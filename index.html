@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#06162c">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="monogram" href="#top" data-text="hero.monogram" data-aria-label="ui.homeLabel"></a>
+
+      <div class="nav-right">
+        <nav aria-label="Primary navigation">
+          <a href="#about" data-text="navigation.about"></a>
+          <a href="#directions" data-text="navigation.directions"></a>
+          <a href="#education" data-text="navigation.education"></a>
+          <a href="#science" data-text="navigation.science"></a>
+          <a href="#contacts" data-text="navigation.contacts"></a>
+        </nav>
+
+        <div class="language-switch" data-aria-label="ui.languageLabel" role="group">
+          <button type="button" class="language-button" data-lang="ru" aria-label="Русская версия">RU</button>
+          <button type="button" class="language-button" data-lang="en" aria-label="English version">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-media" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" data-text="hero.kicker"></p>
+          <h1><span data-text="hero.firstName"></span><strong data-text="hero.lastName"></strong></h1>
+          <div class="hero-credentials">
+            <p data-text="hero.role"></p>
+            <p data-text="hero.institution"></p>
+            <p class="academic" data-text="hero.academicRole"></p>
+          </div>
+          <p class="hero-focus" data-text="hero.focus"></p>
+        </div>
+        <div class="portrait-wrap">
+          <div class="portrait-card">
+            <img src="assets/portrait.jpg" data-alt="ui.portraitAlt">
+          </div>
+          <div class="portrait-rule"></div>
+          <span class="portrait-city" data-text="hero.city"></span>
+        </div>
+        <div class="hero-actions">
+          <a class="button primary" data-href="links.telegramChannel" data-text="buttons.telegramChannel" target="_blank" rel="noopener"></a>
+          <a class="button secondary" data-href="links.telegramPersonal" data-text="buttons.telegramPersonal" target="_blank" rel="noopener"></a>
+          <a class="button secondary" data-href="links.prodoctorov" data-text="buttons.prodoctorov" target="_blank" rel="noopener"></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="directions" class="section directions-section">
+      <div class="container">
+        <p class="section-kicker" data-text="directions.kicker"></p>
+        <h2 data-text="directions.title"></h2>
+        <div id="directions-cards" class="direction-grid"></div>
+        <div class="competence-strip">
+          <div><span data-text="directions.additionalLabel"></span><p data-text="directions.additionalText"></p></div>
+          <div><span data-text="directions.developmentLabel"></span><p data-text="directions.developmentText"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about-section">
+      <div class="container about-grid">
+        <div class="about-image-panel">
+          <img src="assets/about.jpg" data-alt="ui.aboutImageAlt">
+          <div class="image-caption" data-text="about.imageCaption"></div>
+        </div>
+        <div class="about-copy">
+          <p class="section-kicker dark-kicker" data-text="about.kicker"></p>
+          <h2 data-text="about.title"></h2>
+          <div id="about-paragraphs" class="prose"></div>
+          <div id="about-facts" class="facts-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section media-section">
+      <div class="container media-grid">
+        <div class="media-copy">
+          <p class="section-kicker" data-text="media.kicker"></p>
+          <h2 data-text="media.title"></h2>
+          <p class="media-lead" data-text="media.text"></p>
+          <p class="media-source" data-text="media.source"></p>
+        </div>
+        <div class="video-shell">
+          <video id="media-video" controls playsinline preload="metadata"></video>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section education-section">
+      <div class="container education-grid">
+        <div class="education-visual">
+          <img src="assets/education.jpg" data-alt="ui.educationImageAlt">
+        </div>
+        <div>
+          <p class="section-kicker dark-kicker" data-text="education.kicker"></p>
+          <h2 data-text="education.title"></h2>
+          <div id="education-timeline" class="timeline"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="science" class="section science-section">
+      <div class="container">
+        <div class="science-head">
+          <div>
+            <p class="section-kicker" data-text="science.kicker"></p>
+            <h2 data-text="science.title"></h2>
+          </div>
+          <p class="science-intro" data-text="science.intro"></p>
+        </div>
+        <div id="science-metrics" class="metrics-grid"></div>
+        <div id="science-publications" class="publication-list"></div>
+        <a class="orcid-link" data-href="links.orcid" data-text="science.orcidLabel" target="_blank" rel="noopener"></a>
+      </div>
+    </section>
+
+    <section id="contacts" class="section contact-section">
+      <div class="container contact-panel">
+        <div>
+          <p class="section-kicker dark-kicker" data-text="contacts.kicker"></p>
+          <h2 data-text="contacts.title"></h2>
+          <p class="contact-lead" data-text="contacts.text"></p>
+        </div>
+        <div class="contact-actions">
+          <a class="contact-link primary-link" data-href="links.telegramChannel" target="_blank" rel="noopener"><span data-text="buttons.telegramChannel"></span><strong>↗</strong></a>
+          <a class="contact-link" data-href="links.telegramPersonal" target="_blank" rel="noopener"><span data-text="buttons.telegramPersonal"></span><strong>@ShemMYu</strong></a>
+          <a class="contact-link" data-href="links.prodoctorov" target="_blank" rel="noopener"><span data-text="buttons.prodoctorov"></span><strong>↗</strong></a>
+          <a class="contact-link" data-href="links.orcid" target="_blank" rel="noopener"><span>ORCID</span><strong>0000-0003-1537-1405</strong></a>
+        </div>
+      </div>
+      <div class="container disclaimer" data-text="contacts.disclaimer"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span data-text="hero.monogram"></span>
+      <p>© <span id="current-year"></span> <span data-text="footer.copyright"></span></p>
+    </div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="site.js"></script>
+</body>
+</html>
