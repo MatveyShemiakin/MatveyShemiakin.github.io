@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://matveyshemiakin.github.io/sitemap.xml
