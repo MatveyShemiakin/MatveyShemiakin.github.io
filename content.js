@@ -68,9 +68,9 @@ window.SITE_CONTENT = {
           "text": "Оценка показаний и объёма хирургического лечения. Проникающие операции фильтрующего типа и лазерные циклодеструктивные вмешательства."
         }
       ],
-      "additionalLabel": "Дополнительная компетенция",
-      "additionalText": "Владею хирургическими и терапевтическими методиками лечения патологии роговицы.",
-      "developmentLabel": "Профессиональное развитие",
+      "additionalLabel": "Дополнительные компетенции",
+      "additionalText": "Владею хирургическими и терапевтическими методиками лечения патологии роговицы. Консервативное и хирургическое лечение открытой и закрытой травмы глаза. Лечение экстренной сосудистой патологии глаза и зрительного нерва. ",
+      "developmentLabel": "Направление профессионального развития",
       "developmentText": "Витреоретинальная хирургия и лечение патологии сетчатки."
     },
     "about": {
@@ -228,7 +228,7 @@ window.SITE_CONTENT = {
     "buttons": {
       "telegramChannel": "Telegram Channel",
       "telegramPersonal": "Contact Me",
-      "prodoctorov": "ProDoctorov"
+      "prodoctorov": "ProDoctorov Profile"
     },
     "directions": {
       "kicker": "Areas of Professional Practice",
@@ -251,7 +251,7 @@ window.SITE_CONTENT = {
         }
       ],
       "additionalLabel": "Additional Expertise",
-      "additionalText": "Surgical and medical management of corneal pathology.",
+      "additionalText": "I am proficient in surgical and therapeutic methods of treating corneal pathology. Conservative and surgical treatment of open and closed eye injuries. Treatment of emergency vascular pathology of the eye and optic nerve.",
       "developmentLabel": "Professional Development",
       "developmentText": "Vitreoretinal surgery and the management of retinal diseases."
     },
