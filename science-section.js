@@ -13,12 +13,16 @@
   const language = location.pathname.startsWith('/en') ? 'en' : 'ru';
   const d = source[language];
   const links = source.links;
+  const scienceAssetBase = 'https://raw.githubusercontent.com/MatveyShemiakin/MatveyShemiakin.github.io/main/assets/science/';
+
+  const resolveScienceAsset = (src) =>
+    src.startsWith('/assets/science/') ? `${scienceAssetBase}${src.split('/').pop()}` : src;
 
   const externalLink = (href, html, className = '') =>
     `<a class="${className}" href="${href}" target="_blank" rel="noopener noreferrer">${html}</a>`;
 
   const image = (src, alt, loading = 'lazy', priority = '') =>
-    `<img src="${src}" alt="${alt}" loading="${loading}"${priority ? ` fetchpriority="${priority}"` : ''}>`;
+    `<img src="${resolveScienceAsset(src)}" alt="${alt}" loading="${loading}"${priority ? ` fetchpriority="${priority}"` : ''}>`;
 
   const stats = d.stats
     .map(([value, label]) => `<div class="science-fact"><strong>${value}</strong><span>${label}</span></div>`)
@@ -29,9 +33,10 @@
     if (item.wide) classes.push('science-conference-card--wide');
     if (item.portrait) classes.push('science-conference-card--portrait');
     const href = item.link || links[item.linkKey];
+    const imageHref = resolveScienceAsset(item.image);
 
     return `<article class="${classes.join(' ')}">
-      ${externalLink(item.image, image(item.image, item.alt), 'science-conference-image')}
+      ${externalLink(imageHref, image(item.image, item.alt), 'science-conference-image')}
       <div class="science-conference-content">
         <span class="science-conference-year">${item.year}</span>
         <h4>${item.title}</h4>
