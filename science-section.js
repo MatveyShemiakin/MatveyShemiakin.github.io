@@ -13,7 +13,7 @@
   const language = location.pathname.startsWith('/en') ? 'en' : 'ru';
   const d = source[language];
   const links = source.links;
-  const scienceAssetBase = 'https://raw.githubusercontent.com/MatveyShemiakin/MatveyShemiakin.github.io/main/assets/science/';
+  const scienceAssetBase = 'https://matveyshemiakin.github.io/assets/science/';
 
   const resolveScienceAsset = (src) =>
     src.startsWith('/assets/science/') ? `${scienceAssetBase}${src.split('/').pop()}` : src;
