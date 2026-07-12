@@ -1,18 +1,18 @@
 (function () {
-  const storageKey = 'shemyakin_site_content_v4';
-  const languageKey = 'shemyakin_site_language';
+  const data = window.SITE_CONTENT;
+  const pathLanguage = window.location.pathname.startsWith('/en') ? 'en' : 'ru';
+  const params = new URLSearchParams(window.location.search);
 
-  let data = window.SITE_CONTENT;
-  const stored = localStorage.getItem(storageKey);
-  if (stored) {
-    try { data = JSON.parse(stored); } catch (_) {}
+  if (params.get('lang') === 'en' && pathLanguage !== 'en') {
+    window.location.replace('/en/');
+    return;
+  }
+  if (params.get('lang') === 'ru' && pathLanguage !== 'ru') {
+    window.location.replace('/');
+    return;
   }
 
-  const availableLanguages = ['ru', 'en'];
-  const params = new URLSearchParams(window.location.search);
-  let currentLanguage = params.get('lang') || localStorage.getItem(languageKey) || data.defaultLanguage || 'ru';
-  if (!availableLanguages.includes(currentLanguage)) currentLanguage = 'ru';
-
+  const currentLanguage = pathLanguage;
   const getByPath = (object, path) =>
     path.split('.').reduce((acc, key) => acc && acc[key], object);
 
@@ -21,8 +21,8 @@
     links: data.shared.links,
     media: {
       ...data[language].media,
-      video: data.shared.media.video,
-      poster: data.shared.media.poster
+      video: data.shared.media.video.startsWith('/') ? data.shared.media.video : '/' + data.shared.media.video,
+      poster: data.shared.media.poster.startsWith('/') ? data.shared.media.poster : '/' + data.shared.media.poster
     }
   });
 
@@ -40,13 +40,12 @@
   };
 
   function render(language) {
-    currentLanguage = language;
     const content = createContent(language);
 
     document.documentElement.lang = language;
-    document.title = content.meta.title;
-    document.querySelector('meta[name="description"]').setAttribute('content', content.meta.description);
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    const year = document.getElementById('current-year');
+    if (year) year.textContent = new Date().getFullYear();
 
     document.querySelectorAll('[data-text]').forEach((element) => {
       const value = getByPath(content, element.dataset.text);
@@ -68,10 +67,15 @@
       if (value) element.setAttribute('aria-label', value);
     });
 
-    document.querySelectorAll('.language-button').forEach((button) => {
-      const active = button.dataset.lang === language;
-      button.classList.toggle('active', active);
-      button.setAttribute('aria-pressed', String(active));
+    document.querySelectorAll('.language-button').forEach((link) => {
+      const linkLanguage = link.getAttribute('hreflang');
+      const active = linkLanguage === language;
+      link.classList.toggle('active', active);
+      if (active) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
     });
 
     const cards = clearElement('directions-cards');
@@ -103,12 +107,12 @@
     });
 
     const video = document.getElementById('media-video');
-    if (video.src !== content.media.video) {
-      video.src = content.media.video;
+    if (video) {
       video.poster = content.media.poster;
-      video.load();
-    } else {
-      video.poster = content.media.poster;
+      if (video.currentSrc !== content.media.video) {
+        video.src = content.media.video;
+        video.load();
+      }
     }
 
     const timeline = clearElement('education-timeline');
@@ -168,19 +172,6 @@
       publications.appendChild(article);
     });
   }
-
-  document.querySelectorAll('.language-button').forEach((button) => {
-    button.addEventListener('click', () => {
-      const language = button.dataset.lang;
-      localStorage.setItem(languageKey, language);
-
-      const nextUrl = new URL(window.location.href);
-      nextUrl.searchParams.set('lang', language);
-      window.history.replaceState({}, '', nextUrl);
-
-      render(language);
-    });
-  });
 
   render(currentLanguage);
 })();
