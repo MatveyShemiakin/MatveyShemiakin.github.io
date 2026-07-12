@@ -1,0 +1,5 @@
+#science .science-facts__date,
+#science .science-source-note,
+#science .science-facts__intro > a {
+  display: none !important;
+}
