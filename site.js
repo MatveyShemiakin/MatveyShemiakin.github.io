@@ -174,4 +174,13 @@
   }
 
   render(currentLanguage);
+
+  const scienceDataScript = document.createElement('script');
+  scienceDataScript.src = '/science-section-data.js?v=20260712-1';
+  scienceDataScript.onload = () => {
+    const scienceScript = document.createElement('script');
+    scienceScript.src = '/science-section.js?v=20260712-3';
+    document.body.appendChild(scienceScript);
+  };
+  document.body.appendChild(scienceDataScript);
 })();
