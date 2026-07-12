@@ -1,4 +1,4 @@
 @import url('/science-section-base.css?v=20260712-1');
 #science .science-hero__media figcaption{display:none!important}
-#science .science-conference-card:nth-child(2) .science-conference-image{background-image:url('/assets/science/mko-2025-v2.webp?v=20260712-1');background-position:58% center;background-size:cover;background-repeat:no-repeat}
+#science .science-conference-card:nth-child(2) .science-conference-image{background-image:url('/assets/science/mko-2025-v2.webp?v=20260712-2');background-position:58% center;background-size:cover;background-repeat:no-repeat}
 #science .science-conference-card:nth-child(2) .science-conference-image img{opacity:0!important}
