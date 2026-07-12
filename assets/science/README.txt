@@ -1,1 +1,0 @@
-Temporary image format note.
