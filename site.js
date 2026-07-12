@@ -176,10 +176,10 @@
   render(currentLanguage);
 
   const scienceDataScript = document.createElement('script');
-  scienceDataScript.src = '/science-section-data.js?v=20260712-4';
+  scienceDataScript.src = '/science-section-data.js?v=20260712-5';
   scienceDataScript.onload = () => {
     const scienceScript = document.createElement('script');
-    scienceScript.src = '/science-section.js?v=20260712-9';
+    scienceScript.src = '/science-section.js?v=20260712-10';
     document.body.appendChild(scienceScript);
   };
   document.body.appendChild(scienceDataScript);
