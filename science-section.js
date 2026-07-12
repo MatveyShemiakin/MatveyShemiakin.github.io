@@ -1,95 +1,78 @@
 (() => {
-  const target = document.getElementById('science');
-  const source = window.SCIENCE_SECTION_CONTENT;
-  if (!target || !source) return;
+  const d = (window.SCIENCE_SECTION_CONTENT || {})[window.CURRENT_LANG] || null;
+  if (!d) return;
 
-  if (!document.querySelector('link[href*="science-section.css"]')) {
-    const stylesheet = document.createElement('link');
-    stylesheet.rel = 'stylesheet';
-    stylesheet.href = '/science-section.css?v=20260712-2';
-    document.head.appendChild(stylesheet);
+  const owner = 'MatveyShemiakin';
+  const repo = 'MatveyShemiakin.github.io';
+  const branch = 'main';
+  const rawBase = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}`;
+
+  function resolveScienceAsset(src) {
+    if (!src) return '';
+    if (src.startsWith('/assets/science/')) return `${rawBase}${src}`;
+    return src;
   }
 
-  const language = location.pathname.startsWith('/en') ? 'en' : 'ru';
-  const d = source[language];
-  const links = source.links;
-  const scienceAssetBase = 'https://raw.githubusercontent.com/MatveyShemiakin/MatveyShemiakin.github.io/main/assets/science/';
+  function image(src, alt = '') {
+    const actual = resolveScienceAsset(src);
+    return `<img src="${actual}" alt="${alt}" loading="lazy">`;
+  }
 
-  const resolveScienceAsset = (src) =>
-    src.startsWith('/assets/science/') ? `${scienceAssetBase}${src.split('/').pop()}` : src;
+  function list(items) {
+    return `<ul>${items.map((i) => `<li>${i}</li>`).join('')}</ul>`;
+  }
 
-  const externalLink = (href, html, className = '') =>
-    `<a class="${className}" href="${href}" target="_blank" rel="noopener noreferrer">${html}</a>`;
+  function paperCard(p) {
+    return `<article class="paper-card"><h3>${p.title}</h3><p class="journal">${p.journal}</p><p class="meta">${p.authors}</p>${p.doi ? `<a class="btn btn-small" href="${p.doi}" target="_blank" rel="noopener">DOI</a>` : ''}</article>`;
+  }
 
-  const image = (src, alt, loading = 'lazy', priority = '') =>
-    `<img src="${resolveScienceAsset(src)}" alt="${alt}" loading="${loading}"${priority ? ` fetchpriority="${priority}"` : ''}>`;
+  function conferenceCard(c) {
+    return `<article class="conf-card">${image(c.image, c.title)}<div class="conf-body"><div class="conf-year">${c.year}</div><h3>${c.title}</h3><p>${c.text}</p></div></article>`;
+  }
 
-  const stats = d.stats
-    .map(([value, label]) => `<div class="science-fact"><strong>${value}</strong><span>${label}</span></div>`)
-    .join('');
-
-  const conferences = d.conferences.map((item) => {
-    const classes = ['science-conference-card'];
-    if (item.wide) classes.push('science-conference-card--wide');
-    if (item.portrait) classes.push('science-conference-card--portrait');
-    const href = item.link || links[item.linkKey];
-    const imageHref = resolveScienceAsset(item.image);
-
-    return `<article class="${classes.join(' ')}">
-      ${externalLink(imageHref, image(item.image, item.alt), 'science-conference-image')}
-      <div class="science-conference-content">
-        <span class="science-conference-year">${item.year}</span>
-        <h4>${item.title}</h4>
-        <p class="science-conference-meta">${item.meta}</p>
-        <p>${item.text}</p>
-        ${externalLink(href, item.linkText)}
-      </div>
-    </article>`;
-  }).join('');
-
-  const publications = d.publications
-    .map(([year, title, meta]) => `<li><span class="science-publication-year">${year}</span><div><h4>${title}</h4><p>${meta}</p></div></li>`)
-    .join('');
-
-  target.className = 'science-section';
-  target.innerHTML = `<div class="science-shell">
-    <div class="science-hero">
-      <div class="science-hero__copy">
-        <p class="science-eyebrow">${d.hero.kicker}</p>
-        <h2>${d.hero.title}</h2>
-        <p class="science-hero__lead">${d.hero.lead}</p>
-        <div class="science-actions" aria-label="Scientific profiles">
-          ${externalLink(links.istina, d.labels.istina, 'science-button science-button--primary')}
-          ${externalLink(links.orcid, 'ORCID ↗', 'science-button science-button--ghost')}
-          ${externalLink(links.rsci, d.labels.rinz, 'science-button science-button--ghost')}
+  const html = `
+    <section class="section section-light" id="science-section">
+      <div class="container">
+        <div class="section-header left">
+          <span class="eyebrow">${d.navLabel}</span>
+          <h2>${d.hero.title}</h2>
+          <p>${d.hero.text}</p>
+          <div class="science-links">
+            <a class="btn btn-primary" href="${d.links.istina}" target="_blank" rel="noopener">Istina MSU</a>
+            <a class="btn btn-ghost" href="${d.links.orcid}" target="_blank" rel="noopener">ORCID</a>
+            <a class="btn btn-ghost" href="${d.links.elibrary}" target="_blank" rel="noopener">eLIBRARY</a>
+          </div>
         </div>
-        <div class="science-identifiers"><span>IRID 691089486</span><span>ORCID 0000-0003-1537-1405</span><span>SPIN 7070-4286</span></div>
+
+        <div class="science-hero-grid">
+          <div class="science-hero-image">${image(d.hero.image || '/assets/science/mko-2026-hero.jpg', d.hero.title)}</div>
+          <div class="science-hero-stats">
+            <div class="science-stat"><strong>${d.stats.papers}</strong><span>${window.CURRENT_LANG === 'ru' ? 'публикаций' : 'publications'}</span></div>
+            <div class="science-stat"><strong>${d.stats.citations}</strong><span>${window.CURRENT_LANG === 'ru' ? 'цитирования' : 'citations'}</span></div>
+            <div class="science-stat"><strong>${d.stats.hindex}</strong><span>H-index</span></div>
+          </div>
+        </div>
+
+        <div class="science-grid-3">
+          <article class="science-panel">
+            <h3>${d.categoriesTitle}</h3>
+            ${list(d.categories)}
+          </article>
+          <article class="science-panel science-panel-wide">
+            <h3>${d.topPapersTitle}</h3>
+            <div class="papers-grid">${d.papers.map(paperCard).join('')}</div>
+          </article>
+        </div>
+
+        <div class="science-grid-3 conferences-wrap">
+          <article class="science-panel science-panel-wide full-span">
+            <h3>${d.conferencesTitle}</h3>
+            <div class="conferences-grid">${d.conferences.map(conferenceCard).join('')}</div>
+          </article>
+        </div>
       </div>
-      <figure class="science-hero__media">
-        ${image('/assets/science/mko-2026-hero.jpg', d.hero.alt, 'eager', 'high')}
-        <div class="science-hero__shade" aria-hidden="true"></div>
-        <figcaption><span class="science-caption-date">${d.hero.date}</span><strong>${d.hero.event}</strong><span>${d.hero.subtitle}</span></figcaption>
-      </figure>
-    </div>
-    <div class="science-facts">
-      <div class="science-facts__intro"><p class="science-eyebrow">${d.labels.interests}</p><p>${d.interests}</p></div>
-      ${stats}
-    </div>
-    <div class="science-block">
-      <div class="science-heading"><div><p class="science-eyebrow">${d.labels.conferenceKicker}</p><h3>${d.labels.conferenceTitle}</h3></div>${externalLink(links.talks, d.labels.allTalks, 'science-text-link')}</div>
-      <div class="science-conference-grid">${conferences}</div>
-    </div>
-    <div class="science-block science-block--compact">
-      <div class="science-heading"><div><p class="science-eyebrow">${d.labels.publicationKicker}</p><h3>${d.labels.publicationTitle}</h3></div>${externalLink(links.publications, d.labels.allPublications, 'science-text-link')}</div>
-      <ol class="science-publication-list">${publications}</ol>
-    </div>
-    <div class="science-block science-block--compact">
-      <div class="science-heading"><div><p class="science-eyebrow">${d.labels.profileKicker}</p><h3>${d.labels.profileTitle}</h3></div></div>
-      <div class="science-profile-grid">
-        ${externalLink(links.istina, '<span class="science-profile-mark">I</span><span class="science-profile-copy"><strong>ISTINA</strong><small>IRID 691089486</small></span><span class="science-profile-arrow">↗</span>', 'science-profile-card')}
-        ${externalLink(links.orcid, '<span class="science-profile-mark">iD</span><span class="science-profile-copy"><strong>ORCID</strong><small>0000-0003-1537-1405</small></span><span class="science-profile-arrow">↗</span>', 'science-profile-card')}
-        ${externalLink(links.rsci, `<span class="science-profile-mark">${language === 'en' ? 'R' : 'Р'}</span><span class="science-profile-copy"><strong>${language === 'en' ? 'RSCI / SPIN' : 'РИНЦ / SPIN'}</strong><small>7070-4286</small></span><span class="science-profile-arrow">↗</span>`, 'science-profile-card')}
-      </div>
-    </div>
-  </div>`;
+    </section>`;
+
+  const mount = document.getElementById('science-mount');
+  if (mount) mount.innerHTML = html;
 })();
