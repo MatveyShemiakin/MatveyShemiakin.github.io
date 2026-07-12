@@ -13,7 +13,7 @@
   const language = location.pathname.startsWith('/en') ? 'en' : 'ru';
   const d = source[language];
   const links = source.links;
-  const scienceAssetBase = 'https://matveyshemiakin.github.io/assets/science/';
+  const scienceAssetBase = 'https://raw.githubusercontent.com/MatveyShemiakin/MatveyShemiakin.github.io/main/assets/science/';
 
   const resolveScienceAsset = (src) =>
     src.startsWith('/assets/science/') ? `${scienceAssetBase}${src.split('/').pop()}` : src;
@@ -66,7 +66,7 @@
         <div class="science-identifiers"><span>IRID 691089486</span><span>ORCID 0000-0003-1537-1405</span><span>SPIN 7070-4286</span></div>
       </div>
       <figure class="science-hero__media">
-        ${image('/assets/science/mko-2026-hero.webp', d.hero.alt, 'eager', 'high')}
+        ${image('/assets/science/mko-2026-hero.jpg', d.hero.alt, 'eager', 'high')}
         <div class="science-hero__shade" aria-hidden="true"></div>
         <figcaption><span class="science-caption-date">${d.hero.date}</span><strong>${d.hero.event}</strong><span>${d.hero.subtitle}</span></figcaption>
       </figure>
