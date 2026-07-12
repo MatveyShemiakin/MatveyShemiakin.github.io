@@ -175,6 +175,11 @@
 
   render(currentLanguage);
 
+  const scienceCleanupStyles = document.createElement('link');
+  scienceCleanupStyles.rel = 'stylesheet';
+  scienceCleanupStyles.href = '/science-section-cleanup.css?v=20260712-1';
+  document.head.appendChild(scienceCleanupStyles);
+
   const scienceScript = document.createElement('script');
   scienceScript.src = '/science-section.js?v=20260712-1';
   scienceScript.defer = true;
