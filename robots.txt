@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://matveyshemyakin.ru/sitemap.xml
+Sitemap: https://matveyshemyakin.ru/sitemap.txt
