@@ -1,0 +1,44 @@
+name: Add Yandex verification
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-index:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Add Yandex verification meta tag
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+          meta = '  <meta name="yandex-verification" content="c81cf85f160f889e" />'
+          anchor = '  <meta name="author" content="Матвей Юрьевич Шемякин">'
+
+          if meta not in html:
+              if anchor not in html:
+                  raise SystemExit('Expected author meta tag not found')
+              html = html.replace(anchor, anchor + '\n' + meta, 1)
+              path.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Commit verification tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Verify site ownership in Yandex Webmaster"
+            git push
+          fi
