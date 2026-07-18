@@ -1,0 +1,102 @@
+{
+  "registry_version": "0.1.0",
+  "last_reviewed": "2026-07-18",
+  "sources": [
+    {
+      "id": "TFOS-DEWS-III-MANAGEMENT-2025",
+      "organization": "Tear Film & Ocular Surface Society",
+      "title": "TFOS DEWS III: Management and Therapy",
+      "year": 2025,
+      "doi": "10.1016/j.ajo.2025.05.039",
+      "pmid": "40467022",
+      "scope": ["dry_eye", "mgd"],
+      "status": "current",
+      "evidence_role": "international evidence-based consensus and prescribing framework"
+    },
+    {
+      "id": "AAO-DRY-EYE-PPP-2023",
+      "organization": "American Academy of Ophthalmology",
+      "title": "Dry Eye Syndrome Preferred Practice Pattern",
+      "year": 2023,
+      "journal_reference": "Ophthalmology. 2024;131(4)",
+      "scope": ["dry_eye"],
+      "status": "current",
+      "evidence_role": "preferred practice pattern"
+    },
+    {
+      "id": "AAO-BACTERIAL-KERATITIS-PPP-2024",
+      "organization": "American Academy of Ophthalmology",
+      "title": "Bacterial Keratitis Preferred Practice Pattern",
+      "year": 2024,
+      "doi": "10.1016/j.ophtha.2023.12.035",
+      "pmid": "38349295",
+      "scope": ["bacterial_keratitis"],
+      "status": "current",
+      "evidence_role": "preferred practice pattern"
+    },
+    {
+      "id": "AAO-POAG-PPP-2025",
+      "organization": "American Academy of Ophthalmology",
+      "title": "Primary Open-Angle Glaucoma Preferred Practice Pattern",
+      "year": 2025,
+      "publication_year": 2026,
+      "doi": "10.1016/j.ophtha.2025.12.029",
+      "pmid": "41665583",
+      "scope": ["poag"],
+      "status": "current",
+      "evidence_role": "preferred practice pattern"
+    },
+    {
+      "id": "AAO-POAG-SUSPECT-PPP-2025",
+      "organization": "American Academy of Ophthalmology",
+      "title": "Primary Open-Angle Glaucoma Suspect Preferred Practice Pattern",
+      "year": 2025,
+      "publication_year": 2026,
+      "doi": "10.1016/j.ophtha.2025.12.028",
+      "pmid": "41665582",
+      "scope": ["ocular_hypertension", "glaucoma_suspect"],
+      "status": "current",
+      "evidence_role": "preferred practice pattern"
+    },
+    {
+      "id": "AAO-PVD-RETINAL-BREAKS-PPP-2024",
+      "organization": "American Academy of Ophthalmology",
+      "title": "Posterior Vitreous Detachment, Retinal Breaks, and Lattice Degeneration Preferred Practice Pattern",
+      "year": 2024,
+      "publication_year": 2025,
+      "doi": "10.1016/j.ophtha.2024.12.023",
+      "scope": ["pvd", "retinal_break", "lattice_degeneration"],
+      "status": "current",
+      "evidence_role": "preferred practice pattern"
+    },
+    {
+      "id": "SUN-UVEITIS-NOMENCLATURE-2005",
+      "organization": "Standardization of Uveitis Nomenclature Working Group",
+      "title": "Standardization of Uveitis Nomenclature for Reporting Clinical Data",
+      "year": 2005,
+      "doi": "10.1016/j.ajo.2005.03.057",
+      "pmid": "16196117",
+      "scope": ["uveitis_grading", "uveitis_activity"],
+      "status": "foundational",
+      "evidence_role": "international consensus for classification, grading and outcomes"
+    },
+    {
+      "id": "ESCRS-CATARACT-RECOMMENDATIONS-2024",
+      "organization": "European Society of Cataract and Refractive Surgeons",
+      "title": "ESCRS Recommendations for Cataract Surgery",
+      "year": 2024,
+      "scope": ["post_cataract", "cme", "postoperative_inflammation", "endophthalmitis_prevention"],
+      "status": "current",
+      "evidence_role": "GRADE-based international recommendations"
+    },
+    {
+      "id": "EVS-POSTOPERATIVE-ENDOPHTHALMITIS-1995",
+      "organization": "Endophthalmitis Vitrectomy Study Group",
+      "title": "Results of the Endophthalmitis Vitrectomy Study",
+      "year": 1995,
+      "scope": ["acute_postoperative_endophthalmitis"],
+      "status": "foundational_with_modern_context_required",
+      "evidence_role": "randomized trial informing tap/inject versus vitrectomy strategy"
+    }
+  ]
+}
