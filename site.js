@@ -173,7 +173,141 @@
     });
   }
 
+  function setupViewportVideo(language) {
+    const video = document.getElementById('media-video');
+    const shell = video && video.closest('.video-shell');
+    if (!video || !shell || shell.dataset.autoplayReady === 'true') return;
+
+    shell.dataset.autoplayReady = 'true';
+    shell.classList.add('viewport-video');
+
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+
+    const labels = language === 'en'
+      ? { soundOn: 'Turn sound on', soundOff: 'Mute', soundOnAria: 'Turn video sound on', soundOffAria: 'Mute video' }
+      : { soundOn: 'Включить звук', soundOff: 'Выключить звук', soundOnAria: 'Включить звук видео', soundOffAria: 'Выключить звук видео' };
+
+    const style = document.createElement('style');
+    style.textContent = `
+      .viewport-video{position:relative}
+      .viewport-video video{width:100%;height:auto}
+      .video-sound-toggle{
+        position:absolute;z-index:3;top:16px;right:16px;
+        display:inline-flex;align-items:center;gap:8px;
+        min-height:42px;padding:0 14px;border:1px solid rgba(255,255,255,.72);
+        border-radius:999px;background:rgba(4,18,37,.76);color:#fff;
+        font:700 12px/1.2 var(--sans);letter-spacing:.02em;cursor:pointer;
+        box-shadow:0 10px 28px rgba(0,0,0,.26);backdrop-filter:blur(10px);
+        -webkit-backdrop-filter:blur(10px);transition:background .2s ease,transform .2s ease
+      }
+      .video-sound-toggle:hover{background:rgba(13,43,81,.92);transform:translateY(-1px)}
+      .video-sound-toggle:focus-visible{outline:3px solid rgba(135,181,255,.9);outline-offset:3px}
+      .video-sound-toggle-icon{font-size:16px;line-height:1}
+      @media(max-width:680px){
+        .video-sound-toggle{top:10px;right:10px;min-height:38px;padding:0 12px;font-size:11px}
+        .video-sound-toggle-icon{font-size:15px}
+      }
+      @media(prefers-reduced-motion:reduce){.video-sound-toggle{transition:none}}
+    `;
+    document.head.appendChild(style);
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'video-sound-toggle';
+
+    const icon = document.createElement('span');
+    icon.className = 'video-sound-toggle-icon';
+    icon.setAttribute('aria-hidden', 'true');
+
+    const text = document.createElement('span');
+    button.append(icon, text);
+    shell.appendChild(button);
+
+    const updateSoundButton = () => {
+      const muted = video.muted || video.volume === 0;
+      icon.textContent = muted ? '🔇' : '🔊';
+      text.textContent = muted ? labels.soundOn : labels.soundOff;
+      button.setAttribute('aria-label', muted ? labels.soundOnAria : labels.soundOffAria);
+      button.setAttribute('aria-pressed', String(!muted));
+    };
+
+    let automaticAction = false;
+    let manuallyPaused = false;
+    let mostlyVisible = false;
+
+    const playAutomatically = () => {
+      if (!video.paused || video.ended || manuallyPaused) return;
+      automaticAction = true;
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.finally === 'function') {
+        playPromise.catch(() => {}).finally(() => { automaticAction = false; });
+      } else {
+        window.setTimeout(() => { automaticAction = false; }, 0);
+      }
+    };
+
+    const pauseAutomatically = () => {
+      if (video.paused) return;
+      automaticAction = true;
+      video.pause();
+      window.setTimeout(() => { automaticAction = false; }, 0);
+    };
+
+    video.addEventListener('play', () => {
+      if (!automaticAction) manuallyPaused = false;
+    });
+
+    video.addEventListener('pause', () => {
+      if (!automaticAction && !video.ended) manuallyPaused = true;
+    });
+
+    video.addEventListener('volumechange', updateSoundButton);
+    video.addEventListener('ended', () => { manuallyPaused = true; });
+
+    button.addEventListener('click', () => {
+      video.muted = !(video.muted || video.volume === 0);
+      if (!video.muted && video.volume === 0) video.volume = 1;
+      manuallyPaused = false;
+      if (video.paused) video.play().catch(() => {});
+      updateSoundButton();
+    });
+
+    updateSoundButton();
+
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const saveData = Boolean(navigator.connection && navigator.connection.saveData);
+    const autoplayEnabled = !reduceMotion && !saveData;
+
+    if ('IntersectionObserver' in window && autoplayEnabled) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          mostlyVisible = entry.isIntersecting && entry.intersectionRatio >= 0.55;
+          if (mostlyVisible) {
+            playAutomatically();
+          } else if (!entry.isIntersecting || entry.intersectionRatio < 0.2) {
+            pauseAutomatically();
+          }
+        });
+      }, { threshold: [0, 0.2, 0.55, 0.85] });
+
+      observer.observe(video);
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          pauseAutomatically();
+        } else if (mostlyVisible) {
+          playAutomatically();
+        }
+      });
+    }
+  }
+
   render(currentLanguage);
+  setupViewportVideo(currentLanguage);
 
   const scienceDataScript = document.createElement('script');
   scienceDataScript.src = '/science-section-data.js?v=20260712-5';
