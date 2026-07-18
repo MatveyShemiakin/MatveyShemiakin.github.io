@@ -183,7 +183,9 @@
 
     video.muted = true;
     video.defaultMuted = true;
+    video.loop = true;
     video.setAttribute('muted', '');
+    video.setAttribute('loop', '');
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
 
@@ -266,7 +268,6 @@
     });
 
     video.addEventListener('volumechange', updateSoundButton);
-    video.addEventListener('ended', () => { manuallyPaused = true; });
 
     button.addEventListener('click', () => {
       video.muted = !(video.muted || video.volume === 0);
