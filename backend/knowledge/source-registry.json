@@ -1,5 +1,5 @@
 {
-  "registry_version": "0.1.0",
+  "registry_version": "0.2.0",
   "last_reviewed": "2026-07-18",
   "sources": [
     {
@@ -79,6 +79,93 @@
       "scope": ["uveitis_grading", "uveitis_activity"],
       "status": "foundational",
       "evidence_role": "international consensus for classification, grading and outcomes"
+    },
+    {
+      "id": "SUN-UVEITIDES-CLASSIFICATION-2021",
+      "organization": "Standardization of Uveitis Nomenclature Working Group",
+      "title": "Development of Classification Criteria for the Uveitides",
+      "year": 2021,
+      "doi": "10.1016/j.ajo.2021.03.061",
+      "pmid": "33848532",
+      "scope": ["uveitis", "classification"],
+      "status": "current_foundational",
+      "evidence_role": "machine-learning-derived classification framework for common uveitides"
+    },
+    {
+      "id": "SUN-HSV-AU-2021",
+      "organization": "Standardization of Uveitis Nomenclature Working Group",
+      "title": "Classification Criteria for Herpes Simplex Virus Anterior Uveitis",
+      "year": 2021,
+      "doi": "10.1016/j.ajo.2021.03.053",
+      "pmid": "33845009",
+      "scope": ["anterior_uveitis", "hsv"],
+      "status": "current",
+      "evidence_role": "classification criteria"
+    },
+    {
+      "id": "SUN-VZV-AU-2021",
+      "organization": "Standardization of Uveitis Nomenclature Working Group",
+      "title": "Classification Criteria for Varicella Zoster Virus Anterior Uveitis",
+      "year": 2021,
+      "doi": "10.1016/j.ajo.2021.03.037",
+      "pmid": "33845010",
+      "scope": ["anterior_uveitis", "vzv"],
+      "status": "current",
+      "evidence_role": "classification criteria"
+    },
+    {
+      "id": "SUN-FUCHS-2021",
+      "organization": "Standardization of Uveitis Nomenclature Working Group",
+      "title": "Classification Criteria for Fuchs Uveitis Syndrome",
+      "year": 2021,
+      "doi": "10.1016/j.ajo.2021.03.052",
+      "pmid": "33845007",
+      "scope": ["anterior_uveitis", "fuchs"],
+      "status": "current",
+      "evidence_role": "classification criteria"
+    },
+    {
+      "id": "SUN-HLAB27-AU-2021",
+      "organization": "Standardization of Uveitis Nomenclature Working Group",
+      "title": "Classification Criteria for Spondyloarthritis/HLA-B27-Associated Anterior Uveitis",
+      "year": 2021,
+      "doi": "10.1016/j.ajo.2021.03.049",
+      "pmid": "33845004",
+      "scope": ["anterior_uveitis", "hla_b27", "spondyloarthritis"],
+      "status": "current",
+      "evidence_role": "classification criteria"
+    },
+    {
+      "id": "TITAN-HSV-VZV-AU-2024",
+      "organization": "Infectious Uveitis Treatment Algorithm Network",
+      "title": "Global current practice patterns for the management of HSV and VZV anterior uveitis",
+      "year": 2024,
+      "doi": "10.1038/s41433-023-02630-9",
+      "scope": ["anterior_uveitis", "hsv", "vzv", "treatment"],
+      "status": "current",
+      "evidence_role": "international Delphi consensus and practice-pattern guidance"
+    },
+    {
+      "id": "TITAN-CMV-AU-2024",
+      "organization": "Infectious Uveitis Treatment Algorithm Network",
+      "title": "Global current practice patterns for the management of Cytomegalovirus anterior uveitis",
+      "year": 2024,
+      "doi": "10.1038/s41433-023-02631-8",
+      "pmid": "37419958",
+      "scope": ["anterior_uveitis", "cmv", "treatment"],
+      "status": "current",
+      "evidence_role": "international Delphi consensus and practice-pattern guidance"
+    },
+    {
+      "id": "FOCUS-NONINFECTIOUS-UVEITIS-2018",
+      "organization": "Fundamentals of Care for Uveitis International Consensus Group",
+      "title": "Guidance on Noncorticosteroid Systemic Immunomodulatory Therapy in Noninfectious Uveitis",
+      "year": 2018,
+      "doi": "10.1016/j.ophtha.2017.11.017",
+      "pmid": "29310963",
+      "scope": ["noninfectious_uveitis", "systemic_immunomodulation"],
+      "status": "current_foundational",
+      "evidence_role": "evidence-based international consensus"
     },
     {
       "id": "ESCRS-CATARACT-RECOMMENDATIONS-2024",
