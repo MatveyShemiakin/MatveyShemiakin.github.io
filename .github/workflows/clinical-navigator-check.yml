@@ -21,11 +21,22 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check doctors/navigator/modules.js
-          node --check doctors/navigator/app.js
+          node --check doctors/navigator/app-v2.js
           node --check doctors/navigator/validate-modules.js
 
       - name: Validate clinical module schema
         run: node doctors/navigator/validate-modules.js
+
+      - name: Check deduction-first entrypoint
+        run: |
+          grep -q "app-v2.js" doctors/navigator/index.html
+          grep -q "Дифференциальный разбор" doctors/navigator/index.html
+          grep -q "scoreCandidates" doctors/navigator/app-v2.js
+          grep -q "ССГ является только одним" doctors/navigator/index.html
+          if grep -q "app.js?v=" doctors/navigator/index.html; then
+            echo "Legacy single-module entrypoint is still active"
+            exit 1
+          fi
 
       - name: Check required files
         run: |
@@ -33,7 +44,7 @@ jobs:
           test -f doctors/doctors.css
           test -f doctors/navigator/index.html
           test -f doctors/navigator/modules.js
-          test -f doctors/navigator/app.js
+          test -f doctors/navigator/app-v2.js
           test -f doctors/navigator/validate-modules.js
           test -f docs/clinical-navigator/README.md
           test -f docs/clinical-navigator/architecture.md
