@@ -29,10 +29,25 @@ jobs:
           cd backend
           npm run check --silent
 
-      - name: Test clinical fact extraction
+      - name: Test uveitis extraction
         run: |
           cd backend
-          node --test --test-reporter=spec test/*.test.mjs
+          node --test --test-name-pattern="extracts uveitis" test/*.test.mjs
+
+      - name: Test symptom negation
+        run: |
+          cd backend
+          node --test --test-name-pattern="respects symptom negation" test/*.test.mjs
+
+      - name: Test free mock provider
+        run: |
+          cd backend
+          node --test --test-name-pattern="mock provider" test/*.test.mjs
+
+      - name: Test case memory
+        run: |
+          cd backend
+          node --test --test-name-pattern="merges facts" test/*.test.mjs
 
       - name: Validate clinical module schema
         run: node doctors/navigator/validate-modules.js
