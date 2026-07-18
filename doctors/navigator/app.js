@@ -1,20 +1,22 @@
 (function () {
   'use strict';
 
-  const content = document.getElementById('navigator-content');
-  const backButton = document.getElementById('back-button');
-  const nextButton = document.getElementById('next-button');
-  const demoButton = document.getElementById('demo-button');
-  const progressBar = document.getElementById('progress-bar');
-  const progressLabel = document.getElementById('progress-label');
-  const stepRail = document.getElementById('step-rail');
-  const caseStatus = document.getElementById('case-status');
+  const stream = document.getElementById('chat-stream');
+  const suggestions = document.getElementById('chat-suggestions');
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const newCaseButton = document.getElementById('new-case-button');
+  const cardButton = document.getElementById('card-button');
+  const typingTemplate = document.getElementById('typing-template');
 
   const summary = {
-    step: document.getElementById('summary-step'),
+    completeness: document.getElementById('summary-completeness'),
     urgency: document.getElementById('summary-urgency'),
     diagnosis: document.getElementById('summary-diagnosis'),
-    completeness: document.getElementById('summary-completeness')
+    driver: document.getElementById('summary-driver'),
+    card: document.getElementById('summary-card'),
+    status: document.getElementById('case-status'),
+    progress: document.getElementById('context-progress-bar')
   };
 
   const driverElements = {
@@ -25,9 +27,56 @@
     neurosensory: document.getElementById('driver-neurosensory')
   };
 
+  const labels = {
+    goal: {
+      framework: 'Проверить диагностическую рамку',
+      drivers: 'Определить ведущие этиологические драйверы',
+      refractory: 'Разобрать отсутствие эффекта от терапии',
+      preop: 'Оценить глазную поверхность перед операцией'
+    },
+    redFlags: {
+      vision_loss: 'значимое или быстрое снижение зрения',
+      severe_pain: 'выраженная боль или светобоязнь',
+      corneal_lesion: 'инфильтрат, дефект эпителия или выраженное поражение роговицы',
+      acute_unilateral: 'острый односторонний красный глаз',
+      contact_lens: 'контактные линзы и острое ухудшение',
+      trauma_chemical: 'травма или химическое воздействие',
+      postop_acute: 'острое ухудшение после операции или инъекции',
+      none: 'красные флаги не выявлены'
+    },
+    symptoms: {
+      dryness: 'сухость, жжение или ощущение инородного тела',
+      fluctuation: 'флюктуация зрения с улучшением после моргания',
+      tearing: 'рефлекторное слезотечение',
+      morning: 'преобладание симптомов утром',
+      evening: 'нарастание симптомов к вечеру',
+      screen: 'усиление при работе с экраном или чтении',
+      itching: 'зуд как ведущая жалоба',
+      discordant_pain: 'боль сильнее объективных признаков'
+    },
+    risks: {
+      glaucoma_drops: 'длительная местная гипотензивная терапия',
+      recent_surgery: 'недавняя офтальмологическая операция',
+      autoimmune: 'аутоиммунное заболевание или сухость слизистых',
+      systemic_drugs: 'системные препараты, способные усиливать сухость',
+      contact_lens_chronic: 'регулярное ношение контактных линз',
+      environment: 'экранная нагрузка, сухой воздух или климатический фактор',
+      none: 'значимые факторы не указаны'
+    },
+    masquerades: {
+      allergy: 'аллергическое заболевание глазной поверхности',
+      recurrent_erosion: 'рецидивирующая эрозия роговицы',
+      neuropathic: 'нейропатическая глазная боль',
+      exposure: 'экспозиционная кератопатия',
+      conjunctivochalasis: 'конъюнктивохалазис',
+      demodex: 'Demodex-ассоциированный блефарит',
+      neurotrophic: 'нейротрофическая кератопатия',
+      none: 'явные заболевания-маски не отмечены'
+    }
+  };
+
   const initialState = () => ({
-    step: 0,
-    resultMode: false,
+    stage: 'consent',
     accepted: false,
     goal: '',
     redFlags: [],
@@ -40,322 +89,630 @@
     osmolarity: '',
     staining: '',
     schirmer: '',
-    tearMeniscus: '',
     mgd: '',
-    lidMargin: '',
-    meibum: '',
     blink: '',
     lagophthalmos: '',
-    meibography: '',
     risks: [],
     masquerades: [],
-    priorTreatment: ''
+    priorTreatment: '',
+    notes: [],
+    conversationComplete: false,
+    stoppedForSafety: false,
+    cardGenerated: false
   });
 
   let state = initialState();
+  let selected = new Set();
 
-  const steps = [
-    ['Условия', 'Ограничения прототипа'],
-    ['Задача', 'Цель клинического обращения'],
-    ['Безопасность', 'Красные флаги'],
-    ['Симптомы', 'Симптоматический профиль'],
-    ['Гомеостаз', 'Диагностические маркеры'],
-    ['Веки и МГД', 'Вековый и липидный компонент'],
-    ['Драйверы', 'Этиологические факторы'],
-    ['Маски', 'Несоответствия и заболевания-маски']
-  ];
-
-  const option = (type, name, value, title, help, checked) => `
-    <label class="option">
-      <input type="${type}" name="${name}" value="${value}" ${checked ? 'checked' : ''}>
-      <span><strong>${title}</strong>${help ? `<small>${help}</small>` : ''}</span>
-    </label>`;
-
-  function renderRail() {
-    stepRail.innerHTML = steps.map((_, index) => {
-      const className = index < state.step || state.resultMode ? 'step-dot done' : index === state.step ? 'step-dot active' : 'step-dot';
-      return `<span class="${className}" aria-hidden="true"></span>`;
-    }).join('');
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
   }
 
-  function renderStep() {
-    state.resultMode = false;
-    progressLabel.textContent = `Шаг ${state.step + 1} из ${steps.length}`;
-    progressBar.style.width = `${((state.step + 1) / steps.length) * 100}%`;
-    summary.step.textContent = steps[state.step][1];
-    caseStatus.textContent = 'Сбор данных';
-    backButton.disabled = state.step === 0;
-    demoButton.hidden = state.step !== 0;
-    nextButton.textContent = state.step === 0 ? 'Начать' : state.step === steps.length - 1 ? 'Сформировать карточку' : 'Продолжить';
-
-    [
-      renderIntro,
-      renderGoal,
-      renderRedFlags,
-      renderSymptoms,
-      renderDiagnostics,
-      renderLids,
-      renderDrivers,
-      renderMasquerades
-    ][state.step]();
-
-    renderRail();
-    updateSummary();
+  function scrollToEnd() {
+    requestAnimationFrame(() => {
+      stream.scrollTo({ top: stream.scrollHeight, behavior: 'smooth' });
+    });
   }
 
-  function renderIntro() {
-    content.innerHTML = `
-      <p class="question-kicker">Перед началом</p>
-      <h2 class="question-title">Управляемый клинический сценарий</h2>
-      <p class="question-help">Прототип демонстрирует последовательность вопросов, остановку опасной ветви и итоговую карту клинических драйверов. Лекарственный модуль намеренно отключён.</p>
-      <div class="context-strip">
-        <span class="context-chip">8 этапов</span>
-        <span class="context-chip">обезличенные данные</span>
-        <span class="context-chip">TFOS DEWS III</span>
-        <span class="context-chip">без автономных назначений</span>
+  function addMessage(role, html) {
+    const row = document.createElement('div');
+    row.className = `message-row ${role}`;
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar';
+    avatar.textContent = role === 'assistant' ? 'AI' : 'В';
+    const bubble = document.createElement('div');
+    bubble.className = 'message-bubble';
+    bubble.innerHTML = html;
+    row.append(avatar, bubble);
+    stream.appendChild(row);
+    scrollToEnd();
+    return bubble;
+  }
+
+  function addUserText(text) {
+    addMessage('user', `<p>${escapeHtml(text).replaceAll('\n', '<br>')}</p>`);
+  }
+
+  function showTyping(callback) {
+    const node = typingTemplate.content.firstElementChild.cloneNode(true);
+    stream.appendChild(node);
+    scrollToEnd();
+    window.setTimeout(() => {
+      node.remove();
+      callback();
+    }, 360);
+  }
+
+  function setSuggestions(items, mode, submitLabel) {
+    suggestions.replaceChildren();
+    selected = new Set();
+    suggestions.dataset.mode = mode || 'single';
+    let done = null;
+
+    items.forEach((item) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'suggestion-chip';
+      button.dataset.value = item.value;
+      button.textContent = item.label;
+      button.addEventListener('click', () => {
+        if (suggestions.dataset.mode === 'single') {
+          submitStructured([item.value], item.label);
+          return;
+        }
+        if (item.value === 'none') {
+          selected.clear();
+          suggestions.querySelectorAll('.suggestion-chip').forEach((chip) => chip.classList.remove('selected'));
+        } else {
+          selected.delete('none');
+          const noneChip = suggestions.querySelector('[data-value="none"]');
+          if (noneChip) noneChip.classList.remove('selected');
+        }
+        if (selected.has(item.value)) {
+          selected.delete(item.value);
+          button.classList.remove('selected');
+        } else {
+          selected.add(item.value);
+          button.classList.add('selected');
+        }
+        if (done) done.disabled = selected.size === 0;
+      });
+      suggestions.appendChild(button);
+    });
+
+    if (mode === 'multi') {
+      done = document.createElement('button');
+      done.type = 'button';
+      done.className = 'suggestion-submit';
+      done.textContent = submitLabel || 'Продолжить';
+      done.disabled = true;
+      done.addEventListener('click', () => {
+        const values = Array.from(selected);
+        const text = values.map((value) => {
+          const found = items.find((item) => item.value === value);
+          return found ? found.label : value;
+        }).join('; ');
+        submitStructured(values, text);
+      });
+      suggestions.appendChild(done);
+    }
+  }
+
+  function clearSuggestions() {
+    suggestions.replaceChildren();
+  }
+
+  function submitStructured(values, displayText) {
+    clearSuggestions();
+    addUserText(displayText);
+    processStage(values);
+  }
+
+  function renderInlineForm(fields, submitLabel, onSubmit) {
+    clearSuggestions();
+    const wrapper = document.createElement('form');
+    wrapper.className = 'inline-chat-form';
+    wrapper.innerHTML = fields.map((field) => {
+      if (field.type === 'select') {
+        return `<label><span>${escapeHtml(field.label)}</span><select name="${field.name}" ${field.required ? 'required' : ''}>${field.options.map((option) => `<option value="${option.value}">${escapeHtml(option.label)}</option>`).join('')}</select></label>`;
+      }
+      if (field.type === 'textarea') {
+        return `<label class="wide"><span>${escapeHtml(field.label)}</span><textarea name="${field.name}" rows="3" placeholder="${escapeHtml(field.placeholder || '')}"></textarea></label>`;
+      }
+      return `<label><span>${escapeHtml(field.label)}</span><input name="${field.name}" type="${field.type || 'text'}" min="${field.min || ''}" max="${field.max || ''}" step="${field.step || ''}" placeholder="${escapeHtml(field.placeholder || '')}" ${field.required ? 'required' : ''}></label>`;
+    }).join('') + `<button type="submit">${escapeHtml(submitLabel)}</button>`;
+    wrapper.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(wrapper).entries());
+      const summaryText = fields.map((field) => `${field.label}: ${data[field.name] || 'не указано'}`).join('; ');
+      wrapper.closest('.message-bubble').classList.add('submitted-form');
+      wrapper.querySelectorAll('input,select,textarea,button').forEach((element) => { element.disabled = true; });
+      addUserText(summaryText);
+      onSubmit(data);
+    });
+    return wrapper;
+  }
+
+  function assistant(html, after) {
+    showTyping(() => {
+      const bubble = addMessage('assistant', html);
+      if (after) after(bubble);
+    });
+  }
+
+  function startConversation() {
+    stream.replaceChildren();
+    clearSuggestions();
+    state = initialState();
+    updateContext();
+    assistant(`
+      <p class="message-eyebrow">Офтальмологический клинический навигатор</p>
+      <h2>Здравствуйте. Опишите клиническую ситуацию — я помогу структурировать данные.</h2>
+      <p>Сначала проверим угрожающие признаки, затем симптомы, объективные тесты и возможные этиологические драйверы.</p>
+      <div class="message-alert"><strong>Важно:</strong> это демонстрационный интерфейс. Не вводите персональные данные и не используйте результат для назначения или изменения лечения.</div>
+      <p>Подтверждаете, что понимаете ограничения?</p>
+    `, () => setSuggestions([
+      { value: 'accept', label: 'Да, понимаю ограничения' },
+      { value: 'details', label: 'Показать ограничения подробнее' }
+    ], 'single'));
+  }
+
+  function askCurrentStage() {
+    updateContext();
+
+    if (state.stage === 'goal') {
+      assistant('<p>Какую задачу вы хотите решить в этом случае?</p>', () => setSuggestions([
+        { value: 'framework', label: labels.goal.framework },
+        { value: 'drivers', label: labels.goal.drivers },
+        { value: 'refractory', label: labels.goal.refractory },
+        { value: 'preop', label: labels.goal.preop }
+      ], 'single'));
+      return;
+    }
+
+    if (state.stage === 'redFlags') {
+      assistant('<p>Сначала исключим признаки, при которых плановый алгоритм сухого глаза нужно остановить. Что присутствует?</p><p class="message-note">Можно выбрать несколько вариантов.</p>', () => setSuggestions([
+        { value: 'vision_loss', label: 'Быстрое или значимое снижение зрения' },
+        { value: 'severe_pain', label: 'Выраженная боль или светобоязнь' },
+        { value: 'corneal_lesion', label: 'Инфильтрат / дефект эпителия' },
+        { value: 'acute_unilateral', label: 'Острый односторонний красный глаз' },
+        { value: 'contact_lens', label: 'Контактные линзы + острое ухудшение' },
+        { value: 'trauma_chemical', label: 'Травма или химическое воздействие' },
+        { value: 'postop_acute', label: 'Острое ухудшение после операции / инъекции' },
+        { value: 'none', label: 'Перечисленных признаков нет' }
+      ], 'multi', 'Подтвердить'));
+      return;
+    }
+
+    if (state.stage === 'symptoms') {
+      assistant('<p>Какие жалобы преобладают?</p><p class="message-note">Отметьте все подходящие варианты.</p>', () => setSuggestions([
+        { value: 'dryness', label: 'Сухость / жжение / инородное тело' },
+        { value: 'fluctuation', label: 'Флюктуация зрения после моргания' },
+        { value: 'tearing', label: 'Рефлекторное слезотечение' },
+        { value: 'morning', label: 'Хуже утром' },
+        { value: 'evening', label: 'Хуже к вечеру' },
+        { value: 'screen', label: 'Хуже при экране или чтении' },
+        { value: 'itching', label: 'Зуд — ведущая жалоба' },
+        { value: 'discordant_pain', label: 'Боль сильнее объективных признаков' }
+      ], 'multi', 'Продолжить'));
+      return;
+    }
+
+    if (state.stage === 'context') {
+      assistant('<p>Уточните течение и влияние симптомов.</p>', (bubble) => {
+        bubble.appendChild(renderInlineForm([
+          { type: 'select', name: 'laterality', label: 'Латеральность', required: true, options: [
+            { value: '', label: 'Выберите' }, { value: 'bilateral', label: 'Двусторонний процесс' }, { value: 'unilateral', label: 'Односторонний процесс' }, { value: 'asymmetric', label: 'Двусторонний асимметричный' }
+          ] },
+          { type: 'select', name: 'onset', label: 'Течение', required: true, options: [
+            { value: '', label: 'Выберите' }, { value: 'acute', label: 'Острое' }, { value: 'subacute', label: 'Подострое' }, { value: 'chronic', label: 'Хроническое / рецидивирующее' }
+          ] },
+          { type: 'select', name: 'severity', label: 'Влияние на активность', required: true, options: [
+            { value: '', label: 'Выберите' }, { value: 'mild', label: 'Незначительное' }, { value: 'moderate', label: 'Умеренное' }, { value: 'severe', label: 'Выраженное' }
+          ] }
+        ], 'Отправить данные', (data) => {
+          Object.assign(state, data);
+          state.stage = 'diagnostics';
+          askCurrentStage();
+        }));
+      });
+      return;
+    }
+
+    if (state.stage === 'diagnostics') {
+      assistant(`
+        <p>Какие объективные данные доступны?</p>
+        <p class="message-note">В логике TFOS DEWS III симптоматика должна сопоставляться с маркерами нарушения гомеостаза. Неизвестные показатели можно оставить пустыми.</p>
+      `, (bubble) => {
+        bubble.appendChild(renderInlineForm([
+          { type: 'select', name: 'osdi6', label: 'OSDI-6', options: [
+            { value: '', label: 'Не выполнен / неизвестен' }, { value: 'positive', label: 'Положительный, ≥4' }, { value: 'negative', label: 'Отрицательный, <4' }
+          ] },
+          { type: 'number', name: 'nibt', label: 'NIBUT, сек', min: '0', max: '60', step: '0.1', placeholder: 'например, 7.5' },
+          { type: 'select', name: 'osmolarity', label: 'Осмолярность', options: [
+            { value: '', label: 'Не оценена' }, { value: 'abnormal', label: 'Аномальная по критериям метода' }, { value: 'normal', label: 'В пределах критериев метода' }
+          ] },
+          { type: 'select', name: 'staining', label: 'Окрашивание поверхности', options: [
+            { value: '', label: 'Не оценено' }, { value: 'abnormal', label: 'Аномальное по валидированной шкале' }, { value: 'normal', label: 'Не достигает порога' }
+          ] },
+          { type: 'number', name: 'schirmer', label: 'Ширмер, мм / 5 мин', min: '0', max: '50', step: '1', placeholder: 'для оценки водного драйвера' }
+        ], 'Отправить показатели', (data) => {
+          Object.assign(state, data);
+          state.stage = 'lids';
+          askCurrentStage();
+        }));
+      });
+      return;
+    }
+
+    if (state.stage === 'lids') {
+      assistant('<p>Теперь оценим веки, моргание и мейбомиевые железы.</p>', (bubble) => {
+        bubble.appendChild(renderInlineForm([
+          { type: 'select', name: 'mgd', label: 'Признаки МГД / патологии края век', options: [
+            { value: '', label: 'Не оценены' }, { value: 'yes', label: 'Присутствуют' }, { value: 'no', label: 'Не выявлены' }
+          ] },
+          { type: 'select', name: 'blink', label: 'Моргание', options: [
+            { value: '', label: 'Не оценено' }, { value: 'incomplete', label: 'Неполное / редкое' }, { value: 'normal', label: 'Без значимых особенностей' }
+          ] },
+          { type: 'select', name: 'lagophthalmos', label: 'Смыкание век', options: [
+            { value: '', label: 'Не оценено' }, { value: 'yes', label: 'Лагофтальм / экспозиция' }, { value: 'no', label: 'Полное смыкание' }
+          ] }
+        ], 'Отправить оценку', (data) => {
+          Object.assign(state, data);
+          state.stage = 'risks';
+          askCurrentStage();
+        }));
+      });
+      return;
+    }
+
+    if (state.stage === 'risks') {
+      assistant('<p>Какие факторы могут поддерживать заболевание?</p>', () => setSuggestions([
+        { value: 'glaucoma_drops', label: 'Местная гипотензивная терапия' },
+        { value: 'recent_surgery', label: 'Недавняя операция' },
+        { value: 'autoimmune', label: 'Аутоиммунный / системный фактор' },
+        { value: 'systemic_drugs', label: 'Системные препараты' },
+        { value: 'contact_lens_chronic', label: 'Контактные линзы' },
+        { value: 'environment', label: 'Экран / сухой воздух / климат' },
+        { value: 'none', label: 'Значимые факторы не выявлены' }
+      ], 'multi', 'Продолжить'));
+      return;
+    }
+
+    if (state.stage === 'masquerades') {
+      assistant('<p>Есть ли признаки заболеваний-масок или атипичного течения?</p>', () => setSuggestions([
+        { value: 'allergy', label: 'Аллергический компонент' },
+        { value: 'recurrent_erosion', label: 'Рецидивирующая эрозия' },
+        { value: 'neuropathic', label: 'Нейропатическая боль' },
+        { value: 'exposure', label: 'Экспозиционная кератопатия' },
+        { value: 'conjunctivochalasis', label: 'Конъюнктивохалазис' },
+        { value: 'demodex', label: 'Demodex-блефарит' },
+        { value: 'neurotrophic', label: 'Нейротрофическая кератопатия' },
+        { value: 'none', label: 'Явных заболеваний-масок нет' }
+      ], 'multi', 'Продолжить'));
+      return;
+    }
+
+    if (state.stage === 'ready') {
+      state.conversationComplete = true;
+      assistant(`
+        <p class="message-eyebrow">Сбор данных завершён</p>
+        <h2>Предварительная структура случая готова.</h2>
+        <p>Можно продолжить диалог, добавить ранее проводившуюся терапию или попросить меня сформировать итоговую карточку.</p>
+        <div class="message-actions">
+          <button type="button" data-chat-action="card">Сформировать карточку</button>
+          <button type="button" data-chat-action="treatment">Добавить сведения о терапии</button>
+          <button type="button" data-chat-action="questions">Что ещё необходимо уточнить?</button>
+        </div>
+      `, (bubble) => wireMessageActions(bubble));
+    }
+  }
+
+  function processStage(values) {
+    if (state.stage === 'consent') {
+      if (values[0] === 'details') {
+        assistant('<p>Навигатор не ставит окончательный диагноз, не назначает препараты и не заменяет очную оценку. Все данные должны быть обезличены. Лекарственный модуль подключается только после валидации источников и правил безопасности.</p><p>Готовы продолжить?</p>', () => setSuggestions([{ value: 'accept', label: 'Да, продолжить' }], 'single'));
+        return;
+      }
+      state.accepted = true;
+      state.stage = 'goal';
+      askCurrentStage();
+      return;
+    }
+
+    if (state.stage === 'goal') {
+      state.goal = values[0];
+      state.stage = 'redFlags';
+      askCurrentStage();
+      return;
+    }
+
+    if (state.stage === 'redFlags') {
+      state.redFlags = values;
+      if (values.some((value) => value !== 'none')) {
+        state.stoppedForSafety = true;
+        state.conversationComplete = true;
+        updateContext();
+        assistant(`
+          <p class="message-eyebrow critical-text">Проверка безопасности</p>
+          <h2>Плановая ветвь ССГ / МГД остановлена.</h2>
+          <div class="message-alert critical"><strong>Выявлены признаки потенциально другого или угрожающего заболевания.</strong><br>Сначала необходима очная оценка и исключение поражения роговицы, воспалительной, инфекционной, послеоперационной или иной патологии.</div>
+          <p>При необходимости я могу сформировать карточку с отмеченными красными флагами и причиной остановки алгоритма.</p>
+          <div class="message-actions"><button type="button" data-chat-action="card">Сформировать карточку безопасности</button></div>
+        `, (bubble) => wireMessageActions(bubble));
+        return;
+      }
+      state.stage = 'symptoms';
+      askCurrentStage();
+      return;
+    }
+
+    if (state.stage === 'symptoms') {
+      state.symptoms = values;
+      state.stage = 'context';
+      askCurrentStage();
+      return;
+    }
+
+    if (state.stage === 'risks') {
+      state.risks = values;
+      state.stage = 'masquerades';
+      askCurrentStage();
+      return;
+    }
+
+    if (state.stage === 'masquerades') {
+      state.masquerades = values;
+      state.stage = 'ready';
+      askCurrentStage();
+    }
+  }
+
+  function hasHomeostasisMarker() {
+    const nibt = state.nibt === '' ? null : Number(state.nibt);
+    return (nibt !== null && nibt < 10) || state.osmolarity === 'abnormal' || state.staining === 'abnormal';
+  }
+
+  function diagnosticFrame() {
+    if (state.stoppedForSafety) return 'Плановая оценка остановлена';
+    if (!state.osdi6) return 'Недостаточно данных';
+    if (state.osdi6 === 'negative') return 'Симптоматический скрининг отрицательный';
+    if (hasHomeostasisMarker()) return 'Рамка потенциально выполнена';
+    return 'Нужен маркер нарушения гомеостаза';
+  }
+
+  function driverScores() {
+    const schirmer = state.schirmer === '' ? null : Number(state.schirmer);
+    return {
+      lipid: Math.min(100, (state.mgd === 'yes' ? 62 : 0) + (state.blink === 'incomplete' ? 20 : 0) + (state.symptoms.includes('evening') ? 10 : 0)),
+      aqueous: Math.min(100, (schirmer !== null && schirmer <= 5 ? 70 : schirmer !== null && schirmer <= 10 ? 38 : 0) + (state.risks.includes('autoimmune') ? 22 : 0)),
+      exposure: Math.min(100, (state.lagophthalmos === 'yes' ? 72 : 0) + (state.blink === 'incomplete' ? 18 : 0) + (state.masquerades.includes('exposure') ? 20 : 0)),
+      iatrogenic: Math.min(100, (state.risks.includes('glaucoma_drops') ? 45 : 0) + (state.risks.includes('recent_surgery') ? 35 : 0) + (state.risks.includes('systemic_drugs') ? 25 : 0)),
+      neurosensory: Math.min(100, (state.symptoms.includes('discordant_pain') ? 65 : 0) + (state.masquerades.includes('neuropathic') ? 35 : 0))
+    };
+  }
+
+  function leadingDriver(scores) {
+    const names = {
+      lipid: 'Липидный / вековый', aqueous: 'Водный', exposure: 'Экспозиционный', iatrogenic: 'Ятрогенный', neurosensory: 'Нейросенсорный'
+    };
+    const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0];
+    return winner && winner[1] > 0 ? names[winner[0]] : 'Не определён';
+  }
+
+  function completeness() {
+    const checks = [
+      state.accepted,
+      Boolean(state.goal),
+      state.redFlags.length > 0,
+      state.stoppedForSafety || state.symptoms.length > 0,
+      state.stoppedForSafety || Boolean(state.laterality),
+      state.stoppedForSafety || Boolean(state.onset),
+      state.stoppedForSafety || Boolean(state.osdi6) || hasHomeostasisMarker(),
+      state.stoppedForSafety || Boolean(state.mgd),
+      state.stoppedForSafety || state.risks.length > 0,
+      state.stoppedForSafety || state.masquerades.length > 0
+    ];
+    return Math.round((checks.filter(Boolean).length / checks.length) * 100);
+  }
+
+  function updateContext() {
+    const percent = completeness();
+    const scores = driverScores();
+    const urgency = state.stoppedForSafety ? 'Требуется другой маршрут' : state.redFlags.length ? 'Плановая ветвь' : 'Не оценена';
+    summary.completeness.textContent = `${percent}%`;
+    summary.progress.style.width = `${percent}%`;
+    summary.urgency.textContent = urgency;
+    summary.diagnosis.textContent = diagnosticFrame();
+    summary.driver.textContent = leadingDriver(scores);
+    summary.status.textContent = state.cardGenerated ? 'Карточка сформирована' : state.conversationComplete ? 'Готово к резюме' : state.accepted ? 'Сбор данных' : 'Диалог не начат';
+    summary.card.textContent = state.cardGenerated ? 'Сформирована' : 'По запросу врача';
+    Object.entries(scores).forEach(([key, value]) => {
+      driverElements[key].style.width = `${value}%`;
+    });
+  }
+
+  function listFrom(values, dictionary) {
+    const items = values.filter((value) => value !== 'none').map((value) => dictionary[value]).filter(Boolean);
+    return items.length ? `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : '<p>Не отмечены.</p>';
+  }
+
+  function missingData() {
+    if (state.stoppedForSafety) return [];
+    const missing = [];
+    if (!state.laterality) missing.push('латеральность');
+    if (!state.onset) missing.push('характер течения');
+    if (!state.osdi6) missing.push('валидированный симптоматический скрининг OSDI-6');
+    if (!hasHomeostasisMarker()) missing.push('положительный маркер нарушения гомеостаза');
+    if (!state.mgd) missing.push('оценка МГД и края век');
+    return missing;
+  }
+
+  function cardHtml() {
+    const scores = driverScores();
+    const missing = missingData();
+    const safety = state.stoppedForSafety;
+    return `
+      <article class="clinical-card" id="clinical-card">
+        <header>
+          <div><span>Офтальмологический клинический навигатор</span><h2>${safety ? 'Карточка безопасности' : 'Предварительная карточка случая'}</h2></div>
+          <strong>v0.3</strong>
+        </header>
+        <section class="card-summary-grid">
+          <div><span>Срочность</span><strong>${escapeHtml(safety ? 'Плановый алгоритм остановлен' : 'Критические признаки не отмечены')}</strong></div>
+          <div><span>Диагностическая рамка</span><strong>${escapeHtml(diagnosticFrame())}</strong></div>
+          <div><span>Ведущий драйвер</span><strong>${escapeHtml(leadingDriver(scores))}</strong></div>
+          <div><span>Полнота данных</span><strong>${completeness()}%</strong></div>
+        </section>
+        ${safety ? `<section class="card-section critical-card"><h3>Причина остановки</h3>${listFrom(state.redFlags, labels.redFlags)}</section>` : `
+          <section class="card-section"><h3>Клиническая задача</h3><p>${escapeHtml(labels.goal[state.goal] || 'Не указана')}</p></section>
+          <section class="card-section"><h3>Симптоматический профиль</h3>${listFrom(state.symptoms, labels.symptoms)}</section>
+          <section class="card-section"><h3>Факторы, изменяющие тактику</h3>${listFrom(state.risks, labels.risks)}</section>
+          <section class="card-section"><h3>Заболевания-маски</h3>${listFrom(state.masquerades, labels.masquerades)}</section>
+          <section class="card-section"><h3>Недостающие данные</h3>${missing.length ? `<ul>${missing.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : '<p>Ключевые поля демонстрационного алгоритма заполнены.</p>'}</section>
+          <section class="card-section"><h3>Ранее проводившаяся терапия</h3><p>${escapeHtml(state.priorTreatment || 'Не указана.')}</p></section>
+        `}
+        <footer><strong>Лекарственные схемы не сформированы.</strong> Прототип не предназначен для клинического применения.</footer>
+      </article>
+      <div class="card-export-actions">
+        <button type="button" data-export="copy">Копировать</button>
+        <button type="button" data-export="txt">Скачать TXT</button>
+        <button type="button" data-export="print">Печать / PDF</button>
       </div>
-      <div class="result-grid">
-        <div class="result-block caution wide">
-          <h3>Ограничения демонстрационной версии</h3>
-          <ul>
-            <li>не вводите персональные данные пациента;</li>
-            <li>не используйте результат для диагностики или изменения терапии;</li>
-            <li>клинические правила и формулировки проходят экспертную проверку;</li>
-            <li>источники и лекарственные схемы будут подключаться только после валидации.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="option-grid">
-        ${option('checkbox', 'accepted', 'yes', 'Я понимаю ограничения прототипа', 'Продолжение доступно после подтверждения.', state.accepted)}
-      </div>`;
+    `;
   }
 
-  function renderGoal() {
-    const choices = [
-      ['framework', 'Проверить диагностическую рамку', 'Сопоставить симптоматику с маркерами нарушения гомеостаза слёзной плёнки и глазной поверхности.'],
-      ['drivers', 'Определить ведущие этиологические драйверы', 'Оценить липидный, водный, экспозиционный, ятрогенный и нейросенсорный компоненты.'],
-      ['refractory', 'Разобрать отсутствие эффекта от терапии', 'Проверить заболевания-маски, приверженность, несоответствие симптомов и объективных признаков.'],
-      ['preop', 'Оценить глазную поверхность перед операцией', 'Структурировать факторы риска до рефракционной или внутриглазной хирургии.']
+  function generateCard() {
+    clearSuggestions();
+    const percent = completeness();
+    if (!state.stoppedForSafety && percent < 60) {
+      const missing = missingData();
+      assistant(`<p>Карточку пока рано формировать: данных недостаточно.</p>${missing.length ? `<ul>${missing.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}<p>Продолжим сбор данных.</p>`, () => askCurrentStage());
+      return;
+    }
+    addUserText('Сформировать итоговую карточку');
+    assistant(cardHtml(), (bubble) => {
+      state.cardGenerated = true;
+      updateContext();
+      wireExportActions(bubble);
+    });
+  }
+
+  function plainTextCard() {
+    const scores = driverScores();
+    const lines = [
+      'ОФТАЛЬМОЛОГИЧЕСКИЙ КЛИНИЧЕСКИЙ НАВИГАТОР — ПРОТОТИП v0.3',
+      '',
+      `Срочность: ${state.stoppedForSafety ? 'плановый алгоритм остановлен' : 'критические признаки не отмечены'}`,
+      `Диагностическая рамка: ${diagnosticFrame()}`,
+      `Ведущий драйвер: ${leadingDriver(scores)}`,
+      `Полнота данных: ${completeness()}%`,
+      '',
+      state.stoppedForSafety ? `Красные флаги: ${state.redFlags.map((item) => labels.redFlags[item]).join('; ')}` : `Клиническая задача: ${labels.goal[state.goal] || 'не указана'}`,
+      !state.stoppedForSafety ? `Симптомы: ${state.symptoms.map((item) => labels.symptoms[item]).join('; ')}` : '',
+      !state.stoppedForSafety ? `Факторы: ${state.risks.filter((item) => item !== 'none').map((item) => labels.risks[item]).join('; ') || 'не отмечены'}` : '',
+      !state.stoppedForSafety ? `Заболевания-маски: ${state.masquerades.filter((item) => item !== 'none').map((item) => labels.masquerades[item]).join('; ') || 'не отмечены'}` : '',
+      '',
+      'Лекарственные схемы не сформированы. Прототип не предназначен для клинического применения.'
     ];
-    content.innerHTML = `
-      <p class="question-kicker">Цель обращения</p>
-      <h2 class="question-title">Какую задачу должен решить навигатор?</h2>
-      <p class="question-help">От выбранной задачи зависит акцент итоговой карточки и перечень недостающих данных.</p>
-      <div class="option-grid">
-        ${choices.map(([value, title, help]) => option('radio', 'goal', value, title, help, state.goal === value)).join('')}
-      </div>`;
+    return lines.filter((line) => line !== '').join('\n');
   }
 
-  function renderRedFlags() {
-    const flags = [
-      ['vision_loss', 'Значимое или быстрое снижение зрения', 'Особенно при остром, одностороннем или асимметричном процессе.'],
-      ['severe_pain', 'Выраженная боль или светобоязнь', 'Не соответствует типичному дискомфорту при неосложнённом сухом глазе.'],
-      ['corneal_lesion', 'Фокальный инфильтрат, дефект эпителия или выраженное поражение роговицы', 'Требует исключения инфекционной, нейротрофической и иной угрожающей патологии.'],
-      ['acute_unilateral', 'Острый односторонний красный глаз', 'Нужна приоритетная оценка альтернативного диагноза.'],
-      ['contact_lens', 'Контактные линзы в сочетании с острым ухудшением', 'Повышает настороженность в отношении микробного кератита.'],
-      ['trauma_chemical', 'Недавняя травма или химическое воздействие', 'Требует отдельного маршрута и оценки повреждения глазной поверхности.'],
-      ['postop_acute', 'Острое ухудшение после операции или инъекции', 'Не должно маскироваться под плановый послеоперационный сухой глаз.'],
-      ['none', 'Перечисленных признаков нет', 'Можно перейти к плановой диагностической рамке.']
-    ];
-    content.innerHTML = `
-      <p class="question-kicker">Проверка безопасности</p>
-      <h2 class="question-title">Есть ли признаки, требующие другого маршрута?</h2>
-      <p class="question-help">При наличии хотя бы одного критического признака плановый алгоритм ССГ/МГД будет остановлен.</p>
-      <div class="option-grid">
-        ${flags.map(([value, title, help]) => option('checkbox', 'redFlags', value, title, help, state.redFlags.includes(value))).join('')}
-      </div>`;
-    setupExclusiveNone('redFlags');
-  }
-
-  function renderSymptoms() {
-    const symptoms = [
-      ['dryness', 'Сухость, жжение или ощущение инородного тела', 'Типичная симптоматика глазной поверхности.'],
-      ['fluctuation', 'Флюктуация зрения и улучшение после моргания', 'Поддерживает нестабильность слёзной плёнки.'],
-      ['tearing', 'Рефлекторное слезотечение', 'Не исключает сухой глаз и может сопровождать нестабильную слёзную плёнку.'],
-      ['morning', 'Преобладание симптомов утром', 'Требует оценки ночной экспозиции, эрозии и смыкания век.'],
-      ['evening', 'Нарастание симптомов к вечеру', 'Может сопровождать зрительную нагрузку и испарительный компонент.'],
-      ['screen', 'Усиление при работе с экраном или чтении', 'Нужно оценивать частоту и полноту моргания.'],
-      ['itching', 'Зуд как ведущая жалоба', 'Повышает вероятность аллергического компонента.'],
-      ['discordant_pain', 'Боль значительно сильнее объективных признаков', 'Требует отдельной нейросенсорной или нейропатической ветви.']
-    ];
-    content.innerHTML = `
-      <p class="question-kicker">Симптоматический профиль</p>
-      <h2 class="question-title">Как проявляется заболевание?</h2>
-      <p class="question-help">Можно выбрать несколько жалоб. Далее они будут сопоставлены с объективными маркерами.</p>
-      <div class="inline-fields three">
-        <div class="field">
-          <label for="laterality">Латеральность</label>
-          <select id="laterality">
-            <option value="">Не указано</option>
-            <option value="bilateral" ${state.laterality === 'bilateral' ? 'selected' : ''}>Двусторонний процесс</option>
-            <option value="unilateral" ${state.laterality === 'unilateral' ? 'selected' : ''}>Односторонний процесс</option>
-            <option value="asymmetric" ${state.laterality === 'asymmetric' ? 'selected' : ''}>Двусторонний асимметричный</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="onset">Течение</label>
-          <select id="onset">
-            <option value="">Не указано</option>
-            <option value="acute" ${state.onset === 'acute' ? 'selected' : ''}>Острое</option>
-            <option value="subacute" ${state.onset === 'subacute' ? 'selected' : ''}>Подострое</option>
-            <option value="chronic" ${state.onset === 'chronic' ? 'selected' : ''}>Хроническое / рецидивирующее</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="severity">Влияние на повседневную активность</label>
-          <select id="severity">
-            <option value="">Не указано</option>
-            <option value="mild" ${state.severity === 'mild' ? 'selected' : ''}>Незначительное</option>
-            <option value="moderate" ${state.severity === 'moderate' ? 'selected' : ''}>Умеренное</option>
-            <option value="severe" ${state.severity === 'severe' ? 'selected' : ''}>Выраженное</option>
-          </select>
-        </div>
-      </div>
-      <div class="option-grid">
-        ${symptoms.map(([value, title, help]) => option('checkbox', 'symptoms', value, title, help, state.symptoms.includes(value))).join('')}
-      </div>`;
-  }
-
-  function renderDiagnostics() {
-    content.innerHTML = `
-      <p class="question-kicker">Нарушение гомеостаза</p>
-      <h2 class="question-title">Какие объективные данные получены?</h2>
-      <p class="question-help">В рамке TFOS DEWS III положительная симптоматика должна сочетаться как минимум с одним объективным маркером нарушения гомеостаза. Тест Ширмера и высота слёзного мениска используются для анализа водного драйвера.</p>
-      <div class="inline-fields">
-        <div class="field"><label for="osdi6">OSDI-6</label><select id="osdi6"><option value="">Не выполнен / неизвестен</option><option value="positive" ${state.osdi6 === 'positive' ? 'selected' : ''}>Положительный, ≥4</option><option value="negative" ${state.osdi6 === 'negative' ? 'selected' : ''}>Отрицательный, &lt;4</option></select></div>
-        <div class="field"><label for="nibt">NIBUT, секунд</label><input id="nibt" type="number" min="0" max="60" step="0.1" inputmode="decimal" value="${state.nibt}" placeholder="Например, 6.8"><span class="field-note">Значение &lt;10 с рассматривается как положительный маркер в текущей демонстрационной логике.</span></div>
-        <div class="field"><label for="osmolarity">Осмолярность слезы</label><select id="osmolarity"><option value="">Не оценена</option><option value="abnormal" ${state.osmolarity === 'abnormal' ? 'selected' : ''}>Аномальная по критериям метода</option><option value="normal" ${state.osmolarity === 'normal' ? 'selected' : ''}>В пределах критериев метода</option></select></div>
-        <div class="field"><label for="staining">Окрашивание глазной поверхности</label><select id="staining"><option value="">Не оценено</option><option value="abnormal" ${state.staining === 'abnormal' ? 'selected' : ''}>Аномальное по валидированной шкале</option><option value="normal" ${state.staining === 'normal' ? 'selected' : ''}>Не достигает диагностического порога</option></select></div>
-        <div class="field"><label for="schirmer">Тест Ширмера, мм / 5 мин</label><input id="schirmer" type="number" min="0" max="50" step="1" inputmode="numeric" value="${state.schirmer}" placeholder="Например, 4"></div>
-        <div class="field"><label for="tearMeniscus">Высота слёзного мениска</label><select id="tearMeniscus"><option value="">Не оценена</option><option value="low" ${state.tearMeniscus === 'low' ? 'selected' : ''}>Снижена</option><option value="normal" ${state.tearMeniscus === 'normal' ? 'selected' : ''}>Не снижена</option></select></div>
-      </div>`;
-  }
-
-  function renderLids() {
-    content.innerHTML = `
-      <p class="question-kicker">Вековый и липидный компонент</p>
-      <h2 class="question-title">Что выявлено при оценке век и мейбомиевых желёз?</h2>
-      <p class="question-help">Отдельная оценка края век, качества секрета, экспрессируемости, моргания и смыкания век помогает определить ведущий механизм, а не только степень выраженности симптомов.</p>
-      <div class="inline-fields">
-        <div class="field"><label for="mgd">Клинические признаки МГД</label><select id="mgd"><option value="">Не оценены</option><option value="yes" ${state.mgd === 'yes' ? 'selected' : ''}>Присутствуют</option><option value="no" ${state.mgd === 'no' ? 'selected' : ''}>Не выявлены</option></select></div>
-        <div class="field"><label for="lidMargin">Край век</label><select id="lidMargin"><option value="">Не оценён</option><option value="abnormal" ${state.lidMargin === 'abnormal' ? 'selected' : ''}>Телеангиэктазии / пробки / воспаление</option><option value="normal" ${state.lidMargin === 'normal' ? 'selected' : ''}>Без значимых изменений</option></select></div>
-        <div class="field"><label for="meibum">Качество и экспрессируемость секрета</label><select id="meibum"><option value="">Не оценены</option><option value="abnormal" ${state.meibum === 'abnormal' ? 'selected' : ''}>Снижены / изменены</option><option value="normal" ${state.meibum === 'normal' ? 'selected' : ''}>Без значимых изменений</option></select></div>
-        <div class="field"><label for="blink">Моргание</label><select id="blink"><option value="">Не оценено</option><option value="incomplete" ${state.blink === 'incomplete' ? 'selected' : ''}>Неполное или редкое</option><option value="normal" ${state.blink === 'normal' ? 'selected' : ''}>Полное, без явного снижения частоты</option></select></div>
-        <div class="field"><label for="lagophthalmos">Смыкание век / экспозиция</label><select id="lagophthalmos"><option value="">Не оценено</option><option value="yes" ${state.lagophthalmos === 'yes' ? 'selected' : ''}>Есть неполное смыкание или экспозиция</option><option value="no" ${state.lagophthalmos === 'no' ? 'selected' : ''}>Не выявлены</option></select></div>
-        <div class="field"><label for="meibography">Мейбография</label><select id="meibography"><option value="">Не выполнялась</option><option value="abnormal" ${state.meibography === 'abnormal' ? 'selected' : ''}>Есть структурные изменения / dropout</option><option value="normal" ${state.meibography === 'normal' ? 'selected' : ''}>Без значимых структурных изменений</option></select></div>
-      </div>`;
-  }
-
-  function renderDrivers() {
-    const risks = [
-      ['glaucoma_drops', 'Длительная местная гипотензивная терапия', 'Учитываются консерванты и суммарная лекарственная нагрузка.'],
-      ['recent_surgery', 'Недавняя офтальмологическая операция', 'Важны срок, тип вмешательства и предоперационное состояние глазной поверхности.'],
-      ['refractive_surgery', 'Рефракционная хирургия в анамнезе', 'Может менять чувствительность и нейросенсорный профиль.'],
-      ['autoimmune', 'Аутоиммунное заболевание или выраженная сухость других слизистых', 'Требует оценки системного вододефицитного драйвера, включая синдром Шегрена.'],
-      ['systemic_drugs', 'Системные препараты, способные усиливать сухость', 'Нужна лекарственная ревизия.'],
-      ['contact_lenses_chronic', 'Регулярное ношение контактных линз', 'Может поддерживать нестабильность и воспаление глазной поверхности.'],
-      ['screen_environment', 'Высокая экранная нагрузка или сухая среда', 'Связано с морганием и повышенным испарением.'],
-      ['rosacea', 'Розацеа или себорейный дерматит', 'Поддерживает вековый и воспалительный компонент.'],
-      ['none', 'Значимые факторы не выявлены', 'По имеющимся данным.']
-    ];
-    content.innerHTML = `<p class="question-kicker">Этиологические драйверы</p><h2 class="question-title">Какие факторы могут поддерживать заболевание?</h2><p class="question-help">Факторы не заменяют диагноз, но помогают построить персонализированную карту механизмов.</p><div class="option-grid">${risks.map(([value,title,help]) => option('checkbox','risks',value,title,help,state.risks.includes(value))).join('')}</div>`;
-    setupExclusiveNone('risks');
-  }
-
-  function renderMasquerades() {
-    const masks = [
-      ['allergy', 'Аллергическое заболевание глазной поверхности', 'Особенно при ведущем зуде, хемозе и сезонности.'],
-      ['erosion', 'Рецидивирующая эрозия роговицы', 'Подозревать при утренней боли и эпизодическом дефекте эпителия.'],
-      ['neuropathic', 'Нейропатическая глазная боль', 'Возможна при выраженном несоответствии симптомов и объективных признаков.'],
-      ['exposure_mask', 'Экспозиционная кератопатия', 'Связана со смыканием век, положением глазного яблока и ночной экспозицией.'],
-      ['conjunctivochalasis', 'Конъюнктивохалазис или нарушение распределения слезы', 'Может вызывать слезотечение и локальный дискомфорт.'],
-      ['demodex', 'Demodex-ассоциированный блефарит', 'Требует целевого осмотра ресниц и края век.'],
-      ['neurotrophic', 'Нейротрофическая кератопатия', 'Нужна оценка чувствительности роговицы при несоответствии симптомов и повреждения.'],
-      ['none', 'Явные заболевания-маски не подозреваются', 'По имеющимся данным.']
-    ];
-    content.innerHTML = `<p class="question-kicker">Дифференциальная диагностика</p><h2 class="question-title">Какие заболевания-маски или несоответствия нужно проверить?</h2><p class="question-help">Навигатор не должен сводить любой хронический дискомфорт глаз к сухому глазу.</p><div class="option-grid">${masks.map(([value,title,help]) => option('checkbox','masquerades',value,title,help,state.masquerades.includes(value))).join('')}</div><div class="field" style="margin-top:22px"><label for="priorTreatment">Ранее проводившаяся терапия и эффект</label><textarea id="priorTreatment" maxlength="800" placeholder="Кратко, без персональных данных пациента">${escapeHtml(state.priorTreatment)}</textarea></div>`;
-    setupExclusiveNone('masquerades');
-  }
-
-  function setupExclusiveNone(name) {
-    content.querySelectorAll(`input[name="${name}"]`).forEach((input) => {
-      input.addEventListener('change', () => {
-        if (input.value === 'none' && input.checked) content.querySelectorAll(`input[name="${name}"]:not([value="none"])`).forEach((item) => { item.checked = false; });
-        if (input.value !== 'none' && input.checked) { const none = content.querySelector(`input[name="${name}"][value="none"]`); if (none) none.checked = false; }
+  function wireExportActions(container) {
+    container.querySelectorAll('[data-export]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const action = button.dataset.export;
+        if (action === 'copy') {
+          try {
+            await navigator.clipboard.writeText(plainTextCard());
+            button.textContent = 'Скопировано';
+          } catch (_error) {
+            button.textContent = 'Не удалось скопировать';
+          }
+        }
+        if (action === 'txt') {
+          const blob = new Blob([plainTextCard()], { type: 'text/plain;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'clinical-navigator-card.txt';
+          link.click();
+          URL.revokeObjectURL(url);
+        }
+        if (action === 'print') window.print();
       });
     });
   }
 
-  function selectedValues(name) { return Array.from(content.querySelectorAll(`input[name="${name}"]:checked`)).map((item) => item.value); }
-
-  function collectCurrentStep(silent) {
-    if (state.step === 0) { state.accepted = Boolean(content.querySelector('input[name="accepted"]:checked')); if (!state.accepted && !silent) return showValidation('Подтвердите, что понимаете ограничения демонстрационной версии.'); }
-    if (state.step === 1) { const goal = content.querySelector('input[name="goal"]:checked'); if (!goal && !silent) return showValidation('Выберите клиническую задачу.'); if (goal) state.goal = goal.value; }
-    if (state.step === 2) { state.redFlags = selectedValues('redFlags'); if (!state.redFlags.length && !silent) return showValidation('Отметьте выявленные признаки или вариант «перечисленных признаков нет».'); }
-    if (state.step === 3) { state.laterality=content.querySelector('#laterality').value; state.onset=content.querySelector('#onset').value; state.severity=content.querySelector('#severity').value; state.symptoms=selectedValues('symptoms'); if (!state.symptoms.length && !silent) return showValidation('Отметьте хотя бы один симптом.'); }
-    if (state.step === 4) { state.osdi6=content.querySelector('#osdi6').value; state.nibt=content.querySelector('#nibt').value; state.osmolarity=content.querySelector('#osmolarity').value; state.staining=content.querySelector('#staining').value; state.schirmer=content.querySelector('#schirmer').value; state.tearMeniscus=content.querySelector('#tearMeniscus').value; }
-    if (state.step === 5) { state.mgd=content.querySelector('#mgd').value; state.lidMargin=content.querySelector('#lidMargin').value; state.meibum=content.querySelector('#meibum').value; state.blink=content.querySelector('#blink').value; state.lagophthalmos=content.querySelector('#lagophthalmos').value; state.meibography=content.querySelector('#meibography').value; }
-    if (state.step === 6) { state.risks=selectedValues('risks'); if (!state.risks.length && !silent) return showValidation('Отметьте факторы или вариант «значимые факторы не выявлены».'); }
-    if (state.step === 7) { state.masquerades=selectedValues('masquerades'); state.priorTreatment=content.querySelector('#priorTreatment').value.trim(); if (!state.masquerades.length && !silent) return showValidation('Отметьте заболевания-маски или вариант «не подозреваются».'); }
-    return true;
+  function wireMessageActions(container) {
+    container.querySelectorAll('[data-chat-action]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const action = button.dataset.chatAction;
+        if (action === 'card') generateCard();
+        if (action === 'treatment') {
+          assistant('<p>Укажите ранее использованные препараты, длительность и клинический эффект. Не вводите персональные данные.</p>', (bubble) => {
+            bubble.appendChild(renderInlineForm([
+              { type: 'textarea', name: 'priorTreatment', label: 'Ранее проводившаяся терапия', placeholder: 'Например: слёзозаменитель без консервантов 4 недели, частичный эффект' }
+            ], 'Сохранить', (data) => {
+              state.priorTreatment = data.priorTreatment || '';
+              assistant('<p>Сведения о терапии добавлены. Карточка будет сформирована только по вашему запросу.</p>');
+            }));
+          });
+        }
+        if (action === 'questions') {
+          const missing = missingData();
+          assistant(missing.length ? `<p>Для более полной карточки желательно уточнить:</p><ul>${missing.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : '<p>Ключевые поля демонстрационного алгоритма заполнены. Можно дополнить анамнез или сформировать карточку.</p>');
+        }
+      });
+    });
   }
 
-  function showValidation(message) { const existing=content.querySelector('.validation-message'); if(existing) existing.remove(); const box=document.createElement('div'); box.className='result-block critical validation-message'; box.style.marginTop='18px'; box.innerHTML=`<h3>Нужно уточнение</h3><p>${message}</p>`; content.appendChild(box); return false; }
-  function hasCriticalFlags(){return state.redFlags.some((flag)=>flag!=='none');}
-  function hasHomeostasisMarker(){const nibt=state.nibt===''?null:Number(state.nibt); return (nibt!==null&&nibt<10)||state.osmolarity==='abnormal'||state.staining==='abnormal';}
+  function handleFreeText(text) {
+    const normalized = text.trim().toLowerCase();
+    if (!normalized) return;
+    addUserText(text.trim());
+    input.value = '';
+    resizeInput();
 
-  function diagnosticStatus(){
-    if(!state.osdi6) return {label:'Неполные данные',detail:'Отсутствует валидированный скрининг симптомов OSDI-6.',tone:'caution'};
-    if(state.osdi6==='positive'&&hasHomeostasisMarker()) return {label:'Рамка потенциально выполнена',detail:'Положительный OSDI-6 сочетается как минимум с одним маркером нарушения гомеостаза.',tone:'safe'};
-    if(state.osdi6==='negative'&&hasHomeostasisMarker()) return {label:'Несоответствие симптомов и признаков',detail:'Объективный маркер присутствует при отрицательном OSDI-6: требуется оценка иной патологии, факторов чувствительности и клинического контекста.',tone:'caution'};
-    if(state.osdi6==='positive') return {label:'Требуется подтверждающий маркер',detail:'Симптоматический скрининг положительный, но объективный маркер нарушения гомеостаза не введён или не достиг порога.',tone:'caution'};
-    return {label:'Рамка не подтверждена',detail:'Текущая ветвь не подтверждает сухой глаз; требуется клиническая переоценка жалоб и альтернативных причин.',tone:'info'};
+    if (/(сформир|созда|покаж|выгруз).*(карточ|отч[её]т|резюме)|^(карточка|отч[её]т|резюме)$/i.test(normalized)) {
+      generateCard();
+      return;
+    }
+
+    if (/нов(ый|ая) случай|начать заново|сброс/i.test(normalized)) {
+      startConversation();
+      return;
+    }
+
+    state.notes.push(text.trim());
+    assistant('<p>Принял это как дополнительное клиническое описание. Для безопасной структуризации ответьте на текущий вопрос с помощью вариантов или формы ниже.</p>', () => askCurrentStage());
   }
 
-  function driverScores(){
-    const schirmer=state.schirmer===''?null:Number(state.schirmer); const scores={lipid:0,aqueous:0,exposure:0,iatrogenic:0,neurosensory:0};
-    if(state.mgd==='yes') scores.lipid+=2; if(state.lidMargin==='abnormal') scores.lipid+=1; if(state.meibum==='abnormal') scores.lipid+=2; if(state.meibography==='abnormal') scores.lipid+=1; if(state.risks.includes('rosacea')) scores.lipid+=1; if(state.blink==='incomplete') scores.lipid+=1;
-    if(schirmer!==null&&schirmer<=5) scores.aqueous+=3; else if(schirmer!==null&&schirmer<=10) scores.aqueous+=1; if(state.tearMeniscus==='low') scores.aqueous+=2; if(state.risks.includes('autoimmune')) scores.aqueous+=2;
-    if(state.lagophthalmos==='yes') scores.exposure+=3; if(state.blink==='incomplete') scores.exposure+=1; if(state.symptoms.includes('morning')) scores.exposure+=1; if(state.masquerades.includes('exposure_mask')) scores.exposure+=2;
-    ['glaucoma_drops','recent_surgery','refractive_surgery','systemic_drugs','contact_lenses_chronic'].forEach((risk)=>{if(state.risks.includes(risk)) scores.iatrogenic+=1.4;});
-    if(state.symptoms.includes('discordant_pain')) scores.neurosensory+=3; if(state.masquerades.includes('neuropathic')) scores.neurosensory+=3; if(state.risks.includes('refractive_surgery')) scores.neurosensory+=1;
-    Object.keys(scores).forEach((key)=>{scores[key]=Math.min(10,Math.round(scores[key]*10)/10);}); return scores;
+  function resizeInput() {
+    input.style.height = 'auto';
+    input.style.height = `${Math.min(input.scrollHeight, 132)}px`;
   }
 
-  function scorePercent(score){return Math.min(100,Math.round((score/8)*100));}
-  function driverLabel(scores){const labels={lipid:'липидный / вековый',aqueous:'водный',exposure:'экспозиционный',iatrogenic:'ятрогенный',neurosensory:'нейросенсорный'}; const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]); if(!sorted[0]||sorted[0][1]===0) return 'Драйверы не классифицированы'; if(sorted[1]&&sorted[1][1]>=sorted[0][1]-1&&sorted[1][1]>0) return `Смешанный профиль: ${labels[sorted[0][0]]} + ${labels[sorted[1][0]]}`; return `Ведущий ${labels[sorted[0][0]]} драйвер`;}
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    handleFreeText(input.value);
+  });
 
-  function missingData(){const missing=[]; if(!state.laterality) missing.push('латеральность процесса'); if(!state.onset) missing.push('характер течения'); if(!state.osdi6) missing.push('валидированный скрининг симптомов OSDI-6'); if(!hasHomeostasisMarker()) missing.push('положительный объективный маркер нарушения гомеостаза'); if(!state.mgd) missing.push('оценка мейбомиевых желёз'); if(!state.meibum) missing.push('качество и экспрессируемость секрета'); if(!state.blink) missing.push('полнота и частота моргания'); if(!state.lagophthalmos) missing.push('смыкание век и экспозиция'); return missing;}
-  function completenessPercent(){const checks=[Boolean(state.goal),state.redFlags.length>0,state.symptoms.length>0,Boolean(state.laterality),Boolean(state.onset),Boolean(state.osdi6),hasHomeostasisMarker(),Boolean(state.mgd),Boolean(state.meibum),Boolean(state.blink),Boolean(state.lagophthalmos),state.risks.length>0,state.masquerades.length>0]; return Math.round((checks.filter(Boolean).length/checks.length)*100);}
-  function urgencyLabel(){if(!state.redFlags.length) return 'Не оценена'; return hasCriticalFlags()?'Другой / неотложный маршрут':'Плановая ветвь';}
+  input.addEventListener('input', resizeInput);
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      form.requestSubmit();
+    }
+  });
 
-  function updateSummary(){const diagnosis=diagnosticStatus(); const scores=driverScores(); summary.urgency.textContent=urgencyLabel(); summary.diagnosis.textContent=state.step>=4||state.resultMode?diagnosis.label:'Не оценена'; summary.completeness.textContent=`${completenessPercent()}%`; Object.entries(driverElements).forEach(([key,element])=>{element.style.width=`${scorePercent(scores[key])}%`;});}
+  newCaseButton.addEventListener('click', startConversation);
+  cardButton.addEventListener('click', generateCard);
 
-  function maskAlerts(){const alerts=[]; if(state.laterality==='unilateral') alerts.push('односторонний процесс требует более широкой дифференциальной диагностики'); if(state.onset==='acute') alerts.push('острое начало нетипично для плановой ветви хронического ССГ'); if(state.symptoms.includes('itching')) alerts.push('ведущий зуд требует оценки аллергического компонента'); if(state.symptoms.includes('morning')) alerts.push('утренние симптомы требуют исключения экспозиции и рецидивирующей эрозии'); if(state.symptoms.includes('discordant_pain')) alerts.push('выраженное несоответствие боли и признаков требует нейросенсорной оценки'); if(state.masquerades.includes('neurotrophic')) alerts.push('необходима оценка чувствительности роговицы'); if(state.masquerades.includes('demodex')) alerts.push('нужен целевой осмотр ресниц и края век'); return alerts;}
-  function nextChecks(){const checks=[]; if(!state.mgd||!state.meibum) checks.push('стандартизированная оценка края век, экспрессируемости и качества секрета'); if(!state.blink||!state.lagophthalmos) checks.push('оценка полноты моргания и смыкания век, включая ночную экспозицию'); if(state.risks.includes('autoimmune')) checks.push('системный анамнез и маршрутизация при подозрении на синдром Шегрена или другое аутоиммунное заболевание'); if(state.symptoms.includes('discordant_pain')||state.masquerades.includes('neuropathic')) checks.push('оценка нейросенсорного профиля и несоответствия симптомов объективным признакам'); if(state.masquerades.includes('neurotrophic')) checks.push('чувствительность роговицы и признаки нейротрофической кератопатии'); if(!checks.length) checks.push('проверка воспроизводимости симптомов и объективных маркеров при контрольном осмотре'); return checks;}
-
-  function showCriticalResult(){state.resultMode=true; progressBar.style.width='100%'; progressLabel.textContent='Алгоритм остановлен'; summary.step.textContent='Требуется другой маршрут'; summary.urgency.textContent='Приоритетная очная оценка'; summary.diagnosis.textContent='ССГ не классифицируется'; caseStatus.textContent='Остановлено'; content.innerHTML=`<p class="question-kicker">Проверка безопасности</p><h2 class="question-title">Плановый алгоритм остановлен</h2><div class="result-grid"><div class="result-block critical wide"><h3>Выявлены признаки потенциально другого заболевания</h3><p>До обсуждения сухого глаза требуется очная оценка и исключение поражения роговицы, инфекции, воспаления, послеоперационного осложнения или другой угрожающей патологии.</p></div><div class="result-block caution"><h3>Почему система остановилась</h3><p>Клинический навигатор не должен маскировать опасный процесс плановыми рекомендациями по заболеванию глазной поверхности.</p></div><div class="result-block info"><h3>Следующий безопасный шаг</h3><p>Перейти к модулю острого красного глаза / поражения роговицы после его отдельной разработки и клинической валидации.</p></div></div>${lockedTreatment()}`; nextButton.textContent='Начать заново'; demoButton.hidden=true; backButton.disabled=false; renderRail(); updateSummary();}
-
-  function renderDriverMap(scores){const names={lipid:'Липидный / вековый',aqueous:'Водный',exposure:'Экспозиционный',iatrogenic:'Ятрогенный',neurosensory:'Нейросенсорный'}; return `<div class="clinical-map"><div class="clinical-map-head"><h3>Карта этиологических драйверов</h3><span>Не является шкалой тяжести или вероятности диагноза</span></div><div class="driver-bars">${Object.entries(names).map(([key,name])=>`<div class="driver-bar"><span>${name}</span><i><b style="width:${scorePercent(scores[key])}%"></b></i><em>${scorePercent(scores[key])}%</em></div>`).join('')}</div></div>`;}
-
-  function showFinalResult(){
-    state.resultMode=true; const diagnosis=diagnosticStatus(); const scores=driverScores(); const driver=driverLabel(scores); const missing=missingData(); const alerts=maskAlerts(); const checks=nextChecks();
-    const riskLabels={glaucoma_drops:'местная гипотензивная терапия',recent_surgery:'недавнее офтальмологическое вмешательство',refractive_surgery:'рефракционная хирургия',autoimmune:'аутоиммунный или системный фактор',systemic_drugs:'возможная лекарственная индукция',contact_lenses_chronic:'контактные линзы',screen_environment:'экранная нагрузка / среда',rosacea:'розацеа / себорейный дерматит'};
-    const relevantRisks=state.risks.filter((item)=>item!=='none').map((item)=>riskLabels[item]).filter(Boolean);
-    progressBar.style.width='100%'; progressLabel.textContent='Клиническая карта'; summary.step.textContent='Результат сформирован'; summary.urgency.textContent='Плановая ветвь'; summary.diagnosis.textContent=diagnosis.label; summary.completeness.textContent=`${completenessPercent()}%`; caseStatus.textContent='Карточка готова';
-    content.innerHTML=`<p class="question-kicker">Демонстрационный результат</p><h2 class="question-title">Предварительная клиническая структура</h2><div class="context-strip"><span class="context-chip">${driver}</span><span class="context-chip">полнота ${completenessPercent()}%</span><span class="context-chip">версия алгоритма 0.2</span></div><div class="result-grid"><div class="result-block safe"><h3>Уровень срочности</h3><p>По введённым ответам критические признаки не отмечены. Это зависит от полноты и достоверности исходных данных.</p></div><div class="result-block ${diagnosis.tone}"><h3>Диагностическая рамка</h3><p><strong>${diagnosis.label}.</strong> ${diagnosis.detail}</p></div>${renderDriverMap(scores)}<div class="result-block"><h3>Факторы, меняющие тактику</h3>${relevantRisks.length?`<div class="badge-list">${relevantRisks.map((item)=>`<span class="clinical-badge">${item}</span>`).join('')}</div>`:'<p>Значимые дополнительные факторы не указаны.</p>'}</div><div class="result-block ${missing.length?'caution':'safe'}"><h3>Недостающие данные</h3>${missing.length?`<ul>${missing.map((item)=>`<li>${item}</li>`).join('')}</ul>`:'<p>Ключевые поля демонстрационного алгоритма заполнены.</p>'}</div><div class="result-block caution"><h3>Заболевания-маски и несоответствия</h3>${alerts.length?`<ul>${alerts.map((item)=>`<li>${item}</li>`).join('')}</ul>`:'<p>Явные несоответствия не выявлены, но дифференциальная диагностика сохраняется при атипичном или резистентном течении.</p>'}</div><div class="result-block info"><h3>Что проверить следующим</h3><ul>${checks.map((item)=>`<li>${item}</li>`).join('')}</ul></div><div class="result-block wide"><h3>Источники клинической рамки</h3><p>TFOS DEWS III: Diagnostic Methodology (2025), TFOS DEWS III: Management and Therapy (2025), AAO Dry Eye Syndrome Preferred Practice Pattern. В production-версии каждое правило будет связано с конкретным источником, разделом, датой проверки и статусом утверждения.</p></div><div class="treatment-preview"><div class="treatment-preview-head"><span>🔒</span><h3>Будущая архитектура терапевтического модуля</h3></div><div class="treatment-lanes"><div class="treatment-lane">восполнение слёзной плёнки</div><div class="treatment-lane">сохранение и стимуляция</div><div class="treatment-lane">МГД-направленная тактика</div><div class="treatment-lane">контроль воспаления</div><div class="treatment-lane">рефрактерные и нейросенсорные случаи</div></div></div></div>${lockedTreatment()}`;
-    nextButton.textContent='Начать заново'; demoButton.hidden=true; backButton.disabled=false; renderRail(); updateSummary();
-  }
-
-  function lockedTreatment(){return '<div class="prototype-lock"><span>🔒</span><div><strong>Препараты, дозировки и длительность намеренно не сформированы.</strong><br>Модуль будет подключён после верификации источников, регистрации препаратов, противопоказаний, off-label статуса и экспертной валидации правил.</div></div>';}
-
-  function fillDemo(){state={step:steps.length-1,resultMode:false,accepted:true,goal:'drivers',redFlags:['none'],symptoms:['dryness','fluctuation','evening','screen'],laterality:'bilateral',onset:'chronic',severity:'moderate',osdi6:'positive',nibt:'5.8',osmolarity:'abnormal',staining:'abnormal',schirmer:'9',tearMeniscus:'normal',mgd:'yes',lidMargin:'abnormal',meibum:'abnormal',blink:'incomplete',lagophthalmos:'no',meibography:'abnormal',risks:['glaucoma_drops','screen_environment','rosacea'],masquerades:['none'],priorTreatment:'Увлажняющие препараты без устойчивого эффекта.'}; showFinalResult();}
-  function reset(){state=initialState(); renderStep();}
-  function escapeHtml(value){return String(value||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');}
-
-  nextButton.addEventListener('click',()=>{if(state.resultMode) return reset(); if(!collectCurrentStep(false)) return; updateSummary(); if(state.step===2&&hasCriticalFlags()) return showCriticalResult(); if(state.step===steps.length-1) return showFinalResult(); state.step+=1; renderStep();});
-  backButton.addEventListener('click',()=>{if(state.resultMode){state.resultMode=false; state.step=hasCriticalFlags()?2:steps.length-1; renderStep(); return;} if(state.step>0){collectCurrentStep(true); state.step-=1; renderStep();}});
-  demoButton.addEventListener('click',fillDemo);
-
-  if(new URLSearchParams(window.location.search).get('demo')==='1') fillDemo(); else renderStep();
+  startConversation();
 })();
