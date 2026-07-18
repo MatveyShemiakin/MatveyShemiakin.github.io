@@ -1,5 +1,6 @@
 import { extractClinicalFacts } from './extract-clinical-facts.mjs';
 import { buildPhysicianChoiceContext } from './knowledge-retrieval.mjs';
+import { generateClinicalOptions } from './generate-clinical-options.mjs';
 
 function response(statusCode, body, origin = '*') {
   return {
@@ -49,21 +50,47 @@ async function handleExtract(body, env) {
   };
 }
 
+function draftMode(body, env) {
+  return body.authoring_mode === true && env.ALLOW_DRAFT_CLINICAL_OPTIONS === 'true';
+}
+
 async function handleBuildOptions(body, env) {
   if (!body.facts || typeof body.facts !== 'object') throw new Error('facts are required');
-  const draftRequested = body.authoring_mode === true;
-  const draftAllowed = env.ALLOW_DRAFT_CLINICAL_OPTIONS === 'true';
+  const authoringMode = draftMode(body, env);
   const context = await buildPhysicianChoiceContext({
     facts: body.facts,
     supplementalTags: body.supplemental_tags || [],
-    authoringMode: draftRequested && draftAllowed
+    authoringMode
   });
   return {
     ok: true,
     action: 'build_options',
     physician_selection_required: true,
-    draft_options_enabled: draftRequested && draftAllowed,
+    draft_options_enabled: authoringMode,
     context
+  };
+}
+
+async function handleGenerateOptions(body, env) {
+  if (!body.facts || typeof body.facts !== 'object') throw new Error('facts are required');
+  const authoringMode = draftMode(body, env);
+  const result = await generateClinicalOptions({
+    caseText: body.case_text || '',
+    facts: body.facts,
+    supplementalTags: body.supplemental_tags || [],
+    authoringMode,
+    env
+  });
+  return {
+    ok: true,
+    action: 'generate_options',
+    provider: result.provider,
+    physician_selection_required: true,
+    draft_options_enabled: authoringMode,
+    options: result.options,
+    context_meta: result.context_meta,
+    usage: result.usage,
+    provider_response_id: result.provider_response_id
   };
 }
 
@@ -78,13 +105,14 @@ export async function handler(event, _context) {
   try {
     const body = parseBody(event);
     const action = body.action || 'extract_facts';
-    const payload = action === 'build_options'
-      ? await handleBuildOptions(body, env)
-      : await handleExtract(body, env);
+    let payload;
+    if (action === 'build_options') payload = await handleBuildOptions(body, env);
+    else if (action === 'generate_options') payload = await handleGenerateOptions(body, env);
+    else payload = await handleExtract(body, env);
     return response(200, payload, origin);
   } catch (error) {
     const safeMessage = error instanceof Error ? error.message : 'Unknown error';
-    const status = /required|must contain|too long|JSON/.test(safeMessage) ? 400 : 502;
+    const status = /required|must contain|too long|JSON|between 2 and 5/.test(safeMessage) ? 400 : 502;
     return response(status, {
       ok: false,
       error: status === 400 ? 'invalid_request' : 'provider_error',
