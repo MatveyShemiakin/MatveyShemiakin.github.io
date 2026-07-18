@@ -1,4 +1,5 @@
 import { extractClinicalFacts } from './extract-clinical-facts.mjs';
+import { buildPhysicianChoiceContext } from './knowledge-retrieval.mjs';
 
 function response(statusCode, body, origin = '*') {
   return {
@@ -32,6 +33,40 @@ function parseBody(event) {
   return JSON.parse(raw);
 }
 
+async function handleExtract(body, env) {
+  const result = await extractClinicalFacts({
+    caseText: body.case_text,
+    priorFacts: body.prior_facts || null,
+    env
+  });
+  return {
+    ok: true,
+    action: 'extract_facts',
+    provider: result.provider,
+    facts: result.facts,
+    usage: result.usage,
+    provider_response_id: result.provider_response_id
+  };
+}
+
+async function handleBuildOptions(body, env) {
+  if (!body.facts || typeof body.facts !== 'object') throw new Error('facts are required');
+  const draftRequested = body.authoring_mode === true;
+  const draftAllowed = env.ALLOW_DRAFT_CLINICAL_OPTIONS === 'true';
+  const context = await buildPhysicianChoiceContext({
+    facts: body.facts,
+    supplementalTags: body.supplemental_tags || [],
+    authoringMode: draftRequested && draftAllowed
+  });
+  return {
+    ok: true,
+    action: 'build_options',
+    physician_selection_required: true,
+    draft_options_enabled: draftRequested && draftAllowed,
+    context
+  };
+}
+
 export async function handler(event, _context) {
   const env = process.env;
   const origin = allowedOrigin(event, env);
@@ -42,19 +77,11 @@ export async function handler(event, _context) {
 
   try {
     const body = parseBody(event);
-    const result = await extractClinicalFacts({
-      caseText: body.case_text,
-      priorFacts: body.prior_facts || null,
-      env
-    });
-
-    return response(200, {
-      ok: true,
-      provider: result.provider,
-      facts: result.facts,
-      usage: result.usage,
-      provider_response_id: result.provider_response_id
-    }, origin);
+    const action = body.action || 'extract_facts';
+    const payload = action === 'build_options'
+      ? await handleBuildOptions(body, env)
+      : await handleExtract(body, env);
+    return response(200, payload, origin);
   } catch (error) {
     const safeMessage = error instanceof Error ? error.message : 'Unknown error';
     const status = /required|must contain|too long|JSON/.test(safeMessage) ? 400 : 502;
