@@ -13,7 +13,9 @@ function isNegated(text, phrase) {
   const index = text.indexOf(phrase);
   if (index < 0) return false;
   const prefix = text.slice(Math.max(0, index - 28), index);
-  return /(?:нет|без|не отмечает|отрицает|отсутств)/.test(prefix);
+  const suffix = text.slice(index + phrase.length, index + phrase.length + 36);
+  return /(?:нет|без|не отмечает|отрицает|отсутств)/.test(prefix)
+    || /(?:^|[ ,;])(?:нет|отсутствуют?|не отмечаются?)(?:[ .;,]|$)/.test(suffix);
 }
 
 function addSymptom(facts, text, id, phrases) {
@@ -43,8 +45,8 @@ export function extractFactsLocally(caseText) {
   else if (hasAny(text, ['несколько недель', 'неделю', 'недели'])) facts.onset = 'weeks';
   else if (hasAny(text, ['несколько месяцев', 'месяц', 'месяцев'])) facts.onset = 'months';
 
-  addSymptom(facts, text, 'pain', ['боль', 'болит']);
-  addSymptom(facts, text, 'photophobia', ['светобоязнь', 'фотофобия']);
+  addSymptom(facts, text, 'pain', ['боль', 'боли', 'болит']);
+  addSymptom(facts, text, 'photophobia', ['светобоязнь', 'светобоязни', 'фотофобия']);
   addSymptom(facts, text, 'redness', ['покраснение', 'красный глаз', 'инъекция']);
   addSymptom(facts, text, 'itching', ['зуд']);
   addSymptom(facts, text, 'dryness', ['сухость', 'сухой глаз']);
