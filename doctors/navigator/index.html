@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Клинический навигатор — прототип</title>
+  <title>Клинический навигатор — прототип v0.2</title>
   <meta name="description" content="Демонстрационный прототип клинического навигатора для врачей-офтальмологов.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#06162c">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/doctors/doctors.css?v=20260718-1">
+  <link rel="stylesheet" href="/doctors/doctors.css?v=20260718-2">
 </head>
 <body class="doctor-page">
   <header class="doctor-header">
@@ -19,22 +19,36 @@
         <a href="/doctors/">Для врачей</a>
         <a href="/">Основной сайт</a>
       </nav>
-      <span class="prototype-badge">Не для клинического применения</span>
+      <span class="prototype-badge">Прототип v0.2 · не для клинического применения</span>
     </div>
   </header>
 
   <main class="navigator-main">
     <div class="container navigator-shell">
       <aside class="case-sidebar">
-        <p class="section-kicker">Карточка случая</p>
-        <h2>ССГ / МГД</h2>
+        <div class="sidebar-heading">
+          <p class="section-kicker">Карточка случая</p>
+          <h2>ССГ / МГД</h2>
+          <span class="case-status" id="case-status">Сбор данных</span>
+        </div>
+
         <ul class="case-list" id="case-summary">
           <li><span>Этап</span><strong id="summary-step">Начало</strong></li>
-          <li><span>Красные флаги</span><strong id="summary-redflags">Не оценены</strong></li>
-          <li><span>Предварительный драйвер</span><strong id="summary-phenotype">Не определён</strong></li>
+          <li><span>Срочность</span><strong id="summary-urgency">Не оценена</strong></li>
+          <li><span>Диагностическая рамка</span><strong id="summary-diagnosis">Не оценена</strong></li>
           <li><span>Полнота данных</span><strong id="summary-completeness">0%</strong></li>
         </ul>
-        <div class="data-warning"><strong>Не вводите персональные данные.</strong><br>ФИО, дату рождения, номер истории болезни, телефон и изображения документов.</div>
+
+        <div class="driver-mini-map" aria-label="Карта этиологических драйверов">
+          <div class="driver-mini-head"><span>Карта драйверов</span><small>предварительно</small></div>
+          <div class="driver-row"><span>Липидный / вековый</span><i><b id="driver-lipid"></b></i></div>
+          <div class="driver-row"><span>Водный</span><i><b id="driver-aqueous"></b></i></div>
+          <div class="driver-row"><span>Экспозиционный</span><i><b id="driver-exposure"></b></i></div>
+          <div class="driver-row"><span>Ятрогенный</span><i><b id="driver-iatrogenic"></b></i></div>
+          <div class="driver-row"><span>Нейросенсорный</span><i><b id="driver-neurosensory"></b></i></div>
+        </div>
+
+        <div class="data-warning"><strong>Не вводите персональные данные.</strong><br>ФИО, точную дату рождения, номер истории болезни, телефон и изображения документов.</div>
       </aside>
 
       <section class="navigator-card" aria-live="polite">
@@ -44,16 +58,20 @@
               <p class="question-kicker">Пилотный клинический модуль</p>
               <h1>Синдром сухого глаза и МГД</h1>
             </div>
-            <span class="progress-label" id="progress-label">Шаг 1 из 6</span>
+            <span class="progress-label" id="progress-label">Шаг 1 из 8</span>
           </div>
           <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+          <div class="step-rail" id="step-rail" aria-label="Этапы алгоритма"></div>
         </div>
 
         <div class="navigator-body">
           <div id="navigator-content"></div>
           <div class="navigator-actions" id="navigator-actions">
             <button class="nav-button secondary" id="back-button" type="button" disabled>Назад</button>
-            <button class="nav-button primary" id="next-button" type="button">Начать</button>
+            <div class="action-group">
+              <button class="nav-button ghost" id="demo-button" type="button">Показать пример результата</button>
+              <button class="nav-button primary" id="next-button" type="button">Начать</button>
+            </div>
           </div>
         </div>
       </section>
