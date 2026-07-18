@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Клинический навигатор — тестовая версия</title>
+  <meta name="description" content="Тестовая версия клинического навигатора для совместной проверки обновлений.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#06162c">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../doctors/doctors.css?v=20260718-4">
+</head>
+<body class="doctor-page chat-navigator-page">
+  <header class="doctor-header">
+    <div class="container doctor-nav">
+      <a class="monogram" href="../../index.html" aria-label="На главную">МШ</a>
+      <nav class="doctor-links" aria-label="Навигация раздела">
+        <a href="../../doctors/index.html">Для врачей</a>
+        <a href="../../index.html">Основной сайт</a>
+      </nav>
+      <span class="prototype-badge">Тестовый стенд · обновляется автоматически</span>
+    </div>
+  </header>
+
+  <main class="chat-main">
+    <div class="container chat-layout">
+      <aside class="chat-context" aria-label="Контекст клинического случая">
+        <div class="context-heading">
+          <div class="assistant-mark" aria-hidden="true">МШ</div>
+          <div>
+            <p class="section-kicker">Клинический модуль</p>
+            <h1>ССГ / МГД</h1>
+          </div>
+        </div>
+
+        <div class="context-status-row">
+          <span class="context-status" id="case-status">Диалог не начат</span>
+          <strong id="summary-completeness">0%</strong>
+        </div>
+        <div class="context-progress" aria-hidden="true"><b id="context-progress-bar"></b></div>
+
+        <dl class="context-facts">
+          <div><dt>Срочность</dt><dd id="summary-urgency">Не оценена</dd></div>
+          <div><dt>Признаки ССГ</dt><dd id="summary-diagnosis">Не оценены</dd></div>
+          <div><dt>Преобладающий механизм</dt><dd id="summary-driver">Не определён</dd></div>
+          <div><dt>Карточка</dt><dd id="summary-card">По запросу врача</dd></div>
+        </dl>
+
+        <div class="driver-mini-map" aria-label="Возможные механизмы заболевания">
+          <div class="driver-mini-head"><span>Возможные механизмы</span><small>рабочая оценка</small></div>
+          <div class="driver-row"><span>Испарительный / МГД</span><i><b id="driver-lipid"></b></i></div>
+          <div class="driver-row"><span>Недостаток слезопродукции</span><i><b id="driver-aqueous"></b></i></div>
+          <div class="driver-row"><span>Экспозиция</span><i><b id="driver-exposure"></b></i></div>
+          <div class="driver-row"><span>Лекарственный / послеоперационный</span><i><b id="driver-iatrogenic"></b></i></div>
+          <div class="driver-row"><span>Нейросенсорный компонент</span><i><b id="driver-neurosensory"></b></i></div>
+        </div>
+
+        <div class="data-warning"><strong>Не вводите персональные данные.</strong><br>ФИО, точную дату рождения, номер истории болезни, телефон и документы.</div>
+      </aside>
+
+      <section class="chat-panel" aria-label="Диалог с клиническим навигатором">
+        <header class="chat-panel-head">
+          <div class="chat-agent">
+            <div class="agent-avatar" aria-hidden="true">AI</div>
+            <div>
+              <strong>Офтальмологический клинический навигатор</strong>
+              <span><i></i> тестовый режим · текущая версия рабочей ветки</span>
+            </div>
+          </div>
+          <div class="chat-head-actions">
+            <button class="chat-head-button" id="new-case-button" type="button">Новый случай</button>
+            <button class="chat-head-button primary" id="card-button" type="button">Сформировать карточку</button>
+          </div>
+        </header>
+
+        <div class="chat-notice">
+          Это тестовый стенд для совместной проверки интерфейса и логики. Лекарственные схемы пока отключены.
+        </div>
+
+        <div class="chat-stream" id="chat-stream" role="log" aria-live="polite" aria-relevant="additions"></div>
+        <div class="chat-suggestions" id="chat-suggestions" aria-label="Быстрые варианты ответа"></div>
+
+        <form class="chat-composer" id="chat-form">
+          <label class="sr-only" for="chat-input">Сообщение клиническому навигатору</label>
+          <textarea id="chat-input" rows="1" maxlength="1200" placeholder="Опишите клиническую ситуацию или напишите «сформировать карточку»"></textarea>
+          <button id="send-button" type="submit" aria-label="Отправить сообщение">➜</button>
+        </form>
+        <p class="composer-hint">Enter — отправить · Shift+Enter — новая строка · карточка формируется только по вашему запросу</p>
+      </section>
+    </div>
+  </main>
+
+  <template id="typing-template">
+    <div class="message-row assistant typing-row">
+      <div class="message-avatar">AI</div>
+      <div class="message-bubble typing-bubble"><span></span><span></span><span></span></div>
+    </div>
+  </template>
+
+  <script src="../../doctors/navigator/app.js?v=20260718-4"></script>
+</body>
+</html>
