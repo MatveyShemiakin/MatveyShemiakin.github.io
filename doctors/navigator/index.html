@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Клинический навигатор — прототип</title>
+  <meta name="description" content="Демонстрационный прототип клинического навигатора для врачей-офтальмологов.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#06162c">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/doctors/doctors.css?v=20260718-1">
+</head>
+<body class="doctor-page">
+  <header class="doctor-header">
+    <div class="container doctor-nav">
+      <a class="monogram" href="/" aria-label="На главную">МШ</a>
+      <nav class="doctor-links" aria-label="Навигация раздела">
+        <a href="/doctors/">Для врачей</a>
+        <a href="/">Основной сайт</a>
+      </nav>
+      <span class="prototype-badge">Не для клинического применения</span>
+    </div>
+  </header>
+
+  <main class="navigator-main">
+    <div class="container navigator-shell">
+      <aside class="case-sidebar">
+        <p class="section-kicker">Карточка случая</p>
+        <h2>ССГ / МГД</h2>
+        <ul class="case-list" id="case-summary">
+          <li><span>Этап</span><strong id="summary-step">Начало</strong></li>
+          <li><span>Красные флаги</span><strong id="summary-redflags">Не оценены</strong></li>
+          <li><span>Предварительный фенотип</span><strong id="summary-phenotype">Не определён</strong></li>
+          <li><span>Полнота данных</span><strong id="summary-completeness">0%</strong></li>
+        </ul>
+        <div class="data-warning"><strong>Не вводите персональные данные.</strong><br>ФИО, дату рождения, номер истории болезни, телефон и изображения документов.</div>
+      </aside>
+
+      <section class="navigator-card" aria-live="polite">
+        <div class="navigator-card-head">
+          <div class="navigator-card-head-row">
+            <div>
+              <p class="question-kicker">Пилотный клинический модуль</p>
+              <h1>Синдром сухого глаза и МГД</h1>
+            </div>
+            <span class="progress-label" id="progress-label">Шаг 1 из 6</span>
+          </div>
+          <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+        </div>
+
+        <div class="navigator-body">
+          <div id="navigator-content"></div>
+          <div class="navigator-actions" id="navigator-actions">
+            <button class="nav-button secondary" id="back-button" type="button" disabled>Назад</button>
+            <button class="nav-button primary" id="next-button" type="button">Начать</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="/doctors/navigator/app.js?v=20260718-1"></script>
+</body>
+</html>
