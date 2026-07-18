@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "doctors/**"
+      - "backend/**"
       - "docs/clinical-navigator/**"
       - ".github/workflows/clinical-navigator-check.yml"
   workflow_dispatch:
@@ -23,6 +24,13 @@ jobs:
           node --check doctors/navigator/modules.js
           node --check doctors/navigator/app-v2.js
           node --check doctors/navigator/validate-modules.js
+          cd backend
+          npm run check
+
+      - name: Test clinical fact extraction
+        run: |
+          cd backend
+          npm test
 
       - name: Validate clinical module schema
         run: node doctors/navigator/validate-modules.js
@@ -37,6 +45,16 @@ jobs:
             echo "Legacy single-module entrypoint is still active"
             exit 1
           fi
+
+      - name: Check provider-neutral backend
+        run: |
+          test -f backend/src/handler.mjs
+          test -f backend/src/providers.mjs
+          test -f backend/src/clinical-schema.mjs
+          grep -q "AI_PROVIDER" backend/src/providers.mjs
+          grep -q "YANDEX_API_KEY" backend/src/providers.mjs
+          grep -q "OPENAI_API_KEY" backend/src/providers.mjs
+          grep -q "AI_PROVIDER=mock" backend/README.md
 
       - name: Check required files
         run: |
@@ -72,7 +90,7 @@ jobs:
 
       - name: Prevent accidental API secrets
         run: |
-          if grep -RInE 'sk-[A-Za-z0-9_-]{20,}|OPENAI_API_KEY[[:space:]]*=' doctors docs/clinical-navigator; then
+          if grep -RInE 'sk-[A-Za-z0-9_-]{20,}|AQVN[A-Za-z0-9_-]{20,}|(OPENAI|YANDEX|AI)_API_KEY[[:space:]]*=[[:space:]]*[^<[:space:]]+' doctors backend docs/clinical-navigator; then
             echo "Potential secret detected"
             exit 1
           fi
