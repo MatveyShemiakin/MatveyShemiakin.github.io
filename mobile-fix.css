@@ -11,6 +11,24 @@ main,.section,.site-footer{
   max-width:100%;
 }
 
+/* Точное центрирование RU/EN внутри переключателя языка. */
+.language-switch{
+  align-items:center;
+}
+
+.language-button{
+  display:inline-flex!important;
+  align-items:center;
+  justify-content:center;
+  width:39px;
+  min-width:39px;
+  height:31px;
+  padding:0!important;
+  line-height:1!important;
+  text-align:center;
+  text-indent:.12em;
+}
+
 /* Сдвигаем подпись города левее, чтобы она не заходила на портрет. */
 @media (min-width:761px){
   .portrait-city{
