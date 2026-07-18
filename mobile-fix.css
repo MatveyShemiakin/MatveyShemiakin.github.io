@@ -11,6 +11,14 @@ main,.section,.site-footer{
   max-width:100%;
 }
 
+/* Сдвигаем подпись города левее, чтобы она не заходила на портрет. */
+@media (min-width:761px){
+  .portrait-city{
+    left:-24px!important;
+    white-space:nowrap;
+  }
+}
+
 @media (max-width:760px){
   .section{
     overflow-x:clip;
