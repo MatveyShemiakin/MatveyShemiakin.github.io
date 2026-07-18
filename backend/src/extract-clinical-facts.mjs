@@ -14,8 +14,9 @@ function isNegated(text, phrase) {
   if (index < 0) return false;
   const prefix = text.slice(Math.max(0, index - 28), index);
   const suffix = text.slice(index + phrase.length, index + phrase.length + 36);
+  const suffixClause = suffix.split(/[.;,]/, 1)[0];
   return /(?:нет|без|не отмечает|отрицает|отсутств)/.test(prefix)
-    || /(?:^|[ ,;])(?:нет|отсутствуют?|не отмечаются?)(?:[ .;,]|$)/.test(suffix);
+    || /(?:^|[ ])(?:нет|отсутствуют?|не отмечаются?)(?:[ ]|$)/.test(suffixClause.trim());
 }
 
 function addSymptom(facts, text, id, phrases) {
