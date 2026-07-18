@@ -2,7 +2,6 @@
   'use strict';
 
   const content = document.getElementById('navigator-content');
-  const actions = document.getElementById('navigator-actions');
   const backButton = document.getElementById('back-button');
   const nextButton = document.getElementById('next-button');
   const progressBar = document.getElementById('progress-bar');
@@ -15,7 +14,7 @@
     completeness: document.getElementById('summary-completeness')
   };
 
-  const state = {
+  const initialState = () => ({
     step: 0,
     resultMode: false,
     accepted: false,
@@ -23,21 +22,25 @@
     redFlags: [],
     symptoms: [],
     laterality: '',
-    tbut: '',
-    schirmer: '',
+    osdi6: '',
+    nibt: '',
+    osmolarity: '',
     staining: '',
+    schirmer: '',
     mgd: '',
     risks: [],
     priorTreatment: ''
-  };
+  });
+
+  let state = initialState();
 
   const stepNames = [
     'Условия использования',
     'Клиническая задача',
     'Проверка безопасности',
     'Симптомы',
-    'Объективные данные',
-    'Факторы риска'
+    'Диагностические данные',
+    'Этиологические факторы'
   ];
 
   const option = (type, name, value, title, help, checked) => `
@@ -48,15 +51,13 @@
 
   function renderStep() {
     state.resultMode = false;
-    actions.hidden = false;
     progressLabel.textContent = `Шаг ${state.step + 1} из ${stepNames.length}`;
     progressBar.style.width = `${((state.step + 1) / stepNames.length) * 100}%`;
     summary.step.textContent = stepNames[state.step];
     backButton.disabled = state.step === 0;
     nextButton.textContent = state.step === 0 ? 'Начать' : state.step === stepNames.length - 1 ? 'Сформировать результат' : 'Продолжить';
 
-    const renderers = [renderIntro, renderGoal, renderRedFlags, renderSymptoms, renderMeasurements, renderRisks];
-    renderers[state.step]();
+    [renderIntro, renderGoal, renderRedFlags, renderSymptoms, renderDiagnostics, renderDrivers][state.step]();
     updateSummary();
   }
 
@@ -64,33 +65,33 @@
     content.innerHTML = `
       <p class="question-kicker">Перед началом</p>
       <h2 class="question-title">Демонстрационный режим</h2>
-      <p class="question-help">Этот прототип проверяет структуру диалога, логику обязательных вопросов и блокировку небезопасного результата. Он не предназначен для диагностики или назначения лечения.</p>
+      <p class="question-help">Прототип проверяет структуру диалога, обязательные вопросы и остановку небезопасного сценария. Он не предназначен для диагностики или назначения лечения.</p>
       <div class="result-grid">
         <div class="result-block caution">
-          <h3>Основные ограничения</h3>
+          <h3>Ограничения</h3>
           <ul>
             <li>не вводите персональные данные пациента;</li>
             <li>не используйте результат как медицинскую рекомендацию;</li>
-            <li>лекарственный модуль в этой версии отключён;</li>
-            <li>клинические ветви ещё проходят экспертную валидацию.</li>
+            <li>лекарственный модуль отключён;</li>
+            <li>правила проходят клиническую валидацию.</li>
           </ul>
         </div>
       </div>
       <div class="option-grid">
-        ${option('checkbox', 'accepted', 'yes', 'Я понимаю ограничения прототипа', 'Продолжение доступно только после подтверждения.', state.accepted)}
+        ${option('checkbox', 'accepted', 'yes', 'Я понимаю ограничения прототипа', 'Продолжение доступно после подтверждения.', state.accepted)}
       </div>`;
   }
 
   function renderGoal() {
     const choices = [
-      ['phenotype', 'Определить вероятный фенотип', 'Структурировать признаки вододефицитного, испарительного или смешанного варианта.'],
-      ['missing', 'Проверить полноту обследования', 'Определить, каких данных недостаточно для клинической классификации.'],
-      ['refractory', 'Разобрать отсутствие эффекта', 'Проверить болезни-маски, факторы риска и возможное несоответствие диагноза.']
+      ['framework', 'Проверить диагностическую рамку', 'Сопоставить симптомы с маркерами нарушения гомеостаза слёзной плёнки или глазной поверхности.'],
+      ['drivers', 'Оценить вероятные этиологические драйверы', 'Структурировать липидный, водный, вековый, ятрогенный и другие компоненты.'],
+      ['refractory', 'Разобрать отсутствие эффекта', 'Проверить болезни-маски, несоответствие симптомов и признаков, а также поддерживающие факторы.']
     ];
     content.innerHTML = `
       <p class="question-kicker">Цель обращения</p>
       <h2 class="question-title">Какую задачу нужно решить?</h2>
-      <p class="question-help">Выбранная задача определит приоритеты итоговой карточки.</p>
+      <p class="question-help">Выбранная задача изменит акценты итоговой карточки.</p>
       <div class="option-grid">
         ${choices.map(([value, title, help]) => option('radio', 'goal', value, title, help, state.goal === value)).join('')}
       </div>`;
@@ -98,47 +99,36 @@
 
   function renderRedFlags() {
     const flags = [
-      ['vision_loss', 'Значимое или быстрое снижение зрения', 'Особенно при одностороннем остром процессе.'],
-      ['severe_pain', 'Выраженная боль или светобоязнь', 'Симптомы, не соответствующие обычному дискомфорту при ССГ.'],
-      ['infiltrate', 'Фокальный инфильтрат, дефект эпителия или выраженное окрашивание', 'Требует исключения инфекционного или иного поражения роговицы.'],
+      ['vision_loss', 'Значимое или быстрое снижение зрения', 'Особенно при остром одностороннем процессе.'],
+      ['severe_pain', 'Выраженная боль или светобоязнь', 'Симптомы, не соответствующие обычному дискомфорту при сухом глазе.'],
+      ['corneal_lesion', 'Фокальный инфильтрат, дефект эпителия или выраженное поражение роговицы', 'Требует исключения инфекционной и иной угрожающей патологии.'],
       ['acute_unilateral', 'Острый односторонний красный глаз', 'Нужна оценка альтернативного диагноза.'],
       ['contact_lens', 'Контактные линзы и острое ухудшение', 'Повышает настороженность в отношении кератита.'],
-      ['none', 'Перечисленных признаков нет', 'Можно перейти к плановой фенотипизации.']
+      ['none', 'Перечисленных признаков нет', 'Можно перейти к плановой диагностической рамке.']
     ];
     content.innerHTML = `
       <p class="question-kicker">Красные флаги</p>
-      <h2 class="question-title">Есть ли признаки, требующие другого клинического маршрута?</h2>
-      <p class="question-help">При наличии любого угрожающего признака обычный алгоритм ССГ будет остановлен.</p>
+      <h2 class="question-title">Есть ли признаки, требующие другого маршрута?</h2>
+      <p class="question-help">При наличии угрожающего признака плановый алгоритм будет остановлен.</p>
       <div class="option-grid">
         ${flags.map(([value, title, help]) => option('checkbox', 'redFlags', value, title, help, state.redFlags.includes(value))).join('')}
       </div>`;
-
-    content.querySelectorAll('input[name="redFlags"]').forEach((input) => {
-      input.addEventListener('change', () => {
-        if (input.value === 'none' && input.checked) {
-          content.querySelectorAll('input[name="redFlags"]:not([value="none"])').forEach((item) => { item.checked = false; });
-        }
-        if (input.value !== 'none' && input.checked) {
-          const none = content.querySelector('input[name="redFlags"][value="none"]');
-          if (none) none.checked = false;
-        }
-      });
-    });
+    setupExclusiveNone('redFlags');
   }
 
   function renderSymptoms() {
     const symptoms = [
-      ['dryness', 'Сухость, жжение или ощущение песка', 'Типичный симптомокомплекс глазной поверхности.'],
+      ['dryness', 'Сухость, жжение или ощущение песка', 'Типичные симптомы глазной поверхности.'],
       ['fluctuation', 'Флюктуация зрения и улучшение после моргания', 'Может поддерживать нестабильность слёзной плёнки.'],
-      ['tearing', 'Рефлекторное слезотечение', 'Не исключает синдром сухого глаза.'],
+      ['tearing', 'Рефлекторное слезотечение', 'Не исключает сухой глаз.'],
       ['morning', 'Преобладание симптомов утром', 'Может потребовать оценки экспозиции и состояния век.'],
-      ['screen', 'Усиление при зрительной нагрузке', 'Учитывается вместе с частотой моргания и условиями среды.'],
-      ['discordant_pain', 'Боль значительно сильнее объективных признаков', 'Требует отдельной оценки возможной нейропатической боли.']
+      ['screen', 'Усиление при зрительной нагрузке', 'Оценивается вместе с морганием и условиями среды.'],
+      ['discordant_pain', 'Боль значительно сильнее объективных признаков', 'Требует оценки нейросенсорного или нейропатического компонента.']
     ];
     content.innerHTML = `
       <p class="question-kicker">Симптоматический профиль</p>
       <h2 class="question-title">Какие жалобы преобладают?</h2>
-      <p class="question-help">Можно выбрать несколько вариантов.</p>
+      <p class="question-help">Можно выбрать несколько вариантов. На следующем шаге отдельно фиксируется результат валидированного опросника.</p>
       <div class="inline-fields">
         <div class="field">
           <label for="laterality">Латеральность</label>
@@ -155,32 +145,46 @@
       </div>`;
   }
 
-  function renderMeasurements() {
+  function renderDiagnostics() {
     content.innerHTML = `
-      <p class="question-kicker">Объективные признаки</p>
-      <h2 class="question-title">Введите доступные результаты обследования</h2>
-      <p class="question-help">Можно оставить неизвестный показатель пустым. Итог укажет, какие данные необходимо дополнить.</p>
+      <p class="question-kicker">Диагностическая методология</p>
+      <h2 class="question-title">Какие данные получены?</h2>
+      <p class="question-help">В логике TFOS DEWS III положительный скрининг симптомов должен сочетаться как минимум с одним маркером нарушения гомеостаза. Ширмер используется для анализа драйвера слёзодефицита, а не как самостоятельное подтверждение диагноза.</p>
       <div class="inline-fields">
         <div class="field">
-          <label for="tbut">TBUT / NIBUT, секунд</label>
-          <input id="tbut" type="number" min="0" max="60" step="0.1" inputmode="decimal" value="${state.tbut}" placeholder="Например, 6">
+          <label for="osdi6">OSDI-6</label>
+          <select id="osdi6">
+            <option value="">Не выполнен / неизвестен</option>
+            <option value="positive" ${state.osdi6 === 'positive' ? 'selected' : ''}>Положительный, ≥4</option>
+            <option value="negative" ${state.osdi6 === 'negative' ? 'selected' : ''}>Отрицательный, &lt;4</option>
+          </select>
         </div>
         <div class="field">
-          <label for="schirmer">Тест Ширмера, мм</label>
-          <input id="schirmer" type="number" min="0" max="50" step="1" inputmode="numeric" value="${state.schirmer}" placeholder="Например, 12">
+          <label for="nibt">NIBUT, секунд</label>
+          <input id="nibt" type="number" min="0" max="60" step="0.1" inputmode="decimal" value="${state.nibt}" placeholder="Например, 7.5">
+        </div>
+        <div class="field">
+          <label for="osmolarity">Осмолярность слезы</label>
+          <select id="osmolarity">
+            <option value="">Не оценена</option>
+            <option value="abnormal" ${state.osmolarity === 'abnormal' ? 'selected' : ''}>Аномальная по критериям метода</option>
+            <option value="normal" ${state.osmolarity === 'normal' ? 'selected' : ''}>В пределах критериев метода</option>
+          </select>
         </div>
         <div class="field">
           <label for="staining">Окрашивание глазной поверхности</label>
           <select id="staining">
             <option value="">Не оценено</option>
-            <option value="none" ${state.staining === 'none' ? 'selected' : ''}>Нет</option>
-            <option value="mild" ${state.staining === 'mild' ? 'selected' : ''}>Минимальное</option>
-            <option value="moderate" ${state.staining === 'moderate' ? 'selected' : ''}>Умеренное</option>
-            <option value="severe" ${state.staining === 'severe' ? 'selected' : ''}>Выраженное</option>
+            <option value="abnormal" ${state.staining === 'abnormal' ? 'selected' : ''}>Аномальное по валидированной шкале</option>
+            <option value="normal" ${state.staining === 'normal' ? 'selected' : ''}>Не достигает диагностического порога</option>
           </select>
         </div>
         <div class="field">
-          <label for="mgd">Признаки МГД</label>
+          <label for="schirmer">Тест Ширмера, мм / 5 мин</label>
+          <input id="schirmer" type="number" min="0" max="50" step="1" inputmode="numeric" value="${state.schirmer}" placeholder="Для оценки водного драйвера">
+        </div>
+        <div class="field">
+          <label for="mgd">Признаки МГД / патологии края век</label>
           <select id="mgd">
             <option value="">Не оценены</option>
             <option value="yes" ${state.mgd === 'yes' ? 'selected' : ''}>Присутствуют</option>
@@ -190,18 +194,18 @@
       </div>`;
   }
 
-  function renderRisks() {
+  function renderDrivers() {
     const risks = [
       ['glaucoma_drops', 'Длительная местная гипотензивная терапия', 'Учитываются консерванты и суммарная лекарственная нагрузка.'],
-      ['recent_surgery', 'Недавняя офтальмологическая операция', 'Важны срок, тип вмешательства и состояние эпителия.'],
-      ['autoimmune', 'Аутоиммунное заболевание или выраженная сухость слизистых', 'Может требовать системной оценки, включая синдром Шегрена.'],
-      ['systemic_drugs', 'Системные препараты, способные усиливать сухость', 'Необходима лекарственная ревизия.'],
-      ['exposure', 'Неполное смыкание век или экспозиция', 'Требует отдельной защиты глазной поверхности.'],
+      ['recent_surgery', 'Недавняя офтальмологическая операция', 'Важны срок, тип вмешательства и состояние глазной поверхности.'],
+      ['autoimmune', 'Аутоиммунное заболевание или выраженная сухость слизистых', 'Может потребовать системной оценки, включая синдром Шегрена.'],
+      ['systemic_drugs', 'Системные препараты, способные усиливать сухость', 'Нужна лекарственная ревизия.'],
+      ['exposure', 'Неполное смыкание век или экспозиция', 'Формирует самостоятельный этиологический драйвер.'],
       ['none', 'Значимые факторы не выявлены', 'По имеющимся данным.']
     ];
     content.innerHTML = `
-      <p class="question-kicker">Контекст заболевания</p>
-      <h2 class="question-title">Какие факторы могут поддерживать процесс?</h2>
+      <p class="question-kicker">Этиологические драйверы</p>
+      <h2 class="question-title">Какие факторы могут поддерживать заболевание?</h2>
       <div class="option-grid">
         ${risks.map(([value, title, help]) => option('checkbox', 'risks', value, title, help, state.risks.includes(value))).join('')}
       </div>
@@ -209,14 +213,17 @@
         <label for="priorTreatment">Ранее проводившаяся терапия и эффект</label>
         <textarea id="priorTreatment" maxlength="800" placeholder="Без персональных данных пациента">${state.priorTreatment}</textarea>
       </div>`;
+    setupExclusiveNone('risks');
+  }
 
-    content.querySelectorAll('input[name="risks"]').forEach((input) => {
+  function setupExclusiveNone(name) {
+    content.querySelectorAll(`input[name="${name}"]`).forEach((input) => {
       input.addEventListener('change', () => {
         if (input.value === 'none' && input.checked) {
-          content.querySelectorAll('input[name="risks"]:not([value="none"])').forEach((item) => { item.checked = false; });
+          content.querySelectorAll(`input[name="${name}"]:not([value="none"])`).forEach((item) => { item.checked = false; });
         }
         if (input.value !== 'none' && input.checked) {
-          const none = content.querySelector('input[name="risks"][value="none"]');
+          const none = content.querySelector(`input[name="${name}"][value="none"]`);
           if (none) none.checked = false;
         }
       });
@@ -228,38 +235,38 @@
       state.accepted = Boolean(content.querySelector('input[name="accepted"]:checked'));
       if (!state.accepted) return showValidation('Подтвердите, что понимаете ограничения демонстрационной версии.');
     }
-
     if (state.step === 1) {
       const goal = content.querySelector('input[name="goal"]:checked');
       if (!goal) return showValidation('Выберите клиническую задачу.');
       state.goal = goal.value;
     }
-
     if (state.step === 2) {
-      state.redFlags = Array.from(content.querySelectorAll('input[name="redFlags"]:checked')).map((item) => item.value);
+      state.redFlags = selectedValues('redFlags');
       if (!state.redFlags.length) return showValidation('Отметьте выявленные признаки или вариант «перечисленных признаков нет».');
     }
-
     if (state.step === 3) {
       state.laterality = content.querySelector('#laterality').value;
-      state.symptoms = Array.from(content.querySelectorAll('input[name="symptoms"]:checked')).map((item) => item.value);
-      if (!state.symptoms.length) return showValidation('Отметьте хотя бы один симптом или вернитесь для уточнения клинической задачи.');
+      state.symptoms = selectedValues('symptoms');
+      if (!state.symptoms.length) return showValidation('Отметьте хотя бы один симптом.');
     }
-
     if (state.step === 4) {
-      state.tbut = content.querySelector('#tbut').value;
-      state.schirmer = content.querySelector('#schirmer').value;
+      state.osdi6 = content.querySelector('#osdi6').value;
+      state.nibt = content.querySelector('#nibt').value;
+      state.osmolarity = content.querySelector('#osmolarity').value;
       state.staining = content.querySelector('#staining').value;
+      state.schirmer = content.querySelector('#schirmer').value;
       state.mgd = content.querySelector('#mgd').value;
     }
-
     if (state.step === 5) {
-      state.risks = Array.from(content.querySelectorAll('input[name="risks"]:checked')).map((item) => item.value);
+      state.risks = selectedValues('risks');
       state.priorTreatment = content.querySelector('#priorTreatment').value.trim();
-      if (!state.risks.length) return showValidation('Отметьте факторы риска или вариант «значимые факторы не выявлены».');
+      if (!state.risks.length) return showValidation('Отметьте факторы или вариант «значимые факторы не выявлены».');
     }
-
     return true;
+  }
+
+  function selectedValues(name) {
+    return Array.from(content.querySelectorAll(`input[name="${name}"]:checked`)).map((item) => item.value);
   }
 
   function showValidation(message) {
@@ -277,26 +284,36 @@
     return state.redFlags.some((flag) => flag !== 'none');
   }
 
-  function determinePhenotype() {
-    const tbut = state.tbut === '' ? null : Number(state.tbut);
-    const schirmer = state.schirmer === '' ? null : Number(state.schirmer);
-    const evaporative = state.mgd === 'yes' && tbut !== null && tbut <= 10;
-    const aqueous = schirmer !== null && schirmer <= 5;
+  function hasHomeostasisMarker() {
+    const nibt = state.nibt === '' ? null : Number(state.nibt);
+    return (nibt !== null && nibt < 10) || state.osmolarity === 'abnormal' || state.staining === 'abnormal';
+  }
 
-    if (evaporative && aqueous) return 'Смешанный фенотип: признаки испарительного и вододефицитного компонентов';
-    if (evaporative) return 'Преимущественно испарительный фенотип / МГД';
-    if (aqueous) return 'Вероятный вододефицитный фенотип';
-    if (tbut !== null && tbut > 10 && schirmer !== null && schirmer > 5 && state.staining === 'none') return 'Объективных данных для подтверждения ССГ недостаточно';
-    return 'Фенотип не определён: требуется дополнение объективных данных';
+  function diagnosticFrame() {
+    if (!state.osdi6) return 'Не оценивается: отсутствует результат OSDI-6.';
+    if (state.osdi6 === 'negative') return 'Скрининг OSDI-6 отрицательный; данная диагностическая ветвь не подтверждает сухой глаз.';
+    if (hasHomeostasisMarker()) return 'Положительный OSDI-6 сочетается как минимум с одним маркером нарушения гомеостаза; критерии диагностической рамки потенциально выполнены.';
+    return 'OSDI-6 положительный, но подтверждающий маркер нарушения гомеостаза не получен или не введён.';
+  }
+
+  function determineDriver() {
+    const schirmer = state.schirmer === '' ? null : Number(state.schirmer);
+    const aqueousSignal = schirmer !== null && schirmer <= 5;
+    const lidSignal = state.mgd === 'yes';
+
+    if (aqueousSignal && lidSignal) return 'Смешанные драйверы: выраженный сигнал слёзодефицита и патология мейбомиевых желёз / края век';
+    if (lidSignal) return 'Вероятный липидный или вековый драйвер, связанный с МГД';
+    if (aqueousSignal) return 'Выраженный сигнал водного дефицита; требуется этиологическая оценка';
+    if (state.symptoms.includes('discordant_pain')) return 'Возможный нейросенсорный драйвер при несоответствии симптомов и признаков';
+    return 'Драйвер не классифицирован: нужны дополнительные этиологические тесты';
   }
 
   function missingData() {
     const missing = [];
     if (!state.laterality) missing.push('латеральность процесса');
-    if (state.tbut === '') missing.push('стабильность слёзной плёнки (TBUT/NIBUT)');
-    if (state.schirmer === '') missing.push('оценка слёзопродукции');
-    if (!state.staining) missing.push('окрашивание глазной поверхности');
-    if (!state.mgd) missing.push('оценка мейбомиевых желёз');
+    if (!state.osdi6) missing.push('валидированный скрининг симптомов OSDI-6');
+    if (!hasHomeostasisMarker()) missing.push('как минимум один положительный маркер нарушения гомеостаза: NIBUT, осмолярность или окрашивание');
+    if (!state.mgd) missing.push('оценка мейбомиевых желёз и края век');
     return missing;
   }
 
@@ -306,9 +323,8 @@
       state.redFlags.length > 0,
       state.symptoms.length > 0,
       Boolean(state.laterality),
-      state.tbut !== '',
-      state.schirmer !== '',
-      Boolean(state.staining),
+      Boolean(state.osdi6),
+      hasHomeostasisMarker(),
       Boolean(state.mgd),
       state.risks.length > 0
     ];
@@ -318,7 +334,7 @@
   function updateSummary() {
     const criticalCount = state.redFlags.filter((flag) => flag !== 'none').length;
     summary.redFlags.textContent = !state.redFlags.length ? 'Не оценены' : criticalCount ? `Выявлено: ${criticalCount}` : 'Не выявлены';
-    summary.phenotype.textContent = state.step >= 4 || state.resultMode ? determinePhenotype() : 'Не определён';
+    summary.phenotype.textContent = state.step >= 4 || state.resultMode ? determineDriver() : 'Не определён';
     summary.completeness.textContent = `${completenessPercent()}%`;
   }
 
@@ -327,21 +343,21 @@
     progressBar.style.width = '100%';
     progressLabel.textContent = 'Алгоритм остановлен';
     summary.step.textContent = 'Требуется другой маршрут';
-    summary.phenotype.textContent = 'Фенотипизация ССГ не выполнялась';
+    summary.phenotype.textContent = 'Анализ драйверов не выполнялся';
     content.innerHTML = `
-      <p class="question-kicker">Результат проверки безопасности</p>
-      <h2 class="question-title">Обычный алгоритм ССГ остановлен</h2>
+      <p class="question-kicker">Проверка безопасности</p>
+      <h2 class="question-title">Плановый алгоритм остановлен</h2>
       <div class="result-grid">
         <div class="result-block critical">
           <h3>Выявлены признаки потенциально другого заболевания</h3>
-          <p>Перед плановой фенотипизацией синдрома сухого глаза требуется очная оценка и исключение поражения роговицы, воспалительного, инфекционного или иного угрожающего состояния.</p>
+          <p>Перед обсуждением сухого глаза требуется очная оценка и исключение поражения роговицы, воспалительной, инфекционной или другой угрожающей патологии.</p>
         </div>
         <div class="result-block caution">
-          <h3>Логика прототипа</h3>
-          <p>Система намеренно не продолжает формировать плановую тактику и не показывает лекарственные варианты при наличии красных флагов.</p>
+          <h3>Почему система остановилась</h3>
+          <p>Навигатор не должен маскировать опасный процесс плановыми рекомендациями по заболеванию глазной поверхности.</p>
         </div>
       </div>
-      <div class="prototype-lock"><span>🔒</span><div><strong>Фармакотерапевтический блок недоступен.</strong><br>Он будет подключён только после экспертной валидации источников и правил безопасности.</div></div>`;
+      ${lockedTreatment()}`;
     nextButton.textContent = 'Начать заново';
     backButton.disabled = false;
     updateSummary();
@@ -349,14 +365,8 @@
 
   function showFinalResult() {
     state.resultMode = true;
-    const phenotype = determinePhenotype();
+    const driver = determineDriver();
     const missing = missingData();
-    progressBar.style.width = '100%';
-    progressLabel.textContent = 'Предварительная карточка';
-    summary.step.textContent = 'Результат сформирован';
-    summary.phenotype.textContent = phenotype;
-    summary.completeness.textContent = `${completenessPercent()}%`;
-
     const riskLabels = {
       glaucoma_drops: 'местная гипотензивная терапия',
       recent_surgery: 'недавнее офтальмологическое вмешательство',
@@ -366,73 +376,67 @@
     };
     const relevantRisks = state.risks.filter((item) => item !== 'none').map((item) => riskLabels[item]).filter(Boolean);
 
+    progressBar.style.width = '100%';
+    progressLabel.textContent = 'Предварительная карточка';
+    summary.step.textContent = 'Результат сформирован';
+    summary.phenotype.textContent = driver;
+    summary.completeness.textContent = `${completenessPercent()}%`;
+
     content.innerHTML = `
       <p class="question-kicker">Демонстрационный результат</p>
       <h2 class="question-title">Предварительная клиническая структура</h2>
       <div class="result-grid">
         <div class="result-block safe">
           <h3>Красные флаги</h3>
-          <p>По введённым ответам критические признаки не отмечены. Это не исключает патологию, если исходные данные неполны или ошибочны.</p>
+          <p>По введённым ответам критические признаки не отмечены. Это не исключает патологию при неполных или ошибочных исходных данных.</p>
         </div>
         <div class="result-block">
-          <h3>Предварительный фенотип</h3>
-          <p>${phenotype}.</p>
+          <h3>Диагностическая рамка</h3>
+          <p>${diagnosticFrame()}</p>
+        </div>
+        <div class="result-block">
+          <h3>Предварительный этиологический драйвер</h3>
+          <p>${driver}.</p>
         </div>
         <div class="result-block ${missing.length ? 'caution' : ''}">
-          <h3>Полнота обследования</h3>
-          ${missing.length ? `<p>Для более надёжной классификации необходимо дополнить:</p><ul>${missing.map((item) => `<li>${item}</li>`).join('')}</ul>` : '<p>Основные поля пилотного алгоритма заполнены.</p>'}
+          <h3>Недостающие данные</h3>
+          ${missing.length ? `<ul>${missing.map((item) => `<li>${item}</li>`).join('')}</ul>` : '<p>Ключевые поля демонстрационного алгоритма заполнены.</p>'}
         </div>
         <div class="result-block">
           <h3>Факторы, способные изменить тактику</h3>
-          ${relevantRisks.length ? `<ul>${relevantRisks.map((item) => `<li>${item}</li>`).join('')}</ul>` : '<p>В выбранных вариантах значимые дополнительные факторы не указаны.</p>'}
+          ${relevantRisks.length ? `<ul>${relevantRisks.map((item) => `<li>${item}</li>`).join('')}</ul>` : '<p>Значимые дополнительные факторы не указаны.</p>'}
         </div>
         <div class="result-block caution">
           <h3>Заболевания-маски и несоответствия</h3>
-          <p>${state.symptoms.includes('discordant_pain') ? 'Отмечено несоответствие боли объективным признакам: в будущем модуле будет обязательна ветвь оценки нейропатического компонента.' : 'При атипичном, одностороннем или резистентном течении алгоритм должен отдельно проверять поражение роговицы, экспозицию, токсическое воздействие препаратов, воспалительную и нейропатическую патологию.'}</p>
+          <p>${state.symptoms.includes('discordant_pain') ? 'Отмечено несоответствие выраженности боли объективным признакам: необходима отдельная нейросенсорная ветвь.' : 'При атипичном, одностороннем или резистентном течении необходимо проверять поражение роговицы, экспозицию, токсическое воздействие препаратов, воспалительную и нейросенсорную патологию.'}</p>
+        </div>
+        <div class="result-block">
+          <h3>Источник диагностической рамки</h3>
+          <p>TFOS DEWS III: Diagnostic Methodology, 2025. В production-версии каждое утверждение будет связано с конкретной версией и разделом источника.</p>
         </div>
       </div>
-      <div class="prototype-lock"><span>🔒</span><div><strong>Лекарственные схемы намеренно не сформированы.</strong><br>Следующая версия будет получать МНН, дозы, длительность и ограничения только из утверждённой структурированной базы.</div></div>`;
+      ${lockedTreatment()}`;
 
     nextButton.textContent = 'Начать заново';
     backButton.disabled = false;
   }
 
+  function lockedTreatment() {
+    return '<div class="prototype-lock"><span>🔒</span><div><strong>Лекарственные схемы намеренно не сформированы.</strong><br>Они будут подключены только после экспертной валидации источников, противопоказаний и правил безопасности.</div></div>';
+  }
+
   function reset() {
-    Object.assign(state, {
-      step: 0,
-      resultMode: false,
-      accepted: false,
-      goal: '',
-      redFlags: [],
-      symptoms: [],
-      laterality: '',
-      tbut: '',
-      schirmer: '',
-      staining: '',
-      mgd: '',
-      risks: [],
-      priorTreatment: ''
-    });
+    state = initialState();
     renderStep();
   }
 
   nextButton.addEventListener('click', () => {
-    if (state.resultMode) {
-      reset();
-      return;
-    }
+    if (state.resultMode) return reset();
     if (!collectCurrentStep()) return;
     updateSummary();
 
-    if (state.step === 2 && hasCriticalFlags()) {
-      showCriticalResult();
-      return;
-    }
-
-    if (state.step === stepNames.length - 1) {
-      showFinalResult();
-      return;
-    }
+    if (state.step === 2 && hasCriticalFlags()) return showCriticalResult();
+    if (state.step === stepNames.length - 1) return showFinalResult();
 
     state.step += 1;
     renderStep();
