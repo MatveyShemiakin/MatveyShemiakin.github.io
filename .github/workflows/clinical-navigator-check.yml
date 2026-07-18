@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          show-progress: false
 
       - name: Check JavaScript syntax
         run: |
@@ -25,12 +27,12 @@ jobs:
           node --check doctors/navigator/app-v2.js
           node --check doctors/navigator/validate-modules.js
           cd backend
-          npm run check
+          npm run check --silent
 
       - name: Test clinical fact extraction
         run: |
           cd backend
-          npm test
+          node --test --test-reporter=spec test/*.test.mjs
 
       - name: Validate clinical module schema
         run: node doctors/navigator/validate-modules.js
