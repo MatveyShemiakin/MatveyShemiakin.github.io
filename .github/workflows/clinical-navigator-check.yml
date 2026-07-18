@@ -1,0 +1,55 @@
+name: Clinical navigator checks
+
+on:
+  pull_request:
+    paths:
+      - "doctors/**"
+      - "docs/clinical-navigator/**"
+      - ".github/workflows/clinical-navigator-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check JavaScript syntax
+        run: node --check doctors/navigator/app.js
+
+      - name: Check required files
+        run: |
+          test -f doctors/index.html
+          test -f doctors/doctors.css
+          test -f doctors/navigator/index.html
+          test -f doctors/navigator/app.js
+          test -f docs/clinical-navigator/README.md
+          test -f docs/clinical-navigator/architecture.md
+          test -f docs/clinical-navigator/dry-eye-v0.1.md
+
+      - name: Parse HTML with Python standard library
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          class Parser(HTMLParser):
+              pass
+
+          for path in [Path('doctors/index.html'), Path('doctors/navigator/index.html')]:
+              parser = Parser()
+              parser.feed(path.read_text(encoding='utf-8'))
+              parser.close()
+              print(f'Parsed {path}')
+          PY
+
+      - name: Prevent accidental API secrets
+        run: |
+          if grep -RInE 'sk-[A-Za-z0-9_-]{20,}|OPENAI_API_KEY[[:space:]]*=' doctors docs/clinical-navigator; then
+            echo "Potential secret detected"
+            exit 1
+          fi
