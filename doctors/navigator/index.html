@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Клинический навигатор — чат-прототип v0.4</title>
-  <meta name="description" content="Демонстрационный чат-прототип клинического навигатора для врачей-офтальмологов.">
+  <title>Клинический навигатор — многомодульный прототип v0.5</title>
+  <meta name="description" content="Многомодульный чат-прототип клинического навигатора для врачей-офтальмологов.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#06162c">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/doctors/doctors.css?v=20260718-3">
+  <link rel="stylesheet" href="/doctors/doctors.css?v=20260718-5">
 </head>
 <body class="doctor-page chat-navigator-page">
   <header class="doctor-header">
@@ -19,7 +19,7 @@
         <a href="/doctors/">Для врачей</a>
         <a href="/">Основной сайт</a>
       </nav>
-      <span class="prototype-badge">Прототип v0.4 · не для клинического применения</span>
+      <span class="prototype-badge">Прототип v0.5 · 7 клинических модулей</span>
     </div>
   </header>
 
@@ -30,7 +30,7 @@
           <div class="assistant-mark" aria-hidden="true">МШ</div>
           <div>
             <p class="section-kicker">Клинический модуль</p>
-            <h1>ССГ / МГД</h1>
+            <h1 id="module-title">Выберите модуль</h1>
           </div>
         </div>
 
@@ -42,18 +42,18 @@
 
         <dl class="context-facts">
           <div><dt>Срочность</dt><dd id="summary-urgency">Не оценена</dd></div>
-          <div><dt>Признаки ССГ</dt><dd id="summary-diagnosis">Не оценены</dd></div>
-          <div><dt>Вероятный механизм</dt><dd id="summary-driver">Не определён</dd></div>
-          <div><dt>Карточка</dt><dd id="summary-card">Только по запросу</dd></div>
+          <div><dt>Предварительный вывод</dt><dd id="summary-diagnosis">Не оценён</dd></div>
+          <div><dt>Основное направление</dt><dd id="summary-driver">Не определено</dd></div>
+          <div><dt>Карточка</dt><dd id="summary-card">По запросу врача</dd></div>
         </dl>
 
-        <div class="driver-mini-map" aria-label="Возможные механизмы заболевания">
-          <div class="driver-mini-head"><span>Возможные механизмы</span><small>предварительно</small></div>
-          <div class="driver-row"><span>Испарительный / МГД</span><i><b id="driver-lipid"></b></i></div>
-          <div class="driver-row"><span>Слёзодефицитный</span><i><b id="driver-aqueous"></b></i></div>
-          <div class="driver-row"><span>Экспозиционный</span><i><b id="driver-exposure"></b></i></div>
-          <div class="driver-row"><span>Лекарственный / послеоперационный</span><i><b id="driver-iatrogenic"></b></i></div>
-          <div class="driver-row"><span>Нейросенсорный</span><i><b id="driver-neurosensory"></b></i></div>
+        <div class="driver-mini-map" aria-label="Ключевые клинические направления">
+          <div class="driver-mini-head"><span>Ключевые направления</span><small>предварительно</small></div>
+          <div class="driver-row"><span id="insight-label-1">—</span><i><b id="insight-bar-1"></b></i></div>
+          <div class="driver-row"><span id="insight-label-2">—</span><i><b id="insight-bar-2"></b></i></div>
+          <div class="driver-row"><span id="insight-label-3">—</span><i><b id="insight-bar-3"></b></i></div>
+          <div class="driver-row"><span id="insight-label-4">—</span><i><b id="insight-bar-4"></b></i></div>
+          <div class="driver-row"><span id="insight-label-5">—</span><i><b id="insight-bar-5"></b></i></div>
         </div>
 
         <div class="data-warning"><strong>Не вводите персональные данные.</strong><br>ФИО, точную дату рождения, номер истории болезни, телефон и документы.</div>
@@ -65,7 +65,7 @@
             <div class="agent-avatar" aria-hidden="true">AI</div>
             <div>
               <strong>Офтальмологический клинический навигатор</strong>
-              <span><i></i> демонстрационный режим · правила v0.4</span>
+              <span><i></i> 7 сценариев · правила v0.5</span>
             </div>
           </div>
           <div class="chat-head-actions">
@@ -75,16 +75,15 @@
         </header>
 
         <div class="chat-notice">
-          Прототип проверяет интерфейс и логику вопросов. Лекарственные схемы отключены до клинической валидации.
+          Доступны: ССГ/МГД, острый красный глаз, кератит, вспышки и мушки, повышение ВГД/глаукома, передний увеит, снижение зрения после операции по поводу катаракты.
         </div>
 
         <div class="chat-stream" id="chat-stream" role="log" aria-live="polite" aria-relevant="additions"></div>
-
         <div class="chat-suggestions" id="chat-suggestions" aria-label="Быстрые варианты ответа"></div>
 
         <form class="chat-composer" id="chat-form">
-          <label class="sr-only" for="chat-input">Сообщение клиническому навигатору</label>
-          <textarea id="chat-input" rows="1" maxlength="1200" placeholder="Добавьте клинические сведения или напишите «сформировать карточку»"></textarea>
+          <label class="sr-only" for="chat-input">Сообщение врачу-ассистенту</label>
+          <textarea id="chat-input" rows="1" maxlength="1600" placeholder="Введите патологию или опишите клиническую ситуацию"></textarea>
           <button id="send-button" type="submit" aria-label="Отправить сообщение">➜</button>
         </form>
         <p class="composer-hint">Enter — отправить · Shift+Enter — новая строка · карточка формируется только по вашему запросу</p>
@@ -99,6 +98,7 @@
     </div>
   </template>
 
-  <script src="/doctors/navigator/app.js?v=20260718-4"></script>
+  <script src="/doctors/navigator/modules.js?v=20260718-5"></script>
+  <script src="/doctors/navigator/app.js?v=20260718-5"></script>
 </body>
 </html>
