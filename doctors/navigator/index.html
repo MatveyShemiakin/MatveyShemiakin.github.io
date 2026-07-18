@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Клинический навигатор — дифференциальный разбор v0.6</title>
-  <meta name="description" content="Диалоговый офтальмологический навигатор: дифференциальный разбор, определение срочности и выбор профильного алгоритма.">
+  <title>Клинический навигатор — варианты по международным рекомендациям v0.8</title>
+  <meta name="description" content="Диалоговый офтальмологический навигатор: дифференциальный разбор, поиск международных рекомендаций и варианты тактики для выбора врача.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#06162c">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/doctors/doctors.css?v=20260718-6">
+  <link rel="stylesheet" href="/doctors/doctors.css?v=20260718-8">
+  <link rel="stylesheet" href="/doctors/navigator/options-ui.css?v=20260718-8">
 </head>
 <body class="doctor-page chat-navigator-page">
   <header class="doctor-header">
@@ -19,7 +20,7 @@
         <a href="/doctors/">Для врачей</a>
         <a href="/">Основной сайт</a>
       </nav>
-      <span class="prototype-badge">Прототип v0.6 · дедуктивный сценарий</span>
+      <span class="prototype-badge">Прототип v0.8 · варианты выбирает врач</span>
     </div>
   </header>
 
@@ -65,7 +66,7 @@
             <div class="agent-avatar" aria-hidden="true">AI</div>
             <div>
               <strong>Офтальмологический клинический навигатор</strong>
-              <span><i></i> дифференциальный разбор · правила v0.6</span>
+              <span><i></i> анализ случая · evidence retrieval · выбор врача</span>
             </div>
           </div>
           <div class="chat-head-actions">
@@ -75,7 +76,7 @@
         </header>
 
         <div class="chat-notice">
-          Сначала система анализирует клиническое описание и формирует дифференциальный ряд. ССГ является только одним из возможных направлений.
+          Система формирует несколько диагностических и лечебных вариантов по найденным источникам. Окончательное решение принимает врач.
         </div>
 
         <div class="chat-stream" id="chat-stream" role="log" aria-live="polite" aria-relevant="additions"></div>
@@ -86,7 +87,7 @@
           <textarea id="chat-input" rows="1" maxlength="2000" placeholder="Опишите клинический случай: жалобы, сроки и данные осмотра"></textarea>
           <button id="send-button" type="submit" aria-label="Отправить сообщение">➜</button>
         </form>
-        <p class="composer-hint">Enter — отправить · Shift+Enter — новая строка · карточка формируется только по запросу</p>
+        <p class="composer-hint">Enter — отправить · Shift+Enter — новая строка · ни один вариант не выбирается автоматически</p>
       </section>
     </div>
   </main>
@@ -98,7 +99,9 @@
     </div>
   </template>
 
-  <script src="/doctors/navigator/modules.js?v=20260718-6"></script>
-  <script src="/doctors/navigator/app-v2.js?v=20260718-6"></script>
+  <script src="/doctors/navigator/modules.js?v=20260718-8"></script>
+  <script src="/doctors/navigator/app-v2.js?v=20260718-8"></script>
+  <script src="/doctors/navigator/ai-config.js?v=20260718-8"></script>
+  <script src="/doctors/navigator/options-ui.js?v=20260718-8"></script>
 </body>
 </html>
