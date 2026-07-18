@@ -19,14 +19,22 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check JavaScript syntax
-        run: node --check doctors/navigator/app.js
+        run: |
+          node --check doctors/navigator/modules.js
+          node --check doctors/navigator/app.js
+          node --check doctors/navigator/validate-modules.js
+
+      - name: Validate clinical module schema
+        run: node doctors/navigator/validate-modules.js
 
       - name: Check required files
         run: |
           test -f doctors/index.html
           test -f doctors/doctors.css
           test -f doctors/navigator/index.html
+          test -f doctors/navigator/modules.js
           test -f doctors/navigator/app.js
+          test -f doctors/navigator/validate-modules.js
           test -f docs/clinical-navigator/README.md
           test -f docs/clinical-navigator/architecture.md
           test -f docs/clinical-navigator/dry-eye-v0.1.md
@@ -40,7 +48,11 @@ jobs:
           class Parser(HTMLParser):
               pass
 
-          for path in [Path('doctors/index.html'), Path('doctors/navigator/index.html')]:
+          for path in [
+              Path('doctors/index.html'),
+              Path('doctors/navigator/index.html'),
+              Path('preview/clinical-navigator/index.html'),
+          ]:
               parser = Parser()
               parser.feed(path.read_text(encoding='utf-8'))
               parser.close()
