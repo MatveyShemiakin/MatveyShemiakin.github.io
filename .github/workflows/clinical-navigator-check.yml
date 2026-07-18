@@ -25,39 +25,29 @@ jobs:
         run: |
           node --check doctors/navigator/modules.js
           node --check doctors/navigator/app-v2.js
+          node --check doctors/navigator/ai-config.js
+          node --check doctors/navigator/options-ui.js
           node --check doctors/navigator/validate-modules.js
           cd backend
           npm run check --silent
 
-      - name: Test uveitis extraction
+      - name: Run backend tests
         run: |
           cd backend
-          node --test --test-name-pattern="extracts uveitis" test/*.test.mjs
-
-      - name: Test symptom negation
-        run: |
-          cd backend
-          node --test --test-name-pattern="respects symptom negation" test/*.test.mjs
-
-      - name: Test free mock provider
-        run: |
-          cd backend
-          node --test --test-name-pattern="mock provider" test/*.test.mjs
-
-      - name: Test case memory
-        run: |
-          cd backend
-          node --test --test-name-pattern="merges facts" test/*.test.mjs
+          npm test --silent
 
       - name: Validate clinical module schema
         run: node doctors/navigator/validate-modules.js
 
-      - name: Check deduction-first entrypoint
+      - name: Check deduction-first and physician-choice entrypoints
         run: |
           grep -q "app-v2.js" doctors/navigator/index.html
-          grep -q "Дифференциальный разбор" doctors/navigator/index.html
+          grep -q "options-ui.js" doctors/navigator/index.html
+          grep -q "options-ui.css" doctors/navigator/index.html
           grep -q "scoreCandidates" doctors/navigator/app-v2.js
-          grep -q "ССГ является только одним" doctors/navigator/index.html
+          grep -q "Окончательное решение принимает врач" doctors/navigator/index.html
+          grep -q "data-select-diagnosis" doctors/navigator/options-ui.js
+          grep -q "selected-by-physician" doctors/navigator/options-ui.js
           if grep -q "app.js?v=" doctors/navigator/index.html; then
             echo "Legacy single-module entrypoint is still active"
             exit 1
@@ -67,11 +57,26 @@ jobs:
         run: |
           test -f backend/src/handler.mjs
           test -f backend/src/providers.mjs
+          test -f backend/src/option-providers.mjs
           test -f backend/src/clinical-schema.mjs
+          test -f backend/src/clinical-options-schema.mjs
+          test -f backend/src/generate-clinical-options.mjs
+          test -f backend/src/knowledge-retrieval.mjs
           grep -q "AI_PROVIDER" backend/src/providers.mjs
           grep -q "YANDEX_API_KEY" backend/src/providers.mjs
           grep -q "OPENAI_API_KEY" backend/src/providers.mjs
+          grep -q "generate_options" backend/src/handler.mjs
+          grep -q "final_decision_owner" backend/src/clinical-options-schema.mjs
           grep -q "AI_PROVIDER=mock" backend/README.md
+
+      - name: Check evidence package and safety locks
+        run: |
+          test -f backend/knowledge/pathologies/anterior-uveitis/manifest.json
+          test -f backend/knowledge/pathologies/anterior-uveitis/evidence.json
+          grep -q '"prewritten_final_answer": false' backend/knowledge/pathologies/anterior-uveitis/manifest.json
+          grep -q '"model_may_select_final_treatment": false' backend/knowledge/pathologies/anterior-uveitis/manifest.json
+          grep -q '"activation": "draft_locked"' backend/knowledge/pathologies/anterior-uveitis/evidence.json
+          grep -q "ALLOW_DRAFT_CLINICAL_OPTIONS" backend/src/handler.mjs
 
       - name: Check required files
         run: |
@@ -80,6 +85,9 @@ jobs:
           test -f doctors/navigator/index.html
           test -f doctors/navigator/modules.js
           test -f doctors/navigator/app-v2.js
+          test -f doctors/navigator/ai-config.js
+          test -f doctors/navigator/options-ui.js
+          test -f doctors/navigator/options-ui.css
           test -f doctors/navigator/validate-modules.js
           test -f docs/clinical-navigator/README.md
           test -f docs/clinical-navigator/architecture.md
