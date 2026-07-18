@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Клинический навигатор — чат-прототип v0.3</title>
+  <title>Клинический навигатор — чат-прототип v0.4</title>
   <meta name="description" content="Демонстрационный чат-прототип клинического навигатора для врачей-офтальмологов.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#06162c">
@@ -19,7 +19,7 @@
         <a href="/doctors/">Для врачей</a>
         <a href="/">Основной сайт</a>
       </nav>
-      <span class="prototype-badge">Прототип v0.3 · не для клинического применения</span>
+      <span class="prototype-badge">Прототип v0.4 · не для клинического применения</span>
     </div>
   </header>
 
@@ -42,17 +42,17 @@
 
         <dl class="context-facts">
           <div><dt>Срочность</dt><dd id="summary-urgency">Не оценена</dd></div>
-          <div><dt>Рамка ССГ</dt><dd id="summary-diagnosis">Не оценена</dd></div>
-          <div><dt>Ведущий драйвер</dt><dd id="summary-driver">Не определён</dd></div>
-          <div><dt>Карточка</dt><dd id="summary-card">По запросу врача</dd></div>
+          <div><dt>Признаки ССГ</dt><dd id="summary-diagnosis">Не оценены</dd></div>
+          <div><dt>Вероятный механизм</dt><dd id="summary-driver">Не определён</dd></div>
+          <div><dt>Карточка</dt><dd id="summary-card">Только по запросу</dd></div>
         </dl>
 
-        <div class="driver-mini-map" aria-label="Карта этиологических драйверов">
-          <div class="driver-mini-head"><span>Карта драйверов</span><small>рабочая</small></div>
-          <div class="driver-row"><span>Липидный / вековый</span><i><b id="driver-lipid"></b></i></div>
-          <div class="driver-row"><span>Водный</span><i><b id="driver-aqueous"></b></i></div>
+        <div class="driver-mini-map" aria-label="Возможные механизмы заболевания">
+          <div class="driver-mini-head"><span>Возможные механизмы</span><small>предварительно</small></div>
+          <div class="driver-row"><span>Испарительный / МГД</span><i><b id="driver-lipid"></b></i></div>
+          <div class="driver-row"><span>Слёзодефицитный</span><i><b id="driver-aqueous"></b></i></div>
           <div class="driver-row"><span>Экспозиционный</span><i><b id="driver-exposure"></b></i></div>
-          <div class="driver-row"><span>Ятрогенный</span><i><b id="driver-iatrogenic"></b></i></div>
+          <div class="driver-row"><span>Лекарственный / послеоперационный</span><i><b id="driver-iatrogenic"></b></i></div>
           <div class="driver-row"><span>Нейросенсорный</span><i><b id="driver-neurosensory"></b></i></div>
         </div>
 
@@ -65,7 +65,7 @@
             <div class="agent-avatar" aria-hidden="true">AI</div>
             <div>
               <strong>Офтальмологический клинический навигатор</strong>
-              <span><i></i> демонстрационный режим · правила v0.3</span>
+              <span><i></i> демонстрационный режим · правила v0.4</span>
             </div>
           </div>
           <div class="chat-head-actions">
@@ -75,7 +75,7 @@
         </header>
 
         <div class="chat-notice">
-          Прототип проверяет интерфейс и логику ветвления. Лекарственные схемы отключены до клинической валидации.
+          Прототип проверяет интерфейс и логику вопросов. Лекарственные схемы отключены до клинической валидации.
         </div>
 
         <div class="chat-stream" id="chat-stream" role="log" aria-live="polite" aria-relevant="additions"></div>
@@ -83,8 +83,8 @@
         <div class="chat-suggestions" id="chat-suggestions" aria-label="Быстрые варианты ответа"></div>
 
         <form class="chat-composer" id="chat-form">
-          <label class="sr-only" for="chat-input">Сообщение врачу-ассистенту</label>
-          <textarea id="chat-input" rows="1" maxlength="1200" placeholder="Опишите клиническую ситуацию или напишите «сформировать карточку»"></textarea>
+          <label class="sr-only" for="chat-input">Сообщение клиническому навигатору</label>
+          <textarea id="chat-input" rows="1" maxlength="1200" placeholder="Добавьте клинические сведения или напишите «сформировать карточку»"></textarea>
           <button id="send-button" type="submit" aria-label="Отправить сообщение">➜</button>
         </form>
         <p class="composer-hint">Enter — отправить · Shift+Enter — новая строка · карточка формируется только по вашему запросу</p>
@@ -99,6 +99,6 @@
     </div>
   </template>
 
-  <script src="/doctors/navigator/app.js?v=20260718-3"></script>
+  <script src="/doctors/navigator/app.js?v=20260718-4"></script>
 </body>
 </html>
