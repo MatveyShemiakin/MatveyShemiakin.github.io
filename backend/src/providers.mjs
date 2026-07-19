@@ -1,4 +1,5 @@
 import { clinicalFactsSchema } from './clinical-schema.mjs';
+import { resolveYandexAuth } from './yandex-auth.mjs';
 
 const DEFAULT_TIMEOUT_MS = 45_000;
 
@@ -135,15 +136,17 @@ export function providerFromEnvironment(env = process.env) {
   const provider = String(env.AI_PROVIDER || 'mock').toLowerCase();
 
   if (provider === 'yandex') {
-    if (!env.YANDEX_API_KEY || !env.YANDEX_FOLDER_ID || !env.YANDEX_MODEL) {
-      throw new Error('YANDEX_API_KEY, YANDEX_FOLDER_ID and YANDEX_MODEL are required');
+    if (!env.YANDEX_FOLDER_ID || !env.YANDEX_MODEL) {
+      throw new Error('YANDEX_FOLDER_ID and YANDEX_MODEL are required');
     }
+    const auth = resolveYandexAuth(env);
     return {
       id: 'yandex',
+      auth_source: auth.source,
       extract: ({ caseText, priorFacts }) => callChatCompletions({
         baseUrl: env.YANDEX_BASE_URL || 'https://ai.api.cloud.yandex.net/v1',
-        apiKey: env.YANDEX_API_KEY,
-        authScheme: 'Api-Key',
+        apiKey: auth.credential,
+        authScheme: auth.authScheme,
         model: env.YANDEX_MODEL.startsWith('gpt://')
           ? env.YANDEX_MODEL
           : `gpt://${env.YANDEX_FOLDER_ID}/${env.YANDEX_MODEL}`,
