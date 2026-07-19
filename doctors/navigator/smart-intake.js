@@ -127,7 +127,7 @@
       .filter((button) => triageValues.has(button.dataset.value) || button.dataset.value === 'none');
   }
 
-  function addRecognitionNote(knownSignals, hiddenButtons) {
+  function addRecognitionNote(knownSignals) {
     let note = suggestions.querySelector('[data-recognized-facts-note]');
     if (!note) {
       note = document.createElement('div');
@@ -137,13 +137,19 @@
     }
 
     const labels = [...knownSignals].map((signal) => signalLabels[signal]).filter(Boolean);
+    const signature = labels.join('|');
+    if (note.dataset.signature === signature) return;
+    note.dataset.signature = signature;
     note.innerHTML = `
       <strong>Уже учтено из описания:</strong> ${labels.map(escapeHtml).join('; ')}.
       <span>Эти вопросы повторно не задаются.</span>
       <button type="button" data-review-recognized>Проверить / исправить</button>
     `;
     note.querySelector('[data-review-recognized]')?.addEventListener('click', () => {
-      hiddenButtons.forEach((button) => { button.hidden = !button.hidden; });
+      knownSignals.forEach((signal) => {
+        const button = suggestions.querySelector(`.suggestion-chip[data-value="${signal}"]`);
+        if (button) button.hidden = !button.hidden;
+      });
     });
   }
 
@@ -152,16 +158,16 @@
     const buttons = triageButtons();
     if (!buttons.some((button) => button.dataset.value === 'pain_photophobia')) return;
 
-    const hiddenButtons = [];
+    let recognizedCount = 0;
     pendingIntake.signals.forEach((signal) => {
       const button = buttons.find((item) => item.dataset.value === signal);
       if (!button) return;
       if (!button.classList.contains('selected')) button.click();
       button.hidden = true;
-      hiddenButtons.push(button);
+      recognizedCount += 1;
     });
 
-    if (!hiddenButtons.length) return;
+    if (!recognizedCount) return;
 
     const noneButton = buttons.find((button) => button.dataset.value === 'none');
     if (noneButton) {
@@ -179,7 +185,7 @@
       }
     }
 
-    addRecognitionNote(pendingIntake.signals, hiddenButtons);
+    addRecognitionNote(pendingIntake.signals);
 
     const lastAssistant = [...stream.querySelectorAll('.message-row.assistant .message-bubble')].at(-1);
     if (lastAssistant && normalize(lastAssistant.textContent).includes('перед выбором патологии')) {
