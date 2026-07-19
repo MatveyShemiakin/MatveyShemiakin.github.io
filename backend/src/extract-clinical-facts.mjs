@@ -142,20 +142,35 @@ export async function extractClinicalFacts({ caseText, priorFacts, env = process
   if (caseText.length > 12_000) throw new Error('case_text is too long');
 
   const provider = providerFromEnvironment(env);
+  const localFacts = extractFactsLocally(caseText);
   if (provider.id === 'mock') {
     return {
       provider: 'mock',
-      facts: mergeFacts(priorFacts, extractFactsLocally(caseText)),
+      facts: mergeFacts(priorFacts, localFacts),
       usage: null,
-      provider_response_id: null
+      provider_response_id: null,
+      degraded: false
     };
   }
 
-  const response = await provider.extract({ caseText, priorFacts });
-  return {
-    provider: provider.id,
-    facts: mergeFacts(priorFacts, response.facts),
-    usage: response.usage,
-    provider_response_id: response.provider_response_id
-  };
+  try {
+    const response = await provider.extract({ caseText, priorFacts });
+    return {
+      provider: provider.id,
+      facts: mergeFacts(mergeFacts(priorFacts, localFacts), response.facts),
+      usage: response.usage,
+      provider_response_id: response.provider_response_id,
+      degraded: false
+    };
+  } catch (error) {
+    if (env.AI_DISABLE_DEGRADED_MODE === 'true') throw error;
+    return {
+      provider: `${provider.id}-fallback`,
+      facts: mergeFacts(priorFacts, localFacts),
+      usage: null,
+      provider_response_id: null,
+      degraded: true,
+      provider_warning: 'Модель не вернула валидный структурированный ответ; использован детерминированный разбор.'
+    };
+  }
 }
