@@ -41,13 +41,15 @@ ALLOWED_ORIGINS=https://raw.githack.com,https://matveyshemyakin.ru
 ALLOW_DRAFT_CLINICAL_OPTIONS=true
 ```
 
-`YANDEX_MODEL` можно указать полным URI:
+Backend сам преобразует значение `yandexgpt/latest` в полный URI:
 
 ```text
 gpt://<folder-id>/yandexgpt/latest
 ```
 
-Backend также сохраняет совместимость с OpenAI и OpenAI-compatible провайдерами.
+Полный URI также можно сразу указать в `YANDEX_MODEL`.
+
+Backend сохраняет совместимость с OpenAI и другими OpenAI-compatible провайдерами.
 
 ## 4. Ресурсы функции
 
