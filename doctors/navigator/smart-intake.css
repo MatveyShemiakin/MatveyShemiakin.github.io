@@ -1,4 +1,5 @@
-.recognized-facts-note {
+.recognized-facts-note,
+.smart-prefill-note {
   flex-basis: 100%;
   width: 100%;
   padding: 14px 16px;
@@ -11,7 +12,12 @@
   line-height: 1.5;
 }
 
-.recognized-facts-note strong {
+.smart-prefill-note {
+  margin-bottom: 12px;
+}
+
+.recognized-facts-note strong,
+.smart-prefill-note strong {
   color: #0f3d74;
 }
 
@@ -21,7 +27,8 @@
   color: #64748b;
 }
 
-.recognized-facts-note button {
+.recognized-facts-note button,
+.smart-prefill-note button {
   margin-top: 9px;
   padding: 7px 10px;
   border: 1px solid rgba(15, 61, 116, 0.18);
@@ -34,6 +41,7 @@
   cursor: pointer;
 }
 
-.chat-suggestions .suggestion-chip[hidden] {
+.chat-suggestions .suggestion-chip[hidden],
+.inline-chat-form label[hidden] {
   display: none !important;
 }
