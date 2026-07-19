@@ -1,15 +1,24 @@
+function credentialString(value) {
+  if (typeof value === 'string' && value.trim()) return value.trim();
+  if (!value || typeof value !== 'object') return '';
+  const candidates = [value.access_token, value.accessToken, value.iamToken, value.secret, value.apiKey];
+  return candidates.find((item) => typeof item === 'string' && item.trim())?.trim() || '';
+}
+
 export function resolveYandexAuth(env = process.env) {
-  if (env.YANDEX_API_KEY) {
+  const apiKey = credentialString(env.YANDEX_API_KEY);
+  if (apiKey) {
     return {
-      credential: env.YANDEX_API_KEY,
+      credential: apiKey,
       authScheme: 'Api-Key',
       source: 'api_key'
     };
   }
 
-  if (env.YANDEX_IAM_TOKEN) {
+  const iamToken = credentialString(env.YANDEX_IAM_TOKEN);
+  if (iamToken) {
     return {
-      credential: env.YANDEX_IAM_TOKEN,
+      credential: iamToken,
       authScheme: 'Bearer',
       source: 'attached_service_account'
     };
