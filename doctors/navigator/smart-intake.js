@@ -239,7 +239,8 @@
 
     const noneButton = buttons.find((button) => button.dataset.value === 'none');
     if (noneButton) {
-      noneButton.textContent = 'Остальных перечисленных признаков нет';
+      const noneLabel = 'Остальных перечисленных признаков нет';
+      if (noneButton.textContent !== noneLabel) noneButton.textContent = noneLabel;
       if (!noneButton.dataset.restoreKnownBound) {
         noneButton.dataset.restoreKnownBound = 'true';
         noneButton.addEventListener('click', () => {
@@ -293,7 +294,6 @@
   function applyKnownFieldsToForms() {
     if (!pendingIntake) return;
     stream.querySelectorAll('.inline-chat-form').forEach((inlineForm) => {
-      const filled = [];
       inlineForm.querySelectorAll('select[name], input[name]').forEach((control) => {
         const value = prefillValueForField(control.name);
         if (!value || control.dataset.smartPrefilled === 'true') return;
@@ -301,13 +301,7 @@
         control.value = String(value);
         control.dataset.smartPrefilled = 'true';
         const label = control.closest('label');
-        if (!label) return;
-        label.hidden = true;
-        const title = label.querySelector('span')?.textContent?.trim() || control.name;
-        const displayed = control.tagName === 'SELECT'
-          ? control.selectedOptions[0]?.textContent?.trim()
-          : String(value);
-        filled.push({ label, title, displayed });
+        if (label) label.hidden = true;
       });
 
       const allFilled = [...inlineForm.querySelectorAll('[data-smart-prefilled="true"]')];
