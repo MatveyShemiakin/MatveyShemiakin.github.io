@@ -77,7 +77,13 @@ export function extractFactsLocally(caseText) {
   if (hasAny(text, ['задние синехии', 'синехии'])) facts.examination.synechiae = !isNegated(text, 'синехии');
   if (hasAny(text, ['инфильтрат роговицы', 'роговичный инфильтрат'])) facts.examination.corneal_infiltrate = !isNegated(text, 'инфильтрат');
   if (hasAny(text, ['дефект эпителия'])) facts.examination.epithelial_defect = !isNegated(text, 'дефект эпителия');
-  if (hasAny(text, ['витреит'])) facts.examination.vitritis = !isNegated(text, 'витреит');
+
+  const vitritisPhrase = [
+    'витреит', 'витрит', 'клетки в стекловидном теле', 'взвесь в стекловидном теле',
+    'помутнения в стекловидном теле', 'выпот в стекловидном теле'
+  ].find((phrase) => text.includes(phrase));
+  if (vitritisPhrase) facts.examination.vitritis = !isNegated(text, vitritisPhrase);
+
   if (hasAny(text, ['разрыв сетчатки'])) facts.examination.retinal_tear = !isNegated(text, 'разрыв сетчатки');
   if (hasAny(text, ['отслойка сетчатки'])) facts.examination.retinal_detachment = !isNegated(text, 'отслойка сетчатки');
 
@@ -98,6 +104,7 @@ export function extractFactsLocally(caseText) {
 
   if (facts.symptoms.includes('vision_loss')) facts.red_flags.push('Снижение зрения');
   if (facts.examination.hypopyon === true) facts.red_flags.push('Гипопион');
+  if (facts.examination.vitritis === true && facts.examination.hypopyon === true) facts.red_flags.push('Гипопион с признаками вовлечения стекловидного тела');
   if (facts.examination.retinal_detachment === true) facts.red_flags.push('Отслойка сетчатки');
   if (facts.examination.iop_mm_hg !== null && facts.examination.iop_mm_hg >= 40) facts.red_flags.push('ВГД ≥40 мм рт. ст.');
   if (facts.symptoms.includes('field_defect')) facts.red_flags.push('Дефект поля зрения или занавес');
@@ -106,6 +113,8 @@ export function extractFactsLocally(caseText) {
     facts.laterality, facts.course, facts.onset,
     ...facts.symptoms, facts.examination.iop_mm_hg,
     facts.examination.anterior_chamber_cells,
+    facts.examination.hypopyon,
+    facts.examination.vitritis,
     ...facts.procedures, ...facts.suspected_diagnoses
   ].filter((value) => value !== null && value !== '').length;
   facts.source_confidence = Math.min(0.85, 0.25 + extractedCount * 0.06);
