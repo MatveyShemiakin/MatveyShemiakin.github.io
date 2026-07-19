@@ -64,12 +64,13 @@ jobs:
         run: |
           test -f backend/src/providers.mjs
           test -f backend/src/option-providers.mjs
+          test -f backend/src/yandex-auth.mjs
           test -f backend/src/clinical-options-schema.mjs
           test -f backend/src/generate-clinical-options.mjs
           test -f backend/src/knowledge-retrieval.mjs
-          grep -q "YANDEX_API_KEY" backend/src/providers.mjs
+          grep -q "YANDEX_IAM_TOKEN" backend/src/yandex-auth.mjs
+          grep -q "runtimeEnvironment" backend/src/handler.mjs
           grep -q "OPENAI_API_KEY" backend/src/providers.mjs
-          grep -q "YANDEX_API_KEY" backend/src/option-providers.mjs
           grep -q "OPENAI_API_KEY" backend/src/option-providers.mjs
           grep -q "selected !== false" backend/src/generate-clinical-options.mjs
 
