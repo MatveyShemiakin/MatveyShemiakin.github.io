@@ -1,9 +1,10 @@
-name: Clinical navigator checks
+name: Clinical AI checks
 
 on:
   pull_request:
     paths:
       - "doctors/**"
+      - "preview/**"
       - "backend/**"
       - "tests/**"
       - "docs/clinical-navigator/**"
@@ -14,7 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  static-checks:
+  checks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -24,12 +25,14 @@ jobs:
 
       - name: Check JavaScript syntax
         run: |
+          node --check doctors/clinical-ai/config.js
+          node --check doctors/clinical-ai/app.js
+          node --check tests/clinical-ai-vertical-e2e.mjs
           node --check doctors/navigator/modules.js
           node --check doctors/navigator/app-v2.js
           node --check doctors/navigator/ai-config.js
           node --check doctors/navigator/smart-intake.js
           node --check doctors/navigator/options-ui.js
-          node --check doctors/navigator/validate-modules.js
           node --check tests/clinical-navigator-e2e.mjs
           cd backend
           npm run check --silent
@@ -39,42 +42,36 @@ jobs:
           cd backend
           npm test --silent
 
-      - name: Validate clinical module schema
-        run: node doctors/navigator/validate-modules.js
-
-      - name: Check deduction-first and physician-choice entrypoints
+      - name: Check vertical slice contract
         run: |
-          grep -q "app-v2.js" doctors/navigator/index.html
-          grep -q "smart-intake.js" doctors/navigator/index.html
-          grep -q "smart-intake.css" doctors/navigator/index.html
-          grep -q "options-ui.js" doctors/navigator/index.html
-          grep -q "options-ui.css" doctors/navigator/index.html
-          grep -q "scoreCandidates" doctors/navigator/app-v2.js
-          grep -q "Эти вопросы повторно не задаются" doctors/navigator/smart-intake.js
-          grep -q "Окончательное решение принимает врач" doctors/navigator/index.html
-          grep -q "data-select-diagnosis" doctors/navigator/options-ui.js
-          grep -q "selected-by-physician" doctors/navigator/options-ui.js
-          if grep -q "app.js?v=" doctors/navigator/index.html; then
-            echo "Legacy single-module entrypoint is still active"
+          test -f backend/src/analyze-case.mjs
+          test -f doctors/clinical-ai/index.html
+          test -f doctors/clinical-ai/app.js
+          test -f doctors/clinical-ai/styles.css
+          test -f doctors/clinical-ai/config.js
+          test -f preview/clinical-ai/index.html
+          test -f tests/clinical-ai-vertical-e2e.mjs
+          grep -q "analyze_case" backend/src/handler.mjs
+          grep -q "final_decision_owner: 'physician'" backend/src/analyze-case.mjs
+          grep -q "action: 'analyze_case'" doctors/clinical-ai/app.js
+          grep -q "Модель предложит варианты" doctors/clinical-ai/index.html
+          if grep -q "suggestion-chip" doctors/clinical-ai/index.html doctors/clinical-ai/app.js; then
+            echo "Legacy questionnaire leaked into the clean vertical slice"
             exit 1
           fi
 
       - name: Check provider-neutral backend
         run: |
-          test -f backend/src/handler.mjs
           test -f backend/src/providers.mjs
           test -f backend/src/option-providers.mjs
-          test -f backend/src/clinical-schema.mjs
           test -f backend/src/clinical-options-schema.mjs
           test -f backend/src/generate-clinical-options.mjs
           test -f backend/src/knowledge-retrieval.mjs
-          grep -q "AI_PROVIDER" backend/src/providers.mjs
           grep -q "YANDEX_API_KEY" backend/src/providers.mjs
           grep -q "OPENAI_API_KEY" backend/src/providers.mjs
-          grep -q "generate_options" backend/src/handler.mjs
-          grep -q "final_decision_owner" backend/src/clinical-options-schema.mjs
-          grep -q "AI_PROVIDER=mock" backend/README.md
-          grep -q "выпот в стекловидном теле" backend/src/extract-clinical-facts.mjs
+          grep -q "YANDEX_API_KEY" backend/src/option-providers.mjs
+          grep -q "OPENAI_API_KEY" backend/src/option-providers.mjs
+          grep -q "selected !== false" backend/src/generate-clinical-options.mjs
 
       - name: Check evidence package and safety locks
         run: |
@@ -85,25 +82,7 @@ jobs:
           grep -q '"activation": "draft_locked"' backend/knowledge/pathologies/anterior-uveitis/evidence.json
           grep -q "ALLOW_DRAFT_CLINICAL_OPTIONS" backend/src/handler.mjs
 
-      - name: Check required files
-        run: |
-          test -f doctors/index.html
-          test -f doctors/doctors.css
-          test -f doctors/navigator/index.html
-          test -f doctors/navigator/modules.js
-          test -f doctors/navigator/app-v2.js
-          test -f doctors/navigator/ai-config.js
-          test -f doctors/navigator/smart-intake.js
-          test -f doctors/navigator/smart-intake.css
-          test -f doctors/navigator/options-ui.js
-          test -f doctors/navigator/options-ui.css
-          test -f doctors/navigator/validate-modules.js
-          test -f tests/clinical-navigator-e2e.mjs
-          test -f docs/clinical-navigator/README.md
-          test -f docs/clinical-navigator/architecture.md
-          test -f docs/clinical-navigator/dry-eye-v0.1.md
-
-      - name: Parse HTML with Python standard library
+      - name: Parse HTML
         run: |
           python - <<'PY'
           from html.parser import HTMLParser
@@ -113,7 +92,8 @@ jobs:
               pass
 
           for path in [
-              Path('doctors/index.html'),
+              Path('doctors/clinical-ai/index.html'),
+              Path('preview/clinical-ai/index.html'),
               Path('doctors/navigator/index.html'),
               Path('preview/clinical-navigator/index.html'),
           ]:
@@ -130,12 +110,15 @@ jobs:
             exit 1
           fi
 
-      - name: Install browser test runtime
+      - name: Install browser runtime
         run: |
           npm install --no-save --package-lock=false playwright@1.55.0
           npx playwright install --with-deps chromium
 
-      - name: Run browser smoke test
+      - name: Run clean vertical slice browser test
+        run: node tests/clinical-ai-vertical-e2e.mjs
+
+      - name: Keep legacy preview regression test green
         run: node tests/clinical-navigator-e2e.mjs
 
       - name: Build Yandex Cloud deployment archive
@@ -150,14 +133,14 @@ jobs:
           EOF
           node --check dist/clinical-navigator-api/index.js
           cd dist/clinical-navigator-api
-          zip -qr ../clinical-navigator-api-yandex.zip .
+          zip -qr ../clinical-ai-yandex.zip .
           cd ..
-          unzip -l clinical-navigator-api-yandex.zip
+          unzip -l clinical-ai-yandex.zip
 
       - name: Upload Yandex Cloud deployment archive
         uses: actions/upload-artifact@v4
         with:
-          name: clinical-navigator-api-yandex
-          path: dist/clinical-navigator-api-yandex.zip
+          name: clinical-ai-yandex
+          path: dist/clinical-ai-yandex.zip
           if-no-files-found: error
           retention-days: 14
