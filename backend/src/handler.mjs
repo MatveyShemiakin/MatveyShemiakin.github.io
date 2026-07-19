@@ -58,8 +58,21 @@ export function parseRequestBody(event) {
   throw new Error('Request JSON nesting is too deep');
 }
 
+function tokenFromContext(context) {
+  const token = context?.token;
+  const candidates = [
+    context?.access_token,
+    context?.accessToken,
+    token?.access_token,
+    token?.accessToken,
+    token?.iamToken,
+    typeof token === 'string' ? token : ''
+  ];
+  return candidates.find((value) => typeof value === 'string' && value.trim())?.trim() || '';
+}
+
 export function runtimeEnvironment(context, baseEnv = process.env) {
-  const iamToken = context?.access_token || context?.accessToken || context?.token || '';
+  const iamToken = tokenFromContext(context);
   if (!iamToken) return baseEnv;
   return {
     ...baseEnv,
