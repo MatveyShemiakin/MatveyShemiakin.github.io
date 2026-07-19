@@ -119,3 +119,27 @@ jobs:
             echo "Potential secret detected"
             exit 1
           fi
+
+      - name: Build Yandex Cloud deployment archive
+        run: |
+          rm -rf dist/clinical-navigator-api
+          mkdir -p dist/clinical-navigator-api
+          cp backend/package.json dist/clinical-navigator-api/package.json
+          cp -R backend/src dist/clinical-navigator-api/src
+          cp -R backend/knowledge dist/clinical-navigator-api/knowledge
+          cat > dist/clinical-navigator-api/index.js <<'EOF'
+          export { handler } from './src/handler.mjs';
+          EOF
+          node --check dist/clinical-navigator-api/index.js
+          cd dist/clinical-navigator-api
+          zip -qr ../clinical-navigator-api-yandex.zip .
+          cd ..
+          unzip -l clinical-navigator-api-yandex.zip
+
+      - name: Upload Yandex Cloud deployment archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: clinical-navigator-api-yandex
+          path: dist/clinical-navigator-api-yandex.zip
+          if-no-files-found: error
+          retention-days: 14
