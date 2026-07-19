@@ -58,6 +58,15 @@ export function parseRequestBody(event) {
   throw new Error('Request JSON nesting is too deep');
 }
 
+export function runtimeEnvironment(context, baseEnv = process.env) {
+  const iamToken = context?.access_token || context?.accessToken || context?.token || '';
+  if (!iamToken) return baseEnv;
+  return {
+    ...baseEnv,
+    YANDEX_IAM_TOKEN: iamToken
+  };
+}
+
 async function handleExtract(body, env) {
   const result = await extractClinicalFacts({
     caseText: body.case_text,
@@ -127,8 +136,8 @@ async function handleGenerateOptions(body, env) {
   };
 }
 
-export async function handler(event, _context) {
-  const env = process.env;
+export async function handler(event, context) {
+  const env = runtimeEnvironment(context);
   const origin = allowedOrigin(event, env);
   const method = event && typeof event === 'object'
     ? (event?.httpMethod || event?.requestContext?.http?.method || 'POST')
