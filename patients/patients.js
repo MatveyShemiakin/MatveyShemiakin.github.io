@@ -1,4 +1,5 @@
 (function(){
+const responsiveStyle=document.createElement('style');responsiveStyle.textContent='@media(max-width:1160px){.patient-header nav{display:none}}';document.head.append(responsiveStyle);
 const DATA=window.PATIENT_FAQ_DATA||{categories:[],faqs:[]},VIDEOS=window.PATIENT_VIDEOS||{};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const path=document.getElementById('path-grid'),filters=document.getElementById('filter-row'),groups=document.getElementById('faq-groups'),search=document.getElementById('faq-search'),empty=document.getElementById('search-empty');
