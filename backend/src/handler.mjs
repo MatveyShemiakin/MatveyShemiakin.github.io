@@ -1,6 +1,7 @@
 import { extractClinicalFacts } from './extract-clinical-facts.mjs';
 import { buildPhysicianChoiceContext } from './knowledge-retrieval.mjs';
 import { generateClinicalOptions } from './generate-clinical-options.mjs';
+import { analyzeCase } from './analyze-case.mjs';
 
 function response(statusCode, body, origin = '*') {
   return {
@@ -77,6 +78,15 @@ function draftMode(body, env) {
   return body.authoring_mode === true && env.ALLOW_DRAFT_CLINICAL_OPTIONS === 'true';
 }
 
+async function handleAnalyzeCase(body, env) {
+  return analyzeCase({
+    caseText: body.case_text,
+    priorFacts: body.prior_facts || null,
+    authoringMode: draftMode(body, env),
+    env
+  });
+}
+
 async function handleBuildOptions(body, env) {
   if (!body.facts || typeof body.facts !== 'object') throw new Error('facts are required');
   const authoringMode = draftMode(body, env);
@@ -129,15 +139,16 @@ export async function handler(event, _context) {
 
   try {
     const body = parseRequestBody(event);
-    const action = body.action || 'extract_facts';
+    const action = body.action || 'analyze_case';
     let payload;
-    if (action === 'build_options') payload = await handleBuildOptions(body, env);
+    if (action === 'analyze_case') payload = await handleAnalyzeCase(body, env);
+    else if (action === 'build_options') payload = await handleBuildOptions(body, env);
     else if (action === 'generate_options') payload = await handleGenerateOptions(body, env);
     else payload = await handleExtract(body, env);
     return response(200, payload, origin);
   } catch (error) {
     const safeMessage = error instanceof Error ? error.message : 'Unknown error';
-    const status = /required|must contain|too long|JSON|between 2 and 5|nesting/.test(safeMessage) ? 400 : 502;
+    const status = /required|must contain|too long|JSON|between 2 and 5|nesting|at least/.test(safeMessage) ? 400 : 502;
     return response(status, {
       ok: false,
       error: status === 400 ? 'invalid_request' : 'provider_error',
