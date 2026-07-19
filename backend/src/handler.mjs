@@ -17,6 +17,7 @@ function response(statusCode, body, origin = '*') {
 }
 
 function requestOrigin(event) {
+  if (!event || typeof event !== 'object') return '';
   return event?.headers?.origin || event?.headers?.Origin || '';
 }
 
@@ -27,11 +28,33 @@ function allowedOrigin(event, env) {
   return configured.includes(origin) ? origin : configured[0];
 }
 
-function parseBody(event) {
-  if (!event?.body) return {};
-  if (typeof event.body === 'object') return event.body;
-  const raw = event.isBase64Encoded ? Buffer.from(event.body, 'base64').toString('utf8') : event.body;
+function decodeJsonValue(value, base64Encoded = false) {
+  if (Buffer.isBuffer(value)) value = value.toString('utf8');
+  if (typeof value !== 'string') return value;
+  const raw = base64Encoded ? Buffer.from(value, 'base64').toString('utf8') : value;
   return JSON.parse(raw);
+}
+
+export function parseRequestBody(event) {
+  let current = event;
+
+  for (let depth = 0; depth < 4; depth += 1) {
+    current = decodeJsonValue(current, false);
+    if (!current || typeof current !== 'object') return {};
+
+    if (
+      Object.prototype.hasOwnProperty.call(current, 'action')
+      || Object.prototype.hasOwnProperty.call(current, 'case_text')
+      || Object.prototype.hasOwnProperty.call(current, 'facts')
+    ) {
+      return current;
+    }
+
+    if (!Object.prototype.hasOwnProperty.call(current, 'body')) return current;
+    current = decodeJsonValue(current.body, current.isBase64Encoded === true);
+  }
+
+  throw new Error('Request JSON nesting is too deep');
 }
 
 async function handleExtract(body, env) {
@@ -97,13 +120,15 @@ async function handleGenerateOptions(body, env) {
 export async function handler(event, _context) {
   const env = process.env;
   const origin = allowedOrigin(event, env);
-  const method = event?.httpMethod || event?.requestContext?.http?.method || 'POST';
+  const method = event && typeof event === 'object'
+    ? (event?.httpMethod || event?.requestContext?.http?.method || 'POST')
+    : 'POST';
 
   if (method === 'OPTIONS') return response(204, {}, origin);
   if (method !== 'POST') return response(405, { error: 'method_not_allowed' }, origin);
 
   try {
-    const body = parseBody(event);
+    const body = parseRequestBody(event);
     const action = body.action || 'extract_facts';
     let payload;
     if (action === 'build_options') payload = await handleBuildOptions(body, env);
@@ -112,7 +137,7 @@ export async function handler(event, _context) {
     return response(200, payload, origin);
   } catch (error) {
     const safeMessage = error instanceof Error ? error.message : 'Unknown error';
-    const status = /required|must contain|too long|JSON|between 2 and 5/.test(safeMessage) ? 400 : 502;
+    const status = /required|must contain|too long|JSON|between 2 and 5|nesting/.test(safeMessage) ? 400 : 502;
     return response(status, {
       ok: false,
       error: status === 400 ? 'invalid_request' : 'provider_error',
