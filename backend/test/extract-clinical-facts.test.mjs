@@ -14,6 +14,19 @@ test('extracts uveitis facts without asking again', () => {
   assert.ok(facts.suspected_diagnoses.includes('передний увеит'));
 });
 
+test('extracts the physician example before triage deduplication', () => {
+  const facts = extractFactsLocally('Мужчина с острой болью, подъёмом ВГД и светобоязнью, ВГД 40, гипопион, выпот в стекловидном теле.');
+  assert.ok(facts.symptoms.includes('pain'));
+  assert.ok(facts.symptoms.includes('photophobia'));
+  assert.equal(facts.examination.iop_mm_hg, 40);
+  assert.equal(facts.examination.iop_state, 'high');
+  assert.equal(facts.examination.hypopyon, true);
+  assert.equal(facts.examination.vitritis, true);
+  assert.ok(facts.red_flags.includes('Гипопион'));
+  assert.ok(facts.red_flags.includes('ВГД ≥40 мм рт. ст.'));
+  assert.ok(facts.red_flags.includes('Гипопион с признаками вовлечения стекловидного тела'));
+});
+
 test('respects symptom negation', () => {
   const facts = extractFactsLocally('Покраснение глаза, боли и светобоязни нет.');
   assert.ok(facts.symptoms.includes('redness'));
