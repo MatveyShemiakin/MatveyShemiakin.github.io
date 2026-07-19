@@ -1,0 +1,29 @@
+.noscript-topics {
+  margin-top: 34px;
+  padding: 28px;
+  border: 1px solid #d4d0c8;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.noscript-topics h3 {
+  margin: 0 0 16px;
+  font: 400 30px var(--serif);
+}
+
+.noscript-topics a {
+  display: block;
+  padding: 10px 0;
+  color: #3567ad;
+  border-top: 1px solid #e3dfd7;
+}
+
+@media (max-width: 680px) {
+  .back-link {
+    font-size: 12px;
+  }
+
+  .back-link span {
+    font-size: 14px;
+  }
+}
