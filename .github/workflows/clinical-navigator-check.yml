@@ -5,6 +5,7 @@ on:
     paths:
       - "doctors/**"
       - "backend/**"
+      - "tests/**"
       - "docs/clinical-navigator/**"
       - ".github/workflows/clinical-navigator-check.yml"
   workflow_dispatch:
@@ -29,6 +30,7 @@ jobs:
           node --check doctors/navigator/smart-intake.js
           node --check doctors/navigator/options-ui.js
           node --check doctors/navigator/validate-modules.js
+          node --check tests/clinical-navigator-e2e.mjs
           cd backend
           npm run check --silent
 
@@ -96,6 +98,7 @@ jobs:
           test -f doctors/navigator/options-ui.js
           test -f doctors/navigator/options-ui.css
           test -f doctors/navigator/validate-modules.js
+          test -f tests/clinical-navigator-e2e.mjs
           test -f docs/clinical-navigator/README.md
           test -f docs/clinical-navigator/architecture.md
           test -f docs/clinical-navigator/dry-eye-v0.1.md
@@ -126,6 +129,14 @@ jobs:
             echo "Potential secret detected"
             exit 1
           fi
+
+      - name: Install browser test runtime
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Run browser smoke test
+        run: node tests/clinical-navigator-e2e.mjs
 
       - name: Build Yandex Cloud deployment archive
         run: |
