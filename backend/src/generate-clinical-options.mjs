@@ -53,7 +53,7 @@ function discriminatingTests(chunk) {
   return ['Уточнить возраст, латеральность, течение, преципитаты, ВГД, радужку, роговицу и задний отрезок.'];
 }
 
-function mockOptions({ caseText, facts, context }) {
+function mockOptions({ caseText, facts, context, warning = null }) {
   let diagnosticChunks = context.diagnostic_evidence
     .filter((chunk) => chunk.kind === 'diagnostic_option')
     .slice(0, 5);
@@ -122,7 +122,7 @@ function mockOptions({ caseText, facts, context }) {
     ]),
     physician_selection_required: true,
     final_decision_owner: 'physician',
-    limitations: context.limitations || []
+    limitations: unique([...(context.limitations || []), warning])
   };
 }
 
@@ -172,20 +172,57 @@ export async function generateClinicalOptions({
   if (!facts || typeof facts !== 'object') throw new Error('facts are required');
   const context = await buildPhysicianChoiceContext({ facts, supplementalTags, authoringMode });
   const provider = optionProviderFromEnvironment(env);
-  const generated = provider.id === 'mock'
-    ? { options: mockOptions({ caseText, facts, context }), usage: null, provider_response_id: null }
-    : await provider.generate({ caseText, facts, context });
 
-  return {
-    provider: provider.id,
-    options: validateClinicalOptions(generated.options, context),
-    context_meta: {
-      package: context.package,
-      inferred_tags: context.inferred_tags,
-      evidence_chunk_ids: context.evidence_chunks.map((chunk) => chunk.id),
-      treatment_evidence_enabled: context.treatment_candidates.length > 0
-    },
-    usage: generated.usage,
-    provider_response_id: generated.provider_response_id
-  };
+  if (provider.id === 'mock') {
+    const options = validateClinicalOptions(mockOptions({ caseText, facts, context }), context);
+    return {
+      provider: 'mock',
+      options,
+      context_meta: {
+        package: context.package,
+        inferred_tags: context.inferred_tags,
+        evidence_chunk_ids: context.evidence_chunks.map((chunk) => chunk.id),
+        treatment_evidence_enabled: context.treatment_candidates.length > 0
+      },
+      usage: null,
+      provider_response_id: null,
+      degraded: false
+    };
+  }
+
+  try {
+    const generated = await provider.generate({ caseText, facts, context });
+    const options = validateClinicalOptions(generated.options, context);
+    return {
+      provider: provider.id,
+      options,
+      context_meta: {
+        package: context.package,
+        inferred_tags: context.inferred_tags,
+        evidence_chunk_ids: context.evidence_chunks.map((chunk) => chunk.id),
+        treatment_evidence_enabled: context.treatment_candidates.length > 0
+      },
+      usage: generated.usage,
+      provider_response_id: generated.provider_response_id,
+      degraded: false
+    };
+  } catch (error) {
+    if (env.AI_DISABLE_DEGRADED_MODE === 'true') throw error;
+    const warning = 'Yandex AI не вернул валидный структурированный результат; показан безопасный детерминированный fallback по извлечённым evidence chunks.';
+    const options = validateClinicalOptions(mockOptions({ caseText, facts, context, warning }), context);
+    return {
+      provider: `${provider.id}-fallback`,
+      options,
+      context_meta: {
+        package: context.package,
+        inferred_tags: context.inferred_tags,
+        evidence_chunk_ids: context.evidence_chunks.map((chunk) => chunk.id),
+        treatment_evidence_enabled: context.treatment_candidates.length > 0
+      },
+      usage: null,
+      provider_response_id: null,
+      degraded: true,
+      provider_warning: warning
+    };
+  }
 }
