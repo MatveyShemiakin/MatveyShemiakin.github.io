@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Клинический AI — передний увеит</title>
+  <meta name="description" content="Вертикальный прототип клинической поддержки принятия решений по переднему увеиту.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b1f3b">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/doctors/clinical-ai/styles.css?v=20260719-1">
+</head>
+<body class="vertical-ai-page">
+  <header class="vertical-header">
+    <div class="vertical-shell vertical-nav">
+      <a class="vertical-brand" href="/doctors/">
+        <b>МШ</b>
+        <span>Клинический AI</span>
+      </a>
+      <div class="vertical-nav-actions">
+        <span class="provider-pill">Передний увеит · vertical slice</span>
+        <button type="button" class="ghost-button" id="new-case-button">Новый случай</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="vertical-main">
+    <div class="vertical-shell">
+      <section class="hero-grid">
+        <article class="hero-card">
+          <p class="eyebrow">Офтальмологическая поддержка решения</p>
+          <h1>Опишите случай. Модель предложит варианты — решение останется за врачом.</h1>
+          <p class="hero-copy">Система извлекает уже названные факты, задаёт только недостающие вопросы, формирует дифференциальные варианты и подбирает доказательный контекст из международных рекомендаций.</p>
+
+          <form id="case-form" class="case-form">
+            <label for="case-input" class="sr-only">Клинический случай</label>
+            <textarea id="case-input" minlength="10" maxlength="12000" placeholder="Например: женщина 34 лет, острый односторонний передний увеит, боль, светобоязнь, клетки 3+, фибрин, HLA-B27-ассоциированный артрит…"></textarea>
+            <div class="form-actions">
+              <button type="button" class="text-button" id="example-button">Вставить пример</button>
+              <button type="submit" class="primary-button" id="analyze-button">Проанализировать случай</button>
+            </div>
+          </form>
+
+          <div id="analysis-status" class="status-line" hidden></div>
+          <div id="analysis-error" class="error-box" hidden></div>
+        </article>
+
+        <aside class="scope-card">
+          <h2>Что делает эта версия</h2>
+          <ul>
+            <li>работает только с передним увеитом;</li>
+            <li>предлагает 2–5 диагностических вариантов;</li>
+            <li>показывает аргументы, пробелы и исследования;</li>
+            <li>формирует варианты ведения только из извлечённых evidence chunks;</li>
+            <li>не выбирает диагноз или лечение автоматически.</li>
+          </ul>
+          <div class="scope-warning"><strong>Не вводите персональные данные пациента.</strong><br>Лечебные варианты тестового режима остаются черновыми до клинической и юридической верификации.</div>
+        </aside>
+      </section>
+
+      <div class="results-stack" id="analysis-results" hidden>
+        <section class="result-section">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Первичная безопасность</p>
+              <h2>Срочность</h2>
+            </div>
+            <span class="provider-pill">Провайдер: <b id="provider-badge">—</b></span>
+          </div>
+          <div id="urgency-card" class="urgency-card" data-level="uncertain"></div>
+        </section>
+
+        <section class="result-section">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Из сообщения врача</p>
+              <h2>Распознанные факты</h2>
+            </div>
+            <p>Факты можно уточнить следующим сообщением.</p>
+          </div>
+          <ul class="fact-list" id="recognized-facts"></ul>
+        </section>
+
+        <section class="result-section" id="questions-section" hidden>
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Только недостающие данные</p>
+              <h2>Уточняющие вопросы</h2>
+            </div>
+            <p>Заполняйте только то, что доступно.</p>
+          </div>
+          <div class="questions-list" id="questions-list"></div>
+        </section>
+
+        <section class="result-section">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Дифференциальный ряд</p>
+              <h2>Варианты диагноза</h2>
+            </div>
+            <p>Выбор отмечает только врач.</p>
+          </div>
+          <div class="options-list" id="diagnosis-options"></div>
+        </section>
+
+        <section class="result-section" id="management-section" hidden>
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">По найденным рекомендациям</p>
+              <h2>Варианты ведения и лечения</h2>
+            </div>
+            <p>Ни один вариант не назначается автоматически.</p>
+          </div>
+          <div class="options-list" id="management-options"></div>
+        </section>
+
+        <section class="result-section">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Границы текущей версии</p>
+              <h2>Ограничения</h2>
+            </div>
+          </div>
+          <div class="limitations-list" id="limitations-list"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="/doctors/clinical-ai/config.js?v=20260719-1"></script>
+  <script src="/doctors/clinical-ai/app.js?v=20260719-1"></script>
+</body>
+</html>

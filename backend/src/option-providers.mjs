@@ -1,25 +1,13 @@
 import { clinicalOptionsSchema } from './clinical-options-schema.mjs';
+import { resolveYandexAuth } from './yandex-auth.mjs';
+import { parseJsonContent } from './providers.mjs';
 
-const DEFAULT_TIMEOUT_MS = 60_000;
+const DEFAULT_TIMEOUT_MS = 45_000;
 
 function withTimeout(timeoutMs = DEFAULT_TIMEOUT_MS) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   return { signal: controller.signal, clear: () => clearTimeout(timer) };
-}
-
-function parseJsonContent(content) {
-  if (content && typeof content === 'object') return content;
-  const text = String(content || '').trim();
-  if (!text) throw new Error('Model returned an empty response');
-  try {
-    return JSON.parse(text);
-  } catch (_error) {
-    const start = text.indexOf('{');
-    const end = text.lastIndexOf('}');
-    if (start >= 0 && end > start) return JSON.parse(text.slice(start, end + 1));
-    throw new Error('Model response is not valid JSON');
-  }
 }
 
 function buildOptionMessages({ caseText, facts, context }) {
@@ -33,7 +21,7 @@ function buildOptionMessages({ caseText, facts, context }) {
         'Use only evidence chunks supplied in the request. Do not cite or invent other sources, drugs, doses or durations.',
         'When treatment evidence is absent, return an empty management_options array and explain that treatment evidence is locked.',
         'Separate supporting facts from missing or conflicting facts.',
-        'Return concise professional Russian text as strict JSON matching the schema.'
+        'Return concise professional Russian text as exactly one JSON object with no markdown.'
       ].join(' ')
     },
     {
@@ -45,6 +33,80 @@ function buildOptionMessages({ caseText, facts, context }) {
       })
     }
   ];
+}
+
+function responseOutput(payload) {
+  if (typeof payload?.output_text === 'string') return payload.output_text;
+  for (const item of payload?.output || []) {
+    for (const part of item?.content || []) {
+      if (part?.json && typeof part.json === 'object') return part.json;
+      if (typeof part?.text === 'string') return part.text;
+      if (typeof part === 'string') return part;
+    }
+  }
+  return null;
+}
+
+async function callResponses({
+  baseUrl,
+  apiKey,
+  authScheme = 'Bearer',
+  model,
+  extraHeaders = {},
+  input,
+  format = 'json_schema'
+}) {
+  const timeout = withTimeout();
+  try {
+    const responseFormat = format === 'json_schema'
+      ? {
+          type: 'json_schema',
+          name: 'physician_choice_options',
+          description: 'Multiple evidence-grounded diagnostic and management options for physician selection.',
+          strict: true,
+          schema: clinicalOptionsSchema
+        }
+      : { type: 'json_object' };
+
+    const response = await fetch(`${baseUrl.replace(/\/$/, '')}/responses`, {
+      method: 'POST',
+      signal: timeout.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${authScheme} ${apiKey}`,
+        ...extraHeaders
+      },
+      body: JSON.stringify({
+        model,
+        store: false,
+        temperature: 0,
+        max_output_tokens: 6500,
+        input: buildOptionMessages(input),
+        text: { format: responseFormat }
+      })
+    });
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(`AI provider returned ${response.status}: ${message.slice(0, 300)}`);
+    }
+    const payload = await response.json();
+    return {
+      options: parseJsonContent(responseOutput(payload)),
+      usage: payload?.usage || null,
+      provider_response_id: payload?.id || null
+    };
+  } finally {
+    timeout.clear();
+  }
+}
+
+async function callYandexStructured(args) {
+  try {
+    return await callResponses({ ...args, format: 'json_schema' });
+  } catch (error) {
+    if (!/valid JSON|empty response|json_schema|response format/i.test(String(error?.message || ''))) throw error;
+    return callResponses({ ...args, format: 'json_object' });
+  }
 }
 
 async function callChatCompletions({ baseUrl, apiKey, authScheme, model, extraHeaders = {}, input }) {
@@ -62,14 +124,7 @@ async function callChatCompletions({ baseUrl, apiKey, authScheme, model, extraHe
         model,
         temperature: 0,
         messages: buildOptionMessages(input),
-        response_format: {
-          type: 'json_schema',
-          json_schema: {
-            name: 'physician_choice_options',
-            strict: true,
-            schema: clinicalOptionsSchema
-          }
-        }
+        response_format: { type: 'json_object' }
       })
     });
     if (!response.ok) {
@@ -87,67 +142,35 @@ async function callChatCompletions({ baseUrl, apiKey, authScheme, model, extraHe
   }
 }
 
-async function callResponses({ baseUrl, apiKey, model, input }) {
-  const timeout = withTimeout();
-  try {
-    const response = await fetch(`${baseUrl.replace(/\/$/, '')}/responses`, {
-      method: 'POST',
-      signal: timeout.signal,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model,
-        store: false,
-        input: buildOptionMessages(input),
-        text: {
-          format: {
-            type: 'json_schema',
-            name: 'physician_choice_options',
-            strict: true,
-            schema: clinicalOptionsSchema
-          }
-        }
-      })
-    });
-    if (!response.ok) {
-      const message = await response.text();
-      throw new Error(`AI provider returned ${response.status}: ${message.slice(0, 300)}`);
-    }
-    const payload = await response.json();
-    const outputText = payload?.output_text || payload?.output
-      ?.flatMap((item) => item?.content || [])
-      ?.find((item) => item?.type === 'output_text')?.text;
-    return {
-      options: parseJsonContent(outputText),
-      usage: payload?.usage || null,
-      provider_response_id: payload?.id || null
-    };
-  } finally {
-    timeout.clear();
-  }
-}
-
 export function optionProviderFromEnvironment(env = process.env) {
   const provider = String(env.AI_PROVIDER || 'mock').toLowerCase();
 
   if (provider === 'yandex') {
-    if (!env.YANDEX_API_KEY || !env.YANDEX_FOLDER_ID || !env.YANDEX_MODEL) {
-      throw new Error('YANDEX_API_KEY, YANDEX_FOLDER_ID and YANDEX_MODEL are required');
+    if (!env.YANDEX_FOLDER_ID || !env.YANDEX_MODEL) {
+      throw new Error('YANDEX_FOLDER_ID and YANDEX_MODEL are required');
     }
+    const auth = resolveYandexAuth(env);
+    const model = env.YANDEX_MODEL.startsWith('gpt://')
+      ? env.YANDEX_MODEL
+      : `gpt://${env.YANDEX_FOLDER_ID}/${env.YANDEX_MODEL}`;
+    const common = {
+      baseUrl: env.YANDEX_BASE_URL || 'https://ai.api.cloud.yandex.net/v1',
+      apiKey: auth.credential,
+      authScheme: auth.authScheme,
+      model,
+      extraHeaders: { 'x-folder-id': env.YANDEX_FOLDER_ID }
+    };
     return {
       id: 'yandex',
-      generate: (input) => callChatCompletions({
-        baseUrl: env.YANDEX_BASE_URL || 'https://ai.api.cloud.yandex.net/v1',
-        apiKey: env.YANDEX_API_KEY,
-        authScheme: 'Api-Key',
-        model: env.YANDEX_MODEL.startsWith('gpt://')
-          ? env.YANDEX_MODEL
-          : `gpt://${env.YANDEX_FOLDER_ID}/${env.YANDEX_MODEL}`,
-        extraHeaders: { 'x-folder-id': env.YANDEX_FOLDER_ID },
-        input
-      })
+      auth_source: auth.source,
+      generate: async (input) => {
+        try {
+          return await callYandexStructured({ ...common, input });
+        } catch (error) {
+          if (!/valid JSON|empty response|response format/i.test(String(error?.message || ''))) throw error;
+          return callChatCompletions({ ...common, input });
+        }
+      }
     };
   }
 
@@ -161,7 +184,8 @@ export function optionProviderFromEnvironment(env = process.env) {
         baseUrl: env.OPENAI_BASE_URL || 'https://api.openai.com/v1',
         apiKey: env.OPENAI_API_KEY,
         model: env.OPENAI_MODEL,
-        input
+        input,
+        format: 'json_schema'
       })
     };
   }
