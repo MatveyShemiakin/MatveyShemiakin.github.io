@@ -158,10 +158,21 @@ export async function analyzeCase({ caseText, priorFacts = null, authoringMode =
     env
   });
 
+  const degraded = extraction.degraded === true || generated.degraded === true;
+  const limitations = unique([
+    ...(generated.options.limitations || []),
+    extraction.provider_warning,
+    generated.provider_warning
+  ]);
+  const provider = degraded
+    ? (generated.provider.includes('fallback') ? generated.provider : `${generated.provider}+extraction-fallback`)
+    : generated.provider;
+
   return {
     ok: true,
     action: 'analyze_case',
-    provider: generated.provider,
+    provider,
+    degraded,
     case_text: caseText,
     facts: extraction.facts,
     recognized_facts: recognizedFacts(caseText, extraction.facts, tags),
@@ -169,7 +180,7 @@ export async function analyzeCase({ caseText, priorFacts = null, authoringMode =
     diagnostic_options: generated.options.diagnostic_options,
     management_options: generated.options.management_options,
     urgency: generated.options.urgency,
-    limitations: generated.options.limitations,
+    limitations,
     physician_selection_required: true,
     final_decision_owner: 'physician',
     context_meta: generated.context_meta,
