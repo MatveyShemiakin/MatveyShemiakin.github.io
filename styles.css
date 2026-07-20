@@ -26,6 +26,7 @@ img{display:block;max-width:100%}
 .site-header{position:absolute;inset:0 0 auto;z-index:20}
 .nav{height:98px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.72)}
 .nav-right{display:flex;align-items:center;gap:30px}
+.mobile-patients-link{display:none;color:#fff;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .monogram{font-family:var(--serif);font-size:31px;letter-spacing:.02em;color:white}
 nav{display:flex;gap:54px;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#cad6e6}
 nav a{transition:.2s ease}
@@ -119,7 +120,7 @@ h2{font-family:var(--serif);font-size:clamp(42px,5vw,64px);font-weight:400;line-
 .footer-row{display:flex;align-items:center;justify-content:space-between;color:#aebdce}
 .footer-row>span{font-family:var(--serif);font-size:27px;color:white}
 .footer-row p{margin:0;font-size:13px}
-@media (max-width:1020px){nav{display:none}.nav-right{gap:0}.hero-grid,.about-grid,.media-grid,.education-grid,.science-head,.contact-panel{grid-template-columns:1fr}.portrait-wrap{max-width:540px}.direction-grid{grid-template-columns:1fr}.competence-strip{grid-template-columns:1fr}.education-visual img{height:560px;position:static}.portrait-card img{height:520px}.hero{min-height:auto}.hero-grid{padding-top:130px}.science-head{gap:10px}}
+@media (max-width:1020px){nav{display:none}.nav-right{gap:14px}.mobile-patients-link{display:inline-flex}.hero-grid,.about-grid,.media-grid,.education-grid,.science-head,.contact-panel{grid-template-columns:1fr}.portrait-wrap{max-width:540px}.direction-grid{grid-template-columns:1fr}.competence-strip{grid-template-columns:1fr}.education-visual img{height:560px;position:static}.portrait-card img{height:520px}.hero{min-height:auto}.hero-grid{padding-top:130px}.science-head{gap:10px}}
 @media (max-width:680px){.language-switch{padding:3px}.language-button{min-width:36px;height:29px}.container{width:min(calc(100% - 24px),var(--max))}.nav{height:78px}.hero-grid{padding-top:104px;gap:42px}.hero-actions{display:grid}.button{width:100%}.portrait-wrap{padding-left:16px}.portrait-card img{height:460px}.portrait-city{display:none}.section{padding:72px 0}h2{font-size:42px}.direction-card{min-height:220px}.competence-strip div{display:block}.facts-grid,.metrics-grid{grid-template-columns:1fr}.about-image-panel img,.education-visual img{height:500px}.timeline-item{grid-template-columns:78px 1fr}.publication{grid-template-columns:1fr}.contact-panel{padding:28px}.footer-row{align-items:flex-start;gap:20px}.hero-focus{font-size:36px}}
 
 
