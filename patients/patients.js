@@ -7,7 +7,7 @@ const T=lang==='en'?{
 };
 function pluralRu(n,one,few,many){const a=Math.abs(n)%100,b=a%10;return a>10&&a<20?many:b>1&&b<5?few:b===1?one:many}
 const DATA=window.PATIENT_FAQ_DATA||{categories:[],faqs:[]},VIDEOS=window.PATIENT_VIDEOS||{};
-const TOPIC_URLS=lang==='en'?{before:'/en/patients/before-surgery/',day:'/en/patients/surgery-day/',early:'/en/patients/recovery/'}:{before:'/patients/before-surgery/',day:'/patients/surgery-day/',early:'/patients/recovery/'};
+const TOPIC_URLS=lang==='en'?{before:'/en/patients/before-surgery/',day:'/en/patients/surgery-day/',early:'/en/patients/recovery/',daily:'/en/patients/daily-life/',drops:'/en/patients/eye-drops/',glasses:'/en/patients/glasses/'}:{before:'/patients/before-surgery/',day:'/patients/surgery-day/',early:'/patients/recovery/',daily:'/patients/daily-life/',drops:'/patients/eye-drops/',glasses:'/patients/glasses/'};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/ё/g,'е').replace(/[ьъ]/g,'').replace(/[^a-zа-я0-9]+/gi,' ').trim();
 const words=v=>norm(v).split(/\s+/).filter(Boolean);
