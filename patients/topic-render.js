@@ -1,0 +1,22 @@
+(function(){
+const lang=(document.documentElement.lang||'ru').toLowerCase().startsWith('en')?'en':'ru';
+const category=document.body.dataset.category;
+const data=window.PATIENT_FAQ_DATA||{categories:[],faqs:[]};
+const cfg=window.TOPIC_PAGE_CONFIG||{};
+const items=data.faqs.filter(x=>x.cat===category);
+const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const labels=lang==='en'?{on:'On this page',short:'Short answer.',important:'Important',prepared:'Prepared and reviewed by',role:'Ophthalmologist and ophthalmic surgeon. Medical review: 20 July 2026.',sources:'Sources',related:'Related information',all:'All patient information'}:{on:'На этой странице',short:'Короткий ответ.',important:'Что важно',prepared:'Материал подготовлен и проверен врачом',role:'Врач-офтальмолог, офтальмохирург. Медицинская проверка: 20 июля 2026 года.',sources:'Источники',related:'Связанные материалы',all:'Все материалы для пациентов'};
+const toc=document.getElementById('topic-toc');
+if(toc)toc.innerHTML=`<strong>${labels.on}</strong>`+items.map(x=>`<a href="#${esc(x.id)}">${esc(x.q)}</a>`).join('');
+const article=document.getElementById('topic-questions');
+if(article)article.innerHTML=items.map(x=>`<section class="question" id="${esc(x.id)}"><h2>${esc(x.q)}</h2><p><strong>${labels.short}</strong> ${esc(x.short)}</p>${x.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}<div class="important"><strong>${labels.important}</strong><ul>${x.important.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div></section>`).join('');
+const sources=document.getElementById('topic-sources');
+if(sources)sources.innerHTML=`<h2>${labels.sources}</h2><ul>${(cfg.sources||[]).map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a></li>`).join('')}</ul><p class="disclaimer">${esc(cfg.disclaimer||'')}</p>`;
+const related=document.getElementById('topic-related');
+if(related)related.innerHTML=`<h2>${labels.related}</h2><div class="related-grid">${(cfg.related||[]).map(x=>`<a href="${esc(x.url)}">${esc(x.label)}</a>`).join('')}</div>`;
+const person=lang==='en'?'Matvey Yuryevich Shemyakin':'Матвей Юрьевич Шемякин';
+const author=document.getElementById('topic-author');
+if(author)author.innerHTML=`<small>${labels.prepared}</small><h2>${person}</h2><p>${labels.role}</p>`;
+const schema={'@context':'https://schema.org','@graph':[{'@type':'MedicalWebPage',url:cfg.url,name:cfg.name,description:cfg.description,inLanguage:lang,datePublished:'2026-07-20',dateModified:'2026-07-20',lastReviewed:'2026-07-20',author:{'@id':'https://matveyshemyakin.ru/#person'},reviewedBy:{'@id':'https://matveyshemyakin.ru/#person'}},{'@type':'FAQPage',url:cfg.url+'#faq',inLanguage:lang,mainEntity:items.map(x=>({'@type':'Question',name:x.q,acceptedAnswer:{'@type':'Answer',text:[x.short,...x.paragraphs,...x.important].join(' ')}}))},{'@type':'Person','@id':'https://matveyshemyakin.ru/#person',name:person,jobTitle:lang==='en'?'Ophthalmologist and ophthalmic surgeon':'Врач-офтальмолог, офтальмохирург',url:'https://matveyshemyakin.ru/'}]};
+const tag=document.createElement('script');tag.type='application/ld+json';tag.text=JSON.stringify(schema);document.head.append(tag);
+})();
