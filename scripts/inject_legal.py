@@ -5,7 +5,7 @@ import re
 # and professional safeguards connected to every clinician-facing page.
 ROOT = Path(__file__).resolve().parents[1]
 LEGAL_SCRIPT = '<script src="/legal.js?v=20260721-3"></script>'
-DOCTORS_SCRIPT = '<script src="/doctors-legal.js?v=20260721-1"></script>'
+DOCTORS_SCRIPT = '<script src="/doctors-legal.js?v=20260721-2"></script>'
 PRIVACY_PAGES = {ROOT / 'privacy.html', ROOT / 'en' / 'privacy.html'}
 PROFESSIONAL_TERMS = {
     ROOT / 'for-doctors' / 'professional-use.html',
@@ -25,16 +25,17 @@ for path in ROOT.rglob('*.html'):
         if '/legal.js' in text:
             text = re.sub(r'<script\s+src="/legal\.js(?:\?v=[^"]*)?"></script>', LEGAL_SCRIPT, text)
         else:
-            insertion = LEGAL_SCRIPT
             if '</body>' in text:
-                text = text.replace('</body>', insertion + '</body>', 1)
+                text = text.replace('</body>', LEGAL_SCRIPT + '</body>', 1)
             elif '</html>' in text:
-                text = text.replace('</html>', insertion + '</html>', 1)
+                text = text.replace('</html>', LEGAL_SCRIPT + '</html>', 1)
 
     relative_posix = relative.as_posix()
     is_doctors_page = relative_posix.startswith('for-doctors/') or relative_posix.startswith('en/for-doctors/')
-    if is_doctors_page and path not in PROFESSIONAL_TERMS and '/doctors-legal.js' not in text:
-        if '</body>' in text:
+    if is_doctors_page and path not in PROFESSIONAL_TERMS:
+        if '/doctors-legal.js' in text:
+            text = re.sub(r'<script\s+src="/doctors-legal\.js(?:\?v=[^"]*)?"></script>', DOCTORS_SCRIPT, text)
+        elif '</body>' in text:
             text = text.replace('</body>', DOCTORS_SCRIPT + '</body>', 1)
         elif '</html>' in text:
             text = text.replace('</html>', DOCTORS_SCRIPT + '</html>', 1)
