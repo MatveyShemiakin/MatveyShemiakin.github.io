@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Клинический конспект — Матвей Шемякин</title>
+  <meta name="description" content="Клинический конспект для врачей-офтальмологов.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Матвей Юрьевич Шемякин">
+  <meta name="theme-color" content="#041225">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body{min-height:100vh;background:var(--navy-950);color:var(--white)}
+    .doctors-header{position:relative;border-bottom:1px solid var(--line)}
+    .doctors-nav{height:98px;display:flex;align-items:center;justify-content:space-between}
+    .doctors-nav a:last-child{font-size:13px;color:var(--blue-soft);font-weight:700}
+    .konspekt-hero{padding:72px 0 46px;background:linear-gradient(145deg,var(--navy-900),var(--navy-950))}
+    .konspekt-hero h1{max-width:900px;font-family:var(--serif);font-size:clamp(46px,6vw,72px);font-weight:400;line-height:.98;margin-bottom:18px}
+    .konspekt-hero p:last-child{max-width:760px;margin-bottom:0;color:var(--muted);font-size:17px}
+    .konspekt-section{padding:56px 0 96px;background:var(--paper);color:var(--ink);min-height:58vh}
+    .konspekt-back{display:inline-flex;align-items:center;gap:8px;margin-bottom:24px;color:#3567ad;font-size:14px;font-weight:700}
+    .konspekt-shell{max-width:940px;margin:0 auto;padding:clamp(26px,5vw,58px);border:1px solid var(--line-dark);border-radius:28px;background:#fff;box-shadow:0 22px 58px rgba(4,18,37,.09)}
+    .konspekt-status{margin:0;padding:22px;border:1px solid var(--line-dark);border-radius:16px;background:#f8f6f2;color:var(--muted-dark);font-size:16px}
+    .konspekt-status strong{display:block;margin-bottom:6px;color:var(--ink);font-family:var(--serif);font-size:27px;font-weight:400}
+    .konspekt-status a{color:#3567ad;font-weight:700}
+    .konspekt-content{font-size:17px;line-height:1.72;color:#354154;overflow-wrap:anywhere}
+    .konspekt-content> :first-child{margin-top:0}
+    .konspekt-content> :last-child{margin-bottom:0}
+    .konspekt-content h1,.konspekt-content h2,.konspekt-content h3{scroll-margin-top:24px;color:var(--ink);font-family:var(--serif);font-weight:400;letter-spacing:-.025em}
+    .konspekt-content h1{margin:0 0 28px;font-size:clamp(38px,5vw,58px);line-height:1.04}
+    .konspekt-content h2{margin:50px 0 20px;padding-top:6px;border-top:1px solid var(--line-dark);font-size:clamp(31px,4vw,42px);line-height:1.1}
+    .konspekt-content h3{margin:34px 0 14px;font-size:clamp(24px,3vw,31px);line-height:1.18}
+    .konspekt-content p{margin:0 0 18px}
+    .konspekt-content ul,.konspekt-content ol{margin:0 0 22px;padding-left:1.45em}
+    .konspekt-content li{margin:7px 0;padding-left:4px}
+    .konspekt-content li::marker{color:#3567ad;font-weight:700}
+    .konspekt-content a{color:#285fa8;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+    .konspekt-content strong{color:#172538}
+    .konspekt-content blockquote{margin:28px 0;padding:20px 22px;border-left:4px solid var(--blue);border-radius:0 14px 14px 0;background:#eef4fc;color:#34465e}
+    .konspekt-content blockquote p:last-child{margin-bottom:0}
+    .konspekt-content hr{margin:42px 0;border:0;border-top:1px solid var(--line-dark)}
+    .konspekt-content code{padding:.16em .38em;border-radius:6px;background:#eef1f5;color:#243349;font:0.92em/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    .konspekt-content pre{margin:26px 0;padding:20px;overflow:auto;border-radius:16px;background:#07182f;color:#e7eef8}
+    .konspekt-content pre code{padding:0;background:transparent;color:inherit}
+    .konspekt-content table{display:block;width:100%;margin:26px 0;overflow-x:auto;border-collapse:collapse}
+    .konspekt-content th,.konspekt-content td{min-width:150px;padding:13px 15px;border:1px solid var(--line-dark);text-align:left;vertical-align:top}
+    .konspekt-content th{background:#eef3f9;color:#172538}
+    .konspekt-content img{width:auto;max-width:100%;height:auto;margin:30px auto;border-radius:18px;box-shadow:0 16px 38px rgba(4,18,37,.12)}
+    .konspekt-content details{margin:22px 0;border:1px solid #cbd6e4;border-radius:16px;background:#f8fafc;overflow:hidden}
+    .konspekt-content summary{position:relative;padding:18px 52px 18px 20px;color:#1d3554;font-weight:750;cursor:pointer;list-style:none;transition:background .2s ease,color .2s ease}
+    .konspekt-content summary::-webkit-details-marker{display:none}
+    .konspekt-content summary::after{content:"";position:absolute;right:21px;top:50%;width:9px;height:9px;border-right:2px solid #3567ad;border-bottom:2px solid #3567ad;transform:translateY(-65%) rotate(45deg);transition:transform .2s ease}
+    .konspekt-content details[open] summary{border-bottom:1px solid #d8e0ea;background:#edf4fc;color:#153b6d}
+    .konspekt-content details[open] summary::after{transform:translateY(-35%) rotate(225deg)}
+    .konspekt-content details>*:not(summary){margin-left:20px;margin-right:20px}
+    .konspekt-content details> :nth-child(2){margin-top:18px}
+    .konspekt-content details> :last-child{margin-bottom:20px}
+    .konspekt-video{display:block;width:100%;max-width:860px;margin:32px auto;border-radius:18px;background:#000;box-shadow:0 18px 42px rgba(4,18,37,.18)}
+    @media(hover:hover){.konspekt-content summary:hover{background:#edf4fc}}
+    @media(max-width:680px){.doctors-nav{height:78px}.konspekt-hero{padding:50px 0 36px}.konspekt-hero h1{font-size:44px}.konspekt-hero p:last-child{font-size:15px}.konspekt-section{padding:36px 0 68px}.konspekt-shell{padding:24px 18px;border-radius:20px}.konspekt-content{font-size:16px;line-height:1.65}.konspekt-content h1{font-size:38px}.konspekt-content h2{margin-top:40px;font-size:31px}.konspekt-content h3{font-size:25px}.konspekt-content img,.konspekt-video{margin:24px auto;border-radius:14px}.konspekt-content summary{padding:16px 48px 16px 16px}.konspekt-content details>*:not(summary){margin-left:16px;margin-right:16px}}
+  </style>
+</head>
+<body>
+  <header class="doctors-header">
+    <div class="container doctors-nav">
+      <a class="monogram" href="/" aria-label="На главную">МШ</a>
+      <a href="/">← Основной сайт</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="konspekt-hero">
+      <div class="container">
+        <p class="eyebrow">Профессиональная библиотека</p>
+        <h1>Клинический конспект</h1>
+        <p>Материал для медицинских специалистов. Конспект не заменяет клинические рекомендации, инструкции к препаратам и индивидуальное решение лечащего врача.</p>
+      </div>
+    </section>
+
+    <section class="konspekt-section" aria-label="Содержание клинического конспекта">
+      <div class="container">
+        <a class="konspekt-back" href="/for-doctors/">← Вернуться в библиотеку для врачей</a>
+        <article class="konspekt-shell">
+          <div id="konspekt-content" class="konspekt-content" aria-live="polite" aria-busy="true">
+            <p class="konspekt-status"><strong>Загрузка конспекта</strong>Материал будет показан через несколько секунд.</p>
+          </div>
+          <noscript>
+            <p class="konspekt-status"><strong>Нужен JavaScript</strong>Для динамической загрузки конспекта включите JavaScript в браузере.</p>
+          </noscript>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>МШ</span>
+      <p>Матвей Юрьевич Шемякин · врач-офтальмолог · офтальмохирург</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@18.0.7/lib/marked.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.4.11/dist/purify.min.js"></script>
+  <script>
+    (() => {
+      'use strict';
+
+      const content = document.getElementById('konspekt-content');
+      const params = new URLSearchParams(window.location.search);
+      const id = (params.get('id') || '').trim().toLowerCase();
+      const validId = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+      const showMessage = (title, message) => {
+        content.innerHTML = `<p class="konspekt-status"><strong>${title}</strong>${message}</p>`;
+        content.setAttribute('aria-busy', 'false');
+      };
+
+      const escapeAttribute = (value) => value
+        .replaceAll('&', '&amp;')
+        .replaceAll('"', '&quot;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;');
+
+      const renderVideos = (markdown) => markdown.replace(
+        /\[video:(\/videos\/[^\]\s"'<>]+\.(?:mp4|webm|ogg))\]/gi,
+        (_, source) => `<video controls preload="metadata" playsinline class="konspekt-video"><source src="${escapeAttribute(source)}">Ваш браузер не поддерживает встроенное видео.</video>`
+      );
+
+      const loadKonspekt = async () => {
+        if (!id) {
+          showMessage('Конспект не выбран', 'Откройте материал из <a href="/for-doctors/">библиотеки для врачей</a> или добавьте параметр <code>?id=...</code> к адресу страницы.');
+          return;
+        }
+
+        if (!validId.test(id)) {
+          showMessage('Некорректный адрес', 'Идентификатор конспекта может содержать только латинские буквы, цифры и дефисы.');
+          return;
+        }
+
+        if (!window.marked || !window.DOMPurify) {
+          showMessage('Не удалось запустить просмотр', 'Библиотеки для отображения Markdown не загрузились. Обновите страницу или попробуйте позже.');
+          return;
+        }
+
+        try {
+          const response = await fetch(`/konspekty/${encodeURIComponent(id)}.md`, {
+            headers: { Accept: 'text/markdown, text/plain;q=0.9' },
+            cache: 'no-cache'
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          const markdown = await response.text();
+          const preparedMarkdown = renderVideos(markdown);
+          const renderedHtml = window.marked.parse(preparedMarkdown, {
+            gfm: true,
+            breaks: false
+          });
+          const safeHtml = window.DOMPurify.sanitize(renderedHtml, {
+            ADD_TAGS: ['details', 'summary', 'video', 'source'],
+            ADD_ATTR: ['controls', 'preload', 'playsinline', 'poster', 'open']
+          });
+
+          content.innerHTML = safeHtml;
+          content.setAttribute('aria-busy', 'false');
+
+          const title = content.querySelector('h1')?.textContent?.trim();
+          if (title) {
+            document.title = `${title} — клинический конспект`;
+            const description = document.querySelector('meta[name="description"]');
+            if (description) description.content = `${title}. Клинический конспект для врачей-офтальмологов.`;
+          }
+        } catch (error) {
+          console.error('Не удалось загрузить конспект:', error);
+          showMessage('Материал не найден', 'Проверьте адрес или вернитесь в <a href="/for-doctors/">библиотеку для врачей</a>.');
+        }
+      };
+
+      loadKonspekt();
+    })();
+  </script>
+  <script src="/legal.js?v=20260721-1"></script>
+</body>
+</html>
