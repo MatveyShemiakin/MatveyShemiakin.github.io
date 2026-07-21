@@ -1,5 +1,6 @@
 from pathlib import Path
 
+# Shared build step: keep privacy controls connected to every static HTML page.
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = '<script src="/legal.js?v=20260721-1"></script>'
 EXCLUDED = {ROOT / 'privacy.html', ROOT / 'en' / 'privacy.html'}
