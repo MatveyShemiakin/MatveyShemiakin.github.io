@@ -69,96 +69,17 @@
   if(!document.querySelector('link[href*="doctors-legal.css"]')){
     const link=document.createElement('link');
     link.rel='stylesheet';
-    link.href='/doctors-legal.css?v=20260721-1';
+    link.href='/doctors-legal.css?v=20260721-2';
     document.head.appendChild(link);
   }
 
   const html=(strings,...values)=>strings.reduce((result,string,index)=>result+string+(values[index]??''),'');
-
   function professionalLink(){return `<a class="md-prof-text-link" href="${professionalUseUrl}">${T.more} →</a>`;}
-
-  function createLandingNotice(){
-    if(document.querySelector('.md-prof-entry'))return;
-    const section=document.createElement('section');
-    section.className='md-prof-notice md-prof-entry';
-    section.setAttribute('aria-labelledby','md-prof-entry-title');
-    section.innerHTML=html`<div class="md-prof-notice__inner"><div><span class="md-prof-eyebrow">${T.audienceKicker}</span><h2 id="md-prof-entry-title">${T.audienceTitle}</h2></div><div class="md-prof-notice__copy"><p>${T.audienceP1}</p><p>${T.audienceP2}</p><p>${T.audienceP3}</p>${professionalLink()}</div></div>`;
-    const hero=document.querySelector('.doctors-hero');
-    if(hero)hero.insertAdjacentElement('afterend',section);else document.querySelector('main')?.prepend(section);
-  }
-
-  function createClinicalNotice(){
-    const article=document.querySelector('.article,article');
-    if(!article||article.querySelector('.md-prof-clinical'))return;
-    const notice=document.createElement('section');
-    notice.className='md-prof-notice md-prof-clinical';
-    notice.setAttribute('aria-labelledby','md-prof-clinical-title');
-    notice.innerHTML=html`<div class="md-prof-notice__inner"><div><span class="md-prof-eyebrow">${T.clinicalKicker}</span><h2 id="md-prof-clinical-title">${T.clinicalTitle}</h2></div><div class="md-prof-notice__copy"><p>${T.clinicalP1}</p><p>${T.clinicalP2}</p>${professionalLink()}</div></div>`;
-    article.prepend(notice);
-  }
-
-  function createTreatmentWarning(){
-    const therapy=document.getElementById('therapy')||document.querySelector('[data-treatment-section],.treatment-section,.therapy-section');
-    if(!therapy||document.querySelector('.md-prof-treatment'))return;
-    const warning=document.createElement('aside');
-    warning.className='md-prof-treatment';
-    warning.setAttribute('aria-labelledby','md-prof-treatment-title');
-    warning.innerHTML=html`<span class="md-prof-eyebrow">${T.treatmentKicker}</span><h3 id="md-prof-treatment-title">${T.treatmentTitle}</h3><p>${T.treatmentP}</p><ul>${T.treatmentItems.map(item=>`<li>${item}</li>`).join('')}</ul>`;
-    therapy.insertAdjacentElement('beforebegin',warning);
-  }
-
-  function createFullLegalBlock(){
-    const article=document.querySelector('.article,article');
-    if(!article||article.querySelector('.md-prof-legal'))return;
-    const block=document.createElement('section');
-    block.className='md-prof-legal';
-    block.setAttribute('aria-labelledby','md-prof-legal-title');
-    block.innerHTML=html`<span class="md-prof-eyebrow">${T.legalKicker}</span><h2 id="md-prof-legal-title">${T.legalTitle}</h2><p>${T.legalP1}</p><p>${T.legalP2}</p><p>${T.legalP3}</p><a class="md-prof-text-link" href="${professionalUseUrl}">${T.more} →</a><div class="md-prof-legal__meta"><span>${T.version}</span><span>${T.updated}</span></div>`;
-    const sources=document.getElementById('sources');
-    if(sources)sources.insertAdjacentElement('afterend',block);else article.appendChild(block);
-  }
-
-  function addFooterLink(){
-    const footer=document.querySelector('footer .footer-row')||document.querySelector('footer');
-    if(!footer||footer.querySelector('a[href="'+professionalUseUrl+'"]'))return;
-    const link=document.createElement('a');
-    link.href=professionalUseUrl;
-    link.className='md-prof-text-link';
-    link.textContent=T.footer;
-    footer.appendChild(link);
-  }
-
-  function showAudienceModal(){
-    try{if(localStorage.getItem(STORAGE_KEY)==='confirmed')return;}catch(e){}
-    const modal=document.createElement('div');
-    modal.className='md-prof-modal';
-    modal.setAttribute('role','dialog');
-    modal.setAttribute('aria-modal','true');
-    modal.setAttribute('aria-labelledby','md-prof-modal-title');
-    modal.innerHTML=html`<div class="md-prof-modal__panel"><span class="md-prof-eyebrow">${T.modalKicker}</span><h2 id="md-prof-modal-title">${T.modalTitle}</h2><p>${T.modalText}</p><a class="md-prof-text-link" href="${professionalUseUrl}">${T.more} →</a><div class="md-prof-modal__actions"><button class="md-prof-confirm" type="button">${T.confirm}</button><a class="md-prof-patients" href="${patientsUrl}">${T.goPatients}</a></div></div>`;
-    document.body.appendChild(modal);
-    const confirm=modal.querySelector('.md-prof-confirm');
-    const focusables=()=>Array.from(modal.querySelectorAll('button,a[href]'));
-    confirm.addEventListener('click',()=>{
-      try{localStorage.setItem(STORAGE_KEY,'confirmed');}catch(e){}
-      modal.remove();
-    });
-    modal.addEventListener('keydown',event=>{
-      if(event.key!=='Tab')return;
-      const items=focusables();
-      const first=items[0],last=items[items.length-1];
-      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
-      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
-    });
-    window.setTimeout(()=>confirm.focus(),0);
-  }
-
-  if(isLanding)createLandingNotice();
-  else{
-    createClinicalNotice();
-    createTreatmentWarning();
-    createFullLegalBlock();
-  }
-  addFooterLink();
-  showAudienceModal();
+  function createLandingNotice(){if(document.querySelector('.md-prof-entry'))return;const section=document.createElement('section');section.className='md-prof-notice md-prof-entry';section.setAttribute('aria-labelledby','md-prof-entry-title');section.innerHTML=html`<div class="md-prof-notice__inner"><div><span class="md-prof-eyebrow">${T.audienceKicker}</span><h2 id="md-prof-entry-title">${T.audienceTitle}</h2></div><div class="md-prof-notice__copy"><p>${T.audienceP1}</p><p>${T.audienceP2}</p><p>${T.audienceP3}</p>${professionalLink()}</div></div>`;const hero=document.querySelector('.doctors-hero');if(hero)hero.insertAdjacentElement('afterend',section);else document.querySelector('main')?.prepend(section);}
+  function createClinicalNotice(){const article=document.querySelector('.article,article');if(!article||article.querySelector('.md-prof-clinical'))return;const notice=document.createElement('section');notice.className='md-prof-notice md-prof-clinical';notice.setAttribute('aria-labelledby','md-prof-clinical-title');notice.innerHTML=html`<div class="md-prof-notice__inner"><div><span class="md-prof-eyebrow">${T.clinicalKicker}</span><h2 id="md-prof-clinical-title">${T.clinicalTitle}</h2></div><div class="md-prof-notice__copy"><p>${T.clinicalP1}</p><p>${T.clinicalP2}</p>${professionalLink()}</div></div>`;article.prepend(notice);}
+  function createTreatmentWarning(){const therapy=document.getElementById('therapy')||document.querySelector('[data-treatment-section],.treatment-section,.therapy-section');if(!therapy||document.querySelector('.md-prof-treatment'))return;const warning=document.createElement('aside');warning.className='md-prof-treatment';warning.setAttribute('aria-labelledby','md-prof-treatment-title');warning.innerHTML=html`<span class="md-prof-eyebrow">${T.treatmentKicker}</span><h3 id="md-prof-treatment-title">${T.treatmentTitle}</h3><p>${T.treatmentP}</p><ul>${T.treatmentItems.map(item=>`<li>${item}</li>`).join('')}</ul>`;therapy.insertAdjacentElement('beforebegin',warning);}
+  function createFullLegalBlock(){const article=document.querySelector('.article,article');if(!article||article.querySelector('.md-prof-legal'))return;const block=document.createElement('section');block.className='md-prof-legal';block.setAttribute('aria-labelledby','md-prof-legal-title');block.innerHTML=html`<span class="md-prof-eyebrow">${T.legalKicker}</span><h2 id="md-prof-legal-title">${T.legalTitle}</h2><p>${T.legalP1}</p><p>${T.legalP2}</p><p>${T.legalP3}</p><a class="md-prof-text-link" href="${professionalUseUrl}">${T.more} →</a><div class="md-prof-legal__meta"><span>${T.version}</span><span>${T.updated}</span></div>`;const sources=document.getElementById('sources');if(sources)sources.insertAdjacentElement('afterend',block);else article.appendChild(block);}
+  function addFooterLink(){const footer=document.querySelector('footer .footer-row')||document.querySelector('footer');if(!footer||footer.querySelector('a[href="'+professionalUseUrl+'"]'))return;let tools=footer.querySelector('.footer-service-links');if(!tools){tools=document.createElement('div');tools.className='footer-service-links';footer.appendChild(tools);}const link=document.createElement('a');link.href=professionalUseUrl;link.className='md-prof-text-link md-prof-footer-link';link.textContent=T.footer;tools.prepend(link);}
+  function showAudienceModal(){try{if(localStorage.getItem(STORAGE_KEY)==='confirmed')return;}catch(e){}const modal=document.createElement('div');modal.className='md-prof-modal';modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-labelledby','md-prof-modal-title');modal.innerHTML=html`<div class="md-prof-modal__panel"><span class="md-prof-eyebrow">${T.modalKicker}</span><h2 id="md-prof-modal-title">${T.modalTitle}</h2><p>${T.modalText}</p><a class="md-prof-text-link" href="${professionalUseUrl}">${T.more} →</a><div class="md-prof-modal__actions"><button class="md-prof-confirm" type="button">${T.confirm}</button><a class="md-prof-patients" href="${patientsUrl}">${T.goPatients}</a></div></div>`;document.body.appendChild(modal);const confirm=modal.querySelector('.md-prof-confirm');const focusables=()=>Array.from(modal.querySelectorAll('button,a[href]'));confirm.addEventListener('click',()=>{try{localStorage.setItem(STORAGE_KEY,'confirmed');}catch(e){}modal.remove();});modal.addEventListener('keydown',event=>{if(event.key!=='Tab')return;const items=focusables();const first=items[0],last=items[items.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}});window.setTimeout(()=>confirm.focus(),0);}
+  if(isLanding)createLandingNotice();else{createClinicalNotice();createTreatmentWarning();createFullLegalBlock();}addFooterLink();showAudienceModal();
 })();
