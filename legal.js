@@ -8,7 +8,7 @@
     cookie:'Сайт использует необходимые cookie и локальное хранилище. Необязательная веб-аналитика может быть включена только с вашего согласия. Вы можете разрешить аналитику или продолжить только с необходимыми технологиями.',accept:'Разрешить аналитику',reject:'Только необходимые'
   };
   const privacyUrl=lang==='en'?'/en/privacy.html':'/privacy.html';
-  if(!document.querySelector('link[href^="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=20260721-2';document.head.appendChild(l)}
+  if(!document.querySelector('link[href^="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=20260721-3';document.head.appendChild(l)}
   const footer=document.querySelector('footer .footer-row')||document.querySelector('footer');
   if(footer&&!footer.querySelector('.legal-footer-link')){
     const wrap=document.createElement('span');wrap.className='legal-footer-wrap';
