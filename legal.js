@@ -8,12 +8,12 @@
     cookie:'Сайт использует необходимые cookie и локальное хранилище. Необязательная веб-аналитика может быть включена только с вашего согласия. Вы можете разрешить аналитику или продолжить только с необходимыми технологиями.',accept:'Разрешить аналитику',reject:'Только необходимые'
   };
   const privacyUrl=lang==='en'?'/en/privacy.html':'/privacy.html';
-  if(!document.querySelector('link[href="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=20260721-1';document.head.appendChild(l)}
+  if(!document.querySelector('link[href^="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=20260721-2';document.head.appendChild(l)}
   const footer=document.querySelector('footer .footer-row')||document.querySelector('footer');
   if(footer&&!footer.querySelector('.legal-footer-link')){
-    const wrap=document.createElement('span');
+    const wrap=document.createElement('span');wrap.className='legal-footer-wrap';
     const a=document.createElement('a');a.className='legal-footer-link';a.href=privacyUrl;a.textContent=T.privacy;
-    const sep=document.createTextNode(' · ');
+    const sep=document.createElement('span');sep.className='legal-footer-separator';sep.setAttribute('aria-hidden','true');sep.textContent='·';
     const b=document.createElement('button');b.type='button';b.className='legal-cookie-settings';b.textContent=T.cookies;b.addEventListener('click',()=>{localStorage.removeItem('site_cookie_choice');showBanner()});
     wrap.append(a,sep,b);footer.appendChild(wrap);
   }
