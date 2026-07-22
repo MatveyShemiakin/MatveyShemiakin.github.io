@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#041225" name="theme-color"/>
 <title>Клинический конспект — Матвей Шемякин</title>
 <meta content="Динамический клинический конспект для врачей-офтальмологов." name="description"/>
@@ -18,13 +18,23 @@
 <meta content="Матвей Шемякин" property="og:site_name"/>
 <link href="/for-doctors/bacterial-keratitis/styles.css?v=20260720-1" rel="stylesheet"/>
 <style>
+  /* Page-level overflow guard for dynamically generated Markdown. */
+  html,body{width:100%;max-width:100%;min-width:0;overflow-x:hidden}
+  body{min-width:0}
+  .container{min-width:0;max-width:100%;padding-left:max(0px,env(safe-area-inset-left));padding-right:max(0px,env(safe-area-inset-right))}
+  .hero-grid,.status-grid,.layout,.article,.markdown-content,.markdown-content .section-card,.section-head.dynamic-head,.section-head.dynamic-head>div{min-width:0;max-width:100%}
+  .hero-grid>*,.status-grid>*,.layout>*,.markdown-content .section-card>*{min-width:0;max-width:100%}
+  .hero h1,.hero-lead,.hero-meta,.pill,.button,.visual-label,.visual-label strong,.visual-label span,.footer-row>*{max-width:100%;overflow-wrap:anywhere;word-break:normal;hyphens:auto}
+  .pill,.button{white-space:normal;text-align:center}
   .dynamic-visual{display:grid;place-items:center;padding:34px;background:radial-gradient(circle at 50% 35%,rgba(105,209,255,.2),transparent 18rem),linear-gradient(145deg,rgba(12,43,82,.96),rgba(4,18,37,.99))}
   .dynamic-visual-mark{font-family:var(--serif);font-size:clamp(88px,14vw,158px);font-weight:400;line-height:.8;letter-spacing:-.08em;color:rgba(255,255,255,.09);user-select:none}
   .dynamic-visual .visual-label{z-index:4}
   .loading-card{min-height:220px;display:grid;place-content:center;text-align:center}
   .loading-card strong{display:block;margin-bottom:7px;font-family:var(--serif);font-size:30px;font-weight:400;color:#234f8e}
   .loading-card p{margin:0;color:#657184}
-  .markdown-content{color:#354154}
+  .markdown-content{color:#354154;min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:normal;hyphens:auto}
+  .markdown-content :where(p,li,a,strong,em,h2,h3,h4,summary,td,th){overflow-wrap:anywhere;word-break:normal;hyphens:auto}
+  .markdown-content :where(figure,details,blockquote,pre,.table-wrap,video,img,svg,iframe,canvas){min-width:0;max-width:100%}
   .markdown-content .section-card{overflow-wrap:anywhere}
   .markdown-content .section-card> :last-child{margin-bottom:0}
   .markdown-content .section-card>p,.markdown-content .section-card>ul,.markdown-content .section-card>ol,.markdown-content .section-card>blockquote,.markdown-content .section-card>details,.markdown-content .section-card>.table-wrap,.markdown-content .section-card>pre,.markdown-content .section-card>figure,.markdown-content .section-card>video{margin-bottom:20px}
@@ -38,18 +48,18 @@
   .markdown-content a{color:#285fa8;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
   .markdown-content blockquote{margin-left:0;margin-right:0;padding:18px 20px;border:1px solid #c9d8ee;border-left:4px solid #4d8eff;border-radius:0 16px 16px 0;background:#edf4ff;color:#41546d}
   .markdown-content blockquote p:last-child{margin-bottom:0}
-  .markdown-content .table-wrap{overflow-x:auto;border:1px solid #d9dee5;border-radius:16px}
+  .markdown-content .table-wrap{width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;border:1px solid #d9dee5;border-radius:16px;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain}
   .markdown-content .clinical-table{width:100%;min-width:720px;border-collapse:collapse}
   .markdown-content .clinical-table th,.markdown-content .clinical-table td{padding:15px 16px;border-bottom:1px solid #e0e4e8;border-right:1px solid #e0e4e8;text-align:left;vertical-align:top;font-size:14px;line-height:1.55}
   .markdown-content .clinical-table th:last-child,.markdown-content .clinical-table td:last-child{border-right:0}
   .markdown-content .clinical-table tr:last-child td{border-bottom:0}
   .markdown-content .clinical-table th{background:#eef3f9;color:#536276;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
-  .markdown-content code{padding:.14em .38em;border-radius:6px;background:#eef1f5;color:#243349;font:0.92em/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-  .markdown-content pre{padding:20px;overflow:auto;border-radius:16px;background:#07182f;color:#e7eef8}
-  .markdown-content pre code{padding:0;background:transparent;color:inherit}
+  .markdown-content code{max-width:100%;padding:.14em .38em;border-radius:6px;background:#eef1f5;color:#243349;font:0.92em/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-wrap:anywhere;word-break:break-word}
+  .markdown-content pre{width:100%;max-width:100%;min-width:0;padding:20px;overflow-x:auto;overflow-y:hidden;border-radius:16px;background:#07182f;color:#e7eef8;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain}
+  .markdown-content pre code{padding:0;background:transparent;color:inherit;white-space:pre;overflow-wrap:normal;word-break:normal}
   .markdown-content img{display:block;width:auto;max-width:100%;height:auto;margin:26px auto;border-radius:18px;box-shadow:0 16px 38px rgba(4,18,37,.12)}
   .markdown-content figure{margin-left:0;margin-right:0}
-  .markdown-content details{border:1px solid #cbd6e4;border-radius:16px;background:#f8fafc;overflow:hidden}
+  .markdown-content details{width:100%;max-width:100%;min-width:0;border:1px solid #cbd6e4;border-radius:16px;background:#f8fafc;overflow:hidden}
   .markdown-content summary{position:relative;padding:18px 52px 18px 20px;color:#1d3554;font-weight:750;cursor:pointer;list-style:none}
   .markdown-content summary::-webkit-details-marker{display:none}
   .markdown-content summary::after{content:"";position:absolute;right:21px;top:50%;width:9px;height:9px;border-right:2px solid #3567ad;border-bottom:2px solid #3567ad;transform:translateY(-65%) rotate(45deg);transition:transform .2s ease}
@@ -58,18 +68,36 @@
   .markdown-content details>*:not(summary){margin-left:20px;margin-right:20px}
   .markdown-content details> :nth-child(2){margin-top:18px}
   .markdown-content details> :last-child{margin-bottom:20px}
-  .konspekt-video{display:block;width:100%;max-width:860px;margin-left:auto;margin-right:auto;border-radius:18px;background:#000;box-shadow:0 18px 42px rgba(4,18,37,.18)}
+  .konspekt-video{display:block;width:100%;max-width:860px;height:auto;margin-left:auto;margin-right:auto;border-radius:18px;background:#000;box-shadow:0 18px 42px rgba(4,18,37,.18)}
   .markdown-intro{border-color:#bfd0e8;background:linear-gradient(145deg,#fff,#f8fbff)}
   .markdown-intro>p:first-child{font-size:15px;color:#506176}
   .section-head.dynamic-head{margin-bottom:22px}
   .section-head.dynamic-head>div{min-width:0}
   .empty-toc{padding:11px 12px;color:#7c8796;font-size:13px}
+  @media(max-width:1040px){
+    .hero-grid,.layout{grid-template-columns:minmax(0,1fr)}
+    .status-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .sidebar{min-width:0;max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain}
+  }
+  @media(min-width:701px) and (max-width:1040px){
+    .container{width:100%;padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
+  }
   @media(max-width:700px){
+    .container{width:100%;padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
     .dynamic-visual{min-height:260px}
     .markdown-content p,.markdown-content li{font-size:15px}
     .markdown-content h3{font-size:28px}
     .markdown-content .clinical-table th,.markdown-content .clinical-table td{font-size:13px}
-    .markdown-content details>*:not(summary){margin-left:16px;margin-right:16px}
+    .markdown-content details>*:not(summary){max-width:calc(100% - 32px);margin-left:16px;margin-right:16px}
+    .markdown-content summary{padding-right:46px}
+    .markdown-content pre{padding:16px}
+    .section-head.dynamic-head h2{font-size:clamp(30px,9vw,40px)}
+  }
+  @media(orientation:landscape) and (max-width:1000px) and (max-height:500px){
+    .hero-grid{gap:24px;padding-top:36px;padding-bottom:40px}
+    .dynamic-visual{min-height:220px}
+    .main{padding-top:40px}
+    .section-card{padding:24px 20px}
   }
 </style>
 <script id="medical-page-schema" type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalWebPage","@id":"https://matveyshemyakin.ru/konspekt.html#page","url":"https://matveyshemyakin.ru/konspekt.html","name":"Клинический конспект","description":"Динамический клинический конспект для врачей-офтальмологов.","inLanguage":"ru","author":{"@type":"Person","name":"Матвей Юрьевич Шемякин","url":"https://matveyshemyakin.ru/"},"reviewedBy":{"@type":"Person","name":"Матвей Юрьевич Шемякин","url":"https://matveyshemyakin.ru/"},"isPartOf":{"@type":"WebSite","name":"Матвей Шемякин","url":"https://matveyshemyakin.ru/"}}</script>
