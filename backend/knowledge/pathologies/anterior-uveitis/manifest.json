@@ -1,0 +1,85 @@
+{
+  "package_id": "anterior-uveitis",
+  "version": "0.1.0",
+  "status": "draft_locked",
+  "last_reviewed": "2026-07-18",
+  "review_status": "requires_clinical_and_legal_review",
+  "purpose": "Retrieve evidence and let the model compose multiple diagnostic and treatment options for physician selection.",
+  "principles": {
+    "prewritten_final_answer": false,
+    "physician_selection_required": true,
+    "model_may_rank_options": true,
+    "model_may_select_final_treatment": false,
+    "model_may_invent_doses": false,
+    "show_source_for_each_material_claim": true
+  },
+  "supported_hypotheses": [
+    "acute_noninfectious_anterior_uveitis",
+    "hla_b27_associated_anterior_uveitis",
+    "hsv_anterior_uveitis",
+    "vzv_anterior_uveitis",
+    "cmv_anterior_uveitis",
+    "fuchs_uveitis_syndrome",
+    "sarcoidosis_associated_anterior_uveitis",
+    "masquerade_or_posterior_involvement"
+  ],
+  "required_fact_groups": [
+    {
+      "id": "phenotype",
+      "fields": ["age_group", "laterality", "onset", "course", "anterior_chamber_cells", "flare", "pain", "photophobia"]
+    },
+    {
+      "id": "viral_clues",
+      "fields": ["iop", "keratic_precipitate_pattern", "iris_atrophy_pattern", "corneal_sensation", "current_or_previous_keratitis", "dermatomal_zoster_history"]
+    },
+    {
+      "id": "safety",
+      "fields": ["visual_acuity", "hypopyon", "vitritis", "retinitis_or_vasculitis", "immunosuppression", "pregnancy", "renal_function", "drug_allergies"]
+    },
+    {
+      "id": "systemic_clues",
+      "fields": ["inflammatory_back_pain", "psoriasis", "inflammatory_bowel_disease", "oral_or_genital_ulcers", "respiratory_or_sarcoid_clues", "infection_risk"]
+    }
+  ],
+  "output_contract": {
+    "diagnostic_options_min": 2,
+    "diagnostic_options_max": 5,
+    "each_diagnostic_option_requires": [
+      "supporting_facts",
+      "contradicting_or_missing_facts",
+      "suggested_investigations",
+      "evidence_refs"
+    ],
+    "each_treatment_option_requires": [
+      "clinical_intent",
+      "eligibility_conditions",
+      "regimen_components",
+      "benefits",
+      "risks",
+      "contraindication_checks",
+      "monitoring",
+      "failure_or_escalation_criteria",
+      "evidence_refs",
+      "evidence_strength",
+      "physician_selection_required"
+    ]
+  },
+  "hard_stops": [
+    "suspected_endophthalmitis",
+    "retinitis_or_acute_retinal_necrosis",
+    "open_globe_or_severe_trauma",
+    "uncontrolled_iop_with_systemic_symptoms",
+    "insufficient_data_to_exclude_infectious_etiology_before_uncovered_corticosteroid_escalation"
+  ],
+  "source_ids": [
+    "SUN-UVEITIS-NOMENCLATURE-2005",
+    "SUN-UVEITIDES-CLASSIFICATION-2021",
+    "SUN-HSV-AU-2021",
+    "SUN-VZV-AU-2021",
+    "SUN-FUCHS-2021",
+    "SUN-HLAB27-AU-2021",
+    "TITAN-HSV-VZV-AU-2024",
+    "TITAN-CMV-AU-2024",
+    "FOCUS-NONINFECTIOUS-UVEITIS-2018"
+  ]
+}

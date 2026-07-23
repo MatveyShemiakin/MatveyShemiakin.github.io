@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Для врачей — Матвей Шемякин</title>
+  <meta name="description" content="Профессиональный раздел для врачей-офтальмологов: многомодульный клинический навигатор, алгоритмы и образовательные материалы.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#06162c">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/doctors/doctors.css?v=20260718-5">
+</head>
+<body class="doctor-page">
+  <header class="doctor-header">
+    <div class="container doctor-nav">
+      <a class="monogram" href="/" aria-label="На главную">МШ</a>
+      <nav class="doctor-links" aria-label="Навигация раздела для врачей">
+        <a href="/">Основной сайт</a>
+        <a href="#principles">Принципы</a>
+        <a href="/doctors/navigator/">Навигатор</a>
+      </nav>
+      <span class="prototype-badge">Прототип v0.5 · 7 модулей</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="doctor-hero">
+      <div class="doctor-hero-grid container">
+        <div>
+          <p class="eyebrow">Профессиональный раздел</p>
+          <h1 class="doctor-title">Клинические инструменты <strong>для офтальмолога</strong></h1>
+          <p class="doctor-lead">Врач вводит патологию или клиническую ситуацию. Навигатор выбирает подходящий сценарий, проверяет срочность, задаёт уточняющие вопросы и формирует структурированную карточку только по запросу.</p>
+          <div class="doctor-actions">
+            <a class="button primary" href="/doctors/navigator/">Открыть клинический навигатор</a>
+            <a class="button secondary" href="#modules">Посмотреть модули</a>
+          </div>
+        </div>
+        <aside class="status-panel" aria-label="Статус разработки">
+          <span class="status-label">Текущая рабочая версия</span>
+          <h2>Многомодульный клинический навигатор</h2>
+          <dl>
+            <div><dt>Версия</dt><dd>0.5 · клиническое ядро</dd></div>
+            <div><dt>Модули</dt><dd>7 рабочих сценариев</dd></div>
+            <div><dt>Формат</dt><dd>Чат, ветвление и карточка по запросу</dd></div>
+            <div><dt>Выгрузка</dt><dd>Копирование, TXT, печать / PDF</dd></div>
+          </dl>
+          <p>Лекарственные схемы и дозировки будут подключаться отдельно после валидации источников и правил безопасности.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="principles" class="doctor-section doctor-paper">
+      <div class="container">
+        <p class="section-kicker dark-kicker">Архитектура доверия</p>
+        <h2>Чат остаётся простым. Клиническая логика работает в фоне.</h2>
+        <div class="principle-grid">
+          <article><span>01</span><h3>Сначала срочность</h3><p>Каждый модуль начинает с признаков, которые могут потребовать другого маршрута или осмотра в день обращения.</p></article>
+          <article><span>02</span><h3>Сценарий по патологии</h3><p>Набор вопросов, дифференциальный ряд и рекомендуемое обследование меняются в зависимости от выбранного заболевания.</p></article>
+          <article><span>03</span><h3>Проверяемый вывод</h3><p>Итоговая карточка разделяет введённые данные, предварительный вывод, альтернативы, недостающие сведения и следующие действия.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="modules" class="doctor-section doctor-dark">
+      <div class="container module-grid">
+        <article class="module-card featured">
+          <p class="module-kicker">Доступно сейчас</p>
+          <h2>7 клинических сценариев</h2>
+          <p>Синдром сухого глаза и МГД; острый красный глаз; кератит и инфильтрат роговицы; вспышки, мушки и подозрение на разрыв сетчатки; повышение ВГД и подозрение на глаукому; передний увеит; снижение зрения после операции по поводу катаракты.</p>
+          <a href="/doctors/navigator/">Начать клинический разбор <span>↗</span></a>
+        </article>
+        <article class="module-card">
+          <p class="module-kicker">Что выдаёт каждый модуль</p>
+          <h2>Не анкета, а клинический маршрут</h2>
+          <p>Система определяет срочность, выделяет основное диагностическое направление, показывает значимые альтернативы, формирует перечень необходимых обследований и отмечает недостающие данные.</p>
+          <a href="/doctors/navigator/">Проверить на клиническом случае <span>↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="doctor-section doctor-paper">
+      <div class="container safety-note">
+        <div><p class="section-kicker dark-kicker">Следующий этап</p><h2>Подключение проверенной базы знаний и лекарственных алгоритмов.</h2></div>
+        <p>Текущая версия уже структурирует несколько патологий, но пока не формирует назначения. Следующий слой — источники, противопоказания, дозировки, контрольные сроки, версия алгоритма и защищённый backend для работы ИИ через API.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-row"><span>МШ</span><p>© 2026 Матвей Юрьевич Шемякин · профессиональный раздел</p></div></footer>
+</body>
+</html>
