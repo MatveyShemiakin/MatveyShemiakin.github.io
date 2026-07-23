@@ -9,6 +9,36 @@
   };
   const privacyUrl=lang==='en'?'/en/privacy.html':'/privacy.html';
   if(!document.querySelector('link[href^="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=20260723-6';document.head.appendChild(l)}
+  if(!document.querySelector('link[href^="/prodoctorov-widget.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/prodoctorov-widget.css?v=20260723-2';document.head.appendChild(l)}
+
+  function initProDoctorovWidget(){
+    const container=document.querySelector('.hero-actions');
+    if(!container||container.querySelector('.prodoctorov-widget-card'))return;
+    const oldButton=container.querySelector('a[data-href="links.prodoctorov"],a[href*="prodoctorov.ru/moskva/vrach/1115864"]');
+    if(oldButton)oldButton.remove();
+    const card=document.createElement('div');
+    card.className='prodoctorov-widget-card';
+    card.setAttribute('aria-label',lang==='en'?'Rating and reviews on ProDoctorov':'Рейтинг и отзывы на портале ПроДокторов');
+    card.innerHTML=`
+      <div id="pd_widget_footerd1115864" class="pd_widget_footer" data-doctor="1115864">
+        <div class="pd_left">
+          <a target="_blank" rel="noopener noreferrer" class="pd_doctor_name" href="https://prodoctorov.ru/moskva/vrach/1115864-shemyakin/">Шемякин Матвей Юрьевич</a>
+        </div>
+        <div class="pd_middle"><div id="pd_widget_footer_content_middled1115864"></div></div>
+        <div class="pd_right"><div id="pd_widget_footer_content_rightd1115864"></div></div>
+      </div>
+      <div class="pd_powered_by">
+        <a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/">
+          <img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ПроДокторов">
+        </a>
+      </div>`;
+    container.appendChild(card);
+    if(!document.querySelector('script[src*="widget_footer.js"]')){
+      const script=document.createElement('script');script.src='https://prodoctorov.ru/static/js/widget_footer.js?v06';script.async=true;document.body.appendChild(script);
+    }
+  }
+  initProDoctorovWidget();
+
   const footer=document.querySelector('footer .footer-row')||document.querySelector('footer');
   if(footer&&!footer.querySelector('.legal-footer-link')){
     const wrap=document.createElement('span');wrap.className='legal-footer-wrap';
