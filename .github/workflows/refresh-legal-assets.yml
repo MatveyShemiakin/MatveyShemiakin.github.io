@@ -1,0 +1,47 @@
+name: Refresh legal assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/refresh-legal-assets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Refresh legal script version in every HTML page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          version = '20260723-7'
+          changed = []
+          for path in Path('.').rglob('*.html'):
+              if '.git' in path.parts:
+                  continue
+              text = path.read_text(encoding='utf-8')
+              updated = re.sub(r'/legal\.js(?:\?v=[^"\']+)?', f'/legal.js?v={version}', text)
+              if updated != text:
+                  path.write_text(updated, encoding='utf-8')
+                  changed.append(str(path))
+          print('Updated pages:', len(changed))
+          for item in changed:
+              print(item)
+          PY
+      - name: Commit refreshed pages
+        run: |
+          if git diff --quiet; then
+            echo 'No changes required'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html' '**/*.html'
+          git commit -m 'Обновить юридические стили на всех страницах [skip ci]'
+          git push
