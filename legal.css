@@ -14,3 +14,30 @@
 }
 @media(max-width:900px){footer .footer-row{align-items:flex-start}.legal-footer-wrap{width:100%;justify-content:flex-start;margin-top:4px}footer .footer-row>.md-prof-text-link{margin:4px 0 0!important;font-family:var(--legal-sans)!important;font-size:13px!important;line-height:1.45!important;font-weight:600!important}}
 @media(max-width:720px){.legal-footer-wrap{display:flex;width:100%;gap:6px 10px;margin-top:8px;font-size:13px;line-height:1.45}.legal-footer-link,.legal-cookie-settings{font-size:13px;line-height:1.45}.legal-footer-separator{display:none}.telegram-privacy-note{font-size:12px;line-height:1.55}.cookie-banner{left:10px;right:10px;bottom:10px;padding:16px}.cookie-banner__inner{align-items:stretch;flex-direction:column}.cookie-banner__actions{display:grid;grid-template-columns:1fr}.privacy-shell{width:min(100% - 24px,920px);padding-top:30px}.privacy-card{border-radius:18px}}
+/* Floating actions for every RU/EN patient page */
+.patient-fab{position:fixed;z-index:9800;right:max(18px,env(safe-area-inset-right));bottom:calc(20px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:flex-end;gap:12px;font-family:var(--legal-sans);isolation:isolate}
+.patient-fab__menu{display:grid;gap:10px;width:min(292px,calc(100vw - 28px));transform:translateY(9px) scale(.985);transform-origin:right bottom;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,transform .18s ease,visibility .18s}
+.patient-fab.is-open .patient-fab__menu{transform:none;opacity:1;visibility:visible;pointer-events:auto}
+.patient-fab__action{appearance:none;width:100%;min-height:64px;padding:8px 16px 8px 12px;border:1px solid rgba(135,181,255,.38);border-radius:18px;background:rgba(248,251,255,.98);box-shadow:0 16px 44px rgba(0,0,0,.22);display:grid;grid-template-columns:42px minmax(0,1fr);align-items:center;gap:11px;color:#111f32;text-decoration:none;text-align:left;font-family:var(--legal-sans);cursor:pointer;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.patient-fab__action:hover{transform:translateY(-1px);border-color:rgba(77,142,255,.7);box-shadow:0 18px 48px rgba(0,0,0,.25)}
+.patient-fab__action:focus-visible,.patient-fab__main:focus-visible{outline:3px solid rgba(135,181,255,.8);outline-offset:3px}
+.patient-fab__action strong{display:block;margin:0;color:#111f32;font-family:var(--legal-sans);font-size:15px;line-height:1.2;font-weight:750;letter-spacing:0;text-transform:none}
+.patient-fab__action small{display:block;margin-top:3px;color:#66758a;font-family:var(--legal-sans);font-size:11px;line-height:1.3;font-weight:500;letter-spacing:0;text-transform:none}
+.patient-fab.is-copied [data-patient-share-note]{color:#246a51;font-weight:700}
+.patient-fab__logo{width:38px;height:38px;display:grid;place-items:center;flex:0 0 auto}
+.patient-fab__logo svg{display:block;width:38px;height:38px}
+.patient-fab__logo--site{border:2px solid #4d8eff;border-radius:50%;background:#06182f;color:#fff;font-family:var(--serif,Georgia,serif);font-size:12px;line-height:1;font-weight:700;letter-spacing:-.04em}
+.patient-fab__main{appearance:none;position:relative;width:62px;height:62px;padding:0;border:1px solid rgba(190,216,255,.58);border-radius:50%;background:#4d8eff;box-shadow:0 14px 36px rgba(0,0,0,.34);color:#fff;display:grid;place-items:center;cursor:pointer;animation:patientFabPulse 4.8s ease-in-out infinite;transition:transform .18s ease,box-shadow .18s ease}
+.patient-fab__main::before{content:"";position:absolute;inset:-1px;border-radius:inherit;border:1px solid rgba(135,181,255,.62);opacity:0;animation:patientFabRing 4.8s ease-out infinite;pointer-events:none}
+.patient-fab__main:hover{transform:translateY(-2px)}
+.patient-fab__main svg{position:absolute;width:27px;height:27px;transition:opacity .16s ease,transform .18s ease}
+.patient-fab__main-close{opacity:0;transform:rotate(-35deg) scale(.82)}
+.patient-fab.is-open .patient-fab__main{animation:none}
+.patient-fab.is-open .patient-fab__main::before{animation:none}
+.patient-fab.is-open .patient-fab__main-chat{opacity:0;transform:rotate(35deg) scale(.82)}
+.patient-fab.is-open .patient-fab__main-close{opacity:1;transform:none}
+@keyframes patientFabPulse{0%,72%,100%{transform:scale(1);box-shadow:0 14px 36px rgba(0,0,0,.34)}79%{transform:scale(1.04);box-shadow:0 14px 42px rgba(77,142,255,.4)}86%{transform:scale(1)}}
+@keyframes patientFabRing{0%,72%,100%{opacity:0;transform:scale(1)}75%{opacity:.42}90%{opacity:0;transform:scale(1.32)}}
+@media(min-width:760px){.patient-fab{right:28px;bottom:28px}}
+@media(max-width:360px){.patient-fab{right:max(12px,env(safe-area-inset-right))}.patient-fab__menu{width:min(286px,calc(100vw - 24px))}.patient-fab__action{padding-right:12px}.patient-fab__action strong{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.patient-fab__menu,.patient-fab__action,.patient-fab__main,.patient-fab__main::before,.patient-fab__main svg{animation:none!important;transition:none!important}}
