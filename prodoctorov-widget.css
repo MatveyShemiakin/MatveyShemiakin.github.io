@@ -1,0 +1,74 @@
+/* Official ProDoctorov widget on the homepage */
+.hero-actions > a[data-href="links.prodoctorov"],
+.hero-actions > a[href*="prodoctorov.ru/moskva/vrach/1115864"]{
+  display:none!important;
+}
+
+.prodoctorov-widget-card{
+  flex:1 0 100%;
+  width:100%;
+  min-width:0;
+  margin-top:2px;
+  padding:12px;
+  border:1px solid rgba(190,216,255,.68);
+  border-radius:20px;
+  background:rgba(255,255,255,.98);
+  box-shadow:0 18px 46px rgba(0,0,0,.22);
+  color:#142239;
+  overflow:hidden;
+}
+
+.prodoctorov-widget-card .pd_widget_footer{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+}
+
+.prodoctorov-widget-card .pd_powered_by{
+  margin-top:6px;
+}
+
+.prodoctorov-widget-card .pd_logo{
+  max-width:132px;
+  height:auto;
+}
+
+@media(max-width:680px){
+  .hero-actions .prodoctorov-widget-card{
+    grid-column:1 / -1;
+    width:100%;
+    max-width:none;
+    padding:10px;
+    border-radius:16px;
+  }
+
+  .hero-actions .telegram-privacy-note{
+    grid-column:1 / -1;
+    margin-top:4px;
+  }
+
+  html[lang="en"] .hero-actions > .button.secondary{
+    grid-column:1 / -1;
+  }
+
+  .prodoctorov-widget-card .pd_widget_footer{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+
+  .prodoctorov-widget-card .pd_logo{
+    width:108px;
+  }
+}
+
+@media(max-width:390px){
+  .prodoctorov-widget-card{
+    padding:8px;
+  }
+
+  .prodoctorov-widget-card .pd_logo{
+    width:96px;
+  }
+}
