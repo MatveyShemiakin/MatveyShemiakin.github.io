@@ -27,7 +27,7 @@
 @media(max-width:680px){
   .hero-actions .prodoctorov-widget-card{
     grid-column:1 / -1;
-    grid-row:4;
+    grid-row:3;
     width:100%;
     max-width:none;
     padding:10px 11px 8px;
@@ -36,7 +36,7 @@
   }
   .hero-actions .telegram-privacy-note{
     grid-column:1 / -1;
-    grid-row:5;
+    grid-row:4;
     margin:4px 0 0;
   }
   .prodoctorov-widget-card .pd_widget_footer{
