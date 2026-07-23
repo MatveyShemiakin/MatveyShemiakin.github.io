@@ -1,186 +1,106 @@
-/* Glassmorphism preview — isolated design experiment */
+/* Selective glassmorphism preview — restrained medical UI */
 :root{
-  --glass-dark:rgba(8,29,57,.48);
-  --glass-dark-strong:rgba(5,23,46,.68);
-  --glass-light:rgba(255,255,255,.58);
-  --glass-light-strong:rgba(255,255,255,.76);
-  --glass-line:rgba(196,220,255,.34);
-  --glass-line-light:rgba(255,255,255,.68);
-  --glass-shadow:0 22px 60px rgba(0,8,24,.24);
-  --glass-blur:blur(20px) saturate(145%);
+  --glass-dark:rgba(4,18,37,.58);
+  --glass-line:rgba(198,220,255,.28);
+  --glass-shadow:0 14px 38px rgba(0,8,24,.20);
 }
 
+/* Keep the original page architecture and typography intact. */
 body{
-  background:
-    radial-gradient(circle at 8% 18%,rgba(77,142,255,.18),transparent 30%),
-    radial-gradient(circle at 92% 36%,rgba(135,181,255,.12),transparent 30%),
-    var(--navy-950);
+  background:var(--navy-950);
 }
 
-/* Floating glass navigation */
-.site-header{padding-top:16px}
+/* 1. Floating navigation only */
+.site-header{padding-top:14px}
 .site-header .nav{
   height:72px;
   padding:0 22px;
-  border:1px solid rgba(196,220,255,.30);
-  border-radius:24px;
-  background:rgba(4,18,37,.48);
-  box-shadow:0 16px 42px rgba(0,8,24,.22),inset 0 1px 0 rgba(255,255,255,.10);
-  -webkit-backdrop-filter:var(--glass-blur);
-  backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-line);
+  border-radius:22px;
+  background:var(--glass-dark);
+  box-shadow:var(--glass-shadow),inset 0 1px 0 rgba(255,255,255,.08);
+  -webkit-backdrop-filter:blur(16px) saturate(125%);
+  backdrop-filter:blur(16px) saturate(125%);
 }
 .language-switch{
-  border-color:rgba(196,220,255,.34);
-  background:rgba(255,255,255,.08);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
-  -webkit-backdrop-filter:blur(14px);
-  backdrop-filter:blur(14px);
+  background:rgba(255,255,255,.07);
+  border-color:rgba(205,224,255,.30);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
 }
 
-/* Layered hero */
-.hero::after{
-  content:"";
-  position:absolute;
-  width:420px;
-  height:420px;
-  right:-110px;
-  bottom:-150px;
-  border-radius:50%;
-  background:rgba(77,142,255,.18);
-  filter:blur(70px);
-  pointer-events:none;
-}
-.hero-copy{
-  padding:28px 30px 30px;
-  border:1px solid rgba(196,220,255,.22);
-  border-radius:30px;
-  background:linear-gradient(135deg,rgba(5,23,46,.44),rgba(12,43,81,.20));
-  box-shadow:0 22px 60px rgba(0,8,24,.16),inset 0 1px 0 rgba(255,255,255,.08);
-  -webkit-backdrop-filter:blur(13px) saturate(130%);
-  backdrop-filter:blur(13px) saturate(130%);
-}
-.portrait-card{
-  border-color:rgba(255,255,255,.72);
-  box-shadow:0 34px 76px rgba(0,0,0,.31),inset 0 1px 0 rgba(255,255,255,.16);
-}
-
-/* Glass buttons */
-.button{
-  border:1px solid rgba(196,220,255,.34);
-  box-shadow:0 14px 34px rgba(0,8,24,.20),inset 0 1px 0 rgba(255,255,255,.12);
-  -webkit-backdrop-filter:blur(16px) saturate(140%);
-  backdrop-filter:blur(16px) saturate(140%);
-}
+/* 2. Preserve the solid primary CTA; soften only secondary actions */
 .button.primary{
-  background:linear-gradient(135deg,rgba(77,142,255,.92),rgba(75,130,232,.72));
-  border-color:rgba(209,226,255,.52);
+  background:var(--blue);
+  border:1px solid rgba(210,227,255,.38);
+  box-shadow:0 14px 34px rgba(50,110,230,.25);
 }
 .button.secondary{
-  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(7,29,58,.38));
+  border:1px solid rgba(185,212,250,.38);
+  background:rgba(6,26,51,.48);
+  box-shadow:0 10px 26px rgba(0,8,24,.16),inset 0 1px 0 rgba(255,255,255,.07);
+  -webkit-backdrop-filter:blur(13px) saturate(120%);
+  backdrop-filter:blur(13px) saturate(120%);
 }
-.button:hover{
-  border-color:rgba(216,231,255,.62);
-  box-shadow:0 18px 42px rgba(0,8,24,.28),inset 0 1px 0 rgba(255,255,255,.18);
+.button.secondary:hover{
+  background:rgba(10,36,69,.62);
+  border-color:rgba(205,225,255,.52);
 }
 
-/* Official ProDoctorov widget in a glass shell */
+/* 3. Official ProDoctorov widget: subtle frosted shell, not a decorative card */
 .prodoctorov-widget-card{
   border-color:rgba(255,255,255,.66)!important;
-  background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(229,240,255,.62))!important;
-  box-shadow:0 24px 58px rgba(0,8,24,.24),inset 0 1px 0 rgba(255,255,255,.94)!important;
-  -webkit-backdrop-filter:blur(22px) saturate(145%);
-  backdrop-filter:blur(22px) saturate(145%);
+  background:rgba(255,255,255,.88)!important;
+  box-shadow:0 18px 42px rgba(0,8,24,.20),inset 0 1px 0 rgba(255,255,255,.92)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(120%);
+  backdrop-filter:blur(16px) saturate(120%);
 }
 
-/* Dark cards */
-.direction-card,
-.publication,
-.metric,
-.video-shell{
-  border-color:rgba(196,220,255,.27);
-  background:linear-gradient(145deg,rgba(25,69,121,.38),rgba(5,23,46,.32));
-  box-shadow:var(--glass-shadow),inset 0 1px 0 rgba(255,255,255,.08);
-  -webkit-backdrop-filter:var(--glass-blur);
-  backdrop-filter:var(--glass-blur);
-}
-.direction-card{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
-.direction-card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(135,181,255,.54);
-  box-shadow:0 28px 68px rgba(0,8,24,.30),inset 0 1px 0 rgba(255,255,255,.12);
-}
-.metrics-grid .metric{border:1px solid rgba(196,220,255,.22);border-radius:22px}
-
-/* Light sections become translucent layered surfaces */
-.about-section,
-.education-section,
-.contact-section{
-  background:
-    radial-gradient(circle at 12% 18%,rgba(77,142,255,.12),transparent 30%),
-    radial-gradient(circle at 88% 72%,rgba(135,181,255,.10),transparent 28%),
-    linear-gradient(135deg,#e9eef5,#f6f2eb 48%,#e9eef6);
-}
-.fact,
-.contact-panel,
-.contact-link,
+/* 4. Retain normal cards and sections. Only existing overlay captions get glass. */
 .image-caption{
-  border-color:rgba(255,255,255,.72);
-  background:var(--glass-light);
-  box-shadow:0 18px 44px rgba(28,48,75,.12),inset 0 1px 0 rgba(255,255,255,.86);
-  -webkit-backdrop-filter:blur(18px) saturate(135%);
-  backdrop-filter:blur(18px) saturate(135%);
+  border:1px solid rgba(215,230,255,.28);
+  background:rgba(4,18,37,.58);
+  box-shadow:0 10px 30px rgba(0,8,24,.18);
+  -webkit-backdrop-filter:blur(13px) saturate(120%);
+  backdrop-filter:blur(13px) saturate(120%);
 }
-.contact-panel{background:rgba(255,255,255,.48)}
-.contact-link{transition:transform .2s ease,background .2s ease}
-.contact-link:hover{transform:translateY(-2px);background:rgba(255,255,255,.76)}
-.contact-link.primary-link{
-  color:white;
-  border-color:rgba(196,220,255,.30);
-  background:linear-gradient(135deg,rgba(6,24,47,.88),rgba(13,43,81,.74));
-}
-.image-caption{color:white;background:rgba(4,18,37,.50)}
 
-/* Floating contact menu */
+/* 5. Floating quick-action menu */
 .patient-fab__action{
   border-color:rgba(255,255,255,.68)!important;
-  background:rgba(248,251,255,.72)!important;
-  box-shadow:0 20px 48px rgba(0,8,24,.25),inset 0 1px 0 rgba(255,255,255,.92)!important;
-  -webkit-backdrop-filter:blur(22px) saturate(145%)!important;
-  backdrop-filter:blur(22px) saturate(145%)!important;
+  background:rgba(248,251,255,.82)!important;
+  box-shadow:0 18px 42px rgba(0,8,24,.22),inset 0 1px 0 rgba(255,255,255,.92)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(125%)!important;
+  backdrop-filter:blur(18px) saturate(125%)!important;
 }
 .patient-fab__main{
-  background:linear-gradient(145deg,rgba(77,142,255,.92),rgba(77,142,255,.72))!important;
-  border-color:rgba(224,236,255,.68)!important;
-  -webkit-backdrop-filter:blur(16px);
-  backdrop-filter:blur(16px);
+  background:rgba(77,142,255,.90)!important;
+  border-color:rgba(224,236,255,.62)!important;
+  box-shadow:0 14px 34px rgba(26,82,177,.30)!important;
+  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
 }
+
+/* 6. Cookie notice: readable first, glass second */
 .cookie-banner{
-  border-color:rgba(196,220,255,.30)!important;
-  background:rgba(4,18,37,.76)!important;
-  -webkit-backdrop-filter:blur(24px) saturate(140%);
-  backdrop-filter:blur(24px) saturate(140%);
+  border-color:rgba(196,220,255,.26)!important;
+  background:rgba(4,18,37,.88)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(120%);
+  backdrop-filter:blur(18px) saturate(120%);
 }
 
 @media(max-width:1020px){
   .site-header{padding-top:10px}
-  .site-header .nav{height:66px;padding:0 16px;border-radius:20px}
-  .hero-copy{padding:24px;border-radius:24px}
+  .site-header .nav{height:66px;padding:0 16px;border-radius:19px}
 }
 
 @media(max-width:680px){
   .site-header{padding-top:8px}
-  .site-header .nav{height:62px;padding:0 12px;border-radius:18px}
+  .site-header .nav{height:62px;padding:0 12px;border-radius:17px}
   .hero-grid{padding-top:92px}
-  .hero-copy{padding:20px 18px 22px;border-radius:22px}
-  .button{border-radius:16px}
-  .direction-card,.contact-panel,.publication,.metric{border-radius:20px}
-}
-
-@media(prefers-reduced-motion:reduce){
-  .direction-card,.contact-link,.button{transition:none!important}
 }
 
 @supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
-  .site-header .nav,.hero-copy,.button.secondary,.direction-card,.publication,.metric,.prodoctorov-widget-card,.patient-fab__action,.cookie-banner{background-color:rgba(5,23,46,.94)}
-  .fact,.contact-panel,.contact-link{background-color:rgba(255,255,255,.94)}
+  .site-header .nav,.button.secondary,.cookie-banner{background-color:rgba(5,23,46,.94)}
+  .prodoctorov-widget-card,.patient-fab__action{background-color:rgba(255,255,255,.96)!important}
 }
