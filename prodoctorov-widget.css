@@ -1,0 +1,74 @@
+/* Official ProDoctorov widget integration */
+.prodoctorov-widget-card{
+  flex:1 0 100%;
+  width:min(100%,560px);
+  min-width:0;
+  padding:14px 16px 10px;
+  border:1px solid rgba(190,216,255,.68);
+  border-radius:20px;
+  background:rgba(255,255,255,.98);
+  box-shadow:0 18px 46px rgba(0,0,0,.22);
+  color:#142239;
+  overflow:hidden;
+}
+.prodoctorov-widget-card .pd_widget_footer{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+}
+.prodoctorov-widget-card .pd_powered_by{
+  margin-top:6px;
+}
+.prodoctorov-widget-card .pd_logo{
+  max-width:132px;
+  height:auto;
+}
+
+@media(max-width:680px){
+  .hero-actions .prodoctorov-widget-card{
+    grid-column:1;
+    grid-row:4;
+    width:100%;
+    padding:10px 11px 8px;
+    border-radius:15px;
+    align-self:start;
+  }
+  .hero-actions .telegram-privacy-note{
+    grid-column:2;
+    grid-row:3 / span 2;
+    align-self:start;
+    margin:0;
+  }
+  .prodoctorov-widget-card .pd_widget_footer{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+  }
+  .prodoctorov-widget-card .pd_left,
+  .prodoctorov-widget-card .pd_middle,
+  .prodoctorov-widget-card .pd_right{
+    float:none!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:0!important;
+    text-align:left!important;
+  }
+  .prodoctorov-widget-card .pd_doctor_name{
+    white-space:normal!important;
+    overflow-wrap:anywhere;
+  }
+  .prodoctorov-widget-card .pd_logo{
+    width:108px;
+  }
+}
+
+@media(max-width:390px){
+  .prodoctorov-widget-card{
+    padding:9px 9px 7px;
+  }
+  .prodoctorov-widget-card .pd_logo{
+    width:96px;
+  }
+}
