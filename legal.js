@@ -1,5 +1,7 @@
 (function(){
   const lang=(document.documentElement.lang||'ru').toLowerCase().startsWith('en')?'en':'ru';
+  const path=window.location.pathname.replace(/\/{2,}/g,'/');
+  const isDoctorsSection=/^\/(?:en\/)?for-doctors(?:\/|$)/.test(path);
   const T=lang==='en'?{
     privacy:'Privacy policy',cookies:'Cookie settings',warning:'Telegram is intended only for organisational and general information. Do not send medical records, examination results, photographs, diagnoses or other health information. Medical advice, diagnosis and treatment are not provided through the website or Telegram.',
     cookie:'This website uses essential cookies and local storage. Optional analytics may be enabled only with your consent. You can accept analytics or continue with essential technologies only.',accept:'Accept analytics',reject:'Essential only'
@@ -9,9 +11,13 @@
   };
   const privacyUrl=lang==='en'?'/en/privacy.html':'/privacy.html';
   if(!document.querySelector('link[href^="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=20260723-7';document.head.appendChild(l)}
-  if(!document.querySelector('link[href^="/prodoctorov-widget.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/prodoctorov-widget.css?v=20260723-2';document.head.appendChild(l)}
+  if(!isDoctorsSection&&!document.querySelector('link[href^="/prodoctorov-widget.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/prodoctorov-widget.css?v=20260723-2';document.head.appendChild(l)}
 
   function initProDoctorovWidget(){
+    if(isDoctorsSection){
+      document.querySelectorAll('.prodoctorov-widget-card').forEach(element=>element.remove());
+      return;
+    }
     const container=document.querySelector('.hero-actions');
     if(!container||container.querySelector('.prodoctorov-widget-card'))return;
     const oldButton=container.querySelector('a[data-href="links.prodoctorov"],a[href*="prodoctorov.ru/moskva/vrach/1115864"]');
