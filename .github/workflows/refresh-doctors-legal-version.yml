@@ -1,0 +1,51 @@
+name: Refresh doctors legal script
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/refresh-doctors-legal-version.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bump legal script version on doctors pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          version = '20260725-1'
+          changed = []
+          for path in Path('for-doctors').rglob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              updated = re.sub(r'/legal\.js(?:\?v=[^"\']+)?', f'/legal.js?v={version}', text)
+              if updated != text:
+                  path.write_text(updated, encoding='utf-8')
+                  changed.append(str(path))
+          for path in Path('en/for-doctors').rglob('*.html') if Path('en/for-doctors').exists() else []:
+              text = path.read_text(encoding='utf-8')
+              updated = re.sub(r'/legal\.js(?:\?v=[^"\']+)?', f'/legal.js?v={version}', text)
+              if updated != text:
+                  path.write_text(updated, encoding='utf-8')
+                  changed.append(str(path))
+          print('Updated:', len(changed))
+          for item in changed:
+              print(item)
+          PY
+      - name: Commit updated pages
+        run: |
+          if git diff --quiet; then
+            echo 'No changes required'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add for-doctors en/for-doctors 2>/dev/null || true
+          git commit -m 'Обновить скрипт раздела для врачей [skip ci]'
+          git push
