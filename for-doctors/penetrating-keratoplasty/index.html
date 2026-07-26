@@ -67,6 +67,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 a { color: var(--blue); text-decoration-thickness: .08em; text-underline-offset: .18em; }
 a:hover { text-decoration-thickness: .12em; }
 img { max-width: 100%; display: block; }
+html, body { width:100%; max-width:100%; overflow-x:clip; }
+@supports not (overflow:clip) {
+  html, body { overflow-x:hidden; }
+}
 
 .skip-link {
   position: fixed; left: 16px; top: -80px; z-index: 300;
@@ -191,7 +195,7 @@ tbody tr:nth-child(even) td:first-child { background:var(--surface-2); }
 .figure-media img { width:100%; height:clamp(330px,46vw,560px); object-fit:contain; }
 .clinical-figure[data-image-count="2"] .figure-media img { height:clamp(310px,34vw,470px); }
 .figure-media:focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
-.figure-zoom { position:absolute; right:12px; bottom:12px; padding:7px 10px; border-radius:999px; background:rgba(8,16,24,.76); color:white; font-size:12px; opacity:0; transition:.18s ease; }
+.figure-zoom { position:absolute; right:12px; bottom:12px; z-index:3; padding:7px 10px; border-radius:999px; background:rgba(8,16,24,.76); color:white; font-size:12px; opacity:0; transition:.18s ease; }
 .figure-media:hover .figure-zoom, .figure-media:focus .figure-zoom { opacity:1; }
 figcaption { margin-top:12px; color:var(--muted); font-size:14px; line-height:1.55; }
 .figure-label { display:block; margin-bottom:3px; color:var(--text); font-weight:800; }
@@ -213,6 +217,7 @@ figcaption { margin-top:12px; color:var(--muted); font-size:14px; line-height:1.
 .lightbox { border:0; padding:0; background:transparent; max-width:none; max-height:none; width:100vw; height:100vh; }
 .lightbox::backdrop { background:rgba(3,8,14,.91); }
 .lightbox-inner { width:100%; height:100%; display:grid; place-items:center; padding:60px 24px 24px; }
+.lightbox-media { position:relative; display:inline-grid; max-width:94vw; max-height:88vh; overflow:hidden; }
 .lightbox img { max-width:min(1280px,94vw); max-height:88vh; object-fit:contain; box-shadow:0 30px 90px rgba(0,0,0,.42); }
 .lightbox-close { position:fixed; right:20px; top:20px; width:46px; height:46px; border:1px solid rgba(255,255,255,.3); border-radius:50%; background:rgba(0,0,0,.38); color:white; font-size:26px; cursor:pointer; }
 
@@ -476,6 +481,61 @@ body{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-he
   background:#07172c!important;
 }
 .hero-portrait-shade{display:none!important;}
+
+/* Clinical image protection: same non-destructive watermark pattern as bacterial keratitis. */
+.hero-portrait,
+.figure-media,
+.lightbox-media{
+  isolation:isolate;
+}
+.hero-portrait::after,
+.figure-media::after,
+.lightbox-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='270' height='150' viewBox='0 0 270 150'%3E%3Cg transform='rotate(-22 135 75)' fill='%23ffffff' fill-opacity='.16' font-family='Arial,sans-serif' font-size='12' font-weight='700' letter-spacing='2'%3E%3Ctext x='23' y='79'%3EMATVEYSHEMYAKIN.RU%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-size:270px 150px;
+  background-repeat:repeat;
+}
+.hero-portrait img,
+.figure-media img,
+.lightbox-media img{
+  position:relative;
+  z-index:1;
+}
+.hero-portrait.caption-cropped,
+.figure-media.caption-cropped{
+  overflow:hidden;
+}
+.hero-portrait.caption-cropped img,
+.figure-media.caption-cropped img{
+  left:50%;
+  width:auto!important;
+  max-width:none!important;
+  height:122.93%!important;
+  object-fit:contain!important;
+  object-position:top center!important;
+  transform:translateX(-50%);
+}
+.lightbox-media.is-caption-cropped{
+  width:min(94vw,calc(88vh * .69146),1280px);
+  max-height:88vh;
+  aspect-ratio:2268/3280;
+}
+.lightbox-media.is-caption-cropped img{
+  width:100%;
+  max-width:none;
+  max-height:none;
+  height:auto;
+  object-fit:initial;
+}
+.lightbox-media::after{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='210' viewBox='0 0 360 210'%3E%3Cg transform='rotate(-22 180 105)' fill='%23ffffff' fill-opacity='.14' font-family='Arial,sans-serif' font-size='14' font-weight='700' letter-spacing='2'%3E%3Ctext x='50' y='110'%3EMATVEYSHEMYAKIN.RU%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-size:360px 210px;
+}
 @media (max-width:980px){
   .hero-inner{grid-template-columns:minmax(0,1fr) minmax(320px,.78fr)!important;gap:32px!important;}
   .hero-portrait,.hero-portrait img{min-height:0!important;}
@@ -543,7 +603,7 @@ body{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-he
 <a class="hero-link primary" href="#risk">Определить группу риска →</a>
 <a class="hero-link secondary" href="#acute">Тактика при ухудшении →</a>
 </div>
-</div><figure class="hero-portrait"><img alt="Clinical photograph of a penetrating corneal graft" decoding="async" loading="eager" src="/for-doctors/penetrating-keratoplasty/assets/images/hero-corneal-graft.jpg"/><span aria-hidden="true" class="hero-portrait-shade"></span></figure></div>
+</div><figure class="hero-portrait caption-cropped"><img alt="Clinical photograph of a penetrating corneal graft" decoding="async" loading="eager" src="/for-doctors/penetrating-keratoplasty/assets/images/hero-corneal-graft.jpg"/><span aria-hidden="true" class="hero-portrait-shade"></span></figure></div>
 </section>
 <section aria-label="Ключевые ориентиры" class="quick-clinical">
 <div class="quick-grid">
@@ -577,7 +637,7 @@ body{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-he
 <div class="exam-item"><strong>Дополнительные исследования</strong><p>Кератометрия/топография примерно к 3-му месяцу; после снятия швов — повторная рефракция и топография через 2–4 недели.</p></div>
 </div>
 <figure class="clinical-figure" data-image-count="1">
-<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-01.jpg" type="button">
+<div class="figure-grid"><button class="figure-media caption-cropped" data-crop="caption" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-01.jpg" type="button">
 <img alt="Прозрачный трансплантат через 7 дней после сквозной кератопластики" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-01.jpg"/>
 <span class="figure-zoom">Увеличить</span>
 </button></div>
@@ -890,7 +950,7 @@ body{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-he
 </div>
 </main>
 <footer class="site-footer"><div class="footer-inner"><span>Матвей Шемякин · материалы для врачей</span><span>Клинический конспект по методическим рекомендациям, 2025</span></div></footer>
-<dialog class="lightbox"><div class="lightbox-inner"><button aria-label="Закрыть" class="lightbox-close" type="button">×</button><img alt="" src=""/></div></dialog>
+<dialog class="lightbox"><div class="lightbox-inner"><button aria-label="Закрыть" class="lightbox-close" type="button">×</button><div class="lightbox-media"><img alt="" src=""/></div></div></dialog>
 <script>
 (() => {
   const root = document.documentElement;
@@ -967,10 +1027,12 @@ body{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-he
 
   const dialog = document.querySelector('.lightbox');
   const lightboxImage = dialog?.querySelector('img');
+  const lightboxMedia = dialog?.querySelector('.lightbox-media');
   document.querySelectorAll('[data-lightbox]').forEach(button => {
     button.addEventListener('click', () => {
       lightboxImage.src = button.dataset.lightbox;
       lightboxImage.alt = button.querySelector('img')?.alt || 'Клиническая фотография';
+      lightboxMedia?.classList.toggle('is-caption-cropped', button.dataset.crop === 'caption');
       dialog.showModal();
     });
   });

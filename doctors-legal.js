@@ -91,7 +91,7 @@
   }
 
   ensureStylesheet('/doctors-legal.css?v=20260721-2','doctors-legal');
-  ensureStylesheet('/clinical-header.css?v=20260726-5','clinical-header');
+  ensureStylesheet('/clinical-header.css?v=20260726-6','clinical-header');
 
   function themeIcon(theme){
     return theme==='dark'
@@ -131,31 +131,43 @@
     return actions;
   }
 
-  function buildPkpNavigation(header,inner){
-    if(!isPkp)return;
+  function buildSiteNavigation(header,inner){
     let nav=header.querySelector('.nav-links,.clinical-section-nav');
     if(!nav){
-      const items=lang==='en'?
-        [['Examination','#exam'],['Risk','#risk'],['Follow-up','#followup'],['Therapy','#therapy-low'],['Complications','#acute'],['Sources','#sources']]:
-        [['Осмотр','#exam'],['Риск','#risk'],['Наблюдение','#followup'],['Терапия','#therapy-low'],['Осложнения','#acute'],['Источники','#sources']];
       nav=document.createElement('nav');
-      nav.className='clinical-section-nav';
-      nav.setAttribute('aria-label',lang==='en'?'Page sections':'Разделы страницы');
-      items.forEach(([label,href])=>{
-        const link=document.createElement('a');
-        link.href=href;
-        link.textContent=label;
-        nav.appendChild(link);
-      });
-      const back=document.createElement('a');
-      back.href=libraryUrl;
-      back.className='back-link';
-      back.textContent=T.library;
-      nav.appendChild(back);
       const actions=header.querySelector('.header-actions,.clinical-header__actions');
       inner.insertBefore(nav,actions||null);
     }
+    nav.replaceChildren();
     nav.classList.add('clinical-section-nav');
+    const homeUrl=lang==='en'?'/en/':'/';
+    const items=lang==='en'?
+      [
+        ['Patients',patientsUrl],
+        ['For doctors',libraryUrl],
+        ['About',`${homeUrl}#about`],
+        ['Specialties',`${homeUrl}#directions`],
+        ['Education',`${homeUrl}#education`],
+        ['Science',`${homeUrl}#science`],
+        ['Contacts',`${homeUrl}#contacts`]
+      ]:
+      [
+        ['Пациентам',patientsUrl],
+        ['Для врачей',libraryUrl],
+        ['О враче',`${homeUrl}#about`],
+        ['Направления',`${homeUrl}#directions`],
+        ['Образование',`${homeUrl}#education`],
+        ['Наука',`${homeUrl}#science`],
+        ['Контакты',`${homeUrl}#contacts`]
+      ];
+    nav.setAttribute('aria-label',lang==='en'?'Primary navigation':'Основная навигация');
+    items.forEach(([label,href])=>{
+      const link=document.createElement('a');
+      link.href=href;
+      link.textContent=label;
+      if(href===libraryUrl)link.setAttribute('aria-current','page');
+      nav.appendChild(link);
+    });
   }
 
   function normalizeClinicalHeader(){
@@ -195,7 +207,7 @@
     if(existingNav)existingNav.classList.add('clinical-section-nav');
 
     const actions=ensureActions(header,inner);
-    buildPkpNavigation(header,inner);
+    buildSiteNavigation(header,inner);
 
     const language=header.querySelector('.language-switch');
     if(language){
