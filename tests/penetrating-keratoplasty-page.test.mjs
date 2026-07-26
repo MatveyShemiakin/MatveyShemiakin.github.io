@@ -12,6 +12,8 @@ test('hides the embedded first-photo caption without altering the source JPEG', 
   assert.ok(cropClasses.length >= 5, `expected the crop treatment in CSS, hero, figure and lightbox logic; found ${cropClasses.length}`);
   assert.match(page, /data-crop="caption"/);
   assert.match(page, /is-caption-cropped/);
+  assert.match(page, /\.figure-media\.caption-cropped\s*\{[^}]*height:\s*clamp\(330px,46vw,560px\)/s);
+  assert.match(page, /\.figure-media\.caption-cropped img\s*\{[^}]*position:\s*absolute/s);
   assert.doesNotMatch(page, /clinical-01-eye\.png/);
 });
 
