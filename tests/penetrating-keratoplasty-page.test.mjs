@@ -53,6 +53,10 @@ test('professional notice is injected into the real article column, never a quic
   assert.doesNotMatch(headerJs, /querySelector\('\.article,article'\)/);
 });
 
+test('professional notice title stays white inside the dark panel in the light theme', () => {
+  assert.match(page, /html:not\(\[data-theme="dark"\]\) \.article \.md-prof-clinical h2\s*\{[^}]*color:\s*#fff/s);
+});
+
 test('treatment cards do not create narrow text columns', () => {
   for (const clinicalPage of [page, englishPage]) {
     assert.match(clinicalPage, /\.regimen-card \.dose-row\s*\{[^}]*grid-template-columns:1fr/s);
