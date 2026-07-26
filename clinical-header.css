@@ -1,6 +1,6 @@
 :root{
-  --clinical-header-height:104px;
-  --header-h:104px;
+  --clinical-header-height:98px;
+  --header-h:98px;
   --clinical-navy:#041225;
   --clinical-navy-2:#06182f;
   --clinical-blue:#4d8eff;
@@ -10,8 +10,8 @@
   --clinical-line:rgba(255,255,255,.14);
   --clinical-control:rgba(255,255,255,.045);
   --clinical-control-hover:rgba(77,142,255,.14);
-  --clinical-sans:Inter,"Segoe UI",Roboto,Arial,sans-serif;
-  --clinical-serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  --clinical-sans:var(--sans,Inter,"Segoe UI",Roboto,Arial,sans-serif);
+  --clinical-serif:var(--serif,"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif);
 }
 
 .site-header.clinical-header{
@@ -64,7 +64,7 @@
   border-radius:0!important;
   background:transparent!important;
   color:#fff!important;
-  font:400 38px/1 var(--clinical-serif)!important;
+  font:400 31px/1 var(--clinical-serif)!important;
   font-family:var(--clinical-serif)!important;
   letter-spacing:.015em!important;
 }
@@ -95,12 +95,12 @@
   align-items:center!important;
   justify-content:center!important;
   gap:clamp(24px,3.15vw,54px)!important;
-  color:#c8d5e5!important;
+  color:#cad6e6!important;
 }
 .clinical-section-nav a,.clinical-header .nav-links a{
-  color:#c8d5e5!important;
-  font:500 11px/1.2 var(--clinical-sans)!important;
-  letter-spacing:.22em!important;
+  color:#cad6e6!important;
+  font:400 11px/1.2 var(--clinical-sans)!important;
+  letter-spacing:.25em!important;
   text-decoration:none!important;
   text-transform:uppercase!important;
   white-space:nowrap!important;

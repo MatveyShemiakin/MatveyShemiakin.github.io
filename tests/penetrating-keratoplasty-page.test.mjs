@@ -3,9 +3,12 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 const page = readFileSync('for-doctors/penetrating-keratoplasty/index.html', 'utf8');
+const englishPage = readFileSync('en/for-doctors/penetrating-keratoplasty/index.html', 'utf8');
 const headerCss = readFileSync('clinical-header.css', 'utf8');
 const headerJs = readFileSync('doctors-legal.js', 'utf8');
 const legalInjector = readFileSync('scripts/inject_legal.py', 'utf8');
+const doctorsLanding = readFileSync('for-doctors/index.html', 'utf8');
+const englishDoctorsLanding = readFileSync('en/for-doctors/index.html', 'utf8');
 
 test('hides the embedded first-photo caption without altering the source JPEG', () => {
   const cropClasses = page.match(/caption-cropped/g) || [];
@@ -35,9 +38,34 @@ test('shared clinical header contains the primary site navigation', () => {
   for (const label of ['Пациентам', 'Для врачей', 'О враче', 'Направления', 'Образование', 'Наука', 'Контакты']) {
     assert.ok(headerJs.includes(label), `missing navigation label: ${label}`);
   }
+  assert.match(headerCss, /--clinical-serif:var\(--serif,/);
   assert.match(headerCss, /font-family:var\(--clinical-serif\)/);
   assert.match(headerCss, /text-transform:uppercase/);
-  assert.match(headerCss, /--clinical-header-height:\s*104px/);
-  assert.match(page, /doctors-legal\.js\?v=20260726-7/);
-  assert.match(legalInjector, /doctors-legal\.js\?v=20260726-7/);
+  assert.match(headerCss, /--clinical-header-height:\s*98px/);
+  assert.match(headerCss, /font:400 31px\/1 var\(--clinical-serif\)/);
+  assert.match(headerCss, /letter-spacing:\.25em/);
+  assert.match(page, /doctors-legal\.js\?v=20260726-8/);
+  assert.match(legalInjector, /doctors-legal\.js\?v=20260726-8/);
+});
+
+test('professional notice is injected into the real article column, never a quick card', () => {
+  assert.match(headerJs, /document\.querySelector\('\.article'\)/);
+  assert.doesNotMatch(headerJs, /querySelector\('\.article,article'\)/);
+});
+
+test('treatment cards do not create narrow text columns', () => {
+  for (const clinicalPage of [page, englishPage]) {
+    assert.match(clinicalPage, /\.regimen-card \.dose-row\s*\{[^}]*grid-template-columns:1fr/s);
+    assert.match(clinicalPage, /\.quick-card[^}]*word-break:normal/s);
+    assert.match(clinicalPage, /\.regimen-card[^}]*overflow-wrap:normal/s);
+  }
+});
+
+test('keratoplasty library preview shows a close eye crop without the embedded caption', () => {
+  for (const landing of [doctorsLanding, englishDoctorsLanding]) {
+    assert.match(landing, /\.library-image\.pkp\{[^}]*background-size:cover/s);
+    assert.match(landing, /\.library-image\.pkp\{[^}]*background-position:center 39%/s);
+    assert.match(landing, /\.library-image\.pkp::after/);
+    assert.match(landing, /MATVEYSHEMYAKIN\.RU/);
+  }
 });

@@ -115,7 +115,7 @@ html[data-theme="dark"] .hero-link.primary { color:#0d1219; background:#dbeafe; 
 
 .quick-clinical { max-width:1180px; margin:0 auto; padding:28px 24px 6px; }
 .quick-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.quick-card { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:0 8px 24px rgba(16,42,67,.04); }
+.quick-card { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:0 8px 24px rgba(16,42,67,.04); overflow-wrap:normal; word-break:normal; hyphens:auto; }
 .quick-card .label { color:var(--muted); font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
 .quick-card strong { display:block; margin:7px 0 5px; color:var(--brand); font-size:19px; line-height:1.35; }
 .quick-card p { margin:0; color:var(--muted); font-size:14px; line-height:1.55; }
@@ -313,10 +313,10 @@ figcaption { margin-top:12px; color:var(--muted); font-size:14px; line-height:1.
 .decision-step strong { display:block; margin-bottom:4px; }
 .decision-step p { margin:0; color:var(--muted); font-size:14px; }
 .regimen-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:26px 0 32px; }
-.regimen-card { padding:20px; border:1px solid var(--line); border-radius:16px; background:var(--surface); }
+.regimen-card { padding:20px; border:1px solid var(--line); border-radius:16px; background:var(--surface); overflow-wrap:normal; word-break:normal; hyphens:auto; }
 .regimen-card h3 { margin:0 0 13px; font-size:20px; }
 .regimen-card dl { margin:0; }
-.regimen-card .dose-row { display:grid; grid-template-columns:130px 1fr; gap:14px; padding:10px 0; border-top:1px solid var(--line); }
+.regimen-card .dose-row { display:grid; grid-template-columns:1fr; gap:4px; padding:12px 0; border-top:1px solid var(--line); }
 .regimen-card .dose-row:first-child { border-top:0; padding-top:0; }
 .regimen-card dt { color:var(--muted); font-size:13px; font-weight:750; }
 .regimen-card dd { margin:0; font-weight:700; line-height:1.5; }
@@ -978,5 +978,5 @@ body{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-he
   dialog?.addEventListener('click', e => { if (e.target === dialog || e.target.classList.contains('lightbox-inner')) dialog.close(); });
 })();
 </script>
-<script src="/legal.js?v=20260721-3"></script><script src="/doctors-legal.js?v=20260726-7"></script></body>
+<script src="/legal.js?v=20260721-3"></script><script src="/doctors-legal.js?v=20260726-8"></script></body>
 </html>
