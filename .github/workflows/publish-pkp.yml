@@ -1,0 +1,33 @@
+name: Publish penetrating keratoplasty synopsis
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.site-deploy/pkp/**'
+      - '.github/workflows/publish-pkp.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack production files
+        run: |
+          unzip -o .site-deploy/pkp/payload.zip -d .
+          rm -rf .site-deploy/pkp
+          rm -f .github/workflows/publish-pkp.yml
+      - name: Commit published pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No publication changes"
+            exit 0
+          fi
+          git commit -m "Publish penetrating keratoplasty clinical synopsis [skip ci]"
+          git push
