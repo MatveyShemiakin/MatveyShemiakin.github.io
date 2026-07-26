@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#041225" name="theme-color"/>
+<title>Penetrating keratoplasty follow-up: clinical quick reference</title>
+<meta content="High-density clinical quick reference for ophthalmologists and residents on outpatient management after penetrating keratoplasty." name="description"/>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --surface-2: #eef3f7;
+  --text: #172033;
+  --muted: #667085;
+  --line: #dce3ea;
+  --line-strong: #cbd5df;
+  --brand: #102a43;
+  --accent: #0f766e;
+  --accent-soft: #e6f4f2;
+  --blue: #1d4ed8;
+  --blue-soft: #edf4ff;
+  --danger: #b42318;
+  --danger-soft: #fff1f0;
+  --warning: #b54708;
+  --shadow: 0 18px 50px rgba(16, 42, 67, .08);
+  --radius: 18px;
+  --header-h: 66px;
+  --content: 760px;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0d1219;
+  --surface: #141b24;
+  --surface-2: #1a2430;
+  --text: #e6edf5;
+  --muted: #aab6c4;
+  --line: #2a3745;
+  --line-strong: #3a4a5a;
+  --brand: #dbeafe;
+  --accent: #5eead4;
+  --accent-soft: #123b38;
+  --blue: #8bb7ff;
+  --blue-soft: #152947;
+  --danger: #ff8b82;
+  --danger-soft: #401d20;
+  --warning: #f7b955;
+  --shadow: 0 18px 50px rgba(0, 0, 0, .28);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 104px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.72;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: var(--blue); text-decoration-thickness: .08em; text-underline-offset: .18em; }
+a:hover { text-decoration-thickness: .12em; }
+img { max-width: 100%; display: block; }
+
+.skip-link {
+  position: fixed; left: 16px; top: -80px; z-index: 300;
+  padding: 10px 14px; border-radius: 10px; background: var(--text); color: var(--surface);
+}
+.skip-link:focus { top: 12px; }
+
+.reading-progress { position: fixed; inset: 0 0 auto; height: 3px; z-index: 500; background: transparent; }
+.reading-progress > span { display:block; width:0; height:100%; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+.site-header {
+  position: sticky; top: 0; z-index: 120;
+  height: var(--header-h); border-bottom: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+.header-inner { max-width: 1220px; height:100%; margin:auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.brand { display:flex; align-items:center; gap:12px; color:var(--text); text-decoration:none; font-weight:750; letter-spacing:-.02em; }
+.brand-mark { width:38px; height:38px; border:1px solid var(--line-strong); border-radius:50%; display:grid; place-items:center; font-size:13px; letter-spacing:.08em; }
+.brand-sub { display:block; color:var(--muted); font-size:12px; line-height:1.2; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
+.header-actions { display:flex; align-items:center; gap:8px; }
+.icon-btn, .text-btn {
+  min-width:44px; min-height:44px; border:1px solid var(--line); border-radius:12px; background:var(--surface); color:var(--text); cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center; gap:8px; font:inherit; font-size:14px; font-weight:650;
+}
+.text-btn { padding:0 14px; }
+.icon-btn:hover, .text-btn:hover { border-color:var(--line-strong); background:var(--surface-2); }
+.icon-btn svg { width:20px; height:20px; }
+
+.hero { background: var(--surface); border-bottom:1px solid var(--line); }
+.hero-inner { max-width:1180px; margin:auto; padding:74px 24px 54px; }
+.breadcrumbs { display:flex; flex-wrap:wrap; gap:8px; color:var(--muted); font-size:14px; margin-bottom:34px; }
+.breadcrumbs a { color:inherit; text-decoration:none; }
+.eyebrow { margin:0 0 14px; color:var(--accent); font-size:13px; line-height:1.3; font-weight:800; letter-spacing:.11em; text-transform:uppercase; }
+.hero h1 { max-width:980px; margin:0; color:var(--brand); font-size:clamp(36px, 5.2vw, 68px); line-height:1.04; letter-spacing:-.045em; font-weight:780; }
+.hero-lead { max-width:790px; margin:28px 0 0; color:var(--muted); font-size:clamp(18px, 2vw, 21px); line-height:1.62; }
+.meta-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
+.meta-chip { border:1px solid var(--line); border-radius:999px; padding:7px 12px; color:var(--muted); background:var(--bg); font-size:13px; font-weight:650; }
+.byline { margin-top:18px; display:grid; gap:3px; color:var(--muted); font-size:14px; line-height:1.5; }
+.byline strong { color:var(--text); font-weight:750; }
+.hero-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; }
+.hero-link { min-height:46px; padding:0 16px; border-radius:12px; display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:750; }
+.hero-link.primary { color:white; background:var(--brand); }
+html[data-theme="dark"] .hero-link.primary { color:#0d1219; background:#dbeafe; }
+.hero-link.secondary { color:var(--text); border:1px solid var(--line); background:var(--surface); }
+
+.quick-clinical { max-width:1180px; margin:0 auto; padding:28px 24px 6px; }
+.quick-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.quick-card { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:0 8px 24px rgba(16,42,67,.04); }
+.quick-card .label { color:var(--muted); font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.quick-card strong { display:block; margin:7px 0 5px; color:var(--brand); font-size:19px; line-height:1.35; }
+.quick-card p { margin:0; color:var(--muted); font-size:14px; line-height:1.55; }
+.quick-card.urgent { border-color:color-mix(in srgb, var(--danger) 40%, var(--line)); }
+.quick-card.urgent strong { color:var(--danger); }
+
+.mobile-toc-bar { display:none; }
+.page-shell { max-width:1180px; margin:0 auto; padding:52px 24px 96px; display:grid; grid-template-columns:270px minmax(0,var(--content)); gap:72px; align-items:start; }
+.toc-panel { position:sticky; top:calc(var(--header-h) + 26px); max-height:calc(100vh - var(--header-h) - 48px); overflow:auto; padding:2px 12px 24px 0; scrollbar-width:thin; }
+.toc-title { margin:0 0 14px; color:var(--muted); font-size:12px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; }
+.toc-nav { border-left:1px solid var(--line); }
+.toc-nav a { display:block; margin-left:-1px; padding:7px 10px 7px 14px; border-left:2px solid transparent; color:var(--muted); text-decoration:none; font-size:14px; line-height:1.35; transition:.16s ease; }
+.toc-nav a.level-3 { padding-left:26px; font-size:13px; }
+.toc-nav a:hover { color:var(--text); }
+.toc-nav a.active { color:var(--accent); border-left-color:var(--accent); background:linear-gradient(90deg,var(--accent-soft),transparent); font-weight:750; }
+.toc-overlay { display:none; }
+
+.article { min-width:0; }
+.article > :first-child { margin-top:0; }
+.article h2, .article h3 { color:var(--brand); position:relative; text-wrap:balance; }
+.article h2 { margin:74px 0 26px; padding-top:6px; font-size:clamp(29px,3vw,39px); line-height:1.14; letter-spacing:-.035em; }
+.article h3 { margin:50px 0 20px; font-size:clamp(22px,2.2vw,28px); line-height:1.25; letter-spacing:-.022em; }
+.anchor-link { margin-left:9px; opacity:0; color:var(--muted); text-decoration:none; font-size:.66em; vertical-align:.15em; }
+.article h2:hover .anchor-link, .article h3:hover .anchor-link, .anchor-link:focus { opacity:1; }
+.article p { margin:0 0 20px; }
+.article strong { font-weight:760; color:var(--brand); }
+.article ul:not([class]), .article ol:not([class]) { padding-left:1.35em; }
+
+.section-kicker { display:inline-flex; margin-top:66px; padding:7px 11px; border-radius:999px; font-size:12px; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+.risk-section { margin:72px -28px 0; padding:1px 28px 34px; border-radius:24px; border:1px solid var(--line); background:color-mix(in srgb,var(--surface) 65%, transparent); }
+.risk-section h2 { margin-top:16px; }
+.risk-low .section-kicker { color:var(--accent); background:var(--accent-soft); }
+.risk-high .section-kicker { color:var(--danger); background:var(--danger-soft); }
+
+.callout { display:grid; grid-template-columns:38px 1fr; gap:14px; margin:28px 0; padding:20px 22px; border-left:4px solid; border-radius:4px 14px 14px 4px; }
+.callout p { margin:4px 0 0; }
+.callout-icon { width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-weight:850; }
+.callout-info { background:var(--blue-soft); border-color:var(--blue); }
+.callout-info .callout-icon { background:color-mix(in srgb,var(--blue) 15%, transparent); color:var(--blue); }
+.callout-danger { background:var(--danger-soft); border-color:var(--danger); }
+.callout-danger .callout-icon { background:color-mix(in srgb,var(--danger) 15%, transparent); color:var(--danger); }
+.callout-action { background:var(--accent-soft); border-color:var(--accent); }
+.callout-action .callout-icon { background:color-mix(in srgb,var(--accent) 15%, transparent); color:var(--accent); }
+
+.clinical-list, .clinical-timeline { list-style:none; padding:0; margin:24px 0 30px; display:grid; gap:12px; }
+.clinical-list li { position:relative; display:grid; grid-template-columns:auto 1fr; gap:14px; padding:18px 18px 18px 20px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+.clinical-list li::before { content:""; width:7px; height:7px; margin-top:.7em; border-radius:50%; background:var(--accent); }
+.clinical-list li .item-icon + div { min-width:0; }
+.clinical-list li:has(.item-icon)::before { display:none; }
+.item-icon { width:32px; height:32px; border-radius:9px; display:grid; place-items:center; color:var(--accent); background:var(--accent-soft); font-size:12px; font-weight:900; }
+.complication-list .item-icon, .risk-factor-list .item-icon { color:var(--danger); background:var(--danger-soft); }
+.clinical-timeline { counter-reset:steps; position:relative; }
+.clinical-timeline::before { content:""; position:absolute; left:20px; top:22px; bottom:22px; width:2px; background:var(--line); }
+.clinical-timeline li { counter-increment:steps; position:relative; display:grid; grid-template-columns:42px 1fr; gap:16px; padding:0 0 20px; }
+.clinical-timeline li::before { content:counter(steps); z-index:1; width:42px; height:42px; border-radius:50%; display:grid; place-items:center; background:var(--surface); border:2px solid var(--accent); color:var(--accent); font-weight:850; }
+.clinical-timeline li > div { padding:12px 16px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+
+.table-shell { margin:30px 0; overflow:auto; border:1px solid var(--line); border-radius:16px; background:var(--surface); box-shadow:var(--shadow); }
+.table-hint { display:none; padding:10px 14px; color:var(--muted); font-size:12px; border-bottom:1px solid var(--line); }
+table { width:100%; border-collapse:separate; border-spacing:0; min-width:940px; font-size:14px; line-height:1.45; }
+th { padding:14px 12px; background:var(--brand); color:white; text-align:left; vertical-align:bottom; font-size:12px; letter-spacing:.02em; }
+html[data-theme="dark"] th { color:#0d1219; background:#dbeafe; }
+td { padding:14px 12px; border-top:1px solid var(--line); vertical-align:top; }
+tbody tr:nth-child(even) td { background:var(--surface-2); }
+th:first-child, td:first-child { position:sticky; left:0; z-index:1; min-width:180px; }
+td:first-child { background:var(--surface); font-weight:750; color:var(--brand); }
+tbody tr:nth-child(even) td:first-child { background:var(--surface-2); }
+
+.clinical-figure { margin:36px 0 42px; }
+.figure-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.clinical-figure[data-image-count="1"] .figure-grid { grid-template-columns:1fr; }
+.figure-media { position:relative; width:100%; padding:0; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#081018; cursor:zoom-in; }
+.figure-media img { width:100%; height:clamp(330px,46vw,560px); object-fit:contain; }
+.clinical-figure[data-image-count="2"] .figure-media img { height:clamp(310px,34vw,470px); }
+.figure-media:focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
+.figure-zoom { position:absolute; right:12px; bottom:12px; padding:7px 10px; border-radius:999px; background:rgba(8,16,24,.76); color:white; font-size:12px; opacity:0; transition:.18s ease; }
+.figure-media:hover .figure-zoom, .figure-media:focus .figure-zoom { opacity:1; }
+figcaption { margin-top:12px; color:var(--muted); font-size:14px; line-height:1.55; }
+.figure-label { display:block; margin-bottom:3px; color:var(--text); font-weight:800; }
+
+.definition-row { display:grid; grid-template-columns:110px 1fr; gap:18px; padding:12px 0; border-bottom:1px solid var(--line); }
+.definition-row dt { color:var(--brand); font-weight:800; }
+.definition-row dd { margin:0; }
+.term-card { margin:14px 0; padding:18px 20px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+.term-card h3 { margin:0 0 8px; font-size:18px; }
+.term-card p { margin:0; }
+.reference-item { padding:13px 0 13px 34px; border-bottom:1px solid var(--line); position:relative; font-size:15px; }
+.reference-item::before { content:""; position:absolute; left:4px; top:24px; width:10px; height:2px; background:var(--accent); }
+
+.source-card { margin:38px 0 0; padding:22px; border-radius:16px; border:1px solid var(--line); background:var(--surface); color:var(--muted); font-size:14px; }
+.source-card strong { display:block; margin-bottom:7px; }
+.site-footer { border-top:1px solid var(--line); background:var(--surface); }
+.footer-inner { max-width:1180px; margin:auto; padding:34px 24px 42px; display:flex; justify-content:space-between; gap:30px; color:var(--muted); font-size:13px; }
+
+.lightbox { border:0; padding:0; background:transparent; max-width:none; max-height:none; width:100vw; height:100vh; }
+.lightbox::backdrop { background:rgba(3,8,14,.91); }
+.lightbox-inner { width:100%; height:100%; display:grid; place-items:center; padding:60px 24px 24px; }
+.lightbox img { max-width:min(1280px,94vw); max-height:88vh; object-fit:contain; box-shadow:0 30px 90px rgba(0,0,0,.42); }
+.lightbox-close { position:fixed; right:20px; top:20px; width:46px; height:46px; border:1px solid rgba(255,255,255,.3); border-radius:50%; background:rgba(0,0,0,.38); color:white; font-size:26px; cursor:pointer; }
+
+@media (max-width: 980px) {
+  :root { --header-h:62px; }
+  .header-inner { padding:0 16px; }
+  .brand-sub { display:none; }
+  .header-actions .text-btn { display:none; }
+  .hero-inner { padding:48px 18px 42px; }
+  .breadcrumbs { margin-bottom:25px; }
+  .quick-clinical { padding:20px 16px 0; }
+  .quick-grid { grid-template-columns:1fr; }
+  .mobile-toc-bar {
+    display:flex; position:sticky; top:var(--header-h); z-index:110; align-items:center; justify-content:space-between; gap:12px;
+    min-height:54px; padding:8px 16px; border-bottom:1px solid var(--line); background:color-mix(in srgb,var(--surface) 94%,transparent); backdrop-filter:blur(12px);
+  }
+  .mobile-current { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--muted); font-size:13px; }
+  .toc-toggle { flex:0 0 auto; min-height:40px; padding:0 13px; border:1px solid var(--line); border-radius:10px; background:var(--surface); color:var(--text); font:inherit; font-size:13px; font-weight:750; }
+  .page-shell { display:block; padding:30px 16px 72px; }
+  .toc-panel {
+    position:fixed; z-index:220; top:0; bottom:0; left:0; width:min(88vw,360px); max-height:none; padding:24px 18px 40px; background:var(--surface); transform:translateX(-102%); transition:transform .22s ease; box-shadow:30px 0 80px rgba(0,0,0,.22);
+  }
+  .toc-panel.open { transform:translateX(0); }
+  .toc-overlay { position:fixed; inset:0; z-index:210; background:rgba(3,8,14,.52); }
+  .toc-overlay.open { display:block; }
+  .toc-close { display:flex !important; margin-left:auto; }
+  .risk-section { margin:58px -4px 0; padding:1px 16px 28px; border-radius:18px; }
+  .article h2 { margin-top:58px; }
+  .article h3 { margin-top:40px; }
+  .figure-grid { grid-template-columns:1fr; }
+  .figure-media img, .clinical-figure[data-image-count="2"] .figure-media img { height:min(70vh,520px); }
+  .table-hint { display:block; }
+  .footer-inner { flex-direction:column; }
+}
+
+@media (max-width: 560px) {
+  body { font-size:16px; line-height:1.7; }
+  .hero h1 { font-size:36px; }
+  .hero-lead { font-size:17px; }
+  .hero-actions { display:grid; grid-template-columns:1fr; }
+  .hero-link { justify-content:center; }
+  .page-shell { padding-left:14px; padding-right:14px; }
+  .callout { grid-template-columns:32px 1fr; padding:17px 16px; }
+  .clinical-list li { padding:16px; }
+  .definition-row { grid-template-columns:1fr; gap:2px; }
+  .figure-media img, .clinical-figure[data-image-count="2"] .figure-media img { height:430px; }
+  .brand { font-size:15px; }
+  .brand-mark { width:34px; height:34px; }
+}
+
+@media print {
+  :root { --bg:#fff; --surface:#fff; --text:#000; --brand:#000; --muted:#333; --line:#bbb; }
+  .reading-progress,.site-header,.mobile-toc-bar,.toc-panel,.toc-overlay,.header-actions,.hero-actions,.anchor-link,.figure-zoom { display:none !important; }
+  body { font-size:10.5pt; background:white; }
+  .hero { border:0; }
+  .hero-inner { padding:0 0 20px; }
+  .hero h1 { font-size:28pt; }
+  .quick-clinical { padding:0; }
+  .quick-grid { grid-template-columns:repeat(3,1fr); }
+  .page-shell { display:block; max-width:none; padding:20px 0; }
+  .article { max-width:none; }
+  .risk-section { margin:24px 0; break-inside:avoid; }
+  .clinical-figure, .callout, .quick-card, .term-card, .table-shell { break-inside:avoid; box-shadow:none; }
+  .figure-media img, .clinical-figure[data-image-count="2"] .figure-media img { height:320px; }
+  a { color:inherit; text-decoration:none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+}
+
+
+/* Content architecture for the concentrated clinical conspect */
+.article-intro { margin:0 0 34px; color:var(--muted); font-size:18px; line-height:1.65; }
+.section-summary { margin:-8px 0 26px; color:var(--muted); font-size:16px; }
+.key-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:26px 0 34px; }
+.key-card { border:1px solid var(--line); border-radius:16px; padding:20px; background:var(--surface); }
+.key-card .key-label { display:block; margin-bottom:8px; color:var(--muted); font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.key-card strong { display:block; margin-bottom:7px; font-size:19px; line-height:1.35; }
+.key-card p { margin:0; color:var(--muted); font-size:14px; line-height:1.55; }
+.compare-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:26px 0 34px; }
+.compare-card { border:1px solid var(--line); border-radius:18px; padding:22px; background:var(--surface); }
+.compare-card.low { border-top:4px solid var(--accent); }
+.compare-card.high { border-top:4px solid var(--danger); }
+.compare-card h3 { margin:0 0 8px; font-size:22px; }
+.compare-card > p { margin:0 0 14px; color:var(--muted); }
+.compact-list { margin:0; padding-left:1.15em; }
+.compact-list li { margin:8px 0; }
+.exam-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:24px 0 32px; }
+.exam-item { padding:17px 18px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+.exam-item strong { display:block; margin-bottom:4px; }
+.exam-item p { margin:0; color:var(--muted); font-size:14px; line-height:1.5; }
+.decision-flow { display:grid; gap:12px; margin:28px 0 34px; counter-reset:flow; }
+.decision-step { counter-increment:flow; display:grid; grid-template-columns:44px 1fr; gap:14px; align-items:start; }
+.decision-step::before { content:counter(flow); width:44px; height:44px; display:grid; place-items:center; border:2px solid var(--accent); border-radius:50%; color:var(--accent); background:var(--surface); font-weight:850; }
+.decision-step > div { padding:16px 18px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+.decision-step strong { display:block; margin-bottom:4px; }
+.decision-step p { margin:0; color:var(--muted); font-size:14px; }
+.regimen-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin:26px 0 32px; }
+.regimen-card { padding:20px; border:1px solid var(--line); border-radius:16px; background:var(--surface); }
+.regimen-card h3 { margin:0 0 13px; font-size:20px; }
+.regimen-card dl { margin:0; }
+.regimen-card .dose-row { display:grid; grid-template-columns:130px 1fr; gap:14px; padding:10px 0; border-top:1px solid var(--line); }
+.regimen-card .dose-row:first-child { border-top:0; padding-top:0; }
+.regimen-card dt { color:var(--muted); font-size:13px; font-weight:750; }
+.regimen-card dd { margin:0; font-weight:700; line-height:1.5; }
+.triage-table table { min-width:760px; }
+.triage-table th:first-child, .triage-table td:first-child { min-width:170px; }
+.action-strip { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:24px 0 30px; }
+.action-strip > div { padding:17px 18px; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+.action-strip span { display:block; margin-bottom:5px; color:var(--muted); font-size:12px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; }
+.action-strip strong { font-size:16px; line-height:1.4; }
+.clinical-note { margin:24px 0; padding:18px 20px; border:1px solid var(--line); border-radius:14px; background:var(--surface-2); }
+.clinical-note p { margin:0; }
+.subtle-divider { height:1px; margin:44px 0; background:var(--line); }
+.figure-pair-context { display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:12px; color:var(--muted); font-size:14px; }
+.hero .meta-chip.no-emoji { letter-spacing:.01em; }
+@media (max-width: 760px) {
+  .key-grid,.compare-grid,.exam-grid,.regimen-grid,.action-strip { grid-template-columns:1fr; }
+  .regimen-card .dose-row { grid-template-columns:1fr; gap:3px; }
+}
+
+
+/* Brand palette aligned with matveyshemyakin.ru; layout intentionally retained. */
+:root{
+  color-scheme:light;
+  --bg:#f4f1eb;--surface:#ffffff;--surface-2:#ece9e2;--text:#111a27;--muted:#596679;
+  --line:#d8d3ca;--line-strong:#c7c1b7;--brand:#06182f;--accent:#3567ad;--accent-soft:#eef4ff;
+  --blue:#4d8eff;--blue-soft:#edf4ff;--danger:#b8463d;--danger-soft:#fff1ef;--warning:#a65f17;
+  --shadow:0 18px 50px rgba(4,18,37,.09);--serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  --sans:Inter,"Segoe UI",Arial,sans-serif;
+}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#041225;--surface:#06182f;--surface-2:#0a2344;--text:#ffffff;--muted:#a9bad1;
+  --line:rgba(255,255,255,.17);--line-strong:rgba(135,181,255,.38);--brand:#ffffff;
+  --accent:#87b5ff;--accent-soft:rgba(77,142,255,.13);--blue:#87b5ff;--blue-soft:rgba(77,142,255,.14);
+  --danger:#ff7c73;--danger-soft:rgba(255,124,115,.12);--warning:#f2a65a;--shadow:0 18px 50px rgba(0,0,0,.30);
+}
+body{font-family:var(--sans);}
+.site-header{background:rgba(4,18,37,.95);border-bottom-color:rgba(255,255,255,.16);color:#fff;}
+.site-header .brand,.site-header .text-btn,.site-header .icon-btn{color:#fff;}
+.site-header .brand-sub{color:#a9bad1;}
+.site-header .brand-mark,.site-header .text-btn,.site-header .icon-btn{border-color:rgba(135,181,255,.30);background:rgba(255,255,255,.04);}
+.site-header .text-btn:hover,.site-header .icon-btn:hover{background:rgba(77,142,255,.13);border-color:#87b5ff;}
+.hero{color:#fff;background:radial-gradient(circle at 84% 24%,rgba(77,142,255,.20),transparent 32rem),linear-gradient(145deg,#06182f,#041225 68%);border-bottom-color:rgba(255,255,255,.12);}
+.hero h1{font-family:var(--serif);font-weight:400;color:#fff;letter-spacing:-.03em;}
+.hero-lead,.hero .breadcrumbs,.hero .byline,.hero .meta-chip{color:#c8d5e5;}
+.hero .byline strong{color:#fff;}.hero .eyebrow{color:#87b5ff;}.hero .breadcrumbs a{color:#c8d5e5;}
+.hero .meta-chip{background:rgba(255,255,255,.04);border-color:rgba(135,181,255,.28);}
+.hero-link.primary{background:#4d8eff;color:#fff;}.hero-link.secondary{background:rgba(4,18,37,.42);color:#fff;border-color:rgba(135,181,255,.34);}
+.article h2,.article h3,.quick-card strong{font-family:var(--serif);font-weight:400;}
+.article strong{font-weight:750;}
+.language-switch{display:flex;padding:3px;border:1px solid rgba(135,181,255,.30);border-radius:999px;background:rgba(4,18,37,.35);}
+.language-button{min-width:38px;height:32px;border-radius:999px;display:grid;place-items:center;color:#a9bad1;text-decoration:none;font-size:11px;font-weight:800;letter-spacing:.10em;}
+.language-button.is-active{background:#4d8eff;color:#fff;box-shadow:0 6px 18px rgba(50,110,230,.28);}
+.critical-duration{display:inline-block;color:var(--danger);font-weight:900;text-decoration-line:underline;text-decoration-thickness:3px;text-decoration-color:var(--danger);text-underline-offset:4px;letter-spacing:.02em;}
+.surgeon-only{margin:14px 0 0!important;padding:10px 12px;border-left:4px solid var(--danger);border-radius:4px 10px 10px 4px;background:var(--danger-soft);color:var(--danger)!important;font-size:12px!important;font-weight:850;letter-spacing:.02em;text-transform:uppercase;}
+.author-card{display:grid;grid-template-columns:88px 1fr;gap:22px;padding:25px;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:var(--shadow);}
+.author-monogram{width:72px;height:72px;border:1px solid var(--line-strong);border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:24px;color:var(--accent);}
+.author-kicker{margin:0 0 5px!important;color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
+.author-copy h3{margin:0 0 8px!important;font-size:30px;}.author-role{color:var(--muted);font-size:14px;}.author-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.author-links a{padding:8px 11px;border:1px solid var(--line);border-radius:10px;text-decoration:none;font-size:13px;font-weight:750;}
+.reference-list{counter-reset:refs;list-style:none;padding:0;margin:24px 0;display:grid;gap:0;}.reference-list li{counter-increment:refs;position:relative;padding:15px 0 15px 42px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.58;color:var(--muted);}.reference-list li::before{content:counter(refs);position:absolute;left:0;top:14px;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-size:11px;font-weight:850;}.reference-list strong{color:var(--text);}.reference-list em{color:var(--text);}
+@media(max-width:680px){.language-switch{order:-1}.author-card{grid-template-columns:1fr}.author-monogram{width:58px;height:58px}.header-actions{gap:5px}.language-button{min-width:34px}.site-header .brand>span:last-child{display:none}}
+
+
+/* Final editorial refinement: concise typography, portrait-led hero, no print control. */
+body{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-height:1.62;}
+.hero-inner{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(280px,.62fr);gap:54px;align-items:center;max-width:1180px;margin:auto;padding:68px 24px 58px;}
+.hero-copy{min-width:0;}
+.hero h1{max-width:780px;font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;font-size:clamp(48px,5.3vw,74px);font-weight:400;line-height:.99;letter-spacing:-.04em;text-wrap:balance;}
+.hero-lead{max-width:720px;font-size:17px;line-height:1.62;}
+.hero-portrait{position:relative;align-self:stretch;min-height:440px;margin:0;border:1px solid rgba(135,181,255,.30);border-radius:28px;overflow:hidden;background:#0a2344;box-shadow:0 28px 70px rgba(0,0,0,.28);}
+.hero-portrait img{width:100%;height:100%;min-height:440px;display:block;object-fit:cover;object-position:center 16%;}
+.hero-portrait-shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(4,18,37,.20));pointer-events:none;}
+.article h2{font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;font-weight:400;font-size:clamp(31px,3vw,42px);line-height:1.08;letter-spacing:-.03em;}
+.article h3,.quick-card strong,.key-card strong,.exam-item strong,.regimen-card h3,.compare-card h3{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-weight:720;letter-spacing:-.012em;}
+.article h3{font-size:clamp(20px,2vw,25px);line-height:1.25;}
+.article p,.article li,.quick-card p,.exam-item p,.regimen-card p{line-height:1.62;}
+.meta-chip,.key-label,.label,.toc-title,.author-kicker{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;letter-spacing:.075em;}
+.header-actions{gap:8px;}
+.author-card{grid-template-columns:132px minmax(0,1fr);gap:25px;align-items:start;}
+.author-portrait{width:132px;aspect-ratio:4/5;margin:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface-2);}
+.author-portrait img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 15%;}
+.author-copy h3{font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;font-weight:400;}
+.figure-media img{background:#081018;}
+@media(max-width:980px){
+  .hero-inner{grid-template-columns:minmax(0,1fr) minmax(240px,.52fr);gap:34px;padding:52px 24px 46px;}
+  .hero h1{font-size:clamp(43px,6.4vw,62px);}
+  .hero-portrait,.hero-portrait img{min-height:390px;}
+}
+@media(max-width:760px){
+  .hero-inner{grid-template-columns:1fr;padding:42px 18px 38px;}
+  .hero-portrait{width:min(100%,430px);min-height:390px;justify-self:center;}
+  .hero-portrait img{min-height:390px;}
+  .author-card{grid-template-columns:92px minmax(0,1fr);gap:16px;}
+  .author-portrait{width:92px;border-radius:14px;}
+}
+@media(max-width:520px){
+  .hero h1{font-size:42px;}
+  .hero-portrait,.hero-portrait img{min-height:350px;}
+  .author-card{grid-template-columns:1fr;}
+  .author-portrait{width:104px;}
+}
+
+/* Final hero correction: show the clinical photograph in full, without portrait cropping. */
+.hero-inner{
+  grid-template-columns:minmax(0,1.08fr) minmax(360px,.82fr);
+  gap:44px;
+  align-items:center;
+}
+.hero-portrait{
+  width:100%;
+  aspect-ratio:4/3;
+  min-height:0!important;
+  align-self:center;
+  border-radius:26px;
+  background:#07172c;
+}
+.hero-portrait img{
+  width:100%;
+  height:100%!important;
+  min-height:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#07172c;
+}
+.hero-portrait-shade{display:none;}
+@media (max-width:980px){
+  .hero-inner{grid-template-columns:minmax(0,1fr) minmax(320px,.78fr);gap:32px;}
+  .hero-portrait,.hero-portrait img{min-height:0!important;}
+}
+@media (max-width:760px){
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-portrait{width:min(100%,620px);justify-self:center;aspect-ratio:4/3;}
+  .hero-portrait,.hero-portrait img{min-height:0!important;}
+}
+
+</style>
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Matvey Yuryevich Shemyakin">
+<link rel="canonical" href="https://matveyshemyakin.ru/en/for-doctors/penetrating-keratoplasty/">
+<link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/for-doctors/penetrating-keratoplasty/">
+<link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/for-doctors/penetrating-keratoplasty/">
+<link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/for-doctors/penetrating-keratoplasty/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Matvey Shemyakin">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Penetrating keratoplasty follow-up: clinical quick reference">
+<meta property="og:description" content="Clinical quick reference for ophthalmologists on outpatient follow-up, risk stratification, treatment and urgent complications after penetrating keratoplasty.">
+<meta property="og:url" content="https://matveyshemyakin.ru/en/for-doctors/penetrating-keratoplasty/">
+<meta property="og:image" content="https://matveyshemyakin.ru/for-doctors/penetrating-keratoplasty/assets/images/hero-corneal-graft.jpg">
+<meta property="og:image:alt" content="Penetrating keratoplasty follow-up: clinical quick reference">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Penetrating keratoplasty follow-up: clinical quick reference">
+<meta name="twitter:description" content="Clinical quick reference for ophthalmologists on outpatient follow-up, risk stratification, treatment and urgent complications after penetrating keratoplasty.">
+<meta name="twitter:image" content="https://matveyshemyakin.ru/for-doctors/penetrating-keratoplasty/assets/images/hero-corneal-graft.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MedicalWebPage","name":"Penetrating keratoplasty follow-up: clinical quick reference","description":"Clinical quick reference for ophthalmologists on outpatient follow-up, risk stratification, treatment and urgent complications after penetrating keratoplasty.","url":"https://matveyshemyakin.ru/en/for-doctors/penetrating-keratoplasty/","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"Matvey Shemyakin","url":"https://matveyshemyakin.ru/"},"author":{"@type":"Person","name":"Matvey Yuryevich Shemyakin","url":"https://matveyshemyakin.ru/"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://matveyshemyakin.ru/for-doctors/penetrating-keratoplasty/assets/images/hero-corneal-graft.jpg"},"about":{"@type":"MedicalProcedure","name":"Penetrating keratoplasty"}}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#article">Skip to content</a>
+<div aria-hidden="true" class="reading-progress"><span></span></div>
+<header class="site-header">
+<div class="header-inner">
+<a aria-label="Home" class="brand" href="/">
+<span aria-hidden="true" class="brand-mark">MS</span>
+<span>Matvey Shemyakin<span class="brand-sub">Resources for clinicians</span></span>
+</a>
+<div class="header-actions"><nav aria-label="Language selector" class="language-switch"><a class="language-button" href="/for-doctors/penetrating-keratoplasty/">RU</a><a aria-current="page" class="language-button is-active" href="/en/for-doctors/penetrating-keratoplasty/">EN</a></nav>
+<button aria-label="Enable dark theme" class="icon-btn" data-theme-toggle="" title="Dark theme" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.6 6.6 0 0 0 21 12.8Z"></path></svg>
+</button>
+</div>
+</div>
+</header>
+<main>
+<section class="hero">
+<div class="hero-inner"><div class="hero-copy">
+<nav aria-label="Breadcrumbs" class="breadcrumbs"><a href="/">Home</a><span>→</span><a href="/for-doctors/">For clinicians</a><span>→</span><span>Cornea</span></nav>
+<p class="eyebrow">Ophthalmology · clinical quick reference</p>
+<h1>Outpatient management after penetrating keratoplasty</h1>
+<p class="hero-lead">A practical, condensed version of the methodological recommendations: graft assessment, immunologic risk stratification, follow-up schedule, exact treatment regimens, and management of complications.</p>
+<div class="meta-row">
+<span class="meta-chip no-emoji">For ophthalmologists and residents</span>
+<span class="meta-chip no-emoji">Rapid clinical decision support</span>
+<span class="meta-chip no-emoji">15 figures · 21 clinical photographs</span>
+</div>
+<div class="byline"><span><strong>Based on:</strong> the methodological recommendations “Algorithms for management of patients with a full-thickness corneal graft…”, Moscow, 2025</span><span><strong>Methodology authors:</strong> G. Sh. Arzhimatova, E. A. Salikhov, G. M. Chernakova, M. Yu. Shemyakin</span></div>
+<div class="hero-actions">
+<a class="hero-link primary" href="#risk">Determine risk group →</a>
+<a class="hero-link secondary" href="#acute">Management of deterioration →</a>
+</div>
+</div><figure class="hero-portrait"><img alt="Clinical photograph of a penetrating corneal graft" decoding="async" loading="eager" src="/for-doctors/penetrating-keratoplasty/assets/images/hero-corneal-graft.jpg"/><span aria-hidden="true" class="hero-portrait-shade"></span></figure></div>
+</section>
+<section aria-label="Key clinical anchors" class="quick-clinical">
+<div class="quick-grid">
+<article class="quick-card"><span class="label">Low risk</span><strong>First examination 1 week after discharge</strong><p>If the course is stable, visit frequency is gradually reduced.</p></article>
+<article class="quick-card"><span class="label">High risk</span><strong>After 3–4 days, then every 3–7 days</strong><p>During the first month, examination every other day may be required; keep a low threshold for referral.</p></article>
+<article class="quick-card urgent"><span class="label">Acute deterioration</span><strong>Redness, photophobia, pain, reduced vision</strong><p>Do not wait for the scheduled visit: exclude rejection, infection, and wound/suture failure.</p></article>
+</div>
+</section>
+<div class="mobile-toc-bar"><span class="mobile-current">Contents</span><button aria-expanded="false" class="toc-toggle" type="button">Sections</button></div>
+<div class="page-shell">
+<aside aria-label="Contents" class="toc-panel"><button aria-label="Close contents" class="icon-btn toc-close" style="display:none" type="button">×</button><p class="toc-title">Contents</p><nav class="toc-nav"></nav></aside>
+<div aria-hidden="true" class="toc-overlay"></div>
+<article class="article" id="article">
+<h2 id="key">Key points<a aria-label="Section link" class="anchor-link" href="#key">#</a></h2>
+<p class="article-intro">This quick reference answers three practical questions: how high the risk of graft disease is, how often the patient should be examined, and what to do at the first signs of an adverse course.</p>
+<div class="key-grid">
+<div class="key-card"><span class="key-label">Principle 1</span><strong>Risk determines follow-up intensity</strong><p>Vascularization, repeat PK, active infectious inflammation, severe dry eye, and systemic disease place the patient in the high-risk group.</p></div>
+<div class="key-card"><span class="key-label">Principle 2</span><strong>Assess the same core findings at every visit</strong><p>Visual acuity, graft clarity and epithelialization, suture status, keratic precipitates/edema, inflammation, new vessels, and IOP.</p></div>
+<div class="key-card"><span class="key-label">Principle 3</span><strong>Taper topical corticosteroids slowly</strong><p>Abrupt unsupervised discontinuation may trigger graft rejection. In high-risk eyes, maintenance treatment may be prolonged or lifelong.</p></div>
+<div class="key-card"><span class="key-label">Principle 4</span><strong>Deterioration requires an immediate decision</strong><p>Redness, photophobia, pain, blurred or reduced vision require urgent slit-lamp examination and escalation—not waiting for scheduled follow-up.</p></div>
+</div>
+<div class="callout callout-danger"><div class="callout-icon">!</div><div><strong>Critical error</strong><p>Do not “observe over time” suspected rejection, infection, wound/suture failure, or graft melt without urgent corneal surgeon review.</p></div></div>
+<h2 id="exam">What to assess at every visit<a aria-label="Section link" class="anchor-link" href="#exam">#</a></h2>
+<p class="section-summary">Use a reproducible minimum examination set to detect subtle changes before irreversible graft opacity develops.</p>
+<div class="exam-grid">
+<div class="exam-item"><strong>Function</strong><p>Uncorrected and corrected visual acuity; ask about blur, halos, photophobia, and pain.</p></div>
+<div class="exam-item"><strong>Graft</strong><p>Clarity, completeness of epithelialization, stromal edema, Descemet membrane folds, keratic precipitates, and focal infiltrates.</p></div>
+<div class="exam-item"><strong>Suture and wound</strong><p>Tension or loosening, exposed suture, erosion, infiltrate, vessel ingrowth; perform a Seidel test if leakage is suspected.</p></div>
+<div class="exam-item"><strong>Inflammation and infection</strong><p>Injection pattern, anterior chamber cells/flare, hypopyon, discharge, and epithelial defects.</p></div>
+<div class="exam-item"><strong>Intraocular pressure</strong><p>Check at every visit. After PK, non-contact tonometry may be unreliable; the source document proposes transpalpebral tonometry or comparative digital palpation.</p></div>
+<div class="exam-item"><strong>Additional tests</strong><p>Keratometry/topography at approximately month 3; after suture removal, repeat refraction and topography in 2–4 weeks.</p></div>
+</div>
+<figure class="clinical-figure" data-image-count="1">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-01.jpg" type="button">
+<img alt="Clear graft 7 days after penetrating keratoplasty" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-01.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 1</span>Clear graft 7 days after surgery. The continuous suture is clean and intact.</figcaption>
+</figure>
+<div class="clinical-note"><p><strong>Uncomplicated course:</strong> epithelialization is usually complete by days 7–10; edema gradually decreases over 1–2 months. By month 6, the expected findings are a quiet eye, clear graft, clean intact suture, and no significant vascular invasion.</p></div>
+<h2 id="risk">Immunologic risk stratification<a aria-label="Section link" class="anchor-link" href="#risk">#</a></h2>
+<div class="compare-grid">
+<section class="compare-card low">
+<h3>Low risk</h3>
+<p>Favorable recipient bed and first elective optical graft.</p>
+<ul class="compact-list">
+<li>First PK.</li>
+<li>Avascular cornea or only minimal superficial vascularization.</li>
+<li>No active inflammation.</li>
+<li>Typical indications: keratoconus, corneal dystrophies, limited stromal opacities.</li>
+<li>No severe systemic autoimmune disease.</li>
+</ul>
+</section>
+<section class="compare-card high">
+<h3>High risk</h3>
+<p>Corneal immune privilege is disrupted or healing is substantially impaired.</p>
+<ul class="compact-list">
+<li>Corneal vascularization; involvement of ≥2 quadrants indicates very high risk.</li>
+<li>Repeat keratoplasty.</li>
+<li>Urgent PK for ulceration, perforation, or melt.</li>
+<li>Severe dry eye, Sjögren syndrome, or ocular cicatricial pemphigoid.</li>
+<li>Autoimmune disease, systemic vasculitis, or Stevens–Johnson syndrome.</li>
+<li>Combined surgery, pediatric age, or poor-quality donor tissue.</li>
+</ul>
+</section>
+</div>
+<figure class="clinical-figure" data-image-count="1">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-02.jpg" type="button">
+<img alt="Corneal vascularization in four quadrants before penetrating keratoplasty" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-02.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 2</span>High-risk PK candidate: vascularization in all 4 quadrants and an optical-zone defect threatening perforation.</figcaption>
+</figure>
+<div class="callout callout-danger"><div class="callout-icon">!</div><div><strong>High risk requires a low threshold for referral</strong><p>A new vessel reaching the graft, increasing opacity, edema, thinning, or marked inflammation → urgent corneal surgeon review.</p></div></div>
+<h2 id="followup">Follow-up schedule<a aria-label="Section link" class="anchor-link" href="#followup">#</a></h2>
+<h3 id="followup-low">Low risk<a aria-label="Subsection link" class="anchor-link" href="#followup-low">#</a></h3>
+<ol class="clinical-timeline">
+<li><div><strong>1 week after discharge</strong><p>Approximately 2–3 weeks after surgery: visual acuity, slit-lamp examination, tonometry, suture assessment, and adherence review.</p></div></li>
+<li><div><strong>First month</strong><p>Examine every 2 weeks.</p></div></li>
+<li><div><strong>Months 2–6</strong><p>Approximately monthly; by month 3, perform keratometry or topography if epithelialization is complete.</p></div></li>
+<li><div><strong>Months 6–12</strong><p>Every 1.5–2 months, or at least once per quarter.</p></div></li>
+<li><div><strong>After year 1</strong><p>During year 2, every 3–6 months; thereafter annually for life.</p></div></li>
+</ol>
+<div class="clinical-note"><p><strong>Sutures:</strong> with a favorable course, sutures are generally left untouched for at least 12 months. Removal is usually considered at 12–15 months, individualized by clarity, vascularization, and wound strength.</p></div>
+<figure class="clinical-figure" data-image-count="2">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-03.jpg" type="button">
+<img alt="Loose continuous suture and superficial vascularization" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-03.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-04.jpg" type="button">
+<img alt="Infiltrate adjacent to a loose suture and neovascularization" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-04.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 3A,B</span>A — loose continuous suture with superficial vessels growing toward the graft; B — infiltrate adjacent to the loose suture with neovascularization.</figcaption>
+</figure>
+<h3 id="followup-high">High risk<a aria-label="Subsection link" class="anchor-link" href="#followup-high">#</a></h3>
+<ol class="clinical-timeline">
+<li><div><strong>3–4 days after discharge</strong><p>First outpatient review.</p></div></li>
+<li><div><strong>First month</strong><p>Every 3–7 days; if unstable, every other day during the first 2 weeks.</p></div></li>
+<li><div><strong>Months 2–6</strong><p>Every 2 weeks, at least twice monthly.</p></div></li>
+<li><div><strong>Months 6–12</strong><p>Monthly.</p></div></li>
+<li><div><strong>Year 2 and beyond</strong><p>At least every 2 months during year 2; thereafter quarterly for life.</p></div></li>
+</ol>
+<div class="callout callout-action"><div class="callout-icon">→</div><div><strong>Escalation and referral</strong><p>In high-risk eyes, rejection, marked inflammation, a new vessel, thinning, or melt should not be managed for a prolonged period in outpatient care alone—refer to a specialist center.</p></div></div>
+<h2 id="therapy-low">Baseline treatment: low risk<a aria-label="Section link" class="anchor-link" href="#therapy-low">#</a></h2>
+<p class="section-summary">The doses and intervals below are retained from the methodological recommendations. Adjust treatment according to the operating surgeon’s discharge instructions and clinical course.</p>
+<div class="table-shell"><div class="table-hint">Scroll horizontally to view the table</div>
+<table>
+<thead><tr><th>Medication / regimen</th><th>Months 1–2</th><th>Months 3–4</th><th>Months 5–6</th><th>Months 7–8</th><th>Months 9–10</th><th>Months 11–12</th></tr></thead>
+<tbody>
+<tr><td>Antibiotic</td><td>1 drop × 4 times/day**<br/><span class="critical-duration">ONLY 7–10 DAYS</span></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>Corticosteroid<br/>(dexamethasone 0.1%)</td><td>1 drop × 6 times/day</td><td>1 drop × 5 times/day</td><td>1 drop × 4 times/day</td><td>1 drop × 3 times/day</td><td>1 drop × 2 times/day</td><td>1 drop once daily (morning)</td></tr>
+<tr><td>Corneal surface protective agent</td><td>1 drop × 3 times/day</td><td>—</td><td>—</td><td>1 drop × 2 times/day</td><td>—</td><td>—</td></tr>
+<tr><td>Lubricant</td><td>1 drop × 4–8 times/day</td><td colspan="5">As needed; preservative-free preferred</td></tr>
+</tbody>
+</table>
+</div>
+<p><small>* drops × times per day; ** course <span class="critical-duration">ONLY 7–10 DAYS</span>.</small></p>
+<div class="callout callout-info"><div class="callout-icon">i</div><div><strong>The source document provides two early dexamethasone regimens</strong><p>Table regimen: dexamethasone 0.1%, 1 drop 6 times daily during months 1–2. Narrative regimen: every 2 hours while awake or 6–8 times/day. Do not independently average these regimens; follow the surgeon’s discharge instructions and graft status.</p></div></div>
+<div class="regimen-grid">
+<section class="regimen-card"><h3>Antibacterial prophylaxis</h3><dl>
+<div class="dose-row"><dt>Agents</dt><dd>Ciprofloxacin 0.3%, ofloxacin 0.3%, levofloxacin 0.5%, or tobramycin 0.3%.</dd></div>
+<div class="dose-row"><dt>Regimen</dt><dd>4–6 times daily. Course: ONLY 7–10 DAYS.</dd></div>
+<div class="dose-row"><dt>Discontinue</dt><dd>After epithelialization if there are no signs of infection.</dd></div>
+</dl></section>
+<section class="regimen-card"><h3>Lubrication</h3><dl>
+<div class="dose-row"><dt>Regimen</dt><dd>4–8 times daily as needed.</dd></div>
+<div class="dose-row"><dt>Preferred</dt><dd>Preservative-free products.</dd></div>
+<div class="dose-row"><dt>Goal</dt><dd>Support epithelialization and treat postoperative dry eye.</dd></div>
+</dl></section>
+<section class="regimen-card"><h3>Mydriatics / cycloplegics</h3><dl>
+<div class="dose-row"><dt>Agents</dt><dd>Tropicamide 1% or cyclopentolate 1%.</dd></div>
+<div class="dose-row"><dt>Regimen</dt><dd>1–2 times daily during the first 1–2 weeks — USE WITH EXTREME CAUTION AND ONLY ON THE OPERATING SURGEON’S RECOMMENDATION.</dd></div>
+<div class="dose-row"><dt>Monitoring</dt><dd>IOP monitoring is mandatory; consider the risk of Urrets–Zavalia syndrome. Use only on the operating surgeon’s recommendation.</dd></div>
+</dl><p class="surgeon-only">EXTREME CAUTION: only on the operating surgeon’s recommendation.</p></section>
+<section class="regimen-card"><h3>IOP-lowering treatment</h3><dl>
+<div class="dose-row"><dt>First line</dt><dd>Timolol 0.5% twice daily or dorzolamide 2% 2–3 times daily.</dd></div>
+<div class="dose-row"><dt>Caution</dt><dd>Prostaglandin analogues are generally avoided during the first months.</dd></div>
+<div class="dose-row"><dt>Approach</dt><dd>Do not automatically stop corticosteroids: balance the risks of ocular hypertension and graft rejection.</dd></div>
+</dl></section>
+</div>
+<h3 id="special-drugs">Treatment when indicated<a aria-label="Subsection link" class="anchor-link" href="#special-drugs">#</a></h3>
+<ul class="clinical-list">
+<li><div><strong>Herpetic etiology:</strong> valacyclovir 1000 mg orally 3 times daily for 10 days, or famciclovir 500 mg 3 times daily. Topical option: acyclovir 3% ointment at night.</div></li>
+<li><div><strong>Topical NSAIDs:</strong> diclofenac 0.1% or bromfenac 0.05% once daily during the first weeks. Not mandatory; use cautiously because of delayed epithelialization and epithelial erosion.</div></li>
+<li><div><strong>Systemic corticosteroids:</strong> not routinely required. In some centers, prednisolone approximately 20–30 mg with tapering over 2–3 weeks.</div></li>
+</ul>
+<h2 id="therapy-high">Treatment: high risk<a aria-label="Section link" class="anchor-link" href="#therapy-high">#</a></h2>
+<div class="decision-flow">
+<div class="decision-step"><div><strong>Intensive topical corticosteroids</strong><p>Dexamethasone 0.1% hourly for at least 2 weeks → 6 times/day by month 2 → 4 times/day by month 3 → 2–4 times/day through month 6 and beyond.</p></div></div>
+<div class="decision-step"><div><strong>Long-term maintenance</strong><p>Do not discontinue completely during the first 1–2 years; lifelong once-daily maintenance may be required.</p></div></div>
+<div class="decision-step"><div><strong>Cyclosporine A 0.05%</strong><p>In selected cases: 1 drop twice daily for at least 6–12 months, often up to 2 years; only when prescribed by the surgeon and etiologically appropriate.</p></div></div>
+<div class="decision-step"><div><strong>Ocular surface support</strong><p>Lubricants every 1–2 hours, gels/ointments at night; consider punctal plugs or partial tarsorrhaphy when indicated.</p></div></div>
+<div class="decision-step"><div><strong>Progressive vascularization</strong><p>Consult a corneal transplant center; local anti-VEGF therapy is an individualized option based on multidisciplinary review.</p></div></div>
+</div>
+<div class="callout callout-danger"><div class="callout-icon">!</div><div><strong>Infectious-disease caution</strong><p>If fungal infection is possible or bacterial susceptibility data are unavailable, do not introduce topical corticosteroids or cyclosporine A until the pathogen is clarified and adequate antimicrobial control is established.</p></div></div>
+<figure class="clinical-figure" data-image-count="1">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-05.jpg" type="button">
+<img alt="Secondary infection after partial penetrating keratoplasty" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-05.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 4</span>Secondary infection after partial PK: keratouveitis, 0.5-mm hypopyon, mixed injection.</figcaption>
+</figure>
+<figure class="clinical-figure" data-image-count="1">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-06.jpg" type="button">
+<img alt="Corneal infiltrate with mixed-etiology keratouveitis" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-06.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 5</span>Corneal infiltrate with mixed-etiology keratouveitis; a clinical setting in which therapeutic (urgent) PK may be required to preserve the globe.</figcaption>
+</figure>
+<div class="clinical-note"><p><strong>Refractory rejection:</strong> prednisolone 1 mg/kg orally + cyclosporine A 5 mg/kg orally if not contraindicated; alternatively tacrolimus or mycophenolate mofetil—only under specialist supervision.</p></div>
+<h2 id="acute">Acute deterioration: differential management<a aria-label="Section link" class="anchor-link" href="#acute">#</a></h2>
+<p class="section-summary">First identify the dominant syndrome: immune rejection, infection, mechanical failure, epithelial defect, or graft melt. Then begin permissible initial measures and urgently escalate care.</p>
+<div class="table-shell triage-table"><div class="table-hint">Scroll horizontally to view the table</div>
+<table>
+<thead><tr><th>Situation</th><th>Key findings</th><th>Initial action</th><th>Escalation and referral</th></tr></thead>
+<tbody>
+<tr><td>Rejection</td><td>Reduced vision, redness, photophobia; edema, Descemet membrane folds, keratic precipitates, Khodadoust line.</td><td>Dexamethasone 0.1% hourly; every ~2 hours overnight.</td><td>Urgent referral to a specialist center / hospital.</td></tr>
+<tr><td>Suture-related keratitis</td><td>Focal infiltrate and erosion around the suture, discharge, progressive ulceration.</td><td>Intensive topical fluoroquinolone therapy; temporarily stop corticosteroids until infection is controlled.</td><td>Urgent review; remove/replace the suture if the infiltrate fails to resolve within 2–3 days.</td></tr>
+<tr><td>Suture / wound failure</td><td>Positive Seidel test, shallow anterior chamber, wound deformation, history of trauma.</td><td>Bandage contact lens, sterile eye dressing, supine face-up position, frequent antibacterial drops.</td><td>Immediate transfer for resuturing.</td></tr>
+<tr><td>Persistent epithelial defect</td><td>Fluorescein-staining defect, pain, absent epithelialization, filaments.</td><td>Frequent lubricants, carbomer at night, therapeutic soft contact lens; temporarily hold corticosteroids for a significant defect.</td><td>If persistent for &gt;2 weeks, investigate dry eye, infection, and mechanical causes.</td></tr>
+<tr><td>Graft melt</td><td>Progressive thinning, graft deformation, impending or established perforation.</td><td>Stop corticosteroids and initiate intensive corneal surface protective therapy.</td><td>Urgently consider autoconjunctival corneal coverage, blepharorrhaphy, or repeat large-diameter keratoplasty.</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="rejection">Graft rejection<a aria-label="Subsection link" class="anchor-link" href="#rejection">#</a></h3>
+<div class="action-strip"><div><span>Topical</span><strong>Dexamethasone 0.1% hourly; every ~2 hours overnight</strong></div><div><span>Hospital treatment</span><strong>Dexamethasone 16 mg IV or prednisolone 60–80 mg/day with gradual taper</strong></div></div>
+<figure class="clinical-figure" data-image-count="2">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-07.jpg" type="button">
+<img alt="Large graft diameter with the suture at the limbus" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-07.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-08.jpg" type="button">
+<img alt="Khodadoust line on graft endothelium" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-08.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 6A,B</span>A — 9.0-mm graft with the suture involving the limbus; B — punctate endothelial precipitates forming a Khodadoust line.</figcaption>
+</figure>
+<figure class="clinical-figure" data-image-count="2">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-09.jpg" type="button">
+<img alt="After removal of a loose suture and escalation of topical therapy" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-09.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-10.jpg" type="button">
+<img alt="Regressed stromal vessels and punctate opacities along the suture" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-10.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 7A,B</span>Seven days after removal of a loose suture and escalation of topical corticosteroids following an episode of graft disease.</figcaption>
+</figure>
+<h3 id="wound">Suture failure or wound dehiscence<a aria-label="Subsection link" class="anchor-link" href="#wound">#</a></h3>
+<div class="callout callout-danger"><div class="callout-icon">!</div><div><strong>Emergency</strong><p>Bandage contact lens + sterile dressing + supine face-up position + frequent antibacterial drops → immediate transfer for resuturing.</p></div></div>
+<figure class="clinical-figure" data-image-count="1">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-11.jpg" type="button">
+<img alt="Corneal wound dehiscence after trauma" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-11.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 8</span>Wound dehiscence from 11 to 3 o’clock after trauma, one week after suture removal at 16 months after PK.</figcaption>
+</figure>
+<h3 id="infection">Suture-related keratitis and infection<a aria-label="Subsection link" class="anchor-link" href="#infection">#</a></h3>
+<ul class="clinical-list complication-list">
+<li><div><strong>Antibiotic:</strong> intensive topical fluoroquinolone therapy.</div></li>
+<li><div><strong>Suture:</strong> if the infiltrate does not resolve within 2–3 days, remove or replace the infected suture.</div></li>
+<li><div><strong>Corticosteroids:</strong> temporarily discontinue until infection is controlled.</div></li>
+</ul>
+<figure class="clinical-figure" data-image-count="1">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-12.jpg" type="button">
+<img alt="Suture-related keratitis and corneal thinning after PK" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-12.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 9</span>Suture-related keratitis and thinning: OCT thickness 120 µm, with infiltration at the edge of the thinned area.</figcaption>
+</figure>
+<h3 id="epithelium">Persistent epithelial defect<a aria-label="Subsection link" class="anchor-link" href="#epithelium">#</a></h3>
+<ul class="clinical-list">
+<li><div>Frequent artificial tears; carbomer at night.</div></li>
+<li><div>Therapeutic soft contact lens.</div></li>
+<li><div>Consider autologous serum tears.</div></li>
+<li><div>For a significant defect, temporarily hold corticosteroids until epithelialization.</div></li>
+<li><div>If the defect persists for more than 2 weeks → investigate dry eye, infection, and mechanical causes.</div></li>
+</ul>
+<figure class="clinical-figure" data-image-count="2">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-13.jpg" type="button">
+<img alt="Persistent graft epithelial defect" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-13.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-14.jpg" type="button">
+<img alt="Graft epithelial defect with fluorescein staining" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-14.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 10A,B</span>Persistent epithelial defect; fluorescein staining.</figcaption>
+</figure>
+<figure class="clinical-figure" data-image-count="2">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-15.jpg" type="button">
+<img alt="Filamentary epithelial defects 6 months after PK" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-15.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-16.jpg" type="button">
+<img alt="Filamentary epithelial defects with fluorescein staining" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-16.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 11A,B</span>Filamentary epithelial defects 6 months after PK; fluorescein staining.</figcaption>
+</figure>
+<h3 id="melt">Graft thinning and melt<a aria-label="Subsection link" class="anchor-link" href="#melt">#</a></h3>
+<div class="callout callout-danger"><div class="callout-icon">!</div><div><strong>Threat to globe integrity</strong><p>Stop corticosteroids, initiate intensive corneal surface protective therapy, and urgently consider autoconjunctival corneal coverage, blepharorrhaphy, or repeat large-diameter keratoplasty.</p></div></div>
+<figure class="clinical-figure" data-image-count="1">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-17.jpg" type="button">
+<img alt="Critical graft thinning after penetrating keratoplasty" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-17.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 12</span>Critical graft thinning at 3 months requiring autoconjunctival coverage.</figcaption>
+</figure>
+<figure class="clinical-figure" data-image-count="1">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-18.jpg" type="button">
+<img alt="Graft melt and thinning in the optical zone" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-18.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 13</span>Area of thinning in the optical portion of the graft.</figcaption>
+</figure>
+<h2 id="late">Late follow-up and additional procedures<a aria-label="Section link" class="anchor-link" href="#late">#</a></h2>
+<div class="table-shell"><div class="table-hint">Scroll horizontally to view the table</div>
+<table>
+<thead><tr><th>Clinical task</th><th>Practical approach</th><th>Approximate timing</th></tr></thead>
+<tbody>
+<tr><td>Suture removal</td><td>Individualize according to clarity, vascularization, suture type, and wound strength. Repeat refraction/topography after removal.</td><td>Usually 12–15 months; review 2–4 weeks after removal.</td></tr>
+<tr><td>Post-keratoplasty astigmatism</td><td>Spectacle correction; rigid gas-permeable lenses if the epithelium is stable. Excimer laser correction only with a stable graft.</td><td>RGP lenses after 3–4 months; laser correction no earlier than 2 years.</td></tr>
+<tr><td>Cataract</td><td>Perform phacoemulsification + IOL under protective corticosteroid therapy.</td><td>Preferably 1–2 years after PK.</td></tr>
+<tr><td>Refractory glaucoma</td><td>Laser/surgical treatment when indicated, accounting for the risk of triggering rejection.</td><td>If possible, after graft healing—6–12 months.</td></tr>
+<tr><td>Repeat optical PK</td><td>Completely control inflammation and minimize vascularization; decide jointly with the corneal surgeon.</td><td>No earlier than 6–12 months after the first graft.</td></tr>
+</tbody>
+</table>
+</div>
+<figure class="clinical-figure" data-image-count="1">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-19.jpg" type="button">
+<img alt="Mature cataract after PK and topical corticosteroid therapy" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-19.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 14</span>Mature cataract after 2 years of topical corticosteroid therapy; status after elective phacoemulsification + IOL.</figcaption>
+</figure>
+<figure class="clinical-figure" data-image-count="2">
+<div class="figure-grid"><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-20.jpg" type="button">
+<img alt="Marked graft vascularization before repeat keratoplasty" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-20.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button><button class="figure-media" data-lightbox="/for-doctors/penetrating-keratoplasty/assets/images/clinical-21.jpg" type="button">
+<img alt="Graft melt with perforation and iris plugging" loading="lazy" src="/for-doctors/penetrating-keratoplasty/assets/images/clinical-21.jpg"/>
+<span class="figure-zoom">Enlarge</span>
+</button></div>
+<figcaption><span class="figure-label">Figure 15A,B</span>A — marked stromal vascularization in 4 quadrants before repeat keratoplasty; B — melt, perforation, and iris plugging.</figcaption>
+</figure>
+<h2 id="errors">Critical errors<a aria-label="Section link" class="anchor-link" href="#errors">#</a></h2>
+<ul class="clinical-list complication-list">
+<li><div>Abruptly stop topical corticosteroids or allow the patient to change dosing frequency independently.</div></li>
+<li><div>Use corticosteroids or cyclosporine A when fungal infection is possible or antimicrobial control is inadequate.</div></li>
+<li><div>Ignore a new vessel, focal infiltrate near a suture, or subtle reduction in graft clarity.</div></li>
+<li><div>Rely solely on non-contact tonometry after PK without correlating it with clinical findings and an alternative IOP assessment.</div></li>
+<li><div>Continue prolonged outpatient treatment of suspected rejection, wound failure, or melt without urgent escalation.</div></li>
+<li><div>Plan refractive or repeat surgery before the graft is stable and inflammation is controlled.</div></li>
+</ul>
+<h2 id="prepared">Prepared by<a aria-label="Section link" class="anchor-link" href="#prepared">#</a></h2>
+<section class="author-card">
+<figure class="author-portrait"><img alt="Matvey Yu. Shemyakin" decoding="async" loading="lazy" src="https://matveyshemyakin.ru/assets/portrait.jpg"/></figure>
+<div class="author-copy">
+<p class="author-kicker">Clinical editing and digital adaptation</p>
+<h3>Matvey Yu. Shemyakin</h3>
+<p class="author-role">Ophthalmologist, Ophthalmology Department No. 63 · Junior Research Fellow, S.P. Botkin Moscow Multidisciplinary Scientific and Clinical Center</p>
+<p>Prepared for rapid professional use by ophthalmologists and residents, based on methodological recommendations for outpatient management of patients with a full-thickness corneal graft.</p>
+<div class="author-links"><a href="/">About the physician</a><a href="https://t.me/DrShemMYu" rel="noopener" target="_blank">Telegram</a><a href="https://prodoctorov.ru/moskva/vrach/1115864-shemyakin/" rel="noopener" target="_blank">ProDoctorov</a></div>
+</div>
+</section>
+<h2 id="sources">References<a aria-label="Section link" class="anchor-link" href="#sources">#</a></h2>
+<p class="section-summary">The primary source is the authors’ methodological recommendation; the bibliography is retained in a concise clinical format.</p>
+<ol class="reference-list">
+<li><strong>Arzhimatova GSh, Salikhov EA, Chernakova GM, Shemyakin MY.</strong> Algorithms for management of patients with a full-thickness corneal graft in Moscow public healthcare organizations during outpatient care. Methodological recommendations. Moscow: Moscow City Ophthalmology Center, S.P. Botkin Center; 2025.</li>
+<li>Eye Bank Association of America. <em>Eye Banking Statistical Report — 2024.</em></li>
+<li>Eye Bank Association of America. <em>2018 Eye Banking Statistical Report.</em> Washington, DC: EBAA; 2019.</li>
+<li>Arzhimatova GSh, Salikhov EA, Shemyakin MY. Corneal neovascularization: current view of molecular mechanisms and therapeutic approaches. <em>Russian Ophthalmological Journal.</em> 2023;16(2):153–159. doi:10.21516/2072-0076-2023-16-2-153-159.</li>
+<li>Sarezky D, Orlin SE, Pan W, VanderBeek BL. Trends in Corneal Transplantation in Keratoconus. <em>Cornea.</em> 2017;36(2):131–137. doi:10.1097/ICO.0000000000001083.</li>
+<li>Boisjoly HM, Tourigny R, Bazin R, et al. Risk factors of corneal graft failure. <em>Ophthalmology.</em> 1993;100(11):1728–1735. doi:10.1016/S0161-6420(93)31409-0.</li>
+<li>Sugar A, Tanner JP, Dontchev M, et al. Recipient risk factors for graft failure in the Cornea Donor Study. <em>Ophthalmology.</em> 2009;116(6):1023–1028. doi:10.1016/j.ophtha.2008.12.050.</li>
+<li>Lois N, Kowal VO, Cohen EJ, et al. Indications for penetrating keratoplasty and associated procedures, 1989–1995. <em>Cornea.</em> 1997;16(6):623–629.</li>
+<li>Gurnani B, et al. Corneal Graft Rejection. <em>StatPearls.</em> 2023. NCBI Bookshelf: NBK519043.</li>
+<li>Magovern M, et al. Trends in keratoplasty for keratoconus: a report by the Eye Bank Association of America. <em>Ophthalmology.</em> 2018;125(10):1471–1478.</li>
+<li>Sharif W, et al. Corneal graft rejection: incidence, features, risk factors, and outcomes. <em>Clinical Ophthalmology.</em> 2019;13:1343–1355.</li>
+<li>Gurnani B, et al. Penetrating Keratoplasty. <em>StatPearls.</em> 2023. NCBI Bookshelf: NBK592388.</li>
+<li>Arzhimatova GSh, Chernakova GM, Salikhov EA, Shemyakin MY. Statistical analysis of risk factors for penetrating corneal graft disease in high-risk keratoplasty. <em>Ophthalmology in Russia.</em> 2024;21(3):509–516. doi:10.18008/1816-5095-2024-3-509-516.</li>
+<li>Slonimskiy YuB, Arzhimatova GSh, Slonimskiy AYu, Salikhov EA, Slonimskaya AS. Penetrating corneal graft survival: analysis of clinical cases. <em>The EYE GLAZ.</em> 2025;27(3):222–230. doi:10.33791/2222-4408-2025-3-222-230.</li>
+<li>Kalinnikov YuYu, Izmailova SB, Ragimova LF, et al. Clinical and functional results of combined surgical treatment of keratoconus: 10-year follow-up. <em>Ophthalmology in Russia.</em> 2025;22(1):191–199. doi:10.18008/1816-5095-2025-1-191-199.</li>
+</ol>
+<div class="source-card"><strong>Purpose of this material</strong>This quick reference is intended for rapid professional orientation and selection of a management pathway. It does not replace the operating surgeon’s individualized decision, discharge instructions, or in-person assessment.</div>
+</article>
+</div>
+</main>
+<footer class="site-footer"><div class="footer-inner"><span>Matvey Shemyakin · resources for clinicians</span><span>Clinical quick reference based on methodological recommendations, 2025</span></div></footer>
+<dialog class="lightbox"><div class="lightbox-inner"><button aria-label="Close" class="lightbox-close" type="button">×</button><img alt="" src=""/></div></dialog>
+<script>
+(() => {
+  const root = document.documentElement;
+  const themeButton = document.querySelector('[data-theme-toggle]');
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  let storedTheme = null;
+  try { storedTheme = localStorage.getItem('skp-theme'); } catch (_) {}
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initial = storedTheme || (systemDark ? 'dark' : 'light');
+
+  function applyTheme(theme) {
+    root.dataset.theme = theme;
+    themeButton?.setAttribute('aria-label', theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему');
+    themeButton?.setAttribute('title', theme === 'dark' ? 'Светлая тема' : 'Тёмная тема');
+    if (themeMeta) themeMeta.content = theme === 'dark' ? '#0d1219' : '#ffffff';
+  }
+  applyTheme(initial);
+  themeButton?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('skp-theme', next); } catch (_) {}
+    applyTheme(next);
+  });
+
+  const toc = document.querySelector('.toc-nav');
+  const headings = [...document.querySelectorAll('.article h2[id], .article h3[id]')];
+  headings.forEach(h => {
+    const a = document.createElement('a');
+    a.href = `#${h.id}`;
+    a.textContent = h.childNodes[0]?.textContent?.trim() || h.textContent.replace('#','').trim();
+    a.className = h.tagName === 'H3' ? 'level-3' : 'level-2';
+    toc.appendChild(a);
+  });
+
+  const links = [...toc.querySelectorAll('a')];
+  const mobileCurrent = document.querySelector('.mobile-current');
+  const observer = new IntersectionObserver(entries => {
+    const visible = entries.filter(e => e.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (!visible.length) return;
+    const id = visible[0].target.id;
+    links.forEach(a => a.classList.toggle('active', a.hash === `#${id}`));
+    const active = links.find(a => a.hash === `#${id}`);
+    if (active && mobileCurrent) mobileCurrent.textContent = active.textContent;
+  }, { rootMargin: '-18% 0px -70% 0px', threshold: [0, 1] });
+  headings.forEach(h => observer.observe(h));
+
+  const progress = document.querySelector('.reading-progress > span');
+  function updateProgress() {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    const value = max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0;
+    progress.style.width = `${value}%`;
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+
+  const panel = document.querySelector('.toc-panel');
+  const overlay = document.querySelector('.toc-overlay');
+  const tocToggle = document.querySelector('.toc-toggle');
+  const tocClose = document.querySelector('.toc-close');
+  function setToc(open) {
+    panel.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+    tocToggle?.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) tocClose?.focus();
+  }
+  tocToggle?.addEventListener('click', () => setToc(true));
+  tocClose?.addEventListener('click', () => setToc(false));
+  overlay?.addEventListener('click', () => setToc(false));
+  links.forEach(a => a.addEventListener('click', () => setToc(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setToc(false); });
+
+
+  const dialog = document.querySelector('.lightbox');
+  const lightboxImage = dialog?.querySelector('img');
+  document.querySelectorAll('[data-lightbox]').forEach(button => {
+    button.addEventListener('click', () => {
+      lightboxImage.src = button.dataset.lightbox;
+      lightboxImage.alt = button.querySelector('img')?.alt || 'Клиническая фотография';
+      dialog.showModal();
+    });
+  });
+  dialog?.querySelector('.lightbox-close')?.addEventListener('click', () => dialog.close());
+  dialog?.addEventListener('click', e => { if (e.target === dialog || e.target.classList.contains('lightbox-inner')) dialog.close(); });
+})();
+</script>
+</body>
+</html>
