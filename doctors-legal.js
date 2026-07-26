@@ -80,16 +80,18 @@
   };
 
   function ensureStylesheet(href,marker){
-    if(document.querySelector(`link[data-shared-style="${marker}"]`))return;
-    const link=document.createElement('link');
-    link.rel='stylesheet';
+    let link=document.querySelector(`link[data-shared-style="${marker}"]`);
+    if(!link){
+      link=document.createElement('link');
+      link.rel='stylesheet';
+      link.dataset.sharedStyle=marker;
+      document.head.appendChild(link);
+    }
     link.href=href;
-    link.dataset.sharedStyle=marker;
-    document.head.appendChild(link);
   }
 
   ensureStylesheet('/doctors-legal.css?v=20260721-2','doctors-legal');
-  ensureStylesheet('/clinical-header.css?v=20260726-2','clinical-header');
+  ensureStylesheet('/clinical-header.css?v=20260726-5','clinical-header');
 
   function themeIcon(theme){
     return theme==='dark'
@@ -161,6 +163,7 @@
     const header=document.querySelector('body > header.site-header, body > header.clinical-header');
     if(!header)return;
     header.classList.add('clinical-header');
+    header.style.backgroundImage='none';
     if(isBacterial)document.body.classList.add('bacterial-clinical-page');
 
     const inner=header.querySelector('.header-inner,.container.nav,.nav');
