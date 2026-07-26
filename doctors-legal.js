@@ -5,9 +5,13 @@
 
   const lang=(document.documentElement.lang||'ru').toLowerCase().startsWith('en')?'en':'ru';
   const isLanding=pathname==='/for-doctors/'||pathname==='/en/for-doctors/';
+  const isBacterial=pathname.includes('/bacterial-keratitis/');
+  const isPkp=pathname.includes('/penetrating-keratoplasty/');
   const professionalUseUrl=lang==='en'?'/en/for-doctors/professional-use.html':'/for-doctors/professional-use.html';
   const patientsUrl=lang==='en'?'/en/patients/':'/patients/';
+  const libraryUrl=lang==='en'?'/en/for-doctors/':'/for-doctors/';
   const STORAGE_KEY='medical_professional_audience_v1';
+  const THEME_KEY='clinical-material-theme';
 
   const T=lang==='en'?{
     audienceKicker:'Professional audience',
@@ -36,7 +40,11 @@
     modalText:'By continuing, you confirm that you are a healthcare or pharmaceutical professional, or are enrolled in an appropriate professional education programme, and understand that these materials are not an individual prescription or a substitute for clinical judgement.',
     confirm:'I confirm and wish to continue',
     goPatients:'Go to patient information',
-    footer:'Professional-use terms'
+    footer:'Professional-use terms',
+    library:'← Library',
+    materials:'Materials for clinicians',
+    lightTheme:'Use light theme',
+    darkTheme:'Use dark theme'
   }:{
     audienceKicker:'Профессиональная аудитория',
     audienceTitle:'Материалы предназначены для медицинских работников',
@@ -64,7 +72,11 @@
     modalText:'Продолжая, вы подтверждаете, что являетесь медицинским или фармацевтическим работником либо обучаетесь по соответствующей профессиональной программе и понимаете, что материалы не являются индивидуальным назначением и не заменяют клиническое решение врача.',
     confirm:'Подтверждаю и продолжить',
     goPatients:'Перейти в раздел для пациентов',
-    footer:'Условия профессионального использования'
+    footer:'Условия профессионального использования',
+    library:'← К библиотеке',
+    materials:'Материалы для врачей',
+    lightTheme:'Включить светлую тему',
+    darkTheme:'Включить тёмную тему'
   };
 
   function ensureStylesheet(href,marker){
@@ -77,16 +89,83 @@
   }
 
   ensureStylesheet('/doctors-legal.css?v=20260721-2','doctors-legal');
-  ensureStylesheet('/clinical-header.css?v=20260726-1','clinical-header');
+  ensureStylesheet('/clinical-header.css?v=20260726-2','clinical-header');
+
+  function themeIcon(theme){
+    return theme==='dark'
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.6 6.6 0 0 0 21 12.8Z"></path></svg>';
+  }
+
+  function applySharedTheme(theme,button){
+    document.documentElement.dataset.theme=theme;
+    if(button){
+      button.innerHTML=themeIcon(theme);
+      const label=theme==='dark'?T.lightTheme:T.darkTheme;
+      button.setAttribute('aria-label',label);
+      button.setAttribute('title',label);
+    }
+  }
+
+  function setupInjectedThemeButton(button){
+    let stored=null;
+    try{stored=localStorage.getItem(THEME_KEY)||localStorage.getItem('skp-theme');}catch(_){ }
+    const initial=stored||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    applySharedTheme(initial,button);
+    button.addEventListener('click',()=>{
+      const next=document.documentElement.dataset.theme==='dark'?'light':'dark';
+      try{localStorage.setItem(THEME_KEY,next);localStorage.setItem('skp-theme',next);}catch(_){ }
+      applySharedTheme(next,button);
+    });
+  }
+
+  function ensureActions(header,inner){
+    let actions=header.querySelector('.header-actions,.clinical-header__actions');
+    if(!actions){
+      actions=document.createElement('div');
+      inner.appendChild(actions);
+    }
+    actions.classList.add('clinical-header__actions');
+    return actions;
+  }
+
+  function buildPkpNavigation(header,inner){
+    if(!isPkp)return;
+    let nav=header.querySelector('.nav-links,.clinical-section-nav');
+    if(!nav){
+      const items=lang==='en'?
+        [['Examination','#exam'],['Risk','#risk'],['Follow-up','#followup'],['Therapy','#therapy-low'],['Complications','#acute'],['Sources','#sources']]:
+        [['Осмотр','#exam'],['Риск','#risk'],['Наблюдение','#followup'],['Терапия','#therapy-low'],['Осложнения','#acute'],['Источники','#sources']];
+      nav=document.createElement('nav');
+      nav.className='clinical-section-nav';
+      nav.setAttribute('aria-label',lang==='en'?'Page sections':'Разделы страницы');
+      items.forEach(([label,href])=>{
+        const link=document.createElement('a');
+        link.href=href;
+        link.textContent=label;
+        nav.appendChild(link);
+      });
+      const back=document.createElement('a');
+      back.href=libraryUrl;
+      back.className='back-link';
+      back.textContent=T.library;
+      nav.appendChild(back);
+      const actions=header.querySelector('.header-actions,.clinical-header__actions');
+      inner.insertBefore(nav,actions||null);
+    }
+    nav.classList.add('clinical-section-nav');
+  }
 
   function normalizeClinicalHeader(){
     if(isLanding)return;
     const header=document.querySelector('body > header.site-header, body > header.clinical-header');
     if(!header)return;
     header.classList.add('clinical-header');
+    if(isBacterial)document.body.classList.add('bacterial-clinical-page');
 
     const inner=header.querySelector('.header-inner,.container.nav,.nav');
-    if(inner)inner.classList.add('clinical-header__inner');
+    if(!inner)return;
+    inner.classList.add('clinical-header__inner');
 
     const brand=header.querySelector('.brand');
     if(brand){
@@ -104,11 +183,16 @@
           directText.remove();
           text.prepend(name);
         }
+        const subtitle=text.querySelector('.brand-sub')||Array.from(text.children).find(el=>el.tagName==='SPAN');
+        if(subtitle)subtitle.textContent=T.materials;
       }
     }
 
-    const actions=header.querySelector('.header-actions');
-    if(actions)actions.classList.add('clinical-header__actions');
+    const existingNav=header.querySelector('.nav-links');
+    if(existingNav)existingNav.classList.add('clinical-section-nav');
+
+    const actions=ensureActions(header,inner);
+    buildPkpNavigation(header,inner);
 
     const language=header.querySelector('.language-switch');
     if(language){
@@ -119,8 +203,27 @@
       });
     }
 
-    const theme=header.querySelector('[data-theme-toggle]');
-    if(theme)theme.classList.add('clinical-theme-toggle');
+    let mobileLibrary=header.querySelector('.mobile-back-link,.clinical-mobile-library');
+    if(!mobileLibrary){
+      mobileLibrary=document.createElement('a');
+      mobileLibrary.href=libraryUrl;
+      mobileLibrary.textContent=T.library;
+    }
+    mobileLibrary.classList.add('clinical-mobile-library');
+    if(mobileLibrary.parentElement!==actions)actions.prepend(mobileLibrary);
+
+    let theme=header.querySelector('[data-theme-toggle]');
+    if(theme){
+      theme.classList.add('clinical-theme-toggle');
+    }else if(isBacterial){
+      theme=document.createElement('button');
+      theme.type='button';
+      theme.dataset.themeToggle='';
+      theme.dataset.sharedThemeToggle='true';
+      theme.className='clinical-theme-toggle';
+      actions.appendChild(theme);
+      setupInjectedThemeButton(theme);
+    }
   }
 
   normalizeClinicalHeader();
