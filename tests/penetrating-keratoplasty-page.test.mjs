@@ -5,6 +5,7 @@ import test from 'node:test';
 const page = readFileSync('for-doctors/penetrating-keratoplasty/index.html', 'utf8');
 const headerCss = readFileSync('clinical-header.css', 'utf8');
 const headerJs = readFileSync('doctors-legal.js', 'utf8');
+const legalInjector = readFileSync('scripts/inject_legal.py', 'utf8');
 
 test('hides the embedded first-photo caption without altering the source JPEG', () => {
   const cropClasses = page.match(/caption-cropped/g) || [];
@@ -36,4 +37,5 @@ test('shared clinical header contains the primary site navigation', () => {
   assert.match(headerCss, /text-transform:uppercase/);
   assert.match(headerCss, /--clinical-header-height:\s*104px/);
   assert.match(page, /doctors-legal\.js\?v=20260726-7/);
+  assert.match(legalInjector, /doctors-legal\.js\?v=20260726-7/);
 });

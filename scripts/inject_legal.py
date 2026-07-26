@@ -5,7 +5,7 @@ import re
 # and professional safeguards connected to every clinician-facing page.
 ROOT = Path(__file__).resolve().parents[1]
 LEGAL_SCRIPT = '<script src="/legal.js?v=20260721-3"></script>'
-DOCTORS_SCRIPT = '<script src="/doctors-legal.js?v=20260721-2"></script>'
+DOCTORS_SCRIPT = '<script src="/doctors-legal.js?v=20260726-7"></script>'
 PRIVACY_PAGES = {ROOT / 'privacy.html', ROOT / 'en' / 'privacy.html'}
 PROFESSIONAL_TERMS = {
     ROOT / 'for-doctors' / 'professional-use.html',
