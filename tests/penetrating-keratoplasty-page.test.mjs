@@ -35,4 +35,5 @@ test('shared clinical header contains the primary site navigation', () => {
   assert.match(headerCss, /font-family:var\(--clinical-serif\)/);
   assert.match(headerCss, /text-transform:uppercase/);
   assert.match(headerCss, /--clinical-header-height:\s*104px/);
+  assert.match(page, /doctors-legal\.js\?v=20260726-7/);
 });
