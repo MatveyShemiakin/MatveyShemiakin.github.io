@@ -1,0 +1,31 @@
+name: Publish PKP synopsis on command
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  publish:
+    if: github.event.comment.body == '/publish-pkp' && github.actor == 'MatveyShemiakin'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore the reviewed site bundle
+        run: |
+          git fetch origin pkp-publish
+          git show origin/pkp-publish:.site-deploy/pkp/payload.zip > /tmp/pkp-site.zip
+          unzip -o /tmp/pkp-site.zip -d .
+          rm -f .github/workflows/publish-pkp-on-comment.yml
+      - name: Commit the published pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Publish penetrating keratoplasty clinical synopsis" || exit 0
+          git push
