@@ -1,0 +1,151 @@
+:root{--site-lang-navy:#06182f;--site-lang-border:rgba(202,214,230,.55);--site-lang-muted:#c7d3e3;--site-lang-white:#fff}
+
+nav.site-language-switch,
+.site-language-switch,
+.language-switch,
+.patient-language-switch,
+.doctors-language{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 auto!important;
+  gap:4px!important;
+  width:auto!important;
+  min-width:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:4px!important;
+  border:1px solid var(--site-lang-border)!important;
+  border-radius:999px!important;
+  background:rgba(4,18,37,.62)!important;
+  box-shadow:none!important;
+  color:var(--site-lang-white)!important;
+  font-family:Inter,"Segoe UI",Arial,sans-serif!important;
+  font-size:11px!important;
+  line-height:1!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  white-space:nowrap!important;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.site-language-switch a,
+.language-switch a,
+.patient-language-switch a,
+.doctors-language a,
+.site-language-switch__link{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:39px!important;
+  min-width:39px!important;
+  height:31px!important;
+  min-height:31px!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--site-lang-muted)!important;
+  font-family:Inter,"Segoe UI",Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  line-height:1!important;
+  letter-spacing:.08em!important;
+  text-align:center!important;
+  text-decoration:none!important;
+  text-indent:.08em!important;
+  text-transform:uppercase!important;
+  transition:background-color .16s ease,color .16s ease,transform .16s ease!important;
+}
+
+.site-language-switch a:hover,
+.language-switch a:hover,
+.patient-language-switch a:hover,
+.doctors-language a:hover{
+  color:#fff!important;
+}
+
+.site-language-switch a[aria-current="page"],
+.site-language-switch a.is-active,
+.site-language-switch a.active,
+.language-switch a[aria-current="page"],
+.language-switch a.is-active,
+.language-switch a.active,
+.patient-language-switch a[aria-current="page"],
+.patient-language-switch a.active,
+.doctors-language a[aria-current="page"],
+.doctors-language a.active{
+  background:#fff!important;
+  color:var(--site-lang-navy)!important;
+  box-shadow:0 5px 14px rgba(0,0,0,.18)!important;
+}
+
+.site-language-switch a:focus-visible,
+.language-switch a:focus-visible,
+.patient-language-switch a:focus-visible,
+.doctors-language a:focus-visible{
+  outline:3px solid rgba(135,181,255,.8)!important;
+  outline-offset:3px!important;
+}
+
+.nav-right>.site-language-switch,
+.patient-header .header-row>.site-language-switch,
+.site-head .nav>.site-language-switch,
+.doctors-nav-actions>.site-language-switch,
+.site-header .header-actions>.site-language-switch,
+.site-header .nav>.site-language-switch,
+.site-header .header-inner>.site-language-switch,
+header .container>.site-language-switch{
+  margin-left:auto!important;
+}
+
+.site-language-utility{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  width:100%;
+  margin:0 0 22px;
+}
+
+.site-language-utility .site-language-switch{
+  background:var(--site-lang-navy)!important;
+}
+
+@media(max-width:760px){
+  nav.site-language-switch,
+  .site-language-switch,
+  .language-switch,
+  .patient-language-switch,
+  .doctors-language{
+    gap:3px!important;
+    padding:3px!important;
+  }
+
+  .site-language-switch a,
+  .language-switch a,
+  .patient-language-switch a,
+  .doctors-language a,
+  .site-language-switch__link{
+    width:36px!important;
+    min-width:36px!important;
+    height:29px!important;
+    min-height:29px!important;
+    font-size:10px!important;
+  }
+
+  .site-language-utility{
+    margin-bottom:18px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .site-language-switch a,
+  .language-switch a,
+  .patient-language-switch a,
+  .doctors-language a{
+    transition:none!important;
+  }
+}
