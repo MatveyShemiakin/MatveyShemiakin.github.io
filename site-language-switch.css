@@ -4,6 +4,7 @@ nav.site-language-switch,
 .site-language-switch,
 .language-switch,
 .patient-language-switch,
+.topic-language-switch,
 .doctors-language{
   display:inline-flex!important;
   align-items:center!important;
@@ -33,6 +34,7 @@ nav.site-language-switch,
 .site-language-switch a,
 .language-switch a,
 .patient-language-switch a,
+.topic-language-switch a,
 .doctors-language a,
 .site-language-switch__link{
   display:inline-flex!important;
@@ -64,6 +66,7 @@ nav.site-language-switch,
 .site-language-switch a:hover,
 .language-switch a:hover,
 .patient-language-switch a:hover,
+.topic-language-switch a:hover,
 .doctors-language a:hover{
   color:#fff!important;
 }
@@ -76,6 +79,8 @@ nav.site-language-switch,
 .language-switch a.active,
 .patient-language-switch a[aria-current="page"],
 .patient-language-switch a.active,
+.topic-language-switch a[aria-current="page"],
+.topic-language-switch a.active,
 .doctors-language a[aria-current="page"],
 .doctors-language a.active{
   background:#fff!important;
@@ -86,6 +91,7 @@ nav.site-language-switch,
 .site-language-switch a:focus-visible,
 .language-switch a:focus-visible,
 .patient-language-switch a:focus-visible,
+.topic-language-switch a:focus-visible,
 .doctors-language a:focus-visible{
   outline:3px solid rgba(135,181,255,.8)!important;
   outline-offset:3px!important;
@@ -95,6 +101,7 @@ nav.site-language-switch,
 .patient-header .header-row>.site-language-switch,
 .site-head .nav>.site-language-switch,
 .doctors-nav-actions>.site-language-switch,
+.terms-nav>.site-language-switch,
 .site-header .header-actions>.site-language-switch,
 .site-header .nav>.site-language-switch,
 .site-header .header-inner>.site-language-switch,
@@ -119,6 +126,7 @@ header .container>.site-language-switch{
   .site-language-switch,
   .language-switch,
   .patient-language-switch,
+  .topic-language-switch,
   .doctors-language{
     gap:3px!important;
     padding:3px!important;
@@ -127,6 +135,7 @@ header .container>.site-language-switch{
   .site-language-switch a,
   .language-switch a,
   .patient-language-switch a,
+  .topic-language-switch a,
   .doctors-language a,
   .site-language-switch__link{
     width:36px!important;
@@ -145,6 +154,7 @@ header .container>.site-language-switch{
   .site-language-switch a,
   .language-switch a,
   .patient-language-switch a,
+  .topic-language-switch a,
   .doctors-language a{
     transition:none!important;
   }
