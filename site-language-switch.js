@@ -62,6 +62,7 @@
       '.patient-header .header-row',
       '.site-head .nav',
       '.doctors-nav-actions',
+      '.terms-nav',
       '.site-header .header-actions',
       '.site-header .nav',
       '.site-header .header-inner',
@@ -74,15 +75,24 @@
     return null;
   }
 
+  function removeLegacyLanguageLinks(){
+    document.querySelectorAll('header a[lang="ru"],header a[lang="en"],header a[hreflang="ru"],header a[hreflang="en"]').forEach(link=>{
+      if(link.closest('.site-language-switch'))return;
+      const label=(link.textContent||'').trim().toUpperCase();
+      if(label==='RU'||label==='EN')link.remove();
+    });
+  }
+
   function initLanguageSwitch(){
     if(document.documentElement.dataset.siteLanguageSwitch==='ready')return;
     document.documentElement.dataset.siteLanguageSwitch='ready';
 
-    const existing=[...document.querySelectorAll('.site-language-switch,.language-switch,.patient-language-switch,.doctors-language')];
+    const existing=[...document.querySelectorAll('.site-language-switch,.language-switch,.patient-language-switch,.topic-language-switch,.doctors-language')];
     const first=existing[0]||null;
     const parent=first&&first.parentElement;
     const next=first&&first.nextSibling;
     existing.forEach(element=>element.remove());
+    removeLegacyLanguageLinks();
 
     const languageSwitch=createSwitch();
     if(parent){
