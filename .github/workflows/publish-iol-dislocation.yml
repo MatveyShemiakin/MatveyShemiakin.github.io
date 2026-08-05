@@ -143,6 +143,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          sed -i 's/[[:space:]]\+$//' patients/iol-dislocation/styles.css
           rm -rf .github/iol-publish
           rm -f .github/workflows/publish-iol-dislocation.yml
           git config user.name 'github-actions[bot]'
