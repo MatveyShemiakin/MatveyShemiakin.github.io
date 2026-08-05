@@ -1,0 +1,112 @@
+name: Implement site breadcrumbs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/implement-site-breadcrumbs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  implement:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run breadcrumb implementation
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          legal_js=Path('legal.js'); legal_css=Path('legal.css'); doctors_js=Path('doctors-legal.js'); doctors_css=Path('doctors-legal.css')
+          test=Path('tests/site-breadcrumbs.test.mjs')
+          test.write_text("""import fs from 'node:fs';\nimport assert from 'node:assert/strict';\nconst legal=fs.readFileSync('legal.js','utf8');\nconst doctors=fs.readFileSync('doctors-legal.js','utf8');\nconst legalCss=fs.readFileSync('legal.css','utf8');\nconst doctorsCss=fs.readFileSync('doctors-legal.css','utf8');\nassert.match(legal,/SITE_BREADCRUMBS_V1/);\nassert.match(doctors,/CLINICAL_BREADCRUMBS_V1/);\nassert.match(legalCss,/\\.site-breadcrumbs/);\nassert.match(doctorsCss,/\\.clinical-breadcrumbs/);\nfor(const page of ['patients/before-surgery/index.html','patients/surgery-day/index.html','patients/recovery/index.html','patients/daily-life/index.html','patients/eye-drops/index.html','patients/glasses/index.html','patients/iol-dislocation/index.html','en/patients/before-surgery/index.html','en/patients/surgery-day/index.html','en/patients/recovery/index.html','en/patients/daily-life/index.html','en/patients/eye-drops/index.html','en/patients/glasses/index.html','en/patients/iol-dislocation/index.html']){const html=fs.readFileSync(page,'utf8');assert.match(html,/class=[\"']crumbs[\"']/);assert.match(html,/legal\\.js\\?v=20260805-1/);}\nfor(const page of ['for-doctors/bacterial-keratitis/index.html','for-doctors/penetrating-keratoplasty/index.html','en/for-doctors/penetrating-keratoplasty/index.html']){assert.match(fs.readFileSync(page,'utf8'),/doctors-legal\\.js\\?v=20260805-1/);}\nconsole.log('Breadcrumb implementation checks passed.');\n""",encoding='utf-8')
+
+          import subprocess
+          before=subprocess.run(['node',str(test)],capture_output=True,text=True)
+          if before.returncode==0:
+              raise SystemExit('Test unexpectedly passed before implementation')
+          print('Expected failing test confirmed')
+
+          legal_snippet=r'''
+
+/* SITE_BREADCRUMBS_V1 */
+(function(){
+  const path=(window.location.pathname.replace(/\/{2,}/g,'/').replace(/\/+$/,'')||'/')+'/';
+  const patientPages={
+    '/patients/before-surgery/':[['Главная','/'],['Пациентам','/patients/'],['До операции',null]],
+    '/patients/surgery-day/':[['Главная','/'],['Пациентам','/patients/'],['День операции',null]],
+    '/patients/recovery/':[['Главная','/'],['Пациентам','/patients/'],['Первые дни после операции',null]],
+    '/patients/daily-life/':[['Главная','/'],['Пациентам','/patients/'],['Повседневная жизнь после операции',null]],
+    '/patients/eye-drops/':[['Главная','/'],['Пациентам','/patients/'],['Глазные капли',null]],
+    '/patients/glasses/':[['Главная','/'],['Пациентам','/patients/'],['Очки и зрение',null]],
+    '/patients/iol-dislocation/':[['Главная','/'],['Пациентам','/patients/'],['Смещение искусственного хрусталика',null]],
+    '/en/patients/before-surgery/':[['Home','/en/'],['Patients','/en/patients/'],['Before surgery',null]],
+    '/en/patients/surgery-day/':[['Home','/en/'],['Patients','/en/patients/'],['Surgery day',null]],
+    '/en/patients/recovery/':[['Home','/en/'],['Patients','/en/patients/'],['Early recovery',null]],
+    '/en/patients/daily-life/':[['Home','/en/'],['Patients','/en/patients/'],['Daily life after surgery',null]],
+    '/en/patients/eye-drops/':[['Home','/en/'],['Patients','/en/patients/'],['Eye drops',null]],
+    '/en/patients/glasses/':[['Home','/en/'],['Patients','/en/patients/'],['Glasses and vision',null]],
+    '/en/patients/iol-dislocation/':[['Home','/en/'],['Patients','/en/patients/'],['Intraocular lens dislocation',null]]
+  };
+  const professionalPages={
+    '/for-doctors/professional-use.html/':[['Главная','/'],['Для врачей','/for-doctors/'],['Условия профессионального использования',null]],
+    '/en/for-doctors/professional-use.html/':[['Home','/en/'],['For doctors','/en/for-doctors/'],['Professional use terms',null]]
+  };
+  function containsType(value,type){if(Array.isArray(value))return value.some(item=>containsType(item,type));if(!value||typeof value!=='object')return false;const current=value['@type'];if(current===type||(Array.isArray(current)&&current.includes(type)))return true;return Object.values(value).some(item=>containsType(item,type))}
+  function hasBreadcrumbJsonLd(){return Array.from(document.querySelectorAll('script[type="application/ld+json"]')).some(script=>{try{return containsType(JSON.parse(script.textContent),'BreadcrumbList')}catch(_){return false}})}
+  function addBreadcrumbJsonLd(items){if(hasBreadcrumbJsonLd())return;const origin=window.location.origin;const pageUrl=origin+window.location.pathname;const data={'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:items.map(([name,href],index)=>({'@type':'ListItem',position:index+1,name,item:href?origin+href:pageUrl}))};const script=document.createElement('script');script.type='application/ld+json';script.dataset.siteBreadcrumbs='true';script.textContent=JSON.stringify(data);document.head.appendChild(script)}
+  function addVisibleBreadcrumbs(items){const hero=document.querySelector('.terms-hero');if(!hero||hero.querySelector('.site-breadcrumbs'))return;const nav=document.createElement('nav');nav.className='site-breadcrumbs site-breadcrumbs--on-dark';nav.setAttribute('aria-label',document.documentElement.lang.toLowerCase().startsWith('en')?'Breadcrumb':'Хлебные крошки');items.forEach(([name,href],index)=>{if(index){const separator=document.createElement('span');separator.className='site-breadcrumbs__separator';separator.setAttribute('aria-hidden','true');separator.textContent='/';nav.appendChild(separator)}if(href){const link=document.createElement('a');link.href=href;link.textContent=name;nav.appendChild(link)}else{const current=document.createElement('span');current.className='site-breadcrumbs__current';current.setAttribute('aria-current','page');current.textContent=name;nav.appendChild(current)}});hero.prepend(nav)}
+  const patient=patientPages[path];if(patient){addBreadcrumbJsonLd(patient);return}const professional=professionalPages[path];if(professional){addVisibleBreadcrumbs(professional);addBreadcrumbJsonLd(professional)}
+})();
+'''
+          doctors_snippet=r'''
+
+/* CLINICAL_BREADCRUMBS_V1 */
+(function(){
+  const path=(window.location.pathname.replace(/\/{2,}/g,'/').replace(/\/+$/,'')||'/')+'/';
+  const pages={
+    '/for-doctors/bacterial-keratitis/':[['Главная','/'],['Для врачей','/for-doctors/'],['Бактериальный кератит и язва роговицы',null]],
+    '/for-doctors/penetrating-keratoplasty/':[['Главная','/'],['Для врачей','/for-doctors/'],['Ведение после сквозной кератопластики',null]],
+    '/en/for-doctors/penetrating-keratoplasty/':[['Home','/en/'],['For doctors','/en/for-doctors/'],['Follow-up after penetrating keratoplasty',null]]
+  };
+  const items=pages[path];if(!items)return;
+  function containsType(value,type){if(Array.isArray(value))return value.some(item=>containsType(item,type));if(!value||typeof value!=='object')return false;const current=value['@type'];if(current===type||(Array.isArray(current)&&current.includes(type)))return true;return Object.values(value).some(item=>containsType(item,type))}
+  function addJsonLd(){const exists=Array.from(document.querySelectorAll('script[type="application/ld+json"]')).some(script=>{try{return containsType(JSON.parse(script.textContent),'BreadcrumbList')}catch(_){return false}});if(exists)return;const origin=window.location.origin;const data={'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:items.map(([name,href],index)=>({'@type':'ListItem',position:index+1,name,item:href?origin+href:origin+window.location.pathname}))};const script=document.createElement('script');script.type='application/ld+json';script.dataset.clinicalBreadcrumbs='true';script.textContent=JSON.stringify(data);document.head.appendChild(script)}
+  function addVisible(){if(document.querySelector('.clinical-breadcrumbs'))return;const h1=document.querySelector('main h1');if(!h1||!h1.parentElement)return;const nav=document.createElement('nav');nav.className='clinical-breadcrumbs';nav.setAttribute('aria-label',document.documentElement.lang.toLowerCase().startsWith('en')?'Breadcrumb':'Хлебные крошки');items.forEach(([name,href],index)=>{if(index){const separator=document.createElement('span');separator.className='clinical-breadcrumbs__separator';separator.setAttribute('aria-hidden','true');separator.textContent='/';nav.appendChild(separator)}if(href){const link=document.createElement('a');link.href=href;link.textContent=name;nav.appendChild(link)}else{const current=document.createElement('span');current.className='clinical-breadcrumbs__current';current.setAttribute('aria-current','page');current.textContent=name;nav.appendChild(current)}});h1.parentElement.insertBefore(nav,h1.parentElement.firstChild)}
+  addVisible();addJsonLd();
+})();
+'''
+          legal_styles='''\n/* SITE_BREADCRUMBS_V1 */\n.site-breadcrumbs{display:flex;flex-wrap:wrap;align-items:center;gap:5px 8px;margin:0 0 16px;font-family:var(--legal-sans);font-size:12px;line-height:1.45;font-weight:600;letter-spacing:0}.site-breadcrumbs a{color:#b9d4ff;text-decoration:none;text-underline-offset:3px}.site-breadcrumbs a:hover{text-decoration:underline}.site-breadcrumbs__separator{color:rgba(255,255,255,.42)}.site-breadcrumbs__current{color:rgba(255,255,255,.72)}.site-breadcrumbs a:focus-visible{outline:3px solid rgba(135,181,255,.78);outline-offset:3px;border-radius:3px}@media(max-width:720px){.site-breadcrumbs{margin-bottom:13px;font-size:11px;gap:4px 6px}}\n'''
+          doctors_styles='''\n/* CLINICAL_BREADCRUMBS_V1 */\n.clinical-breadcrumbs{display:flex;flex-wrap:wrap;align-items:center;gap:5px 8px;margin:0 0 14px;color:rgba(255,255,255,.72);font-family:var(--sans,Arial,sans-serif);font-size:12px;line-height:1.45;font-weight:650;letter-spacing:0;text-transform:none}.clinical-breadcrumbs a{color:#b9d4ff;text-decoration:none;text-underline-offset:3px}.clinical-breadcrumbs a:hover{text-decoration:underline}.clinical-breadcrumbs__separator{color:rgba(255,255,255,.38)}.clinical-breadcrumbs__current{color:rgba(255,255,255,.7)}.clinical-breadcrumbs a:focus-visible{outline:3px solid #87b5ff;outline-offset:3px;border-radius:3px}@media(max-width:780px){.clinical-breadcrumbs{margin-bottom:12px;font-size:11px;gap:4px 6px}}\n'''
+          for path,marker,snippet in [(legal_js,'SITE_BREADCRUMBS_V1',legal_snippet),(doctors_js,'CLINICAL_BREADCRUMBS_V1',doctors_snippet),(legal_css,'SITE_BREADCRUMBS_V1',legal_styles),(doctors_css,'CLINICAL_BREADCRUMBS_V1',doctors_styles)]:
+              text=path.read_text(encoding='utf-8')
+              if marker not in text:path.write_text(text.rstrip()+snippet+'\n',encoding='utf-8')
+          for html_path in Path('.').rglob('*.html'):
+              text=html_path.read_text(encoding='utf-8')
+              updated=re.sub(r'(/legal\.js\?v=)[^"\'\s>]+',r'\g<1>20260805-1',text)
+              updated=re.sub(r'(/doctors-legal\.js\?v=)[^"\'\s>]+',r'\g<1>20260805-1',updated)
+              if updated!=text:html_path.write_text(updated,encoding='utf-8')
+          legal_js.write_text(legal_js.read_text(encoding='utf-8').replace('/legal.css?v=20260723-7','/legal.css?v=20260805-1'),encoding='utf-8')
+          doctors_js.write_text(re.sub(r'/doctors-legal\.css\?v=[^\'\"]+','/doctors-legal.css?v=20260805-1',doctors_js.read_text(encoding='utf-8')),encoding='utf-8')
+          PY
+          node --check legal.js
+          node --check doctors-legal.js
+          node tests/site-breadcrumbs.test.mjs
+          git diff --check
+      - name: Commit and publish
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/implement-site-breadcrumbs.yml
+          git add -A
+          git diff --cached --check
+          git commit -m 'Add consistent breadcrumbs across content pages'
+          git push origin main
