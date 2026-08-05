@@ -1,0 +1,164 @@
+{
+  "package_id": "anterior-uveitis",
+  "version": "0.1.0",
+  "evidence_chunks": [
+    {
+      "id": "au-classification-framework",
+      "kind": "classification",
+      "tags": ["anterior_uveitis", "grading", "activity", "all_cases"],
+      "claim": "Use standardized anatomic classification, course, anterior chamber cell grade and activity terminology before comparing etiologies or treatment options.",
+      "source_ids": ["SUN-UVEITIS-NOMENCLATURE-2005", "SUN-UVEITIDES-CLASSIFICATION-2021"],
+      "evidence_strength": "international_consensus_and_validated_classification",
+      "activation": "retrievable"
+    },
+    {
+      "id": "au-hsv-classification",
+      "kind": "diagnostic_option",
+      "tags": ["anterior_uveitis", "unilateral", "recurrent", "high_iop", "sectoral_iris_atrophy", "keratitis", "hsv"],
+      "claim": "HSV anterior uveitis becomes a stronger option in unilateral anterior uveitis with positive aqueous PCR for HSV, sectoral iris atrophy in a patient 50 years or younger, or HSV keratitis. These are classification criteria and do not replace clinical diagnosis.",
+      "source_ids": ["SUN-HSV-AU-2021"],
+      "evidence_strength": "validated_classification_criteria",
+      "activation": "retrievable"
+    },
+    {
+      "id": "au-vzv-classification",
+      "kind": "diagnostic_option",
+      "tags": ["anterior_uveitis", "unilateral", "high_iop", "sectoral_iris_atrophy", "zoster_history", "vzv", "older_age"],
+      "claim": "VZV anterior uveitis becomes a stronger option in unilateral anterior uveitis with positive aqueous PCR for VZV, sectoral iris atrophy in a patient 60 years or older, or concurrent/recent dermatomal herpes zoster.",
+      "source_ids": ["SUN-VZV-AU-2021"],
+      "evidence_strength": "validated_classification_criteria",
+      "activation": "retrievable"
+    },
+    {
+      "id": "au-fuchs-classification",
+      "kind": "diagnostic_option",
+      "tags": ["anterior_uveitis", "chronic", "unilateral", "diffuse_iris_atrophy", "vitritis", "fuchs"],
+      "claim": "Fuchs uveitis syndrome should be retained as an option when the phenotype is chronic, usually unilateral, with characteristic iris changes and low-grade inflammation; the model must retrieve the full classification criteria before presenting this option as strongly supported.",
+      "source_ids": ["SUN-FUCHS-2021"],
+      "evidence_strength": "validated_classification_criteria",
+      "activation": "retrievable"
+    },
+    {
+      "id": "au-hlab27-classification",
+      "kind": "diagnostic_option",
+      "tags": ["anterior_uveitis", "acute", "recurrent", "unilateral", "alternating", "hla_b27", "spondyloarthritis"],
+      "claim": "HLA-B27/spondyloarthritis-associated anterior uveitis is supported by an acute or recurrent acute unilateral or alternating phenotype together with spondyloarthritis or a positive HLA-B27 test.",
+      "source_ids": ["SUN-HLAB27-AU-2021"],
+      "evidence_strength": "validated_classification_criteria",
+      "activation": "retrievable"
+    },
+    {
+      "id": "au-viral-discriminating-clues",
+      "kind": "diagnostic_reasoning",
+      "tags": ["anterior_uveitis", "viral", "unilateral", "high_iop", "reduced_corneal_sensation", "iris_atrophy"],
+      "claim": "International expert consensus considers unilaterality, increased IOP, reduced corneal sensation and diffuse or sectoral iris atrophy useful clues for HSV/VZV anterior uveitis. Sectoral iris atrophy is particularly characteristic of HSV in that consensus.",
+      "source_ids": ["TITAN-HSV-VZV-AU-2024"],
+      "evidence_strength": "international_delphi_consensus",
+      "activation": "retrievable"
+    },
+    {
+      "id": "au-hsv-vzv-treatment-option",
+      "kind": "treatment_option",
+      "tags": ["anterior_uveitis", "hsv", "vzv", "viral", "antiviral", "topical_corticosteroid", "high_iop"],
+      "claim": "For suspected HSV/VZV anterior uveitis, present an antiviral-based option plus inflammation and IOP control. Valacyclovir was preferred by most experts because of simpler dosing; topical corticosteroids and beta-blockers may be used when clinically indicated. Resolution of inflammation and normalization of IOP are treatment endpoints. Duration and recurrence management varied among experts.",
+      "source_ids": ["TITAN-HSV-VZV-AU-2024"],
+      "evidence_strength": "international_delphi_consensus_with_variation",
+      "activation": "draft_locked",
+      "safety_requirements": [
+        "confirm_or_preserve viral etiology in differential",
+        "review renal function and dose adjustment before systemic antiviral",
+        "check pregnancy, allergy and interactions",
+        "do not present corticosteroid escalation without antiviral coverage when herpetic disease is suspected",
+        "exclude posterior herpetic involvement"
+      ]
+    },
+    {
+      "id": "au-cmv-diagnostic-option",
+      "kind": "diagnostic_option",
+      "tags": ["anterior_uveitis", "cmv", "high_iop", "recurrent", "hypertensive_uveitis", "aqueous_pcr"],
+      "claim": "In suspected CMV anterior uveitis, diagnostic aqueous sampling should be offered as an option; in TITAN, 73.3% of participating experts reported always performing an aqueous tap in suspected cases.",
+      "source_ids": ["TITAN-CMV-AU-2024"],
+      "evidence_strength": "international_practice_consensus",
+      "activation": "retrievable"
+    },
+    {
+      "id": "au-cmv-topical-treatment-option",
+      "kind": "treatment_option",
+      "tags": ["anterior_uveitis", "cmv", "topical_antiviral", "ganciclovir", "topical_corticosteroid"],
+      "claim": "For CMV anterior uveitis, present a topical antiviral option based on ganciclovir gel 0.15%. TITAN experts commonly paired antiviral coverage with prednisolone acetate 1% four times daily for one to two weeks, then adjusted treatment to clinical response.",
+      "source_ids": ["TITAN-CMV-AU-2024"],
+      "evidence_strength": "international_delphi_consensus_with_acknowledged_variation",
+      "activation": "draft_locked",
+      "safety_requirements": [
+        "confirm availability and local regulatory status",
+        "assess corneal status and IOP",
+        "do not treat a suspected CMV phenotype as noninfectious uveitis alone",
+        "monitor response and reconsider diagnosis if inflammation or IOP does not improve"
+      ]
+    },
+    {
+      "id": "au-cmv-systemic-treatment-option",
+      "kind": "treatment_option",
+      "tags": ["anterior_uveitis", "cmv", "severe", "prolonged", "atypical", "valganciclovir", "systemic_antiviral"],
+      "claim": "Offer systemic valganciclovir as a separate physician-selectable option for severe, prolonged or atypical CMV anterior uveitis, not as an automatic default. Expert practice varied substantially.",
+      "source_ids": ["TITAN-CMV-AU-2024"],
+      "evidence_strength": "international_practice_consensus_with_high_variation",
+      "activation": "draft_locked",
+      "safety_requirements": [
+        "confirm diagnosis or very strong suspicion",
+        "review renal function",
+        "require blood-count and toxicity monitoring plan",
+        "check pregnancy and reproductive toxicity constraints",
+        "review interactions and local prescribing information"
+      ]
+    },
+    {
+      "id": "au-cmv-maintenance-option",
+      "kind": "treatment_option",
+      "tags": ["anterior_uveitis", "cmv", "chronic", "recurrent", "maintenance"],
+      "claim": "Long-term maintenance, potentially up to 12 months, may be presented for chronic CMV inflammation or at least two episodes in a year, but the option must be labelled as consensus-based and individualized because practice varies.",
+      "source_ids": ["TITAN-CMV-AU-2024"],
+      "evidence_strength": "international_delphi_consensus_with_variation",
+      "activation": "draft_locked"
+    },
+    {
+      "id": "au-noninfectious-local-option",
+      "kind": "treatment_option",
+      "tags": ["anterior_uveitis", "noninfectious", "topical_corticosteroid", "local_treatment"],
+      "claim": "For a phenotype judged noninfectious after appropriate exclusion of infection, present local anti-inflammatory therapy as a first-line option, with intensity and taper tied to activity and response rather than a fixed universal schedule. Monitoring must include IOP, lens status, anterior chamber activity and visual function.",
+      "source_ids": ["SUN-UVEITIS-NOMENCLATURE-2005"],
+      "evidence_strength": "standard_of_care_framework_requires_regimen_source_validation",
+      "activation": "draft_locked",
+      "safety_requirements": [
+        "exclude or cover infectious etiologies when indicated",
+        "record baseline IOP",
+        "define early reassessment",
+        "avoid automatic taper without documented response"
+      ]
+    },
+    {
+      "id": "au-noninfectious-systemic-escalation",
+      "kind": "treatment_option",
+      "tags": ["anterior_uveitis", "noninfectious", "recurrent", "chronic", "steroid_dependent", "systemic_immunomodulation"],
+      "claim": "For recurrent, chronic, steroid-dependent or sight-threatening noninfectious uveitis, present referral and systemic corticosteroid-sparing immunomodulatory therapy as an escalation option. The choice of agent requires disease-specific efficacy, safety screening, monitoring and shared decision-making.",
+      "source_ids": ["FOCUS-NONINFECTIOUS-UVEITIS-2018"],
+      "evidence_strength": "evidence_based_international_consensus",
+      "activation": "draft_locked",
+      "safety_requirements": [
+        "exclude infection and masquerade",
+        "coordinate with an appropriate specialist",
+        "complete pretreatment laboratory and infection screening",
+        "define toxicity monitoring and response criteria"
+      ]
+    },
+    {
+      "id": "au-universal-safety-stop",
+      "kind": "safety",
+      "tags": ["anterior_uveitis", "all_cases", "red_flags"],
+      "claim": "Do not allow routine treatment-option presentation to delay urgent evaluation when there is hypopyon after surgery or injection, suspected endophthalmitis, retinitis/vasculitis, severe visual loss, marked uncontrolled IOP with systemic symptoms, or significant posterior involvement.",
+      "source_ids": ["SUN-UVEITIS-NOMENCLATURE-2005"],
+      "evidence_strength": "safety_rule_pending_multisource_validation",
+      "activation": "retrievable"
+    }
+  ]
+}
