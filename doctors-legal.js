@@ -90,7 +90,7 @@
     link.href=href;
   }
 
-  ensureStylesheet('/doctors-legal.css?v=20260721-2','doctors-legal');
+  ensureStylesheet('/doctors-legal.css?v=20260805-1','doctors-legal');
   ensureStylesheet('/clinical-header.css?v=20260726-7','clinical-header');
 
   function themeIcon(theme){
@@ -255,4 +255,77 @@
   if(isLanding)createLandingNotice();else{createClinicalNotice();createTreatmentWarning();createFullLegalBlock();}
   addFooterLink();
   showAudienceModal();
+})();
+
+/* CLINICAL_BREADCRUMBS_V1 */
+(function(){
+  const path=(window.location.pathname.replace(/\/{2,}/g,'/').replace(/\/+$/,'')||'/')+'/';
+  const pages={
+    '/for-doctors/bacterial-keratitis/':[['Главная','/'],['Для врачей','/for-doctors/'],['Бактериальный кератит и язва роговицы',null]],
+    '/for-doctors/penetrating-keratoplasty/':[['Главная','/'],['Для врачей','/for-doctors/'],['Ведение после сквозной кератопластики',null]],
+    '/en/for-doctors/penetrating-keratoplasty/':[['Home','/en/'],['For doctors','/en/for-doctors/'],['Follow-up after penetrating keratoplasty',null]]
+  };
+  const items=pages[path];
+  if(!items)return;
+  function containsType(value,type){
+    if(Array.isArray(value))return value.some(item=>containsType(item,type));
+    if(!value||typeof value!=='object')return false;
+    const current=value['@type'];
+    if(current===type||(Array.isArray(current)&&current.includes(type)))return true;
+    return Object.values(value).some(item=>containsType(item,type));
+  }
+  function addJsonLd(){
+    const exists=Array.from(document.querySelectorAll('script[type="application/ld+json"]')).some(script=>{
+      try{return containsType(JSON.parse(script.textContent),'BreadcrumbList')}catch(_){return false}
+    });
+    if(exists)return;
+    const origin=window.location.origin;
+    const data={
+      '@context':'https://schema.org',
+      '@type':'BreadcrumbList',
+      itemListElement:items.map(([name,href],index)=>({
+        '@type':'ListItem',
+        position:index+1,
+        name,
+        item:href?origin+href:origin+window.location.pathname
+      }))
+    };
+    const script=document.createElement('script');
+    script.type='application/ld+json';
+    script.dataset.clinicalBreadcrumbs='true';
+    script.textContent=JSON.stringify(data);
+    document.head.appendChild(script);
+  }
+  function addVisible(){
+    if(document.querySelector('.clinical-breadcrumbs'))return;
+    const h1=document.querySelector('main h1');
+    if(!h1||!h1.parentElement)return;
+    const nav=document.createElement('nav');
+    nav.className='clinical-breadcrumbs';
+    nav.setAttribute('aria-label',document.documentElement.lang.toLowerCase().startsWith('en')?'Breadcrumb':'Хлебные крошки');
+    items.forEach(([name,href],index)=>{
+      if(index){
+        const separator=document.createElement('span');
+        separator.className='clinical-breadcrumbs__separator';
+        separator.setAttribute('aria-hidden','true');
+        separator.textContent='/';
+        nav.appendChild(separator);
+      }
+      if(href){
+        const link=document.createElement('a');
+        link.href=href;
+        link.textContent=name;
+        nav.appendChild(link);
+      }else{
+        const current=document.createElement('span');
+        current.className='clinical-breadcrumbs__current';
+        current.setAttribute('aria-current','page');
+        current.textContent=name;
+        nav.appendChild(current);
+      }
+    });
+    h1.parentElement.insertBefore(nav,h1.parentElement.firstChild);
+  }
+  addVisible();
+  addJsonLd();
 })();

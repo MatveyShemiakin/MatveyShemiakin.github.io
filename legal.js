@@ -10,7 +10,7 @@
     cookie:'Сайт использует необходимые cookie и локальное хранилище. Необязательная веб-аналитика может быть включена только с вашего согласия. Вы можете разрешить аналитику или продолжить только с необходимыми технологиями.',accept:'Разрешить аналитику',reject:'Только необходимые'
   };
   const privacyUrl=lang==='en'?'/en/privacy.html':'/privacy.html';
-  if(!document.querySelector('link[href^="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=20260723-7';document.head.appendChild(l)}
+  if(!document.querySelector('link[href^="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=20260805-1';document.head.appendChild(l)}
   if(!isDoctorsSection&&!document.querySelector('link[href^="/prodoctorov-widget.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/prodoctorov-widget.css?v=20260723-2';document.head.appendChild(l)}
 
   function initProDoctorovWidget(){
@@ -111,4 +111,94 @@
     updateBottomOffset();
   }
   initSiteFab();
+})();
+
+/* SITE_BREADCRUMBS_V1 */
+(function(){
+  const path=(window.location.pathname.replace(/\/{2,}/g,'/').replace(/\/+$/,'')||'/')+'/';
+  const patientPages={
+    '/patients/before-surgery/':[['Главная','/'],['Пациентам','/patients/'],['До операции',null]],
+    '/patients/surgery-day/':[['Главная','/'],['Пациентам','/patients/'],['День операции',null]],
+    '/patients/recovery/':[['Главная','/'],['Пациентам','/patients/'],['Первые дни после операции',null]],
+    '/patients/daily-life/':[['Главная','/'],['Пациентам','/patients/'],['Повседневная жизнь после операции',null]],
+    '/patients/eye-drops/':[['Главная','/'],['Пациентам','/patients/'],['Глазные капли',null]],
+    '/patients/glasses/':[['Главная','/'],['Пациентам','/patients/'],['Очки и зрение',null]],
+    '/patients/iol-dislocation/':[['Главная','/'],['Пациентам','/patients/'],['Смещение искусственного хрусталика',null]],
+    '/en/patients/before-surgery/':[['Home','/en/'],['Patients','/en/patients/'],['Before surgery',null]],
+    '/en/patients/surgery-day/':[['Home','/en/'],['Patients','/en/patients/'],['Surgery day',null]],
+    '/en/patients/recovery/':[['Home','/en/'],['Patients','/en/patients/'],['Early recovery',null]],
+    '/en/patients/daily-life/':[['Home','/en/'],['Patients','/en/patients/'],['Daily life after surgery',null]],
+    '/en/patients/eye-drops/':[['Home','/en/'],['Patients','/en/patients/'],['Eye drops',null]],
+    '/en/patients/glasses/':[['Home','/en/'],['Patients','/en/patients/'],['Glasses and vision',null]],
+    '/en/patients/iol-dislocation/':[['Home','/en/'],['Patients','/en/patients/'],['Intraocular lens dislocation',null]]
+  };
+  const professionalPages={
+    '/for-doctors/professional-use.html/':[['Главная','/'],['Для врачей','/for-doctors/'],['Условия профессионального использования',null]],
+    '/en/for-doctors/professional-use.html/':[['Home','/en/'],['For doctors','/en/for-doctors/'],['Professional use terms',null]]
+  };
+  function containsType(value,type){
+    if(Array.isArray(value))return value.some(item=>containsType(item,type));
+    if(!value||typeof value!=='object')return false;
+    const current=value['@type'];
+    if(current===type||(Array.isArray(current)&&current.includes(type)))return true;
+    return Object.values(value).some(item=>containsType(item,type));
+  }
+  function hasBreadcrumbJsonLd(){
+    return Array.from(document.querySelectorAll('script[type="application/ld+json"]')).some(script=>{
+      try{return containsType(JSON.parse(script.textContent),'BreadcrumbList')}catch(_){return false}
+    });
+  }
+  function addBreadcrumbJsonLd(items){
+    if(hasBreadcrumbJsonLd())return;
+    const origin=window.location.origin;
+    const pageUrl=origin+window.location.pathname;
+    const data={
+      '@context':'https://schema.org',
+      '@type':'BreadcrumbList',
+      itemListElement:items.map(([name,href],index)=>({
+        '@type':'ListItem',
+        position:index+1,
+        name,
+        item:href?origin+href:pageUrl
+      }))
+    };
+    const script=document.createElement('script');
+    script.type='application/ld+json';
+    script.dataset.siteBreadcrumbs='true';
+    script.textContent=JSON.stringify(data);
+    document.head.appendChild(script);
+  }
+  function addVisibleBreadcrumbs(items){
+    const hero=document.querySelector('.terms-hero');
+    if(!hero||hero.querySelector('.site-breadcrumbs'))return;
+    const nav=document.createElement('nav');
+    nav.className='site-breadcrumbs site-breadcrumbs--on-dark';
+    nav.setAttribute('aria-label',document.documentElement.lang.toLowerCase().startsWith('en')?'Breadcrumb':'Хлебные крошки');
+    items.forEach(([name,href],index)=>{
+      if(index){
+        const separator=document.createElement('span');
+        separator.className='site-breadcrumbs__separator';
+        separator.setAttribute('aria-hidden','true');
+        separator.textContent='/';
+        nav.appendChild(separator);
+      }
+      if(href){
+        const link=document.createElement('a');
+        link.href=href;
+        link.textContent=name;
+        nav.appendChild(link);
+      }else{
+        const current=document.createElement('span');
+        current.className='site-breadcrumbs__current';
+        current.setAttribute('aria-current','page');
+        current.textContent=name;
+        nav.appendChild(current);
+      }
+    });
+    hero.prepend(nav);
+  }
+  const patient=patientPages[path];
+  if(patient){addBreadcrumbJsonLd(patient);return}
+  const professional=professionalPages[path];
+  if(professional){addVisibleBreadcrumbs(professional);addBreadcrumbJsonLd(professional)}
 })();
