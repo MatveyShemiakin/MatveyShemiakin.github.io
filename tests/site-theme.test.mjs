@@ -17,8 +17,8 @@ for(const file of files){
   assert.equal((html.match(/\/site-theme-init\.js\?v=20260806-1/g)||[]).length,1,`initializer count in ${file}`);
   assert.equal((html.match(/\/site-theme\.css\?v=20260806-1/g)||[]).length,1,`stylesheet count in ${file}`);
   assert.equal((html.match(/\/site-theme\.js\?v=20260806-1/g)||[]).length,1,`controller count in ${file}`);
-  assert.match(html,/<script src="\/site-theme-init\.js\?v=20260806-1"><\/script><link rel="stylesheet" href="\/site-theme\.css\?v=20260806-1">\s*<\/head>/i,`head order in ${file}`);
-  assert.match(html,/<script defer src="\/site-theme\.js\?v=20260806-1"><\/script>\s*<\/body>/i,`deferred controller in ${file}`);
+  assert.match(html,/<script src="\/site-theme-init\.js\?v=20260806-1"><\/script><link rel="stylesheet" href="\/site-theme\.css\?v=20260806-1"><link rel="stylesheet" href="\/site-motion\.css\?v=20260806-1">\s*<\/head>/i,`head order in ${file}`);
+  assert.match(html,/<script defer src="\/site-theme\.js\?v=20260806-1"><\/script><script defer src="\/site-motion\.js\?v=20260806-1"><\/script>\s*<\/body>/i,`deferred controller in ${file}`);
   assert.ok(html.indexOf('/site-language-switch.js')<html.indexOf('/site-theme.js?v=20260806-1'),`language switch must precede theme controller in ${file}`);
 }
 
@@ -71,6 +71,11 @@ for(const file of ['for-doctors/penetrating-keratoplasty/index.html','en/for-doc
   const html=read(file);
   assert.match(html,/localStorage\.getItem\('site_theme_v1'\)/,`shared key missing in ${file}`);
   assert.match(html,/root\.dataset\.siteTheme/,`common dataset bridge missing in ${file}`);
+  assert.equal(
+    (html.match(/root\.dataset\.siteTheme = theme;/g)||[]).length,
+    1,
+    `common dataset bridge must occur once in ${file}`,
+  );
 }
 
 console.log(`Global site theme verified on ${files.length} public pages.`);

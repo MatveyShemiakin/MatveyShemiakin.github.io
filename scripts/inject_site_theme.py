@@ -13,6 +13,8 @@ HEAD_ASSETS = (
     '<link rel="stylesheet" href="/site-theme.css?v=20260806-1">'
 )
 BODY_ASSET = '<script defer src="/site-theme.js?v=20260806-1"></script>'
+MOTION_HEAD_ASSET = '<link rel="stylesheet" href="/site-motion.css?v=20260806-1">'
+MOTION_BODY_ASSET = '<script defer src="/site-motion.js?v=20260806-1"></script>'
 
 
 def public_html_paths() -> list[Path]:
@@ -51,7 +53,9 @@ def update_public_html() -> None:
             raise FileNotFoundError(path)
         text = path.read_text(encoding="utf-8")
         text = inject_once(text, "/site-theme-init.js?v=20260806-1", HEAD_ASSETS, "</head>")
+        text = inject_once(text, "/site-motion.css?v=20260806-1", MOTION_HEAD_ASSET, "</head>")
         text = inject_once(text, "/site-theme.js?v=20260806-1", BODY_ASSET, "</body>")
+        text = inject_once(text, "/site-motion.js?v=20260806-1", MOTION_BODY_ASSET, "</body>")
 
         relative = path.relative_to(ROOT).as_posix()
         if relative == "for-doctors/bacterial-keratitis/index.html":
@@ -72,6 +76,14 @@ def update_public_html() -> None:
 def bridge_iol_theme() -> None:
     path = ROOT / "patients/iol-dislocation/script.js"
     text = path.read_text(encoding="utf-8")
+    migrated_markers = (
+        "const themeKey='site_theme_v1';",
+        "function setTheme(theme,persist=true){",
+        "window.addEventListener('site-theme-change'",
+    )
+    if all(marker in text for marker in migrated_markers):
+        return
+
     text = text.replace("const themeKey='iol_dislocation_theme';", "const themeKey='site_theme_v1';", 1)
     text = text.replace("function setTheme(theme){", "function setTheme(theme,persist=true){", 1)
     text = text.replace(
@@ -109,10 +121,14 @@ def bridge_pkp_theme() -> None:
             "const initial = root.dataset.siteTheme || storedTheme || (systemDark ? 'dark' : 'light');",
             1,
         )
-        text = text.replace(
-            "root.dataset.theme = theme;",
-            "root.dataset.theme = theme;\n    root.dataset.siteTheme = theme;",
-            1,
+        text = re.sub(
+            r"(?m)^([ \t]*)root\.dataset\.theme = theme;\n(?:[ \t]*root\.dataset\.siteTheme = theme;\n?)*",
+            lambda match: (
+                f"{match.group(1)}root.dataset.theme = theme;\n"
+                f"{match.group(1)}root.dataset.siteTheme = theme;\n"
+            ),
+            text,
+            count=1,
         )
         text = text.replace(
             "try { localStorage.setItem('skp-theme', next); } catch (_) {}",
