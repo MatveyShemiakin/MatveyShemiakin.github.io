@@ -1,0 +1,115 @@
+name: Fix mobile navbar theme loop
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-mobile-nav-theme-loop.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reproduce self-observing theme loop
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const source = fs.readFileSync('mobile-nav.js', 'utf8');
+          const safe =
+            !source.includes("querySelectorAll('.sim-page,[data-theme]')") &&
+            source.includes("if(nav.dataset.theme!==theme)") &&
+            source.includes("if(search.dataset.theme!==theme)");
+          if (safe) {
+            console.error('Regression did not reproduce: source is already protected');
+            process.exit(1);
+          }
+          console.log('Regression reproduced: the observer can observe its own data-theme writes.');
+          NODE
+
+      - name: Apply minimal loop fix and cache bust
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          js_path = Path('mobile-nav.js')
+          source = js_path.read_text(encoding='utf-8')
+
+          old_sync = "function syncTheme(){const theme=detectTheme();nav.dataset.theme=theme;search.dataset.theme=theme}"
+          new_sync = "function syncTheme(){const theme=detectTheme();if(nav.dataset.theme!==theme)nav.dataset.theme=theme;if(search.dataset.theme!==theme)search.dataset.theme=theme}"
+          old_observer = "[document.documentElement,document.body,...document.querySelectorAll('.sim-page,[data-theme]')].forEach(node=>node&&themeObserver.observe(node,{attributes:true,attributeFilter:['class','data-theme']}));"
+          new_observer = "[document.documentElement,document.body,...document.querySelectorAll('.sim-page')].forEach(node=>node&&themeObserver.observe(node,{attributes:true,attributeFilter:['class','data-theme']}));"
+
+          if old_sync not in source:
+              raise SystemExit('Expected syncTheme implementation not found')
+          if old_observer not in source:
+              raise SystemExit('Expected self-observing selector not found')
+
+          source = source.replace(old_sync, new_sync, 1).replace(old_observer, new_observer, 1)
+          js_path.write_text(source, encoding='utf-8')
+
+          for path in Path('.').rglob('*.html'):
+              if any(part.startswith('.') for part in path.parts):
+                  continue
+              text = path.read_text(encoding='utf-8')
+              updated = text.replace('/mobile-nav.js?v=20260806-1', '/mobile-nav.js?v=20260806-2')
+              if updated != text:
+                  path.write_text(updated, encoding='utf-8')
+
+          injector = Path('scripts/inject_mobile_nav.py')
+          injector_text = injector.read_text(encoding='utf-8')
+          injector.write_text(
+              injector_text.replace('/mobile-nav.js?v=20260806-1', '/mobile-nav.js?v=20260806-2'),
+              encoding='utf-8'
+          )
+
+          test_path = Path('tests/mobile-navbar.test.mjs')
+          test = test_path.read_text(encoding='utf-8')
+          test = test.replace('/mobile-nav\\.js\\?v=20260806-1', '/mobile-nav\\.js\\?v=20260806-2')
+          if "querySelectorAll('.sim-page,[data-theme]')" not in test:
+              test = test.replace(
+                  "assert.match(js,/MutationObserver\\(syncTheme\\)/);",
+                  "assert.match(js,/MutationObserver\\(syncTheme\\)/);\n"
+                  "assert.doesNotMatch(js,/querySelectorAll\\('\\.sim-page,\\[data-theme\\]'\\)/);\n"
+                  "assert.match(js,/if\\(nav\\.dataset\\.theme!==theme\\)nav\\.dataset\\.theme=theme/);\n"
+                  "assert.match(js,/if\\(search\\.dataset\\.theme!==theme\\)search\\.dataset\\.theme=theme/);"
+              )
+          test_path.write_text(test, encoding='utf-8')
+          PY
+
+      - name: Verify loop is removed
+        run: |
+          node --check mobile-nav.js
+          node tests/mobile-navbar.test.mjs
+          node <<'NODE'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const source = fs.readFileSync('mobile-nav.js', 'utf8');
+          assert.doesNotMatch(source, /querySelectorAll\('\.sim-page,\[data-theme\]'\)/);
+          assert.match(source, /querySelectorAll\('\.sim-page'\)/);
+          assert.match(source, /if\(nav\.dataset\.theme!==theme\)nav\.dataset\.theme=theme/);
+          assert.match(source, /if\(search\.dataset\.theme!==theme\)search\.dataset\.theme=theme/);
+          for (const file of ['index.html','patients/index.html','patients/iol-dislocation/index.html','en/index.html']) {
+            const html = fs.readFileSync(file, 'utf8');
+            assert.equal((html.match(/\/mobile-nav\.js\?v=20260806-2/g) || []).length, 1, `Updated JS version missing in ${file}`);
+          }
+          console.log('Theme observer loop removed and cache-busted.');
+          NODE
+          python3 -m py_compile scripts/inject_mobile_nav.py
+          git diff --check
+
+      - name: Commit and publish site files
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add mobile-nav.js scripts/inject_mobile_nav.py tests/mobile-navbar.test.mjs
+          git add '*.html' '**/*.html'
+          git diff --cached --check
+          git commit -m 'Fix mobile navbar theme observer freeze'
+          git push origin main
