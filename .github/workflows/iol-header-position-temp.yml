@@ -1,0 +1,22 @@
+name: IOL header position regression
+
+on:
+  push:
+    branches:
+      - fix/iol-header-photo-lower
+    paths:
+      - 'patients/iol-dislocation/header-photo.css'
+      - 'tests/iol-header-photo.test.mjs'
+      - '.github/workflows/iol-header-position-temp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run IOL header regression
+        run: node --test tests/iol-header-photo.test.mjs
