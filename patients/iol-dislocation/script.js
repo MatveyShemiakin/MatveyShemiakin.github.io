@@ -7,7 +7,7 @@
   const progress=page.querySelector('.reading-progress span');
   const themeButton=page.querySelector('[data-site-theme]');
   const isEnglish=document.documentElement.lang.toLowerCase().startsWith('en');
-  const themeKey='iol_dislocation_theme';
+  const themeKey='site_theme_v1';
 
   function updateReadingProgress(){
     if(!progress)return;
@@ -48,11 +48,13 @@
     button.addEventListener('click',()=>activate(button.dataset.next,true));
   });
 
-  function setTheme(theme){
+  function setTheme(theme,persist=true){
     const dark=theme==='dark';
     page.classList.toggle('theme-dark',dark);
     page.classList.toggle('theme-light',!dark);
-    try{localStorage.setItem(themeKey,dark?'dark':'light')}catch(error){}
+    if(persist){try{localStorage.setItem(themeKey,dark?'dark':'light')}catch(error){}}
+    document.documentElement.dataset.siteTheme=dark?'dark':'light';
+    document.documentElement.dataset.theme=dark?'dark':'light';
     if(themeButton){
       themeButton.setAttribute(
         'aria-label',
@@ -63,9 +65,10 @@
     }
   }
 
-  let storedTheme='light';
-  try{storedTheme=localStorage.getItem(themeKey)||'light'}catch(error){}
-  setTheme(storedTheme);
+  let storedTheme=document.documentElement.dataset.siteTheme||'light';
+  try{storedTheme=document.documentElement.dataset.siteTheme||localStorage.getItem(themeKey)||'light'}catch(error){}
+  setTheme(storedTheme,false);
+  window.addEventListener('site-theme-change',event=>setTheme(event.detail&&event.detail.theme?event.detail.theme:'light',false));
   themeButton?.addEventListener('click',()=>{
     setTheme(page.classList.contains('theme-dark')?'light':'dark');
   });

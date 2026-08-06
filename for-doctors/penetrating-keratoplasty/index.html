@@ -580,7 +580,7 @@ body{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-he
 <meta name="twitter:image" content="https://matveyshemyakin.ru/for-doctors/penetrating-keratoplasty/assets/images/hero-corneal-graft.jpg">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MedicalWebPage","name":"Ведение после сквозной кератопластики — клинический конспект","description":"Клинический конспект для офтальмологов: наблюдение, стратификация риска, лечение и неотложная тактика после сквозной кератопластики.","url":"https://matveyshemyakin.ru/for-doctors/penetrating-keratoplasty/","inLanguage":"ru","isPartOf":{"@type":"WebSite","name":"Matvey Shemyakin","url":"https://matveyshemyakin.ru/"},"author":{"@type":"Person","name":"Matvey Yuryevich Shemyakin","url":"https://matveyshemyakin.ru/"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://matveyshemyakin.ru/for-doctors/penetrating-keratoplasty/assets/images/hero-corneal-graft.jpg"},"about":{"@type":"MedicalProcedure","name":"Penetrating keratoplasty"}}
-</script><link rel="stylesheet" href="/site-language-switch.css?v=20260729-2"><link rel="stylesheet" href="/mobile-nav.css?v=20260806-3"></head>
+</script><link rel="stylesheet" href="/site-language-switch.css?v=20260729-2"><link rel="stylesheet" href="/mobile-nav.css?v=20260806-3"><script src="/site-theme-init.js?v=20260806-1"></script><link rel="stylesheet" href="/site-theme.css?v=20260806-1"></head>
 <body>
 <a class="skip-link" href="#article">Перейти к материалу</a>
 <div aria-hidden="true" class="reading-progress"><span></span></div>
@@ -968,12 +968,13 @@ body{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-he
   const themeButton = document.querySelector('[data-theme-toggle]');
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   let storedTheme = null;
-  try { storedTheme = localStorage.getItem('skp-theme'); } catch (_) {}
+  try { storedTheme = localStorage.getItem('site_theme_v1') || localStorage.getItem('skp-theme'); } catch (_) {}
   const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initial = storedTheme || (systemDark ? 'dark' : 'light');
+  const initial = root.dataset.siteTheme || storedTheme || (systemDark ? 'dark' : 'light');
 
   function applyTheme(theme) {
     root.dataset.theme = theme;
+    root.dataset.siteTheme = theme;
     themeButton?.setAttribute('aria-label', theme === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему');
     themeButton?.setAttribute('title', theme === 'dark' ? 'Светлая тема' : 'Тёмная тема');
     if (themeMeta) themeMeta.content = theme === 'dark' ? '#0d1219' : '#ffffff';
@@ -981,7 +982,7 @@ body{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-he
   applyTheme(initial);
   themeButton?.addEventListener('click', () => {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    try { localStorage.setItem('skp-theme', next); } catch (_) {}
+    try { localStorage.setItem('site_theme_v1', next); localStorage.setItem('skp-theme', next); } catch (_) {}
     applyTheme(next);
   });
 
@@ -1051,5 +1052,5 @@ body{font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-he
   dialog?.addEventListener('click', e => { if (e.target === dialog || e.target.classList.contains('lightbox-inner')) dialog.close(); });
 })();
 </script>
-<script src="/legal.js?v=20260805-1"></script><script src="/doctors-legal.js?v=20260805-1"></script><script defer src="/site-language-switch.js?v=20260729-2"></script><script src="/mobile-nav.js?v=20260806-3"></script></body>
+<script src="/legal.js?v=20260805-1"></script><script src="/doctors-legal.js?v=20260805-1"></script><script defer src="/site-language-switch.js?v=20260729-2"></script><script src="/mobile-nav.js?v=20260806-3"></script><script defer src="/site-theme.js?v=20260806-1"></script></body>
 </html>
