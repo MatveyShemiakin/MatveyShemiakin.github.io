@@ -45,3 +45,9 @@
   .site-mobile-nav__label{font-size:9.5px}
 }
 @media(prefers-reduced-motion:reduce){.site-mobile-nav__item{transition:none}}
+
+/* MOBILE_NAV_HIT_AREA_FIX_V2 */
+@media(max-width:760px){
+  .patient-fab{pointer-events:none!important}
+  .patient-fab__main,.patient-fab.is-open .patient-fab__menu,.patient-fab.is-open .patient-fab__action{pointer-events:auto!important}
+}

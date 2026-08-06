@@ -12,6 +12,9 @@ assert.match(css,/\.site-mobile-nav\{[^}]*position:fixed/);
 assert.match(css,/\.site-mobile-nav__icon\{width:29px;height:29px/);
 assert.match(css,/\.patient-fab\{bottom:calc\(var\(--fab-bottom-offset,20px\) \+ 96px/);
 assert.match(css,/\.cookie-banner\{bottom:calc\(104px/);
+
+assert.match(css,/@media\(max-width:760px\)[\s\S]*?\.patient-fab\{pointer-events:none!important\}/);
+assert.match(css,/\.patient-fab__main,\.patient-fab\.is-open \.patient-fab__menu,\.patient-fab\.is-open \.patient-fab__action\{pointer-events:auto!important\}/);
 assert.match(js,/const path=cleanPath\?cleanPath\+'\/'\:'\/'/);
 assert.match(js,/patients:'\/patients\/'/);
 assert.match(js,/doctors:'\/for-doctors\/'/);
@@ -26,7 +29,7 @@ for(const url of urls){
   const file=pagePath(url);
   assert.ok(fs.existsSync(file),`Missing sitemap page ${file}`);
   const html=fs.readFileSync(file,'utf8');
-  assert.equal((html.match(/\/mobile-nav\.css\?v=20260806-1/g)||[]).length,1,`CSS tag mismatch in ${file}`);
+  assert.equal((html.match(/\/mobile-nav\.css\?v=20260806-2/g)||[]).length,1,`CSS tag mismatch in ${file}`);
   assert.equal((html.match(/\/mobile-nav\.js\?v=20260806-1/g)||[]).length,1,`JS tag mismatch in ${file}`);
 }
 assert.doesNotMatch(fs.readFileSync('konspekt.html','utf8'),/\/mobile-nav\.(?:css|js)/);
