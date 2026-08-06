@@ -23,6 +23,7 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          from textwrap import dedent
 
           js_path = Path('mobile-nav.js')
           js = js_path.read_text(encoding='utf-8')
@@ -31,53 +32,54 @@ jobs:
           assert old in js, 'Expected root path normalisation line was not found'
           js_path.write_text(js.replace(old, new, 1), encoding='utf-8')
 
-          injector = '''from pathlib import Path
-          from urllib.parse import urlparse
-          import re
-          import xml.etree.ElementTree as ET
+          injector = dedent('''
+              from pathlib import Path
+              from urllib.parse import urlparse
+              import re
+              import xml.etree.ElementTree as ET
 
-          ROOT = Path(__file__).resolve().parents[1]
-          STYLE = '<link rel="stylesheet" href="/mobile-nav.css?v=20260806-1">'
-          SCRIPT = '<script src="/mobile-nav.js?v=20260806-1"></script>'
-          EXCLUDED = {ROOT / 'konspekt.html'}
+              ROOT = Path(__file__).resolve().parents[1]
+              STYLE = '<link rel="stylesheet" href="/mobile-nav.css?v=20260806-1">'
+              SCRIPT = '<script src="/mobile-nav.js?v=20260806-1"></script>'
+              EXCLUDED = {ROOT / 'konspekt.html'}
 
-          def public_pages():
-              sitemap = ET.parse(ROOT / 'sitemap.xml')
-              namespace = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
-              for loc in sitemap.findall('.//sm:loc', namespace):
-                  url_path = urlparse(loc.text.strip()).path
-                  if url_path == '/':
-                      page = ROOT / 'index.html'
-                  elif url_path.endswith('/'):
-                      page = ROOT / url_path.lstrip('/') / 'index.html'
-                  else:
-                      page = ROOT / url_path.lstrip('/')
-                  if page not in EXCLUDED:
-                      yield page
+              def public_pages():
+                  sitemap = ET.parse(ROOT / 'sitemap.xml')
+                  namespace = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+                  for loc in sitemap.findall('.//sm:loc', namespace):
+                      url_path = urlparse(loc.text.strip()).path
+                      if url_path == '/':
+                          page = ROOT / 'index.html'
+                      elif url_path.endswith('/'):
+                          page = ROOT / url_path.lstrip('/') / 'index.html'
+                      else:
+                          page = ROOT / url_path.lstrip('/')
+                      if page not in EXCLUDED:
+                          yield page
 
-          changed = []
-          for path in public_pages():
-              if not path.exists():
-                  raise FileNotFoundError(path)
-              text = path.read_text(encoding='utf-8')
-              original = text
-              text = re.sub(r'<link\\s+rel="stylesheet"\\s+href="/mobile-nav\\.css(?:\\?v=[^"]*)?">', STYLE, text)
-              text = re.sub(r'<script\\s+src="/mobile-nav\\.js(?:\\?v=[^"]*)?"></script>', SCRIPT, text)
-              if '/mobile-nav.css' not in text:
-                  if '</head>' not in text:
-                      raise ValueError(f'Missing </head> in {path}')
-                  text = text.replace('</head>', STYLE + '</head>', 1)
-              if '/mobile-nav.js' not in text:
-                  if '</body>' not in text:
-                      raise ValueError(f'Missing </body> in {path}')
-                  text = text.replace('</body>', SCRIPT + '</body>', 1)
-              if text != original:
-                  path.write_text(text, encoding='utf-8')
-                  changed.append(path.relative_to(ROOT).as_posix())
+              changed = []
+              for path in public_pages():
+                  if not path.exists():
+                      raise FileNotFoundError(path)
+                  text = path.read_text(encoding='utf-8')
+                  original = text
+                  text = re.sub(r'<link\\s+rel="stylesheet"\\s+href="/mobile-nav\\.css(?:\\?v=[^"]*)?">', STYLE, text)
+                  text = re.sub(r'<script\\s+src="/mobile-nav\\.js(?:\\?v=[^"]*)?"></script>', SCRIPT, text)
+                  if '/mobile-nav.css' not in text:
+                      if '</head>' not in text:
+                          raise ValueError(f'Missing </head> in {path}')
+                      text = text.replace('</head>', STYLE + '</head>', 1)
+                  if '/mobile-nav.js' not in text:
+                      if '</body>' not in text:
+                          raise ValueError(f'Missing </body> in {path}')
+                      text = text.replace('</body>', SCRIPT + '</body>', 1)
+                  if text != original:
+                      path.write_text(text, encoding='utf-8')
+                      changed.append(path.relative_to(ROOT).as_posix())
 
-          print('\\n'.join(changed) if changed else 'No mobile navbar changes required')
-          '''
-          Path('scripts/inject_mobile_nav.py').write_text(injector.replace('          ', ''), encoding='utf-8')
+              print('\\n'.join(changed) if changed else 'No mobile navbar changes required')
+          ''').lstrip()
+          Path('scripts/inject_mobile_nav.py').write_text(injector, encoding='utf-8')
 
           workflow_path = Path('.github/workflows/inject-legal.yml')
           workflow = workflow_path.read_text(encoding='utf-8')
@@ -87,45 +89,46 @@ jobs:
               workflow = workflow.replace('      - run: python scripts/inject_legal.py\n', '      - run: python scripts/inject_legal.py\n      - run: python scripts/inject_mobile_nav.py\n', 1)
           workflow_path.write_text(workflow, encoding='utf-8')
 
-          test = '''import fs from 'node:fs';
-          import assert from 'node:assert/strict';
+          test = dedent('''
+              import fs from 'node:fs';
+              import assert from 'node:assert/strict';
 
-          const css=fs.readFileSync('mobile-nav.css','utf8');
-          const js=fs.readFileSync('mobile-nav.js','utf8');
-          const sitemap=fs.readFileSync('sitemap.xml','utf8');
-          const urls=[...sitemap.matchAll(/<loc>([^<]+)<\\/loc>/g)].map(match=>new URL(match[1]));
-          const pagePath=url=>url.pathname==='/'?'index.html':url.pathname.endsWith('/')?url.pathname.slice(1)+'index.html':url.pathname.slice(1);
+              const css=fs.readFileSync('mobile-nav.css','utf8');
+              const js=fs.readFileSync('mobile-nav.js','utf8');
+              const sitemap=fs.readFileSync('sitemap.xml','utf8');
+              const urls=[...sitemap.matchAll(/<loc>([^<]+)<\\/loc>/g)].map(match=>new URL(match[1]));
+              const pagePath=url=>url.pathname==='/'?'index.html':url.pathname.endsWith('/')?url.pathname.slice(1)+'index.html':url.pathname.slice(1);
 
-          assert.match(css,/@media\\(max-width:760px\\)/);
-          assert.match(css,/\\.site-mobile-nav\\{[^}]*position:fixed/);
-          assert.match(css,/\\.site-mobile-nav__icon\\{width:29px;height:29px/);
-          assert.match(css,/\\.patient-fab\\{bottom:calc\\(var\\(--fab-bottom-offset,20px\\) \\+ 96px/);
-          assert.match(css,/\\.cookie-banner\\{bottom:calc\\(104px/);
-          assert.match(js,/const path=cleanPath\\?cleanPath\\+'\\/'\\:'\\/'/);
-          assert.match(js,/patients:'\\/patients\\/'/);
-          assert.match(js,/doctors:'\\/for-doctors\\/'/);
-          assert.match(js,/about:'\\/#about'/);
-          assert.match(js,/patients:'\\/en\\/patients\\/'/);
-          assert.match(js,/doctors:'\\/en\\/for-doctors\\/'/);
-          assert.match(js,/MutationObserver\\(syncTheme\\)/);
-          assert.match(js,/site-mobile-search/);
-          assert.doesNotMatch(js,/style=/);
+              assert.match(css,/@media\\(max-width:760px\\)/);
+              assert.match(css,/\\.site-mobile-nav\\{[^}]*position:fixed/);
+              assert.match(css,/\\.site-mobile-nav__icon\\{width:29px;height:29px/);
+              assert.match(css,/\\.patient-fab\\{bottom:calc\\(var\\(--fab-bottom-offset,20px\\) \\+ 96px/);
+              assert.match(css,/\\.cookie-banner\\{bottom:calc\\(104px/);
+              assert.match(js,/const path=cleanPath\\?cleanPath\\+'\\/'\\:'\\/'/);
+              assert.match(js,/patients:'\\/patients\\/'/);
+              assert.match(js,/doctors:'\\/for-doctors\\/'/);
+              assert.match(js,/about:'\\/#about'/);
+              assert.match(js,/patients:'\\/en\\/patients\\/'/);
+              assert.match(js,/doctors:'\\/en\\/for-doctors\\/'/);
+              assert.match(js,/MutationObserver\\(syncTheme\\)/);
+              assert.match(js,/site-mobile-search/);
+              assert.doesNotMatch(js,/style=/);
 
-          for(const url of urls){
-            const file=pagePath(url);
-            assert.ok(fs.existsSync(file),`Missing sitemap page ${file}`);
-            const html=fs.readFileSync(file,'utf8');
-            assert.equal((html.match(/\\/mobile-nav\\.css\\?v=20260806-1/g)||[]).length,1,`CSS tag mismatch in ${file}`);
-            assert.equal((html.match(/\\/mobile-nav\\.js\\?v=20260806-1/g)||[]).length,1,`JS tag mismatch in ${file}`);
-          }
-          const technical=fs.readFileSync('konspekt.html','utf8');
-          assert.doesNotMatch(technical,/\\/mobile-nav\\.(?:css|js)/);
-          const injector=fs.readFileSync('scripts/inject_mobile_nav.py','utf8');
-          assert.match(injector,/STYLE =/);
-          assert.match(injector,/EXCLUDED =/);
-          console.log(`Mobile navbar verified on ${urls.length} public pages.`);
-          '''
-          Path('tests/mobile-navbar.test.mjs').write_text(test.replace('          ', ''), encoding='utf-8')
+              for(const url of urls){
+                const file=pagePath(url);
+                assert.ok(fs.existsSync(file),`Missing sitemap page ${file}`);
+                const html=fs.readFileSync(file,'utf8');
+                assert.equal((html.match(/\\/mobile-nav\\.css\\?v=20260806-1/g)||[]).length,1,`CSS tag mismatch in ${file}`);
+                assert.equal((html.match(/\\/mobile-nav\\.js\\?v=20260806-1/g)||[]).length,1,`JS tag mismatch in ${file}`);
+              }
+              const technical=fs.readFileSync('konspekt.html','utf8');
+              assert.doesNotMatch(technical,/\\/mobile-nav\\.(?:css|js)/);
+              const injector=fs.readFileSync('scripts/inject_mobile_nav.py','utf8');
+              assert.match(injector,/STYLE =/);
+              assert.match(injector,/EXCLUDED =/);
+              console.log(`Mobile navbar verified on ${urls.length} public pages.`);
+          ''').lstrip()
+          Path('tests/mobile-navbar.test.mjs').write_text(test, encoding='utf-8')
           PY
 
           python3 scripts/inject_mobile_nav.py
