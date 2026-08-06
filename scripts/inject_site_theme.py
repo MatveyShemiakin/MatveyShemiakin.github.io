@@ -113,10 +113,14 @@ def bridge_pkp_theme() -> None:
             "const initial = root.dataset.siteTheme || storedTheme || (systemDark ? 'dark' : 'light');",
             1,
         )
-        text = text.replace(
-            "root.dataset.theme = theme;",
-            "root.dataset.theme = theme;\n    root.dataset.siteTheme = theme;",
-            1,
+        text = re.sub(
+            r"(?m)^([ \t]*)root\.dataset\.theme = theme;\n(?:[ \t]*root\.dataset\.siteTheme = theme;\n?)*",
+            lambda match: (
+                f"{match.group(1)}root.dataset.theme = theme;\n"
+                f"{match.group(1)}root.dataset.siteTheme = theme;\n"
+            ),
+            text,
+            count=1,
         )
         text = text.replace(
             "try { localStorage.setItem('skp-theme', next); } catch (_) {}",
