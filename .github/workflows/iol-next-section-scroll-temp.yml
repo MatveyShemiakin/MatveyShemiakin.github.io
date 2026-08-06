@@ -1,0 +1,22 @@
+name: IOL next-section scroll TDD
+
+on:
+  push:
+    branches:
+      - fix/iol-next-section-scroll
+    paths:
+      - 'patients/iol-dislocation/script.js'
+      - 'tests/iol-next-section-scroll.test.mjs'
+      - '.github/workflows/iol-next-section-scroll-temp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run regression test
+        run: node --test tests/iol-next-section-scroll.test.mjs
