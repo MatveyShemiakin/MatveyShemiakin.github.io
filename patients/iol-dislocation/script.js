@@ -114,3 +114,31 @@
   openHashTarget();
   updateReadingProgress();
 })();
+// IOL IMAGE LIGHTBOX 2026-08-06
+(() => {
+  const modal = document.querySelector('[data-iol-lightbox-modal]');
+  const modalImage = modal?.querySelector('.iol-lightbox__image');
+  const closeButton = modal?.querySelector('[data-iol-lightbox-close]');
+  let opener = null;
+  if (!modal || !modalImage || typeof modal.showModal !== 'function') return;
+  document.querySelectorAll('[data-iol-lightbox]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const source = button.getAttribute('data-iol-lightbox');
+      const preview = button.querySelector('img');
+      if (!source) return;
+      opener = button;
+      modalImage.src = source;
+      modalImage.alt = preview?.alt || 'Увеличенное медицинское изображение';
+      modal.showModal();
+      closeButton?.focus();
+    });
+  });
+  const closeModal = () => { if (modal.open) modal.close(); };
+  closeButton?.addEventListener('click', closeModal);
+  modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(); });
+  modal.addEventListener('close', () => {
+    modalImage.removeAttribute('src');
+    opener?.focus();
+    opener = null;
+  });
+})();
