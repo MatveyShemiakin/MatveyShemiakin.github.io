@@ -113,6 +113,7 @@ jobs:
           from pathlib import Path
 
           link = '<link rel="stylesheet" href="/patients/iol-dislocation/header-photo.css?v=20260806-1">'
+          marker = '<script src="/site-theme-init.js?v=20260806-1"></script>'
           paths = (
               Path('patients/iol-dislocation/index.html'),
               Path('en/patients/iol-dislocation/index.html'),
@@ -121,7 +122,9 @@ jobs:
           for path in paths:
               text = path.read_text(encoding='utf-8')
               if link not in text:
-                  text = text.replace('</head>', link + '</head>', 1)
+                  if marker not in text:
+                      raise SystemExit(f'{path}: site theme marker not found')
+                  text = text.replace(marker, link + marker, 1)
               if text.count(link) != 1:
                   raise SystemExit(f'{path}: expected exactly one header-photo stylesheet link')
               path.write_text(text, encoding='utf-8')
