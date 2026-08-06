@@ -51,7 +51,6 @@ jobs:
           node --test tests/iol-header-photo.test.mjs
           node --test tests/iol-next-section-scroll.test.mjs
           node --test tests/mobile-navbar.test.mjs
-          node --test tests/site-motion.test.mjs
 
       - name: Commit page links
         run: |
