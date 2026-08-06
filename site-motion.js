@@ -24,6 +24,7 @@
   var revealSelector=[
     'main > section',
     'main > article',
+    'main .question',
     'main .section-card',
     'main .content-section',
     'main .topic-section',
@@ -50,6 +51,7 @@
     '.stage-card a',
     '.publication-card a',
     '.doctor-card a',
+    '.related a',
     'button.card',
     'details.faq-item'
   ].join(',');
@@ -215,7 +217,8 @@
   function mountNextMaterial(){
     var main=document.querySelector('main');
     var route=routes[normalisePath(window.location.pathname)];
-    if(!main||!route||main.querySelector('[data-site-next-material]'))return;
+    var existing=document.querySelector('.related,.next-material,.next-section,[data-next-material],[data-site-next-material]');
+    if(!main||!route||existing)return;
 
     var aside=document.createElement('aside');
     aside.className='site-next-material';
@@ -240,11 +243,16 @@
     aside.appendChild(copy);
     aside.appendChild(link);
 
-    var disclaimer=Array.prototype.find.call(main.children,function(child){
-      return child.matches('.medical-disclaimer,.disclaimer,[data-medical-disclaimer]');
-    });
-    if(disclaimer)main.insertBefore(aside,disclaimer);
-    else main.appendChild(aside);
+    var disclaimer=main.querySelector('.medical-disclaimer,.disclaimer,[data-medical-disclaimer]');
+    if(disclaimer){
+      var insertionTarget=disclaimer;
+      while(insertionTarget.parentElement&&insertionTarget.parentElement!==main){
+        insertionTarget=insertionTarget.parentElement;
+      }
+      main.insertBefore(aside,insertionTarget);
+    }else{
+      main.appendChild(aside);
+    }
   }
 
   function mountReveals(){
