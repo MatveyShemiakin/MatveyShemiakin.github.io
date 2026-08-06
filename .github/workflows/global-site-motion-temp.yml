@@ -32,13 +32,26 @@ jobs:
         run: python scripts/inject_site_theme.py
 
       - name: Capture first generation
-        run: git diff --binary > /tmp/first-generation.diff
+        run: |
+          mkdir -p /tmp/first-tree
+          git diff --name-only -z | while IFS= read -r -d '' file; do
+            mkdir -p "/tmp/first-tree/$(dirname "$file")"
+            cp "$file" "/tmp/first-tree/$file"
+          done
 
       - name: Verify generator idempotence
+        shell: bash
         run: |
           python scripts/inject_site_theme.py
-          git diff --binary > /tmp/second-generation.diff
-          cmp /tmp/first-generation.diff /tmp/second-generation.diff
+          status=0
+          while IFS= read -r -d '' file; do
+            if ! cmp -s "/tmp/first-tree/$file" "$file"; then
+              echo "::error file=$file::Generator changed $file on its second run"
+              diff -u "/tmp/first-tree/$file" "$file" | head -n 80 || true
+              status=1
+            fi
+          done < <(find /tmp/first-tree -type f -printf '%P\0')
+          exit "$status"
 
       - name: Verify global motion
         run: node --test tests/site-motion.test.mjs
