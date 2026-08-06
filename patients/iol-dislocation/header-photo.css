@@ -70,11 +70,13 @@
   z-index: 4;
 }
 
-.sim-page .iol-lightbox__frame {
+/* The dialog is mounted directly under <body>, outside .sim-page. */
+.iol-lightbox__frame {
+  position: relative;
   overflow: hidden;
 }
 
-.sim-page .iol-lightbox__frame::before {
+.iol-lightbox__frame::before {
   content: "";
   position: absolute;
   z-index: 2;
@@ -87,7 +89,7 @@
   pointer-events: none;
 }
 
-.sim-page .iol-lightbox__frame::after {
+.iol-lightbox__frame::after {
   content: "";
   position: absolute;
   z-index: 3;
@@ -98,12 +100,13 @@
   pointer-events: none;
 }
 
-.sim-page .iol-lightbox__image {
+.iol-lightbox__image {
   position: relative;
   z-index: 1;
 }
 
-.sim-page .iol-lightbox__close {
+.iol-lightbox__close {
+  position: relative;
   z-index: 5;
 }
 
@@ -148,7 +151,7 @@
     background-size: 210px 117px;
   }
 
-  .sim-page .iol-lightbox__frame::before {
+  .iol-lightbox__frame::before {
     left: 7px;
     right: 7px;
     bottom: 7px;
@@ -156,7 +159,7 @@
     border-radius: 0 0 9px 9px;
   }
 
-  .sim-page .iol-lightbox__frame::after {
+  .iol-lightbox__frame::after {
     inset: 7px;
     border-radius: 9px;
     background-size: 270px 158px;
