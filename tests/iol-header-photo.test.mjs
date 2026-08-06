@@ -28,8 +28,8 @@ assert.equal((enHtml.match(new RegExp(stylesheetReference.replace(/[.*+?^${}()|[
 assert.match(css,/\.sim-page \.site-head::before/,'the photograph must be added as a CSS background layer');
 assert.match(css,/\.sim-page \.site-head::after/,'the blue readability overlay must be a separate CSS layer');
 assert.match(css,/url\(["']?\/assets\/iol-dislocation-header\.webp\?v=20260806-1["']?\)/,'the stylesheet must reference the approved source photograph');
-assert.match(css,/@media \(max-width:1020px\)/,'the stylesheet must define tablet positioning');
-assert.match(css,/@media \(max-width:680px\)/,'the stylesheet must define mobile positioning');
+assert.match(css,/@media\s*\(\s*max-width\s*:\s*1020px\s*\)/,'the stylesheet must define tablet positioning');
+assert.match(css,/@media\s*\(\s*max-width\s*:\s*680px\s*\)/,'the stylesheet must define mobile positioning');
 
 for(const html of [ruHtml,enHtml]){
   assert.match(html,/<header class="site-head">/,'the existing header element must remain present');
