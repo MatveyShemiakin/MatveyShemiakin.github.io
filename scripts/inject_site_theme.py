@@ -13,6 +13,8 @@ HEAD_ASSETS = (
     '<link rel="stylesheet" href="/site-theme.css?v=20260806-1">'
 )
 BODY_ASSET = '<script defer src="/site-theme.js?v=20260806-1"></script>'
+MOTION_HEAD_ASSET = '<link rel="stylesheet" href="/site-motion.css?v=20260806-1">'
+MOTION_BODY_ASSET = '<script defer src="/site-motion.js?v=20260806-1"></script>'
 
 
 def public_html_paths() -> list[Path]:
@@ -51,7 +53,9 @@ def update_public_html() -> None:
             raise FileNotFoundError(path)
         text = path.read_text(encoding="utf-8")
         text = inject_once(text, "/site-theme-init.js?v=20260806-1", HEAD_ASSETS, "</head>")
+        text = inject_once(text, "/site-motion.css?v=20260806-1", MOTION_HEAD_ASSET, "</head>")
         text = inject_once(text, "/site-theme.js?v=20260806-1", BODY_ASSET, "</body>")
+        text = inject_once(text, "/site-motion.js?v=20260806-1", MOTION_BODY_ASSET, "</body>")
 
         relative = path.relative_to(ROOT).as_posix()
         if relative == "for-doctors/bacterial-keratitis/index.html":
