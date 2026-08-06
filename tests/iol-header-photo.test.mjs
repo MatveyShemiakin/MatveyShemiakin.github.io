@@ -20,7 +20,7 @@ assert.ok(fs.existsSync(cssPath),'the isolated IOL header photograph stylesheet 
 const css=fs.readFileSync(cssPath,'utf8');
 const ruHtml=fs.readFileSync(ruPath,'utf8');
 const enHtml=fs.readFileSync(enPath,'utf8');
-const stylesheetReference='/patients/iol-dislocation/header-photo.css?v=20260806-1';
+const stylesheetReference='/patients/iol-dislocation/header-photo.css?v=20260806-2';
 const themeInit='/site-theme-init.js?v=20260806-1';
 
 assert.match(css,/\.sim-page \.site-head::before/,'the photograph must be added as a CSS background layer');
@@ -39,6 +39,7 @@ assert.match(css,/right:\s*-8%;[\s\S]*?width:\s*108%;[\s\S]*?background-position
 
 for(const [label,html] of [['Russian',ruHtml],['English',enHtml]]){
   assert.equal((html.match(new RegExp(stylesheetReference.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g'))||[]).length,1,`${label} page must load the stylesheet exactly once`);
+  assert.doesNotMatch(html,/header-photo\.css\?v=20260806-1/,`${label} page must not keep the stale stylesheet URL`);
   assert.ok(html.indexOf(stylesheetReference)<html.indexOf(themeInit),`${label} page must preserve the shared theme asset order`);
   assert.match(html,/<header class="site-head">/,'the existing header element must remain present');
   assert.match(html,/<div class="container hero">/,'the existing hero container must remain present');
