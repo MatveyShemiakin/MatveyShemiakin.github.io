@@ -1,0 +1,60 @@
+name: Verify global site motion
+
+on:
+  push:
+    branches:
+      - feature/global-site-motion
+    paths:
+      - 'site-motion.css'
+      - 'site-motion.js'
+      - 'tests/*.test.mjs'
+      - 'scripts/inject_site_theme.py'
+      - '.github/workflows/global-site-motion-verify.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check controller syntax
+        run: node --check site-motion.js
+
+      - name: Generate public pages
+        run: python scripts/inject_site_theme.py
+
+      - name: Capture first generation
+        run: |
+          mkdir -p /tmp/first-tree
+          git diff --name-only -z | while IFS= read -r -d '' file; do
+            mkdir -p "/tmp/first-tree/$(dirname "$file")"
+            cp "$file" "/tmp/first-tree/$file"
+          done
+
+      - name: Verify generator idempotence
+        shell: bash
+        run: |
+          python scripts/inject_site_theme.py
+          status=0
+          while IFS= read -r -d '' file; do
+            if ! cmp -s "/tmp/first-tree/$file" "$file"; then
+              echo "Generator changed $file on its second run"
+              status=1
+            fi
+          done < <(find /tmp/first-tree -type f -printf '%P\0')
+          exit "$status"
+
+      - name: Run regression suite
+        run: |
+          node --test tests/site-motion.test.mjs
+          node --test tests/mobile-navbar.test.mjs
+          node --test tests/penetrating-keratoplasty-page.test.mjs
+          node --test tests/site-breadcrumbs.test.mjs
+          node --test tests/site-theme.test.mjs
