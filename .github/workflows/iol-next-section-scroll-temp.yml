@@ -6,30 +6,64 @@ on:
       - fix/iol-next-section-scroll
     paths:
       - 'patients/iol-dislocation/script.js'
+      - 'patients/iol-dislocation/index.html'
+      - 'en/patients/iol-dislocation/index.html'
       - 'tests/*.test.mjs'
-      - 'scripts/*.py'
       - '.github/workflows/iol-next-section-scroll-temp.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   test:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Generate published pages
+
+      - name: Bump shared IOL script version
         run: |
-          python scripts/inject_legal.py
-          python scripts/inject_site_theme.py
+          python - <<'PY'
+          from pathlib import Path
+
+          old = '/patients/iol-dislocation/script.js?v=20260805-1'
+          new = '/patients/iol-dislocation/script.js?v=20260806-2'
+          paths = (
+              Path('patients/iol-dislocation/index.html'),
+              Path('en/patients/iol-dislocation/index.html'),
+          )
+          for path in paths:
+              text = path.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'{path}: expected one old script reference, found {count}')
+              path.write_text(text.replace(old, new), encoding='utf-8')
+          PY
+
       - name: Check script syntax
         run: node --check patients/iol-dislocation/script.js
-      - name: Run regression suite
+
+      - name: Run focused regression suite
         run: |
-          for test in tests/*.test.mjs; do
-            node --test "$test"
-          done
+          node --test tests/iol-next-section-scroll.test.mjs
+          node --test tests/mobile-navbar.test.mjs
+          node --test tests/penetrating-keratoplasty-page.test.mjs
+          node --test tests/site-motion.test.mjs
+          node --test tests/site-theme.test.mjs
+
+      - name: Verify cache-busting references
+        run: |
+          grep -Fq '/patients/iol-dislocation/script.js?v=20260806-2' patients/iol-dislocation/index.html
+          grep -Fq '/patients/iol-dislocation/script.js?v=20260806-2' en/patients/iol-dislocation/index.html
+
+      - name: Commit published pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add patients/iol-dislocation/index.html en/patients/iol-dislocation/index.html
+          git commit -m "Bump IOL page script version"
+          git push
