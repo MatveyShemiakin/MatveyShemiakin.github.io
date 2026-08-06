@@ -9,6 +9,8 @@ on:
       - 'site-motion.css'
       - 'site-motion.js'
       - 'scripts/inject_site_theme.py'
+      - 'scripts/inject_legal.py'
+      - 'docs/releases/**'
       - '**/*.html'
       - '.github/workflows/global-site-motion-temp.yml'
   workflow_dispatch:
@@ -25,29 +27,42 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
       - name: Generate public pages
         run: python scripts/inject_site_theme.py
+
+      - name: Capture first generation
+        run: git diff --binary > /tmp/first-generation.diff
+
+      - name: Verify generator idempotence
+        run: |
+          python scripts/inject_site_theme.py
+          git diff --binary > /tmp/second-generation.diff
+          cmp /tmp/first-generation.diff /tmp/second-generation.diff
+
       - name: Verify global motion
         run: node --test tests/site-motion.test.mjs
+
       - name: Verify mobile navigation
         run: node --test tests/mobile-navbar.test.mjs
+
       - name: Verify penetrating keratoplasty pages
-        shell: bash
-        run: |
-          set +e
-          output=$(node --test tests/penetrating-keratoplasty-page.test.mjs 2>&1)
-          status=$?
-          printf '%s\n' "$output"
-          if [ "$status" -ne 0 ]; then
-            while IFS= read -r line; do
-              safe=${line//'%'/'%25'}
-              safe=${safe//$'\r'/'%0D'}
-              safe=${safe//$'\n'/'%0A'}
-              echo "::error::$safe"
-            done < <(printf '%s\n' "$output" | grep -E 'not ok|location:|failureType:|error:|operator:|actual:|expected:' | head -n 20)
-          fi
-          exit "$status"
+        run: node --test tests/penetrating-keratoplasty-page.test.mjs
+
       - name: Verify breadcrumbs
         run: node --test tests/site-breadcrumbs.test.mjs
+
       - name: Verify global theme compatibility
         run: node --test tests/site-theme.test.mjs
+
+      - name: Commit generated pages
+        run: |
+          if git diff --quiet; then
+            echo "No generated changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html' '**/*.html' patients/iol-dislocation/script.js site-theme.css || true
+          git commit -m "Inject global motion across public pages"
+          git push
