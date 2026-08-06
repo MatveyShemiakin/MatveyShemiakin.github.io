@@ -21,19 +21,21 @@ assert.match(js,/doctors:'\/for-doctors\/'/);
 assert.match(js,/about:'\/#about'/);
 assert.match(js,/patients:'\/en\/patients\/'/);
 assert.match(js,/doctors:'\/en\/for-doctors\/'/);
-assert.match(js,/MutationObserver\(syncTheme\)/);
+assert.doesNotMatch(js,/MutationObserver\(syncTheme\)/);
 assert.doesNotMatch(js,/querySelectorAll\('\.sim-page,\[data-theme\]'\)/);
 assert.match(js,/if\(nav\.dataset\.theme!==theme\)nav\.dataset\.theme=theme/);
 assert.match(js,/if\(search\.dataset\.theme!==theme\)search\.dataset\.theme=theme/);
 assert.match(js,/site-mobile-search/);
+assert.doesNotMatch(css,/backdrop-filter:/);
+assert.doesNotMatch(js,/render\(''\);/);
 assert.doesNotMatch(js,/style=/);
 
 for(const url of urls){
   const file=pagePath(url);
   assert.ok(fs.existsSync(file),`Missing sitemap page ${file}`);
   const html=fs.readFileSync(file,'utf8');
-  assert.equal((html.match(/\/mobile-nav\.css\?v=20260806-2/g)||[]).length,1,`CSS tag mismatch in ${file}`);
-  assert.equal((html.match(/\/mobile-nav\.js\?v=20260806-2/g)||[]).length,1,`JS tag mismatch in ${file}`);
+  assert.equal((html.match(/\/mobile-nav\.css\?v=20260806-3/g)||[]).length,1,`CSS tag mismatch in ${file}`);
+  assert.equal((html.match(/\/mobile-nav\.js\?v=20260806-3/g)||[]).length,1,`JS tag mismatch in ${file}`);
 }
 assert.doesNotMatch(fs.readFileSync('konspekt.html','utf8'),/\/mobile-nav\.(?:css|js)/);
 console.log(`Mobile navbar verified on ${urls.length} public pages.`);

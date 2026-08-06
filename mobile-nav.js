@@ -149,10 +149,7 @@
 
   applyActive(currentSection());
   syncTheme();
-  render('');
 
-  const themeObserver=new MutationObserver(syncTheme);
-  [document.documentElement,document.body,...document.querySelectorAll('.sim-page')].forEach(node=>node&&themeObserver.observe(node,{attributes:true,attributeFilter:['class','data-theme']}));
   document.addEventListener('click',event=>{if(event.target.closest('[data-site-theme],.theme-toggle,.site-theme-toggle'))setTimeout(syncTheme,0)});
   window.addEventListener('storage',syncTheme);
   if(window.matchMedia){const media=window.matchMedia('(prefers-color-scheme: dark)');if(media.addEventListener)media.addEventListener('change',syncTheme)}
