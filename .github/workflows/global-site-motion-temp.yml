@@ -44,7 +44,7 @@ jobs:
               safe=${safe//$'\r'/'%0D'}
               safe=${safe//$'\n'/'%0A'}
               echo "::error::$safe"
-            done < <(printf '%s\n' "$output" | tail -n 80)
+            done < <(printf '%s\n' "$output" | head -n 20)
           fi
           exit "$status"
       - name: Verify breadcrumbs
