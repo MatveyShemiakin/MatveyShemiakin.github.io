@@ -1,0 +1,89 @@
+name: Remove desktop sticky IOL tabs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/remove-iol-desktop-sticky-tabs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Confirm regression test fails before fix
+        shell: bash
+        run: |
+          cat > /tmp/check_iol_tabs.py <<'PY'
+          from pathlib import Path
+
+          css = Path('patients/iol-dislocation/styles.css').read_text(encoding='utf-8')
+          desktop_rule = '@media(min-width:761px){.topic-tabs{position:static;top:auto}}'
+          assert desktop_rule in css, 'Desktop topic tabs are still sticky'
+          assert '.sim-page.mobile .topic-tabs{top:57px;' in css, 'Mobile navigation behavior was changed'
+
+          for page in (
+              Path('patients/iol-dislocation/index.html'),
+              Path('en/patients/iol-dislocation/index.html'),
+          ):
+              html = page.read_text(encoding='utf-8')
+              assert '/patients/iol-dislocation/styles.css?v=20260806-1' in html, f'Cache version is stale in {page}'
+          PY
+
+          if python3 /tmp/check_iol_tabs.py; then
+            echo 'Regression test unexpectedly passed before the fix.'
+            exit 1
+          else
+            echo 'Expected failing regression test confirmed.'
+          fi
+
+      - name: Apply minimal desktop-only fix
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          css_path = Path('patients/iol-dislocation/styles.css')
+          css = css_path.read_text(encoding='utf-8')
+          marker = '/* Desktop IOL topic tabs stay in document flow */'
+          rule = '@media(min-width:761px){.topic-tabs{position:static;top:auto}}'
+
+          assert '.topic-tabs{position:sticky;top:69px;' in css, 'Expected source sticky rule was not found'
+          assert '.sim-page.mobile .topic-tabs{top:57px;' in css, 'Expected mobile navigation rule was not found'
+
+          if marker not in css:
+              css = css.rstrip() + '\n\n' + marker + '\n' + rule + '\n'
+              css_path.write_text(css, encoding='utf-8')
+
+          old_version = '/patients/iol-dislocation/styles.css?v=20260805-1'
+          new_version = '/patients/iol-dislocation/styles.css?v=20260806-1'
+          for page in (
+              Path('patients/iol-dislocation/index.html'),
+              Path('en/patients/iol-dislocation/index.html'),
+          ):
+              html = page.read_text(encoding='utf-8')
+              if new_version not in html:
+                  assert old_version in html, f'Expected stylesheet reference was not found in {page}'
+                  page.write_text(html.replace(old_version, new_version), encoding='utf-8')
+          PY
+
+          python3 /tmp/check_iol_tabs.py
+          git diff --check
+
+      - name: Commit and publish
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/remove-iol-desktop-sticky-tabs.yml
+          git add patients/iol-dislocation/styles.css patients/iol-dislocation/index.html en/patients/iol-dislocation/index.html
+          git diff --cached --check
+          git commit -m 'Stop IOL section tabs following desktop scroll'
+          git push origin main
