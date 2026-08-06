@@ -1,0 +1,25 @@
+name: IOL header clinical photo TDD
+
+on:
+  push:
+    branches:
+      - feature/iol-header-clinical-photo
+    paths:
+      - 'assets/iol-dislocation-header.jpg'
+      - 'patients/iol-dislocation/header-photo.css'
+      - 'patients/iol-dislocation/index.html'
+      - 'en/patients/iol-dislocation/index.html'
+      - 'tests/iol-header-photo.test.mjs'
+      - '.github/workflows/iol-header-photo-temp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run IOL header photo regression test
+        run: node --test tests/iol-header-photo.test.mjs
