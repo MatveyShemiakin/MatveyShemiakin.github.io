@@ -220,3 +220,6 @@
 .sim-page.mobile .site-language-switch a{min-width:32px;height:27px;padding:0 6px}
 .reading-progress{position:fixed;left:0;right:0;top:0;z-index:12000;pointer-events:none}
 .site-theme-toggle:focus-visible,.site-language-switch a:focus-visible{outline:3px solid rgba(135,181,255,.78);outline-offset:3px}
+
+/* Desktop IOL topic tabs stay in document flow */
+@media(min-width:761px){.topic-tabs{position:static;top:auto}}
