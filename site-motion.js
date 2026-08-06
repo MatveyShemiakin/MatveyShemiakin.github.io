@@ -283,6 +283,8 @@
   }
 
   function mountProgress(){
+    if(document.querySelector('.reading-progress,[data-reading-progress]'))return;
+
     var progress=null;
     var frame=0;
     var listening=false;
