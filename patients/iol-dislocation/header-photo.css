@@ -1,0 +1,66 @@
+.sim-page .site-head {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.sim-page .site-head::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 84px;
+  right: 0;
+  bottom: 0;
+  width: min(62vw, 900px);
+  background: url("/assets/iol-dislocation-header.webp?v=20260806-1") 58% 46% / cover no-repeat;
+  opacity: .82;
+  pointer-events: none;
+}
+
+.sim-page .site-head::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(6, 24, 47, 1) 0%, rgba(6, 24, 47, .98) 42%, rgba(6, 24, 47, .76) 64%, rgba(4, 18, 37, .28) 100%),
+    linear-gradient(180deg, rgba(4, 18, 37, .12), rgba(4, 18, 37, .55));
+  pointer-events: none;
+}
+
+.sim-page .site-head > .container {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1020px) {
+  .sim-page .site-head::before {
+    top: 72px;
+    width: 68vw;
+    opacity: .68;
+    background-position: 58% 44%;
+  }
+
+  .sim-page .site-head::after {
+    background:
+      linear-gradient(90deg, rgba(6, 24, 47, 1) 0%, rgba(6, 24, 47, .97) 52%, rgba(4, 18, 37, .52) 100%),
+      linear-gradient(180deg, rgba(4, 18, 37, .16), rgba(4, 18, 37, .62));
+  }
+}
+
+@media (max-width: 680px) {
+  .sim-page .site-head::before {
+    top: 72px;
+    right: -18%;
+    bottom: 0;
+    width: 112%;
+    opacity: .56;
+    background-position: 59% 46%;
+  }
+
+  .sim-page .site-head::after {
+    background:
+      linear-gradient(180deg, rgba(4, 18, 37, .98) 0%, rgba(4, 18, 37, .93) 49%, rgba(4, 18, 37, .56) 73%, rgba(4, 18, 37, .88) 100%),
+      linear-gradient(90deg, rgba(6, 24, 47, .97), rgba(4, 18, 37, .38));
+  }
+}
