@@ -2,6 +2,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 const css = fs.readFileSync('patients/iol-dislocation/header-photo.css', 'utf8');
+const ruHtml = fs.readFileSync('patients/iol-dislocation/index.html', 'utf8');
+const enHtml = fs.readFileSync('en/patients/iol-dislocation/index.html', 'utf8');
+const stylesheetReference = '/patients/iol-dislocation/header-photo.css?v=20260806-3';
 
 assert.match(
   css,
@@ -24,4 +27,13 @@ assert.match(
   'mobile right edge overlay should be light enough to reveal the image',
 );
 
-console.log('IOL header desktop and mobile framing verified.');
+for (const [label, html] of [['Russian', ruHtml], ['English', enHtml]]) {
+  assert.equal(
+    (html.match(new RegExp(stylesheetReference.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length,
+    1,
+    `${label} page must load the refreshed stylesheet exactly once`,
+  );
+  assert.doesNotMatch(html, /header-photo\.css\?v=20260806-2/, `${label} page must not retain the stale cache key`);
+}
+
+console.log('IOL header desktop, mobile visibility and cache refresh verified.');
