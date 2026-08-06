@@ -31,7 +31,7 @@
       panel.hidden=!active;
     });
     if(shouldScroll){
-      page.querySelector('.topic-tabs')?.scrollIntoView({behavior:'smooth',block:'start'});
+      requestAnimationFrame(()=>window.scrollTo({top:0,behavior:'smooth'}));
     }
     requestAnimationFrame(updateReadingProgress);
   }
