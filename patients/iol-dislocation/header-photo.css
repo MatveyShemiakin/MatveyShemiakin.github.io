@@ -33,6 +33,40 @@
   z-index: 1;
 }
 
+/* Unified watermark for IOL illustrations */
+.sim-page .iol-image-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.sim-page .iol-image-button::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 12%;
+  background: linear-gradient(180deg, rgba(255,255,255,0), #fff 48%, #fff 100%);
+  pointer-events: none;
+}
+
+.sim-page .iol-image-button::after {
+  content: "МШ  |  matveyshemyakin.ru";
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 2.7%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 32px);
+  color: rgba(53,103,173,.72);
+  font: 700 clamp(13px, 1.55vw, 22px)/1.1 Inter, "Segoe UI", Arial, sans-serif;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
 @media (max-width: 1020px) {
   .sim-page .site-head::before {
     top: 72px;
@@ -62,5 +96,15 @@
     background:
       linear-gradient(180deg, rgba(4, 18, 37, .98) 0%, rgba(4, 18, 37, .93) 49%, rgba(4, 18, 37, .56) 73%, rgba(4, 18, 37, .88) 100%),
       linear-gradient(90deg, rgba(6, 24, 47, .97), rgba(4, 18, 37, .38));
+  }
+
+  .sim-page .iol-image-button::before {
+    height: 14%;
+  }
+
+  .sim-page .iol-image-button::after {
+    bottom: 3.1%;
+    max-width: calc(100% - 20px);
+    font-size: 12px;
   }
 }
