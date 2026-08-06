@@ -44,8 +44,8 @@ test('shared clinical header contains the primary site navigation', () => {
   assert.match(headerCss, /--clinical-header-height:\s*98px/);
   assert.match(headerCss, /font:400 31px\/1 var\(--clinical-serif\)/);
   assert.match(headerCss, /letter-spacing:\.25em/);
-  assert.match(page, /doctors-legal\.js\?v=20260726-8/);
-  assert.match(legalInjector, /doctors-legal\.js\?v=20260726-8/);
+  assert.match(page, /doctors-legal\.js\?v=20260805-1/);
+  assert.match(legalInjector, /doctors-legal\.js\?v=20260805-1/);
 });
 
 test('professional notice is injected into the real article column, never a quick card', () => {
