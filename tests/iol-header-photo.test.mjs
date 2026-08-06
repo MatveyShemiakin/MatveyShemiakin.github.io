@@ -37,6 +37,12 @@ assert.match(
 assert.match(css,/background-position:\s*95%\s+22%;[\s\S]*?background-size:\s*auto\s+180%;/,'tablet framing must preserve the full cornea');
 assert.match(css,/right:\s*-8%;[\s\S]*?width:\s*108%;[\s\S]*?background-position:\s*74%\s+22%;[\s\S]*?background-size:\s*auto\s+175%;/,'mobile framing must preserve the full cornea without moving header content');
 
+assert.match(css,/\.sim-page \.iol-image-button::after/,'the in-page IOL figures must keep the watermark overlay');
+assert.match(css,/(^|\n)\.iol-lightbox__frame::after\s*\{/,'the enlarged image must receive an unscoped watermark overlay');
+assert.match(css,/(^|\n)\.iol-lightbox__frame::before\s*\{/,'the enlarged image must mask the legacy lower watermark');
+assert.doesNotMatch(css,/\.sim-page \.iol-lightbox__frame::(?:before|after)/,'the lightbox lives outside .sim-page and must not use a descendant selector');
+assert.match(css,/MATVEYSHEMYAKIN\.RU/,'the repeated watermark text must remain present');
+
 for(const [label,html] of [['Russian',ruHtml],['English',enHtml]]){
   assert.equal((html.match(new RegExp(stylesheetReference.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g'))||[]).length,1,`${label} page must load the stylesheet exactly once`);
   assert.doesNotMatch(html,/header-photo\.css\?v=20260806-1/,`${label} page must not keep the stale stylesheet URL`);
@@ -44,6 +50,7 @@ for(const [label,html] of [['Russian',ruHtml],['English',enHtml]]){
   assert.match(html,/<header class="site-head">/,'the existing header element must remain present');
   assert.match(html,/<div class="container hero">/,'the existing hero container must remain present');
   assert.doesNotMatch(html,/<img[^>]+iol-dislocation-header/,'the photograph must not be inserted as new header markup');
+  assert.match(html,/<\/div><script[^>]*><\/script><dialog class="iol-lightbox"|<dialog class="iol-lightbox"/,'the IOL lightbox must remain mounted outside the page wrapper');
 }
 
-console.log('IOL header photograph verified for RU and EN pages.');
+console.log('IOL header photograph and enlarged-image watermark verified for RU and EN pages.');
