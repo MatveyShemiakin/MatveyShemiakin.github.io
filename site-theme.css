@@ -1,0 +1,189 @@
+:root{
+  --site-theme-bg:#f4f1eb;
+  --site-theme-surface:#ffffff;
+  --site-theme-surface-2:#ece9e2;
+  --site-theme-text:#111a27;
+  --site-theme-muted:#596679;
+  --site-theme-border:#d8d3ca;
+  --site-theme-accent:#3567ad;
+  --site-theme-control-bg:rgba(4,18,37,.62);
+  --site-theme-control-border:rgba(202,214,230,.55);
+  --site-theme-control-text:#ffffff;
+  color-scheme:light;
+}
+
+html[data-site-theme="dark"]{
+  --paper:#06182f;
+  --paper-2:#0a2344;
+  --ink:#edf4fb;
+  --muted:#a9bad1;
+  --muted-dark:#b8c6d8;
+  --line-dark:#29415a;
+  --site-theme-bg:#041225;
+  --site-theme-surface:#06182f;
+  --site-theme-surface-2:#0a2344;
+  --site-theme-text:#edf4fb;
+  --site-theme-muted:#b8c6d8;
+  --site-theme-border:#29415a;
+  --site-theme-accent:#87b5ff;
+  --site-theme-control-bg:#0a2344;
+  --site-theme-control-border:rgba(135,181,255,.42);
+  --site-theme-control-text:#ffffff;
+  color-scheme:dark;
+}
+
+.site-theme-toggle{
+  appearance:none;
+  width:41px;
+  height:41px;
+  min-width:41px;
+  min-height:41px;
+  margin:0;
+  padding:0;
+  display:inline-grid;
+  place-items:center;
+  flex:0 0 auto;
+  border:1px solid var(--site-theme-control-border);
+  border-radius:50%;
+  background:var(--site-theme-control-bg);
+  color:var(--site-theme-control-text);
+  box-shadow:none;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:background-color .16s ease,border-color .16s ease,color .16s ease,transform .16s ease;
+}
+
+.site-theme-toggle:hover{border-color:#87b5ff;background:#0d2b51}
+.site-theme-toggle:active{transform:scale(.96)}
+.site-theme-toggle:focus-visible{outline:3px solid rgba(135,181,255,.82);outline-offset:3px}
+.site-theme-toggle__icon{grid-area:1/1;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.site-theme-toggle__icon--moon{display:none}
+html[data-site-theme="dark"] .site-theme-toggle__icon--sun{display:none}
+html[data-site-theme="dark"] .site-theme-toggle__icon--moon{display:block}
+
+.site-language-switch+.site-theme-toggle{margin-left:7px}
+.site-language-utility:has(.site-theme-toggle),.site-theme-utility{display:flex;align-items:center;justify-content:flex-end;gap:7px;width:100%}
+.site-language-utility .site-language-switch+.site-theme-toggle{margin-left:0}
+.site-language-utility .site-theme-toggle,.site-theme-utility .site-theme-toggle{background:var(--site-theme-surface);border-color:var(--site-theme-border);color:var(--site-theme-text)}
+
+html[data-site-theme="dark"] body{background:var(--site-theme-bg);color:var(--site-theme-text)}
+html[data-site-theme="dark"] .patient-fab__action{background:#0a2344;border-color:#365574;color:#edf4fb}
+html[data-site-theme="dark"] .patient-fab__action strong{color:#edf4fb}
+html[data-site-theme="dark"] .patient-fab__action small{color:#b8c6d8}
+html[data-site-theme="dark"] .cookie-banner{background:#06182f;border-color:#29415a}
+
+/* Main author website */
+html[data-site-theme="dark"][data-site-theme-family="home"] .about-section,
+html[data-site-theme="dark"][data-site-theme-family="home"] .education-section,
+html[data-site-theme="dark"][data-site-theme-family="home"] .contact-section{
+  background:#06182f;
+  color:#edf4fb;
+}
+html[data-site-theme="dark"][data-site-theme-family="home"] .dark-kicker{color:#87b5ff}
+html[data-site-theme="dark"][data-site-theme-family="home"] .prose,
+html[data-site-theme="dark"][data-site-theme-family="home"] .timeline-item p,
+html[data-site-theme="dark"][data-site-theme-family="home"] .contact-lead,
+html[data-site-theme="dark"][data-site-theme-family="home"] .disclaimer{color:#b8c6d8}
+html[data-site-theme="dark"][data-site-theme-family="home"] .fact,
+html[data-site-theme="dark"][data-site-theme-family="home"] .contact-panel,
+html[data-site-theme="dark"][data-site-theme-family="home"] .contact-link:not(.primary-link){background:#0a2344;border-color:#29415a;color:#edf4fb}
+html[data-site-theme="dark"][data-site-theme-family="home"] .fact span{color:#a8b8ca}
+html[data-site-theme="dark"][data-site-theme-family="home"] .timeline,
+html[data-site-theme="dark"][data-site-theme-family="home"] .timeline-item{border-color:#29415a}
+html[data-site-theme="dark"][data-site-theme-family="home"] .timeline-year{color:#87b5ff}
+html[data-site-theme="dark"][data-site-theme-family="home"] .contact-link.primary-link{background:#4d8eff;border-color:#4d8eff;color:#fff}
+
+/* Patient landing page and patient topic pages */
+html[data-site-theme="dark"][data-site-theme-family="patients"] .faq-section,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .author-section,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .article{background:#06182f;color:#edf4fb}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .section-kicker.dark,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .faq-toolbar .section-kicker,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .toc strong,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .question h3,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .important strong,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .author small,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .sources a{color:#87b5ff}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .section-head>p,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .faq-group-head p,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .answer-detail p,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .answer-detail li,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .question p,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .question li,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .author p,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .disclaimer{color:#c4d1df}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .search-box,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .short-answer,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .answer-important,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .search-empty,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .author-panel,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .intro-card,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .toc,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .important,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .author{background:#0a2344;border-color:#29415a;color:#edf4fb;box-shadow:0 14px 34px rgba(0,0,0,.16)}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .search-box input{color:#edf4fb}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .filter-button{border-color:#45617d;color:#c4d1df}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .filter-button:hover,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .filter-button.active{background:#4d8eff;border-color:#4d8eff;color:#fff}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .faq-group-head,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .faq-list,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .faq-item,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .question,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .sources{border-color:#29415a}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .faq-question,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .question h2,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .author h2,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .sources h2{color:#edf4fb}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .faq-toggle{border-color:#7890ac;color:#87b5ff}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .faq-item[open] .faq-toggle{background:#4d8eff;border-color:#4d8eff;color:#fff}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .short-answer{color:#eaf1f8}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .answer-important ul,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .important ul,
+html[data-site-theme="dark"][data-site-theme-family="patients"] .toc a{color:#c4d1df}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .author-links a{border-color:#45617d;color:#87b5ff}
+
+/* Professional library landing pages */
+html[data-site-theme="dark"][data-site-theme-family="doctors"] .library{background:#06182f;color:#edf4fb}
+html[data-site-theme="dark"][data-site-theme-family="doctors"] .library-card{background:#0a2344;border-color:#29415a;color:#edf4fb;box-shadow:0 18px 45px rgba(0,0,0,.18)}
+html[data-site-theme="dark"][data-site-theme-family="doctors"] .library-card p{color:#c4d1df}
+html[data-site-theme="dark"][data-site-theme-family="doctors"] .library-label,
+html[data-site-theme="dark"][data-site-theme-family="doctors"] .library-link,
+html[data-site-theme="dark"][data-site-theme-family="doctors"] .dark-kicker{color:#87b5ff}
+
+/* Professional-use terms */
+html[data-site-theme="dark"][data-site-theme-family="terms"] body,
+html[data-site-theme="dark"][data-site-theme-family="terms"] .terms-main{background:#041225;color:#edf4fb}
+html[data-site-theme="dark"][data-site-theme-family="terms"] .terms-card,
+html[data-site-theme="dark"][data-site-theme-family="terms"] .terms-aside{background:#06182f;border-color:#29415a;color:#edf4fb;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+html[data-site-theme="dark"][data-site-theme-family="terms"] .terms-card p,
+html[data-site-theme="dark"][data-site-theme-family="terms"] .terms-card li,
+html[data-site-theme="dark"][data-site-theme-family="terms"] .terms-aside p,
+html[data-site-theme="dark"][data-site-theme-family="terms"] .terms-meta{color:#c4d1df}
+html[data-site-theme="dark"][data-site-theme-family="terms"] .terms-callout{background:#392812;border-left-color:#f2a65a;color:#f5dfc3}
+html[data-site-theme="dark"][data-site-theme-family="terms"] .terms-aside a{color:#9fc4f4}
+html[data-site-theme="dark"][data-site-theme-family="terms"] .terms-meta{border-color:#29415a}
+
+/* Privacy pages */
+html[data-site-theme="dark"][data-site-theme-family="privacy"] .privacy-page{background:#041225;color:#edf4fb}
+html[data-site-theme="dark"][data-site-theme-family="privacy"] .privacy-card{background:#06182f;border-color:#29415a;color:#edf4fb;box-shadow:0 18px 55px rgba(0,0,0,.2)}
+html[data-site-theme="dark"][data-site-theme-family="privacy"] .privacy-updated{color:#a8b8ca}
+html[data-site-theme="dark"][data-site-theme-family="privacy"] .privacy-back,
+html[data-site-theme="dark"][data-site-theme-family="privacy"] .privacy-card a{color:#9fc4f4}
+
+/* IOL page uses its existing detailed dark palette; this bridge keeps the common state authoritative. */
+html[data-site-theme="dark"][data-site-theme-family="iol"]{background:#06182f}
+html[data-site-theme="light"][data-site-theme-family="iol"]{background:#f4f1eb}
+
+/* Penetrating keratoplasty already consumes html[data-theme]. */
+html[data-site-theme-family="pkp"] .site-theme-toggle{background:rgba(255,255,255,.04);border-color:rgba(135,181,255,.30);color:#fff}
+
+/* Bacterial keratitis body class is added statically by the injector. */
+html[data-site-theme-family="bacterial"] .site-theme-toggle{background:rgba(255,255,255,.04);border-color:rgba(135,181,255,.30);color:#fff}
+
+@media(max-width:760px){
+  .site-theme-toggle{width:37px;height:37px;min-width:37px;min-height:37px}
+  .site-theme-toggle__icon{width:18px;height:18px}
+  .site-language-switch+.site-theme-toggle{margin-left:5px}
+}
+
+@media(prefers-reduced-motion:reduce){.site-theme-toggle{transition:none}}
