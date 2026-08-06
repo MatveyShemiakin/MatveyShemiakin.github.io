@@ -1,0 +1,22 @@
+name: IOL header mobile framing
+
+on:
+  push:
+    branches:
+      - fix/iol-header-mobile-photo
+    paths:
+      - 'patients/iol-dislocation/header-photo.css'
+      - 'tests/iol-header-mobile-visibility.test.mjs'
+      - '.github/workflows/iol-header-mobile-temp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run framing regression
+        run: node --test tests/iol-header-mobile-visibility.test.mjs
