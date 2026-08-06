@@ -76,6 +76,14 @@ def update_public_html() -> None:
 def bridge_iol_theme() -> None:
     path = ROOT / "patients/iol-dislocation/script.js"
     text = path.read_text(encoding="utf-8")
+    migrated_markers = (
+        "const themeKey='site_theme_v1';",
+        "function setTheme(theme,persist=true){",
+        "window.addEventListener('site-theme-change'",
+    )
+    if all(marker in text for marker in migrated_markers):
+        return
+
     text = text.replace("const themeKey='iol_dislocation_theme';", "const themeKey='site_theme_v1';", 1)
     text = text.replace("function setTheme(theme){", "function setTheme(theme,persist=true){", 1)
     text = text.replace(
