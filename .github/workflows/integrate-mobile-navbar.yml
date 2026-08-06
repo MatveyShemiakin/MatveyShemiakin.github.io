@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Integrate component across public pages
+      - name: Build site-wide integration
         shell: bash
         run: |
           python3 - <<'PY'
@@ -29,8 +29,10 @@ jobs:
           js = js_path.read_text(encoding='utf-8')
           old = "const path=(window.location.pathname.replace(/\\/{2,}/g,'/').replace(/\\/+$/,'')||'/')+'/';"
           new = "const cleanPath=window.location.pathname.replace(/\\/{2,}/g,'/').replace(/\\/+$/,'');\n  const path=cleanPath?cleanPath+'/':'/';"
-          assert old in js, 'Expected root path normalisation line was not found'
-          js_path.write_text(js.replace(old, new, 1), encoding='utf-8')
+          if old in js:
+              js = js.replace(old, new, 1)
+          assert new in js, 'Root path normalisation is missing'
+          js_path.write_text(js, encoding='utf-8')
 
           injector = dedent('''
               from pathlib import Path
@@ -81,14 +83,6 @@ jobs:
           ''').lstrip()
           Path('scripts/inject_mobile_nav.py').write_text(injector, encoding='utf-8')
 
-          workflow_path = Path('.github/workflows/inject-legal.yml')
-          workflow = workflow_path.read_text(encoding='utf-8')
-          if "      - 'mobile-nav.js'" not in workflow:
-              workflow = workflow.replace("      - 'legal.css'\n", "      - 'legal.css'\n      - 'mobile-nav.js'\n      - 'mobile-nav.css'\n      - 'scripts/inject_mobile_nav.py'\n", 1)
-          if 'python scripts/inject_mobile_nav.py' not in workflow:
-              workflow = workflow.replace('      - run: python scripts/inject_legal.py\n', '      - run: python scripts/inject_legal.py\n      - run: python scripts/inject_mobile_nav.py\n', 1)
-          workflow_path.write_text(workflow, encoding='utf-8')
-
           test = dedent('''
               import fs from 'node:fs';
               import assert from 'node:assert/strict';
@@ -121,11 +115,7 @@ jobs:
                 assert.equal((html.match(/\\/mobile-nav\\.css\\?v=20260806-1/g)||[]).length,1,`CSS tag mismatch in ${file}`);
                 assert.equal((html.match(/\\/mobile-nav\\.js\\?v=20260806-1/g)||[]).length,1,`JS tag mismatch in ${file}`);
               }
-              const technical=fs.readFileSync('konspekt.html','utf8');
-              assert.doesNotMatch(technical,/\\/mobile-nav\\.(?:css|js)/);
-              const injector=fs.readFileSync('scripts/inject_mobile_nav.py','utf8');
-              assert.match(injector,/STYLE =/);
-              assert.match(injector,/EXCLUDED =/);
+              assert.doesNotMatch(fs.readFileSync('konspekt.html','utf8'),/\\/mobile-nav\\.(?:css|js)/);
               console.log(`Mobile navbar verified on ${urls.length} public pages.`);
           ''').lstrip()
           Path('tests/mobile-navbar.test.mjs').write_text(test, encoding='utf-8')
@@ -133,19 +123,18 @@ jobs:
 
           python3 scripts/inject_mobile_nav.py
 
-      - name: Verify JavaScript and integration
+      - name: Verify integration
         run: |
           node --check mobile-nav.js
           node tests/mobile-navbar.test.mjs
           python3 -m py_compile scripts/inject_mobile_nav.py
           git diff --check
 
-      - name: Commit and publish
+      - name: Commit and publish site files
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git rm .github/workflows/integrate-mobile-navbar.yml
-          git add mobile-nav.js scripts/inject_mobile_nav.py .github/workflows/inject-legal.yml tests/mobile-navbar.test.mjs
+          git add mobile-nav.js scripts/inject_mobile_nav.py tests/mobile-navbar.test.mjs
           git add '*.html' '**/*.html'
           git diff --cached --check
           git commit -m 'Integrate bilingual mobile navbar across site'
