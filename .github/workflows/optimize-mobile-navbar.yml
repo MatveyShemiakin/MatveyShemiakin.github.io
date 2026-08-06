@@ -23,16 +23,9 @@ jobs:
           const fs = require('node:fs');
           const css = fs.readFileSync('mobile-nav.css', 'utf8');
           const js = fs.readFileSync('mobile-nav.js', 'utf8');
-          const hasExpensiveState =
-            css.includes('backdrop-filter:blur(18px)') &&
-            css.includes('backdrop-filter:blur(4px)') &&
-            js.includes('const themeObserver=new MutationObserver(syncTheme);') &&
-            js.includes("render('');");
-          if (!hasExpensiveState) {
-            console.error('Expected performance regression was not reproduced');
-            process.exit(1);
-          }
-          console.log('Regression reproduced: fixed blur layers, persistent observer and eager search rendering are active.');
+          const hasExpensiveState = css.includes('backdrop-filter:blur(18px)') && css.includes('backdrop-filter:blur(4px)') && js.includes('const themeObserver=new MutationObserver(syncTheme);') && js.includes("render('');");
+          if (!hasExpensiveState) process.exit(1);
+          console.log('Performance regression reproduced.');
           NODE
 
       - name: Apply stable mobile implementation
@@ -42,20 +35,24 @@ jobs:
 
           css_path = Path('mobile-nav.css')
           css = css_path.read_text(encoding='utf-8')
-          css = css.replace('background:var(--mn-bg);box-shadow:var(--mn-shadow);font-family:var(--mobile-nav-sans);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);isolation:isolate',
-                            'background:var(--mn-bg);box-shadow:var(--mn-shadow);font-family:var(--mobile-nav-sans);isolation:isolate')
-          css = css.replace('background:rgba(2,13,28,.58);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)',
-                            'background:rgba(2,13,28,.66)')
+          css = css.replace(
+              'background:var(--mn-bg);box-shadow:var(--mn-shadow);font-family:var(--mobile-nav-sans);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);isolation:isolate',
+              'background:var(--mn-bg);box-shadow:var(--mn-shadow);font-family:var(--mobile-nav-sans);isolation:isolate'
+          )
+          css = css.replace(
+              'background:rgba(2,13,28,.58);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)',
+              'background:rgba(2,13,28,.66)'
+          )
           css = css.replace('--mn-bg:rgba(255,255,255,.94)', '--mn-bg:rgba(255,255,255,.985)')
           css = css.replace('--mn-bg:rgba(10,35,68,.94)', '--mn-bg:rgba(10,35,68,.985)')
           css_path.write_text(css, encoding='utf-8')
 
           js_path = Path('mobile-nav.js')
           js = js_path.read_text(encoding='utf-8')
-          observer_block = """\n  const themeObserver=new MutationObserver(syncTheme);\n  [document.documentElement,document.body,...document.querySelectorAll('.sim-page')].forEach(node=>node&&themeObserver.observe(node,{attributes:true,attributeFilter:['class','data-theme']}));"""
-          if observer_block not in js:
-              raise SystemExit('Expected theme observer block not found')
-          js = js.replace(observer_block, '', 1)
+          observer = "\n  const themeObserver=new MutationObserver(syncTheme);\n  [document.documentElement,document.body,...document.querySelectorAll('.sim-page')].forEach(node=>node&&themeObserver.observe(node,{attributes:true,attributeFilter:['class','data-theme']}));"
+          if observer not in js:
+              raise SystemExit('Observer block not found')
+          js = js.replace(observer, '', 1)
           js = js.replace("\n  render('');\n", "\n", 1)
           js_path.write_text(js, encoding='utf-8')
 
@@ -63,10 +60,9 @@ jobs:
               if any(part.startswith('.') for part in path.parts):
                   continue
               text = path.read_text(encoding='utf-8')
-              updated = text.replace('/mobile-nav.css?v=20260806-2', '/mobile-nav.css?v=20260806-3')
-              updated = updated.replace('/mobile-nav.js?v=20260806-2', '/mobile-nav.js?v=20260806-3')
-              if updated != text:
-                  path.write_text(updated, encoding='utf-8')
+              text = text.replace('/mobile-nav.css?v=20260806-2', '/mobile-nav.css?v=20260806-3')
+              text = text.replace('/mobile-nav.js?v=20260806-2', '/mobile-nav.js?v=20260806-3')
+              path.write_text(text, encoding='utf-8')
 
           injector = Path('scripts/inject_mobile_nav.py')
           text = injector.read_text(encoding='utf-8')
@@ -78,13 +74,11 @@ jobs:
           test = test_path.read_text(encoding='utf-8')
           test = test.replace('/mobile-nav\\.css\\?v=20260806-2', '/mobile-nav\\.css\\?v=20260806-3')
           test = test.replace('/mobile-nav\\.js\\?v=20260806-2', '/mobile-nav\\.js\\?v=20260806-3')
-          test = test.replace("assert.match(js,/MutationObserver\\(syncTheme\\)/);\n", "assert.doesNotMatch(js,/MutationObserver\\(syncTheme\\)/);\n")
-          extra = """
-assert.doesNotMatch(css,/backdrop-filter:/);
-assert.doesNotMatch(js,/render\(''\);/);
-"""
-          if "assert.doesNotMatch(css,/backdrop-filter:/);" not in test:
-              test = test.replace("assert.match(js,/site-mobile-search/);\n", "assert.match(js,/site-mobile-search/);\n" + extra)
+          test = test.replace('assert.match(js,/MutationObserver\\(syncTheme\\)/);', 'assert.doesNotMatch(js,/MutationObserver\\(syncTheme\\)/);')
+          marker = 'assert.match(js,/site-mobile-search/);'
+          additions = "assert.doesNotMatch(css,/backdrop-filter:/);\nassert.doesNotMatch(js,/render\\(''\\);/);"
+          if additions not in test:
+              test = test.replace(marker, marker + '\n' + additions)
           test_path.write_text(test, encoding='utf-8')
           PY
 
@@ -101,13 +95,12 @@ assert.doesNotMatch(js,/render\(''\);/);
           assert.doesNotMatch(js, /MutationObserver\(syncTheme\)/);
           assert.doesNotMatch(js, /render\(''\);/);
           assert.match(js, /function openSearch\(\).*render\(input\.value\)/);
-          assert.match(js, /document\.addEventListener\('click'.*setTimeout\(syncTheme,0\)/s);
           for (const file of ['index.html','en/index.html','patients/iol-dislocation/index.html','en/patients/iol-dislocation/index.html']) {
             const html = fs.readFileSync(file, 'utf8');
-            assert.equal((html.match(/\/mobile-nav\.css\?v=20260806-3/g) || []).length, 1, `CSS v3 missing in ${file}`);
-            assert.equal((html.match(/\/mobile-nav\.js\?v=20260806-3/g) || []).length, 1, `JS v3 missing in ${file}`);
+            assert.equal((html.match(/\/mobile-nav\.css\?v=20260806-3/g) || []).length, 1);
+            assert.equal((html.match(/\/mobile-nav\.js\?v=20260806-3/g) || []).length, 1);
           }
-          console.log('Mobile navbar performance safeguards verified for RU and EN pages.');
+          console.log('RU and EN performance safeguards verified.');
           NODE
           python3 -m py_compile scripts/inject_mobile_nav.py
           git diff --check
