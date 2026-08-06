@@ -5,7 +5,7 @@ on:
     branches:
       - feature/global-site-motion
     paths:
-      - 'tests/site-motion.test.mjs'
+      - 'tests/*.test.mjs'
       - 'site-motion.css'
       - 'site-motion.js'
       - 'scripts/inject_site_theme.py'
@@ -22,5 +22,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify global site motion
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate public pages
+        run: python scripts/inject_site_theme.py
+      - name: Verify focused motion contract
         run: node tests/site-motion.test.mjs
+      - name: Run complete regression suite
+        run: |
+          for test in tests/*.test.mjs; do
+            node "$test"
+          done
+      - name: Commit generated pages
+        run: |
+          if git diff --quiet; then
+            echo "No generated changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.html' '**/*.html' patients/iol-dislocation/script.js site-theme.css || true
+          git commit -m "Inject global motion across public pages"
+          git push
