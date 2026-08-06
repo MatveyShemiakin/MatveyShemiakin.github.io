@@ -82,5 +82,7 @@ vm.runInContext(fs.readFileSync('patients/iol-dislocation/script.js','utf8'),con
 nextButton.trigger('click');
 
 assert.equal(secondPanel.hidden,false,'the requested section must become active');
-assert.deepEqual(scrollCalls,[{top:0,behavior:'smooth'}],'next-section navigation must move the page to its top');
+assert.equal(scrollCalls.length,1,'next-section navigation must request exactly one page scroll');
+assert.equal(scrollCalls[0].top,0,'next-section navigation must move the page to its top');
+assert.equal(scrollCalls[0].behavior,'smooth','next-section navigation must preserve smooth motion');
 assert.equal(legacyScrollCalls,0,'next-section navigation must not retain the old tab-strip scroll target');
