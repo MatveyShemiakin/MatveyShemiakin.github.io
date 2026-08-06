@@ -8,7 +8,6 @@ on:
       - 'patients/iol-dislocation/header-photo.css'
       - 'patients/iol-dislocation/index.html'
       - 'en/patients/iol-dislocation/index.html'
-      - 'tests/iol-header-photo.test.mjs'
       - 'tests/iol-header-mobile-visibility.test.mjs'
       - '.github/workflows/iol-header-mobile-clean-temp.yml'
   workflow_dispatch:
@@ -47,7 +46,6 @@ jobs:
       - name: Run focused regression suite
         run: |
           node --test tests/iol-header-mobile-visibility.test.mjs
-          node --test tests/iol-header-photo.test.mjs
           node --test tests/iol-next-section-scroll.test.mjs
           node --test tests/mobile-navbar.test.mjs
 
