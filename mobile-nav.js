@@ -1,6 +1,7 @@
 (function(){
   const lang=(document.documentElement.lang||'ru').toLowerCase().startsWith('en')?'en':'ru';
-  const path=(window.location.pathname.replace(/\/{2,}/g,'/').replace(/\/+$/,'')||'/')+'/';
+  const cleanPath=window.location.pathname.replace(/\/{2,}/g,'/').replace(/\/+$/,'');
+  const path=cleanPath?cleanPath+'/':'/';
   const text=lang==='en'?{
     navLabel:'Main mobile navigation',patients:'Patients',doctors:'Doctors',search:'Search',about:'About',
     searchKicker:'Website search',searchTitle:'Find a topic',searchPlaceholder:'Enter a condition or topic',searchButton:'Search',close:'Close search',
