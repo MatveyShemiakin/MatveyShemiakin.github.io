@@ -1,0 +1,26 @@
+name: Global site motion TDD
+
+on:
+  push:
+    branches:
+      - feature/global-site-motion
+    paths:
+      - 'tests/site-motion.test.mjs'
+      - 'site-motion.css'
+      - 'site-motion.js'
+      - 'scripts/inject_site_theme.py'
+      - '**/*.html'
+      - '.github/workflows/global-site-motion-temp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify global site motion
+        run: node tests/site-motion.test.mjs
