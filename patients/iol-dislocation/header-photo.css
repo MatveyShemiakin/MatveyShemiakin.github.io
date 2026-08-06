@@ -12,7 +12,7 @@
   right: 0;
   bottom: 0;
   width: min(62vw, 900px);
-  background: url("/assets/iol-dislocation-header.webp?v=20260806-1") 58% 46% / cover no-repeat;
+  background: url("/assets/iol-dislocation-header.webp?v=20260806-1") 96% 25% / auto 190% no-repeat;
   opacity: .82;
   pointer-events: none;
 }
@@ -38,7 +38,8 @@
     top: 72px;
     width: 68vw;
     opacity: .68;
-    background-position: 58% 44%;
+    background-position: 95% 22%;
+    background-size: auto 180%;
   }
 
   .sim-page .site-head::after {
@@ -51,11 +52,12 @@
 @media (max-width: 680px) {
   .sim-page .site-head::before {
     top: 72px;
-    right: -18%;
+    right: -8%;
     bottom: 0;
-    width: 112%;
+    width: 108%;
     opacity: .56;
-    background-position: 59% 46%;
+    background-position: 74% 22%;
+    background-size: auto 175%;
   }
 
   .sim-page .site-head::after {
