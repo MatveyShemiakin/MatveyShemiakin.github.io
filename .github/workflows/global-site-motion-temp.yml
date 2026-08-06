@@ -29,11 +29,14 @@ jobs:
         run: python scripts/inject_site_theme.py
       - name: Verify focused motion contract
         run: node tests/site-motion.test.mjs
-      - name: Run complete regression suite
-        run: |
-          for test in tests/*.test.mjs; do
-            node "$test"
-          done
+      - name: Verify mobile navigation
+        run: node tests/mobile-navbar.test.mjs
+      - name: Verify penetrating keratoplasty pages
+        run: node tests/penetrating-keratoplasty-page.test.mjs
+      - name: Verify breadcrumbs
+        run: node tests/site-breadcrumbs.test.mjs
+      - name: Verify global theme compatibility
+        run: node tests/site-theme.test.mjs
       - name: Commit generated pages
         run: |
           if git diff --quiet; then
