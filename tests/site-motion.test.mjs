@@ -55,6 +55,7 @@ assert.match(controller,/IntersectionObserver/);
 assert.match(controller,/requestAnimationFrame/);
 assert.match(controller,/passive:\s*true/);
 assert.match(controller,/prefers-reduced-motion:\s*reduce/);
+assert.match(controller,/document\.querySelector\('\.reading-progress,\[data-reading-progress\]'\)/);
 assert.match(controller,/Следующий материал/);
 assert.match(controller,/Открыть материал/);
 assert.match(controller,/Next material/);
