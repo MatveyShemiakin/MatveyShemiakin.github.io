@@ -71,6 +71,11 @@ for(const file of ['for-doctors/penetrating-keratoplasty/index.html','en/for-doc
   const html=read(file);
   assert.match(html,/localStorage\.getItem\('site_theme_v1'\)/,`shared key missing in ${file}`);
   assert.match(html,/root\.dataset\.siteTheme/,`common dataset bridge missing in ${file}`);
+  assert.equal(
+    (html.match(/root\.dataset\.siteTheme = theme;/g)||[]).length,
+    1,
+    `common dataset bridge must occur once in ${file}`,
+  );
 }
 
 console.log(`Global site theme verified on ${files.length} public pages.`);
