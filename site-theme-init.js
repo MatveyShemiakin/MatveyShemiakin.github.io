@@ -50,5 +50,12 @@
   var meta=document.querySelector('meta[name="theme-color"]');
   if(meta)meta.setAttribute('content',theme==='dark'?'#041225':'#f4f1eb');
 
+  if(!document.querySelector('link[href^="/site-contrast-fix.css"]')){
+    var contrast=document.createElement('link');
+    contrast.rel='stylesheet';
+    contrast.href='/site-contrast-fix.css?v=20260809-1';
+    document.head.appendChild(contrast);
+  }
+
   window.__siteThemeInitial=theme;
 })();
