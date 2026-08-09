@@ -180,3 +180,9 @@ header .container>.site-language-switch{
     margin-left:-11px;
   }
 }
+
+@media(max-width:340px){
+  .bacterial-clinical-page .site-header .mobile-back-link{
+    display:none;
+  }
+}
