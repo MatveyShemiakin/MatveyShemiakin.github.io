@@ -18,6 +18,10 @@ html[data-site-theme="dark"][data-site-theme-family="patients"] .faq-index-link 
 html[data-site-theme="dark"][data-site-theme-family="patients"] .hub-search-status{color:#b8c6d8}
 html[data-site-theme="dark"][data-site-theme-family="patients"] .hub-search-empty{border-color:#29415a;background:#0a2344;color:#c4d1df}
 html[data-site-theme="dark"][data-site-theme-family="patients"] .search-box .type-layer{color:#b8c6d8}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .search-guidance{color:#b8c6d8}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .search-status{color:#b8c6d8}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .search-status.is-searching{color:#87b5ff}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .topic-page-link{color:#87b5ff}
 
 @keyframes patientBlink{50%{opacity:0}}@keyframes cataractCloud{0%,18%,100%{opacity:.12;transform:scale(.88)}45%,64%{opacity:.88;transform:scale(1.05)}}@keyframes iolShift{0%,18%,100%{transform:translate(0,0) rotate(0)}42%,58%{transform:translate(14px,-9px) rotate(6deg)}72%{transform:translate(-4px,3px) rotate(-2deg)}}@keyframes pressureRise{0%,15%,100%{height:29%}45%,62%{height:82%}78%{height:48%}}
 @media(max-width:1040px){.condition-grid{grid-template-columns:1fr 1fr}.author-panel.has-widget{grid-template-columns:260px 1fr}.author-panel.has-widget .pd-slot{grid-column:1/-1}.faq-index-list{grid-template-columns:1fr}.cataract-hero-visual{max-width:520px;min-height:320px}}
