@@ -65,8 +65,8 @@ jobs:
           render ru-cataract-mobile 390,844 http://127.0.0.1:8000/patients/cataract/
           render en-cataract-desktop 1440,1200 http://127.0.0.1:8000/en/patients/cataract/
           render en-cataract-mobile 390,844 http://127.0.0.1:8000/en/patients/cataract/
-          render_dark ru-cataract-desktop-dark 1440,1600 http://127.0.0.1:8000/patients/cataract/
-          render_dark en-cataract-desktop-dark 1440,1600 http://127.0.0.1:8000/en/patients/cataract/
+          render_dark ru-cataract-desktop-dark 1440,5000 http://127.0.0.1:8000/patients/cataract/
+          render_dark en-cataract-desktop-dark 1440,5000 http://127.0.0.1:8000/en/patients/cataract/
           render ru-iol-desktop 1440,1200 http://127.0.0.1:8000/patients/iol-dislocation/
           render ru-iol-mobile 390,844 http://127.0.0.1:8000/patients/iol-dislocation/
           render en-iol-desktop 1440,1200 http://127.0.0.1:8000/en/patients/iol-dislocation/
