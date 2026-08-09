@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>https://matveyshemyakin.ru/</loc><lastmod>2026-07-20</lastmod></url>
-  <url><loc>https://matveyshemyakin.ru/patients/</loc><lastmod>2026-08-05</lastmod></url>
+  <url><loc>https://matveyshemyakin.ru/patients/</loc><lastmod>2026-08-09</lastmod></url>
+  <url>
+    <loc>https://matveyshemyakin.ru/patients/cataract/</loc><lastmod>2026-08-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/patients/cataract/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/patients/cataract/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/patients/cataract/"/>
+  </url>
   <url><loc>https://matveyshemyakin.ru/patients/before-surgery/</loc><lastmod>2026-07-20</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/patients/surgery-day/</loc><lastmod>2026-07-20</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/patients/recovery/</loc><lastmod>2026-07-20</lastmod></url>
@@ -9,7 +15,13 @@
   <url><loc>https://matveyshemyakin.ru/patients/eye-drops/</loc><lastmod>2026-07-20</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/patients/glasses/</loc><lastmod>2026-07-20</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/en/</loc><lastmod>2026-07-20</lastmod></url>
-  <url><loc>https://matveyshemyakin.ru/en/patients/</loc><lastmod>2026-08-05</lastmod></url>
+  <url><loc>https://matveyshemyakin.ru/en/patients/</loc><lastmod>2026-08-09</lastmod></url>
+  <url>
+    <loc>https://matveyshemyakin.ru/en/patients/cataract/</loc><lastmod>2026-08-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/patients/cataract/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/patients/cataract/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/patients/cataract/"/>
+  </url>
   <url><loc>https://matveyshemyakin.ru/en/patients/before-surgery/</loc><lastmod>2026-07-20</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/en/patients/surgery-day/</loc><lastmod>2026-07-20</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/en/patients/recovery/</loc><lastmod>2026-07-20</lastmod></url>
