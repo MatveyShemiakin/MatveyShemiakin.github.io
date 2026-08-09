@@ -1,0 +1,72 @@
+name: Patient ecosystem checks
+
+on:
+  push:
+    branches:
+      - feature/patients-ecosystem-redesign
+  pull_request:
+    paths:
+      - 'patients/**'
+      - 'en/patients/**'
+      - 'tests/patients-ecosystem.test.mjs'
+      - 'tests/mobile-navbar.test.mjs'
+      - 'tests/iol-*.test.mjs'
+      - 'sitemap.xml'
+      - 'sitemap.txt'
+      - '.github/workflows/patients-ecosystem.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax checks
+        run: |
+          node --check patients/patients-ecosystem.js
+          node --check patients/patients-hub.js
+          node --check patients/patients.js
+          node --check patients/iol-dislocation/script.js
+      - name: Patient ecosystem regression
+        run: node tests/patients-ecosystem.test.mjs
+      - name: Existing mobile navigation regression
+        run: node tests/mobile-navbar.test.mjs
+      - name: Existing IOL regressions
+        run: |
+          node tests/iol-next-section-scroll.test.mjs
+          node tests/iol-header-photo.test.mjs
+          node tests/iol-header-mobile-visibility.test.mjs
+      - name: Render RU EN desktop and mobile smoke screenshots
+        run: |
+          mkdir -p visual-smoke
+          python3 -m http.server 8000 >/tmp/patient-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
+          render() {
+            name="$1"; size="$2"; url="$3"
+            "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=3500 --window-size="$size" --screenshot="visual-smoke/$name.png" "$url"
+            test -s "visual-smoke/$name.png"
+          }
+          render ru-hub-desktop 1440,1200 http://127.0.0.1:8000/patients/
+          render ru-hub-mobile 390,844 http://127.0.0.1:8000/patients/
+          render en-hub-desktop 1440,1200 http://127.0.0.1:8000/en/patients/
+          render en-hub-mobile 390,844 http://127.0.0.1:8000/en/patients/
+          render ru-cataract-desktop 1440,1200 http://127.0.0.1:8000/patients/cataract/
+          render ru-cataract-mobile 390,844 http://127.0.0.1:8000/patients/cataract/
+          render en-cataract-desktop 1440,1200 http://127.0.0.1:8000/en/patients/cataract/
+          render en-cataract-mobile 390,844 http://127.0.0.1:8000/en/patients/cataract/
+          render ru-iol-desktop 1440,1200 http://127.0.0.1:8000/patients/iol-dislocation/
+          render ru-iol-mobile 390,844 http://127.0.0.1:8000/patients/iol-dislocation/
+          render en-iol-desktop 1440,1200 http://127.0.0.1:8000/en/patients/iol-dislocation/
+          render en-iol-mobile 390,844 http://127.0.0.1:8000/en/patients/iol-dislocation/
+      - name: Upload visual smoke screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: patient-ecosystem-visual-smoke
+          path: visual-smoke/*.png
+          if-no-files-found: error
