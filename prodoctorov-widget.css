@@ -4,6 +4,13 @@
   display:none!important;
 }
 
+/* Keep the legal Telegram warning near direct contact actions, but not inside
+   the lower “material prepared by” author block. display:none also removes it
+   from the accessibility tree. */
+.author-links .telegram-privacy-note{
+  display:none!important;
+}
+
 .prodoctorov-widget-card{
   flex:1 0 100%;
   width:100%;
