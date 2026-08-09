@@ -1,6 +1,11 @@
 (function(){
   const reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* The shared legal.js module owns the official ProDoctorov widget on patient pages.
+     Remove the preview-only duplicate author slot before legal.js initializes it. */
+  document.querySelectorAll('.author-section .pd-slot').forEach(slot=>slot.remove());
+  document.querySelectorAll('.author-section .author-panel.has-widget').forEach(panel=>panel.classList.remove('has-widget'));
+
   function parsePhrases(input){
     return String(input.dataset.phrases||'').split('|').map(x=>x.trim()).filter(Boolean);
   }
