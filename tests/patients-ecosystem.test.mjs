@@ -49,6 +49,13 @@ assert.match(css,/\.condition-card \.visual-stage\{[^}]*left:50%[^}]*translateX\
 assert.match(css,/cataractCloud/);
 assert.match(css,/iolShift/);
 assert.match(css,/pressureRise/);
+
+const darkPatients='html[data-site-theme="dark"][data-site-theme-family="patients"]';
+assert.ok(css.includes(`${darkPatients} .faq-index-link`),'dark patient theme must override cataract FAQ link colors');
+assert.match(css,new RegExp(`${darkPatients.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')} \\.faq-index-link\\{[^}]*color:#edf4fb`),'dark cataract FAQ links must use high-contrast light text');
+assert.match(css,new RegExp(`${darkPatients.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')} \\.faq-index-head p[^}]*color:#c4d1df`),'dark cataract FAQ descriptions must use readable muted text');
+assert.match(css,new RegExp(`${darkPatients.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')} \\.hub-search-empty\\{[^}]*background:#0a2344[^}]*color:#c4d1df`),'dark search empty state must not use the light card palette');
+
 assert.match(ecosystemJs,/typewriter/i);
 assert.match(ecosystemJs,/prefers-reduced-motion/);
 assert.match(ecosystemJs,/patients\/cataract/,'cataract FAQ schema must be corrected to the cataract URL');
