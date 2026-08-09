@@ -144,6 +144,7 @@
 })();
 // PATIENT ECOSYSTEM INTEGRATION 2026-08-09
 (() => {
+  if(typeof document==='undefined'||typeof document.createElement!=='function')return;
   const isEnglish=(document.documentElement.lang||'ru').toLowerCase().startsWith('en');
   if(!document.querySelector('link[data-patient-ecosystem]')){
     const link=document.createElement('link');
