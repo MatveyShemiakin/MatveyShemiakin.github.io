@@ -160,24 +160,46 @@ header .container>.site-language-switch{
   }
 }
 
-/* Keep the bacterial keratitis header controls together without changing other pages. */
-.bacterial-clinical-page .site-header .nav > .site-language-switch + .site-theme-toggle{
-  margin-left:-17px;
+/* Bacterial keratitis: reserve the header-control area before JS mounts it,
+   then anchor language and theme controls to the same stable right edge. */
+.bacterial-clinical-page .site-header .nav{
+  position:relative;
+  padding-right:164px;
+}
+
+.bacterial-clinical-page .site-header .nav > .site-language-switch{
+  position:absolute!important;
+  top:50%;
+  right:48px;
+  margin:0!important;
+  transform:translateY(-50%);
+}
+
+.bacterial-clinical-page .site-header .nav > .site-theme-toggle{
+  position:absolute;
+  top:50%;
+  right:0;
+  margin:0!important;
+  transform:translateY(-50%);
+}
+
+.bacterial-clinical-page .site-header .nav > .site-theme-toggle:active{
+  transform:translateY(-50%) scale(.96);
 }
 
 @media(max-width:760px){
-  .bacterial-clinical-page .site-header .nav > .site-language-switch + .site-theme-toggle{
-    margin-left:-19px;
+  .bacterial-clinical-page .site-header .nav{
+    padding-right:139px;
+  }
+
+  .bacterial-clinical-page .site-header .nav > .site-language-switch{
+    right:44px;
   }
 }
 
 @media(max-width:700px){
   .bacterial-clinical-page .site-header .nav{
     gap:16px;
-  }
-
-  .bacterial-clinical-page .site-header .nav > .site-language-switch + .site-theme-toggle{
-    margin-left:-11px;
   }
 }
 
