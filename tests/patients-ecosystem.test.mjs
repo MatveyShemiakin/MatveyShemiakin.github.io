@@ -28,7 +28,6 @@ for(const [html,lang] of [[ru,'ru'],[en,'en']]){
   assert.match(html,/patients\/iol-dislocation\//,`${lang}: IOL link missing`);
   assert.match(html,/DrShemMYu/,`${lang}: Telegram channel missing`);
   assert.match(html,/ShemMYu/,`${lang}: personal Telegram missing`);
-  assert.match(html,/pd_widget_footerd1115864/,`${lang}: ProDoctorov widget missing`);
   assert.match(html,/patients-ecosystem\.css/,`${lang}: ecosystem css missing`);
   assert.match(html,/patients-ecosystem\.js/,`${lang}: ecosystem js missing`);
   assert.match(html,/patients-hub\.js/,`${lang}: hub js missing`);
@@ -42,13 +41,14 @@ for(const html of [ruCat,enCat]){
   assert.match(html,/faq-extra-data\.js/);
   assert.match(html,/patients\.js/);
   assert.match(html,/faq-search/);
-  assert.match(html,/pd_widget_footerd1115864/);
 }
 
 assert.match(css,/\.condition-card \.visual-stage\{[^}]*left:50%[^}]*translateX\(-50%\)/s,'mobile condition visuals must be centered');
 assert.match(css,/cataractCloud/);
 assert.match(css,/iolShift/);
 assert.match(css,/pressureRise/);
+assert.match(css,/\.author-section \.pd-slot\{display:none!important\}/,'lower patient author ProDoctorov slot must stay hidden in every viewport');
+assert.match(css,/\.author-panel\.has-widget\{grid-template-columns:330px 1fr\}/,'author block must collapse back to two columns when the lower widget is disabled');
 
 const darkPatients='html[data-site-theme="dark"][data-site-theme-family="patients"]';
 const escapedDarkPatients=darkPatients.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -61,10 +61,11 @@ assert.match(css,new RegExp(`${escapedDarkPatients} \\.search-status\\{[^}]*colo
 
 assert.match(ecosystemJs,/typewriter/i);
 assert.match(ecosystemJs,/prefers-reduced-motion/);
+assert.match(ecosystemJs,/author-section \.pd-slot/,'patient ecosystem runtime must remove the lower ProDoctorov slot');
 assert.match(ecosystemJs,/patients\/cataract/,'cataract FAQ schema must be corrected to the cataract URL');
 assert.match(hubJs,/PATIENT_FAQ_DATA/);
 assert.match(iolJs,/ShemMYu/,'IOL page must gain personal Telegram link without rewriting its medical HTML');
-assert.match(iolJs,/pd_widget_footerd1115864/,'IOL page must render ProDoctorov widget');
+assert.doesNotMatch(iolJs,/iol-prodoctorov|pd_widget_footerd1115864/,'IOL author block must not inject a ProDoctorov widget');
 assert.match(iolJs,/patients\/cataract/,'IOL page must cross-link into the patient ecosystem');
 
 assert.match(sitemap,/https:\/\/matveyshemyakin\.ru\/patients\/cataract\//);
