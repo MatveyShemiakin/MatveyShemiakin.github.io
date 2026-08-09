@@ -51,6 +51,7 @@ assert.match(css,/iolShift/);
 assert.match(css,/pressureRise/);
 assert.match(ecosystemJs,/typewriter/i);
 assert.match(ecosystemJs,/prefers-reduced-motion/);
+assert.match(ecosystemJs,/patients\/cataract/,'cataract FAQ schema must be corrected to the cataract URL');
 assert.match(hubJs,/PATIENT_FAQ_DATA/);
 assert.match(iolJs,/ShemMYu/,'IOL page must gain personal Telegram link without rewriting its medical HTML');
 assert.match(iolJs,/pd_widget_footerd1115864/,'IOL page must render ProDoctorov widget');
@@ -63,6 +64,8 @@ assert.match(sitemapTxt,/https:\/\/matveyshemyakin\.ru\/en\/patients\/cataract\/
 
 assert.equal(gitBlobSha('patients/faq-data.js'),'d76877cab3852f5b9fd24111f3ea89ec8bf6e3d2','RU approved FAQ data changed');
 assert.equal(gitBlobSha('patients/faq-extra-data.js'),'3dcb2079f284cee5313c8275b15c5868c0612dc2','RU approved extra FAQ data changed');
+assert.equal(gitBlobSha('en/patients/faq-data.js'),'6eb4684d8543feca81a08218adfc91cbb8bdaddd','EN approved FAQ data changed');
+assert.equal(gitBlobSha('en/patients/faq-extra-data.js'),'cc68e984e620c6fef2f0ecae1327c2ba8c99fc06','EN approved extra FAQ data changed');
 assert.equal(gitBlobSha('patients/iol-dislocation/index.html'),'605daf1980dcb533a027234212155c168401b43e','RU IOL medical page HTML changed');
 assert.equal(gitBlobSha('en/patients/iol-dislocation/index.html'),'7bfdc66afb86ce31a71f78a1823731b971998594','EN IOL medical page HTML changed');
 
