@@ -11,6 +11,8 @@ on:
       - 'legal.js'
       - 'prodoctorov-widget.css'
       - 'site-theme.css'
+      - 'site-theme-init.js'
+      - 'site-contrast-fix.css'
       - 'tests/patients-ecosystem.test.mjs'
       - 'tests/legal-author-note.test.mjs'
       - 'tests/theme-contrast-audit.html'
@@ -32,6 +34,7 @@ jobs:
       - name: Syntax checks
         run: |
           node --check legal.js
+          node --check site-theme-init.js
           node --check patients/patients-ecosystem.js
           node --check patients/patients-hub.js
           node --check patients/patients.js
