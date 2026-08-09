@@ -1,0 +1,65 @@
+/* Global WCAG contrast corrections. Keep decorative accent blue (#4d8eff) for graphics,
+   but use darker action/link tones when text is rendered on or against light surfaces. */
+:root{--site-action-blue:#3269c7;--site-link-blue:#3567ad;--site-readable-muted:#596679}
+
+html[data-site-theme] .button.primary,
+html[data-site-theme] .hero-link.primary{
+  background:var(--site-action-blue)!important;
+  border-color:var(--site-action-blue)!important;
+  color:#fff!important;
+}
+
+/* Home */
+html[data-site-theme="light"][data-site-theme-family="home"] .fact span,
+html[data-site-theme="light"][data-site-theme-family="home"] .disclaimer{color:var(--site-readable-muted)!important}
+html[data-site-theme="dark"][data-site-theme-family="home"] .button.primary{color:#fff!important}
+
+/* Patient ecosystem */
+html[data-site-theme="light"][data-site-theme-family="patients"] .smart-search-hint,
+html[data-site-theme="light"][data-site-theme-family="patients"] .path-card p,
+html[data-site-theme="light"][data-site-theme-family="patients"] .search-guidance,
+html[data-site-theme="light"][data-site-theme-family="patients"] .author-review-date{color:var(--site-readable-muted)!important}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .author-role{color:#9fc4f4!important}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .author-copy>p:not(.author-role):not(.author-review-date){color:#c4d1df!important}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .copy-link{color:#9fc4f4!important;border-color:#45617d!important}
+html[data-site-theme="dark"][data-site-theme-family="patients"] .filter-button.active{
+  background:var(--site-action-blue)!important;border-color:var(--site-action-blue)!important;color:#fff!important
+}
+
+/* IOL patient page */
+html[data-site-theme-family="iol"] .site-language-switch a.active,
+html[data-site-theme-family="iol"] .topic-tab.active,
+html[data-site-theme-family="iol"] .faq-item[open] .faq-toggle{
+  background:var(--site-action-blue)!important;border-color:var(--site-action-blue)!important;color:#fff!important
+}
+html[data-site-theme-family="iol"] .section-next button{
+  background:#0a2344!important;border-color:#0a2344!important;color:#fff!important
+}
+
+/* Penetrating keratoplasty */
+html[data-site-theme="light"][data-site-theme-family="pkp"] .callout-icon{color:var(--site-link-blue)!important}
+html[data-site-theme="light"][data-site-theme-family="pkp"] .author-links a,
+html[data-site-theme="light"][data-site-theme-family="pkp"] .footer-links a{color:var(--site-link-blue)!important}
+
+/* Bacterial keratitis and shared clinical-consp ect styles */
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .status-intro p,
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .status-item span,
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .side-link span,
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .diff-row span,
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .photo-workflow-note p,
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .visual-case small,
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .recommendation-passport strong,
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .followup-strip span,
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .archive-credit,
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .source span{color:var(--site-readable-muted)!important}
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .source-year{color:var(--site-link-blue)!important}
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .source-badge{color:#244f8c!important}
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .red-alert .notice-icon{color:#8f2f28!important}
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .orange-alert .notice-icon{color:#82480f!important}
+html[data-site-theme="dark"][data-site-theme-family="bacterial"] .diff-inspector h3,
+html[data-site-theme="dark"][data-site-theme-family="bacterial"] .copy-template strong{color:#edf4fb!important}
+html[data-site-theme="dark"][data-site-theme-family="bacterial"] .copy-template p{color:#c4d1df!important}
+
+/* Generic text links that use the decorative blue on white in clinical cards. */
+html[data-site-theme="light"] .author-links a,
+html[data-site-theme="light"] .sources a{color:var(--site-link-blue)!important}
