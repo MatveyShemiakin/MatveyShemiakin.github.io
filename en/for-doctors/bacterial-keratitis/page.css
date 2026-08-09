@@ -1,0 +1,12 @@
+/* English bacterial keratitis page: clinical image mappings only. Layout and typography are inherited from the shared bacterial-keratitis stylesheet. */
+[data-photo="hero"]{--photo:url('/for-doctors/bacterial-keratitis/assets/clinical/hero-bacterial-infiltrate.webp')}
+[data-photo="mild-peripheral"]{--photo:url('/for-doctors/bacterial-keratitis/assets/clinical/mild-peripheral-keratitis-1mm.webp')}
+[data-photo="paracentral-ulcer"]{--photo:url('/for-doctors/bacterial-keratitis/assets/clinical/paracentral-corneal-ulcer-2mm.webp')}
+[data-photo="fungal"]{--photo:url('/for-doctors/bacterial-keratitis/assets/clinical/fungal-keratitis.webp')}
+[data-photo="acanthamoeba"]{--photo:url('/for-doctors/bacterial-keratitis/assets/clinical/acanthamoeba-keratitis.webp')}
+[data-photo="herpetic"]{--photo:url('/for-doctors/bacterial-keratitis/assets/clinical/herpetic-keratitis.webp')}
+[data-photo="neurotrophic"]{--photo:url('/for-doctors/bacterial-keratitis/assets/clinical/neurotrophic-keratitis.webp')}
+[data-photo="post-keratitis-opacity"]{--photo:url('/for-doctors/bacterial-keratitis/assets/clinical/post-keratitis-corneal-opacity.webp')}
+[data-photo="graft-thinning"]{--photo:url('/for-doctors/bacterial-keratitis/assets/clinical/trophic-graft-thinning.webp')}
+[data-photo="case-ulcer"]{--photo:url('/for-doctors/bacterial-keratitis/assets/clinical/case-paracentral-ulcer-2mm.webp')}
+[data-photo]{background-image:var(--photo)}
