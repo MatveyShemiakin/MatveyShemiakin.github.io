@@ -9,6 +9,7 @@ on:
       - 'patients/**'
       - 'en/patients/**'
       - 'legal.js'
+      - 'prodoctorov-widget.css'
       - 'site-theme.css'
       - 'tests/patients-ecosystem.test.mjs'
       - 'tests/legal-author-note.test.mjs'
