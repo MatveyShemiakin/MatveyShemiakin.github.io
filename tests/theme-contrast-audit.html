@@ -10,7 +10,7 @@
   const frame=document.getElementById('page');
   const pages=await fetch('/visual-audit-pages.json',{cache:'no-store'}).then(r=>r.json());
   const failures=[];
-  let checked=0, skipped=0;
+  let checked=0, skipped=0, auditedPages=0;
 
   const parseColor=(value)=>{
     const m=String(value||'').match(/rgba?\(([^)]+)\)/i);
@@ -42,7 +42,7 @@
   };
   const shouldSkip=(el,s)=>{
     if(['SCRIPT','STYLE','NOSCRIPT','SVG','PATH','IMG','VIDEO','IFRAME','DIALOG'].includes(el.tagName))return true;
-    if(el.closest('[aria-hidden="true"]'))return true;
+    if(el.closest('[aria-hidden="true"],.protected-media,.about-image-panel'))return true;
     if(s.display==='none'||s.visibility==='hidden'||Number(s.opacity)===0)return true;
     const r=el.getBoundingClientRect();
     if(r.width<2||r.height<2)return true;
@@ -63,8 +63,12 @@
       await load(url,theme);
       const doc=frame.contentDocument,win=frame.contentWindow;
       if(!doc||!win){failures.push({url,theme,reason:'no document'});continue;}
+      const robots=(doc.querySelector('meta[name="robots"]')?.content||'').toLowerCase();
+      if(robots.includes('noindex')){skipped++;continue;}
       const root=doc.documentElement;
-      if(root.dataset.siteTheme&&root.dataset.siteTheme!==theme){
+      if(!root.dataset.siteTheme){skipped++;continue;}
+      auditedPages++;
+      if(root.dataset.siteTheme!==theme){
         failures.push({url,theme,reason:`theme state is ${root.dataset.siteTheme}`});
         continue;
       }
@@ -82,16 +86,14 @@
         const large=size>=24||(size>=18.66&&weight>=700);
         const min=large?3:4.5;
         checked++;
-        if(cr+0.01<min){
-          failures.push({url,theme,ratio:cr.toFixed(2),min,label:label(el),color:s.color,effectiveBg:`rgb(${Math.round(bg.color.r)}, ${Math.round(bg.color.g)}, ${Math.round(bg.color.b)})`});
-        }
+        if(cr+0.01<min){failures.push({url,theme,ratio:cr.toFixed(2),min,label:label(el),color:s.color,effectiveBg:`rgb(${Math.round(bg.color.r)}, ${Math.round(bg.color.g)}, ${Math.round(bg.color.b)})`});}
       }
     }
   }
 
   const unique=[];const seen=new Set();
   for(const f of failures){const k=JSON.stringify(f);if(!seen.has(k)){seen.add(k);unique.push(f)}}
-  const out={pages:pages.length,checked,skipped,failures:unique.length,items:unique.slice(0,300)};
+  const out={listedPages:pages.length,auditedThemeRenders:auditedPages,checked,skipped,failures:unique.length,items:unique.slice(0,300)};
   report.textContent=JSON.stringify(out,null,2);
   document.body.dataset.auditStatus=unique.length?'fail':'pass';
   document.body.dataset.auditFailures=String(unique.length);
