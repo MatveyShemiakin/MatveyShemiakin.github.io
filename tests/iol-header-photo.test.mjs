@@ -51,7 +51,12 @@ for(const [label,html] of [['Russian',ruHtml],['English',enHtml]]){
   assert.match(html,/<header class="site-head">/,'the existing header element must remain present');
   assert.match(html,/<div class="container hero">/,'the existing hero container must remain present');
   assert.doesNotMatch(html,/<img[^>]+iol-dislocation-header/,'the photograph must not be inserted as new header markup');
-  assert.match(html,/<\/div>(?:<script[^>]*><\/script>)+<dialog class="iol-lightbox"|<dialog class="iol-lightbox"/,'the IOL lightbox must remain mounted outside the page wrapper even when multiple shared scripts precede it');
+  const dialogIndex=html.indexOf('<dialog class="iol-lightbox"');
+  const pageStart=html.indexOf('<div class="sim-page"');
+  const scriptBeforeDialog=html.lastIndexOf('<script',dialogIndex);
+  const wrapperCloseBeforeScripts=html.lastIndexOf('</div>',scriptBeforeDialog);
+  assert.ok(dialogIndex>0,`${label} page must keep the IOL lightbox dialog`);
+  assert.ok(pageStart>=0&&wrapperCloseBeforeScripts>pageStart&&scriptBeforeDialog>wrapperCloseBeforeScripts&&dialogIndex>scriptBeforeDialog,`${label} IOL lightbox must remain mounted after the page wrapper and shared scripts`);
 }
 
 console.log('IOL header photograph, mobile visibility and enlarged-image watermark verified for RU and EN pages.');
