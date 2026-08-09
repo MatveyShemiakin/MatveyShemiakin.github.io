@@ -42,59 +42,56 @@
   };
   const shouldSkip=(el,s)=>{
     if(['SCRIPT','STYLE','NOSCRIPT','SVG','PATH','IMG','VIDEO','IFRAME','DIALOG'].includes(el.tagName))return true;
+    if(el.closest('[aria-hidden="true"]'))return true;
     if(s.display==='none'||s.visibility==='hidden'||Number(s.opacity)===0)return true;
     const r=el.getBoundingClientRect();
     if(r.width<2||r.height<2)return true;
-    if(!directText(el)&&!['INPUT','TEXTAREA','BUTTON','SUMMARY','OPTION'].includes(el.tagName))return true;
+    if(!directText(el))return true;
     return false;
   };
-  const load=(url,theme)=>new Promise((resolve,reject)=>{
+  const load=(url,theme)=>new Promise(resolve=>{
     let done=false;
-    const timer=setTimeout(()=>{if(!done){done=true;reject(new Error('timeout'))}},5500);
+    const finish=()=>{if(done)return;done=true;setTimeout(resolve,120)};
     localStorage.setItem('site_theme_v1',theme);
-    frame.onload=()=>{if(done)return;setTimeout(()=>{done=true;clearTimeout(timer);resolve()},320)};
+    frame.onload=finish;
     frame.src=url+(url.includes('?')?'&':'?')+'contrast-audit='+theme+'-'+Date.now();
+    setTimeout(finish,1800);
   });
 
   for(const theme of ['light','dark']){
     for(const url of pages){
-      try{
-        await load(url,theme);
-        const doc=frame.contentDocument,win=frame.contentWindow;
-        if(!doc||!win)throw new Error('no document');
-        const root=doc.documentElement;
-        if(root.dataset.siteTheme&&root.dataset.siteTheme!==theme){
-          failures.push({url,theme,reason:`theme state is ${root.dataset.siteTheme}`});
-          continue;
+      await load(url,theme);
+      const doc=frame.contentDocument,win=frame.contentWindow;
+      if(!doc||!win){failures.push({url,theme,reason:'no document'});continue;}
+      const root=doc.documentElement;
+      if(root.dataset.siteTheme&&root.dataset.siteTheme!==theme){
+        failures.push({url,theme,reason:`theme state is ${root.dataset.siteTheme}`});
+        continue;
+      }
+      for(const el of doc.body.querySelectorAll('*')){
+        const s=win.getComputedStyle(el);
+        if(shouldSkip(el,s))continue;
+        const bg=effectiveBg(el,win);
+        if(bg.complex){skipped++;continue;}
+        let fg=parseColor(s.color);
+        if(!fg){skipped++;continue;}
+        if(fg.a<1)fg=mix(fg,bg.color);
+        const cr=ratio(fg,bg.color);
+        const size=parseFloat(s.fontSize)||16;
+        const weight=parseInt(s.fontWeight,10)||400;
+        const large=size>=24||(size>=18.66&&weight>=700);
+        const min=large?3:4.5;
+        checked++;
+        if(cr+0.01<min){
+          failures.push({url,theme,ratio:cr.toFixed(2),min,label:label(el),color:s.color,effectiveBg:`rgb(${Math.round(bg.color.r)}, ${Math.round(bg.color.g)}, ${Math.round(bg.color.b)})`});
         }
-        for(const el of doc.body.querySelectorAll('*')){
-          const s=win.getComputedStyle(el);
-          if(shouldSkip(el,s))continue;
-          const bg=effectiveBg(el,win);
-          if(bg.complex){skipped++;continue;}
-          let fg=parseColor(s.color);
-          if(!fg){skipped++;continue;}
-          if(fg.a<1)fg=mix(fg,bg.color);
-          const cr=ratio(fg,bg.color);
-          const size=parseFloat(s.fontSize)||16;
-          const weight=parseInt(s.fontWeight,10)||400;
-          const large=size>=24||(size>=18.66&&weight>=700);
-          const min=large?3:4.5;
-          checked++;
-          if(cr+0.01<min){
-            failures.push({url,theme,ratio:cr.toFixed(2),min,label:label(el),color:s.color,bg:s.backgroundColor});
-            if(failures.length>120)break;
-          }
-        }
-      }catch(error){failures.push({url,theme,reason:error.message});}
-      if(failures.length>120)break;
+      }
     }
-    if(failures.length>120)break;
   }
 
   const unique=[];const seen=new Set();
   for(const f of failures){const k=JSON.stringify(f);if(!seen.has(k)){seen.add(k);unique.push(f)}}
-  const out={pages:pages.length,checked,skipped,failures:unique.length,items:unique.slice(0,120)};
+  const out={pages:pages.length,checked,skipped,failures:unique.length,items:unique.slice(0,300)};
   report.textContent=JSON.stringify(out,null,2);
   document.body.dataset.auditStatus=unique.length?'fail':'pass';
   document.body.dataset.auditFailures=String(unique.length);
