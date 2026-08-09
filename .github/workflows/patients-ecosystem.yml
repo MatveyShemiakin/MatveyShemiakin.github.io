@@ -8,7 +8,11 @@ on:
     paths:
       - 'patients/**'
       - 'en/patients/**'
+      - 'legal.js'
+      - 'site-theme.css'
       - 'tests/patients-ecosystem.test.mjs'
+      - 'tests/legal-author-note.test.mjs'
+      - 'tests/theme-contrast-audit.html'
       - 'tests/mobile-navbar.test.mjs'
       - 'tests/iol-*.test.mjs'
       - 'sitemap.xml'
@@ -18,6 +22,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,12 +30,15 @@ jobs:
           node-version: '22'
       - name: Syntax checks
         run: |
+          node --check legal.js
           node --check patients/patients-ecosystem.js
           node --check patients/patients-hub.js
           node --check patients/patients.js
           node --check patients/iol-dislocation/script.js
       - name: Patient ecosystem regression
         run: node tests/patients-ecosystem.test.mjs
+      - name: Author Telegram note regression
+        run: node tests/legal-author-note.test.mjs
       - name: Existing mobile navigation regression
         run: node tests/mobile-navbar.test.mjs
       - name: Existing IOL regressions
@@ -41,6 +49,27 @@ jobs:
       - name: Render RU EN desktop and mobile smoke screenshots
         run: |
           mkdir -p visual-smoke
+          python3 - <<'PY'
+          import json, os
+          urls=[]
+          for root, dirs, files in os.walk('.'):
+              dirs[:] = [d for d in dirs if d not in {'.git','docs','tests'}]
+              for name in files:
+                  if not name.endswith('.html'):
+                      continue
+                  path=os.path.join(root,name).replace('\\','/').lstrip('./')
+                  if path.startswith(('.github/','docs/','tests/')):
+                      continue
+                  if path=='index.html': url='/'
+                  elif path.endswith('/index.html'): url='/'+path[:-10]
+                  else: url='/'+path
+                  urls.append(url)
+          urls=sorted(set(urls))
+          with open('visual-audit-pages.json','w',encoding='utf-8') as f:
+              json.dump(urls,f,ensure_ascii=False)
+          print('Public HTML pages for contrast audit:',len(urls))
+          for u in urls: print(u)
+          PY
           python3 -m http.server 8000 >/tmp/patient-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
@@ -71,9 +100,12 @@ jobs:
           render ru-iol-mobile 390,844 http://127.0.0.1:8000/patients/iol-dislocation/
           render en-iol-desktop 1440,1200 http://127.0.0.1:8000/en/patients/iol-dislocation/
           render en-iol-mobile 390,844 http://127.0.0.1:8000/en/patients/iol-dislocation/
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=90000 --dump-dom http://127.0.0.1:8000/tests/theme-contrast-audit.html > visual-smoke/theme-contrast-audit.html
+          grep -q 'data-audit-status="pass"' visual-smoke/theme-contrast-audit.html
       - name: Upload visual smoke screenshots
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: patient-ecosystem-visual-smoke
-          path: visual-smoke/*.png
+          path: visual-smoke/*
           if-no-files-found: error
