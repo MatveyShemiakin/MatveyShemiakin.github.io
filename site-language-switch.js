@@ -21,7 +21,7 @@
     }
 
     if(path==='/for-doctors/bacterial-keratitis/'||path==='/for-doctors/bacterial-keratitis'){
-      return '/en/for-doctors/';
+      return '/en/for-doctors/bacterial-keratitis/';
     }
     if(path==='/')return '/en/';
     return path.startsWith('/en/')?path:`/en${path}`;
