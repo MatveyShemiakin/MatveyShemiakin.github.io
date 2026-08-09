@@ -50,4 +50,19 @@
       document.querySelectorAll('[data-pressure]').forEach(node=>node.textContent=pressures[pressureIndex]);
     },650);
   }
+
+  if(location.pathname.includes('/patients/cataract/')){
+    const isEnglish=(document.documentElement.lang||'ru').toLowerCase().startsWith('en');
+    const canonical=new URL(location.pathname.endsWith('/')?location.pathname:location.pathname+'/',location.origin).href;
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(tag=>{
+      try{
+        const data=JSON.parse(tag.textContent||'{}');
+        if(data['@type']!=='FAQPage'||!String(data['@id']||'').endsWith('#faq'))return;
+        data['@id']=canonical+'#faq';
+        data.url=canonical;
+        data.name=isEnglish?'Cataract surgery and recovery FAQs':'Катаракта — частые вопросы об операции и восстановлении';
+        tag.textContent=JSON.stringify(data);
+      }catch(error){}
+    });
+  }
 })();
