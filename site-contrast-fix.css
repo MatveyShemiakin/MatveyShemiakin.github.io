@@ -2,6 +2,8 @@
    but use darker action/link tones when text is rendered on or against light surfaces. */
 :root{--site-action-blue:#3269c7;--site-link-blue:#3567ad;--site-readable-muted:#596679}
 
+html[data-site-theme="light"]{--site-motion-muted:#596679;--site-motion-text:#111a27;--site-motion-surface:#fff}
+
 html[data-site-theme] .button.primary,
 html[data-site-theme] .hero-link.primary{
   background:var(--site-action-blue)!important;
@@ -12,12 +14,19 @@ html[data-site-theme] .hero-link.primary{
 /* Home */
 html[data-site-theme="light"][data-site-theme-family="home"] .fact span,
 html[data-site-theme="light"][data-site-theme-family="home"] .disclaimer{color:var(--site-readable-muted)!important}
+html[data-site-theme-family="home"] .contact-link.primary-link{
+  background:var(--site-action-blue)!important;
+  border-color:var(--site-action-blue)!important;
+  color:#fff!important
+}
 html[data-site-theme="dark"][data-site-theme-family="home"] .button.primary{color:#fff!important}
 
 /* Patient ecosystem */
 html[data-site-theme="light"][data-site-theme-family="patients"] .smart-search-hint,
 html[data-site-theme="light"][data-site-theme-family="patients"] .path-card p,
+html[data-site-theme="light"][data-site-theme-family="patients"] .faq-group-head p,
 html[data-site-theme="light"][data-site-theme-family="patients"] .search-guidance,
+html[data-site-theme="light"][data-site-theme-family="patients"] .answer-meta,
 html[data-site-theme="light"][data-site-theme-family="patients"] .author-review-date{color:var(--site-readable-muted)!important}
 html[data-site-theme="dark"][data-site-theme-family="patients"] .author-role{color:#9fc4f4!important}
 html[data-site-theme="dark"][data-site-theme-family="patients"] .author-copy>p:not(.author-role):not(.author-review-date){color:#c4d1df!important}
@@ -32,6 +41,7 @@ html[data-site-theme-family="iol"] .topic-tab.active,
 html[data-site-theme-family="iol"] .faq-item[open] .faq-toggle{
   background:var(--site-action-blue)!important;border-color:var(--site-action-blue)!important;color:#fff!important
 }
+html[data-site-theme-family="iol"] .topic-tab.active span{color:#fff!important}
 html[data-site-theme-family="iol"] .section-next button{
   background:#0a2344!important;border-color:#0a2344!important;color:#fff!important
 }
@@ -45,6 +55,7 @@ html[data-site-theme="light"][data-site-theme-family="pkp"] .footer-links a{colo
 html[data-site-theme="light"][data-site-theme-family="bacterial"] .status-intro p,
 html[data-site-theme="light"][data-site-theme-family="bacterial"] .status-item span,
 html[data-site-theme="light"][data-site-theme-family="bacterial"] .side-link span,
+html[data-site-theme="light"][data-site-theme-family="bacterial"] .clinical-table td span,
 html[data-site-theme="light"][data-site-theme-family="bacterial"] .diff-row span,
 html[data-site-theme="light"][data-site-theme-family="bacterial"] .photo-workflow-note p,
 html[data-site-theme="light"][data-site-theme-family="bacterial"] .visual-case small,
@@ -56,7 +67,7 @@ html[data-site-theme="light"][data-site-theme-family="bacterial"] .source-year{c
 html[data-site-theme="light"][data-site-theme-family="bacterial"] .source-badge{color:#244f8c!important}
 html[data-site-theme="light"][data-site-theme-family="bacterial"] .red-alert .notice-icon{color:#8f2f28!important}
 html[data-site-theme="light"][data-site-theme-family="bacterial"] .orange-alert .notice-icon{color:#82480f!important}
-html[data-site-theme="dark"][data-site-theme-family="bacterial"] .diff-inspector h3,
+html[data-site-theme-family="bacterial"] .diff-inspector h3{color:#edf4fb!important}
 html[data-site-theme="dark"][data-site-theme-family="bacterial"] .copy-template strong{color:#edf4fb!important}
 html[data-site-theme="dark"][data-site-theme-family="bacterial"] .copy-template p{color:#c4d1df!important}
 
