@@ -177,18 +177,4 @@
       :'<strong>Материалы для пациентов</strong><div class="ecosystem-nav-links"><a href="'+hub+'">Все материалы</a><a href="'+cataract+'">Катаракта</a><span>Глаукома · раздел готовится</span></div>';
     sources.parentNode.insertBefore(nav,sources);
   }
-
-  const authorCopy=document.querySelector('section.author .author-copy');
-  if(authorCopy&&!document.getElementById('pd_widget_footerd1115864')){
-    const card=document.createElement('div');
-    card.className='prodoctorov-widget-card iol-prodoctorov';
-    card.innerHTML='<div id="pd_widget_footerd1115864" class="pd_widget_footer" data-doctor="1115864"><div class="pd_left"><a target="_blank" rel="noopener" class="pd_doctor_name" href="https://prodoctorov.ru/moskva/vrach/1115864-shemyakin/">'+(isEnglish?'Matvey Shemyakin':'Шемякин Матвей Юрьевич')+'</a></div><div class="pd_middle"><div id="pd_widget_footer_content_middled1115864"></div></div><div class="pd_right"><div id="pd_widget_footer_content_rightd1115864"></div></div></div><div class="pd_powered_by"><a target="_blank" rel="noopener" href="https://prodoctorov.ru/"><img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ProDoctorov"></a></div><div class="pd-fallback"><strong>'+(isEnglish?'Matvey Shemyakin':'Шемякин Матвей Юрьевич')+'</strong>'+(isEnglish?'Official profile and patient reviews on ProDoctorov.':'Официальный профиль и отзывы на портале ПроДокторов.')+'</div>';
-    authorCopy.append(card);
-    if(!document.querySelector('script[src*="widget_footer.js"]')){
-      const script=document.createElement('script');
-      script.src='https://prodoctorov.ru/static/js/widget_footer.js?v06';
-      script.defer=true;
-      document.body.append(script);
-    }
-  }
 })();
