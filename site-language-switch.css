@@ -160,7 +160,7 @@ header .container>.site-language-switch{
   }
 }
 
-/* Bacterial keratitis: reserve the header-control area before JS mounts it,
+/* Bacterial keratitis: reserve the control area before JS mounts it,
    then anchor language and theme controls to the same stable right edge. */
 .bacterial-clinical-page .site-header .nav{
   position:relative;
