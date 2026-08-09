@@ -51,10 +51,13 @@ assert.match(css,/iolShift/);
 assert.match(css,/pressureRise/);
 
 const darkPatients='html[data-site-theme="dark"][data-site-theme-family="patients"]';
+const escapedDarkPatients=darkPatients.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 assert.ok(css.includes(`${darkPatients} .faq-index-link`),'dark patient theme must override cataract FAQ link colors');
-assert.match(css,new RegExp(`${darkPatients.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')} \\.faq-index-link\\{[^}]*color:#edf4fb`),'dark cataract FAQ links must use high-contrast light text');
-assert.match(css,new RegExp(`${darkPatients.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')} \\.faq-index-head p[^}]*color:#c4d1df`),'dark cataract FAQ descriptions must use readable muted text');
-assert.match(css,new RegExp(`${darkPatients.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')} \\.hub-search-empty\\{[^}]*background:#0a2344[^}]*color:#c4d1df`),'dark search empty state must not use the light card palette');
+assert.match(css,new RegExp(`${escapedDarkPatients} \\.faq-index-link\\{[^}]*color:#edf4fb`),'dark cataract FAQ links must use high-contrast light text');
+assert.match(css,new RegExp(`${escapedDarkPatients} \\.faq-index-head p[^}]*color:#c4d1df`),'dark cataract FAQ descriptions must use readable muted text');
+assert.match(css,new RegExp(`${escapedDarkPatients} \\.hub-search-empty\\{[^}]*background:#0a2344[^}]*color:#c4d1df`),'dark search empty state must not use the light card palette');
+assert.match(css,new RegExp(`${escapedDarkPatients} \\.search-guidance\\{[^}]*color:#b8c6d8`),'dark cataract search guidance must remain readable');
+assert.match(css,new RegExp(`${escapedDarkPatients} \\.search-status\\{[^}]*color:#b8c6d8`),'dark cataract result count must remain readable');
 
 assert.match(ecosystemJs,/typewriter/i);
 assert.match(ecosystemJs,/prefers-reduced-motion/);
