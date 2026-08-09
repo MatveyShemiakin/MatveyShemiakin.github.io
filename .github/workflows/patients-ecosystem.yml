@@ -1,0 +1,40 @@
+name: Patient ecosystem checks
+
+on:
+  push:
+    branches:
+      - feature/patients-ecosystem-redesign
+  pull_request:
+    paths:
+      - 'patients/**'
+      - 'en/patients/**'
+      - 'tests/patients-ecosystem.test.mjs'
+      - 'tests/mobile-navbar.test.mjs'
+      - 'tests/iol-*.test.mjs'
+      - 'sitemap.xml'
+      - 'sitemap.txt'
+      - '.github/workflows/patients-ecosystem.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax checks
+        run: |
+          node --check patients/patients-ecosystem.js
+          node --check patients/patients-hub.js
+          node --check patients/patients.js
+          node --check patients/iol-dislocation/script.js
+      - name: Patient ecosystem regression
+        run: node tests/patients-ecosystem.test.mjs
+      - name: Existing mobile navigation regression
+        run: node tests/mobile-navbar.test.mjs
+      - name: Existing IOL regressions
+        run: |
+          node tests/iol-next-section-scroll.test.mjs
+          node tests/iol-header-photo.test.mjs
+          node tests/iol-header-mobile-visibility.test.mjs
