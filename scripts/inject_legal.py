@@ -1,9 +1,11 @@
 from pathlib import Path
 import re
 
-# Shared build step: keep privacy controls connected to every static HTML page
-# and professional safeguards connected to every clinician-facing page.
+# Shared build step: keep privacy controls connected to every static HTML page,
+# consent-gated analytics loaded early, and professional safeguards connected
+# to every clinician-facing page.
 ROOT = Path(__file__).resolve().parents[1]
+ANALYTICS_SCRIPT = '<script src="/analytics.js?v=20260811-1"></script>'
 LEGAL_SCRIPT = '<script src="/legal.js?v=20260721-3"></script>'
 DOCTORS_SCRIPT = '<script src="/doctors-legal.js?v=20260805-1"></script>'
 PRIVACY_PAGES = {ROOT / 'privacy.html', ROOT / 'en' / 'privacy.html'}
@@ -20,6 +22,17 @@ for path in ROOT.rglob('*.html'):
 
     text = path.read_text(encoding='utf-8')
     original = text
+
+    if '/analytics.js' in text:
+        text = re.sub(r'<script\s+src="/analytics\.js(?:\?v=[^"]*)?"></script>', ANALYTICS_SCRIPT, text)
+    else:
+        head_match = re.search(r'<head(?:\s[^>]*)?>', text, flags=re.IGNORECASE)
+        if head_match:
+            text = text[:head_match.end()] + '\n  ' + ANALYTICS_SCRIPT + text[head_match.end():]
+        elif '</body>' in text:
+            text = text.replace('</body>', ANALYTICS_SCRIPT + '</body>', 1)
+        elif '</html>' in text:
+            text = text.replace('</html>', ANALYTICS_SCRIPT + '</html>', 1)
 
     if path not in PRIVACY_PAGES:
         if '/legal.js' in text:

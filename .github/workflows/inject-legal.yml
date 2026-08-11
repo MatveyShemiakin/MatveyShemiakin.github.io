@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '**/*.html'
+      - 'analytics.js'
       - 'legal.js'
       - 'legal.css'
       - 'doctors-legal.js'
