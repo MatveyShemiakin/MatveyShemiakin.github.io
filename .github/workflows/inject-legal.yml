@@ -1,4 +1,4 @@
-name: Inject legal and professional modules
+name: Inject legal, analytics and professional modules
 
 on:
   push:
@@ -15,6 +15,8 @@ on:
       - 'for-doctors/professional-use.html'
       - 'en/for-doctors/professional-use.html'
       - 'scripts/inject_legal.py'
+      - 'scripts/inject_content_analytics.py'
+      - 'tests/test_content_analytics.py'
       - '.github/workflows/inject-legal.yml'
   workflow_dispatch:
 
@@ -31,6 +33,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/inject_legal.py
+      - run: python scripts/inject_content_analytics.py
+      - run: python -m unittest tests/test_content_analytics.py
       - name: Commit generated changes
         run: |
           if git diff --quiet; then
@@ -40,5 +44,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html' '**/*.html' sitemap.xml || true
-          git commit -m "Inject privacy and professional safeguards across site"
+          git commit -m "Inject privacy, analytics and professional safeguards across site"
           git push
