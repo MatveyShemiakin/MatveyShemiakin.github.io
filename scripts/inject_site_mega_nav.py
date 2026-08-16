@@ -2,8 +2,8 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-CSS_LINK = '<link rel="stylesheet" href="/site-mega-nav.css?v=20260816-1">'
-JS_SCRIPT = '<script defer src="/site-mega-nav.js?v=20260816-1"></script>'
+CSS_LINK = '<link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">'
+JS_SCRIPT = '<script defer src="/site-mega-nav.js?v=20260816-2"></script>'
 
 
 def inject_assets(text: str) -> str:
