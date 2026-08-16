@@ -1,0 +1,1 @@
+Temporary branch marker for PR-triggered RED/GREEN validation. Remove before merge.
