@@ -132,7 +132,7 @@
   }
 
   function buildSiteNavigation(header,inner){
-    let nav=header.querySelector('.nav-links,.clinical-section-nav');
+    let nav=header.querySelector('.nav-links,.clinical-section-nav,.nav-right > nav');
     if(!nav){
       nav=document.createElement('nav');
       const actions=header.querySelector('.header-actions,.clinical-header__actions');
