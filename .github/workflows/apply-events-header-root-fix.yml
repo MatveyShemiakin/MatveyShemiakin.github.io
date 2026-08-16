@@ -1,0 +1,78 @@
+name: Apply events header root fix
+on:
+  push:
+    branches: [fix/events-header-clean]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Patch professional header integration
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('doctors-legal.js')
+          s=p.read_text(encoding='utf-8')
+          old="header.querySelector('.nav-links,.clinical-section-nav')"
+          new="header.querySelector('.nav-links,.clinical-section-nav,.nav-right > nav')"
+          assert old in s or new in s
+          s=s.replace(old,new)
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('scripts/inject_legal.py')
+          s=p.read_text(encoding='utf-8').replace('/doctors-legal.js?v=20260805-1','/doctors-legal.js?v=20260816-2')
+          p.write_text(s,encoding='utf-8')
+
+          for path in [Path('for-doctors/events/index.html'),Path('en/for-doctors/events/index.html')]:
+              s=path.read_text(encoding='utf-8').replace('/doctors-legal.js?v=20260805-1','/doctors-legal.js?v=20260816-2')
+              path.write_text(s,encoding='utf-8')
+
+          p=Path('.github/workflows/update-ophthalmology-events.yml')
+          s=p.read_text(encoding='utf-8')
+          anchor="          grep -q 'Kazakhstan Ophthalmology Congress 2026' events-smoke/en-dom.html\n"
+          extra="          grep -q 'site-mega-nav' events-smoke/ru-dom.html\n          grep -q 'site-mega-nav' events-smoke/en-dom.html\n          test \"$(grep -o 'class=\\\"clinical-section-nav\\\"' events-smoke/ru-dom.html | wc -l)\" -eq 0\n          test \"$(grep -o 'class=\\\"clinical-section-nav\\\"' events-smoke/en-dom.html | wc -l)\" -eq 0\n"
+          if extra not in s:
+              assert anchor in s
+              s=s.replace(anchor,anchor+extra)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify root fix
+        run: |
+          node --check doctors-legal.js
+          node --check site-mega-nav.js
+          python - <<'PY'
+          from pathlib import Path
+          assert ".nav-links,.clinical-section-nav,.nav-right > nav" in Path('doctors-legal.js').read_text(encoding='utf-8')
+          for p in ['for-doctors/events/index.html','en/for-doctors/events/index.html']:
+              s=Path(p).read_text(encoding='utf-8')
+              assert '/doctors-legal.js?v=20260816-2' in s
+              assert '/assets/events/events.css?v=20260816-2' in s
+          print('root fix wiring: OK')
+          PY
+      - name: Render DOM and assert one navigation system
+        run: |
+          python3 -m http.server 8000 >/tmp/events-http.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          sleep 2
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
+          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:8000/for-doctors/events/ > /tmp/ru-dom.html
+          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:8000/en/for-doctors/events/ > /tmp/en-dom.html
+          grep -q 'class="site-mega-nav"' /tmp/ru-dom.html
+          grep -q 'class="site-mega-nav"' /tmp/en-dom.html
+          test "$(grep -o 'class="clinical-section-nav"' /tmp/ru-dom.html | wc -l)" -eq 0
+          test "$(grep -o 'class="clinical-section-nav"' /tmp/en-dom.html | wc -l)" -eq 0
+      - name: Commit root fix and remove temporary workflow
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          rm .github/workflows/apply-events-header-root-fix.yml
+          git add doctors-legal.js scripts/inject_legal.py for-doctors/events/index.html en/for-doctors/events/index.html .github/workflows/update-ophthalmology-events.yml .github/workflows/apply-events-header-root-fix.yml
+          git commit -m "Prevent duplicate professional navigation"
+          git push
