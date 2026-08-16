@@ -1,0 +1,30 @@
+[
+  {
+    "id": "penetrating-keratoplasty",
+    "event_id": "penetrating-keratoplasty:1",
+    "published": "2026-08-16",
+    "updated": "2026-08-16",
+    "revision": 1,
+    "kind": "new",
+    "title": "Амбулаторное ведение пациента после сквозной кератопластики",
+    "title_en": "Outpatient management after penetrating keratoplasty",
+    "description": "Высококонцентрированный клинический конспект для врачей и ординаторов по амбулаторному ведению пациентов после сквозной кератопластики.",
+    "description_en": "High-density clinical quick reference for ophthalmologists and residents on outpatient management after penetrating keratoplasty.",
+    "url": "/for-doctors/penetrating-keratoplasty/",
+    "url_en": "/en/for-doctors/penetrating-keratoplasty/"
+  },
+  {
+    "id": "bacterial-keratitis",
+    "event_id": "bacterial-keratitis:1",
+    "published": "2026-07-20",
+    "updated": "2026-07-20",
+    "revision": 1,
+    "kind": "new",
+    "title": "Бактериальный кератит и язва роговицы",
+    "title_en": "Bacterial keratitis and corneal ulcer",
+    "description": "Практический клинический конспект для врачей по диагностике, стартовой терапии и контролю бактериального кератита и язвы роговицы.",
+    "description_en": "Clinical guide to bacterial keratitis and corneal ulcer: urgency, corneal scraping, microbiology, antibacterial therapy, monitoring and non-response.",
+    "url": "/for-doctors/bacterial-keratitis/",
+    "url_en": "/en/for-doctors/bacterial-keratitis/"
+  }
+]
