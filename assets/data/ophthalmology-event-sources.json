@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {"id":"oor","official":true,"url":"https://oor.ru/events","eventIds":["oor-cataract-2026","oor-inflammation-2026","fedorov-2026"],"watchTerms":["Катаракта","Воспаление глаза","Федоровские чтения"]},
+    {"id":"koo","official":true,"url":"https://koo.kz/conference-may/","eventIds":["kz-congress-2026"],"watchTerms":["25 августа","18 сентября","e-poster"]},
+    {"id":"ascrs","official":true,"url":"https://annualmeeting.ascrs.org/","eventIds":["ascrs-2027"],"watchTerms":["2027","September 7","Call for Submissions"]},
+    {"id":"escrs","official":true,"url":"https://congress.escrs.org/","eventIds":["escrs-2026"],"watchTerms":["44th Congress","11-15 September","registration"]},
+    {"id":"euretina","official":true,"url":"https://euretina.org/vienna-2026/","eventIds":["euretina-2026"],"watchTerms":["Vienna 2026","1-4 October","registration"]},
+    {"id":"apvrs","official":true,"url":"https://2026.apvrs.org/","eventIds":["apvrs-2026"],"watchTerms":["19th APVRS","Gold Coast","28-30 August"]},
+    {"id":"acs","official":true,"url":"https://www.acshk26.com/web/","eventIds":["acs-2026"],"watchTerms":["Asia Cornea Society","27-29 November","Advance Registration"]},
+    {"id":"apao","official":true,"url":"https://2027.apaophth.org/important-dates/","eventIds":["apao-2027"],"watchTerms":["Abstract Submission","7 September 2026","Early Bird Registration","12 October 2026"]},
+    {"id":"apgc","official":true,"url":"https://apgcongress.org/","eventIds":["apgc-2026"],"watchTerms":["Asia-Pacific Glaucoma Congress","Singapore"]},
+    {"id":"wgc","official":true,"url":"https://worldglaucomacongress.org/","eventIds":["wgc-2027"],"watchTerms":["20-23 April 2027","Abstract","19 October 2026"]},
+    {"id":"oph360","official":true,"url":"https://360.oor.ru/","eventIds":["oph360-2027"],"watchTerms":["Офтальмология 360","2027"]},
+    {"id":"arvo","official":true,"url":"https://www.arvo.org/annual-meeting","eventIds":["arvo-2027"],"watchTerms":["ARVO 2027","San Diego","Abstract"]},
+    {"id":"apacrs","official":true,"url":"https://apacrs.org/","eventIds":["apacrs-2027"],"watchTerms":["39th APACRS","Bali","3-5 June 2027"]}
+  ]
+}
