@@ -1,18 +1,571 @@
 {
   "schemaVersion": 1,
   "sources": [
-    {"id":"oor","official":true,"url":"https://oor.ru/events","eventIds":["oor-cataract-2026","oor-inflammation-2026","fedorov-2026"],"watchTerms":["Катаракта","Воспаление глаза","Федоровские чтения"]},
-    {"id":"koo","official":true,"url":"https://koo.kz/conference-may/","eventIds":["kz-congress-2026"],"watchTerms":["25 августа","18 сентября","e-poster"]},
-    {"id":"ascrs","official":true,"url":"https://annualmeeting.ascrs.org/","eventIds":["ascrs-2027"],"watchTerms":["2027","September 7","Call for Submissions"]},
-    {"id":"escrs","official":true,"url":"https://congress.escrs.org/","eventIds":["escrs-2026"],"watchTerms":["44th Congress","11-15 September","registration"]},
-    {"id":"euretina","official":true,"url":"https://euretina.org/vienna-2026/","eventIds":["euretina-2026"],"watchTerms":["Vienna 2026","1-4 October","registration"]},
-    {"id":"apvrs","official":true,"url":"https://2026.apvrs.org/","eventIds":["apvrs-2026"],"watchTerms":["19th APVRS","Gold Coast","28-30 August"]},
-    {"id":"acs","official":true,"url":"https://www.acshk26.com/web/","eventIds":["acs-2026"],"watchTerms":["Asia Cornea Society","27-29 November","Advance Registration"]},
-    {"id":"apao","official":true,"url":"https://2027.apaophth.org/important-dates/","eventIds":["apao-2027"],"watchTerms":["Abstract Submission","7 September 2026","Early Bird Registration","12 October 2026"]},
-    {"id":"apgc","official":true,"url":"https://apgcongress.org/","eventIds":["apgc-2026"],"watchTerms":["Asia-Pacific Glaucoma Congress","Singapore"]},
-    {"id":"wgc","official":true,"url":"https://worldglaucomacongress.org/","eventIds":["wgc-2027"],"watchTerms":["20-23 April 2027","Abstract","19 October 2026"]},
-    {"id":"oph360","official":true,"url":"https://360.oor.ru/","eventIds":["oph360-2027"],"watchTerms":["Офтальмология 360","2027"]},
-    {"id":"arvo","official":true,"url":"https://www.arvo.org/annual-meeting","eventIds":["arvo-2027"],"watchTerms":["ARVO 2027","San Diego","Abstract"]},
-    {"id":"apacrs","official":true,"url":"https://apacrs.org/","eventIds":["apacrs-2027"],"watchTerms":["39th APACRS","Bali","3-5 June 2027"]}
+    {
+      "id": "aao2026-global",
+      "official": true,
+      "url": "https://apaophth.org/congress/calendar/",
+      "eventIds": [
+        "aao-2026"
+      ],
+      "watchTerms": [
+        "AAO 2026",
+        "New Orleans"
+      ]
+    },
+    {
+      "id": "aapos-global",
+      "official": true,
+      "url": "https://www.aapos.org/education-and-events/annual-meeting2026368",
+      "eventIds": [
+        "aapos-2027"
+      ],
+      "watchTerms": [
+        "Sep 22",
+        "Mar 17-21"
+      ]
+    },
+    {
+      "id": "acs",
+      "official": true,
+      "url": "https://www.acshk26.com/web/",
+      "eventIds": [
+        "acs-2026"
+      ],
+      "watchTerms": [
+        "Asia Cornea Society",
+        "27-29 November",
+        "Advance Registration"
+      ]
+    },
+    {
+      "id": "aios-midterm-global",
+      "official": true,
+      "url": "https://www.aios.org/midtermjharkhand.php",
+      "eventIds": [
+        "aios-midterm-2026"
+      ],
+      "watchTerms": [
+        "September 25",
+        "Ranchi"
+      ]
+    },
+    {
+      "id": "alaccsa-global",
+      "official": true,
+      "url": "https://paao.org/events/alaccsa-2026/",
+      "eventIds": [
+        "alaccsa-r-2026"
+      ],
+      "watchTerms": [
+        "22 October 2026",
+        "Asunción"
+      ]
+    },
+    {
+      "id": "amman-retina-global",
+      "official": true,
+      "url": "https://www.ammanretinameeting.com/",
+      "eventIds": [
+        "amman-retina-2027"
+      ],
+      "watchTerms": [
+        "26-28 May 2027",
+        "Amman"
+      ]
+    },
+    {
+      "id": "apacrs",
+      "official": true,
+      "url": "https://apacrs.org/",
+      "eventIds": [
+        "apacrs-2027"
+      ],
+      "watchTerms": [
+        "39th APACRS",
+        "Bali",
+        "3-5 June 2027"
+      ]
+    },
+    {
+      "id": "apao",
+      "official": true,
+      "url": "https://2027.apaophth.org/important-dates/",
+      "eventIds": [
+        "apao-2027"
+      ],
+      "watchTerms": [
+        "Abstract Submission",
+        "7 September 2026",
+        "Early Bird Registration",
+        "12 October 2026"
+      ]
+    },
+    {
+      "id": "apgc",
+      "official": true,
+      "url": "https://apgcongress.org/",
+      "eventIds": [
+        "apgc-2026"
+      ],
+      "watchTerms": [
+        "Asia-Pacific Glaucoma Congress",
+        "Singapore"
+      ]
+    },
+    {
+      "id": "apspos-global",
+      "official": true,
+      "url": "https://apspos.org/apspos-congress-2027/",
+      "eventIds": [
+        "apspos-capos-2027"
+      ],
+      "watchTerms": [
+        "December 1, 2026",
+        "APSPOS Congress 2027"
+      ]
+    },
+    {
+      "id": "apvrs",
+      "official": true,
+      "url": "https://2026.apvrs.org/",
+      "eventIds": [
+        "apvrs-2026"
+      ],
+      "watchTerms": [
+        "19th APVRS",
+        "Gold Coast",
+        "28-30 August"
+      ]
+    },
+    {
+      "id": "arvo",
+      "official": true,
+      "url": "https://www.arvo.org/annual-meeting",
+      "eventIds": [
+        "arvo-2027"
+      ],
+      "watchTerms": [
+        "ARVO 2027",
+        "San Diego",
+        "Abstract"
+      ]
+    },
+    {
+      "id": "ascrs",
+      "official": true,
+      "url": "https://annualmeeting.ascrs.org/",
+      "eventIds": [
+        "ascrs-2027"
+      ],
+      "watchTerms": [
+        "2027",
+        "September 7",
+        "Call for Submissions"
+      ]
+    },
+    {
+      "id": "asmhk-global",
+      "official": true,
+      "url": "https://asmhk2026.com/",
+      "eventIds": [
+        "asmhk-2026"
+      ],
+      "watchTerms": [
+        "December 12",
+        "Artificial Intelligence and Retinal Disease"
+      ]
+    },
+    {
+      "id": "asrs-global",
+      "official": true,
+      "url": "https://www.asrs.org/annual-meeting/future-annual-meetings",
+      "eventIds": [
+        "asrs-2027"
+      ],
+      "watchTerms": [
+        "2027",
+        "San Francisco"
+      ]
+    },
+    {
+      "id": "ccos-global",
+      "official": true,
+      "url": "https://ccos2026.sciconf.cn/",
+      "eventIds": [
+        "ccos-2026"
+      ],
+      "watchTerms": [
+        "2026年09月09-12日",
+        "中华医学会第三十次眼科学术大会"
+      ]
+    },
+    {
+      "id": "coecsa-global",
+      "official": true,
+      "url": "https://www.coecsa-congress.org/",
+      "eventIds": [
+        "coecsa-2026"
+      ],
+      "watchTerms": [
+        "2-4th December 2026",
+        "Kampala"
+      ]
+    },
+    {
+      "id": "czech-global",
+      "official": true,
+      "url": "https://soevision.org/ophthagenda/category/national-society-meetings/list/",
+      "eventIds": [
+        "czech-national-2026"
+      ],
+      "watchTerms": [
+        "October 1",
+        "Ostrava"
+      ]
+    },
+    {
+      "id": "dog-global",
+      "official": true,
+      "url": "https://dog-kongress.de/",
+      "eventIds": [
+        "dog-2026"
+      ],
+      "watchTerms": [
+        "24",
+        "27. September"
+      ]
+    },
+    {
+      "id": "epomec-global",
+      "official": true,
+      "url": "https://www.epomec.ae/welcome-message/",
+      "eventIds": [
+        "epomec-2026"
+      ],
+      "watchTerms": [
+        "3-5 December 2026",
+        "Dubai World Trade Centre"
+      ]
+    },
+    {
+      "id": "escrs",
+      "official": true,
+      "url": "https://congress.escrs.org/",
+      "eventIds": [
+        "escrs-2026"
+      ],
+      "watchTerms": [
+        "44th Congress",
+        "11-15 September",
+        "registration"
+      ]
+    },
+    {
+      "id": "escrs-winter-global",
+      "official": true,
+      "url": "https://www.escrs.org/meetings-and-events",
+      "eventIds": [
+        "escrs-winter-2027"
+      ],
+      "watchTerms": [
+        "31st ESCRS Winter Meeting",
+        "17 March"
+      ]
+    },
+    {
+      "id": "eso-global",
+      "official": true,
+      "url": "https://eso-conferences.com/",
+      "eventIds": [
+        "eso-2026"
+      ],
+      "watchTerms": [
+        "15–17 October, 2026",
+        "Abu Dhabi"
+      ]
+    },
+    {
+      "id": "euretina",
+      "official": true,
+      "url": "https://euretina.org/vienna-2026/",
+      "eventIds": [
+        "euretina-2026"
+      ],
+      "watchTerms": [
+        "Vienna 2026",
+        "1-4 October",
+        "registration"
+      ]
+    },
+    {
+      "id": "ever-global",
+      "official": true,
+      "url": "https://soevision.org/event/ever-2026/",
+      "eventIds": [
+        "ever-2026"
+      ],
+      "watchTerms": [
+        "October 15",
+        "Florence"
+      ]
+    },
+    {
+      "id": "jco80-global",
+      "official": true,
+      "url": "https://convention.jtbcom.co.jp/80ringan/en/index.html",
+      "eventIds": [
+        "jco-80-2026"
+      ],
+      "watchTerms": [
+        "October 29",
+        "November 1"
+      ]
+    },
+    {
+      "id": "joscrs-global",
+      "official": true,
+      "url": "https://www.jordan-valley.com/jos2026",
+      "eventIds": [
+        "joscrs-2026"
+      ],
+      "watchTerms": [
+        "18–20 November 2026",
+        "15 September 2026"
+      ]
+    },
+    {
+      "id": "koo",
+      "official": true,
+      "url": "https://koo.kz/conference-may/",
+      "eventIds": [
+        "kz-congress-2026"
+      ],
+      "watchTerms": [
+        "25 августа",
+        "18 сентября",
+        "e-poster"
+      ]
+    },
+    {
+      "id": "kos-apois-global",
+      "official": true,
+      "url": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html",
+      "eventIds": [
+        "kos-apois-2026"
+      ],
+      "watchTerms": [
+        "Pre-registration",
+        "Presentation File Upload"
+      ]
+    },
+    {
+      "id": "latam-glaucoma-global",
+      "official": true,
+      "url": "https://paao.org/events/xiii-congreso-latinoamericano-de-glaucoma/",
+      "eventIds": [
+        "latam-glaucoma-2026"
+      ],
+      "watchTerms": [
+        "24 September 2026",
+        "Quito"
+      ]
+    },
+    {
+      "id": "mioc-global",
+      "official": true,
+      "url": "https://mioc.org.om/important-dates",
+      "eventIds": [
+        "mioc-2026"
+      ],
+      "watchTerms": [
+        "1 September",
+        "20 November"
+      ]
+    },
+    {
+      "id": "oor",
+      "official": true,
+      "url": "https://oor.ru/events",
+      "eventIds": [
+        "oor-cataract-2026",
+        "oor-inflammation-2026",
+        "fedorov-2026"
+      ],
+      "watchTerms": [
+        "Катаракта",
+        "Воспаление глаза",
+        "Федоровские чтения"
+      ]
+    },
+    {
+      "id": "oph360",
+      "official": true,
+      "url": "https://360.oor.ru/",
+      "eventIds": [
+        "oph360-2027"
+      ],
+      "watchTerms": [
+        "Офтальмология 360",
+        "2027"
+      ]
+    },
+    {
+      "id": "ossa-global",
+      "official": true,
+      "url": "https://ossacongress.co.za/introduction/",
+      "eventIds": [
+        "ossa-2027"
+      ],
+      "watchTerms": [
+        "28 August 2026",
+        "10 -13 March 2027"
+      ]
+    },
+    {
+      "id": "paao-global",
+      "official": true,
+      "url": "https://paao2027.com/landing/",
+      "eventIds": [
+        "paao-2027"
+      ],
+      "watchTerms": [
+        "March 17th to 20th",
+        "Lima Convention Center"
+      ]
+    },
+    {
+      "id": "pao-annual-global",
+      "official": true,
+      "url": "https://pao.org.ph/eye-doctors-home-event/philippine-academy-of-ophthalmology-pao-annual-convention/",
+      "eventIds": [
+        "pao-annual-2026"
+      ],
+      "watchTerms": [
+        "September 29",
+        "SMX Convention Center"
+      ]
+    },
+    {
+      "id": "pit-perdami-global",
+      "official": true,
+      "url": "https://pit51.perdami.or.id/",
+      "eventIds": [
+        "pit-perdami-51-2026"
+      ],
+      "watchTerms": [
+        "September 3",
+        "Semarang"
+      ]
+    },
+    {
+      "id": "qatar-uveitis-global",
+      "official": true,
+      "url": "https://qataruveitiscare.com/",
+      "eventIds": [
+        "qatar-uveitis-2026"
+      ],
+      "watchTerms": [
+        "25th",
+        "September, 2026"
+      ]
+    },
+    {
+      "id": "ranzco-global",
+      "official": true,
+      "url": "https://ranzco.edu/congress/",
+      "eventIds": [
+        "ranzco-2026"
+      ],
+      "watchTerms": [
+        "6-9 November 2026",
+        "Auckland"
+      ]
+    },
+    {
+      "id": "soe2027-global",
+      "official": true,
+      "url": "https://soe2027.soevision.org/",
+      "eventIds": [
+        "soe-2027"
+      ],
+      "watchTerms": [
+        "18th - 20th June 2027",
+        "Athens"
+      ]
+    },
+    {
+      "id": "sopla-global",
+      "official": true,
+      "url": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
+      "eventIds": [
+        "sopla-2027"
+      ],
+      "watchTerms": [
+        "5 February 2027",
+        "Medellín"
+      ]
+    },
+    {
+      "id": "sos-global",
+      "official": true,
+      "url": "https://sos-conferences.com/",
+      "eventIds": [
+        "sos-2026"
+      ],
+      "watchTerms": [
+        "5–7 November 2026",
+        "Al Khobar"
+      ]
+    },
+    {
+      "id": "spanish-global",
+      "official": true,
+      "url": "https://soevision.org/event/spanish-national-meeting/",
+      "eventIds": [
+        "spanish-national-2026"
+      ],
+      "watchTerms": [
+        "September 23",
+        "Palma de Mallorca"
+      ]
+    },
+    {
+      "id": "sprv-global",
+      "official": true,
+      "url": "https://paao.org/events/sprv-2026/",
+      "eventIds": [
+        "sprv-2026"
+      ],
+      "watchTerms": [
+        "29 October 2026",
+        "Sao Paulo"
+      ]
+    },
+    {
+      "id": "trends-retina-global",
+      "official": true,
+      "url": "https://soevision.org/ophthagenda/list/",
+      "eventIds": [
+        "trends-retina-2026"
+      ],
+      "watchTerms": [
+        "Trends in Retina",
+        "November 12"
+      ]
+    },
+    {
+      "id": "wgc",
+      "official": true,
+      "url": "https://worldglaucomacongress.org/",
+      "eventIds": [
+        "wgc-2027"
+      ],
+      "watchTerms": [
+        "20-23 April 2027",
+        "Abstract",
+        "19 October 2026"
+      ]
+    }
   ]
 }
