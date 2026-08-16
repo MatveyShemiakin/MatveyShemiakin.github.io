@@ -14,6 +14,20 @@
     "url_en": "/en/for-doctors/penetrating-keratoplasty/"
   },
   {
+    "id": "ophthasearch",
+    "event_id": "ophthasearch:1",
+    "published": "2026-08-16",
+    "updated": "2026-08-16",
+    "revision": 1,
+    "kind": "new",
+    "title": "OphthaSearch",
+    "title_en": "OphthaSearch",
+    "description": "OphthaSearch — научный поиск для офтальмологов: публикации, обзоры и клинические исследования из международных научных источников.",
+    "description_en": "OphthaSearch is a clinician-focused ophthalmology research search interface for publications, reviews and clinical studies from international scientific sources.",
+    "url": "/for-doctors/ophthasearch/",
+    "url_en": "/en/for-doctors/ophthasearch/"
+  },
+  {
     "id": "events",
     "event_id": "events:2",
     "published": "2026-08-16",
