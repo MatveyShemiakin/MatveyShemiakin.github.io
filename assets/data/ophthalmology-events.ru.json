@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "language": "ru",
   "verifiedAt": "2026-08-16",
-  "generatedAt": "2026-08-16T16:36:21+00:00",
+  "generatedAt": "2026-08-16T16:40:06+00:00",
   "events": [
     {
       "id": "fedorov-2026",
@@ -59,6 +59,36 @@
       "submit": null,
       "verified": "2026-08-16",
       "description": "Совместная встреча 8th Asia-Pacific Glaucoma Congress и 35-летия Singapore National Eye Centre. Оставлена в архиве, чтобы Сингапур присутствовал и в истории мероприятий 2026 года.",
+      "deadlines": []
+    },
+    {
+      "id": "iser-2026",
+      "featured": true,
+      "level": "research",
+      "title": "ISER 2026",
+      "fullTitle": "XXVII Biennial Meeting of the International Society for Eye Research",
+      "org": "International Society for Eye Research",
+      "start": "2026-08-23",
+      "end": "2026-08-27",
+      "city": "Валенсия",
+      "country": "Испания",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Валенсия, Испания",
+      "categories": [
+        "Research",
+        "Retina",
+        "Роговица",
+        "Глаукома"
+      ],
+      "credits": "CME/НМО: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://iser.org/page/Events_Schedule",
+      "program": "https://iser.org/page/Events_Schedule",
+      "registration": "https://iser.org/page/Events_Schedule",
+      "submit": null,
+      "verified": "2026-08-16",
+      "description": "Международная биеннале по экспериментальной и трансляционной офтальмологии и науке о зрении.",
       "deadlines": []
     },
     {
@@ -225,6 +255,34 @@
           "note": "После срока действуют late/onsite fees."
         }
       ]
+    },
+    {
+      "id": "retina-society-2026",
+      "featured": true,
+      "level": "specialty",
+      "title": "Retina Society 2026",
+      "fullTitle": "59th Annual Scientific Meeting of The Retina Society",
+      "org": "The Retina Society",
+      "start": "2026-09-23",
+      "end": "2026-09-26",
+      "city": "Лос-Анджелес",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "Fairmont Century Plaza, Los Angeles",
+      "categories": [
+        "Retina",
+        "Research"
+      ],
+      "credits": "CME/НМО: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://www.retinasociety.org/page/2/annual-meeting",
+      "program": "https://www.retinasociety.org/page/2/annual-meeting",
+      "registration": "https://www.retinasociety.org/page/2/annual-meeting",
+      "submit": null,
+      "verified": "2026-08-16",
+      "description": "59-я научная встреча Retina Society, посвящённая последним достижениям медицинской и хирургической ретины.",
+      "deadlines": []
     },
     {
       "id": "spanish-national-2026",
@@ -571,6 +629,34 @@
       "submit": null,
       "verified": "2026-08-16",
       "description": "Ежегодная встреча American Academy of Ophthalmology — одна из крупнейших мультиспециализированных офтальмологических встреч мира.",
+      "deadlines": []
+    },
+    {
+      "id": "cornea-eye-banking-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "Cornea & Eye Banking Forum 2026",
+      "fullTitle": "Cornea and Eye Banking Forum 2026",
+      "org": "Cornea Society · Eye Bank Association of America",
+      "start": "2026-10-09",
+      "end": "2026-10-09",
+      "city": "Новый Орлеан",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "New Orleans, Louisiana",
+      "categories": [
+        "Роговица",
+        "Research"
+      ],
+      "credits": "CME/НМО: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://corneasociety.org/cornea-and-eye-banking-forum",
+      "program": "https://corneasociety.org/cornea-and-eye-banking-forum",
+      "registration": "https://corneasociety.org/cornea-and-eye-banking-forum",
+      "submit": null,
+      "verified": "2026-08-16",
+      "description": "Ежегодный форум Cornea Society и eye banking community, проходящий непосредственно перед AAO.",
       "deadlines": []
     },
     {
@@ -1183,6 +1269,34 @@
       "deadlines": []
     },
     {
+      "id": "ags-2027",
+      "featured": true,
+      "level": "specialty",
+      "title": "AGS 2027",
+      "fullTitle": "American Glaucoma Society 2027 Annual Meeting",
+      "org": "American Glaucoma Society",
+      "start": "2027-03-04",
+      "end": "2027-03-07",
+      "city": "Тусон",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "JW Marriott Starr Pass, Tucson, Arizona",
+      "categories": [
+        "Глаукома",
+        "Research"
+      ],
+      "credits": "CME/НМО: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar",
+      "program": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar",
+      "registration": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar",
+      "submit": null,
+      "verified": "2026-08-16",
+      "description": "Ежегодная специализированная встреча American Glaucoma Society по диагностике, хирургии и исследованиям глаукомы.",
+      "deadlines": []
+    },
+    {
       "id": "ossa-2027",
       "featured": true,
       "level": "national",
@@ -1428,6 +1542,35 @@
       ]
     },
     {
+      "id": "fuji-retina-2027",
+      "featured": true,
+      "level": "specialty",
+      "title": "FujiRetina 2027",
+      "fullTitle": "6th FujiRetina International Meeting",
+      "org": "FujiRetina · Japan Retina and Vitreous Society",
+      "start": "2027-03-26",
+      "end": "2027-03-28",
+      "city": "Токио",
+      "country": "Япония",
+      "region": "Азия–Тихоокеанский",
+      "mode": "Очно",
+      "venue": "Toranomon Hills Forum, Tokyo",
+      "categories": [
+        "Retina",
+        "Research",
+        "AI / управление"
+      ],
+      "credits": "CME/НМО: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
+      "program": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
+      "registration": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
+      "submit": null,
+      "verified": "2026-08-16",
+      "description": "Международная витреоретинальная встреча в Токио, ассоциированная с Japanese Retina and Vitreous Society; официальный язык — английский.",
+      "deadlines": []
+    },
+    {
       "id": "ascrs-2027",
       "featured": true,
       "title": "ASCRS 2027",
@@ -1634,6 +1777,35 @@
       "submissionNote": "Abstract submission: октябрь–декабрь 2026; точные даты требуют подтверждения на официальной странице."
     },
     {
+      "id": "wcpos-vi-2027",
+      "featured": true,
+      "level": "major",
+      "title": "WCPOS VI 2027",
+      "fullTitle": "6th World Congress of Paediatric Ophthalmology & Strabismus",
+      "org": "World Society of Paediatric Ophthalmology and Strabismus",
+      "start": "2027-05-13",
+      "end": "2027-05-15",
+      "city": "Канкун",
+      "country": "Мексика",
+      "region": "Латинская Америка",
+      "mode": "Очно",
+      "venue": "Cancun, Mexico",
+      "categories": [
+        "Детская офтальмология",
+        "Страбизм",
+        "Research"
+      ],
+      "credits": "CME/НМО: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://wspos.org/wcpos-vi/",
+      "program": "https://wspos.org/wcpos-vi/",
+      "registration": "https://wspos.org/wcpos-vi/",
+      "submit": "https://wspos.org/wcpos-vi/",
+      "verified": "2026-08-16",
+      "description": "Шестой всемирный конгресс WSPOS по детской офтальмологии и страбизмологии.",
+      "deadlines": []
+    },
+    {
       "id": "amman-retina-2027",
       "featured": false,
       "level": "specialty",
@@ -1703,6 +1875,43 @@
       "deadlines": []
     },
     {
+      "id": "macula-society-2027",
+      "featured": true,
+      "level": "specialty",
+      "title": "Macula Society 50th Annual Meeting",
+      "fullTitle": "50th Anniversary Annual Meeting of The Macula Society",
+      "org": "The Macula Society",
+      "start": "2027-06-09",
+      "end": "2027-06-12",
+      "city": "Канны",
+      "country": "Франция",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Carlton Cannes, Cannes",
+      "categories": [
+        "Retina",
+        "Research"
+      ],
+      "credits": "CME/НМО: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://www.maculasociety.org/50th-anniversary/",
+      "program": "https://www.maculasociety.org/50th-anniversary/",
+      "registration": "https://www.maculasociety.org/50th-anniversary/",
+      "submit": null,
+      "verified": "2026-08-16",
+      "description": "Юбилейная 50-я научная встреча Macula Society в Каннах, посвящённая заболеваниям макулы и ретинальной науке.",
+      "deadlines": [
+        {
+          "kind": "registration",
+          "label": "Открытие регистрации",
+          "date": "2026-09-14",
+          "timeKnown": false,
+          "zone": "Europe/Paris",
+          "url": "https://www.maculasociety.org/49th-annual-meeting/"
+        }
+      ]
+    },
+    {
       "id": "soe-2027",
       "featured": true,
       "level": "major",
@@ -1760,6 +1969,70 @@
       "submit": null,
       "verified": "2026-08-16",
       "description": "Будущая ежегодная встреча American Society of Retina Specialists — одна из ключевых международных конференций для витреоретинальных специалистов.",
+      "deadlines": []
+    },
+    {
+      "id": "retina-society-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "Retina Society 2027",
+      "fullTitle": "60th Annual Meeting of The Retina Society",
+      "org": "The Retina Society",
+      "start": "2027-10-20",
+      "end": "2027-10-23",
+      "city": "Бостон",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "OMNI Boston at the Seaport",
+      "categories": [
+        "Retina",
+        "Research"
+      ],
+      "credits": "CME/НМО: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://www.retinasociety.org/page/17/future-annual-meetings",
+      "program": "https://www.retinasociety.org/page/17/future-annual-meetings",
+      "registration": "https://www.retinasociety.org/page/17/future-annual-meetings",
+      "submit": null,
+      "verified": "2026-08-16",
+      "description": "60-я юбилейная ежегодная встреча Retina Society в Бостоне.",
+      "deadlines": []
+    },
+    {
+      "id": "aao-2027",
+      "featured": false,
+      "level": "major",
+      "title": "AAO 2027",
+      "fullTitle": "American Academy of Ophthalmology Annual Meeting 2027",
+      "org": "American Academy of Ophthalmology",
+      "start": "2027-11-12",
+      "end": "2027-11-15",
+      "city": "Лас-Вегас",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "Las Vegas, Nevada",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Рефракция",
+        "Роговица",
+        "Retina",
+        "Глаукома",
+        "Воспаление",
+        "Детская офтальмология",
+        "Страбизм",
+        "Нейроофтальмология",
+        "Окулопластика"
+      ],
+      "credits": "CME/НМО: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://apaophth.org/congress/calendar/",
+      "program": "https://apaophth.org/congress/calendar/",
+      "registration": "https://apaophth.org/congress/calendar/",
+      "submit": null,
+      "verified": "2026-08-16",
+      "description": "Подтверждённая календарём APAO будущая ежегодная встреча American Academy of Ophthalmology в Лас-Вегасе.",
       "deadlines": []
     }
   ]

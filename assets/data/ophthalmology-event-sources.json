@@ -2,6 +2,18 @@
   "schemaVersion": 1,
   "sources": [
     {
+      "id": "aao-future-extra",
+      "official": true,
+      "url": "https://apaophth.org/congress/calendar/",
+      "eventIds": [
+        "aao-2027"
+      ],
+      "watchTerms": [
+        "AAO 2027",
+        "November 12-15, 2027"
+      ]
+    },
+    {
       "id": "aao2026-global",
       "official": true,
       "url": "https://apaophth.org/congress/calendar/",
@@ -36,6 +48,18 @@
         "Asia Cornea Society",
         "27-29 November",
         "Advance Registration"
+      ]
+    },
+    {
+      "id": "ags-extra",
+      "official": true,
+      "url": "https://www.americanglaucomasociety.net/go.aspx?c=emcalendar",
+      "eventIds": [
+        "ags-2027"
+      ],
+      "watchTerms": [
+        "Mar 4, 2027",
+        "Tucson"
       ]
     },
     {
@@ -213,6 +237,18 @@
       ]
     },
     {
+      "id": "cornea-forum-extra",
+      "official": true,
+      "url": "https://corneasociety.org/cornea-and-eye-banking-forum",
+      "eventIds": [
+        "cornea-eye-banking-2026"
+      ],
+      "watchTerms": [
+        "October 09, 2026",
+        "New Orleans"
+      ]
+    },
+    {
       "id": "czech-global",
       "official": true,
       "url": "https://soevision.org/ophthagenda/category/national-society-meetings/list/",
@@ -311,6 +347,30 @@
       ]
     },
     {
+      "id": "fuji-extra",
+      "official": true,
+      "url": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
+      "eventIds": [
+        "fuji-retina-2027"
+      ],
+      "watchTerms": [
+        "March 26",
+        "2027"
+      ]
+    },
+    {
+      "id": "iser-extra",
+      "official": true,
+      "url": "https://iser.org/page/Events_Schedule",
+      "eventIds": [
+        "iser-2026"
+      ],
+      "watchTerms": [
+        "August 23-27, 2026",
+        "Valencia"
+      ]
+    },
+    {
       "id": "jco80-global",
       "official": true,
       "url": "https://convention.jtbcom.co.jp/80ringan/en/index.html",
@@ -369,6 +429,18 @@
       "watchTerms": [
         "24 September 2026",
         "Quito"
+      ]
+    },
+    {
+      "id": "macula-extra",
+      "official": true,
+      "url": "https://www.maculasociety.org/50th-anniversary/",
+      "eventIds": [
+        "macula-society-2027"
+      ],
+      "watchTerms": [
+        "June 9",
+        "12, 2027"
       ]
     },
     {
@@ -483,6 +555,30 @@
       ]
     },
     {
+      "id": "retina-future-extra",
+      "official": true,
+      "url": "https://www.retinasociety.org/page/17/future-annual-meetings",
+      "eventIds": [
+        "retina-society-2027"
+      ],
+      "watchTerms": [
+        "October 20-23, 2027",
+        "Boston"
+      ]
+    },
+    {
+      "id": "retina-society-extra",
+      "official": true,
+      "url": "https://www.retinasociety.org/page/2/annual-meeting",
+      "eventIds": [
+        "retina-society-2026"
+      ],
+      "watchTerms": [
+        "September 23-26, 2026",
+        "Los Angeles"
+      ]
+    },
+    {
       "id": "soe2027-global",
       "official": true,
       "url": "https://soe2027.soevision.org/",
@@ -565,6 +661,18 @@
         "20-23 April 2027",
         "Abstract",
         "19 October 2026"
+      ]
+    },
+    {
+      "id": "wspos-extra",
+      "official": true,
+      "url": "https://wspos.org/wcpos-vi/",
+      "eventIds": [
+        "wcpos-vi-2027"
+      ],
+      "watchTerms": [
+        "May 13",
+        "May 15 2027"
       ]
     }
   ]
