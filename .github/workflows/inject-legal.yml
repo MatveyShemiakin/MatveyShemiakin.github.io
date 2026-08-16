@@ -51,6 +51,7 @@ jobs:
       - run: python scripts/inject_content_analytics.py
       - run: python scripts/inject_patient_updates.py
       - run: python scripts/inject_patient_consultation_cta.py
+      - run: python scripts/inject_site_mega_nav.py
       - run: python -m unittest tests/test_content_analytics.py
       - run: python -m unittest tests/test_patient_updates_inject.py
       - run: python -m unittest tests/test_patient_consultation_cta.py
@@ -70,5 +71,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html' '**/*.html' sitemap.xml || true
-          git commit -m "Inject privacy, analytics and professional safeguards across site"
+          git commit -m "Inject site navigation, privacy and analytics modules"
           git push
