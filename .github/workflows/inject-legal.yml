@@ -14,10 +14,16 @@ on:
       - 'en/privacy.html'
       - 'for-doctors/professional-use.html'
       - 'en/for-doctors/professional-use.html'
+      - 'patients/updates.json'
+      - 'patients/patients-updates.js'
+      - 'patients/patients-updates.css'
       - 'scripts/inject_legal.py'
       - 'scripts/inject_content_analytics.py'
+      - 'scripts/inject_patient_updates.py'
       - 'tests/test_content_analytics.py'
       - 'tests/test_analytics_events.mjs'
+      - 'tests/patient-updates.test.mjs'
+      - 'tests/test_patient_updates_inject.py'
       - '.github/workflows/inject-legal.yml'
   workflow_dispatch:
 
@@ -35,9 +41,13 @@ jobs:
           python-version: '3.12'
       - run: python scripts/inject_legal.py
       - run: python scripts/inject_content_analytics.py
+      - run: python scripts/inject_patient_updates.py
       - run: python -m unittest tests/test_content_analytics.py
+      - run: python -m unittest tests/test_patient_updates_inject.py
       - run: node --check analytics.js
       - run: node tests/test_analytics_events.mjs
+      - run: node --check patients/patients-updates.js
+      - run: node --test tests/patient-updates.test.mjs
       - name: Commit generated changes
         run: |
           if git diff --quiet; then
