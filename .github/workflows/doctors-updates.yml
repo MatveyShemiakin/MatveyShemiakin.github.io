@@ -16,6 +16,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -30,3 +31,74 @@ jobs:
         run: node --test tests/doctors-updates.test.mjs
       - name: Hub injection tests
         run: python -m unittest tests/test_doctors_updates_inject.py
+      - name: Generate real clinician feed and inject hubs
+        run: |
+          python scripts/generate_doctors_updates.py
+          python scripts/inject_doctors_updates.py
+      - name: Validate generated clinician outputs
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          feed=json.loads(Path('for-doctors/updates.json').read_text(encoding='utf-8'))
+          ids={item['id'] for item in feed}
+          assert {'bacterial-keratitis','penetrating-keratoplasty'} <= ids, ids
+          assert 'professional-use' not in ids
+          assert len(ids)==len(feed)
+          for item in feed:
+              assert item['event_id']==f"{item['id']}:{item['revision']}"
+              assert item['url'].startswith('/for-doctors/')
+              if item['url_en']:
+                  assert item['url_en'].startswith('/en/for-doctors/')
+              assert item['kind'] in {'new','updated'}
+          for path in ('for-doctors/index.html','en/for-doctors/index.html'):
+              text=Path(path).read_text(encoding='utf-8')
+              assert text.count('id="doctors-updates"')==1
+              assert text.count('/for-doctors/doctors-updates.css?v=20260816-1')==1
+              assert text.count('/for-doctors/doctors-updates.js?v=20260816-1')==1
+          print('Generated clinician feed items:',len(feed))
+          PY
+      - name: Syntax and existing navigation regressions
+        run: |
+          node --check for-doctors/doctors-updates.js
+          node --test tests/doctors-updates.test.mjs
+          python -m unittest tests/test_site_mega_nav.py
+          node --check site-mega-nav.js
+          node tests/site-mega-nav.test.mjs
+      - name: Render clinician hubs RU EN desktop mobile light dark
+        run: |
+          mkdir -p doctors-updates-smoke
+          python3 -m http.server 8000 >/tmp/doctors-updates-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
+          render() {
+            name="$1"; size="$2"; url="$3"
+            "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=3000 --window-size="$size" --screenshot="doctors-updates-smoke/$name.png" "$url"
+            test -s "doctors-updates-smoke/$name.png"
+          }
+          render_dark() {
+            name="$1"; size="$2"; url="$3"
+            "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --force-dark-mode --run-all-compositor-stages-before-draw --virtual-time-budget=3000 --window-size="$size" --screenshot="doctors-updates-smoke/$name.png" "$url"
+            test -s "doctors-updates-smoke/$name.png"
+          }
+          render ru-doctors-desktop 1440,1100 http://127.0.0.1:8000/for-doctors/
+          render ru-doctors-mobile 390,844 http://127.0.0.1:8000/for-doctors/
+          render en-doctors-desktop 1440,1100 http://127.0.0.1:8000/en/for-doctors/
+          render en-doctors-mobile 390,844 http://127.0.0.1:8000/en/for-doctors/
+          render_dark ru-doctors-desktop-dark 1440,1100 http://127.0.0.1:8000/for-doctors/
+          render_dark ru-doctors-mobile-dark 390,844 http://127.0.0.1:8000/for-doctors/
+          render_dark en-doctors-desktop-dark 1440,1100 http://127.0.0.1:8000/en/for-doctors/
+          render_dark en-doctors-mobile-dark 390,844 http://127.0.0.1:8000/en/for-doctors/
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=3500 --dump-dom http://127.0.0.1:8000/for-doctors/ > doctors-updates-smoke/ru-doctors-dom.html
+          grep -q 'doctors-update-item' doctors-updates-smoke/ru-doctors-dom.html
+      - name: Upload clinician update smoke artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: doctors-updates-smoke
+          path: doctors-updates-smoke/*
+          if-no-files-found: error
