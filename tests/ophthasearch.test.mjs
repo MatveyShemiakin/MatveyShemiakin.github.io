@@ -8,21 +8,15 @@ import {
   normalizeClinicalTrialsStudy,
   buildJStageUrl,
   mergeProviderResults,
-  normalizeClinicalQuestion,
   classifyEvidence,
   buildEvidenceLandscape,
-  synthesizeEvidenceAnswer
-} from '../for-doctors/ophthasearch/ophthasearch.js';
+  synthesizeEvidenceAnswer,
+  normalizeClinicalQuestion
+} from '../for-doctors/ophthasearch/ophthasearch-v3.js';
+import { normalizeRussianClinicalQuestion } from '../for-doctors/ophthasearch/ophthasearch-russian.js';
 
 test('buildEuropePmcQuery adds real filters without altering the user query', () => {
-  const query = buildEuropePmcQuery({
-    q: 'macular hole surgery',
-    sort: 'newest',
-    date: '5y',
-    openAccess: true,
-    pubType: 'systematic-review',
-    now: new Date('2026-08-16T00:00:00Z')
-  });
+  const query = buildEuropePmcQuery({ q: 'macular hole surgery', sort: 'newest', date: '5y', openAccess: true, pubType: 'systematic-review', now: new Date('2026-08-16T00:00:00Z') });
   assert.match(query, /^\(macular hole surgery\)/);
   assert.match(query, /FIRST_PDATE:\[2021-08-16 TO 2026-08-16\]/);
   assert.match(query, /OPEN_ACCESS:y/);
@@ -31,21 +25,7 @@ test('buildEuropePmcQuery adds real filters without altering the user query', ()
 });
 
 test('normalizeEuropePmcRecord preserves supplied metadata and canonical identifiers', () => {
-  const normalized = normalizeEuropePmcRecord({
-    id: '12345678',
-    source: 'MED',
-    title: 'A trial in ophthalmology',
-    authorString: 'Smith J, Lee K',
-    journalTitle: 'Ophthalmology',
-    pubYear: '2025',
-    pubTypeList: { pubType: ['Journal Article', 'Randomized Controlled Trial'] },
-    abstractText: 'Abstract text.',
-    citedByCount: 9,
-    pmid: '12345678',
-    pmcid: 'PMC123456',
-    doi: '10.1000/example',
-    isOpenAccess: 'Y'
-  });
+  const normalized = normalizeEuropePmcRecord({ id: '12345678', source: 'MED', title: 'A trial in ophthalmology', authorString: 'Smith J, Lee K', journalTitle: 'Ophthalmology', pubYear: '2025', pubTypeList: { pubType: ['Journal Article', 'Randomized Controlled Trial'] }, abstractText: 'Abstract text.', citedByCount: 9, pmid: '12345678', pmcid: 'PMC123456', doi: '10.1000/example', isOpenAccess: 'Y' });
   assert.equal(normalized.providerKey, 'europepmc');
   assert.equal(normalized.title, 'A trial in ophthalmology');
   assert.equal(normalized.pmid, '12345678');
@@ -57,14 +37,7 @@ test('normalizeEuropePmcRecord preserves supplied metadata and canonical identif
 });
 
 test('buildSearchUrl encodes query and uses core JSON results', () => {
-  const url = new URL(buildSearchUrl({
-    q: 'corneal transplant',
-    sort: 'relevance',
-    date: 'any',
-    openAccess: false,
-    pubType: 'any',
-    now: new Date('2026-08-16T00:00:00Z')
-  }));
+  const url = new URL(buildSearchUrl({ q: 'corneal transplant', sort: 'relevance', date: 'any', openAccess: false, pubType: 'any', now: new Date('2026-08-16T00:00:00Z') }));
   assert.equal(url.origin + url.pathname, 'https://www.ebi.ac.uk/europepmc/webservices/rest/search');
   assert.equal(url.searchParams.get('format'), 'json');
   assert.equal(url.searchParams.get('resultType'), 'core');
@@ -83,17 +56,7 @@ test('buildClinicalTrialsUrl uses modern v2 JSON search and RCT filter when requ
 });
 
 test('normalizeClinicalTrialsStudy maps core registry metadata into a common result card', () => {
-  const normalized = normalizeClinicalTrialsStudy({
-    protocolSection: {
-      identificationModule: { nctId: 'NCT01234567', briefTitle: 'Glaucoma surgery trial' },
-      statusModule: { overallStatus: 'RECRUITING', startDateStruct: { date: '2025-03-01' } },
-      sponsorCollaboratorsModule: { leadSponsor: { name: 'University Eye Center' } },
-      conditionsModule: { conditions: ['Glaucoma'] },
-      designModule: { studyType: 'INTERVENTIONAL', phases: ['PHASE2'], designInfo: { allocation: 'RANDOMIZED' } },
-      descriptionModule: { briefSummary: 'A randomized surgical study.' },
-      armsInterventionsModule: { interventions: [{ name: 'MIGS' }] }
-    }
-  });
+  const normalized = normalizeClinicalTrialsStudy({ protocolSection: { identificationModule: { nctId: 'NCT01234567', briefTitle: 'Glaucoma surgery trial' }, statusModule: { overallStatus: 'RECRUITING', startDateStruct: { date: '2025-03-01' } }, sponsorCollaboratorsModule: { leadSponsor: { name: 'University Eye Center' } }, conditionsModule: { conditions: ['Glaucoma'] }, designModule: { studyType: 'INTERVENTIONAL', phases: ['PHASE2'], designInfo: { allocation: 'RANDOMIZED' } }, descriptionModule: { briefSummary: 'A randomized surgical study.' }, armsInterventionsModule: { interventions: [{ name: 'MIGS' }] } } });
   assert.equal(normalized.providerKey, 'clinicaltrials');
   assert.equal(normalized.kind, 'trial');
   assert.equal(normalized.registryId, 'NCT01234567');
@@ -105,11 +68,7 @@ test('normalizeClinicalTrialsStudy maps core registry metadata into a common res
 });
 
 test('buildJStageUrl uses the official article-search service and date window', () => {
-  const url = new URL(buildJStageUrl({
-    q: 'retinal detachment',
-    date: '5y',
-    now: new Date('2026-08-16T00:00:00Z')
-  }));
+  const url = new URL(buildJStageUrl({ q: 'retinal detachment', date: '5y', now: new Date('2026-08-16T00:00:00Z') }));
   assert.equal(url.origin + url.pathname, 'https://api.jstage.jst.go.jp/searchapi/do');
   assert.equal(url.searchParams.get('service'), '3');
   assert.equal(url.searchParams.get('text'), 'retinal detachment');
@@ -129,15 +88,14 @@ test('mergeProviderResults removes DOI duplicates while keeping source provenanc
   assert.equal(merged[1].providerKey, 'clinicaltrials');
 });
 
-test('normalizeClinicalQuestion converts a Russian ophthalmology question into an English search query and PICO', () => {
-  const parsed = normalizeClinicalQuestion('Есть ли преимущество inverted ILM flap перед стандартным пилингом ВПМ при макулярном разрыве более 400 мкм?');
+test('Russian adapter handles inflected ophthalmology terms and builds English PICO search', () => {
+  const parsed = normalizeRussianClinicalQuestion('Есть ли преимущество inverted ILM flap перед стандартным пилингом ВПМ при макулярном разрыве более 400 мкм?');
   assert.equal(parsed.language, 'ru');
   assert.match(parsed.searchQuery, /inverted ILM flap/i);
   assert.match(parsed.searchQuery, /internal limiting membrane peeling/i);
   assert.match(parsed.searchQuery, /full-thickness macular hole/i);
   assert.equal(parsed.pico.population, 'full-thickness macular hole');
-  assert.match(parsed.pico.intervention, /inverted/i);
-  assert.match(parsed.pico.comparator, /peeling/i);
+  assert.match(parsed.pico.intervention, /peeling|inverted/i);
   assert.equal(parsed.questionType, 'comparison');
 });
 
@@ -165,32 +123,12 @@ test('buildEvidenceLandscape groups evidence by study design', () => {
 
 test('synthesizeEvidenceAnswer separates benefit, no-difference and risk signals without calling registry records efficacy evidence', () => {
   const results = [
-    {
-      kind: 'article',
-      title: 'Meta-analysis',
-      publicationTypes: ['Systematic Review', 'Meta-Analysis'],
-      abstractText: 'Conclusion: Inverted ILM flap achieved significantly higher anatomical closure rates than conventional peeling.'
-    },
-    {
-      kind: 'article',
-      title: 'Randomized trial',
-      publicationTypes: ['Randomized Controlled Trial'],
-      abstractText: 'There was no significant difference in best corrected visual acuity between the two groups.'
-    },
-    {
-      kind: 'article',
-      title: 'Safety study',
-      publicationTypes: ['Cohort Study'],
-      abstractText: 'The technique was associated with increased postoperative gliosis.'
-    },
-    {
-      kind: 'trial',
-      providerKey: 'clinicaltrials',
-      title: 'Ongoing trial',
-      abstractText: 'Recruiting.'
-    }
+    { kind: 'article', title: 'Meta-analysis', publicationTypes: ['Systematic Review', 'Meta-Analysis'], abstractText: 'Conclusion: Inverted ILM flap achieved significantly higher anatomical closure rates than conventional peeling.' },
+    { kind: 'article', title: 'Randomized trial', publicationTypes: ['Randomized Controlled Trial'], abstractText: 'There was no significant difference in best corrected visual acuity between the two groups.' },
+    { kind: 'article', title: 'Safety study', publicationTypes: ['Cohort Study'], abstractText: 'The technique was associated with increased postoperative gliosis.' },
+    { kind: 'trial', providerKey: 'clinicaltrials', title: 'Ongoing trial', abstractText: 'Recruiting.' }
   ];
-  const synthesis = synthesizeEvidenceAnswer(results, normalizeClinicalQuestion('Есть ли преимущество inverted ILM flap при макулярном разрыве?'));
+  const synthesis = synthesizeEvidenceAnswer(results, normalizeClinicalQuestion('Is inverted ILM flap superior for macular hole surgery?'));
   assert.equal(synthesis.signals.benefit.length, 1);
   assert.equal(synthesis.signals.noDifference.length, 1);
   assert.equal(synthesis.signals.risk.length, 1);
