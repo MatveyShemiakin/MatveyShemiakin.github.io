@@ -1,29 +1,68 @@
-name: Diagnose events header
+name: Fix events header overlap
 on:
   push:
     branches: [fix/events-header-clean]
 permissions:
-  contents: read
+  contents: write
 jobs:
-  inspect:
+  patch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect event headers
+      - name: Apply header guard and cache bust
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re
+          css=Path('assets/events/events.css')
+          s=css.read_text(encoding='utf-8')
+          guard='''\n/* Keep the shared mega navigation as the only desktop navigation on event pages. */\n.site-header.site-mega-nav-mounted .nav-right > nav:not(.site-mega-nav),\n.site-header .nav-right:has(> .site-mega-nav) > nav:not(.site-mega-nav){display:none!important}\n@media(min-width:1021px){\n  .site-header.site-mega-nav-mounted .nav-right{min-width:0;flex:1 1 auto}\n  .site-header.site-mega-nav-mounted .nav{gap:20px}\n}\n'''
+          if 'Keep the shared mega navigation as the only desktop navigation' not in s:
+              s += guard
+          css.write_text(s,encoding='utf-8')
+          for p in [Path('for-doctors/events/index.html'),Path('en/for-doctors/events/index.html')]:
+              h=p.read_text(encoding='utf-8')
+              h=h.replace('/assets/events/events.css"','/assets/events/events.css?v=20260816-2"')
+              h=h.replace('/assets/events/events.css?v=20260816-1"','/assets/events/events.css?v=20260816-2"')
+              p.write_text(h,encoding='utf-8')
+          PY
+      - name: Verify event pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          css=Path('assets/events/events.css').read_text(encoding='utf-8')
+          assert ':has(> .site-mega-nav)' in css
           for p in ['for-doctors/events/index.html','en/for-doctors/events/index.html']:
               s=Path(p).read_text(encoding='utf-8')
-              print('\nFILE',p)
-              print('header tags',len(re.findall(r'<header\b',s,re.I)))
-              print('site-header',s.count('class="site-header"'))
-              print('header-inner',s.count('class="header-inner"'))
-              print('nav-right',s.count('class="nav-right"'))
-              print('site-mega script',s.count('/site-mega-nav.js'))
-              print('native main nav labels',s.count('Основная навигация')+s.count('Primary navigation'))
-              for i,m in enumerate(re.finditer(r'<header\b.*?</header>',s,re.I|re.S),1):
-                  x=re.sub(r'\s+',' ',m.group(0))
-                  print('HEADER',i,x[:900])
+              assert s.count('<header')==1
+              assert '/assets/events/events.css?v=20260816-2' in s
+              assert '/site-mega-nav.js?v=20260816-2' in s
+              assert 'Данные и источники' not in s and 'Data and sources' not in s
+          print('events header guard: OK')
           PY
+          node --check site-mega-nav.js
+          node tests/site-mega-nav.test.mjs
+      - name: Browser smoke desktop and mobile
+        run: |
+          python3 -m http.server 8000 >/tmp/events-http.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          sleep 2
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
+          mkdir -p header-smoke
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=5000 --window-size=1536,900 --screenshot=header-smoke/ru-desktop.png http://127.0.0.1:8000/for-doctors/events/
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=5000 --window-size=390,844 --screenshot=header-smoke/ru-mobile.png http://127.0.0.1:8000/for-doctors/events/
+          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=5000 --dump-dom http://127.0.0.1:8000/for-doctors/events/ > header-smoke/ru-dom.html
+          grep -q 'site-mega-nav' header-smoke/ru-dom.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: events-header-smoke
+          path: header-smoke/*
+      - name: Commit fix and remove temporary workflow
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          rm .github/workflows/diagnose-events-header.yml
+          git add assets/events/events.css for-doctors/events/index.html en/for-doctors/events/index.html .github/workflows/diagnose-events-header.yml
+          git commit -m "Fix duplicated events header navigation"
+          git push
