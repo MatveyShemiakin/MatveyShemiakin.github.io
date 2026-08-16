@@ -42,3 +42,18 @@ test('feature stylesheet contains responsive result workspace and source-status 
   assert.match(css, /\.ophtha-source-board/);
   assert.match(css, /\.ophtha-provider-state/);
 });
+
+test('answer-first layer hides technical clutter behind disclosure and keeps key evidence visible', async () => {
+  const loader = await read('for-doctors/ophthasearch/ophthasearch.js');
+  const js = await read('for-doctors/ophthasearch/ophthasearch-answer-first.js');
+  const css = await read('for-doctors/ophthasearch/ophthasearch-answer-first.css');
+  assert.match(loader, /ophthasearch-answer-first\.js/);
+  assert.match(js, /Короткий ответ/);
+  assert.match(js, /Ключевые доказательства/);
+  assert.match(js, /Все найденные публикации/);
+  assert.match(js, /Настройки и источники поиска/);
+  assert.match(css, /\.ophtha-direct-answer/);
+  assert.match(css, /\.ophtha-key-evidence-grid/);
+  assert.match(css, /\.ophtha-all-results/);
+  assert.doesNotMatch(js, /\sstyle="/i);
+});
