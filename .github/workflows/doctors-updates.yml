@@ -28,3 +28,5 @@ jobs:
         run: python -m unittest tests/test_generate_doctors_updates.py
       - name: Bell UI tests
         run: node --test tests/doctors-updates.test.mjs
+      - name: Hub injection tests
+        run: python -m unittest tests/test_doctors_updates_inject.py
