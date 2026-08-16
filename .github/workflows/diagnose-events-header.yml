@@ -1,0 +1,29 @@
+name: Diagnose events header
+on:
+  push:
+    branches: [fix/events-header-clean]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect event headers
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          for p in ['for-doctors/events/index.html','en/for-doctors/events/index.html']:
+              s=Path(p).read_text(encoding='utf-8')
+              print('\nFILE',p)
+              print('header tags',len(re.findall(r'<header\b',s,re.I)))
+              print('site-header',s.count('class="site-header"'))
+              print('header-inner',s.count('class="header-inner"'))
+              print('nav-right',s.count('class="nav-right"'))
+              print('site-mega script',s.count('/site-mega-nav.js'))
+              print('native main nav labels',s.count('Основная навигация')+s.count('Primary navigation'))
+              for i,m in enumerate(re.finditer(r'<header\b.*?</header>',s,re.I|re.S),1):
+                  x=re.sub(r'\s+',' ',m.group(0))
+                  print('HEADER',i,x[:900])
+          PY
