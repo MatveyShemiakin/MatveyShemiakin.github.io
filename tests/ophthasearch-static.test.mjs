@@ -59,6 +59,8 @@ test('answer-first layer hides technical clutter behind disclosure and keeps key
 });
 
 test('mobile OphthaSearch prevents long medical terms and identifiers from overflowing the viewport', async () => {
+  const loader = await read('for-doctors/ophthasearch/ophthasearch.js');
+  const refresh = await read('for-doctors/ophthasearch/ophthasearch-style-refresh.js');
   const answerCss = await read('for-doctors/ophthasearch/ophthasearch-answer-first.css');
   assert.match(answerCss, /overflow-wrap:\s*anywhere/);
   assert.match(answerCss, /word-break:\s*break-word/);
@@ -66,4 +68,6 @@ test('mobile OphthaSearch prevents long medical terms and identifiers from overf
   assert.match(answerCss, /\.ophtha-direct-answer[^{}]*\{[^}]*min-width:\s*0/s);
   assert.match(answerCss, /@media\s*\(max-width:\s*480px\)[\s\S]*\.ophtha-brand h1[^{}]*\{[^}]*max-width:\s*100%/);
   assert.match(answerCss, /@media\s*\(max-width:\s*480px\)[\s\S]*\.ophtha-result-title[^{}]*\{[^}]*font-size:\s*24px/);
+  assert.match(loader, /ophthasearch-style-refresh\.js/);
+  assert.match(refresh, /ophthasearch-answer-first\.css\?v=20260816-2/);
 });
