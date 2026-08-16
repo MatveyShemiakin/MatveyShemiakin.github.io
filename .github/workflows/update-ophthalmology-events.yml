@@ -1,6 +1,17 @@
 name: Update ophthalmology events
 
 on:
+  pull_request:
+    paths:
+      - 'for-doctors/events/**'
+      - 'en/for-doctors/events/**'
+      - 'assets/events/**'
+      - 'assets/data/ophthalmology-event*'
+      - 'for-doctors/index.html'
+      - 'en/for-doctors/index.html'
+      - 'sitemap.xml'
+      - 'scripts/sync-ophthalmology-events.py'
+      - '.github/workflows/update-ophthalmology-events.yml'
   schedule:
     - cron: '17 4 * * 1,4'
   workflow_dispatch:
@@ -12,25 +23,88 @@ permissions:
 jobs:
   validate-and-monitor:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Validate event datasets
         run: python scripts/sync-ophthalmology-events.py --validate-only
+      - name: Check JavaScript syntax
+        run: node --check assets/events/events.js
+      - name: Validate page wiring
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          for path,lang,data in [
+              ('for-doctors/events/index.html','ru','ophthalmology-events.ru.json'),
+              ('en/for-doctors/events/index.html','en','ophthalmology-events.en.json')]:
+              text=Path(path).read_text(encoding='utf-8')
+              assert f'<html lang="{lang}">' in text
+              assert '/assets/events/events.js' in text
+              assert data in text
+              assert 'style=' not in text
+              assert 'calendar-google' in text and 'calendar-outlook' in text
+              assert 'data-calendar-provider="apple"' in text
+          ru=Path('for-doctors/index.html').read_text(encoding='utf-8')
+          en=Path('en/for-doctors/index.html').read_text(encoding='utf-8')
+          assert 'href="/for-doctors/events/"' in ru
+          assert 'href="/en/for-doctors/events/"' in en
+          sitemap=Path('sitemap.xml').read_text(encoding='utf-8')
+          assert 'https://matveyshemyakin.ru/for-doctors/events/' in sitemap
+          assert 'https://matveyshemyakin.ru/en/for-doctors/events/' in sitemap
+          print('Page wiring: OK')
+          PY
+      - name: Browser smoke test RU EN desktop mobile
+        if: github.event_name == 'pull_request'
+        run: |
+          mkdir -p events-smoke
+          python3 -m http.server 8000 >/tmp/events-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
+          render() {
+            name="$1"; size="$2"; url="$3"
+            "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=6000 --window-size="$size" --screenshot="events-smoke/$name.png" "$url"
+            test -s "events-smoke/$name.png"
+          }
+          render ru-desktop 1440,1200 http://127.0.0.1:8000/for-doctors/events/
+          render ru-mobile 390,844 http://127.0.0.1:8000/for-doctors/events/
+          render en-desktop 1440,1200 http://127.0.0.1:8000/en/for-doctors/events/
+          render en-mobile 390,844 http://127.0.0.1:8000/en/for-doctors/events/
+          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:8000/for-doctors/events/ > events-smoke/ru-dom.html
+          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:8000/en/for-doctors/events/ > events-smoke/en-dom.html
+          grep -q 'APAO 2027 Singapore' events-smoke/ru-dom.html
+          grep -q 'Конгресс офтальмологов Казахстана 2026' events-smoke/ru-dom.html
+          grep -q 'APAO 2027 Singapore' events-smoke/en-dom.html
+          grep -q 'Kazakhstan Ophthalmology Congress 2026' events-smoke/en-dom.html
+      - name: Upload browser smoke screenshots
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ophthalmology-events-smoke
+          path: events-smoke/*
+          if-no-files-found: error
       - name: Check official sources
+        if: github.event_name != 'pull_request'
         id: monitor
         continue-on-error: true
         run: python scripts/sync-ophthalmology-events.py --check-sources --write-report /tmp/ophthalmology-events-sync-report.json
       - name: Upload monitoring report
+        if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: ophthalmology-events-source-report
           path: /tmp/ophthalmology-events-sync-report.json
           retention-days: 30
       - name: Create review issue when a source needs attention
-        if: steps.monitor.outcome == 'failure'
+        if: github.event_name != 'pull_request' && steps.monitor.outcome == 'failure'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
