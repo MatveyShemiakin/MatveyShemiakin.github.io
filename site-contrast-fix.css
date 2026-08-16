@@ -1,5 +1,5 @@
 /* Global WCAG contrast corrections */
-:root{--site-action-blue:#3269c7;--site-link-blue:#3567ad;--site-readable-muted:#596679}
+:root{--site-action-blue:#2f62b9;--site-link-blue:#3567ad;--site-readable-muted:#596679}
 html[data-site-theme="light"]{--site-motion-muted:#596679;--site-motion-text:#111a27;--site-motion-surface:#fff}
 html[data-site-theme] .button.primary,html[data-site-theme] .hero-link.primary{background:var(--site-action-blue)!important;border-color:var(--site-action-blue)!important;color:#fff!important}
 html[data-site-theme="light"][data-site-theme-family="home"] .fact span,html[data-site-theme="light"][data-site-theme-family="home"] .disclaimer{color:var(--site-readable-muted)!important}
