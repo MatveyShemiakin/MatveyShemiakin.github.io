@@ -1,2 +1,2 @@
-export * from './ophthasearch-v3.js';
-import './ophthasearch-v3.js';
+await import('./ophthasearch-russian.js');
+await import('./ophthasearch-v3.js');
