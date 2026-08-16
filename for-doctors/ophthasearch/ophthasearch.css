@@ -1,0 +1,116 @@
+body.ophtha-page{min-height:100vh;background:var(--site-theme-bg);color:var(--site-theme-text)}
+.ophtha-page .doctors-header{position:relative;border-bottom:1px solid var(--line);background:var(--navy-950);color:#fff}
+.ophtha-page .doctors-nav{height:98px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.ophtha-page .doctors-nav-actions{display:flex;align-items:center;gap:18px}
+.ophtha-page .doctors-nav-actions>a{font-size:13px;color:var(--blue-soft);font-weight:700}
+.ophtha-page .doctors-language{display:flex;gap:6px;padding:4px;border:1px solid rgba(255,255,255,.16);border-radius:999px}
+.ophtha-page .doctors-language a{min-width:38px;padding:7px 9px;border-radius:999px;text-align:center;color:rgba(255,255,255,.68)}
+.ophtha-page .doctors-language a.active{background:#fff;color:#06162c}
+
+.ophtha-hero{padding:74px 0 54px;background:linear-gradient(145deg,var(--navy-900),var(--navy-950));color:#fff}
+.ophtha-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end}
+.ophtha-brand{max-width:850px}
+.ophtha-brand h1{font-family:var(--serif);font-size:clamp(58px,8vw,96px);font-weight:400;line-height:.95;letter-spacing:-.035em;margin-bottom:18px}
+.ophtha-brand-subtitle{margin:0 0 12px;color:#e4ebf5;font-family:var(--serif);font-size:clamp(24px,3vw,38px);line-height:1.1}
+.ophtha-brand-lead{max-width:760px;margin:0;color:var(--muted);font-size:17px}
+.ophtha-live-stack{display:grid;gap:10px;justify-items:end}
+.ophtha-live-chip{display:inline-flex;align-items:center;gap:9px;padding:9px 13px;border:1px solid rgba(135,181,255,.36);border-radius:999px;background:rgba(77,142,255,.10);color:#dbe8fb;font-size:12px;font-weight:700;letter-spacing:.04em;white-space:nowrap}
+.ophtha-live-dot{width:8px;height:8px;border-radius:50%;background:#68d391;box-shadow:0 0 0 4px rgba(104,211,145,.12)}
+
+.ophtha-search-section{padding:38px 0 78px;background:var(--site-theme-bg);color:var(--site-theme-text)}
+.ophtha-search-card{padding:24px;border:1px solid var(--site-theme-border);border-radius:24px;background:var(--site-theme-surface);box-shadow:0 18px 45px rgba(4,18,37,.07)}
+.ophtha-search-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:stretch}
+.ophtha-search-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.ophtha-search-input{width:100%;min-width:0;height:58px;padding:0 18px;border:1px solid var(--site-theme-border);border-radius:16px;background:var(--site-theme-surface);color:var(--site-theme-text);font:500 16px/1.2 var(--sans);outline:none;transition:border-color .16s ease,box-shadow .16s ease}
+.ophtha-search-input:focus{border-color:var(--site-theme-accent);box-shadow:0 0 0 4px rgba(77,142,255,.13)}
+.ophtha-search-input::placeholder{color:var(--site-theme-muted)}
+.ophtha-search-button{min-width:150px;border:0;color:#fff;font:700 15px/1 var(--sans);cursor:pointer}
+.ophtha-search-button:focus-visible,.ophtha-control select:focus-visible,.ophtha-check input:focus-visible{outline:3px solid rgba(77,142,255,.35);outline-offset:3px}
+.ophtha-search-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--site-theme-muted);font-size:12px}
+.ophtha-search-meta span{padding:6px 9px;border:1px solid var(--site-theme-border);border-radius:999px;background:var(--site-theme-surface-2)}
+
+.ophtha-workspace{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px;margin-top:24px;align-items:start}
+.ophtha-filters{position:sticky;top:18px;padding:22px;border:1px solid var(--site-theme-border);border-radius:22px;background:var(--site-theme-surface)}
+.ophtha-filters h2{margin:0 0 18px;font-family:var(--serif);font-size:30px;font-weight:400}
+.ophtha-filter-grid{display:grid;gap:16px}
+.ophtha-control{display:grid;gap:7px}
+.ophtha-control span,.ophtha-check span{font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--site-theme-muted);text-transform:uppercase}
+.ophtha-control select{width:100%;height:44px;padding:0 12px;border:1px solid var(--site-theme-border);border-radius:12px;background:var(--site-theme-surface);color:var(--site-theme-text);font:600 14px/1 var(--sans)}
+.ophtha-check{display:flex;align-items:center;gap:10px;padding:10px 0}
+.ophtha-check input{width:18px;height:18px;accent-color:var(--site-theme-accent)}
+.ophtha-provider{margin-top:22px;padding-top:18px;border-top:1px solid var(--site-theme-border)}
+.ophtha-provider strong{display:block;margin-bottom:7px;font-size:13px}
+.ophtha-provider p{margin:0;color:var(--site-theme-muted);font-size:12px;line-height:1.55}
+.ophtha-roadmap{margin-top:16px;padding-top:16px;border-top:1px solid var(--site-theme-border)}
+.ophtha-roadmap summary{cursor:pointer;color:var(--site-theme-accent);font-weight:700;font-size:13px}
+.ophtha-roadmap ul{margin:12px 0 0;padding-left:18px;color:var(--site-theme-muted);font-size:12px;line-height:1.65}
+
+.ophtha-results-panel{min-width:0}
+.ophtha-results-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:46px;padding:0 4px 12px;border-bottom:1px solid var(--site-theme-border)}
+.ophtha-results-head h2{margin:0;font-family:var(--serif);font-size:32px;font-weight:400}
+.ophtha-result-count{color:var(--site-theme-muted);font-size:13px;font-weight:700}
+.ophtha-status{min-height:24px;margin:14px 4px;color:var(--site-theme-muted);font-size:14px}
+.ophtha-status[data-state="error"]{color:#b64b43}
+.ophtha-status[data-state="loading"]{color:var(--site-theme-accent)}
+.ophtha-results{display:grid;gap:14px}
+.ophtha-result-card{padding:22px;border:1px solid var(--site-theme-border);border-radius:20px;background:var(--site-theme-surface);box-shadow:0 12px 30px rgba(4,18,37,.055)}
+.ophtha-result-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.ophtha-result-badges{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ophtha-badge,.ophtha-result-year{display:inline-flex;align-items:center;min-height:27px;padding:4px 9px;border-radius:999px;border:1px solid var(--site-theme-border);font-size:11px;font-weight:800;letter-spacing:.04em;color:var(--site-theme-muted);background:var(--site-theme-surface-2)}
+.ophtha-badge-oa{border-color:rgba(51,143,92,.28);color:#2f7e51;background:rgba(51,143,92,.08)}
+.ophtha-result-title{margin:14px 0 9px;font-family:var(--serif);font-size:clamp(25px,3vw,34px);font-weight:400;line-height:1.13;letter-spacing:-.015em;color:var(--site-theme-text)}
+.ophtha-result-meta{margin:0 0 8px;color:var(--site-theme-muted);font-size:14px}
+.ophtha-result-identifiers{margin:0;color:var(--site-theme-muted);font-size:12px;overflow-wrap:anywhere}
+.ophtha-abstract{margin-top:16px;padding-top:14px;border-top:1px solid var(--site-theme-border)}
+.ophtha-abstract-summary{cursor:pointer;color:var(--site-theme-accent);font-size:13px;font-weight:800}
+.ophtha-abstract-text{margin:12px 0 0;color:var(--site-theme-muted);font-size:14px;line-height:1.65}
+.ophtha-result-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.ophtha-result-link{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 12px;border:1px solid var(--site-theme-border);border-radius:11px;color:var(--site-theme-accent);font-size:12px;font-weight:800;transition:transform .16s ease,border-color .16s ease}
+.ophtha-result-link:hover{transform:translateY(-1px);border-color:var(--site-theme-accent)}
+.ophtha-result-link-primary{background:var(--navy-900);border-color:var(--navy-900);color:#fff}
+
+.ophtha-note{margin-top:26px;padding:18px 20px;border:1px solid var(--site-theme-border);border-radius:18px;background:var(--site-theme-surface-2);color:var(--site-theme-muted);font-size:12px;line-height:1.6}
+.ophtha-page .site-footer{background:#020d1c;color:#aebdce}
+
+html[data-site-theme="dark"] .ophtha-search-card,
+html[data-site-theme="dark"] .ophtha-filters,
+html[data-site-theme="dark"] .ophtha-result-card{box-shadow:0 18px 45px rgba(0,0,0,.16)}
+html[data-site-theme="dark"] .ophtha-badge-oa{color:#8fe0ad;background:rgba(104,211,145,.08);border-color:rgba(104,211,145,.26)}
+html[data-site-theme="dark"] .ophtha-status[data-state="error"]{color:#ff9e96}
+
+@media(max-width:900px){
+  .ophtha-hero-grid{grid-template-columns:1fr;gap:26px}
+  .ophtha-live-stack{justify-items:start}
+  .ophtha-workspace{grid-template-columns:1fr}
+  .ophtha-filters{position:static}
+}
+
+@media(max-width:680px){
+  .ophtha-page .doctors-nav{height:78px}
+  .ophtha-page .doctors-nav-actions>a:first-child{display:none}
+  .ophtha-hero{padding:54px 0 40px}
+  .ophtha-brand h1{font-size:clamp(50px,17vw,72px)}
+  .ophtha-brand-subtitle{font-size:25px}
+  .ophtha-brand-lead{font-size:15px}
+  .ophtha-search-section{padding:24px 0 58px}
+  .ophtha-search-card{padding:16px;border-radius:20px}
+  .ophtha-search-form{grid-template-columns:1fr}
+  .ophtha-search-button{width:100%}
+  .ophtha-workspace{gap:16px}
+  .ophtha-filters{padding:18px}
+  .ophtha-results-head{align-items:flex-start;flex-direction:column;gap:4px}
+  .ophtha-result-card{padding:18px;border-radius:17px}
+  .ophtha-result-title{font-size:27px}
+  .ophtha-result-links{display:grid;grid-template-columns:1fr 1fr}
+  .ophtha-result-link{width:100%}
+}
+
+@media(max-width:390px){
+  .ophtha-result-links{grid-template-columns:1fr}
+  .ophtha-live-chip{white-space:normal}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .ophtha-search-input,.ophtha-result-link{transition:none}
+  .ophtha-result-link:hover{transform:none}
+}

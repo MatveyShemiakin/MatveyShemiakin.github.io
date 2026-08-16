@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" data-site-theme-family="doctors">
+<head>
+  <script src="/analytics.js?v=20260811-2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OphthaSearch — Global Ophthalmology Research Search</title>
+  <meta name="description" content="OphthaSearch is a clinician-focused ophthalmology research search interface for publications, reviews and clinical studies from international scientific sources.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Matvey Yuryevich Shemyakin">
+  <meta name="theme-color" content="#041225">
+  <link rel="canonical" href="https://matveyshemyakin.ru/en/for-doctors/ophthasearch/">
+  <link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/for-doctors/ophthasearch/">
+  <link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/for-doctors/ophthasearch/">
+  <link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/en/for-doctors/ophthasearch/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/mobile-fix.css">
+  <link rel="stylesheet" href="/legal.css?v=20260729-1">
+  <link rel="stylesheet" href="/site-language-switch.css?v=20260729-2">
+  <link rel="stylesheet" href="/mobile-nav.css?v=20260806-3">
+  <script src="/site-theme-init.js?v=20260806-1"></script>
+  <link rel="stylesheet" href="/site-theme.css?v=20260806-1">
+  <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
+  <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-1">
+  <link rel="stylesheet" href="/for-doctors/doctors-updates.css?v=20260816-1">
+  <link rel="stylesheet" href="/for-doctors/ophthasearch/ophthasearch.css?v=20260816-1">
+</head>
+<body class="ophtha-page" data-ophthasearch data-lang="en">
+  <header class="doctors-header">
+    <div class="container doctors-nav">
+      <a class="monogram" href="/en/" aria-label="Home">MS</a>
+      <div class="doctors-nav-actions">
+        <a href="/en/for-doctors/">← For clinicians</a>
+        <div class="doctors-updates" id="doctors-updates">
+          <button class="doctors-updates-toggle" id="doctors-updates-toggle" type="button" aria-expanded="false" aria-controls="doctors-updates-panel" aria-label="What’s new">
+            <span class="doctors-updates-bell" aria-hidden="true"></span>
+            <span class="doctors-updates-count" id="doctors-updates-count" hidden>0</span>
+          </button>
+          <section class="doctors-updates-panel" id="doctors-updates-panel" aria-labelledby="doctors-updates-title" hidden>
+            <div class="doctors-updates-head">
+              <div><span id="doctors-updates-section-label">Updates</span><h2 id="doctors-updates-title">What’s new</h2></div>
+              <button class="doctors-updates-mark-all" id="doctors-updates-mark-all" type="button">Mark all read</button>
+            </div>
+            <div class="doctors-updates-list" id="doctors-updates-list" aria-live="polite"></div>
+          </section>
+        </div>
+        <div class="doctors-language" aria-label="Section language">
+          <a href="/for-doctors/ophthasearch/" lang="ru" hreflang="ru">RU</a>
+          <a class="active" href="/en/for-doctors/ophthasearch/" lang="en" hreflang="en" aria-current="page">EN</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="ophtha-hero" aria-labelledby="ophtha-title">
+      <div class="container ophtha-hero-grid">
+        <div class="ophtha-brand">
+          <p class="eyebrow">Research search for ophthalmologists</p>
+          <h1 id="ophtha-title">OphthaSearch</h1>
+          <p class="ophtha-brand-subtitle">Global Ophthalmology Research Search</p>
+          <p class="ophtha-brand-lead">A single interface for ophthalmology literature discovery. Europe PMC is the first live source; the architecture is prepared for regional databases across all continents, including Asia-Pacific.</p>
+        </div>
+        <div class="ophtha-live-stack" aria-label="Source status">
+          <span class="ophtha-live-chip"><span class="ophtha-live-dot" aria-hidden="true"></span>Global architecture</span>
+          <span class="ophtha-live-chip"><span class="ophtha-live-dot" aria-hidden="true"></span>Europe PMC · LIVE</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="ophtha-search-section" aria-labelledby="ophtha-search-heading">
+      <div class="container">
+        <div class="ophtha-search-card">
+          <form class="ophtha-search-form" id="ophtha-search-form" role="search">
+            <label class="ophtha-search-label" for="ophtha-query">Search research</label>
+            <input class="ophtha-search-input" id="ophtha-query" name="q" type="search" autocomplete="off" placeholder="Example: inverted ILM flap large macular hole" aria-describedby="ophtha-search-help">
+            <button class="button primary ophtha-search-button" type="submit">Search</button>
+          </form>
+          <div class="ophtha-search-meta" id="ophtha-search-help">
+            <span>Worldwide architecture</span>
+            <span>Europe PMC · live search</span>
+            <span>25 results per query</span>
+          </div>
+        </div>
+
+        <div class="ophtha-workspace">
+          <aside class="ophtha-filters" id="ophtha-filters" aria-labelledby="ophtha-filters-title">
+            <h2 id="ophtha-filters-title">Filters</h2>
+            <div class="ophtha-filter-grid">
+              <label class="ophtha-control" for="ophtha-sort"><span>Sort</span>
+                <select id="ophtha-sort" name="sort">
+                  <option value="relevance">Relevance</option>
+                  <option value="newest">Newest first</option>
+                </select>
+              </label>
+              <label class="ophtha-control" for="ophtha-date"><span>Publication date</span>
+                <select id="ophtha-date" name="date">
+                  <option value="any">Any date</option>
+                  <option value="1y">Past year</option>
+                  <option value="5y">Past 5 years</option>
+                  <option value="10y">Past 10 years</option>
+                </select>
+              </label>
+              <label class="ophtha-control" for="ophtha-pubtype"><span>Publication type</span>
+                <select id="ophtha-pubtype" name="type">
+                  <option value="any">Any</option>
+                  <option value="review">Review</option>
+                  <option value="systematic-review">Systematic review</option>
+                  <option value="clinical-trial">Clinical trial</option>
+                  <option value="rct">Randomized controlled trial</option>
+                </select>
+              </label>
+              <label class="ophtha-check" for="ophtha-oa">
+                <input id="ophtha-oa" name="oa" type="checkbox">
+                <span>Open Access only</span>
+              </label>
+            </div>
+
+            <div class="ophtha-provider">
+              <strong>v1 source</strong>
+              <p>Queries currently run against Europe PMC. Other databases are never shown as connected until their live connector is actually enabled.</p>
+            </div>
+
+            <details class="ophtha-roadmap">
+              <summary>Global coverage — next stage</summary>
+              <ul>
+                <li>PubMed / MEDLINE enrichment</li>
+                <li>WPRIM / Global Index Medicus</li>
+                <li>J-STAGE · Japan</li>
+                <li>KoreaScience · South Korea</li>
+                <li>ClinicalTrials.gov</li>
+                <li>LILACS / SciELO</li>
+                <li>Russia / CIS sources with legal API access</li>
+              </ul>
+            </details>
+          </aside>
+
+          <section class="ophtha-results-panel" aria-labelledby="ophtha-search-heading">
+            <div class="ophtha-results-head">
+              <h2 id="ophtha-search-heading">Results</h2>
+              <span class="ophtha-result-count" id="ophtha-result-count"></span>
+            </div>
+            <p class="ophtha-status" id="ophtha-status" role="status" aria-live="polite">Enter a topic, disease, intervention or clinical question.</p>
+            <div class="ophtha-results" id="ophtha-results" aria-live="polite"></div>
+            <p class="ophtha-note">OphthaSearch is a scientific information discovery tool for healthcare professionals. Search results and metadata do not replace reading the original publication, clinical guidance or professional clinical judgement.</p>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row"><span>MS</span><p>Matvey Yuryevich Shemyakin · ophthalmologist · ophthalmic surgeon</p></div>
+  </footer>
+
+  <script src="/doctors-legal.js?v=20260805-1"></script>
+  <script src="/legal.js?v=20260721-3"></script>
+  <script defer src="/site-language-switch.js?v=20260729-2"></script>
+  <script src="/mobile-nav.js?v=20260806-3"></script>
+  <script defer src="/site-theme.js?v=20260806-1"></script>
+  <script defer src="/site-motion.js?v=20260806-1"></script>
+  <script defer src="/site-mega-nav.js?v=20260816-1"></script>
+  <script defer src="/for-doctors/doctors-updates.js?v=20260816-1"></script>
+  <script type="module" src="/for-doctors/ophthasearch/ophthasearch.js?v=20260816-1"></script>
+</body>
+</html>
