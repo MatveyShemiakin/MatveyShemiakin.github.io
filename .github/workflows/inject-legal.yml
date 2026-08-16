@@ -14,17 +14,26 @@ on:
       - 'en/privacy.html'
       - 'for-doctors/professional-use.html'
       - 'en/for-doctors/professional-use.html'
+      - 'for-doctors/updates.json'
+      - 'for-doctors/updates-manifest.json'
+      - 'for-doctors/doctors-updates.js'
+      - 'for-doctors/doctors-updates.css'
       - 'patients/updates.json'
       - 'patients/patients-updates.js'
       - 'patients/patients-updates.css'
       - 'patients/consultation-cta.css'
       - 'site-mega-nav.js'
       - 'site-mega-nav.css'
+      - 'scripts/generate_doctors_updates.py'
+      - 'scripts/inject_doctors_updates.py'
       - 'scripts/inject_legal.py'
       - 'scripts/inject_content_analytics.py'
       - 'scripts/inject_patient_updates.py'
       - 'scripts/inject_patient_consultation_cta.py'
       - 'scripts/inject_site_mega_nav.py'
+      - 'tests/test_generate_doctors_updates.py'
+      - 'tests/test_doctors_updates_inject.py'
+      - 'tests/doctors-updates.test.mjs'
       - 'tests/test_content_analytics.py'
       - 'tests/test_analytics_events.mjs'
       - 'tests/patient-updates.test.mjs'
@@ -47,17 +56,23 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - run: python scripts/generate_doctors_updates.py
+      - run: python scripts/inject_doctors_updates.py
       - run: python scripts/inject_legal.py
       - run: python scripts/inject_content_analytics.py
       - run: python scripts/inject_patient_updates.py
       - run: python scripts/inject_patient_consultation_cta.py
       - run: python scripts/inject_site_mega_nav.py
+      - run: python -m unittest tests/test_generate_doctors_updates.py
+      - run: python -m unittest tests/test_doctors_updates_inject.py
       - run: python -m unittest tests/test_content_analytics.py
       - run: python -m unittest tests/test_patient_updates_inject.py
       - run: python -m unittest tests/test_patient_consultation_cta.py
       - run: python -m unittest tests/test_site_mega_nav.py
       - run: node --check analytics.js
       - run: node tests/test_analytics_events.mjs
+      - run: node --check for-doctors/doctors-updates.js
+      - run: node --test tests/doctors-updates.test.mjs
       - run: node --check patients/patients-updates.js
       - run: node --test tests/patient-updates.test.mjs
       - run: node --check site-mega-nav.js
@@ -70,6 +85,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add '*.html' '**/*.html' sitemap.xml || true
-          git commit -m "Inject site navigation, privacy and analytics modules"
+          git add '*.html' '**/*.html' sitemap.xml for-doctors/updates.json for-doctors/updates-manifest.json || true
+          git commit -m "Inject site modules and clinician updates"
           git push
