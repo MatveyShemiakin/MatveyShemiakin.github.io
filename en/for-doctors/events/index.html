@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/mobile-fix.css">
 <link rel="stylesheet" href="/assets/events/events.css">
+<link rel="stylesheet" href="/site-language-switch.css?v=20260729-2">
+<script src="/site-theme-init.js?v=20260806-1"></script>
+<link rel="stylesheet" href="/site-theme.css?v=20260806-1">
 <title>Ophthalmology events calendar — Matvey Shemyakin</title>
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Matvey Yuryevich Shemyakin">
@@ -17,10 +20,32 @@
 <link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/for-doctors/events/">
 <link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/for-doctors/events/">
 <link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/for-doctors/events/">
-<link rel="stylesheet" href="/site-mega-nav.css?v=20260816-1"></head>
+<link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2"></head>
 <body data-events-src="/assets/data/ophthalmology-events.en.json">
 <a class="skip-link" href="#events-app">Skip to calendar</a>
-<header class="site-header"><div class="header-inner"><a class="brand" href="#top" aria-label="Matvey Shemyakin — for clinicians"><span class="brand-mark">MS</span><span>Matvey Shemyakin<span class="brand-sub">Resources for clinicians</span></span></a><div class="header-actions"><nav class="language-switch" aria-label="Language"><a class="language-button" href="/for-doctors/events/">RU</a><a class="language-button is-active" href="/en/for-doctors/events/" aria-current="page">EN</a></nav><a class="head-link" href="/en/for-doctors/">← For clinicians</a><button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch colour theme" title="Theme">☾</button></div></div></header>
+<header class="site-header">
+  <div class="container nav">
+    <a class="monogram" href="/en/" aria-label="Home">MS</a>
+    <div class="nav-right">
+      <nav aria-label="Primary navigation">
+        <a href="/en/patients/">Patients</a>
+        <a href="/en/for-doctors/">For doctors</a>
+        <a href="/en/#about">About</a>
+        <a href="/en/#directions">Specialties</a>
+        <a href="/en/#education">Education</a>
+        <a href="/en/#science">Research</a>
+        <a href="/en/#contacts">Contacts</a>
+      </nav>
+      <a class="mobile-patients-link" href="/en/patients/">Patients</a>
+      <a class="mobile-patients-link" href="/en/for-doctors/">Doctors</a>
+      <div class="language-switch" aria-label="Page language" role="group">
+        <a class="language-button" href="/for-doctors/events/" lang="ru" hreflang="ru">RU</a>
+        <a class="language-button active" href="/en/for-doctors/events/" lang="en" hreflang="en" aria-current="page">EN</a>
+      </div>
+      <button class="site-theme-toggle" id="theme-toggle" type="button" aria-label="Switch colour theme" title="Theme">☾</button>
+    </div>
+  </div>
+</header>
 <main id="top">
 <section class="hero"><div class="hero-inner"><nav class="breadcrumbs" aria-label="Breadcrumbs"><a href="/en/">Home</a><span>→</span><a href="/en/for-doctors/">For clinicians</a><span>→</span><span>Events</span></nav><p class="eyebrow">Professional calendar · Russia · CIS · Asia–Pacific · worldwide</p><h1>Ophthalmology events</h1><p class="hero-lead">Congresses, conferences and scientific meetings with abstract deadlines, registration, CME/CPD information and quick calendar export.</p><div class="meta-row"><span class="meta-chip">Official sources only</span><span class="meta-chip">Russia, CIS and Asia–Pacific</span><span class="meta-chip">Deadlines and registration</span><span class="meta-chip">No site account required</span></div><p class="hero-note">Dataset verified 16 August 2026. A deadline time is shown only when the organiser publishes it.</p></div></section>
 <section class="dashboard" aria-label="Calendar summary"><div class="stat-grid"><article class="stat-card"><span class="stat-label">Upcoming</span><strong class="stat-value" id="stat-events">0</strong><span class="stat-note">events in catalogue</span></article><article class="stat-card"><span class="stat-label">Submissions open</span><strong class="stat-value" id="stat-open">0</strong><span class="stat-note">active calls for submissions</span></article><article class="stat-card urgent"><span class="stat-label">≤ 30 days</span><strong class="stat-value" id="stat-deadlines">0</strong><span class="stat-note">important deadlines</span></article><article class="stat-card"><span class="stat-label">Favourites</span><strong class="stat-value" id="stat-favorites">0</strong><span class="stat-note">saved on this device</span></article></div></section>
@@ -30,12 +55,12 @@
 <section class="view-panel active" id="view-events" aria-labelledby="events-title"><div class="section-heading"><div><h2 id="events-title">Official events</h2><p>Major congresses and professional meetings ordered by date.</p></div></div><div class="featured-strip" id="featured-strip"></div><div class="event-grid" id="events-grid"></div></section>
 <section class="view-panel" id="view-deadlines" aria-labelledby="deadlines-title"><div class="section-heading"><div><h2 id="deadlines-title">All deadlines</h2><p>Abstracts, posters, courses, registration and special deadlines.</p></div></div><div class="deadline-list" id="deadlines-list"></div></section>
 <section class="view-panel calendar-view" id="view-calendar" aria-labelledby="calendar-title-label"><div class="section-heading"><div><h2 id="calendar-title-label">Calendar</h2><p>Blue — events; red — deadlines.</p></div></div><div class="calendar-shell"><div class="calendar-head"><strong class="calendar-title" id="calendar-title"></strong><div class="calendar-nav"><button type="button" id="calendar-prev" aria-label="Previous month">←</button><button type="button" id="calendar-today">Today</button><button type="button" id="calendar-next" aria-label="Next month">→</button></div></div><div class="calendar-weekdays" aria-hidden="true"><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div><div class="calendar-grid" id="calendar-grid"></div></div></section>
-<section class="geo-view" aria-labelledby="geo-title"><div class="section-heading"><div><h2 id="geo-title">Catalogue geography</h2><p>Quick access to events by region without a third-party mapping SDK.</p></div></div><div class="geo-grid" id="geo-grid"></div></section><aside class="data-note"><strong>Data and sources.</strong> Every date links to an official organiser page. The catalogue automatically monitors source availability; ambiguous date changes require review before publication. If the organiser does not publish an exact deadline time, it is exported as an all-day calendar item.</aside></section>
+<section class="geo-view" aria-labelledby="geo-title"><div class="section-heading"><div><h2 id="geo-title">Catalogue geography</h2><p>Quick access to events by region without a third-party mapping SDK.</p></div></div><div class="geo-grid" id="geo-grid"></div></section></section>
 </main>
 <nav class="mobile-sticky" aria-label="Mobile view selector"><button type="button" data-mobile-view="events" class="active">Events</button><button type="button" data-mobile-view="deadlines">Deadlines</button><button type="button" data-mobile-view="calendar">Calendar</button></nav>
 <dialog class="dialog" id="event-dialog"><div class="dialog-head"><div><span class="dialog-kicker" id="dialog-kicker"></span><h2 id="dialog-title"></h2></div><button class="dialog-close" type="button" id="dialog-close" aria-label="Close">×</button></div><div class="dialog-body" id="dialog-body"></div></dialog>
 <dialog class="dialog" id="calendar-options-dialog"><div class="dialog-head"><div><span class="dialog-kicker">Add to calendar</span><h2 id="calendar-options-title">Event</h2></div><button class="dialog-close" type="button" id="calendar-options-close" aria-label="Close">×</button></div><div class="dialog-body"><div class="calendar-context" id="calendar-options-context"></div><div class="calendar-provider-grid"><button class="calendar-provider" type="button" data-calendar-provider="apple"><span class="calendar-provider-icon"></span><span><strong>Apple Calendar</strong><span>iPhone / iPad / Mac · .ics file</span></span></button><a class="calendar-provider" id="calendar-google" href="#" target="_blank" rel="noopener noreferrer"><span class="calendar-provider-icon">G</span><span><strong>Google Calendar</strong><span>Open pre-filled event</span></span></a><a class="calendar-provider" id="calendar-outlook" href="#" target="_blank" rel="noopener noreferrer"><span class="calendar-provider-icon">O</span><span><strong>Outlook</strong><span>Outlook.com / Microsoft 365</span></span></a><button class="calendar-provider" type="button" data-calendar-provider="ics"><span class="calendar-provider-icon">↓</span><span><strong>Download .ics</strong><span>Universal calendar file</span></span></button></div><p class="mobile-calendar-hint">On mobile, choose your installed calendar. Use Apple Calendar (.ics) on iPhone/iPad and Google Calendar on Android.</p><p class="calendar-sheet-note">Dates come from the official event record. A deadline without a published time is added as an all-day event; no closing time is invented.</p></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="/assets/events/events.js" defer></script>
-<script src="/legal.js?v=20260721-3"></script><script src="/doctors-legal.js?v=20260805-1"></script><script defer src="/site-mega-nav.js?v=20260816-1"></script></body>
+<script src="/legal.js?v=20260721-3"></script><script src="/doctors-legal.js?v=20260805-1"></script><script defer src="/site-mega-nav.js?v=20260816-2"></script></body>
 </html>
