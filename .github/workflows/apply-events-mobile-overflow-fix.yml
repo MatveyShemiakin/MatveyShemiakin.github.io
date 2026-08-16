@@ -1,0 +1,54 @@
+name: Apply events mobile overflow fix
+
+on:
+  push:
+    branches:
+      - fix/events-mobile-overflow
+    paths:
+      - 'scripts/apply-events-mobile-overflow-fix.py'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/events-mobile-overflow
+      - name: Patch cache-busting references
+        run: python scripts/apply-events-mobile-overflow-fix.py
+      - name: Mobile browser smoke test
+        run: |
+          mkdir -p mobile-smoke
+          python3 -m http.server 8000 >/tmp/events-mobile-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
+          render() {
+            name="$1"; size="$2"; url="$3"
+            "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=7000 --window-size="$size" --screenshot="mobile-smoke/$name.png" "$url"
+            test -s "mobile-smoke/$name.png"
+          }
+          for lang in ru en; do
+            if [ "$lang" = "ru" ]; then url="http://127.0.0.1:8000/for-doctors/events/"; else url="http://127.0.0.1:8000/en/for-doctors/events/"; fi
+            render "$lang-360" 360,1200 "$url"
+            render "$lang-390" 390,1200 "$url"
+            render "$lang-412" 412,1200 "$url"
+          done
+      - name: Upload mobile screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: events-mobile-overflow-smoke
+          path: mobile-smoke/*.png
+      - name: Commit patched page references
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add for-doctors/events/index.html en/for-doctors/events/index.html
+          git commit -m 'Bust cache for events mobile CSS' || exit 0
+          git push origin HEAD:fix/events-mobile-overflow
