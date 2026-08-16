@@ -17,24 +17,28 @@
     questions:n=>`${n} ${n===1?'question':'questions'}`,
     shown:n=>`${n} ${n===1?'material':'materials'} found`,
     all:n=>`${n} patient questions available`,
-    empty:'No matching material was found. Try another word.'
+    empty:'No matching material was found. Try another word.',
+    indexing:'Searching the published patient materials…',
+    conditions:'Conditions',
+    conditionMatches:'Matching condition pages',
+    pageMatches:'Questions and sections on this page'
   }:{
     questions:n=>`${n} ${pluralRu(n,'вопрос','вопроса','вопросов')}`,
     shown:n=>`Найдено: ${n} ${pluralRu(n,'материал','материала','материалов')}`,
     all:n=>`Доступно ${n} ${pluralRu(n,'вопрос','вопроса','вопросов')}`,
-    empty:'По вашему запросу ничего не найдено. Попробуйте другое слово.'
+    empty:'По вашему запросу ничего не найдено. Попробуйте другое слово.',
+    indexing:'Ищу по опубликованным материалам…',
+    conditions:'Заболевания и состояния',
+    conditionMatches:'Подходящие материалы по заболеваниям',
+    pageMatches:'Вопросы и разделы на этой странице'
   };
-  const CONDITION_RESULTS=lang==='en'?[
-    {title:'Intraocular lens dislocation',text:'Causes, symptoms, warning signs, examination, surgical treatment and recovery after IOL dislocation.',search:'intraocular lens dislocation artificial lens moved displaced IOL',href:'/en/patients/iol-dislocation/'},
-    {title:'Glaucoma',text:'Symptoms, examination, pressure-lowering treatment, laser, surgery and long-term follow-up.',search:'glaucoma eye pressure IOP dangerous pressure OCT visual field laser surgery',href:'/en/patients/glaucoma/'}
-  ]:[
-    {title:'Смещение искусственного хрусталика',text:'Причины, симптомы, опасные признаки, обследование, хирургическое лечение и восстановление при дислокации ИОЛ.',search:'смещение искусственного хрусталика дислокация иол линза сместилась',href:'/patients/iol-dislocation/'},
-    {title:'Глаукома',text:'Симптомы, обследование, контроль внутриглазного давления, капли, лазер, операция и длительное наблюдение.',search:'глаукома внутриглазное давление вгд какое давление опасно окт поле зрения лазер операция',href:'/patients/glaucoma/'}
-  ];
+
   function pluralRu(n,one,few,many){const a=Math.abs(n)%100,b=a%10;return a>10&&a<20?many:b>1&&b<5?few:b===1?one:many;}
-  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
   const norm=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/ё/g,'е').replace(/[ьъ]/g,'').replace(/[^a-zа-я0-9]+/gi,' ').trim();
   const words=v=>norm(v).split(/\s+/).filter(Boolean);
+  const tokenMatches=(hay,token)=>hay.includes(token)||(token.length>=5&&hay.includes(token.slice(0,-1)))||(token.length>=7&&hay.includes(token.slice(0,-2)));
+  const matches=(hay,tokens)=>tokens.every(token=>tokenMatches(hay,token));
 
   const pendingGlaucoma=[...document.querySelectorAll('.condition-card.is-pending')].find(card=>{
     const title=(card.querySelector('h3')?.textContent||'').trim().toLowerCase();
@@ -61,11 +65,16 @@
     }).join('');
   }
 
+  const conditionCards=[...document.querySelectorAll('.condition-card[href]')].map(card=>({
+    title:(card.querySelector('h3')?.textContent||'').trim(),
+    text:(card.querySelector('p')?.textContent||'').trim(),
+    href:new URL(card.getAttribute('href'),location.origin).pathname
+  }));
+
   if(faqIndex){
-    const conditions=CONDITION_RESULTS.map(item=>item.pending
-      ?`<div class="faq-index-link faq-index-pending" data-condition-result data-search="${esc(item.search)}"><span><b>${esc(item.title)}</b><small>${esc(item.text)}</small></span><span aria-hidden="true">—</span></div>`
-      :`<a class="faq-index-link" data-condition-result href="${item.href}" data-search="${esc(item.search+' '+item.text)}"><span><b>${esc(item.title)}</b><small>${esc(item.text)}</small></span><span aria-hidden="true">↗</span></a>`).join('');
-    const conditionGroup=`<section class="faq-index-group condition-index-group" data-condition-group hidden><div class="faq-index-head"><span>•</span><div><h3>${lang==='en'?'Conditions':'Заболевания и состояния'}</h3><p>${lang==='en'?'Matching condition pages':'Подходящие материалы по заболеваниям'}</p></div></div><div class="faq-index-list">${conditions}</div></section>`;
+    const conditions=conditionCards.map(item=>`<a class="faq-index-link" data-condition-result href="${esc(item.href)}" data-search="${esc(item.title+' '+item.text)}"><span><b>${esc(item.title)}</b><small>${esc(item.text)}</small></span><span aria-hidden="true">↗</span></a>`).join('');
+    const conditionGroup=`<section class="faq-index-group condition-index-group" data-condition-group hidden><div class="faq-index-head"><span>•</span><div><h3>${T.conditions}</h3><p>${T.conditionMatches}</p></div></div><div class="faq-index-list">${conditions}</div></section>`;
+    const remoteContainer='<div data-condition-detail-groups></div>';
     const questionGroups=DATA.categories.map(c=>{
       const items=DATA.faqs.filter(f=>f.cat===c.key).map(f=>{
         const search=[f.q,f.short,...f.paragraphs,...f.important].join(' ');
@@ -73,18 +82,23 @@
       }).join('');
       return `<section class="faq-index-group" data-index-group="${esc(c.key)}"><div class="faq-index-head"><span>${esc(c.number)}</span><div><h3>${esc(c.title)}</h3><p>${esc(c.description)}</p></div></div><div class="faq-index-list">${items}</div></section>`;
     }).join('');
-    faqIndex.innerHTML=conditionGroup+questionGroups;
+    faqIndex.innerHTML=conditionGroup+remoteContainer+questionGroups;
   }
 
   const inputs=[topSearch,faqSearch].filter(Boolean);
   let syncing=false;
+  let conditionIndexReady=false;
+
   function apply(raw){
     const tokens=words(raw);
     const isSearching=tokens.length>0;
     let count=0;
     faqIndex?.querySelectorAll('.faq-index-link').forEach(link=>{
-      const isCondition=link.hasAttribute('data-condition-result');
-      const match=isCondition?!isSearching?false:tokens.every(t=>norm(link.dataset.search).includes(t)):!isSearching||tokens.every(t=>norm(link.dataset.search).includes(t));
+      const isConditionOverview=link.hasAttribute('data-condition-result');
+      const isConditionDetail=link.hasAttribute('data-condition-detail-result');
+      let match=false;
+      if(isSearching)match=matches(norm(link.dataset.search),tokens);
+      else match=!isConditionOverview&&!isConditionDetail;
       link.hidden=!match;
       if(match)count++;
     });
@@ -92,9 +106,16 @@
       group.hidden=![...group.querySelectorAll('.faq-index-link')].some(link=>!link.hidden);
     });
     const questionCount=[...(faqIndex?.querySelectorAll('[data-question-result]')||[])].filter(link=>!link.hidden).length;
-    if(status)status.textContent=isSearching?T.shown(count):T.all(questionCount);
-    if(empty){empty.hidden=count!==0;empty.textContent=T.empty;}
+    if(status){
+      if(isSearching&&!conditionIndexReady)status.textContent=T.indexing;
+      else status.textContent=isSearching?T.shown(count):T.all(questionCount);
+    }
+    if(empty){
+      empty.hidden=!conditionIndexReady||count!==0||!isSearching;
+      empty.textContent=T.empty;
+    }
   }
+
   function syncFrom(source){
     if(syncing)return;
     syncing=true;
@@ -102,6 +123,68 @@
     syncing=false;
     apply(source.value);
   }
+
+  function cleanText(value){return String(value||'').replace(/\s+/g,' ').trim();}
+
+  function extractConditionItems(doc,page){
+    const seen=new Set();
+    const items=[];
+    doc.querySelectorAll('.faq-item').forEach(item=>{
+      const question=cleanText(item.querySelector('.faq-question')?.textContent);
+      if(!question)return;
+      const section=cleanText(item.closest('[data-panel]')?.querySelector('.topic-head h2')?.textContent)||page.title;
+      const id=item.id||'';
+      const key=id||question;
+      if(seen.has(key))return;
+      seen.add(key);
+      const searchable=cleanText([page.title,section,item.textContent].join(' '));
+      const href=id?`${page.href}#${encodeURIComponent(id)}`:page.href;
+      items.push({title:question,section,searchable,href});
+    });
+    if(items.length)return items;
+    doc.querySelectorAll('main section[id],main article[id]').forEach(section=>{
+      const title=cleanText(section.querySelector('h2,h3')?.textContent);
+      if(!title)return;
+      const key=section.id||title;
+      if(seen.has(key))return;
+      seen.add(key);
+      items.push({
+        title,
+        section:page.title,
+        searchable:cleanText([page.title,section.textContent].join(' ')),
+        href:section.id?`${page.href}#${encodeURIComponent(section.id)}`:page.href
+      });
+    });
+    return items;
+  }
+
+  async function fetchConditionPage(page){
+    const response=await fetch(page.href,{credentials:'same-origin'});
+    if(!response.ok)throw new Error(`HTTP ${response.status}`);
+    const html=await response.text();
+    const doc=new DOMParser().parseFromString(html,'text/html');
+    return {...page,items:extractConditionItems(doc,page)};
+  }
+
+  function renderConditionDetails(pages){
+    const host=faqIndex?.querySelector('[data-condition-detail-groups]');
+    if(!host)return;
+    host.innerHTML=pages.filter(page=>page.items.length).map((page,index)=>{
+      const links=page.items.map(item=>`<a class="faq-index-link" data-condition-detail-result href="${esc(item.href)}" data-search="${esc(item.searchable)}"><span><b>${esc(item.title)}</b><small>${esc(item.section)}</small></span><span aria-hidden="true">↗</span></a>`).join('');
+      return `<section class="faq-index-group condition-detail-group" data-condition-detail-group="${esc(page.href)}" hidden><div class="faq-index-head"><span>${String(index+1).padStart(2,'0')}</span><div><h3>${esc(page.title)}</h3><p>${T.pageMatches}</p></div></div><div class="faq-index-list">${links}</div></section>`;
+    }).join('');
+  }
+
+  async function buildConditionIndex(){
+    const remotePages=conditionCards.filter(page=>page.href!==cataractBase);
+    if(!remotePages.length){conditionIndexReady=true;apply(faqSearch?.value||topSearch?.value||'');return;}
+    const settled=await Promise.allSettled(remotePages.map(fetchConditionPage));
+    const pages=settled.filter(result=>result.status==='fulfilled').map(result=>result.value);
+    renderConditionDetails(pages);
+    conditionIndexReady=true;
+    apply(faqSearch?.value||topSearch?.value||'');
+  }
+
   inputs.forEach(input=>{
     input.addEventListener('input',()=>syncFrom(input));
     input.addEventListener('keydown',event=>{
@@ -112,5 +195,7 @@
       }
     });
   });
+
   apply('');
+  buildConditionIndex();
 })();
