@@ -18,15 +18,20 @@ on:
       - 'patients/patients-updates.js'
       - 'patients/patients-updates.css'
       - 'patients/consultation-cta.css'
+      - 'site-mega-nav.js'
+      - 'site-mega-nav.css'
       - 'scripts/inject_legal.py'
       - 'scripts/inject_content_analytics.py'
       - 'scripts/inject_patient_updates.py'
       - 'scripts/inject_patient_consultation_cta.py'
+      - 'scripts/inject_site_mega_nav.py'
       - 'tests/test_content_analytics.py'
       - 'tests/test_analytics_events.mjs'
       - 'tests/patient-updates.test.mjs'
       - 'tests/test_patient_updates_inject.py'
       - 'tests/test_patient_consultation_cta.py'
+      - 'tests/test_site_mega_nav.py'
+      - 'tests/site-mega-nav.test.mjs'
       - '.github/workflows/inject-legal.yml'
   workflow_dispatch:
 
@@ -49,10 +54,13 @@ jobs:
       - run: python -m unittest tests/test_content_analytics.py
       - run: python -m unittest tests/test_patient_updates_inject.py
       - run: python -m unittest tests/test_patient_consultation_cta.py
+      - run: python -m unittest tests/test_site_mega_nav.py
       - run: node --check analytics.js
       - run: node tests/test_analytics_events.mjs
       - run: node --check patients/patients-updates.js
       - run: node --test tests/patient-updates.test.mjs
+      - run: node --check site-mega-nav.js
+      - run: node tests/site-mega-nav.test.mjs
       - name: Commit generated changes
         run: |
           if git diff --quiet; then
