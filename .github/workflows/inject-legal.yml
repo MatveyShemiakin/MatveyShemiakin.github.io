@@ -17,13 +17,16 @@ on:
       - 'patients/updates.json'
       - 'patients/patients-updates.js'
       - 'patients/patients-updates.css'
+      - 'patients/consultation-cta.css'
       - 'scripts/inject_legal.py'
       - 'scripts/inject_content_analytics.py'
       - 'scripts/inject_patient_updates.py'
+      - 'scripts/inject_patient_consultation_cta.py'
       - 'tests/test_content_analytics.py'
       - 'tests/test_analytics_events.mjs'
       - 'tests/patient-updates.test.mjs'
       - 'tests/test_patient_updates_inject.py'
+      - 'tests/test_patient_consultation_cta.py'
       - '.github/workflows/inject-legal.yml'
   workflow_dispatch:
 
@@ -42,8 +45,10 @@ jobs:
       - run: python scripts/inject_legal.py
       - run: python scripts/inject_content_analytics.py
       - run: python scripts/inject_patient_updates.py
+      - run: python scripts/inject_patient_consultation_cta.py
       - run: python -m unittest tests/test_content_analytics.py
       - run: python -m unittest tests/test_patient_updates_inject.py
+      - run: python -m unittest tests/test_patient_consultation_cta.py
       - run: node --check analytics.js
       - run: node tests/test_analytics_events.mjs
       - run: node --check patients/patients-updates.js
