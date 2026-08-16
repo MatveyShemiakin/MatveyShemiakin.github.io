@@ -14,6 +14,7 @@ on:
       - 'site-theme-init.js'
       - 'site-contrast-fix.css'
       - 'tests/patients-ecosystem.test.mjs'
+      - 'tests/patient-global-search.test.mjs'
       - 'tests/legal-author-note.test.mjs'
       - 'tests/theme-contrast-audit.html'
       - 'tests/mobile-navbar.test.mjs'
@@ -42,6 +43,8 @@ jobs:
           node --check patients/glaucoma/script.js
       - name: Patient ecosystem regression
         run: node tests/patients-ecosystem.test.mjs
+      - name: Patient global search regression
+        run: node tests/patient-global-search.test.mjs
       - name: Author Telegram note regression
         run: node tests/legal-author-note.test.mjs
       - name: Existing mobile navigation regression
