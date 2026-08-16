@@ -74,7 +74,7 @@ jobs:
           for filename in ('for-doctors/index.html','en/for-doctors/index.html'):
               path=Path(filename)
               text=path.read_text(encoding='utf-8')
-              gate="<script>try{localStorage.setItem('medical_professional_audience_v1','yes')}catch(e){}</script>"
+              gate="<script>try{localStorage.setItem('medical_professional_audience_v1','confirmed')}catch(e){}</script>"
               opener="<script>addEventListener('load',()=>setTimeout(()=>document.getElementById('doctors-updates-toggle')?.click(),350))</script>"
               text=text.replace('<head>','<head>'+gate,1)
               text=text.replace('</body>',opener+'</body>',1)
