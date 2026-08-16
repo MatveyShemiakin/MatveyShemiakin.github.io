@@ -1,0 +1,53 @@
+name: Apply verified events header root fix
+on:
+  push:
+    branches: [fix/events-header-clean]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply verified fix
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('doctors-legal.js')
+          s=p.read_text(encoding='utf-8')
+          old="header.querySelector('.nav-links,.clinical-section-nav')"
+          new="header.querySelector('.nav-links,.clinical-section-nav,.nav-right > nav')"
+          assert old in s or new in s
+          p.write_text(s.replace(old,new),encoding='utf-8')
+
+          p=Path('scripts/inject_legal.py')
+          s=p.read_text(encoding='utf-8').replace('/doctors-legal.js?v=20260805-1','/doctors-legal.js?v=20260816-2')
+          p.write_text(s,encoding='utf-8')
+
+          for path in [Path('for-doctors/events/index.html'),Path('en/for-doctors/events/index.html')]:
+              s=path.read_text(encoding='utf-8').replace('/doctors-legal.js?v=20260805-1','/doctors-legal.js?v=20260816-2')
+              path.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify rendered DOM
+        run: |
+          node --check doctors-legal.js
+          python3 -m http.server 8000 >/tmp/events-http.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          sleep 2
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
+          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:8000/for-doctors/events/ > /tmp/ru-dom.html
+          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:8000/en/for-doctors/events/ > /tmp/en-dom.html
+          grep -q 'class="site-mega-nav"' /tmp/ru-dom.html
+          grep -q 'class="site-mega-nav"' /tmp/en-dom.html
+          test "$(grep -o 'class="clinical-section-nav"' /tmp/ru-dom.html | wc -l)" -eq 0
+          test "$(grep -o 'class="clinical-section-nav"' /tmp/en-dom.html | wc -l)" -eq 0
+      - name: Commit and remove temporary workflow
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          rm .github/workflows/apply-events-header-root-fix-2.yml
+          git add doctors-legal.js scripts/inject_legal.py for-doctors/events/index.html en/for-doctors/events/index.html .github/workflows/apply-events-header-root-fix-2.yml
+          git commit -m "Prevent duplicate professional navigation"
+          git push
