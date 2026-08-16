@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ru" data-site-theme-family="doctors">
+<head>
+  <script src="/analytics.js?v=20260811-2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OphthaSearch — глобальный поиск исследований по офтальмологии</title>
+  <meta name="description" content="OphthaSearch — научный поиск для офтальмологов: публикации, обзоры и клинические исследования из международных научных источников.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Матвей Юрьевич Шемякин">
+  <meta name="theme-color" content="#041225">
+  <link rel="canonical" href="https://matveyshemyakin.ru/for-doctors/ophthasearch/">
+  <link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/for-doctors/ophthasearch/">
+  <link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/for-doctors/ophthasearch/">
+  <link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/en/for-doctors/ophthasearch/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/mobile-fix.css">
+  <link rel="stylesheet" href="/legal.css?v=20260729-1">
+  <link rel="stylesheet" href="/site-language-switch.css?v=20260729-2">
+  <link rel="stylesheet" href="/mobile-nav.css?v=20260806-3">
+  <script src="/site-theme-init.js?v=20260806-1"></script>
+  <link rel="stylesheet" href="/site-theme.css?v=20260806-1">
+  <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
+  <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-1">
+  <link rel="stylesheet" href="/for-doctors/doctors-updates.css?v=20260816-1">
+  <link rel="stylesheet" href="/for-doctors/ophthasearch/ophthasearch.css?v=20260816-1">
+</head>
+<body class="ophtha-page" data-ophthasearch data-lang="ru">
+  <header class="doctors-header">
+    <div class="container doctors-nav">
+      <a class="monogram" href="/" aria-label="На главную">МШ</a>
+      <div class="doctors-nav-actions">
+        <a href="/for-doctors/">← Для врачей</a>
+        <div class="doctors-updates" id="doctors-updates">
+          <button class="doctors-updates-toggle" id="doctors-updates-toggle" type="button" aria-expanded="false" aria-controls="doctors-updates-panel" aria-label="Что нового">
+            <span class="doctors-updates-bell" aria-hidden="true"></span>
+            <span class="doctors-updates-count" id="doctors-updates-count" hidden>0</span>
+          </button>
+          <section class="doctors-updates-panel" id="doctors-updates-panel" aria-labelledby="doctors-updates-title" hidden>
+            <div class="doctors-updates-head">
+              <div><span id="doctors-updates-section-label">Обновления</span><h2 id="doctors-updates-title">Что нового</h2></div>
+              <button class="doctors-updates-mark-all" id="doctors-updates-mark-all" type="button">Прочитать всё</button>
+            </div>
+            <div class="doctors-updates-list" id="doctors-updates-list" aria-live="polite"></div>
+          </section>
+        </div>
+        <div class="doctors-language" aria-label="Язык раздела">
+          <a class="active" href="/for-doctors/ophthasearch/" lang="ru" hreflang="ru" aria-current="page">RU</a>
+          <a href="/en/for-doctors/ophthasearch/" lang="en" hreflang="en">EN</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="ophtha-hero" aria-labelledby="ophtha-title">
+      <div class="container ophtha-hero-grid">
+        <div class="ophtha-brand">
+          <p class="eyebrow">Научный поиск для офтальмологов</p>
+          <h1 id="ophtha-title">OphthaSearch</h1>
+          <p class="ophtha-brand-subtitle">Global Ophthalmology Research Search</p>
+          <p class="ophtha-brand-lead">Единый интерфейс для поиска научных публикаций по офтальмологии. Первый рабочий источник — Europe PMC; архитектура готовится к подключению региональных баз со всех континентов, включая Asia-Pacific.</p>
+        </div>
+        <div class="ophtha-live-stack" aria-label="Статус источников">
+          <span class="ophtha-live-chip"><span class="ophtha-live-dot" aria-hidden="true"></span>Глобальная архитектура</span>
+          <span class="ophtha-live-chip"><span class="ophtha-live-dot" aria-hidden="true"></span>Europe PMC · LIVE</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="ophtha-search-section" aria-labelledby="ophtha-search-heading">
+      <div class="container">
+        <div class="ophtha-search-card">
+          <form class="ophtha-search-form" id="ophtha-search-form" role="search">
+            <label class="ophtha-search-label" for="ophtha-query">Поиск исследований</label>
+            <input class="ophtha-search-input" id="ophtha-query" name="q" type="search" autocomplete="off" placeholder="Например: inverted ILM flap large macular hole" aria-describedby="ophtha-search-help">
+            <button class="button primary ophtha-search-button" type="submit">Найти</button>
+          </form>
+          <div class="ophtha-search-meta" id="ophtha-search-help">
+            <span>Worldwide architecture</span>
+            <span>Europe PMC · live search</span>
+            <span>25 результатов на запрос</span>
+          </div>
+        </div>
+
+        <div class="ophtha-workspace">
+          <aside class="ophtha-filters" id="ophtha-filters" aria-labelledby="ophtha-filters-title">
+            <h2 id="ophtha-filters-title">Фильтры</h2>
+            <div class="ophtha-filter-grid">
+              <label class="ophtha-control" for="ophtha-sort"><span>Сортировка</span>
+                <select id="ophtha-sort" name="sort">
+                  <option value="relevance">По релевантности</option>
+                  <option value="newest">Сначала новые</option>
+                </select>
+              </label>
+              <label class="ophtha-control" for="ophtha-date"><span>Дата публикации</span>
+                <select id="ophtha-date" name="date">
+                  <option value="any">Любая</option>
+                  <option value="1y">Последний год</option>
+                  <option value="5y">Последние 5 лет</option>
+                  <option value="10y">Последние 10 лет</option>
+                </select>
+              </label>
+              <label class="ophtha-control" for="ophtha-pubtype"><span>Тип публикации</span>
+                <select id="ophtha-pubtype" name="type">
+                  <option value="any">Любой</option>
+                  <option value="review">Review</option>
+                  <option value="systematic-review">Systematic review</option>
+                  <option value="clinical-trial">Clinical trial</option>
+                  <option value="rct">Randomized controlled trial</option>
+                </select>
+              </label>
+              <label class="ophtha-check" for="ophtha-oa">
+                <input id="ophtha-oa" name="oa" type="checkbox">
+                <span>Только Open Access</span>
+              </label>
+            </div>
+
+            <div class="ophtha-provider">
+              <strong>Источник v1</strong>
+              <p>Сейчас поисковый запрос выполняется по Europe PMC. Интерфейс не помечает другие базы как подключённые, пока реальный коннектор к ним не запущен.</p>
+            </div>
+
+            <details class="ophtha-roadmap">
+              <summary>Глобальное покрытие — следующий этап</summary>
+              <ul>
+                <li>PubMed / MEDLINE enrichment</li>
+                <li>WPRIM / Global Index Medicus</li>
+                <li>J-STAGE · Japan</li>
+                <li>KoreaScience · South Korea</li>
+                <li>ClinicalTrials.gov</li>
+                <li>LILACS / SciELO</li>
+                <li>Россия / СНГ — источники с легальным API-доступом</li>
+              </ul>
+            </details>
+          </aside>
+
+          <section class="ophtha-results-panel" aria-labelledby="ophtha-search-heading">
+            <div class="ophtha-results-head">
+              <h2 id="ophtha-search-heading">Результаты</h2>
+              <span class="ophtha-result-count" id="ophtha-result-count"></span>
+            </div>
+            <p class="ophtha-status" id="ophtha-status" role="status" aria-live="polite">Введите тему, патологию, вмешательство или клинический вопрос.</p>
+            <div class="ophtha-results" id="ophtha-results" aria-live="polite"></div>
+            <p class="ophtha-note">OphthaSearch является инструментом поиска научной информации для медицинских специалистов. Результаты поиска и метаданные не заменяют чтение оригинальной публикации, клинические рекомендации и профессиональное решение врача.</p>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row"><span>МШ</span><p>Матвей Юрьевич Шемякин · врач-офтальмолог · офтальмохирург</p></div>
+  </footer>
+
+  <script src="/doctors-legal.js?v=20260805-1"></script>
+  <script src="/legal.js?v=20260721-3"></script>
+  <script defer src="/site-language-switch.js?v=20260729-2"></script>
+  <script src="/mobile-nav.js?v=20260806-3"></script>
+  <script defer src="/site-theme.js?v=20260806-1"></script>
+  <script defer src="/site-motion.js?v=20260806-1"></script>
+  <script defer src="/site-mega-nav.js?v=20260816-1"></script>
+  <script defer src="/for-doctors/doctors-updates.js?v=20260816-1"></script>
+  <script type="module" src="/for-doctors/ophthasearch/ophthasearch.js?v=20260816-1"></script>
+</body>
+</html>
