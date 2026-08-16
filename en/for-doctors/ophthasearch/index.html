@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OphthaSearch — Global Ophthalmology Research Search</title>
-  <meta name="description" content="OphthaSearch is a clinician-focused ophthalmology research search interface for publications, reviews and clinical studies from international scientific sources.">
+  <meta name="description" content="OphthaSearch is a clinician-focused ophthalmology search across publications, trial registries and regional scientific sources.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Matvey Yuryevich Shemyakin">
   <meta name="theme-color" content="#041225">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
   <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">
   <link rel="stylesheet" href="/for-doctors/doctors-updates.css?v=20260816-1">
-  <link rel="stylesheet" href="/for-doctors/ophthasearch/ophthasearch.css?v=20260816-1">
+  <link rel="stylesheet" href="/for-doctors/ophthasearch/ophthasearch.css?v=20260816-2">
 </head>
 <body class="ophtha-page" data-ophthasearch data-lang="en">
   <header class="doctors-header">
@@ -60,11 +60,12 @@
           <p class="eyebrow">Research search for ophthalmologists</p>
           <h1 id="ophtha-title">OphthaSearch</h1>
           <p class="ophtha-brand-subtitle">Global Ophthalmology Research Search</p>
-          <p class="ophtha-brand-lead">A single interface for ophthalmology literature discovery. Europe PMC is the first live source; the architecture is prepared for regional databases across all continents, including Asia-Pacific.</p>
+          <p class="ophtha-brand-lead">One query searches scientific publications, registered clinical studies and regional literature in parallel. Europe PMC and ClinicalTrials.gov are independent live sources; J-STAGE is connected through its official WebAPI to extend coverage of Japan and the Asia-Pacific region.</p>
         </div>
         <div class="ophtha-live-stack" aria-label="Source status">
-          <span class="ophtha-live-chip"><span class="ophtha-live-dot" aria-hidden="true"></span>Global architecture</span>
           <span class="ophtha-live-chip"><span class="ophtha-live-dot" aria-hidden="true"></span>Europe PMC · LIVE</span>
+          <span class="ophtha-live-chip"><span class="ophtha-live-dot" aria-hidden="true"></span>ClinicalTrials.gov · LIVE</span>
+          <span class="ophtha-live-chip"><span class="ophtha-live-dot" aria-hidden="true"></span>J-STAGE · WebAPI</span>
         </div>
       </div>
     </section>
@@ -78,11 +79,35 @@
             <button class="button primary ophtha-search-button" type="submit">Search</button>
           </form>
           <div class="ophtha-search-meta" id="ophtha-search-help">
-            <span>Worldwide architecture</span>
-            <span>Europe PMC · live search</span>
-            <span>25 results per query</span>
+            <span>Europe PMC · publications</span>
+            <span>ClinicalTrials.gov · studies</span>
+            <span>J-STAGE · Japan / Asia-Pacific</span>
+            <span>up to 36 merged results</span>
           </div>
         </div>
+
+        <section class="ophtha-source-board" id="ophtha-source-board" aria-label="Scientific source connectivity">
+          <article class="ophtha-source-card" data-provider-status="europepmc" data-state="idle">
+            <div class="ophtha-source-head"><strong>Europe PMC</strong><span class="ophtha-provider-state" data-provider-state>Ready</span></div>
+            <p>Publications, PMID/PMCID, DOI, abstracts, citations and Open Access metadata.</p>
+          </article>
+          <article class="ophtha-source-card" data-provider-status="clinicaltrials" data-state="idle">
+            <div class="ophtha-source-head"><strong>ClinicalTrials.gov</strong><span class="ophtha-provider-state" data-provider-state>Ready</span></div>
+            <p>Registered studies, NCT IDs, recruitment status, phase, sponsor and interventions.</p>
+          </article>
+          <article class="ophtha-source-card" data-provider-status="jstage" data-state="idle">
+            <div class="ophtha-source-head"><strong>J-STAGE · Japan</strong><span class="ophtha-provider-state" data-provider-state>Ready</span></div>
+            <p>Japanese regional literature through the official WebAPI. <a href="https://www.jstage.jst.go.jp/" target="_blank" rel="noopener noreferrer">Powered by J-STAGE</a>.</p>
+          </article>
+          <article class="ophtha-source-card ophtha-source-card--planned" data-provider-status="wprim" data-state="planned">
+            <div class="ophtha-source-head"><strong>WPRIM / Global Index Medicus</strong><span class="ophtha-provider-state">API verification</span></div>
+            <p>The WHO index is searchable online, but a publicly documented search API has not yet been confirmed.</p>
+          </article>
+          <article class="ophtha-source-card ophtha-source-card--planned" data-provider-status="koreascience" data-state="planned">
+            <div class="ophtha-source-head"><strong>KoreaScience · South Korea</strong><span class="ophtha-provider-state">API verification</span></div>
+            <p>KISTI regional source. It is not labelled live until an official current search API is verified.</p>
+          </article>
+        </section>
 
         <div class="ophtha-workspace">
           <aside class="ophtha-filters" id="ophtha-filters" aria-labelledby="ophtha-filters-title">
@@ -118,20 +143,18 @@
             </div>
 
             <div class="ophtha-provider">
-              <strong>v1 source</strong>
-              <p>Queries currently run against Europe PMC. Other databases are never shown as connected until their live connector is actually enabled.</p>
+              <strong>How filters are applied</strong>
+              <p>Date and Open Access filters apply to Europe PMC publications; date is also sent to J-STAGE. When a selected filter requires metadata J-STAGE does not return, that provider is skipped rather than returning misleading matches. Review filters do not query the ClinicalTrials.gov registry.</p>
             </div>
 
             <details class="ophtha-roadmap">
-              <summary>Global coverage — next stage</summary>
+              <summary>Next regional connectors</summary>
               <ul>
-                <li>PubMed / MEDLINE enrichment</li>
-                <li>WPRIM / Global Index Medicus</li>
-                <li>J-STAGE · Japan</li>
+                <li>WPRIM / WHO Global Index Medicus</li>
                 <li>KoreaScience · South Korea</li>
-                <li>ClinicalTrials.gov</li>
-                <li>LILACS / SciELO</li>
-                <li>Russia / CIS sources with legal API access</li>
+                <li>LILACS / SciELO · Latin America</li>
+                <li>ANZCTR / CTIS and other trial registries</li>
+                <li>Russia / CIS sources with documented legal API access</li>
               </ul>
             </details>
           </aside>
@@ -143,7 +166,7 @@
             </div>
             <p class="ophtha-status" id="ophtha-status" role="status" aria-live="polite">Enter a topic, disease, intervention or clinical question.</p>
             <div class="ophtha-results" id="ophtha-results" aria-live="polite"></div>
-            <p class="ophtha-note">OphthaSearch is a scientific information discovery tool for healthcare professionals. Search results and metadata do not replace reading the original publication, clinical guidance or professional clinical judgement.</p>
+            <p class="ophtha-note">OphthaSearch is a scientific information discovery tool for healthcare professionals. Search results and metadata do not replace reading the original publication, clinical guidance or professional clinical judgement. J-STAGE terms require source attribution; commercial use of the J-STAGE WebAPI requires separate approval from JST.</p>
           </section>
         </div>
       </div>
@@ -162,6 +185,6 @@
   <script defer src="/site-motion.js?v=20260806-1"></script>
   <script defer src="/site-mega-nav.js?v=20260816-2"></script>
   <script defer src="/for-doctors/doctors-updates.js?v=20260816-1"></script>
-  <script type="module" src="/for-doctors/ophthasearch/ophthasearch.js?v=20260816-1"></script>
+  <script type="module" src="/for-doctors/ophthasearch/ophthasearch.js?v=20260816-2"></script>
 </body>
 </html>

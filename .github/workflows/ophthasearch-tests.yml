@@ -1,0 +1,31 @@
+name: OphthaSearch tests
+
+on:
+  push:
+    paths:
+      - 'for-doctors/ophthasearch/**'
+      - 'en/for-doctors/ophthasearch/**'
+      - 'tests/ophthasearch*.test.mjs'
+      - '.github/workflows/ophthasearch-tests.yml'
+  pull_request:
+    paths:
+      - 'for-doctors/ophthasearch/**'
+      - 'en/for-doctors/ophthasearch/**'
+      - 'tests/ophthasearch*.test.mjs'
+      - '.github/workflows/ophthasearch-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run OphthaSearch tests
+        run: node --test tests/ophthasearch-static.test.mjs tests/ophthasearch.test.mjs
