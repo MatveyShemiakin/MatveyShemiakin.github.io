@@ -24,7 +24,7 @@ body.ophtha-page{min-height:100vh;background:var(--site-theme-bg);color:var(--si
 .ophtha-search-input{width:100%;min-width:0;height:58px;padding:0 18px;border:1px solid var(--site-theme-border);border-radius:16px;background:var(--site-theme-surface);color:var(--site-theme-text);font:500 16px/1.2 var(--sans);outline:none;transition:border-color .16s ease,box-shadow .16s ease}
 .ophtha-search-input:focus{border-color:var(--site-theme-accent);box-shadow:0 0 0 4px rgba(77,142,255,.13)}
 .ophtha-search-input::placeholder{color:var(--site-theme-muted)}
-.ophtha-search-button{min-width:150px;border:0;cursor:pointer}
+.ophtha-search-button{min-width:150px;border:0;color:#fff;font:700 15px/1 var(--sans);cursor:pointer}
 .ophtha-search-button:focus-visible,.ophtha-control select:focus-visible,.ophtha-check input:focus-visible{outline:3px solid rgba(77,142,255,.35);outline-offset:3px}
 .ophtha-search-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--site-theme-muted);font-size:12px}
 .ophtha-search-meta span{padding:6px 9px;border:1px solid var(--site-theme-border);border-radius:999px;background:var(--site-theme-surface-2)}
