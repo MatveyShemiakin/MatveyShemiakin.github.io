@@ -7,7 +7,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 ANALYTICS_SCRIPT = '<script src="/analytics.js?v=20260811-2"></script>'
 LEGAL_SCRIPT = '<script src="/legal.js?v=20260721-3"></script>'
-DOCTORS_SCRIPT = '<script src="/doctors-legal.js?v=20260805-1"></script>'
+DOCTORS_SCRIPT = '<script src="/doctors-legal.js?v=20260816-2"></script>'
 PRIVACY_PAGES = {ROOT / 'privacy.html', ROOT / 'en' / 'privacy.html'}
 PROFESSIONAL_TERMS = {
     ROOT / 'for-doctors' / 'professional-use.html',
