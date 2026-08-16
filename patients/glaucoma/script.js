@@ -2,6 +2,8 @@
   const page=document.querySelector('.sim-page');
   if(!page)return;
 
+  document.documentElement.dataset.siteThemeFamily='iol';
+
   const tabs=[...page.querySelectorAll('[data-tab]')];
   const panels=[...page.querySelectorAll('[data-panel]')];
   const progress=page.querySelector('.reading-progress span');
