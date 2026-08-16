@@ -1,0 +1,42 @@
+name: Apply final specialist meetings expansion
+on:
+  push:
+    branches: [feature/global-ophthalmology-events-expansion]
+    paths:
+      - 'scripts/apply-global-events-expansion-2.py'
+      - '.github/workflows/apply-global-events-expansion-2.yml'
+permissions:
+  contents: write
+jobs:
+  expand:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/global-ophthalmology-events-expansion
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/apply-global-events-expansion-2.py
+      - name: Validate
+        run: |
+          python scripts/sync-ophthalmology-events.py --validate-only
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          ru=json.loads(Path('assets/data/ophthalmology-events.ru.json').read_text(encoding='utf-8'))
+          en=json.loads(Path('assets/data/ophthalmology-events.en.json').read_text(encoding='utf-8'))
+          ids={e['id'] for e in ru['events']}
+          assert len(ids)>=54, len(ids)
+          assert ids=={e['id'] for e in en['events']}
+          need={'iser-2026','retina-society-2026','cornea-eye-banking-2026','ags-2027','fuji-retina-2027','wcpos-vi-2027','macula-society-2027','retina-society-2027','aao-2027'}
+          assert need<=ids
+          print('final global catalogue:',len(ids))
+          PY
+      - name: Commit data
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add assets/data/ophthalmology-events.ru.json assets/data/ophthalmology-events.en.json assets/data/ophthalmology-event-sources.json
+          git commit -m 'Add major specialist ophthalmology meetings' || exit 0
+          git push origin HEAD:feature/global-ophthalmology-events-expansion
