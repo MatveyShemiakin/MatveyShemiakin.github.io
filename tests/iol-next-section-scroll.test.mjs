@@ -33,8 +33,11 @@ const secondTab=interactive({tab:'symptoms'});
 const firstPanel=interactive({panel:'overview'});
 const secondPanel=interactive({panel:'symptoms'});
 const nextButton=interactive({next:'symptoms'});
-let legacyScrollCalls=0;
-const topicTabs={scrollIntoView(){legacyScrollCalls+=1;}};
+let panelScrollCalls=0;
+secondPanel.scrollIntoView=(options)=>{
+  panelScrollCalls+=1;
+  secondPanel.lastScrollOptions=options;
+};
 const scrollCalls=[];
 
 const page={
@@ -45,10 +48,7 @@ const page={
     if(selector==='[data-next]')return [nextButton];
     return [];
   },
-  querySelector(selector){
-    if(selector==='.topic-tabs')return topicTabs;
-    return null;
-  },
+  querySelector(){return null;},
   addEventListener(){},
 };
 
@@ -82,7 +82,7 @@ vm.runInContext(fs.readFileSync('patients/iol-dislocation/script.js','utf8'),con
 nextButton.trigger('click');
 
 assert.equal(secondPanel.hidden,false,'the requested section must become active');
-assert.equal(scrollCalls.length,1,'next-section navigation must request exactly one page scroll');
-assert.equal(scrollCalls[0].top,0,'next-section navigation must move the page to its top');
-assert.equal(scrollCalls[0].behavior,'smooth','next-section navigation must preserve smooth motion');
-assert.equal(legacyScrollCalls,0,'next-section navigation must not retain the old tab-strip scroll target');
+assert.equal(panelScrollCalls,1,'next-section navigation must scroll to the newly activated section');
+assert.equal(secondPanel.lastScrollOptions.block,'start','the new section must begin at the top of the readable viewport');
+assert.equal(secondPanel.lastScrollOptions.behavior,'smooth','next-section navigation must preserve smooth motion');
+assert.equal(scrollCalls.length,0,'next-section navigation must not scroll the document back to the page header');
