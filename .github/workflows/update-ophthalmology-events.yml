@@ -1,0 +1,44 @@
+name: Update ophthalmology events
+
+on:
+  schedule:
+    - cron: '17 4 * * 1,4'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  validate-and-monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate event datasets
+        run: python scripts/sync-ophthalmology-events.py --validate-only
+      - name: Check official sources
+        id: monitor
+        continue-on-error: true
+        run: python scripts/sync-ophthalmology-events.py --check-sources --write-report /tmp/ophthalmology-events-sync-report.json
+      - name: Upload monitoring report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ophthalmology-events-source-report
+          path: /tmp/ophthalmology-events-sync-report.json
+          retention-days: 30
+      - name: Create review issue when a source needs attention
+        if: steps.monitor.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Ophthalmology events: official source needs review ($(date -u +%F))"
+          body=$'The scheduled ophthalmology-events monitor found an official source where watched event/date context is missing or the page could not be fetched.\n\nDownload the **ophthalmology-events-source-report** artifact from this workflow run before changing any event date.\n\nDo not infer a deadline time if the organiser has not published one.'
+          existing=$(gh issue list --state open --search 'Ophthalmology events: official source needs review in:title' --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body"
+          fi
