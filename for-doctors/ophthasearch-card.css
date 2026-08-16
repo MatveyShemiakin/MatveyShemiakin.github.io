@@ -1,0 +1,31 @@
+.library-image.ophthasearch{
+  background:
+    radial-gradient(circle at 82% 22%,rgba(135,181,255,.42),transparent 0 24%,transparent 46%),
+    radial-gradient(circle at 18% 86%,rgba(77,142,255,.22),transparent 0 28%,transparent 52%),
+    linear-gradient(145deg,#0d2b51 0%,#06182f 54%,#041225 100%);
+}
+.library-image.ophthasearch::before,
+.library-image.ophthasearch::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+}
+.library-image.ophthasearch::before{
+  width:150px;
+  height:150px;
+  right:24px;
+  top:50%;
+  transform:translateY(-50%);
+  border:1px solid rgba(255,255,255,.34);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 18px rgba(135,181,255,.06),
+    0 0 0 38px rgba(135,181,255,.035);
+}
+.library-image.ophthasearch::after{
+  left:28px;
+  right:28px;
+  bottom:34px;
+  height:1px;
+  background:linear-gradient(90deg,rgba(135,181,255,.9),rgba(135,181,255,0));
+}
