@@ -26,15 +26,33 @@
   };
   const CONDITION_RESULTS=lang==='en'?[
     {title:'Intraocular lens dislocation',text:'Causes, symptoms, warning signs, examination, surgical treatment and recovery after IOL dislocation.',search:'intraocular lens dislocation artificial lens moved displaced IOL',href:'/en/patients/iol-dislocation/'},
-    {title:'Glaucoma',text:'Patient section is being prepared.',search:'glaucoma eye pressure IOP dangerous pressure',pending:true}
+    {title:'Glaucoma',text:'Symptoms, examination, pressure-lowering treatment, laser, surgery and long-term follow-up.',search:'glaucoma eye pressure IOP dangerous pressure OCT visual field laser surgery',href:'/en/patients/glaucoma/'}
   ]:[
     {title:'Смещение искусственного хрусталика',text:'Причины, симптомы, опасные признаки, обследование, хирургическое лечение и восстановление при дислокации ИОЛ.',search:'смещение искусственного хрусталика дислокация иол линза сместилась',href:'/patients/iol-dislocation/'},
-    {title:'Глаукома',text:'Раздел для пациентов готовится.',search:'глаукома внутриглазное давление вгд какое давление опасно',pending:true}
+    {title:'Глаукома',text:'Симптомы, обследование, контроль внутриглазного давления, капли, лазер, операция и длительное наблюдение.',search:'глаукома внутриглазное давление вгд какое давление опасно окт поле зрения лазер операция',href:'/patients/glaucoma/'}
   ];
   function pluralRu(n,one,few,many){const a=Math.abs(n)%100,b=a%10;return a>10&&a<20?many:b>1&&b<5?few:b===1?one:many;}
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const norm=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/ё/g,'е').replace(/[ьъ]/g,'').replace(/[^a-zа-я0-9]+/gi,' ').trim();
   const words=v=>norm(v).split(/\s+/).filter(Boolean);
+
+  const pendingGlaucoma=[...document.querySelectorAll('.condition-card.is-pending')].find(card=>{
+    const title=(card.querySelector('h3')?.textContent||'').trim().toLowerCase();
+    return title===(lang==='en'?'glaucoma':'глаукома');
+  });
+  if(pendingGlaucoma){
+    const link=document.createElement('a');
+    link.className='condition-card';
+    link.href=lang==='en'?'/en/patients/glaucoma/':'/patients/glaucoma/';
+    link.innerHTML=pendingGlaucoma.innerHTML;
+    const copy=link.querySelector('p');
+    const action=link.querySelector('strong');
+    if(copy)copy.textContent=lang==='en'
+      ?'Symptoms, warning signs, examination, eye drops, laser treatment, surgery and long-term follow-up.'
+      :'Симптомы, опасные признаки, обследование, капли, лазерное и хирургическое лечение, длительное наблюдение.';
+    if(action)action.textContent=lang==='en'?'Open material →':'Открыть материал →';
+    pendingGlaucoma.replaceWith(link);
+  }
 
   if(pathGrid){
     pathGrid.innerHTML=DATA.categories.map(c=>{

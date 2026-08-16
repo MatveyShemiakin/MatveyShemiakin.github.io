@@ -39,6 +39,7 @@ jobs:
           node --check patients/patients-hub.js
           node --check patients/patients.js
           node --check patients/iol-dislocation/script.js
+          node --check patients/glaucoma/script.js
       - name: Patient ecosystem regression
         run: node tests/patients-ecosystem.test.mjs
       - name: Author Telegram note regression
@@ -104,6 +105,14 @@ jobs:
           render ru-iol-mobile 390,844 http://127.0.0.1:8000/patients/iol-dislocation/
           render en-iol-desktop 1440,1200 http://127.0.0.1:8000/en/patients/iol-dislocation/
           render en-iol-mobile 390,844 http://127.0.0.1:8000/en/patients/iol-dislocation/
+          render ru-glaucoma-desktop 1440,1200 http://127.0.0.1:8000/patients/glaucoma/
+          render ru-glaucoma-mobile 390,844 http://127.0.0.1:8000/patients/glaucoma/
+          render en-glaucoma-desktop 1440,1200 http://127.0.0.1:8000/en/patients/glaucoma/
+          render en-glaucoma-mobile 390,844 http://127.0.0.1:8000/en/patients/glaucoma/
+          render_dark ru-glaucoma-desktop-dark 1440,1200 http://127.0.0.1:8000/patients/glaucoma/
+          render_dark ru-glaucoma-mobile-dark 390,844 http://127.0.0.1:8000/patients/glaucoma/
+          render_dark en-glaucoma-desktop-dark 1440,1200 http://127.0.0.1:8000/en/patients/glaucoma/
+          render_dark en-glaucoma-mobile-dark 390,844 http://127.0.0.1:8000/en/patients/glaucoma/
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=90000 --dump-dom http://127.0.0.1:8000/tests/theme-contrast-audit.html > visual-smoke/theme-contrast-audit.html
           grep -q 'data-audit-status="pass"' visual-smoke/theme-contrast-audit.html
       - name: Upload visual smoke screenshots
