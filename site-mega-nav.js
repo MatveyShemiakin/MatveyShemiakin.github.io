@@ -196,8 +196,8 @@
     });
     document.addEventListener('keydown',event=>{
       if(event.key!=='Escape')return;
-      closeAll(nav);
       const active=nav.querySelector('.site-mega-nav__toggle[aria-expanded="true"]');
+      closeAll(nav);
       if(active)active.focus();
     });
   }
