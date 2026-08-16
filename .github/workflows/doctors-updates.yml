@@ -1,0 +1,28 @@
+name: Doctors updates checks
+
+on:
+  pull_request:
+    paths:
+      - 'for-doctors/**'
+      - 'en/for-doctors/**'
+      - 'scripts/generate_doctors_updates.py'
+      - 'scripts/inject_doctors_updates.py'
+      - 'tests/test_generate_doctors_updates.py'
+      - 'tests/test_doctors_updates_inject.py'
+      - 'tests/doctors-updates.test.mjs'
+      - '.github/workflows/doctors-updates.yml'
+      - '.github/workflows/inject-legal.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generator tests
+        run: python -m unittest tests/test_generate_doctors_updates.py
