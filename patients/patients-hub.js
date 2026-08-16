@@ -34,7 +34,7 @@
   };
 
   function pluralRu(n,one,few,many){const a=Math.abs(n)%100,b=a%10;return a>10&&a<20?many:b>1&&b<5?few:b===1?one:many;}
-  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const norm=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/ё/g,'е').replace(/[ьъ]/g,'').replace(/[^a-zа-я0-9]+/gi,' ').trim();
   const words=v=>norm(v).split(/\s+/).filter(Boolean);
   const tokenMatches=(hay,token)=>hay.includes(token)||(token.length>=5&&hay.includes(token.slice(0,-1)))||(token.length>=7&&hay.includes(token.slice(0,-2)));
