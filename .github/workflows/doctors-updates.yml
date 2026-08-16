@@ -26,3 +26,5 @@ jobs:
           node-version: '22'
       - name: Generator tests
         run: python -m unittest tests/test_generate_doctors_updates.py
+      - name: Bell UI tests
+        run: node --test tests/doctors-updates.test.mjs
