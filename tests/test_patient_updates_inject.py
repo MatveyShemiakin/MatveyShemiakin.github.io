@@ -32,7 +32,14 @@ class PatientUpdatesTests(unittest.TestCase):
             self.assertTrue(item['title'].strip())
             self.assertTrue(item['description'].strip())
             self.assertTrue(item['url'].startswith('/patients/'))
-            self.assertNotIn('glaucoma',item['url'])
+
+    def test_feed_announces_published_glaucoma_section(self):
+        data=json.loads((ROOT/'patients'/'updates.json').read_text(encoding='utf-8'))
+        glaucoma=[item for item in data if item.get('url')=='/patients/glaucoma/']
+        self.assertEqual(len(glaucoma),1)
+        self.assertEqual(glaucoma[0]['published'],'2026-08-16')
+        self.assertIn('Глауком',glaucoma[0]['title'])
+        self.assertTrue(glaucoma[0]['description'].strip())
 
     def test_component_css_exists_and_contains_responsive_panel(self):
         css=(ROOT/'patients'/'patients-updates.css').read_text(encoding='utf-8')
