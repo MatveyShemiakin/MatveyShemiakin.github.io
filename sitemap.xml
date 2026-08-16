@@ -28,7 +28,7 @@
   <url><loc>https://matveyshemyakin.ru/en/patients/daily-life/</loc><lastmod>2026-07-20</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/en/patients/eye-drops/</loc><lastmod>2026-07-20</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/en/patients/glasses/</loc><lastmod>2026-07-20</lastmod></url>
-  <url><loc>https://matveyshemyakin.ru/for-doctors/</loc><lastmod>2026-07-20</lastmod></url>
+  <url><loc>https://matveyshemyakin.ru/for-doctors/</loc><lastmod>2026-08-16</lastmod></url>
   <url>
     <loc>https://matveyshemyakin.ru/for-doctors/bacterial-keratitis/</loc>
     <lastmod>2026-07-20</lastmod>
@@ -45,9 +45,21 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/for-doctors/bacterial-keratitis/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/for-doctors/bacterial-keratitis/"/>
   </url>
+  <url>
+    <loc>https://matveyshemyakin.ru/for-doctors/events/</loc><lastmod>2026-08-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/for-doctors/events/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/for-doctors/events/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/for-doctors/events/"/>
+  </url>
+  <url>
+    <loc>https://matveyshemyakin.ru/en/for-doctors/events/</loc><lastmod>2026-08-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/for-doctors/events/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/for-doctors/events/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/for-doctors/events/"/>
+  </url>
   <url><loc>https://matveyshemyakin.ru/privacy.html</loc><lastmod>2026-07-21</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/en/privacy.html</loc><lastmod>2026-07-21</lastmod></url>
-  <url><loc>https://matveyshemyakin.ru/en/for-doctors/</loc><lastmod>2026-08-09</lastmod></url>
+  <url><loc>https://matveyshemyakin.ru/en/for-doctors/</loc><lastmod>2026-08-16</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/for-doctors/professional-use.html</loc><lastmod>2026-07-21</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/en/for-doctors/professional-use.html</loc><lastmod>2026-07-21</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/patients/iol-dislocation/</loc><lastmod>2026-08-05</lastmod></url>
