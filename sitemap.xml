@@ -52,4 +52,16 @@
   <url><loc>https://matveyshemyakin.ru/en/for-doctors/professional-use.html</loc><lastmod>2026-07-21</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/patients/iol-dislocation/</loc><lastmod>2026-08-05</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/en/patients/iol-dislocation/</loc><lastmod>2026-08-05</lastmod></url>
+  <url>
+    <loc>https://matveyshemyakin.ru/patients/glaucoma/</loc><lastmod>2026-08-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/patients/glaucoma/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/patients/glaucoma/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/patients/glaucoma/"/>
+  </url>
+  <url>
+    <loc>https://matveyshemyakin.ru/en/patients/glaucoma/</loc><lastmod>2026-08-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/patients/glaucoma/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/patients/glaucoma/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/patients/glaucoma/"/>
+  </url>
 </urlset>
