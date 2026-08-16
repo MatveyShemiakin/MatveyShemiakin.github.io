@@ -8,3 +8,77 @@
   .site-header.site-mega-nav-mounted .nav-right{min-width:0;flex:1 1 auto}
   .site-header.site-mega-nav-mounted .nav{gap:20px}
 }
+
+/* Mobile containment: long event names, regions and provider labels must never widen the page. */
+@media(max-width:640px){
+  .hero-inner,.dashboard,.app-shell,.toolbar,.viewbar,.view-tabs,
+  .deadline-radar,.featured-strip,.event-grid,.deadline-list,.geo-grid,
+  .section-heading,.event-card,.deadline-card,.official-widget,.geo-card,
+  .dialog,.dialog-head,.dialog-body,.detail-grid,.timeline,.calendar-provider-grid{
+    width:100%;max-width:100%;min-width:0;
+  }
+
+  .hero-inner{padding-left:16px;padding-right:16px}
+  .dashboard,.app-shell{padding-left:14px;padding-right:14px}
+  .hero h1{font-size:clamp(35px,10.7vw,42px);line-height:1.02;overflow-wrap:break-word;word-break:normal;hyphens:none}
+
+  .hero-lead,.eyebrow,.breadcrumbs,.meta-chip,.stat-note,.filter-label,
+  .results-meta,.section-heading p,.tiny-badge,.deadline-card h3,.deadline-date,
+  .deadline-note,.event-card h3,.event-org,.event-location,.tag,.info-pill,
+  .event-deadline,.source-line,.deadline-row-date,.deadline-row-copy h3,
+  .deadline-row-copy p,.geo-card h3,.geo-card button,.dialog h2,.dialog-kicker,
+  .detail-card strong,.timeline-copy strong,.timeline-copy span,.calendar-provider,
+  .calendar-context,.event-brand-copy strong,.event-brand-copy span{
+    max-width:100%;min-width:0;overflow-wrap:anywhere;word-break:break-word;
+  }
+
+  .filter-scroll{display:flex;flex-wrap:wrap;max-width:100%;overflow:visible;gap:7px}
+  .filter-chip{flex:0 1 auto;max-width:100%;min-width:0;height:auto;min-height:36px;padding:8px 11px;line-height:1.2;white-space:normal;text-align:left}
+  .toggles{display:grid;grid-template-columns:minmax(0,1fr);width:100%}
+  .toggle-label{width:100%;max-width:100%;min-width:0;height:auto;min-height:40px;padding:8px 11px;line-height:1.25;white-space:normal}
+
+  .event-card,.deadline-card,.official-widget,.geo-card{overflow:hidden}
+  .event-card-brand,.official-brand-row{min-width:0;max-width:100%;align-items:flex-start}
+  .event-card-brand>div,.official-brand-row>div,.event-brand-copy{min-width:0;max-width:100%}
+  .event-logo-frame{max-width:34vw;flex:0 0 auto}
+
+  .event-deadline{align-items:flex-start;flex-direction:column;gap:4px}
+  .event-deadline strong{max-width:100%;text-align:left;overflow-wrap:anywhere}
+
+  .event-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:7px}
+  .event-actions .card-btn{width:100%;min-width:0;height:auto;min-height:40px;padding:8px;line-height:1.2;text-align:center;white-space:normal;overflow-wrap:anywhere}
+  .event-actions .card-btn:last-child:nth-child(odd){grid-column:1/-1}
+
+  .deadline-actions{display:grid;grid-template-columns:minmax(0,1fr);width:100%}
+  .deadline-actions .small-btn{width:100%;min-width:0;height:auto;min-height:38px;padding:8px;line-height:1.2;white-space:normal;overflow-wrap:anywhere}
+
+  .source-line{align-items:flex-start;flex-direction:column;gap:4px}
+  .source-line a{max-width:100%;overflow-wrap:anywhere}
+  .tiny-badge{align-self:stretch;white-space:normal;line-height:1.3}
+
+  .view-tabs{min-width:0}
+  .view-tab{min-width:0;height:auto;min-height:40px;padding:7px 4px;white-space:normal;line-height:1.15;overflow-wrap:anywhere}
+
+  .deadline-row{grid-template-columns:minmax(0,1fr);gap:8px}
+  .deadline-row-date,.deadline-row-copy,.deadline-row-actions{width:100%;min-width:0}
+  .deadline-row-actions{grid-column:auto;display:grid;grid-template-columns:auto minmax(0,1fr)}
+  .deadline-row-actions .card-btn{min-width:0;height:auto;min-height:38px;padding:7px 9px;white-space:normal;line-height:1.2;overflow-wrap:anywhere}
+
+  .timeline-row{grid-template-columns:18px 76px minmax(0,1fr);gap:8px}
+  .timeline-copy{min-width:0}
+  .calendar-provider{min-width:0;max-width:100%}
+  .calendar-provider>span:last-child{min-width:0}
+  .dialog{width:calc(100vw - 16px)}
+}
+
+@media(max-width:390px){
+  .hero-inner{padding-left:14px;padding-right:14px}
+  .dashboard,.app-shell{padding-left:12px;padding-right:12px}
+  .hero h1{font-size:clamp(33px,10.4vw,39px)}
+  .toolbar{padding:12px}
+  .stat-card{padding:12px}
+  .event-card{padding:15px}
+  .event-actions{grid-template-columns:minmax(0,1fr)}
+  .event-actions .card-btn:last-child:nth-child(odd){grid-column:auto}
+  .timeline-row{grid-template-columns:16px 68px minmax(0,1fr);gap:7px}
+}
