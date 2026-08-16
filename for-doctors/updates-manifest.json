@@ -9,11 +9,11 @@
       "kind": "new"
     },
     "events": {
-      "fingerprint": "6bb7f9b71353d729631b731787ad4d84d72089606b06688e55e81ac2eef1b0be",
+      "fingerprint": "e4cb32a388959d3a32aeb481dfc2f9f1337436731a9ff163fac62d64d0cc0a42",
       "published": "2026-08-16",
       "updated": "2026-08-16",
-      "revision": 1,
-      "kind": "new"
+      "revision": 2,
+      "kind": "updated"
     },
     "penetrating-keratoplasty": {
       "fingerprint": "edfbde0f75c822df45972b221578ee50a9da0ff606e59e550e4fc8480e8c38c4",

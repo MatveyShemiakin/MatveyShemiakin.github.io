@@ -20,6 +20,9 @@
           {label:'Bacterial keratitis and corneal ulcer',href:'/en/for-doctors/bacterial-keratitis/'},
           {label:'Follow-up after penetrating keratoplasty',href:'/en/for-doctors/penetrating-keratoplasty/'}
         ]}
+        ,{title:'Tools',items:[
+          {label:'Ophthalmology events',href:'/en/for-doctors/events/'}
+        ]}
       ]},
       {key:'about',label:'About the doctor',href:'/en/#about',lead:'Matvey Shemyakin',note:'Clinical, educational and research work',sections:[
         {items:[
@@ -50,6 +53,9 @@
         {title:'Клинические материалы',items:[
           {label:'Бактериальный кератит и язва роговицы',href:'/for-doctors/bacterial-keratitis/'},
           {label:'Ведение после сквозной кератопластики',href:'/for-doctors/penetrating-keratoplasty/'}
+        ]}
+        ,{title:'Инструменты',items:[
+          {label:'Офтальмологические события',href:'/for-doctors/events/'}
         ]}
       ]},
       {key:'about',label:'О враче',href:'/#about',lead:'Матвей Шемякин',note:'Клиническая, образовательная и научная работа',sections:[
