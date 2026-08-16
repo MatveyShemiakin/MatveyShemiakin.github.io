@@ -9,7 +9,7 @@ body.ophtha-answer-first .ophtha-results-panel{max-width:980px;margin:0 auto;wid
 
 .ophtha-clinical-answer{max-width:980px;margin:22px auto 0}
 .ophtha-answer-summary{display:block}
-.ophtha-direct-answer{padding:26px 28px;border:1px solid var(--site-theme-border);border-radius:22px;background:var(--site-theme-surface);box-shadow:0 16px 36px rgba(4,18,37,.07)}
+.ophtha-direct-answer{min-width:0;padding:26px 28px;border:1px solid var(--site-theme-border);border-radius:22px;background:var(--site-theme-surface);box-shadow:0 16px 36px rgba(4,18,37,.07)}
 .ophtha-direct-answer-text{margin:8px 0 12px;font-family:var(--serif);font-size:clamp(25px,3vw,36px);line-height:1.22;letter-spacing:-.018em;color:var(--site-theme-text)}
 .ophtha-direct-answer-basis{margin:0;color:var(--site-theme-muted);font-size:13px;font-weight:700}
 
@@ -30,7 +30,7 @@ body.ophtha-answer-first .ophtha-results-panel{max-width:980px;margin:0 auto;wid
 .ophtha-key-evidence{margin-top:24px}
 .ophtha-key-evidence-title{margin:0 0 12px;font-family:var(--serif);font-size:30px;font-weight:400}
 .ophtha-key-evidence-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.ophtha-key-card{padding:18px;border:1px solid var(--site-theme-border);border-radius:18px;background:var(--site-theme-surface)}
+.ophtha-key-card{min-width:0;padding:18px;border:1px solid var(--site-theme-border);border-radius:18px;background:var(--site-theme-surface)}
 .ophtha-key-card-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
 .ophtha-key-tier,.ophtha-key-year{display:inline-flex;align-items:center;min-height:26px;padding:4px 9px;border:1px solid var(--site-theme-border);border-radius:999px;background:var(--site-theme-surface-2);color:var(--site-theme-muted);font-size:11px;font-weight:800}
 .ophtha-key-signal{display:block;margin-bottom:9px;font-size:16px;line-height:1.35}
@@ -52,6 +52,49 @@ body.ophtha-answer-first .ophtha-results-panel{max-width:980px;margin:0 auto;wid
 body.ophtha-answer-first .ophtha-results-head{margin-top:22px}
 body.ophtha-answer-first .ophtha-status{margin-bottom:8px}
 
+/* Mobile overflow guard: dynamic medical terms, DOI/PMID and source metadata must never widen the viewport. */
+body.ophtha-answer-first .ophtha-search-section .container,
+body.ophtha-answer-first .ophtha-search-card,
+body.ophtha-answer-first .ophtha-search-options,
+body.ophtha-answer-first .ophtha-search-options-body,
+body.ophtha-answer-first .ophtha-clinical-answer,
+body.ophtha-answer-first .ophtha-direct-answer,
+body.ophtha-answer-first .ophtha-answer-method,
+body.ophtha-answer-first .ophtha-answer-method-body,
+body.ophtha-answer-first .ophtha-key-evidence,
+body.ophtha-answer-first .ophtha-key-evidence-grid,
+body.ophtha-answer-first .ophtha-key-card,
+body.ophtha-answer-first .ophtha-results-panel,
+body.ophtha-answer-first .ophtha-all-results,
+body.ophtha-answer-first .ophtha-results,
+body.ophtha-answer-first .ophtha-result-card{min-width:0;max-width:100%}
+
+.ophtha-direct-answer-text,
+.ophtha-direct-answer-basis,
+.ophtha-key-signal,
+.ophtha-key-identifiers,
+.ophtha-key-original p,
+.ophtha-key-original summary,
+.ophtha-result-title,
+.ophtha-result-meta,
+.ophtha-result-identifiers,
+.ophtha-abstract-text,
+.ophtha-normalized-query,
+.ophtha-pico-value,
+.ophtha-signal-excerpt,
+.ophtha-source-card p,
+.ophtha-provider p,
+.ophtha-search-options summary,
+.ophtha-answer-method summary,
+.ophtha-all-results summary{overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
+
+.ophtha-key-tier,
+.ophtha-key-year,
+.ophtha-badge,
+.ophtha-result-year,
+.ophtha-provider-state,
+.ophtha-result-link{max-width:100%;white-space:normal;text-align:center}
+
 html[data-site-theme="dark"] .ophtha-direct-answer{box-shadow:0 16px 36px rgba(0,0,0,.18)}
 html[data-site-theme="dark"] .ophtha-key-card--benefit .ophtha-key-signal{color:#8fe0ad}
 html[data-site-theme="dark"] .ophtha-key-card--risk .ophtha-key-signal{color:#ffaaa4}
@@ -62,6 +105,37 @@ html[data-site-theme="dark"] .ophtha-key-card--risk .ophtha-key-signal{color:#ff
   .ophtha-key-evidence-grid{grid-template-columns:1fr}
   .ophtha-key-card{padding:16px}
   .ophtha-search-options-body{padding:0 12px 12px}
+  .ophtha-source-head{flex-wrap:wrap}
+  .ophtha-key-links{display:grid;grid-template-columns:1fr}
+  .ophtha-key-links .ophtha-result-link{width:100%}
+}
+
+@media(max-width:480px){
+  .ophtha-brand{min-width:0;max-width:100%}
+  .ophtha-brand h1{max-width:100%;font-size:clamp(40px,13vw,52px);line-height:1;letter-spacing:-.025em;overflow-wrap:normal;word-break:normal}
+  .ophtha-brand-subtitle{max-width:100%;font-size:clamp(21px,7vw,25px);overflow-wrap:anywhere;word-break:break-word}
+  .ophtha-brand-lead{overflow-wrap:anywhere;word-break:break-word}
+  .ophtha-search-card{padding:12px;border-radius:18px}
+  .ophtha-search-input{font-size:15px;padding-inline:14px}
+  .ophtha-search-options-summary,
+  .ophtha-answer-method-summary,
+  .ophtha-all-results-summary{padding:12px 13px;line-height:1.35}
+  .ophtha-direct-answer{padding:17px 16px}
+  .ophtha-direct-answer-text{font-size:clamp(22px,7vw,26px);line-height:1.26}
+  .ophtha-key-evidence-title{font-size:27px;line-height:1.12}
+  .ophtha-key-card{padding:14px;border-radius:16px}
+  .ophtha-key-card-badges{gap:6px}
+  .ophtha-key-tier,.ophtha-key-year{font-size:10px;padding:4px 7px}
+  .ophtha-all-results>.ophtha-results{padding:0 10px 10px}
+  body.ophtha-answer-first .ophtha-result-card{padding:14px}
+  body.ophtha-answer-first .ophtha-result-title{font-size:24px;line-height:1.16}
+  .ophtha-result-badges{gap:6px}
+}
+
+@media(max-width:360px){
+  .ophtha-brand h1{font-size:40px}
+  .ophtha-direct-answer-text{font-size:22px}
+  .ophtha-key-evidence-title{font-size:25px}
 }
 
 @media(prefers-reduced-motion:reduce){
