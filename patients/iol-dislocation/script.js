@@ -18,8 +18,8 @@
   }
 
   function activate(id,shouldScroll){
-    const exists=panels.some(panel=>panel.dataset.panel===id);
-    if(!exists)return;
+    const targetPanel=panels.find(panel=>panel.dataset.panel===id);
+    if(!targetPanel)return;
     tabs.forEach(button=>{
       const active=button.dataset.tab===id;
       button.classList.toggle('active',active);
@@ -31,7 +31,7 @@
       panel.hidden=!active;
     });
     if(shouldScroll){
-      requestAnimationFrame(()=>window.scrollTo({top:0,behavior:'smooth'}));
+      requestAnimationFrame(()=>targetPanel.scrollIntoView({behavior:'smooth',block:'start'}));
     }
     requestAnimationFrame(updateReadingProgress);
   }
