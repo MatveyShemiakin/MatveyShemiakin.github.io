@@ -47,6 +47,7 @@ jobs:
         run: |
           python scripts/generate_doctors_updates.py
           python scripts/inject_doctors_updates.py
+          python scripts/inject_doctor_retention.py
       - name: Validate generated clinician outputs
         run: |
           python - <<'PY'
@@ -64,17 +65,30 @@ jobs:
               if item['url_en']:
                   assert item['url_en'].startswith('/en/for-doctors/')
               assert item['kind'] in {'new','updated'}
+              assert isinstance(item.get('topics'),list)
           for path in ('for-doctors/index.html','en/for-doctors/index.html'):
               text=Path(path).read_text(encoding='utf-8')
               assert text.count('id="doctors-updates"')==1
               assert text.count('/for-doctors/doctors-updates.css?v=20260816-1')==1
               assert text.count('/for-doctors/doctors-updates.js?v=20260816-1')==1
+              assert text.count('id="doctor-workspace"')==1
+              assert text.count('/for-doctors/doctor-retention.css?v=20260825-1')==1
+              assert text.count('/for-doctors/doctor-retention.js?v=20260825-1')==1
+          for path in ('for-doctors/bacterial-keratitis/index.html','en/for-doctors/bacterial-keratitis/index.html'):
+              text=Path(path).read_text(encoding='utf-8')
+              assert text.count('id="doctor-material-tools"')==1
+              assert text.count('id="doctor-related-list"')==1
+              assert text.count('/for-doctors/doctor-retention.css?v=20260825-1')==1
+              assert text.count('/for-doctors/doctor-retention.js?v=20260825-1')==1
           print('Generated clinician feed items:',len(feed))
           PY
       - name: Syntax and existing navigation regressions
         run: |
           node --check for-doctors/doctors-updates.js
           node --test tests/doctors-updates.test.mjs
+          node --check for-doctors/doctor-retention.js
+          node --test tests/doctor-retention.test.mjs
+          python -m unittest tests/test_publish_doctors_updates_telegram.py
           python -m unittest tests/test_site_mega_nav.py
           node --check site-mega-nav.js
           node tests/site-mega-nav.test.mjs
@@ -119,6 +133,8 @@ jobs:
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=4000 --dump-dom http://127.0.0.1:8000/for-doctors/ > doctors-updates-smoke/ru-doctors-dom.html
           grep -q 'doctors-update-item' doctors-updates-smoke/ru-doctors-dom.html
           grep -q 'id="doctors-updates-panel"' doctors-updates-smoke/ru-doctors-dom.html
+          grep -q 'id="doctor-workspace"' doctors-updates-smoke/ru-doctors-dom.html
+          grep -q 'doctor-topic-chip' doctors-updates-smoke/ru-doctors-dom.html
       - name: Upload clinician update smoke artifact
         if: always()
         uses: actions/upload-artifact@v4
