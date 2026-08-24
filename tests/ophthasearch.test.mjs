@@ -11,7 +11,8 @@ import {
   classifyEvidence,
   buildEvidenceLandscape,
   synthesizeEvidenceAnswer,
-  normalizeClinicalQuestion
+  normalizeClinicalQuestion,
+  buildEvidenceReadyDetail
 } from '../for-doctors/ophthasearch/ophthasearch-v3.js';
 import { normalizeRussianClinicalQuestion } from '../for-doctors/ophthasearch/ophthasearch-russian.js';
 
@@ -134,4 +135,23 @@ test('synthesizeEvidenceAnswer separates benefit, no-difference and risk signals
   assert.equal(synthesis.signals.risk.length, 1);
   assert.equal(synthesis.ongoingTrials, 1);
   assert.match(synthesis.summaryKey, /mixed|benefit|no-difference|insufficient/);
+});
+
+test('evidence-ready detail preserves ranked results and deterministic fallback', () => {
+  const rankedResults = [{ title: 'A' }];
+  const fallbackSynthesis = { summaryKey: 'mixed' };
+  const detail = buildEvidenceReadyDetail({
+    searchId: 7,
+    language: 'ru',
+    question: 'q',
+    questionInfo: { pico: {} },
+    rankedResults,
+    fallbackSynthesis
+  });
+  assert.equal(detail.searchId, 7);
+  assert.equal(detail.language, 'ru');
+  assert.equal(detail.question, 'q');
+  assert.equal(detail.rankedResults, rankedResults);
+  assert.equal(detail.fallbackSynthesis, fallbackSynthesis);
+  assert.equal(detail.classifyEvidence, classifyEvidence);
 });
