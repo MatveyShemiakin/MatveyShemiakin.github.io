@@ -113,3 +113,52 @@ export async function requestAiSynthesis(payload, {
     if (activeController === controller) activeController = null;
   }
 }
+
+function emit(root, name, detail) {
+  root.dispatchEvent(new CustomEvent(name, { detail }));
+}
+
+export function initAiBridge(root = document.querySelector('[data-ophthasearch]'), options = {}) {
+  if (!root || root.dataset.ophthaAiBridge === 'ready') return;
+  root.dataset.ophthaAiBridge = 'ready';
+  let newestSearchId = 0;
+  const endpoint = options.endpoint ?? DEFAULT_AI_ENDPOINT;
+  const fetchImpl = options.fetchImpl ?? globalThis.fetch;
+
+  root.addEventListener('ophthasearch:evidence-ready', async (event) => {
+    const detail = event.detail || {};
+    const searchId = Number(detail.searchId || 0);
+    newestSearchId = Math.max(newestSearchId, searchId);
+    const built = buildAiPayload(detail);
+
+    if (!endpoint || !built) {
+      emit(root, 'ophthasearch:ai-fallback', {
+        searchId,
+        fallbackSynthesis: detail.fallbackSynthesis,
+        reason: !endpoint ? 'disabled' : 'insufficient-evidence'
+      });
+      return;
+    }
+
+    emit(root, 'ophthasearch:ai-pending', { searchId });
+    try {
+      const envelope = await requestAiSynthesis(built.payload, { endpoint, fetchImpl });
+      if (searchId !== newestSearchId) return;
+      const synthesis = validateAiEnvelope(envelope, built.payload.sources.map((source) => source.sourceId));
+      emit(root, 'ophthasearch:ai-success', { searchId, synthesis, sourceMap: built.sourceMap });
+    } catch {
+      if (searchId !== newestSearchId) return;
+      emit(root, 'ophthasearch:ai-fallback', {
+        searchId,
+        fallbackSynthesis: detail.fallbackSynthesis,
+        reason: 'unavailable'
+      });
+    }
+  });
+}
+
+if (typeof document !== 'undefined') {
+  const start = () => initAiBridge();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
+}
