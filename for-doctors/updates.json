@@ -11,7 +11,10 @@
     "description": "Высококонцентрированный клинический конспект для врачей и ординаторов по амбулаторному ведению пациентов после сквозной кератопластики.",
     "description_en": "High-density clinical quick reference for ophthalmologists and residents on outpatient management after penetrating keratoplasty.",
     "url": "/for-doctors/penetrating-keratoplasty/",
-    "url_en": "/en/for-doctors/penetrating-keratoplasty/"
+    "url_en": "/en/for-doctors/penetrating-keratoplasty/",
+    "topics": [
+      "cornea"
+    ]
   },
   {
     "id": "ophthasearch",
@@ -25,7 +28,10 @@
     "description": "OphthaSearch — научный поиск для офтальмологов: публикации, клинические исследования и региональные научные источники.",
     "description_en": "OphthaSearch is a clinician-focused ophthalmology search across publications, trial registries and regional scientific sources.",
     "url": "/for-doctors/ophthasearch/",
-    "url_en": "/en/for-doctors/ophthasearch/"
+    "url_en": "/en/for-doctors/ophthasearch/",
+    "topics": [
+      "research"
+    ]
   },
   {
     "id": "events",
@@ -39,7 +45,10 @@
     "description": "Мировой календарь офтальмологических конгрессов: Россия, СНГ, Китай, Азия, Ближний Восток, Европа, Африка и Америка — события, дедлайны и регистрация.",
     "description_en": "Global ophthalmology congress calendar covering Russia, CIS, China, Asia-Pacific, Middle East, Europe, Africa and the Americas — events, deadlines and registration.",
     "url": "/for-doctors/events/",
-    "url_en": "/en/for-doctors/events/"
+    "url_en": "/en/for-doctors/events/",
+    "topics": [
+      "events"
+    ]
   },
   {
     "id": "bacterial-keratitis",
@@ -53,6 +62,10 @@
     "description": "Практический клинический конспект для врачей по диагностике, стартовой терапии и контролю бактериального кератита и язвы роговицы.",
     "description_en": "Clinical guide to bacterial keratitis and corneal ulcer: urgency, corneal scraping, microbiology, antibacterial therapy, monitoring and non-response.",
     "url": "/for-doctors/bacterial-keratitis/",
-    "url_en": "/en/for-doctors/bacterial-keratitis/"
+    "url_en": "/en/for-doctors/bacterial-keratitis/",
+    "topics": [
+      "cornea",
+      "drugs"
+    ]
   }
 ]

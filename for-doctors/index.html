@@ -56,7 +56,7 @@
   <link rel="stylesheet" href="/for-doctors/doctors-updates.css?v=20260816-1">
   <link rel="stylesheet" href="/for-doctors/events-card.css?v=20260816-1">
   <link rel="stylesheet" href="/for-doctors/ophthasearch-card.css?v=20260816-1">
-</head>
+<link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=20260825-1"></head>
 <body>
   <header class="doctors-header">
     <div class="container doctors-nav">
@@ -64,9 +64,7 @@
       <div class="doctors-nav-actions">
         <a href="/">← Основной сайт</a>
         <a href="/collaboration/">Сотрудничество</a>
-        <!-- doctors-updates:start -->
-        <div class="doctors-updates" id="doctors-updates"><button class="doctors-updates-toggle" id="doctors-updates-toggle" type="button" aria-expanded="false" aria-controls="doctors-updates-panel" aria-label="Что нового"><span class="doctors-updates-bell" aria-hidden="true"></span><span class="doctors-updates-count" id="doctors-updates-count" hidden>0</span></button><section class="doctors-updates-panel" id="doctors-updates-panel" aria-labelledby="doctors-updates-title" hidden><div class="doctors-updates-head"><div><span id="doctors-updates-section-label">Обновления</span><h2 id="doctors-updates-title">Что нового</h2></div><button class="doctors-updates-mark-all" id="doctors-updates-mark-all" type="button">Прочитать всё</button></div><div class="doctors-updates-list" id="doctors-updates-list" aria-live="polite"></div></section></div>
-        <!-- doctors-updates:end -->
+        <!-- doctors-updates:start --><div class="doctors-updates" id="doctors-updates"><button class="doctors-updates-toggle" id="doctors-updates-toggle" type="button" aria-expanded="false" aria-controls="doctors-updates-panel" aria-label="Что нового"><span class="doctors-updates-bell" aria-hidden="true"></span><span class="doctors-updates-count" id="doctors-updates-count" hidden>0</span></button><section class="doctors-updates-panel" id="doctors-updates-panel" aria-labelledby="doctors-updates-title" hidden><div class="doctors-updates-head"><div><span id="doctors-updates-section-label">Обновления</span><h2 id="doctors-updates-title">Что нового</h2></div><button class="doctors-updates-mark-all" id="doctors-updates-mark-all" type="button">Прочитать всё</button></div><div class="doctors-updates-list" id="doctors-updates-list" aria-live="polite"></div></section></div><!-- doctors-updates:end -->
         <div class="doctors-language" aria-label="Язык раздела"><a class="active" href="/for-doctors/" lang="ru" hreflang="ru" aria-current="page">RU</a><a href="/en/for-doctors/" lang="en" hreflang="en">EN</a></div>
       </div>
     </div>
@@ -85,7 +83,7 @@
 
     <section class="doctors-hero"><div class="container"><p class="eyebrow">Профессиональная библиотека</p><h1>Клинические материалы для врачей</h1><p class="doctors-lead">Практические конспекты, алгоритмы и интерактивные материалы для поддержки клинического мышления. Материалы не заменяют клинические рекомендации и решение лечащего врача.</p></div></section>
 
-    <section class="library" aria-labelledby="library-title"><div class="container"><p class="section-kicker dark-kicker">Офтальмология</p><h2 id="library-title">Доступные материалы</h2><div class="library-grid">
+    <!-- doctor-retention:start --><section class="doctor-workspace" id="doctor-workspace" aria-labelledby="doctor-workspace-title"><div class="container"><div class="doctor-workspace-head"><div><p class="eyebrow">Ваше профессиональное пространство</p><h2 id="doctor-workspace-title">Профессиональное рабочее пространство</h2><p class="doctor-workspace-summary" id="doctor-return-summary">Выберите темы — при следующем визите здесь появятся обновления именно по вашим интересам.</p></div><div class="doctor-workspace-actions"><a class="button secondary" href="/for-doctors/updates/">Все обновления</a><a class="button primary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer" data-doctor-telegram>Получать обновления в Telegram</a></div></div><div class="doctor-workspace-grid"><section class="doctor-workspace-panel wide"><h3>Ваши темы</h3><div class="doctor-topic-list" id="doctor-topic-list"></div></section><section class="doctor-workspace-panel"><h3>Продолжить работу</h3><div class="doctor-workspace-list" id="doctor-continue-list"></div></section><section class="doctor-workspace-panel"><h3>Сохранённое</h3><div class="doctor-workspace-list" id="doctor-bookmark-list"></div></section><section class="doctor-workspace-panel"><h3>Для вас</h3><div class="doctor-workspace-list" id="doctor-personal-list"></div></section></div></div></section><!-- doctor-retention:end --><section class="library" aria-labelledby="library-title"><div class="container"><p class="section-kicker dark-kicker">Офтальмология</p><h2 id="library-title">Доступные материалы</h2><div class="library-grid">
       <a class="library-card" href="/for-doctors/bacterial-keratitis/"><div class="library-image" role="img" aria-label="Бактериальный кератит и язва роговицы"></div><div class="library-copy"><span class="library-label">Роговица · неотложная помощь</span><h2>Бактериальный кератит и язва роговицы</h2><p>Оценка срочности, микробиологическая диагностика, стартовая терапия, контроль ответа и тактика при отсутствии эффекта.</p><span class="library-link">Открыть клинический конспект →</span></div></a>
       <a class="library-card" href="/for-doctors/penetrating-keratoplasty/"><div class="library-image pkp" role="img" aria-label="Прозрачный сквозной трансплантат роговицы"></div><div class="library-copy"><span class="library-label">Роговица · послеоперационное ведение</span><h2>Ведение после сквозной кератопластики</h2><p>Стратификация риска, график наблюдения, точные схемы терапии и неотложная тактика при осложнениях трансплантата.</p><span class="library-link">Открыть клинический конспект →</span></div></a>
       <a class="library-card" href="/for-doctors/events/"><div class="library-image events" role="img" aria-label="Календарь офтальмологических событий"></div><div class="library-copy"><span class="library-label">События · дедлайны · конгрессы</span><h2>Календарь офтальмологических событий</h2><p>Россия, СНГ и мир: конгрессы, abstract deadlines, регистрация, НМО/CME и добавление важных дат в личный календарь.</p><span class="library-link">Открыть календарь →</span></div></a>
@@ -101,7 +99,7 @@
   <script src="/mobile-nav.js?v=20260806-3"></script>
   <script defer src="/site-theme.js?v=20260806-1"></script>
   <script defer src="/site-motion.js?v=20260806-1"></script>
-  <script defer src="/site-mega-nav.js?v=20260825-1"></script>
+  <script defer src="/site-mega-nav.js?v=20260816-2"></script>
   <script defer src="/for-doctors/doctors-updates.js?v=20260816-1"></script>
-</body>
+<script defer src="/for-doctors/doctor-retention.js?v=20260825-1"></script></body>
 </html>
