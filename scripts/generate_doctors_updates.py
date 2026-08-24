@@ -14,6 +14,7 @@ MANIFEST_PATH = ROOT / 'for-doctors' / 'updates-manifest.json'
 META_PATH = ROOT / 'for-doctors' / 'professional-meta.json'
 DATE_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 TOPIC_RE = re.compile(r'^[a-z0-9-]+$')
+SERVICE_SLUGS = {'updates'}
 
 
 def _read(path: Path) -> str:
@@ -128,7 +129,9 @@ def _discover_slugs(root: Path) -> list[str]:
     return sorted(
         path.parent.name
         for path in base.glob('*/index.html')
-        if path.parent.name and not path.parent.name.startswith('.')
+        if path.parent.name
+        and not path.parent.name.startswith('.')
+        and path.parent.name not in SERVICE_SLUGS
     )
 
 
