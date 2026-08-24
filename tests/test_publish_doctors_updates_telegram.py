@@ -40,29 +40,60 @@ class DoctorsTelegramPublisherTests(unittest.TestCase):
         feed = [{'id': 'a', 'event_id': 'a:1'}]
         self.assertEqual(self.module.detect_new_events(feed, feed), [])
 
-    def test_formats_new_material_post_with_canonical_absolute_url(self):
+    def test_formats_new_material_as_human_first_person_post(self):
         item = {
             'kind': 'new',
             'title': 'Бактериальный кератит',
-            'description': 'Практический клинический конспект.',
+            'description': 'Практический клинический конспект по диагностике и стартовой терапии.',
             'url': '/for-doctors/bacterial-keratitis/',
+            'topics': ['cornea'],
         }
         text = self.module.format_message(item)
-        self.assertIn('Новый материал для врачей', text)
-        self.assertIn('Бактериальный кератит', text)
-        self.assertIn('Практический клинический конспект.', text)
+        self.assertTrue(text.startswith('Доброго времени суток! 👋'))
+        self.assertIn('Сегодня работал над', text)
+        self.assertIn('я', text.lower())
+        self.assertIn('коллег', text.lower())
+        self.assertIn('📌', text)
+        self.assertIn('🔗', text)
+        self.assertIn('#офтальмология', text)
+        self.assertIn('#роговица', text)
         self.assertIn('https://matveyshemyakin.ru/for-doctors/bacterial-keratitis/', text)
+        self.assertNotIn('Новый материал для врачей', text)
+        self.assertNotIn('revision', text.lower())
 
-    def test_formats_updated_material_post_with_update_label(self):
+    def test_formats_updated_material_as_author_update_not_technical_log(self):
         item = {
             'kind': 'updated',
             'title': 'OphthaSearch',
-            'description': 'Обновлён поиск исследований.',
+            'description': 'Обновлён поиск исследований и региональных научных источников.',
             'url': '/for-doctors/ophthasearch/',
+            'topics': ['research'],
         }
         text = self.module.format_message(item)
-        self.assertIn('Обновление для врачей', text)
+        self.assertIn('Сегодня вернулся к', text)
+        self.assertIn('почему', text.lower())
+        self.assertIn('#наука', text)
+        self.assertNotIn('Обновление для врачей', text)
         self.assertNotIn('Новый материал для врачей', text)
+
+    def test_topic_context_changes_who_the_post_is_for(self):
+        cornea = self.module.format_message({
+            'kind': 'updated',
+            'title': 'Кератопластика',
+            'description': 'Тактика наблюдения после операции.',
+            'url': '/for-doctors/penetrating-keratoplasty/',
+            'topics': ['cornea', 'surgery'],
+        })
+        events = self.module.format_message({
+            'kind': 'updated',
+            'title': 'Календарь офтальмологических событий',
+            'description': 'Добавлены новые конференции и дедлайны.',
+            'url': '/for-doctors/events/',
+            'topics': ['events'],
+        })
+        self.assertIn('роговиц', cornea.lower())
+        self.assertIn('конференц', events.lower())
+        self.assertNotEqual(cornea, events)
 
     def test_rejects_non_site_relative_url(self):
         item = {
