@@ -69,7 +69,7 @@ test('mobile OphthaSearch prevents long medical terms and identifiers from overf
   assert.match(answerCss, /@media\s*\(max-width:\s*480px\)[\s\S]*\.ophtha-brand h1[^{}]*\{[^}]*max-width:\s*100%/);
   assert.match(answerCss, /@media\s*\(max-width:\s*480px\)[\s\S]*\.ophtha-result-title[^{}]*\{[^}]*font-size:\s*24px/);
   assert.match(loader, /ophthasearch-style-refresh\.js/);
-  assert.match(refresh, /ophthasearch-answer-first\.css\?v=20260816-2/);
+  assert.match(refresh, /ophthasearch-answer-first\.css\?v=20260824-1/);
 });
 
 test('loader enables AI before answer-first rendering', async () => {
