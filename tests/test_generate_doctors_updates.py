@@ -90,10 +90,27 @@ class DoctorsUpdatesGeneratorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_material(root, 'bacterial-keratitis', ru_main='<p>RU</p>', en_main='<p>EN</p>')
+            write_material(root, 'updates', ru_main='<p>Service feed</p>', en_main='<p>Service feed</p>')
             (root / 'for-doctors' / 'professional-use.html').write_text('<html><main><h1>Service</h1></main></html>', encoding='utf-8')
             (root / 'for-doctors' / 'index.html').write_text('<html><main><h1>Library</h1></main></html>', encoding='utf-8')
             feed, _ = self.module.build_updates(root, '2026-08-16')
             self.assertEqual([item['id'] for item in feed], ['bacterial-keratitis'])
+
+    def test_professional_metadata_enriches_topics_and_missing_meta_is_safe(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write_material(root, 'keratitis', ru_main='<p>RU</p>', en_main='<p>EN</p>')
+            write_material(root, 'misc', ru_main='<p>RU</p>', en_main='<p>EN</p>')
+            meta_path = root / 'for-doctors' / 'professional-meta.json'
+            meta_path.parent.mkdir(parents=True, exist_ok=True)
+            meta_path.write_text(json.dumps({
+                'keratitis': {'topics': ['cornea', 'research', 'cornea']}
+            }), encoding='utf-8')
+
+            feed, _ = self.module.build_updates(root, '2026-08-16')
+            by_id = {item['id']: item for item in feed}
+            self.assertEqual(by_id['keratitis']['topics'], ['cornea', 'research'])
+            self.assertEqual(by_id['misc']['topics'], [])
 
 
 if __name__ == '__main__':

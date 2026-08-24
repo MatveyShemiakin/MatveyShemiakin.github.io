@@ -1,0 +1,14 @@
+{
+  "bacterial-keratitis": {
+    "topics": ["cornea", "drugs"]
+  },
+  "penetrating-keratoplasty": {
+    "topics": ["cornea"]
+  },
+  "ophthasearch": {
+    "topics": ["research"]
+  },
+  "events": {
+    "topics": ["events"]
+  }
+}

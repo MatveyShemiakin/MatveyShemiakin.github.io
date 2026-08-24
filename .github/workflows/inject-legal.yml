@@ -16,8 +16,11 @@ on:
       - 'en/for-doctors/professional-use.html'
       - 'for-doctors/updates.json'
       - 'for-doctors/updates-manifest.json'
+      - 'for-doctors/professional-meta.json'
       - 'for-doctors/doctors-updates.js'
       - 'for-doctors/doctors-updates.css'
+      - 'for-doctors/doctor-retention.js'
+      - 'for-doctors/doctor-retention.css'
       - 'patients/updates.json'
       - 'patients/patients-updates.js'
       - 'patients/patients-updates.css'
@@ -26,6 +29,7 @@ on:
       - 'site-mega-nav.css'
       - 'scripts/generate_doctors_updates.py'
       - 'scripts/inject_doctors_updates.py'
+      - 'scripts/inject_doctor_retention.py'
       - 'scripts/inject_legal.py'
       - 'scripts/inject_content_analytics.py'
       - 'scripts/inject_patient_updates.py'
@@ -34,6 +38,9 @@ on:
       - 'tests/test_generate_doctors_updates.py'
       - 'tests/test_doctors_updates_inject.py'
       - 'tests/doctors-updates.test.mjs'
+      - 'tests/test_doctor_retention_inject.py'
+      - 'tests/doctor-retention.test.mjs'
+      - 'tests/test_professional_updates_page.py'
       - 'tests/test_content_analytics.py'
       - 'tests/test_analytics_events.mjs'
       - 'tests/patient-updates.test.mjs'
@@ -58,6 +65,7 @@ jobs:
           python-version: '3.12'
       - run: python scripts/generate_doctors_updates.py
       - run: python scripts/inject_doctors_updates.py
+      - run: python scripts/inject_doctor_retention.py
       - run: python scripts/inject_legal.py
       - run: python scripts/inject_content_analytics.py
       - run: python scripts/inject_patient_updates.py
@@ -65,6 +73,8 @@ jobs:
       - run: python scripts/inject_site_mega_nav.py
       - run: python -m unittest tests/test_generate_doctors_updates.py
       - run: python -m unittest tests/test_doctors_updates_inject.py
+      - run: python -m unittest tests/test_doctor_retention_inject.py
+      - run: python -m unittest tests/test_professional_updates_page.py
       - run: python -m unittest tests/test_content_analytics.py
       - run: python -m unittest tests/test_patient_updates_inject.py
       - run: python -m unittest tests/test_patient_consultation_cta.py
@@ -73,6 +83,8 @@ jobs:
       - run: node tests/test_analytics_events.mjs
       - run: node --check for-doctors/doctors-updates.js
       - run: node --test tests/doctors-updates.test.mjs
+      - run: node --check for-doctors/doctor-retention.js
+      - run: node --test tests/doctor-retention.test.mjs
       - run: node --check patients/patients-updates.js
       - run: node --test tests/patient-updates.test.mjs
       - run: node --check site-mega-nav.js
@@ -86,5 +98,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html' '**/*.html' sitemap.xml for-doctors/updates.json for-doctors/updates-manifest.json || true
-          git commit -m "Inject site modules and clinician updates"
+          git commit -m "Inject site modules and clinician retention"
           git push

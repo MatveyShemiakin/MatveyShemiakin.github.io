@@ -11,7 +11,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 FEED_PATH = ROOT / 'for-doctors' / 'updates.json'
 MANIFEST_PATH = ROOT / 'for-doctors' / 'updates-manifest.json'
+META_PATH = ROOT / 'for-doctors' / 'professional-meta.json'
 DATE_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+TOPIC_RE = re.compile(r'^[a-z0-9-]+$')
+SERVICE_SLUGS = {'updates'}
 
 
 def _read(path: Path) -> str:
@@ -30,7 +33,7 @@ def _main_html(source: str) -> str:
     content = match.group(1)
     content = re.sub(r'<!--.*?-->', '', content, flags=re.S)
     content = re.sub(r'<(?:script|style|noscript|template)\b[^>]*>.*?</(?:script|style|noscript|template)\s*>', '', content, flags=re.I | re.S)
-    for marker in ('site-next-material', 'patient-consultation-cta'):
+    for marker in ('site-next-material', 'patient-consultation-cta', 'doctor-retention'):
         content = re.sub(
             rf'<!--\s*{re.escape(marker)}:start\s*-->.*?<!--\s*{re.escape(marker)}:end\s*-->',
             '',
@@ -93,6 +96,32 @@ def _load_manifest(root: Path) -> dict[str, Any]:
     return {'version': 1, 'materials': value['materials']}
 
 
+def _load_professional_meta(root: Path) -> dict[str, Any]:
+    path = root / 'for-doctors' / 'professional-meta.json'
+    if not path.exists():
+        return {}
+    try:
+        value = json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return value if isinstance(value, dict) else {}
+
+
+def _topics_for(meta: dict[str, Any], slug: str) -> list[str]:
+    entry = meta.get(slug)
+    if not isinstance(entry, dict) or not isinstance(entry.get('topics'), list):
+        return []
+    result: list[str] = []
+    seen: set[str] = set()
+    for raw in entry['topics']:
+        topic = str(raw or '').strip().lower()
+        if not topic or not TOPIC_RE.match(topic) or topic in seen:
+            continue
+        seen.add(topic)
+        result.append(topic)
+    return result
+
+
 def _discover_slugs(root: Path) -> list[str]:
     base = root / 'for-doctors'
     if not base.exists():
@@ -100,7 +129,9 @@ def _discover_slugs(root: Path) -> list[str]:
     return sorted(
         path.parent.name
         for path in base.glob('*/index.html')
-        if path.parent.name and not path.parent.name.startswith('.')
+        if path.parent.name
+        and not path.parent.name.startswith('.')
+        and path.parent.name not in SERVICE_SLUGS
     )
 
 
@@ -110,6 +141,7 @@ def build_updates(root: Path, today: str) -> tuple[list[dict[str, Any]], dict[st
 
     previous = _load_manifest(root)
     previous_materials = previous.get('materials', {})
+    professional_meta = _load_professional_meta(root)
     next_materials: dict[str, Any] = {}
     feed: list[dict[str, Any]] = []
 
@@ -170,6 +202,7 @@ def build_updates(root: Path, today: str) -> tuple[list[dict[str, Any]], dict[st
             'description_en': en_meta['description'] or ru_meta['description'],
             'url': f'/for-doctors/{slug}/' if ru_source else '',
             'url_en': f'/en/for-doctors/{slug}/' if en_source else '',
+            'topics': _topics_for(professional_meta, slug),
         })
 
     feed.sort(key=lambda item: (item['updated'], item['id']), reverse=True)

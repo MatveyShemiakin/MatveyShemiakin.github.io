@@ -7,11 +7,18 @@ on:
       - 'en/for-doctors/**'
       - 'scripts/generate_doctors_updates.py'
       - 'scripts/inject_doctors_updates.py'
+      - 'scripts/inject_doctor_retention.py'
+      - 'scripts/publish_doctors_updates_telegram.py'
       - 'tests/test_generate_doctors_updates.py'
       - 'tests/test_doctors_updates_inject.py'
       - 'tests/doctors-updates.test.mjs'
+      - 'tests/test_doctor_retention_inject.py'
+      - 'tests/doctor-retention.test.mjs'
+      - 'tests/test_publish_doctors_updates_telegram.py'
+      - 'tests/test_professional_updates_page.py'
       - '.github/workflows/doctors-updates.yml'
       - '.github/workflows/inject-legal.yml'
+      - '.github/workflows/publish-doctors-updates-telegram.yml'
 
 jobs:
   verify:
@@ -29,12 +36,21 @@ jobs:
         run: python -m unittest tests/test_generate_doctors_updates.py
       - name: Bell UI tests
         run: node --test tests/doctors-updates.test.mjs
+      - name: Retention state tests
+        run: node --test tests/doctor-retention.test.mjs
+      - name: Retention injection tests
+        run: python -m unittest tests/test_doctor_retention_inject.py
+      - name: Telegram publisher tests
+        run: python -m unittest tests/test_publish_doctors_updates_telegram.py
+      - name: Professional updates page tests
+        run: python -m unittest tests/test_professional_updates_page.py
       - name: Hub injection tests
         run: python -m unittest tests/test_doctors_updates_inject.py
       - name: Generate real clinician feed and inject hubs
         run: |
           python scripts/generate_doctors_updates.py
           python scripts/inject_doctors_updates.py
+          python scripts/inject_doctor_retention.py
       - name: Validate generated clinician outputs
         run: |
           python - <<'PY'
@@ -45,6 +61,7 @@ jobs:
           ids={item['id'] for item in feed}
           assert {'bacterial-keratitis','penetrating-keratoplasty'} <= ids, ids
           assert 'professional-use' not in ids
+          assert 'updates' not in ids
           assert len(ids)==len(feed)
           for item in feed:
               assert item['event_id']==f"{item['id']}:{item['revision']}"
@@ -52,17 +69,31 @@ jobs:
               if item['url_en']:
                   assert item['url_en'].startswith('/en/for-doctors/')
               assert item['kind'] in {'new','updated'}
+              assert isinstance(item.get('topics'),list)
           for path in ('for-doctors/index.html','en/for-doctors/index.html'):
               text=Path(path).read_text(encoding='utf-8')
               assert text.count('id="doctors-updates"')==1
               assert text.count('/for-doctors/doctors-updates.css?v=20260816-1')==1
               assert text.count('/for-doctors/doctors-updates.js?v=20260816-1')==1
+              assert text.count('id="doctor-workspace"')==1
+              assert text.count('/for-doctors/doctor-retention.css?v=20260825-1')==1
+              assert text.count('/for-doctors/doctor-retention.js?v=20260825-1')==1
+          for path in ('for-doctors/bacterial-keratitis/index.html','en/for-doctors/bacterial-keratitis/index.html'):
+              text=Path(path).read_text(encoding='utf-8')
+              assert text.count('id="doctor-material-tools"')==1
+              assert text.count('id="doctor-related-list"')==1
+              assert text.count('/for-doctors/doctor-retention.css?v=20260825-1')==1
+              assert text.count('/for-doctors/doctor-retention.js?v=20260825-1')==1
           print('Generated clinician feed items:',len(feed))
           PY
       - name: Syntax and existing navigation regressions
         run: |
           node --check for-doctors/doctors-updates.js
           node --test tests/doctors-updates.test.mjs
+          node --check for-doctors/doctor-retention.js
+          node --test tests/doctor-retention.test.mjs
+          python -m unittest tests/test_publish_doctors_updates_telegram.py
+          python -m unittest tests/test_professional_updates_page.py
           python -m unittest tests/test_site_mega_nav.py
           node --check site-mega-nav.js
           node tests/site-mega-nav.test.mjs
@@ -107,6 +138,21 @@ jobs:
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=4000 --dump-dom http://127.0.0.1:8000/for-doctors/ > doctors-updates-smoke/ru-doctors-dom.html
           grep -q 'doctors-update-item' doctors-updates-smoke/ru-doctors-dom.html
           grep -q 'id="doctors-updates-panel"' doctors-updates-smoke/ru-doctors-dom.html
+          grep -q 'id="doctor-workspace"' doctors-updates-smoke/ru-doctors-dom.html
+          grep -q 'doctor-topic-chip' doctors-updates-smoke/ru-doctors-dom.html
+      - name: Render full updates page RU EN
+        run: |
+          python3 -m http.server 8000 >/tmp/doctors-all-updates-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=4000 --window-size=1440,1100 --dump-dom http://127.0.0.1:8000/for-doctors/updates/ > doctors-updates-smoke/ru-all-updates-dom.html
+          grep -q 'id="doctor-all-updates-list"' doctors-updates-smoke/ru-all-updates-dom.html
+          grep -q 'doctor-workspace-link' doctors-updates-smoke/ru-all-updates-dom.html
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=4000 --window-size=390,844 --screenshot="doctors-updates-smoke/en-all-updates-mobile.png" http://127.0.0.1:8000/en/for-doctors/updates/
+          test -s doctors-updates-smoke/en-all-updates-mobile.png
       - name: Upload clinician update smoke artifact
         if: always()
         uses: actions/upload-artifact@v4
