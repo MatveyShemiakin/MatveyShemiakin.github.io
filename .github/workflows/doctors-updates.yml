@@ -142,7 +142,12 @@ jobs:
           grep -q 'doctor-topic-chip' doctors-updates-smoke/ru-doctors-dom.html
       - name: Render full updates page RU EN
         run: |
+          python3 -m http.server 8000 >/tmp/doctors-all-updates-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
           "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=4000 --window-size=1440,1100 --dump-dom http://127.0.0.1:8000/for-doctors/updates/ > doctors-updates-smoke/ru-all-updates-dom.html
           grep -q 'id="doctor-all-updates-list"' doctors-updates-smoke/ru-all-updates-dom.html
           grep -q 'doctor-workspace-link' doctors-updates-smoke/ru-all-updates-dom.html
