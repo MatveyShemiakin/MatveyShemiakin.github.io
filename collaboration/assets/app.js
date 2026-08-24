@@ -69,6 +69,23 @@
     other: ['Другой профессиональный вопрос','Other professional inquiry']
   };
 
+  function openPreparedEmail(topicKey = 'other') {
+    const isEn = (document.documentElement.lang || '').toLowerCase().startsWith('en');
+    const topic = (topics[topicKey] || topics.other)[isEn ? 1 : 0];
+    const subject = isEn ? `Professional inquiry: ${topic}` : `Профессиональное обращение: ${topic}`;
+    const bodyText = isEn
+      ? `Hello Dr Shemyakin,\n\nI would like to discuss: ${topic}.\n\n`
+      : `Здравствуйте, Матвей Юрьевич!\n\nХотел(а) бы обсудить: ${topic}.\n\n`;
+    window.location.href = `mailto:${recipientAddress()}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+  }
+
+  document.querySelectorAll('[data-mail-topic]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      openPreparedEmail(el.dataset.mailTopic || 'other');
+    });
+  });
+
   form?.addEventListener('submit', e => {
     e.preventDefault();
     if (!form.reportValidity()) return;
