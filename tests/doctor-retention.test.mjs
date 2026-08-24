@@ -89,6 +89,14 @@ test('relatedItems prefers shared professional topics and excludes current item'
   assert.deepEqual(retention.relatedItems(items,'current',['cornea','research'],3).map(x=>x.id),['strong','weak','other']);
 });
 
+test('full updates feed metadata localizes new and updated revisions',()=>{
+  const retention=load();
+  assert.ok(retention);
+  assert.equal(retention.formatUpdateMeta({kind:'new',updated:'2026-08-25'},'ru'),'НОВОЕ · 25.08.2026');
+  assert.equal(retention.formatUpdateMeta({kind:'updated',updated:'2026-08-25'},'ru'),'ОБНОВЛЕНО · 25.08.2026');
+  assert.equal(retention.formatUpdateMeta({kind:'updated',updated:'2026-08-25'},'en'),'UPDATED · 25/08/2026');
+});
+
 test('analytics goal helper respects existing consent gate',()=>{
   const retention=load();
   assert.ok(retention);
