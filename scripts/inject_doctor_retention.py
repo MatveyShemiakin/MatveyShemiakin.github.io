@@ -8,6 +8,12 @@ CSS_LINK = '<link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=202
 JS_SCRIPT = '<script defer src="/for-doctors/doctor-retention.js?v=20260825-1"></script>'
 START = '<!-- doctor-retention:start -->'
 END = '<!-- doctor-retention:end -->'
+SERVICE_SLUGS = {'updates'}
+
+
+def is_material_slug(slug: str) -> bool:
+    value = str(slug or '').strip()
+    return bool(value) and value not in SERVICE_SLUGS and not value.startswith('.')
 
 
 def _assets(text: str) -> str:
@@ -34,6 +40,8 @@ def hub_shell(lang: str) -> str:
         kicker = 'Your professional workspace'
         title = 'Professional workspace'
         summary = 'Choose topics to make this workspace more useful on your next visit.'
+        all_updates = 'All updates'
+        updates_url = '/en/for-doctors/updates/'
         telegram = 'Get updates in Telegram'
         topics = 'Your topics'
         continue_title = 'Continue working'
@@ -43,6 +51,8 @@ def hub_shell(lang: str) -> str:
         kicker = 'Ваше профессиональное пространство'
         title = 'Профессиональное рабочее пространство'
         summary = 'Выберите темы — при следующем визите здесь появятся обновления именно по вашим интересам.'
+        all_updates = 'Все обновления'
+        updates_url = '/for-doctors/updates/'
         telegram = 'Получать обновления в Telegram'
         topics = 'Ваши темы'
         continue_title = 'Продолжить работу'
@@ -57,8 +67,10 @@ def hub_shell(lang: str) -> str:
         + f'<h2 id="doctor-workspace-title">{title}</h2>'
         + f'<p class="doctor-workspace-summary" id="doctor-return-summary">{summary}</p>'
         + '</div>'
-        + f'<a class="button primary doctor-workspace-telegram" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer" data-doctor-telegram>{telegram}</a>'
-        + '</div>'
+        + '<div class="doctor-workspace-actions">'
+        + f'<a class="button secondary" href="{updates_url}">{all_updates}</a>'
+        + f'<a class="button primary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer" data-doctor-telegram>{telegram}</a>'
+        + '</div></div>'
         + '<div class="doctor-workspace-grid">'
         + f'<section class="doctor-workspace-panel wide"><h3>{topics}</h3><div class="doctor-topic-list" id="doctor-topic-list"></div></section>'
         + f'<section class="doctor-workspace-panel"><h3>{continue_title}</h3><div class="doctor-workspace-list" id="doctor-continue-list"></div></section>'
@@ -155,6 +167,8 @@ def main() -> None:
         if not base.exists():
             continue
         for path in sorted(base.glob('*/index.html')):
+            if not is_material_slug(path.parent.name):
+                continue
             original = path.read_text(encoding='utf-8')
             updated = inject_material(original, lang)
             if updated != original:
