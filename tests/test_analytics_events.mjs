@@ -27,7 +27,7 @@ function setup(choice='analytics') {
   };
   const window={
     localStorage:{getItem(){return choice;}},
-    location:{href:'https://matveyshemyakin.ru/patients/cataract/'},
+    location:{href:'https://matveyshemyakin.ru/patients/cataract/',pathname:'/patients/cataract/'},
     innerHeight:200,
     scrollY:800,
     ym(...args){calls.push(args);},
@@ -36,7 +36,21 @@ function setup(choice='analytics') {
     setTimeout,
     clearTimeout
   };
-  const context=vm.createContext({window,document,setTimeout,clearTimeout,URL,console});
+  const context=vm.createContext({
+    window,
+    document,
+    localStorage:window.localStorage,
+    location:window.location,
+    innerHeight:window.innerHeight,
+    scrollY:window.scrollY,
+    pageYOffset:window.scrollY,
+    addEventListener:window.addEventListener.bind(window),
+    requestAnimationFrame:window.requestAnimationFrame.bind(window),
+    setTimeout,
+    clearTimeout,
+    URL,
+    console
+  });
   vm.runInContext(code,context);
   return {calls,docListeners,winListeners};
 }
@@ -127,5 +141,3 @@ function anchor(href,text='',classes=[]) {
   fire(env,'click',targetFor(link));
   assert.equal(env.calls.filter(call=>call[1]==='reachGoal').length,0);
 }
-
-console.log('analytics event behavior tests passed');
