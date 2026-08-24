@@ -1,0 +1,53 @@
+name: Collaboration design checks
+
+on:
+  pull_request:
+    paths:
+      - 'collaboration/**'
+      - 'en/collaboration/**'
+      - 'for-doctors/index.html'
+      - 'en/for-doctors/index.html'
+      - 'for-doctors/collaboration-entry.css'
+      - 'tests/collaboration-design.test.mjs'
+      - '.github/workflows/collaboration-design.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Collaboration design tests
+        run: node --test tests/collaboration-design.test.mjs
+      - name: Collaboration script syntax
+        run: node --check collaboration/assets/app.js
+      - name: Render RU EN desktop and mobile
+        run: |
+          mkdir -p collaboration-smoke
+          python3 -m http.server 8000 >/tmp/collaboration-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
+          render() {
+            name="$1"; size="$2"; url="$3"
+            "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=3500 --window-size="$size" --screenshot="collaboration-smoke/$name.png" "$url"
+            test -s "collaboration-smoke/$name.png"
+          }
+          render ru-collaboration-desktop 1440,1100 http://127.0.0.1:8000/collaboration/
+          render ru-collaboration-mobile 390,844 http://127.0.0.1:8000/collaboration/
+          render en-collaboration-desktop 1440,1100 http://127.0.0.1:8000/en/collaboration/
+          render en-collaboration-mobile 390,844 http://127.0.0.1:8000/en/collaboration/
+          render ru-doctors-mobile 390,844 http://127.0.0.1:8000/for-doctors/
+          render en-doctors-mobile 390,844 http://127.0.0.1:8000/en/for-doctors/
+      - name: Upload collaboration smoke artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: collaboration-design-smoke
+          path: collaboration-smoke/*
+          if-no-files-found: error
