@@ -90,6 +90,7 @@ class DoctorsUpdatesGeneratorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_material(root, 'bacterial-keratitis', ru_main='<p>RU</p>', en_main='<p>EN</p>')
+            write_material(root, 'updates', ru_main='<p>Service feed</p>', en_main='<p>Service feed</p>')
             (root / 'for-doctors' / 'professional-use.html').write_text('<html><main><h1>Service</h1></main></html>', encoding='utf-8')
             (root / 'for-doctors' / 'index.html').write_text('<html><main><h1>Library</h1></main></html>', encoding='utf-8')
             feed, _ = self.module.build_updates(root, '2026-08-16')
