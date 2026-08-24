@@ -21,8 +21,7 @@
           {label:'Follow-up after penetrating keratoplasty',href:'/en/for-doctors/penetrating-keratoplasty/'}
         ]},
         {title:'Tools',items:[
-          {label:'Ophthalmology events',href:'/en/for-doctors/events/'},
-          {label:'OphthaSearch',href:'/en/for-doctors/ophthasearch/'}
+          {label:'Ophthalmology events',href:'/en/for-doctors/events/'}
         ]},
         {title:'Collaboration',items:[
           {label:'Professional collaboration',href:'/en/collaboration/'}
@@ -59,8 +58,7 @@
           {label:'Ведение после сквозной кератопластики',href:'/for-doctors/penetrating-keratoplasty/'}
         ]},
         {title:'Инструменты',items:[
-          {label:'Офтальмологические события',href:'/for-doctors/events/'},
-          {label:'OphthaSearch',href:'/for-doctors/ophthasearch/'}
+          {label:'Офтальмологические события',href:'/for-doctors/events/'}
         ]},
         {title:'Сотрудничество',items:[
           {label:'Профессиональное сотрудничество',href:'/collaboration/'}
