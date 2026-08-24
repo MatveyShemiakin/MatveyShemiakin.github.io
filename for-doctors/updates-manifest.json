@@ -2,32 +2,32 @@
   "version": 1,
   "materials": {
     "bacterial-keratitis": {
-      "fingerprint": "d781c0e8550c2bac913e12813ec72df0c3b10d36a4ad80da628c00721e9fef15",
+      "fingerprint": "dfdb0c3142184b5f8fa0769aca8559eb2da692c759bfef977314d04b1f4fcf6a",
       "published": "2026-07-20",
-      "updated": "2026-07-20",
-      "revision": 1,
-      "kind": "new"
-    },
-    "events": {
-      "fingerprint": "82db9fdb44cd092596223711acd4639330de0b492929f4644b4e620ba0fe4c7e",
-      "published": "2026-08-16",
-      "updated": "2026-08-16",
-      "revision": 3,
-      "kind": "updated"
-    },
-    "ophthasearch": {
-      "fingerprint": "bcf54316605fea1de3bc8733f54de318dcf5ebf5927ea3a08c7976c53cf55ce5",
-      "published": "2026-08-16",
-      "updated": "2026-08-16",
+      "updated": "2026-08-24",
       "revision": 2,
       "kind": "updated"
     },
-    "penetrating-keratoplasty": {
-      "fingerprint": "edfbde0f75c822df45972b221578ee50a9da0ff606e59e550e4fc8480e8c38c4",
+    "events": {
+      "fingerprint": "1e24a7a9019dc80bd067b2f0f04a71bb963efb3026b1f5610344abdeb7f415dd",
       "published": "2026-08-16",
-      "updated": "2026-08-16",
-      "revision": 1,
-      "kind": "new"
+      "updated": "2026-08-24",
+      "revision": 4,
+      "kind": "updated"
+    },
+    "ophthasearch": {
+      "fingerprint": "1fa04df7240832037ed6f1a5d3536d1826ee6a20db6e2cce6e4cc9678f47115f",
+      "published": "2026-08-16",
+      "updated": "2026-08-24",
+      "revision": 3,
+      "kind": "updated"
+    },
+    "penetrating-keratoplasty": {
+      "fingerprint": "804961fc1c6606b4ee2111fb4765409ef23ddf4975d9058bc9c99a145a9d7bcd",
+      "published": "2026-08-16",
+      "updated": "2026-08-24",
+      "revision": 2,
+      "kind": "updated"
     }
   }
 }
