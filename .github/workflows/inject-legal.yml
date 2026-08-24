@@ -40,6 +40,7 @@ on:
       - 'tests/doctors-updates.test.mjs'
       - 'tests/test_doctor_retention_inject.py'
       - 'tests/doctor-retention.test.mjs'
+      - 'tests/test_professional_updates_page.py'
       - 'tests/test_content_analytics.py'
       - 'tests/test_analytics_events.mjs'
       - 'tests/patient-updates.test.mjs'
@@ -73,6 +74,7 @@ jobs:
       - run: python -m unittest tests/test_generate_doctors_updates.py
       - run: python -m unittest tests/test_doctors_updates_inject.py
       - run: python -m unittest tests/test_doctor_retention_inject.py
+      - run: python -m unittest tests/test_professional_updates_page.py
       - run: python -m unittest tests/test_content_analytics.py
       - run: python -m unittest tests/test_patient_updates_inject.py
       - run: python -m unittest tests/test_patient_consultation_cta.py
