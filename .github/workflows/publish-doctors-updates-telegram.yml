@@ -1,0 +1,47 @@
+name: Publish clinician updates to Telegram
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'for-doctors/updates.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  TELEGRAM_CHAT_ID: '@DrShemMYu'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Publisher tests
+        run: python -m unittest tests/test_publish_doctors_updates_telegram.py
+      - name: Prepare previous clinician feed
+        run: |
+          if git show HEAD^:for-doctors/updates.json > /tmp/previous-doctors-updates.json 2>/dev/null; then
+            echo "Previous clinician feed loaded"
+          else
+            printf '[]\n' > /tmp/previous-doctors-updates.json
+            echo "No previous clinician feed found"
+          fi
+      - name: Telegram is not configured
+        if: env.TELEGRAM_BOT_TOKEN == ''
+        run: echo "TELEGRAM_BOT_TOKEN is not configured; clinician update publication is disabled."
+      - name: Publish new clinician event revisions
+        if: env.TELEGRAM_BOT_TOKEN != ''
+        run: |
+          python scripts/publish_doctors_updates_telegram.py \
+            --previous /tmp/previous-doctors-updates.json \
+            --current for-doctors/updates.json \
+            --chat-id "$TELEGRAM_CHAT_ID"
