@@ -57,6 +57,18 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/for-doctors/events/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/for-doctors/events/"/>
   </url>
+  <url>
+    <loc>https://matveyshemyakin.ru/collaboration/</loc><lastmod>2026-08-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/collaboration/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/collaboration/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/collaboration/"/>
+  </url>
+  <url>
+    <loc>https://matveyshemyakin.ru/en/collaboration/</loc><lastmod>2026-08-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/collaboration/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/collaboration/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/collaboration/"/>
+  </url>
   <url><loc>https://matveyshemyakin.ru/privacy.html</loc><lastmod>2026-07-21</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/en/privacy.html</loc><lastmod>2026-07-21</lastmod></url>
   <url><loc>https://matveyshemyakin.ru/en/for-doctors/</loc><lastmod>2026-08-16</lastmod></url>
