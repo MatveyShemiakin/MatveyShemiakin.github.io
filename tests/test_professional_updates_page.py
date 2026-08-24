@@ -21,9 +21,14 @@ class ProfessionalUpdatesPageTests(unittest.TestCase):
             self.assertNotIn('style="', text)
 
     def test_hub_workspace_links_to_full_update_feed_in_both_languages(self):
-        ru = (ROOT / 'scripts' / 'inject_doctor_retention.py').read_text(encoding='utf-8')
-        self.assertIn('/for-doctors/updates/', ru)
-        self.assertIn('/en/for-doctors/updates/', ru)
+        injector = (ROOT / 'scripts' / 'inject_doctor_retention.py').read_text(encoding='utf-8')
+        self.assertIn('/for-doctors/updates/', injector)
+        self.assertIn('/en/for-doctors/updates/', injector)
+
+    def test_update_pages_are_present_in_sitemap_with_language_alternates(self):
+        sitemap = (ROOT / 'sitemap.xml').read_text(encoding='utf-8')
+        self.assertIn('https://matveyshemyakin.ru/for-doctors/updates/', sitemap)
+        self.assertIn('https://matveyshemyakin.ru/en/for-doctors/updates/', sitemap)
 
 
 if __name__ == '__main__':
