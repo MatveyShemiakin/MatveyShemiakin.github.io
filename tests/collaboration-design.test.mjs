@@ -24,6 +24,7 @@ test('doctor hubs place the animated collaboration entry before the hero', () =>
     assert.match(html, new RegExp(`href="${href.replaceAll('/', '\\/')}"`));
     assert.ok(html.includes(label), `${path}: localized CTA label is missing`);
     assert.ok(html.includes('doctor-collaboration-entry__icon'), `${path}: CTA icon is missing`);
+    assert.ok(html.includes('/for-doctors/collaboration-entry.css'), `${path}: CTA stylesheet is missing`);
   }
 });
 
@@ -31,15 +32,16 @@ test('collaboration pages keep six semantic SVG card icons in both languages', (
   for (const path of collaborationPages) {
     const html = read(path);
     assert.equal((html.match(/class="card-icon card-icon--/g) || []).length, 6, `${path}: expected six card icons`);
-    assert.ok((html.match(/<svg/g) || []).length >= 7, `${path}: SVG icon system is incomplete`);
+    assert.ok((html.match(/<svg/g) || []).length >= 11, `${path}: SVG icon system is incomplete`);
     assert.ok(html.includes('class="theme-icon"'), `${path}: theme control must use an SVG icon`);
     assert.ok(!html.includes('>◐<'), `${path}: legacy text theme glyph must be removed`);
     assert.ok(html.includes('class="collaboration-back"'), `${path}: mobile/compact back route to the doctors section is missing`);
+    assert.ok(html.includes('/collaboration/assets/design-refresh.css'), `${path}: refresh stylesheet is missing`);
   }
 });
 
 test('collaboration styles support animated icons, dark theme and mobile tap feedback', () => {
-  const css = read('collaboration/assets/styles.css');
+  const css = read('collaboration/assets/design-refresh.css');
   assert.ok(css.includes('.card-icon'), 'card icon styles are missing');
   assert.ok(css.includes('.card:active .card-icon'), 'touch feedback for card icons is missing');
   assert.ok(css.includes(':root[data-theme="dark"] .card-icon'), 'dark-theme icon treatment is missing');
