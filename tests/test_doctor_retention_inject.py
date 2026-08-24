@@ -29,6 +29,7 @@ class DoctorRetentionInjectorTests(unittest.TestCase):
         self.assertEqual(once.count('id="doctor-workspace"'), 1)
         self.assertIn('Профессиональное рабочее пространство', once)
         self.assertIn('https://t.me/DrShemMYu', once)
+        self.assertIn('/for-doctors/updates/', once)
         self.assertNotIn('style="', once)
 
     def test_hub_injection_localizes_english_copy(self):
@@ -37,6 +38,7 @@ class DoctorRetentionInjectorTests(unittest.TestCase):
         self.assertIn('Professional workspace', result)
         self.assertIn('Continue working', result)
         self.assertIn('Saved', result)
+        self.assertIn('/en/for-doctors/updates/', result)
 
     def test_material_injection_adds_tools_related_and_shared_assets_once(self):
         source = '<html lang="ru"><head></head><body><main><article><h1>Материал</h1><p>Текст</p></article></main><footer></footer></body></html>'
@@ -55,6 +57,10 @@ class DoctorRetentionInjectorTests(unittest.TestCase):
         result = self.module.inject_material(source, 'ru')
         self.assertIn('id="keep-me"', result)
         self.assertIn('Клинический текст', result)
+
+    def test_updates_service_slug_is_not_a_material_target(self):
+        self.assertFalse(self.module.is_material_slug('updates'))
+        self.assertTrue(self.module.is_material_slug('bacterial-keratitis'))
 
 
 if __name__ == '__main__':
