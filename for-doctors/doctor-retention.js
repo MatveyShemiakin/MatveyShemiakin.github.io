@@ -139,6 +139,15 @@
       .map(item=>({...item,topics:normalizeTopics(item.topics)}));
   }
 
+  function formatUpdateMeta(item,lang){
+    const en=String(lang||'').toLowerCase().startsWith('en');
+    const label=item&&item.kind==='updated'?(en?'UPDATED':'ОБНОВЛЕНО'):(en?'NEW':'НОВОЕ');
+    const raw=String(item&&item.updated||'');
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(raw))return label;
+    const [year,month,day]=raw.split('-');
+    return `${label} · ${en?`${day}/${month}/${year}`:`${day}.${month}.${year}`}`;
+  }
+
   function strings(lang){
     const en=String(lang||'').toLowerCase().startsWith('en');
     return en?{
@@ -148,6 +157,7 @@
       noContinue:'Your recently read materials will appear here.',
       noSaved:'Save useful materials to keep them here.',
       noPersonal:'Choose topics to personalize this section.',
+      noUpdates:'No professional updates are available yet.',
       saved:'Saved',save:'Save',progress:n=>`${Math.round(n*100)}% read`,
     }:{
       noReturn:'Выберите темы — при следующем визите здесь появятся обновления именно по вашим интересам.',
@@ -156,6 +166,7 @@
       noContinue:'Недавно прочитанные материалы появятся здесь автоматически.',
       noSaved:'Сохраняйте полезные материалы — они будут доступны здесь.',
       noPersonal:'Выберите темы, чтобы персонализировать этот блок.',
+      noUpdates:'Профессиональных обновлений пока нет.',
       saved:'Сохранено',save:'Сохранить',progress:n=>`Прочитано ${Math.round(n*100)}%`,
     };
   }
@@ -204,6 +215,7 @@
     const T=strings(lang);
     const storage=root.localStorage;
     const hub=doc.getElementById('doctor-workspace');
+    const allUpdatesNode=doc.getElementById('doctor-all-updates-list');
     const bookmarkButton=doc.getElementById('doctor-bookmark-toggle');
     const relatedNode=doc.getElementById('doctor-related-list');
     const telegramLinks=[...doc.querySelectorAll('[data-doctor-telegram]')];
@@ -216,6 +228,10 @@
       .then(raw=>{
         const items=normalizeFeed(raw);
         const topics=normalizeTopics(readJson(storage,TOPICS_KEY,[]));
+
+        if(allUpdatesNode){
+          renderList(doc,allUpdatesNode,items,lang,T.noUpdates,item=>formatUpdateMeta(item,lang));
+        }
 
         if(hub){
           const summary=doc.getElementById('doctor-return-summary');
@@ -320,6 +336,6 @@
   return {
     TOPICS_KEY,BOOKMARKS_KEY,CONTINUE_KEY,LAST_VISIT_KEY,
     normalizeTopics,toggleTopic,readJson,writeJson,newSinceVisit,
-    upsertBookmark,removeBookmark,upsertProgress,relatedItems,sendGoal,init,
+    upsertBookmark,removeBookmark,upsertProgress,relatedItems,formatUpdateMeta,sendGoal,init,
   };
 });
