@@ -120,7 +120,10 @@ function anchor(href,text='',classes=[]) {
 {
   const env=setup();
   const details={open:false};
-  const summary={parentElement:details};
+  const summary={
+    parentElement:details,
+    closest(selector){return selector==='details'?details:null;}
+  };
   fire(env,'click',targetFor(null,summary));
   details.open=true;
   await new Promise(resolve=>setTimeout(resolve,5));
