@@ -80,24 +80,85 @@ const validSynthesis = {
   insufficientEvidence: false
 };
 
+function postRequest(body = validPayload, origin = 'https://matveyshemyakin.ru') {
+  return new Request('https://worker.example/v1/synthesize', {
+    method: 'POST',
+    headers: { Origin: origin, 'Content-Type': 'application/json' },
+    body: typeof body === 'string' ? body : JSON.stringify(body)
+  });
+}
+
 test('wrong Origin is rejected before inference', async () => {
   let calls = 0;
   const env = { AI: { run: async () => { calls += 1; return { response: validSynthesis }; } } };
-  const request = new Request('https://worker.example/v1/synthesize', {
-    method: 'POST', headers: { Origin: 'https://evil.example', 'Content-Type': 'application/json' }, body: JSON.stringify(validPayload)
-  });
-  const response = await handleRequest(request, env, { waitUntil() {} }, { cache: new MemoryCache() });
+  const response = await handleRequest(postRequest(validPayload, 'https://evil.example'), env, { waitUntil() {} }, { cache: new MemoryCache() });
   assert.equal(response.status, 403);
   assert.equal(calls, 0);
+});
+
+test('allowed CORS preflight returns only the production origin', async () => {
+  const request = new Request('https://worker.example/v1/synthesize', {
+    method: 'OPTIONS',
+    headers: { Origin: 'https://matveyshemyakin.ru', 'Access-Control-Request-Method': 'POST' }
+  });
+  const response = await handleRequest(request, { AI: { run: async () => { throw new Error('must not run'); } } }, { waitUntil() {} });
+  assert.equal(response.status, 204);
+  assert.equal(response.headers.get('Access-Control-Allow-Origin'), 'https://matveyshemyakin.ru');
+  assert.match(response.headers.get('Access-Control-Allow-Methods') || '', /POST/);
+});
+
+test('request body above 80 KB is rejected before inference', async () => {
+  let calls = 0;
+  const env = { AI: { run: async () => { calls += 1; return { response: validSynthesis }; } } };
+  const oversized = JSON.stringify({ ...validPayload, padding: 'x'.repeat(90 * 1024) });
+  const response = await handleRequest(postRequest(oversized), env, { waitUntil() {} }, { cache: new MemoryCache() });
+  assert.equal(response.status, 400);
+  assert.equal(calls, 0);
+});
+
+test('Worker invokes Gemma with messages and dynamic json_schema response format', async () => {
+  let model;
+  let options;
+  const env = { AI: { run: async (receivedModel, receivedOptions) => {
+    model = receivedModel;
+    options = receivedOptions;
+    return { response: validSynthesis };
+  } } };
+  const response = await handleRequest(postRequest(), env, { waitUntil() {} }, { cache: new MemoryCache() });
+  assert.equal(response.status, 200);
+  assert.equal(model, MODEL);
+  assert.ok(Array.isArray(options.messages));
+  assert.equal(options.response_format.type, 'json_schema');
+  assert.deepEqual(options.response_format.json_schema.properties.citations.items.properties.sourceId.enum, ['S1', 'S2']);
+  assert.equal(options.max_completion_tokens, 900);
+});
+
+test('malformed model JSON returns controlled 502 and is not cached as success', async () => {
+  const env = { AI: { run: async () => ({ response: '{not-json' }) } };
+  const response = await handleRequest(postRequest(), env, { waitUntil() {} }, { cache: new MemoryCache() });
+  assert.equal(response.status, 502);
+  assert.equal((await response.json()).error.code, 'AI_INVALID_OUTPUT');
+});
+
+test('hallucinated model citation returns controlled 502', async () => {
+  const env = { AI: { run: async () => ({ response: { ...validSynthesis, citations: [{ sourceId: 'S12', relation: 'supports', statement: 'Invented source.' }] } }) } };
+  const response = await handleRequest(postRequest(), env, { waitUntil() {} }, { cache: new MemoryCache() });
+  assert.equal(response.status, 502);
+  assert.equal((await response.json()).error.code, 'AI_INVALID_OUTPUT');
+});
+
+test('Workers AI runtime failure returns controlled 503', async () => {
+  const env = { AI: { run: async () => { throw new Error('quota exhausted'); } } };
+  const response = await handleRequest(postRequest(), env, { waitUntil() {} }, { cache: new MemoryCache() });
+  assert.equal(response.status, 503);
+  assert.equal((await response.json()).error.code, 'AI_UNAVAILABLE');
 });
 
 test('identical validated packet is served from cache on second request', async () => {
   let calls = 0;
   const env = { AI: { run: async () => { calls += 1; return { response: validSynthesis }; } } };
   const cache = new MemoryCache();
-  const makeRequest = () => new Request('https://worker.example/v1/synthesize', {
-    method: 'POST', headers: { Origin: 'https://matveyshemyakin.ru', 'Content-Type': 'application/json' }, body: JSON.stringify(validPayload)
-  });
+  const makeRequest = () => postRequest();
   await handleRequest(makeRequest(), env, { waitUntil(promise) { return promise; } }, { cache });
   const second = await handleRequest(makeRequest(), env, { waitUntil(promise) { return promise; } }, { cache });
   assert.equal(calls, 1);
