@@ -125,7 +125,7 @@ export async function reasonOverEvidence(evidencePack, env, deps = {}) {
   const response = await run(MODEL, {
     messages: buildReasoningMessages(evidencePack),
     response_format: { type: 'json_schema', json_schema: buildReasoningSchema(sourceIds) },
-    max_completion_tokens: 3600,
+    max_completion_tokens: 6000,
     reasoning_effort: 'low',
     chat_template_kwargs: { enable_thinking: false, clear_thinking: true },
     temperature: 0.1
