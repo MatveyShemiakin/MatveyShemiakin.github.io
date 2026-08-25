@@ -1,10 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { selectEvidenceSources, buildAiPayload, validateAiEnvelope } from '../for-doctors/ophthasearch/ophthasearch-ai.js';
+import { DEFAULT_AI_ENDPOINT, selectEvidenceSources, buildAiPayload, validateAiEnvelope } from '../for-doctors/ophthasearch/ophthasearch-ai.js';
 
 const classifyEvidence = (result) => result.kind === 'trial'
   ? { tier: null, rank: 90, useForEfficacy: false }
   : { tier: result.tier, rank: result.tier ?? 6, useForEfficacy: true };
+
+test('production AI bridge uses the same-origin Worker endpoint', () => {
+  assert.equal(DEFAULT_AI_ENDPOINT, '/');
+});
 
 test('source selection is deterministic, bounded and text-backed', () => {
   const results = Array.from({ length: 15 }, (_, index) => ({
