@@ -91,6 +91,7 @@ export function buildReasoningMessages(evidencePack) {
         'Answer the clinician’s actual question and give practical ophthalmic management, not a literature dump.',
         'Weigh guideline positions, systematic reviews, randomized trials, comparative studies, safety evidence, alternatives, patient modifiers and uncertainty.',
         'For comparison questions, directly compare the named alternatives before discussing context; do not substitute a generic disease summary.',
+        'When the clinician asks for drug A versus drug B, compare A and B as the requested separate therapies. Do not silently replace that question with evidence about a fixed combination or fixed-dose combination of A+B; combination evidence may be mentioned only as secondary context if clearly labelled as such.',
         'For surgery questions, prioritize procedure selection, indications, alternatives, expected outcomes, important complications and follow-up when supported.',
         'For therapy questions, specify treatment sequence, monitoring and escalation/de-escalation criteria when supported.',
         'If the available evidence supports a clinically actionable answer, management must contain at least one practical next step with source citations. Leave management empty only when the Evidence Pack truly cannot support an action.',
@@ -124,7 +125,9 @@ export async function reasonOverEvidence(evidencePack, env, deps = {}) {
   const response = await run(MODEL, {
     messages: buildReasoningMessages(evidencePack),
     response_format: { type: 'json_schema', json_schema: buildReasoningSchema(sourceIds) },
-    max_completion_tokens: 6000,
+    max_completion_tokens: 3600,
+    reasoning_effort: 'low',
+    chat_template_kwargs: { enable_thinking: false, clear_thinking: true },
     temperature: 0.1
   });
   const draft = normalizeReasoningDraft(parseStructuredModelResponse(response, {
