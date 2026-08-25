@@ -1,0 +1,111 @@
+name: Deploy OphthaSearch Worker
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '_worker.js'
+      - 'wrangler.jsonc'
+      - 'workers/ophthasearch-ai/**'
+      - 'workers/ophthasearch-v2/**'
+      - '.github/workflows/deploy-ophthasearch-worker.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ophthasearch-worker-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check Cloudflare deployment secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test "${#CLOUDFLARE_ACCOUNT_ID}" -eq 32
+
+      - name: Install Wrangler
+        run: npm install --no-save wrangler@4
+
+      - name: Deploy OphthaSearch Worker
+        run: npx wrangler deploy --config wrangler.jsonc
+
+      - name: Verify named comparison synthesis
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint='https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev/v2/research'
+          payload='{"schemaVersion":"2.0","language":"ru","question":"Есть ли преимущество латанопроста перед тимололом при первичной открытоугольной глаукоме?","mode":"standard","filters":{}}'
+          success=0
+
+          for attempt in 1 2 3; do
+            echo "Production smoke attempt ${attempt}/3"
+            if curl --fail-with-body --silent --show-error --max-time 120 \
+              -H 'Origin: https://matveyshemyakin.ru' \
+              -H 'Content-Type: application/json' \
+              -X POST \
+              --data "$payload" \
+              "$endpoint" > /tmp/ophtha-response.json; then
+              if node <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/ophtha-response.json', 'utf8'));
+          if (body?.ok !== true) throw new Error(`Worker returned ok=${body?.ok}`);
+          const result = body.result || {};
+          const intent = result.intent || {};
+          const interventions = Array.isArray(intent.interventions) ? intent.interventions.map(String) : [];
+          const comparators = Array.isArray(intent.comparators) ? intent.comparators.map(String) : [];
+          if (intent.question_type !== 'comparison') throw new Error(`question_type=${intent.question_type}`);
+          if (!interventions.some((value) => /latanoprost/i.test(value))) throw new Error(`latanoprost missing: ${JSON.stringify(interventions)}`);
+          if (!comparators.some((value) => /timolol/i.test(value))) throw new Error(`timolol missing: ${JSON.stringify(comparators)}`);
+          if (result.status === 'evidence_only') throw new Error('deployed Worker returned evidence_only');
+          const bottomLine = String(result?.answer?.clinical_bottom_line || '').trim();
+          if (!bottomLine) throw new Error('clinical_bottom_line is empty');
+          const citations = Array.isArray(result?.answer?.bottom_line_citations) ? result.answer.bottom_line_citations.length : 0;
+          if (!citations) throw new Error('clinical_bottom_line has no verified citations');
+          const adapters = Array.isArray(result?.diagnostics?.adapters) ? result.diagnostics.adapters : [];
+          const jstage = adapters.filter((entry) => entry?.adapter === 'jstage');
+          if (jstage.some((entry) => entry?.error === 'adapter-unavailable')) throw new Error('J-STAGE adapter is unavailable in deployed Worker');
+          console.log(JSON.stringify({
+            status: result.status,
+            question_type: intent.question_type,
+            interventions,
+            comparators,
+            sources: Array.isArray(result?.answer?.sources) ? result.answer.sources.length : 0,
+            citations,
+            jstage: jstage.map((entry) => ({ status: entry.status, total: entry.total, error: entry.error || '' })),
+            bottomLine
+          }, null, 2));
+          NODE
+              then
+                success=1
+                break
+              fi
+            fi
+            echo 'Smoke attempt failed; response follows:'
+            cat /tmp/ophtha-response.json 2>/dev/null || true
+            sleep 15
+          done
+
+          if [ "$success" -ne 1 ]; then
+            echo 'Production OphthaSearch smoke did not pass.' >&2
+            exit 1
+          fi
