@@ -65,7 +65,7 @@ export function buildIntentMessages(request) {
         'For questions asking whether A is better than B, set question_type to comparison, interventions to A and comparators to B.',
         'Infer only the ophthalmic domain/condition that is strongly implied by standard specialist terminology; otherwise leave condition empty and record the ambiguity.',
         'Use population for explicit patient subgroups, outcomes for explicit or strongly implied clinical endpoints, and modifiers for case details that should affect search relevance.',
-        'needs_dosing is true only when the user asks for a dose, concentration, frequency, duration or treatment regimen.',
+        'For broad pharmacological-therapy questions about first-line treatment or combinations, needs_dosing may be true because a clinically useful answer normally requires regimen detail. For pure comparative-effect questions, set needs_dosing false unless dosing was requested.',
         'needs_alternatives is true for comparison, therapy, surgery or management questions.',
         'Return only structured JSON matching the supplied schema.'
       ].join('\n')
@@ -133,7 +133,7 @@ function detectQuestionType(text, condition) {
   if (/операц|оперир|хирург|surgery|surgical|vitrectom|пилинг|peeling/.test(text)) return 'surgery';
   if (['epiretinal membrane', 'full-thickness macular hole'].includes(condition) && /тактик|management|preferred management|стоит ли/.test(text)) return 'surgery';
   if (/диагност|diagnos|screen/.test(text)) return 'diagnosis';
-  if (/прогноз|prognos/.test(text)) return 'prognosis';
+  if (/прогноз|исход|prognos/.test(text)) return 'prognosis';
   if (/тактик|management|вести|ведение/.test(text)) return 'management';
   if (/лечен|treat|therap/.test(text)) return 'therapy';
   return 'general';
@@ -198,6 +198,7 @@ function fallbackInterpret(request) {
   const outcomes = detectOutcomes(text, domain);
   const modifiers = detectModifiers(text, condition);
   const asksForDosing = /доз|концентрац|кратност|схем|длительност|dose|dosing|concentration|frequency|duration|regimen/.test(text);
+  const broadPharmacotherapy = question_type === 'therapy' && interventions.includes('pharmacological therapy');
 
   return normalizeIntent({
     language: request.language,
@@ -210,7 +211,7 @@ function fallbackInterpret(request) {
     outcomes,
     modifiers,
     requested_depth: 'specialist',
-    needs_dosing: asksForDosing,
+    needs_dosing: asksForDosing || broadPharmacotherapy,
     needs_alternatives: ['comparison', 'therapy', 'surgery', 'management'].includes(question_type),
     ambiguities: condition ? [] : ['specific ophthalmic condition not resolved']
   });
