@@ -22,6 +22,21 @@ const NAMED_THERAPIES = [
   ['brolucizumab', ['brolucizumab', 'бролуцизумаб']]
 ];
 
+const NAMED_PROCEDURES = [
+  ['inverted ILM flap', [
+    'inverted ilm flap', 'inverted internal limiting membrane flap',
+    'инвертированный лоскут впм', 'инвертированный лоскут внутренней пограничной мембраны'
+  ]],
+  ['internal limiting membrane peeling', [
+    'conventional ilm peeling', 'standard ilm peeling', 'internal limiting membrane peeling', 'ilm peeling',
+    'стандартный пилинг впм', 'пилинг впм', 'пилинг внутренней пограничной мембраны'
+  ]],
+  ['pars plana vitrectomy', ['pars plana vitrectomy', 'ppv', 'vitrectomy', 'витрэктомия', 'витреэктомия']],
+  ['scleral buckling', ['scleral buckling', 'scleral buckle', 'склеральное пломбирование', 'эписклеральное пломбирование']],
+  ['pneumatic retinopexy', ['pneumatic retinopexy', 'пневморетинопексия']],
+  ['selective laser trabeculoplasty', ['selective laser trabeculoplasty', 'slt', 'слт', 'селективная лазерная трабекулопластика']]
+];
+
 function normalizedQuestion(value) {
   return String(value || '').toLowerCase().replace(/ё/g, 'е').replace(/[–—]/g, '-').replace(/\s+/g, ' ').trim();
 }
@@ -63,7 +78,8 @@ export function buildIntentMessages(request) {
         'You are the query interpretation component of OphthaSearch, a professional ophthalmology research system.',
         'Convert the clinician question into a compact research intent. Do not answer the medical question and do not invent evidence.',
         'Preserve specifically named drugs, procedures, devices and comparators as canonical English generic terms whenever possible.',
-        'For questions asking whether A is better than B, set question_type to comparison, interventions to A and comparators to B.',
+        'Preserve clinically meaningful disease subtypes such as rhegmatogenous retinal detachment rather than collapsing them to a broader parent condition.',
+        'For questions asking whether A is better than B, set question_type to comparison, interventions to A and comparators to B. Preserve procedure direction, for example inverted ILM flap as the intervention and conventional internal limiting membrane peeling as the comparator.',
         'Infer only the ophthalmic domain/condition that is strongly implied by standard specialist terminology; otherwise leave condition empty and record the ambiguity.',
         'Use population for explicit patient subgroups, outcomes for explicit or strongly implied clinical endpoints, and modifiers for case details that should affect search relevance.',
         'For broad pharmacological-therapy questions about first-line treatment or combinations, needs_dosing may be true because a clinically useful answer normally requires regimen detail. For pure comparative-effect questions, set needs_dosing false unless dosing was requested.',
@@ -111,7 +127,10 @@ function detectCondition(text) {
   if (/full[- ]thickness\s+macular\s+hole|macular\s+hole|макулярн[а-я]*\s+разрыв/.test(text)) {
     return { domain: 'retina', condition: 'full-thickness macular hole' };
   }
-  if (/rhegmatogenous\s+retinal\s+detachment|retinal\s+detachment|регматогенн[а-я]*\s+отслойк[а-я]*\s+сетчатк|отслойк[а-я]*\s+сетчатк/.test(text)) {
+  if (/rhegmatogenous\s+retinal\s+detachment|\brrd\b|регматогенн[а-я]*\s+отслойк[а-я]*\s+сетчатк/.test(text)) {
+    return { domain: 'retina', condition: 'rhegmatogenous retinal detachment' };
+  }
+  if (/retinal\s+detachment|отслойк[а-я]*\s+сетчатк/.test(text)) {
     return { domain: 'retina', condition: 'retinal detachment' };
   }
   if (/iol\s+dislocation|intraocular\s+lens\s+dislocation|дислокац[а-я]*\s+иол|смещен[а-я]*\s+иол|дислокац[а-я]*\s+интраокулярн[а-я]*\s+линз/.test(text)) {
@@ -137,15 +156,28 @@ function detectQuestionType(text, condition) {
   return 'general';
 }
 
-function detectNamedTherapies(text) {
-  const result = [];
-  for (const [canonical, aliases] of NAMED_THERAPIES) {
-    if (aliases.some((alias) => text.includes(normalizedQuestion(alias)))) result.push(canonical);
+function detectNamedItems(text, catalogue) {
+  const matches = [];
+  for (const [canonical, aliases] of catalogue) {
+    let earliest = Number.POSITIVE_INFINITY;
+    for (const alias of aliases) {
+      const index = text.indexOf(normalizedQuestion(alias));
+      if (index >= 0) earliest = Math.min(earliest, index);
+    }
+    if (Number.isFinite(earliest)) matches.push({ canonical, index: earliest });
   }
-  return result;
+  return matches.sort((a, b) => a.index - b.index).map((item) => item.canonical);
 }
 
-function detectInterventions(text, questionType) {
+function detectNamedTherapies(text) {
+  return detectNamedItems(text, NAMED_THERAPIES);
+}
+
+function detectNamedProcedures(text) {
+  return detectNamedItems(text, NAMED_PROCEDURES);
+}
+
+function detectInterventions(text, questionType, condition) {
   const interventions = [];
   if (questionType === 'therapy' && /медикаментоз|лекарствен|фармаколог|препарат|капл|pharmacolog|medication|medical therapy|drug therapy|first[- ]line/.test(text)) {
     interventions.push('pharmacological therapy');
@@ -153,6 +185,9 @@ function detectInterventions(text, questionType) {
   if (/selective laser trabeculoplasty|\bslt\b|слт|селективн[а-я]*\s+лазерн[а-я]*\s+трабекулопласт/.test(text)) interventions.push('selective laser trabeculoplasty');
   if (/vitrectom|витрэктом|витреэктом/.test(text)) interventions.push('pars plana vitrectomy');
   if (/ilm\s+peel|пилинг[а-я]*\s+впм/.test(text)) interventions.push('internal limiting membrane peeling');
+  if (questionType === 'surgery' && condition === 'rhegmatogenous retinal detachment' && !interventions.length) {
+    interventions.push('pars plana vitrectomy', 'scleral buckling', 'pneumatic retinopexy');
+  }
   return [...new Set(interventions)];
 }
 
@@ -161,6 +196,8 @@ function detectOutcomes(text, domain) {
   if (/intraocular\s+pressure|\biop\b|внутриглазн[а-я]*\s+давлен|вгд/.test(text) || domain === 'glaucoma') outcomes.push('intraocular pressure');
   if (/visual\s+acuity|\bvis\b|острот[а-я]*\s+зрен/.test(text)) outcomes.push('visual acuity');
   if (/metamorph|метаморф/.test(text)) outcomes.push('metamorphopsia');
+  if (/reattach|re-attach|прилеган[а-я]*\s+сетчатк|анатомическ[а-я]*\s+успех/.test(text)) outcomes.push('retinal reattachment');
+  if (/closure|закрыт[а-я]*\s+разрыв/.test(text)) outcomes.push('anatomical closure');
   return outcomes;
 }
 
@@ -168,8 +205,8 @@ function detectModifiers(text, condition) {
   const modifiers = [];
   const vis = text.match(/\bvis\s*[:=]?\s*\d+(?:[.,]\d+)?/i);
   if (vis) modifiers.push(vis[0].replace(',', '.'));
-  const size = text.match(/\b\d{2,4}\s*(?:µm|um|мкм)\b/i);
-  if (size) modifiers.push(size[0].replace(/um/i, 'µm').replace(/мкм/i, 'µm'));
+  const size = text.match(/(?:>|<|≥|≤)?\s*\d{2,4}\s*(?:µm|um|мкм)\b/i);
+  if (size) modifiers.push(size[0].replace(/\s+/g, ' ').replace(/um/i, 'µm').replace(/мкм/i, 'µm').trim());
   if (/phakic|факич/.test(text)) modifiers.push('phakic');
   if (/metamorph|метаморф/.test(text)) modifiers.push('metamorphopsia');
   if (/ocular\s+surface\s+disease|синдром[а-я]*\s+сух[а-я]*\s+глаз|сух[а-я]*\s+глаз/.test(text)) modifiers.push('ocular surface disease');
@@ -183,14 +220,18 @@ function fallbackInterpret(request) {
   const { domain, condition } = detectCondition(text);
   const question_type = detectQuestionType(text, condition);
   const namedTherapies = detectNamedTherapies(text);
-  let interventions = detectInterventions(text, question_type);
+  const namedProcedures = detectNamedProcedures(text);
+  let interventions = detectInterventions(text, question_type, condition);
   let comparators = [];
 
   if (question_type === 'comparison' && namedTherapies.length >= 2) {
     interventions = [namedTherapies[0]];
     comparators = namedTherapies.slice(1);
+  } else if (question_type === 'comparison' && namedProcedures.length >= 2) {
+    interventions = [namedProcedures[0]];
+    comparators = namedProcedures.slice(1);
   } else {
-    interventions = [...new Set([...interventions, ...namedTherapies])];
+    interventions = [...new Set([...interventions, ...namedTherapies, ...namedProcedures])];
   }
 
   const outcomes = detectOutcomes(text, domain);
