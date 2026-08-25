@@ -1,0 +1,100 @@
+name: Fix IOL clinical media
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-iol-clinical-media.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify current regression
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html = Path('for-doctors/iol-dislocation/index.html').read_text(encoding='utf-8')
+          assert 'assets/pupillary-capture-front.webp' not in html, 'Regression precondition no longer true'
+          assert 'assets/intrascleral-flange.webp' not in html, 'Regression precondition no longer true'
+          print('RED: clinical images are absent from static HTML')
+          PY
+
+      - name: Patch static clinical media
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('for-doctors/iol-dislocation/index.html')
+          html = path.read_text(encoding='utf-8')
+
+          html = html.replace(
+              '<link rel="stylesheet" href="page.css?v=20260825-3">',
+              '<link rel="stylesheet" href="page.css?v=20260825-3"><link rel="stylesheet" href="media.css?v=20260825-2">',
+              1,
+          )
+
+          html = html.replace(
+              '<figcaption>Клинический пример: гаптика ИОЛ визуализируется в просвете зрачка.</figcaption>',
+              '<figcaption><span class="figure-label">Клиническое фото 1</span>Дислокация ИОЛ: верхняя гаптика визуализируется в просвете зрачка. После мидриаза оцените положение ИОЛ и патологическую подвижность комплекса «ИОЛ–капсульный мешок» при движениях глаза.</figcaption>',
+              1,
+          )
+
+          urgent_start = html.index('<section class="section-card red-flags" id="urgent">')
+          urgent_end = html.index('</section><section class="section-card" id="surgery-indications">', urgent_start)
+          urgent = html[urgent_start:urgent_end]
+          urgent_figure = '<figure class="clinical-figure" data-clinical-media="pupillary-capture"><div class="clinical-photo protected-media"><img src="assets/pupillary-capture-front.webp" alt="Ущемление дислоцированной ИОЛ в зрачке, фронтальный вид" data-lightbox loading="lazy"></div><figcaption><span class="figure-label">Клиническое фото 3</span>Ущемление дислоцированной ИОЛ в зрачке — фронтальный вид.</figcaption></figure>'
+          urgent = urgent + urgent_figure
+          html = html[:urgent_start] + urgent + html[urgent_end:]
+
+          fixation_start = html.index('<section class="section-card" id="fixation">')
+          fixation_end = html.index('</section><section class="section-card" id="vitrectomy">', fixation_start)
+          fixation = html[fixation_start:fixation_end]
+          flange_figure = '<figure class="clinical-figure" data-clinical-media="intrascleral-flange"><div class="clinical-photo protected-media"><img src="assets/intrascleral-flange.webp" alt="Интрасклеральный фланцевый элемент фиксации ИОЛ" data-lightbox loading="lazy"></div><figcaption><span class="figure-label">Клиническое фото 5</span>Интрасклеральный фланцевый элемент фиксации: оценивать положение относительно роговицы, конъюнктивы и предполагаемой оси фиксации.</figcaption></figure>'
+          fixation = fixation.replace('<div class="disclaimer">', flange_figure + '<div class="disclaimer">', 1)
+          html = html[:fixation_start] + fixation + html[fixation_end:]
+
+          html = html.replace(
+              '<figcaption>Глаз с дислоцированной ИОЛ после неоднократных антиглаукомных вмешательств: состояние конъюнктивы и ранее сформированные пути оттока необходимо учитывать при выборе зоны и метода фиксации.</figcaption>',
+              '<figcaption><span class="figure-label">Клиническое фото 7</span>Дислоцированная ИОЛ в многократно оперированном глазу с глаукомой: анатомия переднего отрезка определяет допустимые варианты фиксации.</figcaption>',
+              1,
+          )
+
+          html = html.replace('script.js?v=20260825-3', 'script.js?v=20260825-4', 1)
+          path.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Verify static HTML media
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html = Path('for-doctors/iol-dislocation/index.html').read_text(encoding='utf-8')
+          required = [
+              'assets/iol-haptic-pupil.webp',
+              'assets/pupillary-capture-front.webp',
+              'assets/intrascleral-flange.webp',
+              'assets/dislocated-iol-glaucoma.webp',
+              'media.css?v=20260825-2',
+              'script.js?v=20260825-4',
+              'data-clinical-media="pupillary-capture"',
+              'data-clinical-media="intrascleral-flange"',
+          ]
+          missing = [item for item in required if item not in html]
+          assert not missing, f'Missing from static HTML: {missing}'
+          assert 'style="' not in html, 'Inline styles are prohibited'
+          print('GREEN: all four clinical images are present in static HTML')
+          PY
+
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add for-doctors/iol-dislocation/index.html
+          git commit -m "fix: render IOL clinical photos in static HTML"
+          git push
