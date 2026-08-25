@@ -31,28 +31,30 @@ test('production browser client does not call scientific provider APIs directly'
   }
 });
 
-test('Workers AI intent schema preserves named interventions and comparator', async () => {
+test('Workers AI intent parser accepts OpenAI-compatible chat completion shape', async () => {
   const schema = buildIntentSchema();
   assert.ok(schema.properties.interventions);
   assert.ok(schema.properties.comparators);
 
+  const intentPayload = {
+    domain: 'glaucoma',
+    condition: 'glaucoma',
+    question_type: 'comparison',
+    population: [],
+    interventions: ['latanoprost'],
+    comparators: ['timolol'],
+    outcomes: ['intraocular pressure'],
+    modifiers: [],
+    requested_depth: 'specialist',
+    needs_dosing: false,
+    needs_alternatives: true,
+    ambiguities: []
+  };
   const env = {
     AI: {
       run: async () => ({
-        response: JSON.stringify({
-          domain: 'glaucoma',
-          condition: 'glaucoma',
-          question_type: 'comparison',
-          population: [],
-          interventions: ['latanoprost'],
-          comparators: ['timolol'],
-          outcomes: ['intraocular pressure'],
-          modifiers: [],
-          requested_depth: 'specialist',
-          needs_dosing: false,
-          needs_alternatives: true,
-          ambiguities: []
-        })
+        id: 'chatcmpl-test',
+        choices: [{ message: { role: 'assistant', content: JSON.stringify(intentPayload) } }]
       })
     }
   };
