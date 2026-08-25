@@ -64,30 +64,12 @@ function citationList(ids, target) {
   }
 }
 
-function renderCitedItems(items, target) {
-  target.replaceChildren();
-  const values = Array.isArray(items) ? items : [];
-  if (!values.length) {
-    target.append(el('p', 'ophtha-v2-empty', 'Значимые данные в отобранном Evidence Pack не выделены.'));
-    return;
-  }
-  const list = el('div', 'ophtha-v2-list');
-  for (const item of values) {
-    const card = el('article', 'ophtha-v2-item');
-    card.append(el('p', '', clean(item?.text)));
-    const citations = el('div', 'ophtha-v2-citations');
-    citationList(item?.citations, citations);
-    if (citations.childElementCount) card.append(citations);
-    list.append(card);
-  }
-  target.append(list);
-}
-
 function renderManagement(items, target) {
+  if (!target) return;
   target.replaceChildren();
   const values = Array.isArray(items) ? items : [];
   if (!values.length) {
-    target.append(el('p', 'ophtha-v2-empty', 'Источник-подтверждённая схема лечения не сформирована. Это может означать недостаточность данных для безопасной конкретизации.'));
+    target.append(el('p', 'ophtha-v2-empty', 'Безопасно конкретизировать схему по найденным данным не удалось. Используйте клинический вывод и оригинальные источники ниже.'));
     return;
   }
   const list = el('div', 'ophtha-v2-management');
@@ -123,6 +105,47 @@ function renderManagement(items, target) {
   target.append(list);
 }
 
+function renderImportant(answer, target) {
+  if (!target) return;
+  target.replaceChildren();
+  const candidates = [
+    ...(Array.isArray(answer?.arguments_against) ? answer.arguments_against : []),
+    ...(Array.isArray(answer?.uncertainties) ? answer.uncertainties : []),
+    ...(Array.isArray(answer?.alternatives) ? answer.alternatives : [])
+  ];
+  const seen = new Set();
+  const items = [];
+  for (const item of candidates) {
+    const text = clean(item?.text);
+    const key = text.toLocaleLowerCase('ru-RU');
+    if (!text || seen.has(key)) continue;
+    seen.add(key);
+    items.push({ text, citations: item?.citations });
+  }
+
+  const interpretation = clean(answer?.clinical_interpretation);
+  if (!items.length && !interpretation) {
+    target.append(el('p', 'ophtha-v2-empty', 'Дополнительные ограничения или существенные неопределённости в сформированном ответе не выделены.'));
+    return;
+  }
+
+  const list = el('div', 'ophtha-v2-list');
+  for (const item of items) {
+    const card = el('article', 'ophtha-v2-item');
+    card.append(el('p', '', item.text));
+    const citations = el('div', 'ophtha-v2-citations');
+    citationList(item.citations, citations);
+    if (citations.childElementCount) card.append(citations);
+    list.append(card);
+  }
+  if (interpretation) {
+    const card = el('article', 'ophtha-v2-item');
+    card.append(el('p', '', interpretation));
+    list.append(card);
+  }
+  target.append(list);
+}
+
 function appendSourceLink(container, label, href) {
   const url = safeHttpUrl(href);
   if (!url) return;
@@ -134,6 +157,7 @@ function appendSourceLink(container, label, href) {
 }
 
 function renderSources(sources, target) {
+  if (!target) return;
   target.replaceChildren();
   const values = Array.isArray(sources) ? sources : [];
   if (!values.length) {
@@ -172,34 +196,23 @@ function renderSources(sources, target) {
   target.append(list);
 }
 
-function renderDiagnostics(diagnostics, target) {
-  target.replaceChildren();
-  const entries = Array.isArray(diagnostics?.adapters) ? diagnostics.adapters : [];
-  if (!entries.length) {
-    target.append(el('p', 'ophtha-v2-empty', 'Диагностика источников не требуется.'));
-    return;
-  }
-  const list = el('div', 'ophtha-v2-diagnostics-list');
-  for (const entry of entries) {
-    const row = el('div', 'ophtha-v2-diagnostic');
-    row.append(
-      el('span', '', `${clean(entry?.trackId)} · ${clean(entry?.adapter)}`),
-      el('strong', '', `${clean(entry?.status)}${Number(entry?.total) ? ` · ${Number(entry.total)}` : ''}`)
-    );
-    list.append(row);
-  }
-  target.append(list);
-}
-
 function confidenceLabel(value) {
   const labels = { high: 'Высокая уверенность', moderate: 'Умеренная уверенность', low: 'Низкая уверенность', insufficient: 'Недостаточно данных' };
   return labels[clean(value)] || 'Уверенность не определена';
 }
 
+function sourceCountLabel(count) {
+  const value = Number(count) || 0;
+  const mod10 = value % 10;
+  const mod100 = value % 100;
+  const word = mod10 === 1 && mod100 !== 11 ? 'источник' : (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14) ? 'источника' : 'источников');
+  return `${value} ${word}`;
+}
+
 function statusText(status) {
-  if (status === 'complete') return 'Поиск и клинический синтез завершены.';
-  if (status === 'partial') return 'Ответ сформирован по доступным источникам; один или несколько коннекторов не ответили в срок.';
-  if (status === 'evidence_only') return 'Доступен Evidence Pack без полноценного AI-синтеза.';
+  if (status === 'complete') return 'Клинический вывод сформирован.';
+  if (status === 'partial') return 'Клинический вывод сформирован по доступным источникам.';
+  if (status === 'evidence_only') return 'Публикации найдены, но единый клинический вывод сейчас сформировать не удалось.';
   return 'Ответ получен.';
 }
 
@@ -208,23 +221,15 @@ export function renderResearchResult(result, root = document) {
   const shell = root.querySelector('[data-v2-answer-shell]');
   if (shell) shell.hidden = false;
   setText(root.querySelector('[data-v2-bottom-line]'), answer.clinical_bottom_line);
-  setText(root.querySelector('[data-v2-confidence]'), confidenceLabel(answer.confidence));
+  const sourceCount = Array.isArray(answer.sources) ? answer.sources.length : 0;
+  const confidence = sourceCount
+    ? `${confidenceLabel(answer.confidence)} · ${sourceCountLabel(sourceCount)}`
+    : confidenceLabel(answer.confidence);
+  setText(root.querySelector('[data-v2-confidence]'), confidence);
   citationList(answer.bottom_line_citations, root.querySelector('[data-v2-bottom-line-citations]'));
   renderManagement(answer.management, root.querySelector('[data-v2-management]'));
-  renderCitedItems(answer.guideline_positions, root.querySelector('[data-v2-guidelines]'));
-  renderCitedItems(answer.arguments_for, root.querySelector('[data-v2-arguments-for]'));
-  renderCitedItems(answer.arguments_against, root.querySelector('[data-v2-arguments-against]'));
-  renderCitedItems(answer.alternatives, root.querySelector('[data-v2-alternatives]'));
-  renderCitedItems(answer.uncertainties, root.querySelector('[data-v2-uncertainties]'));
-
-  const interpretation = root.querySelector('[data-v2-clinical-interpretation]');
-  if (interpretation) {
-    interpretation.replaceChildren();
-    const text = clean(answer.clinical_interpretation);
-    interpretation.append(text ? el('p', '', text) : el('p', 'ophtha-v2-empty', 'Отдельная клиническая интерпретация не добавлена.'));
-  }
+  renderImportant(answer, root.querySelector('[data-v2-important]'));
   renderSources(answer.sources, root.querySelector('[data-v2-sources]'));
-  renderDiagnostics(result?.diagnostics, root.querySelector('[data-v2-diagnostics]'));
 
   const status = root.querySelector('[data-v2-status]');
   if (status) {
@@ -250,7 +255,7 @@ function initCanary() {
       return;
     }
     button.disabled = true;
-    status.textContent = 'Интерпретирую вопрос, строю research plan и собираю Evidence Pack…';
+    status.textContent = 'Ищу релевантные публикации и формирую клинический вывод…';
     status.dataset.state = 'loading';
     try {
       const result = await requestResearch(question, document.documentElement.lang === 'en' ? 'en' : 'ru');
