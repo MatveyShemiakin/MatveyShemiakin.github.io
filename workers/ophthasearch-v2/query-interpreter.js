@@ -1,7 +1,100 @@
 import { normalizeIntent, validateResearchRequest } from './contracts.js';
 
+export const INTENT_MODEL = '@cf/google/gemma-4-26b-a4b-it';
+
+const QUESTION_TYPES = ['general', 'comparison', 'therapy', 'surgery', 'management', 'diagnosis', 'prognosis', 'safety'];
+
+const NAMED_THERAPIES = [
+  ['latanoprost', ['latanoprost', 'латанопрост']],
+  ['timolol', ['timolol', 'тимолол']],
+  ['travoprost', ['travoprost', 'травопрост']],
+  ['bimatoprost', ['bimatoprost', 'биматопрост']],
+  ['tafluprost', ['tafluprost', 'тафлупрост']],
+  ['brimonidine', ['brimonidine', 'бримонидин']],
+  ['dorzolamide', ['dorzolamide', 'дорзоламид']],
+  ['brinzolamide', ['brinzolamide', 'бринзоламид']],
+  ['netarsudil', ['netarsudil', 'нетарсудил']],
+  ['aflibercept', ['aflibercept', 'афлиберцепт']],
+  ['faricimab', ['faricimab', 'фарицимаб']],
+  ['ranibizumab', ['ranibizumab', 'ранибизумаб']],
+  ['bevacizumab', ['bevacizumab', 'бевацизумаб']],
+  ['brolucizumab', ['brolucizumab', 'бролуцизумаб']]
+];
+
 function normalizedQuestion(value) {
   return String(value || '').toLowerCase().replace(/ё/g, 'е').replace(/[–—]/g, '-').replace(/\s+/g, ' ').trim();
+}
+
+function stringArraySchema(maxItems = 16) {
+  return { type: 'array', maxItems, items: { type: 'string', minLength: 1, maxLength: 300 } };
+}
+
+export function buildIntentSchema() {
+  return {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      domain: { type: 'string', maxLength: 120 },
+      condition: { type: 'string', maxLength: 240 },
+      question_type: { type: 'string', enum: QUESTION_TYPES },
+      population: stringArraySchema(),
+      interventions: stringArraySchema(),
+      comparators: stringArraySchema(),
+      outcomes: stringArraySchema(),
+      modifiers: stringArraySchema(),
+      requested_depth: { type: 'string', enum: ['specialist'] },
+      needs_dosing: { type: 'boolean' },
+      needs_alternatives: { type: 'boolean' },
+      ambiguities: stringArraySchema(8)
+    },
+    required: [
+      'domain', 'condition', 'question_type', 'population', 'interventions', 'comparators',
+      'outcomes', 'modifiers', 'requested_depth', 'needs_dosing', 'needs_alternatives', 'ambiguities'
+    ]
+  };
+}
+
+export function buildIntentMessages(request) {
+  return [
+    {
+      role: 'system',
+      content: [
+        'You are the query interpretation component of OphthaSearch, a professional ophthalmology research system.',
+        'Convert the clinician question into a compact research intent. Do not answer the medical question and do not invent evidence.',
+        'Preserve specifically named drugs, procedures, devices and comparators as canonical English generic terms whenever possible.',
+        'For questions asking whether A is better than B, set question_type to comparison, interventions to A and comparators to B.',
+        'Infer only the ophthalmic domain/condition that is strongly implied by standard specialist terminology; otherwise leave condition empty and record the ambiguity.',
+        'Use population for explicit patient subgroups, outcomes for explicit or strongly implied clinical endpoints, and modifiers for case details that should affect search relevance.',
+        'needs_dosing is true only when the user asks for a dose, concentration, frequency, duration or treatment regimen.',
+        'needs_alternatives is true for comparison, therapy, surgery or management questions.',
+        'Return only structured JSON matching the supplied schema.'
+      ].join('\n')
+    },
+    {
+      role: 'user',
+      content: JSON.stringify({ language: request.language, question: request.question })
+    }
+  ];
+}
+
+function parseModelIntent(response) {
+  const raw = response?.response ?? response;
+  if (raw && typeof raw === 'object') return raw;
+  try { return JSON.parse(String(raw || '')); }
+  catch { throw new Error('Intent model returned invalid JSON'); }
+}
+
+export async function interpretIntentWithAi(payload, env = {}, deps = {}) {
+  const request = validateResearchRequest(payload);
+  const run = deps.runModel || env?.AI?.run?.bind(env.AI);
+  if (typeof run !== 'function') throw new Error('Workers AI binding unavailable');
+  const response = await run(INTENT_MODEL, {
+    messages: buildIntentMessages(request),
+    response_format: { type: 'json_schema', json_schema: buildIntentSchema() },
+    max_completion_tokens: 700,
+    temperature: 0
+  });
+  return normalizeIntent({ ...parseModelIntent(response), language: request.language });
 }
 
 function detectCondition(text) {
@@ -34,6 +127,8 @@ function detectCondition(text) {
 }
 
 function detectQuestionType(text, condition) {
+  if (/преимущ|сравн|по сравнению|\bversus\b|\bvs\b|better|superior|inferior/.test(text)) return 'comparison';
+  if (/безопас|осложн|риск|safety|risk|adverse/.test(text)) return 'safety';
   if (/медикаментоз|лекарствен|фармаколог|препарат|капл|pharmacolog|medication|medical therapy|drug therapy|first[- ]line/.test(text)) return 'therapy';
   if (/операц|оперир|хирург|surgery|surgical|vitrectom|пилинг|peeling/.test(text)) return 'surgery';
   if (['epiretinal membrane', 'full-thickness macular hole'].includes(condition) && /тактик|management|preferred management|стоит ли/.test(text)) return 'surgery';
@@ -44,6 +139,14 @@ function detectQuestionType(text, condition) {
   return 'general';
 }
 
+function detectNamedTherapies(text) {
+  const result = [];
+  for (const [canonical, aliases] of NAMED_THERAPIES) {
+    if (aliases.some((alias) => text.includes(normalizedQuestion(alias)))) result.push(canonical);
+  }
+  return result;
+}
+
 function detectInterventions(text, questionType) {
   const interventions = [];
   if (questionType === 'therapy' && /медикаментоз|лекарствен|фармаколог|препарат|капл|pharmacolog|medication|medical therapy|drug therapy|first[- ]line/.test(text)) {
@@ -52,7 +155,7 @@ function detectInterventions(text, questionType) {
   if (/selective laser trabeculoplasty|\bslt\b|слт|селективн[а-я]*\s+лазерн[а-я]*\s+трабекулопласт/.test(text)) interventions.push('selective laser trabeculoplasty');
   if (/vitrectom|витрэктом|витреэктом/.test(text)) interventions.push('pars plana vitrectomy');
   if (/ilm\s+peel|пилинг[а-я]*\s+впм/.test(text)) interventions.push('internal limiting membrane peeling');
-  return interventions;
+  return [...new Set(interventions)];
 }
 
 function detectOutcomes(text, domain) {
@@ -81,9 +184,21 @@ function fallbackInterpret(request) {
   const text = normalizedQuestion(request.question);
   const { domain, condition } = detectCondition(text);
   const question_type = detectQuestionType(text, condition);
-  const interventions = detectInterventions(text, question_type);
+  const namedTherapies = detectNamedTherapies(text);
+  let interventions = detectInterventions(text, question_type);
+  let comparators = [];
+
+  if (question_type === 'comparison' && namedTherapies.length >= 2) {
+    interventions = [namedTherapies[0]];
+    comparators = namedTherapies.slice(1);
+  } else {
+    interventions = [...new Set([...interventions, ...namedTherapies])];
+  }
+
   const outcomes = detectOutcomes(text, domain);
   const modifiers = detectModifiers(text, condition);
+  const asksForDosing = /доз|концентрац|кратност|схем|длительност|dose|dosing|concentration|frequency|duration|regimen/.test(text);
+
   return normalizeIntent({
     language: request.language,
     domain,
@@ -91,12 +206,12 @@ function fallbackInterpret(request) {
     question_type,
     population: [],
     interventions,
-    comparators: [],
+    comparators,
     outcomes,
     modifiers,
     requested_depth: 'specialist',
-    needs_dosing: question_type === 'therapy' && interventions.includes('pharmacological therapy'),
-    needs_alternatives: ['therapy', 'surgery', 'management'].includes(question_type),
+    needs_dosing: asksForDosing,
+    needs_alternatives: ['comparison', 'therapy', 'surgery', 'management'].includes(question_type),
     ambiguities: condition ? [] : ['specific ophthalmic condition not resolved']
   });
 }
