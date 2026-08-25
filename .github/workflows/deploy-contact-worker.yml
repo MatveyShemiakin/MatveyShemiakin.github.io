@@ -11,13 +11,21 @@ on:
 
 jobs:
   deploy:
-    if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' && secrets.CONTACT_RECIPIENT_EMAIL != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       contents: write
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CONTACT_RECIPIENT: ${{ secrets.CONTACT_RECIPIENT_EMAIL }}
     steps:
       - uses: actions/checkout@v4
+      - name: Check deployment secrets
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CONTACT_RECIPIENT"
       - name: Deploy contact Worker
         uses: cloudflare/wrangler-action@v4
         with:
@@ -26,8 +34,6 @@ jobs:
           workingDirectory: cloudflare/contact-worker
           secrets: |
             CONTACT_RECIPIENT
-        env:
-          CONTACT_RECIPIENT: ${{ secrets.CONTACT_RECIPIENT_EMAIL }}
       - name: Verify Worker route
         run: |
           code="$(curl --silent --show-error --output /tmp/contact-worker-response --write-out '%{http_code}' --request OPTIONS https://matveyshemyakin.ru/api/contact)"
