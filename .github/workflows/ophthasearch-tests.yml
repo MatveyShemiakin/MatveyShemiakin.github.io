@@ -45,3 +45,4 @@ jobs:
           tests/ophthasearch-v2-contracts.test.mjs
           tests/ophthasearch-v2-relevance.test.mjs
           tests/ophthasearch-v2-query.test.mjs
+          tests/ophthasearch-v2-evidence.test.mjs
