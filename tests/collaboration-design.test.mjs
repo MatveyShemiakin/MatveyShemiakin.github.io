@@ -57,14 +57,13 @@ test('doctor collaboration CTA styling includes gold motion and reduced-motion f
   assert.ok(css.includes('@media (max-width:680px)'), 'CTA mobile layout is missing');
 });
 
-test('collaboration form submits directly to the site backend without Gmail or mailto handoff', () => {
+test('collaboration form prepares an email and hands it off to the user mail service', () => {
   const js = read('collaboration/assets/app.js');
-  assert.ok(js.includes("fetch('/api/contact'"), 'form must POST to the contact backend');
-  assert.ok(js.includes("method: 'POST'"), 'contact request must use POST');
-  assert.ok(js.includes('Сообщение отправлено'), 'RU success state is missing');
-  assert.ok(js.includes('Message sent'), 'EN success state is missing');
-  assert.ok(!js.includes('mail.google.com/mail/'), 'Gmail handoff must be removed');
-  assert.ok(!js.includes('mailto:'), 'mailto handoff must be removed');
+  assert.ok(js.includes('mail.google.com/mail/'), 'Gmail browser compose fallback is missing');
+  assert.ok(js.includes('mailto:'), 'native email-app fallback is missing');
+  assert.ok(js.includes('data-contact-submit'), 'submit hook is missing');
+  assert.ok(js.includes('showInvalidField'), 'visible invalid-field handling is missing');
+  assert.ok(!js.includes("fetch('/api/contact'"), 'direct backend submission must be disabled');
 });
 
 test('collaboration modal stays above global mobile overlays and submit keeps full hit area', () => {
@@ -72,26 +71,4 @@ test('collaboration modal stays above global mobile overlays and submit keeps fu
   assert.ok(css.includes('.modal{z-index:20000'), 'modal must sit above global cookie/fab overlays');
   assert.ok(css.includes('touch-action:manipulation'), 'submit button needs explicit mobile touch handling');
   assert.ok(css.includes('pointer-events:auto'), 'submit button must keep its whole hit area interactive');
-});
-
-test('Cloudflare Worker validates professional enquiries and publishes through workers.dev', () => {
-  const worker = read('cloudflare/contact-worker/worker.mjs');
-  const config = read('cloudflare/contact-worker/wrangler.toml');
-  assert.ok(worker.includes('env.EMAIL.send'), 'Email Service binding must send the enquiry');
-  assert.ok(worker.includes('env.CONTACT_RECIPIENT'), 'recipient must stay in a Worker secret');
-  assert.ok(worker.includes('matveyshemyakin.ru'), 'origin allowlist is missing');
-  assert.ok(worker.includes('honeypot'), 'honeypot validation is missing');
-  assert.ok(worker.includes('consent'), 'consent validation is missing');
-  assert.ok(config.includes('[[send_email]]'), 'send_email binding is missing');
-  assert.ok(config.includes('workers_dev = true'), 'workers.dev endpoint must remain enabled while GitHub Pages hosts the site');
-  assert.ok(!config.includes('route = { pattern = "matveyshemyakin.ru/api/contact*"'), 'GitHub Pages domain must not be configured as an unavailable Cloudflare Worker route');
-});
-
-test('privacy policy documents the collaboration form and Cloudflare processing', () => {
-  const ru = read('privacy.html');
-  const en = read('en/privacy.html');
-  assert.ok(ru.includes('профессионального обращения через форму'), 'RU policy must mention the contact form');
-  assert.ok(ru.includes('Cloudflare'), 'RU policy must disclose Cloudflare processing');
-  assert.ok(en.includes('professional enquiry through the form'), 'EN policy must mention the contact form');
-  assert.ok(en.includes('Cloudflare'), 'EN policy must disclose Cloudflare processing');
 });
