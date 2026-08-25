@@ -82,19 +82,16 @@ function searchableIntent(intent = {}) {
   return [
     intent.domain,
     intent.condition,
-    intent.question_type,
     ...(Array.isArray(intent.interventions) ? intent.interventions : []),
-    ...(Array.isArray(intent.outcomes) ? intent.outcomes : []),
-    ...(Array.isArray(intent.modifiers) ? intent.modifiers : [])
+    ...(Array.isArray(intent.outcomes) ? intent.outcomes : [])
   ].filter(Boolean).join(' ').toLowerCase();
 }
 
 function guidelineTopicScore(guideline, intentText) {
   let score = 0;
   for (const topic of guideline.topics) {
-    const normalized = topic.toLowerCase();
-    if (intentText.includes(normalized) || normalized.includes(intentText)) score += 4;
-    else for (const token of normalized.split(/\s+/)) if (token.length > 5 && intentText.includes(token)) score += 1;
+    const normalized = topic.toLowerCase().trim();
+    if (normalized && intentText.includes(normalized)) score += 4;
   }
   return score;
 }
