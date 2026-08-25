@@ -33,21 +33,18 @@
   },
   {
     "id": "iol-dislocation",
-    "event_id": "iol-dislocation:3",
+    "event_id": "iol-dislocation:2",
     "published": "2026-08-25",
     "updated": "2026-08-25",
-    "revision": 3,
-    "kind": "new",
+    "revision": 2,
+    "kind": "updated",
     "title": "Дислокация ИОЛ",
     "title_en": "IOL dislocation",
-    "description": "Новый практический клинический конспект: диагностика дислокации ИОЛ, оценка срочности, выбор между динамическим наблюдением, репозицией и заменой ИОЛ, варианты вторичной фиксации и витрэктомии.",
-    "description_en": "New practical clinical guide: evaluation of IOL dislocation, urgency assessment, observation versus surgery, IOL repositioning or exchange, secondary fixation and vitrectomy considerations.",
+    "description": "Практический клинический конспект для офтальмологов: диагностика дислокации ИОЛ, выбор между динамическим наблюдением, репозицией и заменой ИОЛ, варианты вторичной фиксации и витрэктомии.",
+    "description_en": "Practical clinical guide for ophthalmologists: evaluation of IOL dislocation, observation versus surgery, IOL repositioning or exchange, secondary fixation and vitrectomy considerations.",
     "url": "/for-doctors/iol-dislocation/",
     "url_en": "/en/for-doctors/iol-dislocation/",
-    "topics": [
-      "iol",
-      "surgery"
-    ]
+    "topics": []
   },
   {
     "id": "penetrating-keratoplasty",
