@@ -1,0 +1,58 @@
+name: OphthaSearch live smoke
+
+on:
+  push:
+    paths:
+      - '.github/workflows/ophthasearch-live-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  live-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Cloudflare deployment and verify named comparison synthesis
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint='https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev/v2/research'
+          payload='{"schemaVersion":"2.0","language":"ru","question":"Есть ли преимущество латанопроста перед тимололом при первичной открытоугольной глаукоме?","mode":"standard","filters":{}}'
+          success=0
+          for attempt in 1 2 3 4 5 6; do
+            echo "Live smoke attempt ${attempt}/6"
+            if curl --fail-with-body --silent --show-error --max-time 45 \
+              -H 'Origin: https://matveyshemyakin.ru' \
+              -H 'Content-Type: application/json' \
+              -X POST \
+              --data "$payload" \
+              "$endpoint" > /tmp/ophtha-response.json; then
+              if node <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/ophtha-response.json', 'utf8'));
+          if (body?.ok !== true) throw new Error(`Worker returned ok=${body?.ok}`);
+          const result = body.result || {};
+          const intent = result.intent || {};
+          const interventions = Array.isArray(intent.interventions) ? intent.interventions.map(String) : [];
+          const comparators = Array.isArray(intent.comparators) ? intent.comparators.map(String) : [];
+          if (intent.question_type !== 'comparison') throw new Error(`question_type=${intent.question_type}`);
+          if (!interventions.some((v) => /latanoprost/i.test(v))) throw new Error(`latanoprost missing: ${JSON.stringify(interventions)}`);
+          if (!comparators.some((v) => /timolol/i.test(v))) throw new Error(`timolol missing: ${JSON.stringify(comparators)}`);
+          if (result.status === 'evidence_only') throw new Error('deployed Worker still returned evidence_only');
+          const bottomLine = String(result?.answer?.clinical_bottom_line || '').trim();
+          if (!bottomLine) throw new Error('clinical_bottom_line is empty');
+          const sources = Array.isArray(result?.answer?.sources) ? result.answer.sources.length : 0;
+          console.log(JSON.stringify({ status: result.status, question_type: intent.question_type, interventions, comparators, sources, bottomLine }, null, 2));
+          NODE
+              then
+                success=1
+                break
+              fi
+            fi
+            cat /tmp/ophtha-response.json 2>/dev/null || true
+            sleep 20
+          done
+          if [ "$success" -ne 1 ]; then
+            echo 'Live deployment smoke did not pass within the retry window.' >&2
+            exit 1
+          fi
