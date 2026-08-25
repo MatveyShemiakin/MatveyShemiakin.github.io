@@ -92,6 +92,31 @@ test('named comparison requires evidence about the requested drugs, not just the
   assert.equal(filterRelevantDocuments([conditionOnly, exact], intent)[0].document.title, exact.title);
 });
 
+test('named monotherapy comparison ranks direct head-to-head evidence above fixed-combination evidence', () => {
+  const intent = {
+    domain: 'glaucoma',
+    condition: 'primary open-angle glaucoma',
+    question_type: 'comparison',
+    interventions: ['latanoprost'],
+    comparators: ['timolol'],
+    outcomes: ['intraocular pressure'],
+    modifiers: []
+  };
+  const direct = {
+    title: 'Latanoprost versus timolol monotherapy in primary open-angle glaucoma',
+    abstract_or_summary: 'Randomized head-to-head monotherapy comparison of latanoprost and timolol for intraocular pressure reduction in primary open-angle glaucoma.'
+  };
+  const fixedCombination = {
+    title: 'Fixed combination of latanoprost and timolol in primary open-angle glaucoma',
+    abstract_or_summary: 'A fixed-combination latanoprost/timolol product was compared with other fixed combinations for intraocular pressure reduction.'
+  };
+
+  const directScore = scoreMedicalRelevance(direct, intent);
+  const combinationScore = scoreMedicalRelevance(fixedCombination, intent);
+  assert.ok(directScore > combinationScore, `direct=${directScore} combination=${combinationScore}`);
+  assert.equal(filterRelevantDocuments([fixedCombination, direct], intent, 0.45)[0].document.title, direct.title);
+});
+
 test('RRD surgical-management evidence outranks molecular topic-only RRD evidence', () => {
   const intent = {
     domain: 'retina',
