@@ -5,25 +5,25 @@ function normalizedQuestion(value) {
 }
 
 function detectCondition(text) {
-  if (/\bpoag\b|\bпоуг\b|первич\w*\s+открытоугольн\w*\s+глауком|primary\s+open[- ]angle\s+glaucoma/.test(text)) {
+  if (/\bpoag\b|поуг|первич[а-я]*\s+открытоугольн[а-я]*\s+глауком|primary\s+open[- ]angle\s+glaucoma/.test(text)) {
     return { domain: 'glaucoma', condition: 'primary open-angle glaucoma' };
   }
-  if (/normal[- ]tension\s+glaucoma|нормотензивн\w*\s+глауком|глауком\w*\s+нормальн\w*\s+давлен/.test(text)) {
+  if (/normal[- ]tension\s+glaucoma|нормотензивн[а-я]*\s+глауком|глауком[а-я]*\s+нормальн[а-я]*\s+давлен/.test(text)) {
     return { domain: 'glaucoma', condition: 'normal-tension glaucoma' };
   }
-  if (/angle[- ]closure\s+glaucoma|закрытоугольн\w*\s+глауком|\bзоуг\b/.test(text)) {
+  if (/angle[- ]closure\s+glaucoma|закрытоугольн[а-я]*\s+глауком|зоуг/.test(text)) {
     return { domain: 'glaucoma', condition: 'angle-closure glaucoma' };
   }
-  if (/epiretinal\s+membrane|\berm\b|эпиретинальн\w*\s+(?:мембран|фиброз)/.test(text)) {
+  if (/epiretinal\s+membrane|\berm\b|эпиретинальн[а-я]*\s+(?:мембран|фиброз)/.test(text)) {
     return { domain: 'retina', condition: 'epiretinal membrane' };
   }
-  if (/full[- ]thickness\s+macular\s+hole|macular\s+hole|макулярн\w*\s+разрыв/.test(text)) {
+  if (/full[- ]thickness\s+macular\s+hole|macular\s+hole|макулярн[а-я]*\s+разрыв/.test(text)) {
     return { domain: 'retina', condition: 'full-thickness macular hole' };
   }
-  if (/rhegmatogenous\s+retinal\s+detachment|retinal\s+detachment|регматогенн\w*\s+отслойк\w*\s+сетчатк|отслойк\w*\s+сетчатк/.test(text)) {
+  if (/rhegmatogenous\s+retinal\s+detachment|retinal\s+detachment|регматогенн[а-я]*\s+отслойк[а-я]*\s+сетчатк|отслойк[а-я]*\s+сетчатк/.test(text)) {
     return { domain: 'retina', condition: 'retinal detachment' };
   }
-  if (/iol\s+dislocation|intraocular\s+lens\s+dislocation|дислокац\w*\s+иол|смещен\w*\s+иол|дислокац\w*\s+интраокулярн\w*\s+линз/.test(text)) {
+  if (/iol\s+dislocation|intraocular\s+lens\s+dislocation|дислокац[а-я]*\s+иол|смещен[а-я]*\s+иол|дислокац[а-я]*\s+интраокулярн[а-я]*\s+линз/.test(text)) {
     return { domain: 'lens-iol', condition: 'intraocular lens dislocation' };
   }
   if (/glaucoma|глауком/.test(text)) return { domain: 'glaucoma', condition: 'glaucoma' };
@@ -49,16 +49,16 @@ function detectInterventions(text, questionType) {
   if (questionType === 'therapy' && /медикаментоз|лекарствен|фармаколог|препарат|капл|pharmacolog|medication|medical therapy|drug therapy|first[- ]line/.test(text)) {
     interventions.push('pharmacological therapy');
   }
-  if (/selective laser trabeculoplasty|\bslt\b|\bслт\b|селективн\w*\s+лазерн\w*\s+трабекулопласт/.test(text)) interventions.push('selective laser trabeculoplasty');
+  if (/selective laser trabeculoplasty|\bslt\b|слт|селективн[а-я]*\s+лазерн[а-я]*\s+трабекулопласт/.test(text)) interventions.push('selective laser trabeculoplasty');
   if (/vitrectom|витрэктом|витреэктом/.test(text)) interventions.push('pars plana vitrectomy');
-  if (/ilm\s+peel|пилинг\w*\s+впм/.test(text)) interventions.push('internal limiting membrane peeling');
+  if (/ilm\s+peel|пилинг[а-я]*\s+впм/.test(text)) interventions.push('internal limiting membrane peeling');
   return interventions;
 }
 
 function detectOutcomes(text, domain) {
   const outcomes = [];
-  if (/intraocular\s+pressure|\biop\b|внутриглазн\w*\s+давлен|\bвгд\b/.test(text) || domain === 'glaucoma') outcomes.push('intraocular pressure');
-  if (/visual\s+acuity|\bvis\b|острот\w*\s+зрен/.test(text)) outcomes.push('visual acuity');
+  if (/intraocular\s+pressure|\biop\b|внутриглазн[а-я]*\s+давлен|вгд/.test(text) || domain === 'glaucoma') outcomes.push('intraocular pressure');
+  if (/visual\s+acuity|\bvis\b|острот[а-я]*\s+зрен/.test(text)) outcomes.push('visual acuity');
   if (/metamorph|метаморф/.test(text)) outcomes.push('metamorphopsia');
   return outcomes;
 }
@@ -71,9 +71,9 @@ function detectModifiers(text, condition) {
   if (size) modifiers.push(size[0].replace(/um/i, 'µm').replace(/мкм/i, 'µm'));
   if (/phakic|факич/.test(text)) modifiers.push('phakic');
   if (/metamorph|метаморф/.test(text)) modifiers.push('metamorphopsia');
-  if (/ocular\s+surface\s+disease|синдром\w*\s+сух\w*\s+глаз|сух\w*\s+глаз/.test(text)) modifiers.push('ocular surface disease');
+  if (/ocular\s+surface\s+disease|синдром[а-я]*\s+сух[а-я]*\s+глаз|сух[а-я]*\s+глаз/.test(text)) modifiers.push('ocular surface disease');
   if (condition !== 'glaucoma' && /glaucoma|глауком/.test(text)) modifiers.push('glaucoma');
-  if (/стекловидн\w*\s+тел|vitreous/.test(text)) modifiers.push('vitreous involvement');
+  if (/стекловидн[а-я]*\s+тел|vitreous/.test(text)) modifiers.push('vitreous involvement');
   return [...new Set(modifiers)];
 }
 
