@@ -51,6 +51,8 @@ jobs:
           tests/ophthasearch-v2-contracts.test.mjs
           tests/ophthasearch-v2-relevance.test.mjs
           tests/ophthasearch-v2-query.test.mjs
+          tests/ophthasearch-v2-mixed-comparison.test.mjs
+          tests/ophthasearch-v2-retrieval-regressions.test.mjs
           tests/ophthasearch-v2-evidence.test.mjs
           tests/ophthasearch-v2-adapters.test.mjs
           tests/ophthasearch-v2-guidelines.test.mjs
