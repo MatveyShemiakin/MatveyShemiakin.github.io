@@ -7,88 +7,63 @@ async function read(path) {
   return readFile(new URL(path, root), 'utf8');
 }
 
-test('RU OphthaSearch page has required multi-source hooks and no inline styles', async () => {
-  const html = await read('for-doctors/ophthasearch/index.html');
-  for (const id of [
-    'ophtha-search-form','ophtha-query','ophtha-sort','ophtha-date','ophtha-oa','ophtha-pubtype',
-    'ophtha-results','ophtha-status','ophtha-result-count','ophtha-source-board'
-  ]) {
-    assert.match(html, new RegExp(`id="${id}"`));
+for (const [label, path, lang] of [
+  ['RU', 'for-doctors/ophthasearch/index.html', 'ru'],
+  ['EN', 'en/for-doctors/ophthasearch/index.html', 'en']
+]) {
+  test(`${label} OphthaSearch production page exposes physician-first v2 hooks`, async () => {
+    const html = await read(path);
+    assert.match(html, new RegExp(`<html lang="${lang}"`));
+    for (const hook of ['search-form', 'query', 'submit', 'answer-shell', 'bottom-line', 'confidence', 'management', 'important', 'sources', 'status']) {
+      assert.match(html, new RegExp(`data-v2-${hook}`));
+    }
+    assert.match(html, /ophthasearch-v2\/ophthasearch-v2\.css/);
+    assert.match(html, /ophthasearch-v2\/ophthasearch-v2\.js/);
+    assert.doesNotMatch(html, /\sstyle="/i);
+  });
+}
+
+test('production OphthaSearch no longer exposes legacy pipeline and provider dashboards', async () => {
+  const ru = await read('for-doctors/ophthasearch/index.html');
+  const en = await read('en/for-doctors/ophthasearch/index.html');
+  for (const html of [ru, en]) {
+    assert.doesNotMatch(html, /id="ophtha-search-form"|id="ophtha-source-board"|ophtha-pico-grid|data-signal-grid/);
+    assert.doesNotMatch(html, /ophthasearch\/ophthasearch\.js|ophthasearch-v3\.js|ophthasearch-russian\.js/);
+    assert.doesNotMatch(html, /7931|up to 36 merged results|до 36 объединённых результатов/i);
   }
-  for (const provider of ['europepmc','clinicaltrials','jstage','wprim','koreascience']) {
-    assert.match(html, new RegExp(`data-provider-status="${provider}"`));
-  }
-  assert.match(html, /Powered by J-STAGE/);
-  assert.doesNotMatch(html, /\sstyle="/i);
-  assert.match(html, /data-ophthasearch/);
-  assert.match(html, /data-lang="ru"/);
 });
 
-test('EN OphthaSearch page has matching multi-source shell and language', async () => {
-  const html = await read('en/for-doctors/ophthasearch/index.html');
-  assert.match(html, /data-ophthasearch/);
-  assert.match(html, /data-lang="en"/);
-  assert.match(html, /Global Ophthalmology Research Search/);
-  assert.match(html, /ClinicalTrials\.gov/);
-  assert.match(html, /J-STAGE/);
-  assert.doesNotMatch(html, /\sstyle="/i);
+test('production v2 stylesheet is responsive and guards long medical identifiers', async () => {
+  const css = await read('for-doctors/ophthasearch-v2/ophthasearch-v2.css');
+  assert.match(css, /overflow-wrap:\s*anywhere/);
+  assert.match(css, /@media\s*\(max-width:\s*760px\)/);
+  assert.match(css, /\.ophtha-v2-search-form/);
+  assert.match(css, /\.ophtha-v2-bottom-line/);
+  assert.match(css, /\.ophtha-v2-source/);
 });
 
-test('feature stylesheet contains responsive result workspace and source-status rules', async () => {
-  const css = await read('for-doctors/ophthasearch/ophthasearch.css');
-  assert.match(css, /\.ophtha-workspace/);
-  assert.match(css, /@media\s*\(max-width:\s*900px\)/);
-  assert.match(css, /\.ophtha-result-card/);
-  assert.match(css, /\.ophtha-source-board/);
-  assert.match(css, /\.ophtha-provider-state/);
-});
-
-test('quarantined answer-first source retains approved UI hooks', async () => {
-  const js = await read('for-doctors/ophthasearch/ophthasearch-answer-first.js');
-  const css = await read('for-doctors/ophthasearch/ophthasearch-answer-first.css');
-  assert.match(js, /Короткий ответ/);
-  assert.match(js, /Ключевые доказательства/);
-  assert.match(js, /Все найденные публикации/);
-  assert.match(js, /Настройки и источники поиска/);
-  assert.match(css, /\.ophtha-direct-answer/);
-  assert.match(css, /\.ophtha-key-evidence-grid/);
-  assert.match(css, /\.ophtha-all-results/);
-  assert.doesNotMatch(js, /\sstyle="/i);
-});
-
-test('mobile OphthaSearch prevents long medical terms and identifiers from overflowing the viewport', async () => {
-  const answerCss = await read('for-doctors/ophthasearch/ophthasearch-answer-first.css');
-  assert.match(answerCss, /overflow-wrap:\s*anywhere/);
-  assert.match(answerCss, /word-break:\s*break-word/);
-  assert.match(answerCss, /\.ophtha-key-card[^{}]*\{[^}]*min-width:\s*0/s);
-  assert.match(answerCss, /\.ophtha-direct-answer[^{}]*\{[^}]*min-width:\s*0/s);
-  assert.match(answerCss, /@media\s*\(max-width:\s*480px\)[\s\S]*\.ophtha-brand h1[^{}]*\{[^}]*max-width:\s*100%/);
-  assert.match(answerCss, /@media\s*\(max-width:\s*480px\)[\s\S]*\.ophtha-result-title[^{}]*\{[^}]*font-size:\s*24px/);
-});
-
-test('production loader runs only stable OphthaSearch core during performance hotfix', async () => {
-  const loader = await read('for-doctors/ophthasearch/ophthasearch.js');
-  assert.match(loader, /ophthasearch-russian\.js/);
-  assert.match(loader, /ophthasearch-v3\.js/);
-  assert.doesNotMatch(loader, /ophthasearch-ai\.js/);
-  assert.doesNotMatch(loader, /ophthasearch-answer-first\.js/);
-  assert.doesNotMatch(loader, /ophthasearch-style-refresh\.js/);
-});
-
-test('production loader quarantines observer-driven answer-first code', async () => {
-  const loader = await read('for-doctors/ophthasearch/ophthasearch.js');
+test('legacy answer-first and v3 modules remain quarantined from the production pages', async () => {
+  const ru = await read('for-doctors/ophthasearch/index.html');
+  const en = await read('en/for-doctors/ophthasearch/index.html');
   const answerFirst = await read('for-doctors/ophthasearch/ophthasearch-answer-first.js');
-  assert.match(answerFirst, /new MutationObserver/);
-  assert.doesNotMatch(loader, /ophthasearch-answer-first\.js/);
+  const legacyLoader = await read('for-doctors/ophthasearch/ophthasearch.js');
+  assert.match(answerFirst, /Gemma 4/);
+  assert.match(legacyLoader, /ophthasearch-v3\.js/);
+  for (const html of [ru, en]) {
+    assert.doesNotMatch(html, /ophthasearch-answer-first\.js/);
+    assert.doesNotMatch(html, /ophthasearch-v3\.js/);
+    assert.doesNotMatch(html, /ophthasearch\/ophthasearch\.js/);
+  }
 });
 
-test('answer-first source retains AI provenance and citation hooks for later refactor', async () => {
-  const js = await read('for-doctors/ophthasearch/ophthasearch-answer-first.js');
-  const css = await read('for-doctors/ophthasearch/ophthasearch-answer-first.css');
-  assert.match(js, /ophthasearch:ai-pending/);
-  assert.match(js, /ophthasearch:ai-success/);
-  assert.match(js, /Gemma 4/);
-  assert.match(css, /\.ophtha-ai-provenance/);
-  assert.match(css, /\.ophtha-ai-citation/);
-  assert.doesNotMatch(js, /\sstyle="/i);
+test('production pages preserve shared doctor navigation and retention integrations', async () => {
+  const ru = await read('for-doctors/ophthasearch/index.html');
+  const en = await read('en/for-doctors/ophthasearch/index.html');
+  for (const html of [ru, en]) {
+    assert.match(html, /class="doctors-header"/);
+    assert.match(html, /doctor-retention\.css/);
+    assert.match(html, /doctor-retention\.js/);
+    assert.match(html, /data-doctor-telegram/);
+    assert.match(html, /doctors-updates\.js/);
+  }
 });
