@@ -1,4 +1,5 @@
 import { verifyClaimsAndCitations, renderSafeSources } from './citations.js';
+import { parseStructuredModelResponse } from './structured-response.js';
 
 export const MODEL = '@cf/google/gemma-4-26b-a4b-it';
 
@@ -21,7 +22,7 @@ export function buildReasoningSchema(sourceIds) {
     type: 'object',
     additionalProperties: false,
     properties: {
-      schemaVersion: { type: 'string', const: '2.0' },
+      schemaVersion: { type: 'string', enum: ['2.0'] },
       clinical_bottom_line: { type: 'string', minLength: 1, maxLength: 3000 },
       bottom_line_citations: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'string', enum: sourceIds } },
       confidence: { type: 'string', enum: CONFIDENCE },
@@ -103,11 +104,10 @@ export function buildReasoningMessages(evidencePack) {
   ];
 }
 
-function parseModelResponse(response) {
-  const raw = response?.response ?? response;
-  if (raw && typeof raw === 'object') return raw;
-  try { return JSON.parse(String(raw || '')); }
-  catch { throw new Error('Clinical reasoning model returned invalid JSON'); }
+function normalizeReasoningDraft(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return value;
+  if (!value.schemaVersion && value.schema_version === '2.0') return { ...value, schemaVersion: '2.0' };
+  return value;
 }
 
 export async function reasonOverEvidence(evidencePack, env, deps = {}) {
@@ -121,7 +121,10 @@ export async function reasonOverEvidence(evidencePack, env, deps = {}) {
     max_completion_tokens: 2200,
     temperature: 0.1
   });
-  return verifyClaimsAndCitations(parseModelResponse(response), evidencePack);
+  const draft = normalizeReasoningDraft(parseStructuredModelResponse(response, {
+    label: 'Clinical reasoning model returned invalid structured JSON'
+  }));
+  return verifyClaimsAndCitations(draft, evidencePack);
 }
 
 export function buildEvidenceOnlyFallback(evidencePack, language = 'en') {
