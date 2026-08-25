@@ -89,13 +89,20 @@ function searchableIntent(intent = {}) {
   ].filter(Boolean).join(' ').toLowerCase();
 }
 
-function guidelineScore(guideline, intentText) {
+function guidelineTopicScore(guideline, intentText) {
   let score = 0;
   for (const topic of guideline.topics) {
     const normalized = topic.toLowerCase();
     if (intentText.includes(normalized) || normalized.includes(intentText)) score += 4;
     else for (const token of normalized.split(/\s+/)) if (token.length > 5 && intentText.includes(token)) score += 1;
   }
+  return score;
+}
+
+function guidelineScore(guideline, intentText) {
+  const topicScore = guidelineTopicScore(guideline, intentText);
+  if (topicScore <= 0) return 0;
+  let score = topicScore;
   if (guideline.status === 'current') score += 2;
   const date = guideline.lastUpdated || guideline.publicationDate || '';
   const year = Number(date.slice(0, 4));
