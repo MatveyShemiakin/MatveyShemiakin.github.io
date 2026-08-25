@@ -14,25 +14,50 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Pillow
-        run: python -m pip install --disable-pip-version-check pillow
-      - name: Inspect clinical images
+        with:
+          fetch-depth: 0
+      - name: Find complete media blobs in reachable history
         run: |
           python - <<'PY'
+          import subprocess
           from pathlib import Path
-          from PIL import Image, ImageStat
-          root=Path('for-doctors/iol-dislocation/assets')
-          names=['iol-haptic-pupil.webp','pupillary-capture-front.webp','intrascleral-flange.webp','dislocated-iol-glaucoma.webp']
-          for name in names:
-              p=root/name
-              im=Image.open(p).convert('RGB')
-              stat=ImageStat.Stat(im)
-              print(name)
-              print(' size=', im.size, 'bytes=', p.stat().st_size)
-              print(' extrema=', im.getextrema())
-              print(' mean=', tuple(round(v,2) for v in stat.mean))
-              print(' rms=', tuple(round(v,2) for v in stat.rms))
-              thumb=im.copy(); thumb.thumbnail((120,120))
-              tstat=ImageStat.Stat(thumb)
-              print(' thumb_mean=', tuple(round(v,2) for v in tstat.mean))
+
+          targets = [
+              Path('for-doctors/iol-dislocation/assets/pupillary-capture-front.webp'),
+              Path('for-doctors/iol-dislocation/assets/intrascleral-flange.webp'),
+          ]
+
+          objects = []
+          for line in subprocess.check_output(['git','rev-list','--objects','--all'], text=True).splitlines():
+              parts = line.split(' ', 1)
+              sha = parts[0]
+              path = parts[1] if len(parts) > 1 else ''
+              objects.append((sha, path))
+
+          for target in targets:
+              prefix = target.read_bytes()
+              print(f'=== TARGET {target} current_bytes={len(prefix)} ===')
+              matches = []
+              seen = set()
+              for sha, path in objects:
+                  if sha in seen:
+                      continue
+                  seen.add(sha)
+                  try:
+                      typ = subprocess.check_output(['git','cat-file','-t',sha], text=True, stderr=subprocess.DEVNULL).strip()
+                      if typ != 'blob':
+                          continue
+                      size = int(subprocess.check_output(['git','cat-file','-s',sha], text=True).strip())
+                      if size <= len(prefix):
+                          continue
+                      data = subprocess.check_output(['git','cat-file','blob',sha])
+                  except Exception:
+                      continue
+                  if data.startswith(prefix):
+                      matches.append((sha, size, path))
+              if matches:
+                  for sha, size, path in sorted(matches, key=lambda x: x[1]):
+                      print(f'MATCH sha={sha} size={size} path={path}')
+              else:
+                  print('NO_FULL_PREFIX_MATCH')
           PY
