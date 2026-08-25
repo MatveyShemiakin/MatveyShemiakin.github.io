@@ -27,6 +27,16 @@ function citationIds(value, path, map, { required = false } = {}) {
   return result;
 }
 
+function safeCitationIds(value, map) {
+  if (!Array.isArray(value)) return [];
+  const result = [];
+  for (const raw of value) {
+    const id = clean(raw);
+    if (map.has(id) && !result.includes(id)) result.push(id);
+  }
+  return result;
+}
+
 function evidenceText(source) {
   return normalized([
     source.title,
@@ -43,25 +53,31 @@ function regimenSupported(value, sources) {
   return sources.some((source) => evidenceText(source).includes(needle));
 }
 
-function verifyManagementItem(item, index, map) {
-  if (!item || typeof item !== 'object') throw new Error(`management[${index}] is invalid`);
-  const citations = citationIds(item.citations, `management[${index}]`, map, { required: true });
+function verifyManagementItem(item, map) {
+  if (!item || typeof item !== 'object') return null;
+  const citations = safeCitationIds(item.citations, map);
+  if (!citations.length) return null;
   const citedSources = citations.map((id) => map.get(id));
+  const verified = { ...item, citations };
   for (const field of ['dose', 'frequency', 'duration']) {
     const value = clean(item[field]);
-    if (value && !regimenSupported(value, citedSources)) throw new Error(`Unsupported ${field} in management[${index}]`);
+    verified[field] = value && regimenSupported(value, citedSources) ? value : '';
   }
-  return { ...item, citations };
+  return verified;
 }
 
-function verifyCitedSection(items, name, map, { citationsRequired = true } = {}) {
-  if (!Array.isArray(items)) throw new Error(`${name} must be an array`);
-  return items.map((item, index) => {
-    if (!item || typeof item !== 'object') throw new Error(`${name}[${index}] is invalid`);
+function verifyCitedSection(items, map, { citationsRequired = true } = {}) {
+  if (!Array.isArray(items)) return [];
+  const verified = [];
+  for (const item of items) {
+    if (!item || typeof item !== 'object') continue;
     const text = clean(item.text);
-    if (!text) throw new Error(`${name}[${index}] text is required`);
-    return { ...item, text, citations: citationIds(item.citations || [], `${name}[${index}]`, map, { required: citationsRequired }) };
-  });
+    if (!text) continue;
+    const citations = safeCitationIds(item.citations || [], map);
+    if (citationsRequired && !citations.length) continue;
+    verified.push({ ...item, text, citations });
+  }
+  return verified;
 }
 
 function safeSource(source) {
@@ -90,19 +106,25 @@ export function verifyClaimsAndCitations(draft, evidencePack) {
   if (!map.size) throw new Error('Evidence Pack has no sources');
   const bottomLine = clean(draft.clinical_bottom_line);
   if (!bottomLine) throw new Error('Clinical bottom line is required');
+
+  // The main conclusion remains strict: it must be traceable to known Evidence Pack sources.
   const bottomLineCitations = citationIds(draft.bottom_line_citations || [], 'clinical_bottom_line', map, { required: true });
 
+  // Secondary sections are fail-soft. Unsupported regimen details or bad secondary
+  // citations are removed instead of discarding an otherwise verified conclusion.
   const answer = {
     schemaVersion: '2.0',
     clinical_bottom_line: bottomLine,
     bottom_line_citations: bottomLineCitations,
     confidence: ['high', 'moderate', 'low', 'insufficient'].includes(draft.confidence) ? draft.confidence : 'insufficient',
-    management: (Array.isArray(draft.management) ? draft.management : []).map((item, index) => verifyManagementItem(item, index, map)),
-    arguments_for: verifyCitedSection(draft.arguments_for || [], 'arguments_for', map),
-    arguments_against: verifyCitedSection(draft.arguments_against || [], 'arguments_against', map),
-    alternatives: verifyCitedSection(draft.alternatives || [], 'alternatives', map),
-    guideline_positions: verifyCitedSection(draft.guideline_positions || [], 'guideline_positions', map),
-    uncertainties: verifyCitedSection(draft.uncertainties || [], 'uncertainties', map, { citationsRequired: false }),
+    management: (Array.isArray(draft.management) ? draft.management : [])
+      .map((item) => verifyManagementItem(item, map))
+      .filter(Boolean),
+    arguments_for: verifyCitedSection(draft.arguments_for || [], map),
+    arguments_against: verifyCitedSection(draft.arguments_against || [], map),
+    alternatives: verifyCitedSection(draft.alternatives || [], map),
+    guideline_positions: verifyCitedSection(draft.guideline_positions || [], map),
+    uncertainties: verifyCitedSection(draft.uncertainties || [], map, { citationsRequired: false }),
     clinical_interpretation: clean(draft.clinical_interpretation),
     sources: [...map.values()].map(safeSource)
   };
