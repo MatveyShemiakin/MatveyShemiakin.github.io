@@ -16,18 +16,18 @@
       "kind": "updated"
     },
     "ophthasearch": {
-      "fingerprint": "1fa04df7240832037ed6f1a5d3536d1826ee6a20db6e2cce6e4cc9678f47115f",
+      "fingerprint": "1af335ee23c30c6187e68ebf1c39e3d7b48b14f3cac6d2b3ef910856544dd005",
       "published": "2026-08-16",
-      "updated": "2026-08-24",
-      "revision": 3,
+      "updated": "2026-08-25",
+      "revision": 4,
       "kind": "updated"
     },
     "ophthasearch-v2": {
-      "fingerprint": "c542895a41bd7eb53ea5a83109463079fc64b1d16b8ae6834dcc1b9a97a8bbdd",
+      "fingerprint": "cbf42e63adbcda1ab3df70a6f8d554734a76cd798639a01011239e6f7f443dd4",
       "published": "2026-08-25",
       "updated": "2026-08-25",
-      "revision": 1,
-      "kind": "new"
+      "revision": 2,
+      "kind": "updated"
     },
     "penetrating-keratoplasty": {
       "fingerprint": "804961fc1c6606b4ee2111fb4765409ef23ddf4975d9058bc9c99a145a9d7bcd",
