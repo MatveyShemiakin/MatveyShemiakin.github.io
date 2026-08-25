@@ -1,5 +1,5 @@
 import { validateResearchRequest, validateStructuredAnswer } from './contracts.js';
-import { interpretClinicalQuestion } from './query-interpreter.js';
+import { interpretClinicalQuestion, interpretIntentWithAi } from './query-interpreter.js';
 import { buildResearchPlan } from './research-planner.js';
 import { buildEvidencePack } from './evidence.js';
 import { findGuidelines } from './guidelines/registry.js';
@@ -7,6 +7,7 @@ import { runAdaptersWithDeadlines } from './adapters/index.js';
 import { search as searchPubMed } from './adapters/pubmed.js';
 import { search as searchEuropePmc } from './adapters/europepmc.js';
 import { search as searchClinicalTrials } from './adapters/clinicaltrials.js';
+import { search as searchJStage } from './adapters/jstage.js';
 import { search as searchOpenAlex } from './adapters/openalex.js';
 import { reasonOverEvidence, buildEvidenceOnlyFallback } from './reasoner.js';
 
@@ -25,7 +26,8 @@ function defaultAdapters(env = {}, deps = {}) {
       tool: 'OphthaSearch'
     }),
     europepmc: (track, runtime) => searchEuropePmc(track, { ...common, ...runtime }),
-    clinicaltrials: (track, runtime) => searchClinicalTrials(track, { ...common, ...runtime })
+    clinicaltrials: (track, runtime) => searchClinicalTrials(track, { ...common, ...runtime }),
+    jstage: (track, runtime) => searchJStage(track, { ...common, ...runtime })
   };
   const openAlexKey = deps.openAlexApiKey || env.OPENALEX_API_KEY || '';
   if (openAlexKey) {
@@ -95,7 +97,11 @@ async function retrievePlan(plan, adapterMap, deps) {
 
 export async function runResearchPipeline(payload, env = {}, deps = {}) {
   const request = validateResearchRequest(payload);
-  const intent = await (deps.interpreter || interpretClinicalQuestion)(request, deps.interpreterDeps || {});
+  const interpreterDeps = { ...(deps.interpreterDeps || {}) };
+  if (typeof interpreterDeps.interpretIntent !== 'function' && typeof env?.AI?.run === 'function') {
+    interpreterDeps.interpretIntent = (validatedRequest) => interpretIntentWithAi(validatedRequest, env, deps.intentReasonerDeps || {});
+  }
+  const intent = await (deps.interpreter || interpretClinicalQuestion)(request, interpreterDeps);
   const plan = (deps.planner || buildResearchPlan)(intent);
   const adapterMap = deps.adapters || defaultAdapters(env, deps);
   const retrieval = await retrievePlan(plan, adapterMap, deps);
