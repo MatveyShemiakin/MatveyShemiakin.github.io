@@ -1,6 +1,19 @@
 name: OphthaSearch canary
 
 on:
+  push:
+    branches:
+      - fix/ophthasearch-single-architecture-20260825
+    paths:
+      - '_worker.js'
+      - 'wrangler.jsonc'
+      - '.assetsignore'
+      - 'workers/ophthasearch-v2/**'
+      - 'for-doctors/ophthasearch-v2/**'
+      - 'tests/ophthasearch-v2-*.test.mjs'
+      - 'tests/ophthasearch-production-v2.test.mjs'
+      - 'scripts/ophthasearch-live-smoke.mjs'
+      - '.github/workflows/ophthasearch-canary.yml'
   pull_request:
     branches:
       - main
