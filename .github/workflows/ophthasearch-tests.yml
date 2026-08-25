@@ -3,17 +3,27 @@ name: OphthaSearch tests
 on:
   push:
     paths:
+      - '_worker.js'
+      - 'wrangler.jsonc'
       - 'for-doctors/ophthasearch/**'
+      - 'for-doctors/ophthasearch-v2/**'
       - 'en/for-doctors/ophthasearch/**'
       - 'workers/ophthasearch-ai/**'
+      - 'workers/ophthasearch-v2/**'
       - 'tests/ophthasearch*.test.mjs'
+      - 'tests/fixtures/ophthasearch-v2-*.json'
       - '.github/workflows/ophthasearch-tests.yml'
   pull_request:
     paths:
+      - '_worker.js'
+      - 'wrangler.jsonc'
       - 'for-doctors/ophthasearch/**'
+      - 'for-doctors/ophthasearch-v2/**'
       - 'en/for-doctors/ophthasearch/**'
       - 'workers/ophthasearch-ai/**'
+      - 'workers/ophthasearch-v2/**'
       - 'tests/ophthasearch*.test.mjs'
+      - 'tests/fixtures/ophthasearch-v2-*.json'
       - '.github/workflows/ophthasearch-tests.yml'
 
 permissions:
@@ -30,4 +40,18 @@ jobs:
         with:
           node-version: '22'
       - name: Run OphthaSearch tests
-        run: node --test tests/ophthasearch-static.test.mjs tests/ophthasearch.test.mjs tests/ophthasearch-ai.test.mjs tests/ophthasearch-ai-worker.test.mjs
+        run: >-
+          node --test
+          tests/ophthasearch-static.test.mjs
+          tests/ophthasearch.test.mjs
+          tests/ophthasearch-ai.test.mjs
+          tests/ophthasearch-ai-worker.test.mjs
+          tests/ophthasearch-v2-contracts.test.mjs
+          tests/ophthasearch-v2-relevance.test.mjs
+          tests/ophthasearch-v2-query.test.mjs
+          tests/ophthasearch-v2-evidence.test.mjs
+          tests/ophthasearch-v2-adapters.test.mjs
+          tests/ophthasearch-v2-guidelines.test.mjs
+          tests/ophthasearch-v2-reasoner.test.mjs
+          tests/ophthasearch-v2-pipeline.test.mjs
+          tests/ophthasearch-v2-ui.test.mjs
