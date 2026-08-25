@@ -4,3 +4,4 @@ wrangler.jsonc
 .github/**
 workers/**
 tests/**
+node_modules/**
