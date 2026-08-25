@@ -10,6 +10,7 @@ const glaucomaIntent = {
   condition: 'primary open-angle glaucoma',
   question_type: 'therapy',
   interventions: ['pharmacological therapy'],
+  comparators: [],
   outcomes: ['intraocular pressure'],
   modifiers: []
 };
@@ -65,4 +66,28 @@ test('filterRelevantDocuments sorts by relevance score descending', () => {
   const filtered = filterRelevantDocuments([broad, specific], glaucomaIntent, 0.4);
   assert.equal(filtered[0].document.title, specific.title);
   assert.ok(filtered[0].score >= filtered[1].score);
+});
+
+test('named comparison requires evidence about the requested drugs, not just the condition', () => {
+  const intent = {
+    domain: 'glaucoma',
+    condition: 'glaucoma',
+    question_type: 'comparison',
+    interventions: ['latanoprost'],
+    comparators: ['timolol'],
+    outcomes: ['intraocular pressure'],
+    modifiers: []
+  };
+  const exact = {
+    title: 'Latanoprost versus timolol in glaucoma',
+    abstract_or_summary: 'A randomized comparison of latanoprost and timolol for intraocular pressure reduction in glaucoma.'
+  };
+  const conditionOnly = {
+    title: 'Vitreous proteome in eyes with glaucoma',
+    abstract_or_summary: 'Proteomic characteristics in glaucoma without treatment comparison.'
+  };
+
+  assert.ok(scoreMedicalRelevance(exact, intent) > scoreMedicalRelevance(conditionOnly, intent));
+  assert.equal(filterRelevantDocuments([conditionOnly], intent).length, 0);
+  assert.equal(filterRelevantDocuments([conditionOnly, exact], intent)[0].document.title, exact.title);
 });
