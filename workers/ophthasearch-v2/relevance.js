@@ -72,10 +72,25 @@ const GENERIC_INTERVENTIONS = new Set([
   'surgical management', 'treatment', 'therapy'
 ]);
 
+const CONDITION_ALIASES = new Map([
+  ['intraocular lens dislocation', [
+    'intraocular lens dislocation',
+    'dislocated intraocular lens',
+    'dislocated posterior chamber intraocular lens',
+    'iol dislocation',
+    'dislocated iol'
+  ]]
+]);
+
 const GLAUCOMA_TERMS = ['glaucoma', 'primary open-angle glaucoma', 'open-angle glaucoma', 'poag', 'глауком', 'поуг'];
 const RETINAL_DETACHMENT_TERMS = ['retinal detachment', 'rhegmatogenous retinal detachment', 'rrd', 'отслойка сетчатки'];
 const MACULAR_HOLE_TERMS = ['macular hole', 'full-thickness macular hole', 'ftmh', 'макулярный разрыв'];
 const ERM_TERMS = ['epiretinal membrane', 'erm', 'эпиретинальная мембрана', 'эпиретинальный фиброз'];
+
+function conditionPhrases(condition) {
+  const normalized = normalizeText(condition);
+  return CONDITION_ALIASES.get(normalized) || (normalized ? [normalized] : []);
+}
 
 function competingDomainPenalty(text, intent) {
   const target = normalizeText([intent?.domain, intent?.condition].filter(Boolean).join(' '));
@@ -193,7 +208,7 @@ export function scoreMedicalRelevance(document = {}, intent = {}) {
   const domain = normalizeText(intent.domain);
   let score = 0;
 
-  if (condition && containsPhrase(text, condition)) {
+  if (condition && containsAny(text, conditionPhrases(condition))) {
     score += 0.55;
   } else if (condition && domain && condition.includes(domain) && containsPhrase(text, domain)) {
     score += 0.15;
