@@ -33,6 +33,19 @@ const THERAPY_TERMS = [
   'терапия', 'лечение', 'медикаментоз', 'препарат', 'капли'
 ];
 
+const SURGERY_TERMS = [
+  'surgery', 'surgical', 'operation', 'operative', 'vitrectomy', 'pars plana vitrectomy',
+  'scleral buckle', 'scleral buckling', 'pneumatic retinopexy', 'retinopexy', 'tamponade',
+  'ilm peeling', 'internal limiting membrane peeling', 'inverted ilm flap', 'membrane peeling',
+  'хирург', 'операц', 'витрэктом', 'витреэктом', 'склеральн', 'пломбирован', 'пневморетинопекс', 'пилинг'
+];
+
+const MOLECULAR_CONTEXT_TERMS = [
+  'proteome', 'proteomic', 'protein expression', 'biomarker', 'molecular', 'metabolomic',
+  'transcriptomic', 'cytokine', 'gene expression', 'pathway analysis',
+  'протеом', 'биомаркер', 'молекуляр', 'метаболом', 'цитокин'
+];
+
 const DIAGNOSIS_TERMS = [
   'diagnosis', 'diagnostic', 'screening', 'optical coherence tomography', 'oct',
   'диагност', 'скрининг', 'томография'
@@ -72,6 +85,13 @@ function questionTypeScore(text, questionType) {
     if (containsAny(text, THERAPY_TERMS)) return 0.12;
     if (containsAny(text, DIAGNOSIS_TERMS)) return -0.08;
   }
+  if (type === 'surgery') {
+    const surgical = containsAny(text, SURGERY_TERMS);
+    const molecularOnly = containsAny(text, MOLECULAR_CONTEXT_TERMS) && !surgical;
+    if (molecularOnly) return -0.22;
+    if (surgical) return 0.18;
+    return -0.08;
+  }
   if (type === 'diagnosis') {
     if (containsAny(text, DIAGNOSIS_TERMS)) return 0.12;
   }
@@ -89,6 +109,9 @@ function interventionScore(text, interventions = []) {
     }
     if (/pharmac|medical|medication|drug|медикамент|лекарств/.test(normalized) && containsAny(text, THERAPY_TERMS)) {
       score = Math.max(score, 0.2);
+    }
+    if (/surg|vitrect|buckl|retinopex|peel|flap|хирург|витрэкт|пилинг/.test(normalized) && containsAny(text, SURGERY_TERMS)) {
+      score = Math.max(score, 0.18);
     }
   }
   return score;
