@@ -1,0 +1,49 @@
+name: OphthaSearch retrieval diagnostics
+
+on:
+  push:
+    branches:
+      - fix/ophthasearch-single-architecture-20260825
+    paths:
+      - '.github/workflows/ophthasearch-retrieval-diagnostics.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ENDPOINT: https://matveyshemiakin-ophthasearch-canary.matvei-shemyakin.workers.dev/v2/research
+    steps:
+      - name: Diagnose ERM and IOL retrieval boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const endpoint = process.env.ENDPOINT;
+          const cases = [
+            ['erm', 'Стоит ли оперировать ERM при Vis 0.8 и выраженных metamorphopsia?'],
+            ['iol', 'Тактика при дислокации ИОЛ в стекловидное тело у пациента с глаукомой.']
+          ];
+          for (const [id, question] of cases) {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: { Origin: 'https://matveyshemyakin.ru', 'Content-Type': 'application/json' },
+              body: JSON.stringify({ schemaVersion: '2.0', language: 'ru', question, mode: 'standard', filters: {} }),
+              signal: AbortSignal.timeout(30000)
+            });
+            const body = await response.json();
+            const result = body?.result || {};
+            console.log(`=== ${id.toUpperCase()} ===`);
+            console.log(JSON.stringify({
+              ok: body?.ok,
+              status: result.status,
+              intent: result.intent,
+              plan: result.plan,
+              diagnostics: result.diagnostics,
+              answer_sources: Array.isArray(result?.answer?.sources) ? result.answer.sources.map(s => ({ id: s.source_id, title: s.title, year: s.year })) : []
+            }, null, 2));
+          }
+          NODE
