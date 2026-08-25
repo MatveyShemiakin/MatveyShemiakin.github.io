@@ -1,0 +1,74 @@
+name: OphthaSearch canary
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '_worker.js'
+      - 'wrangler.jsonc'
+      - '.assetsignore'
+      - 'workers/ophthasearch-v2/**'
+      - 'for-doctors/ophthasearch-v2/**'
+      - 'tests/ophthasearch-v2-*.test.mjs'
+      - 'tests/ophthasearch-production-v2.test.mjs'
+      - 'scripts/ophthasearch-live-smoke.mjs'
+      - '.github/workflows/ophthasearch-canary.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ophthasearch-canary-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      OPHTHASEARCH_ENDPOINT: https://matveyshemiakin-ophthasearch-canary.matvei-shemyakin.workers.dev/v2/research
+      OPHTHASEARCH_SMOKE_ATTEMPTS: '3'
+      OPHTHASEARCH_SMOKE_RETRY_MS: '12000'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Run v2 acceptance tests before deployment
+        run: >-
+          node --test
+          tests/ophthasearch-v2-contracts.test.mjs
+          tests/ophthasearch-v2-relevance.test.mjs
+          tests/ophthasearch-v2-query.test.mjs
+          tests/ophthasearch-v2-evidence.test.mjs
+          tests/ophthasearch-v2-adapters.test.mjs
+          tests/ophthasearch-v2-guidelines.test.mjs
+          tests/ophthasearch-v2-reasoner.test.mjs
+          tests/ophthasearch-v2-pipeline.test.mjs
+          tests/ophthasearch-v2-ui.test.mjs
+          tests/ophthasearch-production-v2.test.mjs
+
+      - name: Check Cloudflare deployment secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test "${#CLOUDFLARE_ACCOUNT_ID}" -eq 32
+
+      - name: Install Wrangler
+        run: npm install --no-save wrangler@4
+
+      - name: Deploy isolated canary Worker
+        run: npx wrangler deploy --config wrangler.jsonc --name matveyshemiakin-ophthasearch-canary
+
+      - name: Run three-case live clinical acceptance smoke
+        run: node scripts/ophthasearch-live-smoke.mjs
