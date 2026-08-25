@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru" data-site-theme-family="doctors">
+<head>
+  <script src="/analytics.js?v=20260811-2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OphthaSearch Research Agent v2 — canary</title>
+  <meta name="description" content="Canary-версия OphthaSearch Research Agent для клинического поиска и evidence-grounded синтеза в офтальмологии.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="author" content="Матвей Юрьевич Шемякин">
+  <meta name="theme-color" content="#041225">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/mobile-fix.css">
+  <link rel="stylesheet" href="/legal.css?v=20260729-1">
+  <link rel="stylesheet" href="/site-language-switch.css?v=20260729-2">
+  <link rel="stylesheet" href="/mobile-nav.css?v=20260806-3">
+  <script src="/site-theme-init.js?v=20260806-1"></script>
+  <link rel="stylesheet" href="/site-theme.css?v=20260806-1">
+  <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
+  <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">
+  <link rel="stylesheet" href="/for-doctors/doctors-updates.css?v=20260816-1">
+  <link rel="stylesheet" href="/for-doctors/ophthasearch-v2/ophthasearch-v2.css?v=20260825-1">
+</head>
+<body class="ophtha-v2-page">
+  <header class="doctors-header">
+    <div class="container doctors-nav">
+      <a class="monogram" href="/" aria-label="На главную">МШ</a>
+      <div class="doctors-nav-actions">
+        <a href="/for-doctors/ophthasearch/">← OphthaSearch</a>
+        <div class="doctors-language" aria-label="Язык раздела">
+          <a class="active" href="/for-doctors/ophthasearch-v2/" lang="ru" hreflang="ru" aria-current="page">RU</a>
+          <a href="/en/for-doctors/ophthasearch/" lang="en" hreflang="en">EN</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="content-material">
+    <section class="ophtha-v2-hero" aria-labelledby="ophtha-v2-title">
+      <div class="container ophtha-v2-hero-grid">
+        <div class="ophtha-v2-brand">
+          <p class="eyebrow">Research Agent · canary</p>
+          <h1 id="ophtha-v2-title">OphthaSearch v2</h1>
+          <p class="ophtha-v2-brand-subtitle">Clinical Evidence Research Workspace</p>
+          <p class="ophtha-v2-brand-lead">Клинический вопрос интерпретируется на сервере, разбивается на независимые направления поиска, проходит relevance gate и дедупликацию, после чего AI анализирует только сформированный Evidence Pack. Идентификаторы источников и конкретные схемы лечения проходят отдельную верификацию.</p>
+        </div>
+        <span class="ophtha-v2-canary">isolated canary</span>
+      </div>
+    </section>
+
+    <section class="ophtha-v2-main" aria-labelledby="ophtha-v2-search-title">
+      <div class="container">
+        <div class="ophtha-v2-query-card">
+          <form class="ophtha-v2-search-form" data-v2-search-form role="search">
+            <label class="ophtha-v2-search-label" for="ophtha-v2-query" id="ophtha-v2-search-title">Клинический вопрос</label>
+            <input class="ophtha-v2-search-input" id="ophtha-v2-query" data-v2-query name="q" type="search" autocomplete="off" placeholder="Например: современная медикаментозная терапия ПОУГ — первая линия, комбинации и критерии эскалации">
+            <button class="button primary ophtha-v2-search-button" data-v2-submit type="submit">Исследовать</button>
+          </form>
+          <div class="ophtha-v2-query-meta" aria-label="Архитектура поиска">
+            <span>PubMed</span>
+            <span>Europe PMC</span>
+            <span>ClinicalTrials.gov</span>
+            <span>Controlled Guidelines</span>
+            <span>Gemma 4 reasoning</span>
+          </div>
+          <p class="ophtha-v2-status" data-v2-status role="status" aria-live="polite">Введите клинический вопрос в формулировке, которую вы использовали бы при обсуждении случая с коллегой.</p>
+        </div>
+
+        <div class="ophtha-v2-answer-shell" data-v2-answer-shell hidden>
+          <section class="ophtha-v2-bottom-line" aria-labelledby="ophtha-v2-bottom-line-title">
+            <div class="ophtha-v2-section-kicker">
+              <span>Clinical bottom line</span>
+              <span class="ophtha-v2-confidence" data-v2-confidence></span>
+            </div>
+            <h2 id="ophtha-v2-bottom-line-title">Практический вывод</h2>
+            <p data-v2-bottom-line></p>
+            <div class="ophtha-v2-citations" data-v2-bottom-line-citations aria-label="Источники практического вывода"></div>
+          </section>
+
+          <div class="ophtha-v2-grid">
+            <div class="ophtha-v2-column">
+              <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-management-title">
+                <h2 id="ophtha-v2-management-title">Тактика</h2>
+                <div data-v2-management></div>
+              </section>
+
+              <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-guidelines-title">
+                <h2 id="ophtha-v2-guidelines-title">Позиции рекомендаций</h2>
+                <div data-v2-guidelines></div>
+              </section>
+
+              <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-alternatives-title">
+                <h2 id="ophtha-v2-alternatives-title">Альтернативы</h2>
+                <div data-v2-alternatives></div>
+              </section>
+
+              <section class="ophtha-v2-card ophtha-v2-interpretation" aria-labelledby="ophtha-v2-interpretation-title">
+                <span class="ophtha-v2-interpretation-label">Отдельно от source-backed рекомендаций</span>
+                <h2 id="ophtha-v2-interpretation-title">Клиническая интерпретация</h2>
+                <div data-v2-clinical-interpretation></div>
+              </section>
+            </div>
+
+            <aside class="ophtha-v2-column" aria-label="Аргументы и доказательства">
+              <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-for-title">
+                <h2 id="ophtha-v2-for-title">Аргументы «за»</h2>
+                <div data-v2-arguments-for></div>
+              </section>
+
+              <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-against-title">
+                <h2 id="ophtha-v2-against-title">Аргументы «против»</h2>
+                <div data-v2-arguments-against></div>
+              </section>
+
+              <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-uncertainties-title">
+                <h2 id="ophtha-v2-uncertainties-title">Неопределённости</h2>
+                <div data-v2-uncertainties></div>
+              </section>
+            </aside>
+          </div>
+
+          <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-sources-title">
+            <h2 id="ophtha-v2-sources-title">Верифицированные источники</h2>
+            <div data-v2-sources></div>
+          </section>
+
+          <details class="ophtha-v2-card ophtha-v2-diagnostics">
+            <summary>Диагностика research pipeline</summary>
+            <div data-v2-diagnostics></div>
+          </details>
+        </div>
+
+        <p class="ophtha-v2-disclaimer">Canary-версия предназначена для профессионального тестирования. OphthaSearch v2 — инструмент поиска и синтеза научной информации для врачей, а не автономная система назначения лечения. Перед клиническим решением необходимо сопоставлять вывод с оригинальными публикациями, актуальными рекомендациями, инструкциями к препаратам и конкретной клинической ситуацией.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row"><span>МШ</span><p>Матвей Юрьевич Шемякин · врач-офтальмолог · офтальмохирург</p></div>
+  </footer>
+
+  <script src="/doctors-legal.js?v=20260816-2"></script>
+  <script src="/legal.js?v=20260721-3"></script>
+  <script defer src="/site-theme.js?v=20260806-1"></script>
+  <script defer src="/site-motion.js?v=20260806-1"></script>
+  <script defer src="/site-mega-nav.js?v=20260816-2"></script>
+  <script type="module" src="/for-doctors/ophthasearch-v2/ophthasearch-v2.js?v=20260825-1"></script>
+</body>
+</html>
