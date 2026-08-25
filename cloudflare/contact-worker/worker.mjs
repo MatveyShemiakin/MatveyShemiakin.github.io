@@ -1,3 +1,4 @@
+// Deployment is managed by GitHub Actions and verified against the production route.
 const ALLOWED_ORIGINS = new Set([
   'https://matveyshemyakin.ru',
   'https://www.matveyshemyakin.ru'
