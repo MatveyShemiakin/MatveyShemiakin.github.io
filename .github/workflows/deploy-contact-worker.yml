@@ -17,7 +17,7 @@ jobs:
       contents: read
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CONFIGURED_CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       CONTACT_RECIPIENT: ${{ secrets.CONTACT_RECIPIENT_EMAIL }}
     steps:
       - uses: actions/checkout@v4
@@ -27,27 +27,12 @@ jobs:
       - name: Check deployment secrets
         run: |
           test -n "$CLOUDFLARE_API_TOKEN"
-          test -n "$CONFIGURED_CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test "${#CLOUDFLARE_ACCOUNT_ID}" -eq 32
           test -n "$CONTACT_RECIPIENT"
       - name: Install Wrangler
         working-directory: cloudflare/contact-worker
         run: npm install --no-save wrangler@4
-      - name: Resolve Cloudflare account from token
-        working-directory: cloudflare/contact-worker
-        run: |
-          whoami="$(npx wrangler whoami --json --config wrangler.toml)"
-          printf '%s' "$whoami" | jq -e '.loggedIn == true and (.accounts | length) >= 1' >/dev/null
-          if printf '%s' "$whoami" | jq -e --arg configured "$CONFIGURED_CLOUDFLARE_ACCOUNT_ID" '.accounts | any(.id == $configured)' >/dev/null; then
-            account_id="$CONFIGURED_CLOUDFLARE_ACCOUNT_ID"
-          elif [ "$(printf '%s' "$whoami" | jq '.accounts | length')" -eq 1 ]; then
-            account_id="$(printf '%s' "$whoami" | jq -r '.accounts[0].id')"
-            echo '::warning::Configured CLOUDFLARE_ACCOUNT_ID does not match the token account; using the only account available to the API token.'
-          else
-            echo 'Unable to determine the Cloudflare account safely from this token.' >&2
-            exit 1
-          fi
-          test "${#account_id}" -eq 32
-          echo "CLOUDFLARE_ACCOUNT_ID=$account_id" >> "$GITHUB_ENV"
       - name: Deploy contact Worker
         working-directory: cloudflare/contact-worker
         run: npx wrangler deploy --config wrangler.toml
