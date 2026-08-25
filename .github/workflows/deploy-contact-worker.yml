@@ -35,20 +35,25 @@ jobs:
         run: npm install --no-save wrangler@4
       - name: Deploy contact Worker
         working-directory: cloudflare/contact-worker
-        run: npx wrangler deploy --config wrangler.toml
+        run: |
+          npx wrangler deploy --config wrangler.toml 2>&1 | tee /tmp/contact-worker-deploy.log
+          worker_url="$(grep -Eo 'https://[^[:space:]]+\.workers\.dev' /tmp/contact-worker-deploy.log | tail -n1 | tr -d '\r')"
+          test -n "$worker_url"
+          echo "CONTACT_WORKER_URL=$worker_url" >> "$GITHUB_ENV"
+          echo "Worker endpoint: $worker_url"
       - name: Set contact recipient secret
         working-directory: cloudflare/contact-worker
         run: printf '%s' "$CONTACT_RECIPIENT" | npx wrangler secret put CONTACT_RECIPIENT --name matveyshemyakin-contact --config wrangler.toml
       - name: Verify Worker route
         run: |
-          code="$(curl --silent --show-error --output /tmp/contact-worker-response --write-out '%{http_code}' --request OPTIONS https://matveyshemyakin.ru/api/contact)"
+          code="$(curl --silent --show-error --output /tmp/contact-worker-response --write-out '%{http_code}' --request OPTIONS "$CONTACT_WORKER_URL/api/contact" --header 'Origin: https://matveyshemyakin.ru' --header 'Access-Control-Request-Method: POST' --header 'Access-Control-Request-Headers: content-type')"
           cat /tmp/contact-worker-response || true
           test "$code" = "204"
       - name: Verify email sending
         run: |
           started_at="$(( $(date +%s%3N) - 5000 ))"
           payload="$(printf '{\"name\":\"Deployment test\",\"organization\":\"matveyshemyakin.ru\",\"reply_email\":\"test@example.com\",\"topic\":\"other\",\"message\":\"Automated Cloudflare Worker deployment verification message.\",\"honeypot\":\"\",\"consent\":true,\"started_at\":%s}' "$started_at")"
-          code="$(curl --silent --show-error --output /tmp/contact-send-response --write-out '%{http_code}' --request POST https://matveyshemyakin.ru/api/contact --header 'Origin: https://matveyshemyakin.ru' --header 'Content-Type: application/json' --data "$payload")"
+          code="$(curl --silent --show-error --output /tmp/contact-send-response --write-out '%{http_code}' --request POST "$CONTACT_WORKER_URL/api/contact" --header 'Origin: https://matveyshemyakin.ru' --header 'Content-Type: application/json' --data "$payload")"
           cat /tmp/contact-send-response || true
           test "$code" = "200"
           grep -Eq '\"ok\"[[:space:]]*:[[:space:]]*true' /tmp/contact-send-response
