@@ -59,6 +59,14 @@ export function buildResearchPlan(intent = {}) {
       ['pubmed', 'europepmc', 'openalex'],
       ['systematic-review', 'meta-analysis', 'randomized-controlled-trial'],
       'recent-10y-plus-landmark'
+    ),
+    makeTrack(
+      'ongoing-trials',
+      'Registered ongoing or recently completed trials that may change practice',
+      `${condition} ${treatment}`,
+      ['clinicaltrials'],
+      ['registered-trial'],
+      'current'
     )
   ];
 
@@ -69,6 +77,7 @@ export function buildResearchPlan(intent = {}) {
     byId.get('alternatives').query = `${condition} selective laser trabeculoplasty versus medication first-line alternative treatment`;
     byId.get('monitoring-escalation').query = `${condition} target intraocular pressure monitoring escalation combination therapy treatment failure`;
     byId.get('pivotal-evidence').query = `${condition} medication randomized trial meta-analysis first-line treatment recent`;
+    byId.get('ongoing-trials').query = `${condition} pharmacological therapy`;
   }
 
   return tracks;
