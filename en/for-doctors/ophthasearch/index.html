@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="en" data-site-theme-family="doctors">
 <head>
-  <script src="/analytics.js?v=20260811-2"></script><script type="application/ld+json" data-yandex-content-analytics="true">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://matveyshemyakin.ru/en/for-doctors/","name":"For doctors"}},{"@type":"ListItem","position":2,"item":{"@id":"https://matveyshemyakin.ru/en/for-doctors/ophthasearch/","name":"Ophthasearch"}}]},{"@type":"Article","@id":"https://matveyshemyakin.ru/en/for-doctors/ophthasearch/#content-material","url":"https://matveyshemyakin.ru/en/for-doctors/ophthasearch/#content-material","headline":"OphthaSearch","mainEntityOfPage":"https://matveyshemyakin.ru/en/for-doctors/ophthasearch/","inLanguage":"en","author":{"@type":"Person","@id":"https://matveyshemyakin.ru/#person","name":"Matvey Yuryevich Shemyakin"},"about":[{"@type":"MedicalCondition","name":"Ophthasearch"},{"@type":"Thing","name":"Ophthalmology"}]}]}</script>
+  <script src="/analytics.js?v=20260811-2"></script>
+  <script type="application/ld+json" data-yandex-content-analytics="true">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://matveyshemyakin.ru/en/for-doctors/","name":"For doctors"}},{"@type":"ListItem","position":2,"item":{"@id":"https://matveyshemyakin.ru/en/for-doctors/ophthasearch/","name":"OphthaSearch"}}]},{"@type":"Article","@id":"https://matveyshemyakin.ru/en/for-doctors/ophthasearch/#content-material","url":"https://matveyshemyakin.ru/en/for-doctors/ophthasearch/#content-material","headline":"OphthaSearch","mainEntityOfPage":"https://matveyshemyakin.ru/en/for-doctors/ophthasearch/","inLanguage":"en","author":{"@type":"Person","@id":"https://matveyshemyakin.ru/#person","name":"Matvey Yuryevich Shemyakin"},"about":[{"@type":"Thing","name":"Ophthalmology"},{"@type":"Thing","name":"Evidence-based medicine"}]}]}</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OphthaSearch — Global Ophthalmology Research Search</title>
-  <meta name="description" content="OphthaSearch is a clinician-focused ophthalmology search across publications, trial registries and regional scientific sources.">
+  <title>OphthaSearch — clinical evidence search in ophthalmology</title>
+  <meta name="description" content="OphthaSearch is a professional ophthalmology research tool that retrieves relevant publications, trials and guidance and returns a verifiable clinical synthesis.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Matvey Yuryevich Shemyakin">
   <meta name="theme-color" content="#041225">
@@ -24,9 +25,10 @@
   <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
   <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">
   <link rel="stylesheet" href="/for-doctors/doctors-updates.css?v=20260816-1">
-  <link rel="stylesheet" href="/for-doctors/ophthasearch/ophthasearch.css?v=20260816-2">
-<link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=20260825-1"></head>
-<body class="ophtha-page" data-ophthasearch data-lang="en">
+  <link rel="stylesheet" href="/for-doctors/ophthasearch-v2/ophthasearch-v2.css?v=20260825-3">
+  <link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=20260825-1">
+</head>
+<body class="ophtha-v2-page">
   <header class="doctors-header">
     <div class="container doctors-nav">
       <a class="monogram" href="/en/" aria-label="Home">MS</a>
@@ -54,124 +56,76 @@
   </header>
 
   <main id="content-material">
-    <section class="ophtha-hero" aria-labelledby="ophtha-title">
-      <div class="container ophtha-hero-grid">
-        <div class="ophtha-brand">
-          <p class="eyebrow">Research search for ophthalmologists</p>
-          <h1 id="ophtha-title">OphthaSearch</h1>
-          <p class="ophtha-brand-subtitle">Global Ophthalmology Research Search</p>
-          <p class="ophtha-brand-lead">One query searches scientific publications, registered clinical studies and regional literature in parallel. Europe PMC and ClinicalTrials.gov are independent live sources; J-STAGE is connected through its official WebAPI to extend coverage of Japan and the Asia-Pacific region.</p>
-        </div>
-        <div class="ophtha-live-stack" aria-label="Source status">
-          <span class="ophtha-live-chip"><span class="ophtha-live-dot" aria-hidden="true"></span>Europe PMC · LIVE</span>
-          <span class="ophtha-live-chip"><span class="ophtha-live-dot" aria-hidden="true"></span>ClinicalTrials.gov · LIVE</span>
-          <span class="ophtha-live-chip"><span class="ophtha-live-dot" aria-hidden="true"></span>J-STAGE · WebAPI</span>
+    <section class="ophtha-v2-hero" aria-labelledby="ophtha-v2-title">
+      <div class="container ophtha-v2-hero-grid">
+        <div class="ophtha-v2-brand">
+          <p class="eyebrow">Clinical search for ophthalmologists</p>
+          <h1 id="ophtha-v2-title">OphthaSearch</h1>
+          <p class="ophtha-v2-brand-subtitle">From clinical question to verifiable synthesis</p>
+          <p class="ophtha-v2-brand-lead">Ask a question in natural clinical language. OphthaSearch interprets it server-side, retrieves publications and trials from multiple sources, removes irrelevant records, and only then passes the Evidence Pack to Gemma 4 for clinical synthesis.</p>
         </div>
       </div>
     </section>
 
-    <section class="ophtha-search-section" aria-labelledby="ophtha-search-heading">
+    <section class="ophtha-v2-main" aria-labelledby="ophtha-v2-search-title">
       <div class="container">
-        <div class="ophtha-search-card">
-          <form class="ophtha-search-form" id="ophtha-search-form" role="search">
-            <label class="ophtha-search-label" for="ophtha-query">Search research</label>
-            <input class="ophtha-search-input" id="ophtha-query" name="q" type="search" autocomplete="off" placeholder="Example: inverted ILM flap large macular hole" aria-describedby="ophtha-search-help">
-            <button class="button primary ophtha-search-button" type="submit">Search</button>
+        <div class="ophtha-v2-query-card">
+          <form class="ophtha-v2-search-form" data-v2-search-form role="search">
+            <label class="ophtha-v2-search-label" for="ophtha-v2-query" id="ophtha-v2-search-title">Clinical question</label>
+            <input class="ophtha-v2-search-input" id="ophtha-v2-query" data-v2-query name="q" type="search" autocomplete="off" placeholder="Example: is latanoprost superior to timolol in primary open-angle glaucoma?">
+            <button class="button primary ophtha-v2-search-button" data-v2-submit type="submit">Research</button>
           </form>
-          <div class="ophtha-search-meta" id="ophtha-search-help">
-            <span>Europe PMC · publications</span>
-            <span>ClinicalTrials.gov · studies</span>
-            <span>J-STAGE · Japan / Asia-Pacific</span>
-            <span>up to 36 merged results</span>
-          </div>
+          <p class="ophtha-v2-status" data-v2-status role="status" aria-live="polite">Enter the question as you would phrase it when discussing a clinical case with a colleague.</p>
         </div>
 
-        <section class="ophtha-source-board" id="ophtha-source-board" aria-label="Scientific source connectivity">
-          <article class="ophtha-source-card" data-provider-status="europepmc" data-state="idle">
-            <div class="ophtha-source-head"><strong>Europe PMC</strong><span class="ophtha-provider-state" data-provider-state>Ready</span></div>
-            <p>Publications, PMID/PMCID, DOI, abstracts, citations and Open Access metadata.</p>
-          </article>
-          <article class="ophtha-source-card" data-provider-status="clinicaltrials" data-state="idle">
-            <div class="ophtha-source-head"><strong>ClinicalTrials.gov</strong><span class="ophtha-provider-state" data-provider-state>Ready</span></div>
-            <p>Registered studies, NCT IDs, recruitment status, phase, sponsor and interventions.</p>
-          </article>
-          <article class="ophtha-source-card" data-provider-status="jstage" data-state="idle">
-            <div class="ophtha-source-head"><strong>J-STAGE · Japan</strong><span class="ophtha-provider-state" data-provider-state>Ready</span></div>
-            <p>Japanese regional literature through the official WebAPI. <a href="https://www.jstage.jst.go.jp/" target="_blank" rel="noopener noreferrer">Powered by J-STAGE</a>.</p>
-          </article>
-          <article class="ophtha-source-card ophtha-source-card--planned" data-provider-status="wprim" data-state="planned">
-            <div class="ophtha-source-head"><strong>WPRIM / Global Index Medicus</strong><span class="ophtha-provider-state">API verification</span></div>
-            <p>The WHO index is searchable online, but a publicly documented search API has not yet been confirmed.</p>
-          </article>
-          <article class="ophtha-source-card ophtha-source-card--planned" data-provider-status="koreascience" data-state="planned">
-            <div class="ophtha-source-head"><strong>KoreaScience · South Korea</strong><span class="ophtha-provider-state">API verification</span></div>
-            <p>KISTI regional source. It is not labelled live until an official current search API is verified.</p>
-          </article>
-        </section>
-
-        <div class="ophtha-workspace">
-          <aside class="ophtha-filters" id="ophtha-filters" aria-labelledby="ophtha-filters-title">
-            <h2 id="ophtha-filters-title">Filters</h2>
-            <div class="ophtha-filter-grid">
-              <label class="ophtha-control" for="ophtha-sort"><span>Sort</span>
-                <select id="ophtha-sort" name="sort">
-                  <option value="relevance">Relevance</option>
-                  <option value="newest">Newest first</option>
-                </select>
-              </label>
-              <label class="ophtha-control" for="ophtha-date"><span>Publication date</span>
-                <select id="ophtha-date" name="date">
-                  <option value="any">Any date</option>
-                  <option value="1y">Past year</option>
-                  <option value="5y">Past 5 years</option>
-                  <option value="10y">Past 10 years</option>
-                </select>
-              </label>
-              <label class="ophtha-control" for="ophtha-pubtype"><span>Publication type</span>
-                <select id="ophtha-pubtype" name="type">
-                  <option value="any">Any</option>
-                  <option value="review">Review</option>
-                  <option value="systematic-review">Systematic review</option>
-                  <option value="clinical-trial">Clinical trial</option>
-                  <option value="rct">Randomized controlled trial</option>
-                </select>
-              </label>
-              <label class="ophtha-check" for="ophtha-oa">
-                <input id="ophtha-oa" name="oa" type="checkbox">
-                <span>Open Access only</span>
-              </label>
+        <div class="ophtha-v2-answer-shell" data-v2-answer-shell hidden>
+          <section class="ophtha-v2-bottom-line" aria-labelledby="ophtha-v2-bottom-line-title">
+            <div class="ophtha-v2-section-kicker">
+              <span>Clinical synthesis</span>
+              <span class="ophtha-v2-confidence" data-v2-confidence></span>
             </div>
-
-            <div class="ophtha-provider">
-              <strong>How filters are applied</strong>
-              <p>Date and Open Access filters apply to Europe PMC publications; date is also sent to J-STAGE. When a selected filter requires metadata J-STAGE does not return, that provider is skipped rather than returning misleading matches. Review filters do not query the ClinicalTrials.gov registry.</p>
-            </div>
-
-            <details class="ophtha-roadmap">
-              <summary>Next regional connectors</summary>
-              <ul>
-                <li>WPRIM / WHO Global Index Medicus</li>
-                <li>KoreaScience · South Korea</li>
-                <li>LILACS / SciELO · Latin America</li>
-                <li>ANZCTR / CTIS and other trial registries</li>
-                <li>Russia / CIS sources with documented legal API access</li>
-              </ul>
-            </details>
-          </aside>
-
-          <section class="ophtha-results-panel" aria-labelledby="ophtha-search-heading">
-            <div class="ophtha-results-head">
-              <h2 id="ophtha-search-heading">Results</h2>
-              <span class="ophtha-result-count" id="ophtha-result-count"></span>
-            </div>
-            <p class="ophtha-status" id="ophtha-status" role="status" aria-live="polite">Enter a topic, disease, intervention or clinical question.</p>
-            <div class="ophtha-results" id="ophtha-results" aria-live="polite"></div>
-            <p class="ophtha-note">OphthaSearch is a scientific information discovery tool for healthcare professionals. Search results and metadata do not replace reading the original publication, clinical guidance or professional clinical judgement. J-STAGE terms require source attribution; commercial use of the J-STAGE WebAPI requires separate approval from JST.</p>
+            <h2 id="ophtha-v2-bottom-line-title">Clinical bottom line</h2>
+            <p data-v2-bottom-line></p>
+            <div class="ophtha-v2-citations" data-v2-bottom-line-citations aria-label="Sources for the clinical bottom line"></div>
           </section>
+
+          <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-management-title">
+            <h2 id="ophtha-v2-management-title">Management</h2>
+            <div data-v2-management></div>
+          </section>
+
+          <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-important-title">
+            <h2 id="ophtha-v2-important-title">Important considerations</h2>
+            <div data-v2-important></div>
+          </section>
+
+          <details class="ophtha-v2-card ophtha-v2-diagnostics">
+            <summary>Key sources</summary>
+            <div data-v2-sources></div>
+          </details>
         </div>
+
+        <p class="ophtha-v2-disclaimer">OphthaSearch is a research and synthesis tool for clinicians, not an autonomous prescribing system. Clinical decisions should be checked against the original publications, current guidelines, drug labelling and the individual clinical context.</p>
       </div>
     </section>
-  <!-- doctor-retention:start --><section class="doctor-material-tools" id="doctor-material-tools" aria-label="Professional workspace tools"><div class="doctor-material-tools-row"><p class="doctor-material-tools-copy">Keep this material in your professional workspace on this device.</p><button class="doctor-bookmark-toggle" id="doctor-bookmark-toggle" type="button" aria-pressed="false">Save</button></div></section><section class="doctor-related" aria-labelledby="doctor-related-title"><h2 id="doctor-related-title">Related professional materials</h2><div class="doctor-workspace-list" id="doctor-related-list"></div></section><div class="doctor-material-telegram"><p>New and updated clinician materials are announced in the Telegram channel.</p><a class="button secondary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer" data-doctor-telegram>Get clinician updates</a></div><!-- doctor-retention:end --></main>
+
+    <!-- doctor-retention:start -->
+    <section class="doctor-material-tools" id="doctor-material-tools" aria-label="Professional workspace tools">
+      <div class="doctor-material-tools-row">
+        <p class="doctor-material-tools-copy">Keep OphthaSearch in your professional workspace on this device.</p>
+        <button class="doctor-bookmark-toggle" id="doctor-bookmark-toggle" type="button" aria-pressed="false">Save</button>
+      </div>
+    </section>
+    <section class="doctor-related" aria-labelledby="doctor-related-title">
+      <h2 id="doctor-related-title">Related professional materials</h2>
+      <div class="doctor-workspace-list" id="doctor-related-list"></div>
+    </section>
+    <div class="doctor-material-telegram">
+      <p>New and updated clinician materials are announced in the Telegram channel.</p>
+      <a class="button secondary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer" data-doctor-telegram>Get clinician updates</a>
+    </div>
+    <!-- doctor-retention:end -->
+  </main>
 
   <footer class="site-footer">
     <div class="container footer-row"><span>MS</span><p>Matvey Yuryevich Shemyakin · ophthalmologist · ophthalmic surgeon</p></div>
@@ -185,6 +139,7 @@
   <script defer src="/site-motion.js?v=20260806-1"></script>
   <script defer src="/site-mega-nav.js?v=20260816-2"></script>
   <script defer src="/for-doctors/doctors-updates.js?v=20260816-1"></script>
-  <script type="module" src="/for-doctors/ophthasearch/ophthasearch.js?v=20260816-2"></script>
-<script defer src="/for-doctors/doctor-retention.js?v=20260825-1"></script></body>
+  <script type="module" src="/for-doctors/ophthasearch-v2/ophthasearch-v2.js?v=20260825-3"></script>
+  <script defer src="/for-doctors/doctor-retention.js?v=20260825-1"></script>
+</body>
 </html>
