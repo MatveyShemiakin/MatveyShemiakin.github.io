@@ -43,11 +43,9 @@ test('feature stylesheet contains responsive result workspace and source-status 
   assert.match(css, /\.ophtha-provider-state/);
 });
 
-test('answer-first layer hides technical clutter behind disclosure and keeps key evidence visible', async () => {
-  const loader = await read('for-doctors/ophthasearch/ophthasearch.js');
+test('quarantined answer-first source retains approved UI hooks', async () => {
   const js = await read('for-doctors/ophthasearch/ophthasearch-answer-first.js');
   const css = await read('for-doctors/ophthasearch/ophthasearch-answer-first.css');
-  assert.match(loader, /ophthasearch-answer-first\.js/);
   assert.match(js, /Короткий ответ/);
   assert.match(js, /Ключевые доказательства/);
   assert.match(js, /Все найденные публикации/);
@@ -59,8 +57,6 @@ test('answer-first layer hides technical clutter behind disclosure and keeps key
 });
 
 test('mobile OphthaSearch prevents long medical terms and identifiers from overflowing the viewport', async () => {
-  const loader = await read('for-doctors/ophthasearch/ophthasearch.js');
-  const refresh = await read('for-doctors/ophthasearch/ophthasearch-style-refresh.js');
   const answerCss = await read('for-doctors/ophthasearch/ophthasearch-answer-first.css');
   assert.match(answerCss, /overflow-wrap:\s*anywhere/);
   assert.match(answerCss, /word-break:\s*break-word/);
@@ -68,24 +64,25 @@ test('mobile OphthaSearch prevents long medical terms and identifiers from overf
   assert.match(answerCss, /\.ophtha-direct-answer[^{}]*\{[^}]*min-width:\s*0/s);
   assert.match(answerCss, /@media\s*\(max-width:\s*480px\)[\s\S]*\.ophtha-brand h1[^{}]*\{[^}]*max-width:\s*100%/);
   assert.match(answerCss, /@media\s*\(max-width:\s*480px\)[\s\S]*\.ophtha-result-title[^{}]*\{[^}]*font-size:\s*24px/);
-  assert.match(loader, /ophthasearch-style-refresh\.js/);
-  assert.match(refresh, /ophthasearch-answer-first\.css\?v=20260824-1/);
 });
 
-test('production loader keeps AI disabled during the performance hotfix', async () => {
+test('production loader runs only stable OphthaSearch core during performance hotfix', async () => {
   const loader = await read('for-doctors/ophthasearch/ophthasearch.js');
+  assert.match(loader, /ophthasearch-russian\.js/);
+  assert.match(loader, /ophthasearch-v3\.js/);
   assert.doesNotMatch(loader, /ophthasearch-ai\.js/);
-  assert.match(loader, /ophthasearch-answer-first\.js/);
+  assert.doesNotMatch(loader, /ophthasearch-answer-first\.js/);
+  assert.doesNotMatch(loader, /ophthasearch-style-refresh\.js/);
 });
 
-test('answer-first refresh is event-driven and does not observe its own DOM mutations', async () => {
-  const js = await read('for-doctors/ophthasearch/ophthasearch-answer-first.js');
-  assert.match(js, /ophthasearch:evidence-ready/);
-  assert.doesNotMatch(js, /new MutationObserver/);
-  assert.doesNotMatch(js, /observer\.observe/);
+test('production loader quarantines observer-driven answer-first code', async () => {
+  const loader = await read('for-doctors/ophthasearch/ophthasearch.js');
+  const answerFirst = await read('for-doctors/ophthasearch/ophthasearch-answer-first.js');
+  assert.match(answerFirst, /new MutationObserver/);
+  assert.doesNotMatch(loader, /ophthasearch-answer-first\.js/);
 });
 
-test('answer-first contains AI provenance and citation hooks with responsive CSS', async () => {
+test('answer-first source retains AI provenance and citation hooks for later refactor', async () => {
   const js = await read('for-doctors/ophthasearch/ophthasearch-answer-first.js');
   const css = await read('for-doctors/ophthasearch/ophthasearch-answer-first.css');
   assert.match(js, /ophthasearch:ai-pending/);
