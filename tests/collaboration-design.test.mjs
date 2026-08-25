@@ -64,3 +64,10 @@ test('collaboration form has a reliable browser handoff instead of a mailto-only
   assert.ok(js.includes("addEventListener('invalid'"), 'visible invalid-field feedback is missing');
   assert.ok(js.includes('data-contact-submit'), 'submit control hook is missing');
 });
+
+test('collaboration modal stays above global mobile overlays and submit keeps full hit area', () => {
+  const css = read('collaboration/assets/design-refresh.css');
+  assert.ok(css.includes('.modal{z-index:20000'), 'modal must sit above global cookie/fab overlays');
+  assert.ok(css.includes('touch-action:manipulation'), 'submit button needs explicit mobile touch handling');
+  assert.ok(css.includes('pointer-events:auto'), 'submit button must keep its whole hit area interactive');
+});
