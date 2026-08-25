@@ -8,8 +8,12 @@ on:
       - 'for-doctors/index.html'
       - 'en/for-doctors/index.html'
       - 'for-doctors/collaboration-entry.css'
+      - 'cloudflare/contact-worker/**'
+      - 'privacy.html'
+      - 'en/privacy.html'
       - 'tests/collaboration-design.test.mjs'
       - '.github/workflows/collaboration-design.yml'
+      - '.github/workflows/deploy-contact-worker.yml'
 
 jobs:
   verify:
@@ -24,6 +28,8 @@ jobs:
         run: node --test tests/collaboration-design.test.mjs
       - name: Collaboration script syntax
         run: node --check collaboration/assets/app.js
+      - name: Contact Worker syntax
+        run: node --check cloudflare/contact-worker/worker.mjs
       - name: Render RU EN desktop and mobile
         run: |
           mkdir -p collaboration-smoke
