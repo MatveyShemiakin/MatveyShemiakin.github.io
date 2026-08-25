@@ -13,6 +13,7 @@ on:
       - 'tests/ophthasearch*.test.mjs'
       - 'tests/fixtures/ophthasearch-v2-*.json'
       - '.github/workflows/ophthasearch-tests.yml'
+      - '.github/workflows/deploy-ophthasearch-worker.yml'
   pull_request:
     paths:
       - '_worker.js'
@@ -25,6 +26,7 @@ on:
       - 'tests/ophthasearch*.test.mjs'
       - 'tests/fixtures/ophthasearch-v2-*.json'
       - '.github/workflows/ophthasearch-tests.yml'
+      - '.github/workflows/deploy-ophthasearch-worker.yml'
 
 permissions:
   contents: read
@@ -56,3 +58,4 @@ jobs:
           tests/ophthasearch-v2-pipeline.test.mjs
           tests/ophthasearch-v2-ui.test.mjs
           tests/ophthasearch-production-v2.test.mjs
+          tests/ophthasearch-deployment.test.mjs
