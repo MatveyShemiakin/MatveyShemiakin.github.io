@@ -53,11 +53,12 @@ test('research planner creates independent evidence tracks for specialist therap
   const intent = await interpret('Современная медикаментозная терапия ПОУГ: что использовать первой линией и когда переходить на комбинацию?');
   const plan = buildResearchPlan(intent);
   const ids = new Set(plan.map((track) => track.id));
-  for (const required of ['guidelines', 'efficacy', 'safety', 'alternatives', 'monitoring-escalation', 'pivotal-evidence']) {
+  for (const required of ['guidelines', 'efficacy', 'safety', 'alternatives', 'monitoring-escalation', 'pivotal-evidence', 'ongoing-trials']) {
     assert.ok(ids.has(required), `missing ${required}`);
   }
   assert.ok(plan.every((track) => Array.isArray(track.sourceClasses) && track.sourceClasses.length > 0));
   assert.ok(plan.some((track) => /primary open-angle glaucoma/i.test(track.query)));
+  assert.ok(plan.find((track) => track.id === 'ongoing-trials').sourceClasses.includes('clinicaltrials'));
 });
 
 test('planner does not create retinal-detachment search terms for glaucoma pharmacotherapy', async () => {
