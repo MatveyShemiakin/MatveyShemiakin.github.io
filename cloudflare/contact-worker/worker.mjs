@@ -1,4 +1,4 @@
-// Deployment is managed by GitHub Actions and verified against the production route.
+// Deployment is managed by GitHub Actions and verified against the production endpoint.
 const ALLOWED_ORIGINS = new Set([
   'https://matveyshemyakin.ru',
   'https://www.matveyshemyakin.ru'
@@ -13,13 +13,25 @@ const TOPICS = {
   other: 'Другой профессиональный вопрос'
 };
 
-const json = (body, status = 200) => new Response(JSON.stringify(body), {
+function corsHeaders(origin) {
+  if (!origin || !ALLOWED_ORIGINS.has(origin)) return {};
+  return {
+    'access-control-allow-origin': origin,
+    'access-control-allow-methods': 'POST, OPTIONS',
+    'access-control-allow-headers': 'Content-Type, Accept',
+    'access-control-max-age': '86400',
+    'vary': 'Origin'
+  };
+}
+
+const json = (body, status = 200, origin = '') => new Response(JSON.stringify(body), {
   status,
   headers: {
     'content-type': 'application/json; charset=utf-8',
     'cache-control': 'no-store',
     'x-content-type-options': 'nosniff',
-    'referrer-policy': 'no-referrer'
+    'referrer-policy': 'no-referrer',
+    ...corsHeaders(origin)
   }
 });
 
@@ -86,45 +98,47 @@ function emailText(value, request) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const origin = request.headers.get('origin') || '';
 
     if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers: { 'allow': 'POST, OPTIONS' } });
+      if (!ALLOWED_ORIGINS.has(origin)) {
+        return json({ ok: false, message: 'Origin not allowed' }, 403, origin);
+      }
+      return new Response(null, { status: 204, headers: corsHeaders(origin) });
     }
     if (request.method !== 'POST' || !url.pathname.startsWith('/api/contact')) {
-      return json({ ok: false, message: 'Not found' }, 404);
+      return json({ ok: false, message: 'Not found' }, 404, origin);
     }
-
-    const origin = request.headers.get('origin');
     if (!origin || !ALLOWED_ORIGINS.has(origin)) {
-      return json({ ok: false, message: 'Origin not allowed' }, 403);
+      return json({ ok: false, message: 'Origin not allowed' }, 403, origin);
     }
 
     const contentType = request.headers.get('content-type') || '';
     if (!contentType.toLowerCase().startsWith('application/json')) {
-      return json({ ok: false, message: 'Unsupported media type' }, 415);
+      return json({ ok: false, message: 'Unsupported media type' }, 415, origin);
     }
 
     const length = Number(request.headers.get('content-length') || 0);
     if (Number.isFinite(length) && length > 16000) {
-      return json({ ok: false, message: 'Request too large' }, 413);
+      return json({ ok: false, message: 'Request too large' }, 413, origin);
     }
 
     let payload;
     try {
       payload = await request.json();
     } catch (_) {
-      return json({ ok: false, message: 'Invalid request' }, 400);
+      return json({ ok: false, message: 'Invalid request' }, 400, origin);
     }
 
     const checked = validate(payload || {});
     if (!checked.ok) {
-      if (checked.silent) return json({ ok: true });
-      return json({ ok: false, message: 'Please check the form fields.', field: checked.code }, 400);
+      if (checked.silent) return json({ ok: true }, 200, origin);
+      return json({ ok: false, message: 'Please check the form fields.', field: checked.code }, 400, origin);
     }
 
     if (!env.EMAIL || typeof env.EMAIL.send !== 'function' || !env.CONTACT_RECIPIENT) {
       console.error('Contact Worker is missing EMAIL binding or CONTACT_RECIPIENT secret');
-      return json({ ok: false, message: 'Service unavailable' }, 503);
+      return json({ ok: false, message: 'Service unavailable' }, 503, origin);
     }
 
     const value = checked.value;
@@ -138,10 +152,10 @@ export default {
         subject,
         text: emailText(value, request)
       });
-      return json({ ok: true });
+      return json({ ok: true }, 200, origin);
     } catch (error) {
       console.error('Contact email send failed', error);
-      return json({ ok: false, message: 'Service unavailable' }, 503);
+      return json({ ok: false, message: 'Service unavailable' }, 503, origin);
     }
   }
 };
