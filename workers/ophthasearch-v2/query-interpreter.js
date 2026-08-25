@@ -1,4 +1,5 @@
 import { normalizeIntent, validateResearchRequest } from './contracts.js';
+import { parseStructuredModelResponse } from './structured-response.js';
 
 export const INTENT_MODEL = '@cf/google/gemma-4-26b-a4b-it';
 
@@ -78,10 +79,7 @@ export function buildIntentMessages(request) {
 }
 
 function parseModelIntent(response) {
-  const raw = response?.response ?? response;
-  if (raw && typeof raw === 'object') return raw;
-  try { return JSON.parse(String(raw || '')); }
-  catch { throw new Error('Intent model returned invalid JSON'); }
+  return parseStructuredModelResponse(response, { label: 'Intent model returned invalid structured JSON' });
 }
 
 export async function interpretIntentWithAi(payload, env = {}, deps = {}) {
