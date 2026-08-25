@@ -8,13 +8,10 @@ on:
       - 'for-doctors/index.html'
       - 'en/for-doctors/index.html'
       - 'for-doctors/collaboration-entry.css'
-      - 'cloudflare/contact-worker/**'
       - 'privacy.html'
       - 'en/privacy.html'
       - 'tests/collaboration-design.test.mjs'
-      - 'tests/contact-worker.test.mjs'
       - '.github/workflows/collaboration-design.yml'
-      - '.github/workflows/deploy-contact-worker.yml'
 
 jobs:
   verify:
@@ -25,21 +22,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Report Cloudflare deployment prerequisites
-        env:
-          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CONTACT_RECIPIENT: ${{ secrets.CONTACT_RECIPIENT_EMAIL }}
-        run: |
-          [ -n "$CF_TOKEN" ] && echo "CLOUDFLARE_API_TOKEN=present" || echo "CLOUDFLARE_API_TOKEN=missing"
-          [ -n "$CF_ACCOUNT" ] && echo "CLOUDFLARE_ACCOUNT_ID=present" || echo "CLOUDFLARE_ACCOUNT_ID=missing"
-          [ -n "$CONTACT_RECIPIENT" ] && echo "CONTACT_RECIPIENT_EMAIL=present" || echo "CONTACT_RECIPIENT_EMAIL=missing"
-      - name: Collaboration and Worker tests
-        run: node --test tests/collaboration-design.test.mjs tests/contact-worker.test.mjs
+      - name: Collaboration design tests
+        run: node --test tests/collaboration-design.test.mjs
       - name: Collaboration script syntax
         run: node --check collaboration/assets/app.js
-      - name: Contact Worker syntax
-        run: node --check cloudflare/contact-worker/worker.mjs
       - name: Render RU EN desktop and mobile
         run: |
           mkdir -p collaboration-smoke
