@@ -16,11 +16,11 @@
       "kind": "updated"
     },
     "iol-dislocation": {
-      "fingerprint": "ee7195ba065c3be95aea11c4e31a2baf4a1aa596fe5263e1236f0e0cf4255292",
+      "fingerprint": "d48f306419b3d41551a70e85398946c363c2bb4e1ab38bdcb17e29e3c0c12a94",
       "published": "2026-08-25",
       "updated": "2026-08-25",
-      "revision": 1,
-      "kind": "new"
+      "revision": 2,
+      "kind": "updated"
     },
     "ophthasearch": {
       "fingerprint": "80471738df39703bc0895b59665e937aaabb7b45d47c17a8223cedc4af59b33b",
