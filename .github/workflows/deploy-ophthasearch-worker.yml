@@ -8,6 +8,7 @@ on:
     paths:
       - '_worker.js'
       - 'wrangler.jsonc'
+      - '.assetsignore'
       - 'workers/ophthasearch-ai/**'
       - 'workers/ophthasearch-v2/**'
       - '.github/workflows/deploy-ophthasearch-worker.yml'
