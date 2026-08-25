@@ -59,7 +59,7 @@ test('doctor collaboration CTA styling includes gold motion and reduced-motion f
 
 test('collaboration form submits directly to the site backend without Gmail or mailto handoff', () => {
   const js = read('collaboration/assets/app.js');
-  assert.ok(js.includes("fetch('/api/contact'"), 'form must POST to the same-origin contact backend');
+  assert.ok(js.includes("fetch('/api/contact'"), 'form must POST to the contact backend');
   assert.ok(js.includes("method: 'POST'"), 'contact request must use POST');
   assert.ok(js.includes('Сообщение отправлено'), 'RU success state is missing');
   assert.ok(js.includes('Message sent'), 'EN success state is missing');
@@ -74,16 +74,17 @@ test('collaboration modal stays above global mobile overlays and submit keeps fu
   assert.ok(css.includes('pointer-events:auto'), 'submit button must keep its whole hit area interactive');
 });
 
-test('Cloudflare Worker validates professional enquiries and sends via Email Service binding', () => {
+test('Cloudflare Worker validates professional enquiries and publishes through workers.dev', () => {
   const worker = read('cloudflare/contact-worker/worker.mjs');
   const config = read('cloudflare/contact-worker/wrangler.toml');
   assert.ok(worker.includes('env.EMAIL.send'), 'Email Service binding must send the enquiry');
   assert.ok(worker.includes('env.CONTACT_RECIPIENT'), 'recipient must stay in a Worker secret');
-  assert.ok(worker.includes('matveyshemyakin.ru'), 'same-origin allowlist is missing');
+  assert.ok(worker.includes('matveyshemyakin.ru'), 'origin allowlist is missing');
   assert.ok(worker.includes('honeypot'), 'honeypot validation is missing');
   assert.ok(worker.includes('consent'), 'consent validation is missing');
   assert.ok(config.includes('[[send_email]]'), 'send_email binding is missing');
-  assert.ok(config.includes('pattern = "matveyshemyakin.ru/api/contact*"'), 'production Worker route is missing');
+  assert.ok(config.includes('workers_dev = true'), 'workers.dev endpoint must remain enabled while GitHub Pages hosts the site');
+  assert.ok(!config.includes('route = { pattern = "matveyshemyakin.ru/api/contact*"'), 'GitHub Pages domain must not be configured as an unavailable Cloudflare Worker route');
 });
 
 test('privacy policy documents the collaboration form and Cloudflare processing', () => {
