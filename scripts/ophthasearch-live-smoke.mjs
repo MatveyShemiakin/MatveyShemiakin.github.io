@@ -58,13 +58,20 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function reasoningDiagnostics(result) {
+  const adapters = Array.isArray(result?.diagnostics?.adapters) ? result.diagnostics.adapters : [];
+  return adapters.filter((entry) => entry?.trackId === 'reasoning' || entry?.adapter === 'workers-ai');
+}
+
 function validateCommon(testCase, body) {
   if (body?.ok !== true) throw new Error(`Worker returned ok=${body?.ok}`);
   const result = body.result || {};
   const intent = result.intent || {};
   testCase.validateIntent(intent);
 
-  if (result.status === 'evidence_only') throw new Error('status=evidence_only');
+  if (result.status === 'evidence_only') {
+    throw new Error(`status=evidence_only reasoning=${JSON.stringify(reasoningDiagnostics(result))}`);
+  }
   if (!['complete', 'partial'].includes(result.status)) throw new Error(`status=${result.status}`);
 
   const answer = result.answer || {};
