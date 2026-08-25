@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
 import { runResearchPipeline } from '../workers/ophthasearch-v2/pipeline.js';
 import { handleRequest as handleRootRequest } from '../_worker.js';
 
@@ -109,4 +110,11 @@ test('root Worker routes POST /v2/research without changing v1 or static fallbac
   const body = await response.json();
   assert.equal(body.ok, true);
   assert.equal(body.result.schemaVersion, '2.0');
+});
+
+test('Wrangler routes both v1 and v2 API namespaces through the Worker before static assets', async () => {
+  const config = await fs.readFile(new URL('../wrangler.jsonc', import.meta.url), 'utf8');
+  const parsed = JSON.parse(config);
+  assert.ok(parsed.assets.run_worker_first.includes('/v1/*'));
+  assert.ok(parsed.assets.run_worker_first.includes('/v2/*'));
 });
