@@ -32,8 +32,9 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: cloudflare/contact-worker
-          secrets: |
-            CONTACT_RECIPIENT
+          command: deploy --config wrangler.toml
+          postCommands: |
+            printf '%s' "$CONTACT_RECIPIENT" | npx wrangler secret put CONTACT_RECIPIENT --name matveyshemyakin-contact --config wrangler.toml
       - name: Verify Worker route
         run: |
           code="$(curl --silent --show-error --output /tmp/contact-worker-response --write-out '%{http_code}' --request OPTIONS https://matveyshemyakin.ru/api/contact)"
