@@ -12,14 +12,32 @@ function treatmentLabel(intent) {
   return 'management';
 }
 
+function specificInterventions(intent = {}) {
+  const generic = new Set(['pharmacological therapy', 'medical therapy', 'management', 'surgical management']);
+  return [...new Set([...(intent.interventions || []), ...(intent.comparators || [])]
+    .map(clean)
+    .filter((value) => value && !generic.has(value.toLowerCase())))];
+}
+
+function comparisonPhrase(intent = {}) {
+  const interventions = (intent.interventions || []).map(clean).filter(Boolean);
+  const comparators = (intent.comparators || []).map(clean).filter(Boolean);
+  const namedInterventions = interventions.filter((value) => !/^(pharmacological therapy|medical therapy|management|surgical management)$/i.test(value));
+  if (namedInterventions.length && comparators.length) return `${namedInterventions.join(' ')} versus ${comparators.join(' ')}`;
+  if (namedInterventions.length) return namedInterventions.join(' ');
+  return '';
+}
+
 export function buildResearchPlan(intent = {}) {
   const condition = clean(intent.condition || intent.domain || 'ophthalmic condition');
   const treatment = treatmentLabel(intent);
+  const named = specificInterventions(intent);
+  const requested = comparisonPhrase(intent) || named.join(' ') || treatment;
   const tracks = [
     makeTrack(
       'guidelines',
       'Current professional-society and authority recommendations',
-      `${condition} guideline ${treatment}`,
+      `${condition} ${requested} guideline recommendation`,
       ['guideline-registry'],
       ['guideline', 'consensus'],
       'current'
@@ -27,50 +45,50 @@ export function buildResearchPlan(intent = {}) {
     makeTrack(
       'efficacy',
       'Comparative effectiveness for the requested management domain',
-      `${condition} ${treatment} comparative efficacy randomized trial systematic review`,
-      ['pubmed', 'europepmc'],
+      `${condition} ${requested} comparative efficacy randomized trial systematic review`,
+      ['pubmed', 'europepmc', 'jstage'],
       ['systematic-review', 'meta-analysis', 'randomized-controlled-trial', 'comparative-study']
     ),
     makeTrack(
       'safety',
       'Adverse events, contraindications and tolerability',
-      `${condition} ${treatment} safety adverse effects contraindications tolerability`,
-      ['pubmed', 'europepmc'],
+      `${condition} ${requested} safety adverse effects contraindications tolerability`,
+      ['pubmed', 'europepmc', 'jstage'],
       ['systematic-review', 'randomized-controlled-trial', 'cohort', 'safety-study']
     ),
     makeTrack(
       'alternatives',
       'Competing treatment strategies and when to choose them',
-      `${condition} alternative treatment comparative management`,
-      ['pubmed', 'europepmc', 'guideline-registry'],
+      `${condition} ${requested} alternative treatment comparative management`,
+      ['pubmed', 'europepmc', 'jstage', 'guideline-registry'],
       ['guideline', 'systematic-review', 'randomized-controlled-trial', 'comparative-study']
     ),
     makeTrack(
       'monitoring-escalation',
       'Monitoring, failure criteria and escalation/de-escalation triggers',
-      `${condition} monitoring treatment failure escalation target outcomes follow-up`,
+      `${condition} ${requested} monitoring treatment failure escalation target outcomes follow-up`,
       ['guideline-registry', 'pubmed', 'europepmc'],
       ['guideline', 'consensus', 'prospective-study', 'comparative-study']
     ),
     makeTrack(
       'pivotal-evidence',
       'Practice-changing and recent pivotal evidence',
-      `${condition} ${treatment} pivotal trial meta-analysis recent`,
-      ['pubmed', 'europepmc', 'openalex'],
+      `${condition} ${requested} pivotal trial meta-analysis recent`,
+      ['pubmed', 'europepmc', 'jstage', 'openalex'],
       ['systematic-review', 'meta-analysis', 'randomized-controlled-trial'],
       'recent-10y-plus-landmark'
     ),
     makeTrack(
       'ongoing-trials',
       'Registered ongoing or recently completed trials that may change practice',
-      `${condition} ${treatment}`,
+      `${condition} ${requested}`,
       ['clinicaltrials'],
       ['registered-trial'],
       'current'
     )
   ];
 
-  if (intent.question_type === 'therapy' && intent.interventions?.includes('pharmacological therapy')) {
+  if (intent.question_type === 'therapy' && intent.interventions?.includes('pharmacological therapy') && !named.length) {
     const byId = new Map(tracks.map((track) => [track.id, track]));
     byId.get('efficacy').query = `${condition} first-line pharmacological therapy prostaglandin analogue beta blocker carbonic anhydrase inhibitor alpha agonist comparative efficacy`;
     byId.get('safety').query = `${condition} topical medication safety adverse effects ocular surface adherence tolerability`;
