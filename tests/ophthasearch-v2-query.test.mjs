@@ -109,3 +109,45 @@ test('acceptance: inverted ILM flap versus conventional peeling preserves both c
   assert.match(efficacy.query, /internal limiting membrane peeling/i);
   assert.match(efficacy.query, /400|large macular hole/i);
 });
+
+test('resolved standard ophthalmology intent skips a redundant AI interpretation call', async () => {
+  let aiCalls = 0;
+  const intent = await interpretClinicalQuestion({
+    schemaVersion: '2.0',
+    language: 'ru',
+    question: 'Есть ли преимущество латанопроста перед тимололом при первичной открытоугольной глаукоме?',
+    mode: 'standard',
+    filters: {}
+  }, {
+    interpretIntent: async () => {
+      aiCalls += 1;
+      return { domain: 'wrong', condition: 'wrong' };
+    }
+  });
+  assert.equal(aiCalls, 0);
+  assert.equal(intent.condition, 'primary open-angle glaucoma');
+  assert.deepEqual(intent.interventions, ['latanoprost']);
+  assert.deepEqual(intent.comparators, ['timolol']);
+});
+
+test('unresolved ophthalmology question may use AI interpretation as a fallback', async () => {
+  let aiCalls = 0;
+  const intent = await interpretClinicalQuestion({
+    schemaVersion: '2.0',
+    language: 'ru',
+    question: 'Какова современная тактика при редкой хориоидальной патологии с серозной отслойкой?',
+    mode: 'standard',
+    filters: {}
+  }, {
+    interpretIntent: async () => {
+      aiCalls += 1;
+      return {
+        language: 'ru', domain: 'retina', condition: 'choroidal disease', question_type: 'management',
+        population: [], interventions: [], comparators: [], outcomes: [], modifiers: [],
+        requested_depth: 'specialist', needs_dosing: false, needs_alternatives: true, ambiguities: []
+      };
+    }
+  });
+  assert.equal(aiCalls, 1);
+  assert.equal(intent.condition, 'choroidal disease');
+});
