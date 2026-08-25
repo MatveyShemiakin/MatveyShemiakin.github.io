@@ -15,9 +15,10 @@ test('Wrangler production config targets the live OphthaSearch Worker with Worke
   assert.match(config, /"run_worker_first"\s*:\s*\[[^\]]*"\/v2\/\*"/s);
 });
 
-test('Worker asset upload excludes build-time dependencies', async () => {
+test('Worker asset upload excludes build-time and Wrangler temporary files', async () => {
   const ignore = await read('.assetsignore');
   assert.match(ignore, /^node_modules\/\*\*$/m);
+  assert.match(ignore, /^\.wrangler\/\*\*$/m);
 });
 
 test('OphthaSearch Worker changes are automatically deployed and live-smoke verified', async () => {
