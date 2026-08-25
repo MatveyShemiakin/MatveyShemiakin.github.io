@@ -124,6 +124,7 @@ test('reasonOverEvidence accepts Workers AI response wrapper and returns verifie
   const answer = await reasonOverEvidence(evidencePack, env);
   assert.equal(invocation.model, MODEL);
   assert.equal(invocation.options.response_format.type, 'json_schema');
+  assert.ok(invocation.options.max_completion_tokens >= 6000, 'Gemma reasoning budget must leave room for hidden reasoning plus structured JSON');
   assert.equal(answer.management[0].dose, '0.005%');
   assert.equal(answer.sources[0].source_id, 'S1');
 });
