@@ -148,6 +148,31 @@ test('reasonOverEvidence accepts OpenAI-compatible parsed structured output', as
   assert.equal(answer.clinical_bottom_line, validDraft().clinical_bottom_line);
 });
 
+test('reasoning parse failure reports safe response shape without leaking generated text', async () => {
+  const secretContent = '{"schemaVersion":"2.0","clinical_bottom_line":"DO_NOT_LEAK_SECRET';
+  const env = { AI: { run: async () => ({
+    id: 'chatcmpl-truncated',
+    choices: [{
+      finish_reason: 'length',
+      message: { role: 'assistant', content: secretContent }
+    }],
+    usage: { completion_tokens: 2200 }
+  }) } };
+
+  await assert.rejects(
+    () => reasonOverEvidence(evidencePack, env),
+    (error) => {
+      assert.match(error.message, /finish_reason=length/);
+      assert.match(error.message, /content_type=string/);
+      assert.match(error.message, new RegExp(`content_length=${secretContent.length}`));
+      assert.match(error.message, /starts_json=true/);
+      assert.match(error.message, /ends_json=false/);
+      assert.doesNotMatch(error.message, /DO_NOT_LEAK_SECRET|clinical_bottom_line/);
+      return true;
+    }
+  );
+});
+
 test('evidence-only fallback is controlled and does not invent a treatment regimen', () => {
   const fallback = buildEvidenceOnlyFallback(evidencePack, 'ru');
   assert.equal(fallback.management.length, 0);
