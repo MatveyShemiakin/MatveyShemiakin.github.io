@@ -33,6 +33,22 @@ const THERAPY_TERMS = [
   'терапия', 'лечение', 'медикаментоз', 'препарат', 'капли'
 ];
 
+const DRUG_TERMS = new Set([
+  'latanoprost', 'timolol', 'travoprost', 'bimatoprost', 'tafluprost', 'brimonidine',
+  'dorzolamide', 'brinzolamide', 'netarsudil', 'aflibercept', 'faricimab',
+  'ranibizumab', 'bevacizumab', 'brolucizumab'
+]);
+
+const FIXED_COMBINATION_TERMS = [
+  'fixed combination', 'fixed-dose combination', 'fixed dose combination', 'fixed-combination',
+  'combination product', 'комбинац'
+];
+
+const DIRECT_MONOTHERAPY_TERMS = [
+  'monotherapy', 'head-to-head', 'head to head', 'versus', ' vs ', 'compared with', 'compared to',
+  'монотерап', 'сравнен'
+];
+
 const SURGERY_TERMS = [
   'surgery', 'surgical', 'operation', 'operative', 'vitrectomy', 'pars plana vitrectomy',
   'scleral buckle', 'scleral buckling', 'pneumatic retinopexy', 'retinopexy', 'tamponade',
@@ -133,7 +149,6 @@ function namedTreatmentRelevance(text, intent = {}) {
   const isComparison = normalizeText(intent.question_type) === 'comparison' && interventions.length && comparators.length;
 
   if (isComparison) {
-    // Direct head-to-head evidence should dominate records that mention only one arm.
     if (interventionMatch && comparatorMatch) return 0.45;
     if (interventionMatch || comparatorMatch) return -0.12;
     return -0.5;
@@ -141,6 +156,22 @@ function namedTreatmentRelevance(text, intent = {}) {
 
   if (interventionMatch || comparatorMatch) return 0.18;
   return -0.28;
+}
+
+function monotherapyComparisonPenalty(text, intent = {}) {
+  if (normalizeText(intent.question_type) !== 'comparison') return 0;
+  const interventions = specificTerms(intent.interventions || []);
+  const comparators = specificTerms(intent.comparators || []);
+  if (!interventions.length || !comparators.length) return 0;
+
+  const requested = [...interventions, ...comparators];
+  if (!requested.every((term) => DRUG_TERMS.has(term))) return 0;
+  if (!containsAny(text, FIXED_COMBINATION_TERMS)) return 0;
+
+  // Fixed-combination studies can remain secondary context, but they must not outrank
+  // direct evidence when the clinician asked for A versus B as separate therapies.
+  if (containsAny(text, DIRECT_MONOTHERAPY_TERMS) && containsPhrase(text, 'monotherapy')) return 0.25;
+  return 0.85;
 }
 
 function outcomeScore(text, outcomes = []) {
@@ -177,6 +208,7 @@ export function scoreMedicalRelevance(document = {}, intent = {}) {
   score += outcomeScore(text, intent.outcomes);
   score += questionTypeScore(text, intent.question_type);
   score -= competingDomainPenalty(text, intent);
+  score -= monotherapyComparisonPenalty(text, intent);
 
   return Math.max(0, Math.min(1, Number(score.toFixed(4))));
 }
