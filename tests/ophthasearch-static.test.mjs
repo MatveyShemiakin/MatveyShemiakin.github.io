@@ -72,11 +72,17 @@ test('mobile OphthaSearch prevents long medical terms and identifiers from overf
   assert.match(refresh, /ophthasearch-answer-first\.css\?v=20260824-1/);
 });
 
-test('loader enables AI before answer-first rendering', async () => {
+test('production loader keeps AI disabled during the performance hotfix', async () => {
   const loader = await read('for-doctors/ophthasearch/ophthasearch.js');
-  const aiIndex = loader.indexOf('ophthasearch-ai.js');
-  const answerIndex = loader.indexOf('ophthasearch-answer-first.js');
-  assert.ok(aiIndex >= 0 && answerIndex > aiIndex);
+  assert.doesNotMatch(loader, /ophthasearch-ai\.js/);
+  assert.match(loader, /ophthasearch-answer-first\.js/);
+});
+
+test('answer-first refresh is event-driven and does not observe its own DOM mutations', async () => {
+  const js = await read('for-doctors/ophthasearch/ophthasearch-answer-first.js');
+  assert.match(js, /ophthasearch:evidence-ready/);
+  assert.doesNotMatch(js, /new MutationObserver/);
+  assert.doesNotMatch(js, /observer\.observe/);
 });
 
 test('answer-first contains AI provenance and citation hooks with responsive CSS', async () => {
