@@ -1,4 +1,4 @@
-export const DEFAULT_RESEARCH_ENDPOINT = '/v2/research';
+export const DEFAULT_RESEARCH_ENDPOINT = 'https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev/v2/research';
 
 function clean(value) {
   return String(value ?? '').replace(/\s+/g, ' ').trim();
