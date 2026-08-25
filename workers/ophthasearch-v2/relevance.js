@@ -38,6 +38,11 @@ const DIAGNOSIS_TERMS = [
   'диагност', 'скрининг', 'томография'
 ];
 
+const GENERIC_INTERVENTIONS = new Set([
+  'pharmacological therapy', 'medical therapy', 'drug therapy', 'management',
+  'surgical management', 'treatment', 'therapy'
+]);
+
 const GLAUCOMA_TERMS = ['glaucoma', 'primary open-angle glaucoma', 'open-angle glaucoma', 'poag', 'глауком', 'поуг'];
 const RETINAL_DETACHMENT_TERMS = ['retinal detachment', 'rhegmatogenous retinal detachment', 'rrd', 'отслойка сетчатки'];
 const MACULAR_HOLE_TERMS = ['macular hole', 'full-thickness macular hole', 'ftmh', 'макулярный разрыв'];
@@ -63,7 +68,7 @@ function competingDomainPenalty(text, intent) {
 
 function questionTypeScore(text, questionType) {
   const type = normalizeText(questionType);
-  if (type === 'therapy' || type === 'treatment' || type === 'effectiveness') {
+  if (type === 'therapy' || type === 'treatment' || type === 'effectiveness' || type === 'comparison') {
     if (containsAny(text, THERAPY_TERMS)) return 0.12;
     if (containsAny(text, DIAGNOSIS_TERMS)) return -0.08;
   }
@@ -87,6 +92,31 @@ function interventionScore(text, interventions = []) {
     }
   }
   return score;
+}
+
+function specificTerms(values = []) {
+  return [...new Set(values
+    .map(normalizeText)
+    .filter((value) => value && !GENERIC_INTERVENTIONS.has(value)))];
+}
+
+function namedTreatmentRelevance(text, intent = {}) {
+  const interventions = specificTerms(intent.interventions || []);
+  const comparators = specificTerms(intent.comparators || []);
+  if (!interventions.length && !comparators.length) return 0;
+
+  const interventionMatch = interventions.some((value) => containsPhrase(text, value));
+  const comparatorMatch = comparators.some((value) => containsPhrase(text, value));
+  const isComparison = normalizeText(intent.question_type) === 'comparison' && interventions.length && comparators.length;
+
+  if (isComparison) {
+    if (interventionMatch && comparatorMatch) return 0.32;
+    if (interventionMatch || comparatorMatch) return 0.04;
+    return -0.5;
+  }
+
+  if (interventionMatch || comparatorMatch) return 0.18;
+  return -0.28;
 }
 
 function outcomeScore(text, outcomes = []) {
@@ -118,6 +148,8 @@ export function scoreMedicalRelevance(document = {}, intent = {}) {
 
   if (domain && containsPhrase(text, domain)) score += 0.25;
   score += interventionScore(text, intent.interventions);
+  score += interventionScore(text, intent.comparators);
+  score += namedTreatmentRelevance(text, intent);
   score += outcomeScore(text, intent.outcomes);
   score += questionTypeScore(text, intent.question_type);
   score -= competingDomainPenalty(text, intent);
