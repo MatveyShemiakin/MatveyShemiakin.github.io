@@ -115,17 +115,37 @@ test('clinical interpretation may remain explicitly separated from sourced recom
   assert.match(finalAnswer.clinical_interpretation, /^Клиническая интерпретация:/);
 });
 
-test('reasonOverEvidence invokes Workers AI with structured schema and returns verified answer', async () => {
+test('reasonOverEvidence accepts Workers AI response wrapper and returns verified answer', async () => {
   let invocation;
   const env = { AI: { run: async (model, options) => {
     invocation = { model, options };
-    return { response: JSON.stringify(validDraft()) };
+    return { response: validDraft() };
   } } };
   const answer = await reasonOverEvidence(evidencePack, env);
   assert.equal(invocation.model, MODEL);
   assert.equal(invocation.options.response_format.type, 'json_schema');
   assert.equal(answer.management[0].dose, '0.005%');
   assert.equal(answer.sources[0].source_id, 'S1');
+});
+
+test('reasonOverEvidence accepts OpenAI-compatible chat completion content from Gemma 4', async () => {
+  const env = { AI: { run: async () => ({
+    id: 'chatcmpl-test',
+    choices: [{ message: { role: 'assistant', content: JSON.stringify(validDraft()) } }]
+  }) } };
+  const answer = await reasonOverEvidence(evidencePack, env);
+  assert.equal(answer.schemaVersion, '2.0');
+  assert.equal(answer.clinical_bottom_line, validDraft().clinical_bottom_line);
+  assert.equal(answer.sources[0].source_id, 'S1');
+});
+
+test('reasonOverEvidence accepts OpenAI-compatible parsed structured output', async () => {
+  const env = { AI: { run: async () => ({
+    choices: [{ message: { role: 'assistant', parsed: validDraft() } }]
+  }) } };
+  const answer = await reasonOverEvidence(evidencePack, env);
+  assert.equal(answer.schemaVersion, '2.0');
+  assert.equal(answer.clinical_bottom_line, validDraft().clinical_bottom_line);
 });
 
 test('evidence-only fallback is controlled and does not invent a treatment regimen', () => {
