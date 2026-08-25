@@ -67,3 +67,45 @@ test('planner does not create retinal-detachment search terms for glaucoma pharm
   const combined = plan.map((track) => track.query).join(' ').toLowerCase();
   assert.doesNotMatch(combined, /retinal detachment|vitrectomy|scleral buckle/);
 });
+
+test('acceptance: latanoprost versus timolol is a named POAG comparison', async () => {
+  const intent = await interpret('Есть ли преимущество латанопроста перед тимололом при первичной открытоугольной глаукоме?');
+  assert.equal(intent.condition, 'primary open-angle glaucoma');
+  assert.equal(intent.question_type, 'comparison');
+  assert.deepEqual(intent.interventions, ['latanoprost']);
+  assert.deepEqual(intent.comparators, ['timolol']);
+  const efficacy = buildResearchPlan(intent).find((track) => track.id === 'efficacy');
+  assert.match(efficacy.query, /latanoprost/i);
+  assert.match(efficacy.query, /timolol/i);
+});
+
+test('acceptance: rhegmatogenous retinal detachment surgery resolves the subtype and surgical search domain', async () => {
+  const intent = await interpret('Тактика хирургического лечения регматогенной отслойки сетчатки');
+  assert.equal(intent.domain, 'retina');
+  assert.equal(intent.condition, 'rhegmatogenous retinal detachment');
+  assert.equal(intent.question_type, 'surgery');
+  assert.ok(intent.interventions.some((value) => /vitrectomy|scleral buckl|pneumatic retinopexy|surgical management/i.test(value)));
+
+  const plan = buildResearchPlan(intent);
+  const efficacy = plan.find((track) => track.id === 'efficacy');
+  assert.match(efficacy.query, /rhegmatogenous retinal detachment/i);
+  assert.match(efficacy.query, /vitrectomy|scleral buckl|pneumatic retinopexy/i);
+});
+
+test('acceptance: inverted ILM flap versus conventional peeling preserves both comparison arms and hole size', async () => {
+  const intent = await interpret(
+    'Inverted ILM flap vs conventional ILM peeling for macular hole >400 µm',
+    'en'
+  );
+  assert.equal(intent.domain, 'retina');
+  assert.equal(intent.condition, 'full-thickness macular hole');
+  assert.equal(intent.question_type, 'comparison');
+  assert.deepEqual(intent.interventions, ['inverted ILM flap']);
+  assert.deepEqual(intent.comparators, ['internal limiting membrane peeling']);
+  assert.ok(intent.modifiers.some((value) => />?400\s*µm/i.test(value)));
+
+  const efficacy = buildResearchPlan(intent).find((track) => track.id === 'efficacy');
+  assert.match(efficacy.query, /inverted ILM flap/i);
+  assert.match(efficacy.query, /internal limiting membrane peeling/i);
+  assert.match(efficacy.query, /400|large macular hole/i);
+});
