@@ -1,5 +1,20 @@
 [
   {
+    "id": "ophthasearch-v2",
+    "event_id": "ophthasearch-v2:1",
+    "published": "2026-08-25",
+    "updated": "2026-08-25",
+    "revision": 1,
+    "kind": "new",
+    "title": "OphthaSearch",
+    "title_en": "OphthaSearch",
+    "description": "OphthaSearch помогает врачу найти релевантные офтальмологические публикации и получить единый клинический вывод со ссылками на источники.",
+    "description_en": "OphthaSearch помогает врачу найти релевантные офтальмологические публикации и получить единый клинический вывод со ссылками на источники.",
+    "url": "/for-doctors/ophthasearch-v2/",
+    "url_en": "",
+    "topics": []
+  },
+  {
     "id": "penetrating-keratoplasty",
     "event_id": "penetrating-keratoplasty:2",
     "published": "2026-08-16",

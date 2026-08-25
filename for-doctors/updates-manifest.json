@@ -22,6 +22,13 @@
       "revision": 3,
       "kind": "updated"
     },
+    "ophthasearch-v2": {
+      "fingerprint": "c542895a41bd7eb53ea5a83109463079fc64b1d16b8ae6834dcc1b9a97a8bbdd",
+      "published": "2026-08-25",
+      "updated": "2026-08-25",
+      "revision": 1,
+      "kind": "new"
+    },
     "penetrating-keratoplasty": {
       "fingerprint": "804961fc1c6606b4ee2111fb4765409ef23ddf4975d9058bc9c99a145a9d7bcd",
       "published": "2026-08-16",
