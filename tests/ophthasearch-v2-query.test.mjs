@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { interpretClinicalQuestion } from '../workers/ophthasearch-v2/query-interpreter.js';
+import { resolveClinicalIntent } from '../workers/ophthasearch-v2/query-resolver.js';
 import { buildResearchPlan } from '../workers/ophthasearch-v2/research-planner.js';
 
 async function interpret(question, language = 'ru') {
@@ -112,13 +113,13 @@ test('acceptance: inverted ILM flap versus conventional peeling preserves both c
 
 test('resolved standard ophthalmology intent skips a redundant AI interpretation call', async () => {
   let aiCalls = 0;
-  const intent = await interpretClinicalQuestion({
+  const intent = await resolveClinicalIntent({
     schemaVersion: '2.0',
     language: 'ru',
     question: 'Есть ли преимущество латанопроста перед тимололом при первичной открытоугольной глаукоме?',
     mode: 'standard',
     filters: {}
-  }, {
+  }, {}, {
     interpretIntent: async () => {
       aiCalls += 1;
       return { domain: 'wrong', condition: 'wrong' };
@@ -132,13 +133,13 @@ test('resolved standard ophthalmology intent skips a redundant AI interpretation
 
 test('unresolved ophthalmology question may use AI interpretation as a fallback', async () => {
   let aiCalls = 0;
-  const intent = await interpretClinicalQuestion({
+  const intent = await resolveClinicalIntent({
     schemaVersion: '2.0',
     language: 'ru',
     question: 'Какова современная тактика при редкой хориоидальной патологии с серозной отслойкой?',
     mode: 'standard',
     filters: {}
-  }, {
+  }, {}, {
     interpretIntent: async () => {
       aiCalls += 1;
       return {
