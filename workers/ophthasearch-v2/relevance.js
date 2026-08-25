@@ -133,8 +133,9 @@ function namedTreatmentRelevance(text, intent = {}) {
   const isComparison = normalizeText(intent.question_type) === 'comparison' && interventions.length && comparators.length;
 
   if (isComparison) {
-    if (interventionMatch && comparatorMatch) return 0.32;
-    if (interventionMatch || comparatorMatch) return 0.04;
+    // Direct head-to-head evidence should dominate records that mention only one arm.
+    if (interventionMatch && comparatorMatch) return 0.45;
+    if (interventionMatch || comparatorMatch) return -0.12;
     return -0.5;
   }
 
