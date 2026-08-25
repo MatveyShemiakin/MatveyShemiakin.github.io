@@ -12,6 +12,7 @@ on:
       - 'privacy.html'
       - 'en/privacy.html'
       - 'tests/collaboration-design.test.mjs'
+      - 'tests/contact-worker.test.mjs'
       - '.github/workflows/collaboration-design.yml'
       - '.github/workflows/deploy-contact-worker.yml'
 
@@ -24,8 +25,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Collaboration design tests
-        run: node --test tests/collaboration-design.test.mjs
+      - name: Collaboration and Worker tests
+        run: node --test tests/collaboration-design.test.mjs tests/contact-worker.test.mjs
       - name: Collaboration script syntax
         run: node --check collaboration/assets/app.js
       - name: Contact Worker syntax
