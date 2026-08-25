@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '_worker.js'
+      - 'wrangler.jsonc'
       - 'for-doctors/ophthasearch/**'
       - 'for-doctors/ophthasearch-v2/**'
       - 'en/for-doctors/ophthasearch/**'
@@ -15,6 +16,7 @@ on:
   pull_request:
     paths:
       - '_worker.js'
+      - 'wrangler.jsonc'
       - 'for-doctors/ophthasearch/**'
       - 'for-doctors/ophthasearch-v2/**'
       - 'en/for-doctors/ophthasearch/**'
