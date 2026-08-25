@@ -27,6 +27,8 @@ jobs:
           test -n "$CLOUDFLARE_ACCOUNT_ID"
           test -n "$CONTACT_RECIPIENT"
       - name: Deploy contact Worker
+        id: deploy
+        continue-on-error: true
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -35,18 +37,50 @@ jobs:
           secrets: |
             CONTACT_RECIPIENT
       - name: Verify Worker route
+        id: verify
+        if: steps.deploy.outcome == 'success'
+        continue-on-error: true
         run: |
           code="$(curl --silent --show-error --output /tmp/contact-worker-response --write-out '%{http_code}' --request OPTIONS https://matveyshemyakin.ru/api/contact)"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
           cat /tmp/contact-worker-response || true
           test "$code" = "204"
-      - name: Record successful deployment
+      - name: Record deployment status
+        if: always()
+        env:
+          DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
+          DEPLOY_STDERR: ${{ steps.deploy.outputs.command-stderr }}
+          VERIFY_OUTCOME: ${{ steps.verify.outcome }}
+          ROUTE_CODE: ${{ steps.verify.outputs.code }}
         run: |
+          status="failed"
+          reason="cloudflare_deploy"
+          route_code="${ROUTE_CODE:-0}"
+          if [ "$DEPLOY_OUTCOME" = "success" ] && [ "$VERIFY_OUTCOME" = "success" ] && [ "$route_code" = "204" ]; then
+            status="deployed"
+            reason="ok"
+          elif [ "$DEPLOY_OUTCOME" = "success" ]; then
+            reason="route_verification"
+          else
+            err="$(printf '%s' "$DEPLOY_STDERR" | tr '[:upper:]' '[:lower:]')"
+            if printf '%s' "$err" | grep -qE 'email|send_email'; then
+              reason="email_service_or_binding"
+            elif printf '%s' "$err" | grep -qE 'unauthor|authenticat|permission|10000|10001'; then
+              reason="cloudflare_auth_or_permissions"
+            elif printf '%s' "$err" | grep -qE 'route|zone'; then
+              reason="route_or_zone"
+            fi
+          fi
           mkdir -p .deployment
-          printf '{\n  "service": "contact-worker",\n  "status": "deployed",\n  "route_check": 204,\n  "source_sha": "%s",\n  "deployed_at_utc": "%s"\n}\n' "$GITHUB_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > .deployment/contact-worker.json
+          printf '{\n  "service": "contact-worker",\n  "status": "%s",\n  "reason": "%s",\n  "route_check": %s,\n  "source_sha": "%s",\n  "checked_at_utc": "%s"\n}\n' "$status" "$reason" "$route_code" "$GITHUB_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > .deployment/contact-worker.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .deployment/contact-worker.json
-          git diff --cached --quiet && exit 0
-          git commit -m "Record contact Worker deployment"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          if ! git diff --cached --quiet; then
+            git commit -m "Record contact Worker deployment status"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Require successful deployment
+        if: always()
+        run: grep -q '"status": "deployed"' .deployment/contact-worker.json
