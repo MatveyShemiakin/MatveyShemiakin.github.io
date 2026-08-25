@@ -5,12 +5,14 @@ on:
     paths:
       - 'for-doctors/ophthasearch/**'
       - 'en/for-doctors/ophthasearch/**'
+      - 'workers/ophthasearch-ai/**'
       - 'tests/ophthasearch*.test.mjs'
       - '.github/workflows/ophthasearch-tests.yml'
   pull_request:
     paths:
       - 'for-doctors/ophthasearch/**'
       - 'en/for-doctors/ophthasearch/**'
+      - 'workers/ophthasearch-ai/**'
       - 'tests/ophthasearch*.test.mjs'
       - '.github/workflows/ophthasearch-tests.yml'
 
@@ -28,4 +30,4 @@ jobs:
         with:
           node-version: '22'
       - name: Run OphthaSearch tests
-        run: node --test tests/ophthasearch-static.test.mjs tests/ophthasearch.test.mjs
+        run: node --test tests/ophthasearch-static.test.mjs tests/ophthasearch.test.mjs tests/ophthasearch-ai.test.mjs tests/ophthasearch-ai-worker.test.mjs

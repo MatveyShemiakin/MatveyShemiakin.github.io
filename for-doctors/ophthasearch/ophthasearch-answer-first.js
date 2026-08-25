@@ -1,4 +1,4 @@
-const ANSWER_FIRST_CSS = '/for-doctors/ophthasearch/ophthasearch-answer-first.css?v=20260816-1';
+const ANSWER_FIRST_CSS = '/for-doctors/ophthasearch/ophthasearch-answer-first.css?v=20260824-1';
 
 const UI = {
   ru: {
@@ -15,6 +15,14 @@ const UI = {
     signalNeutral: 'Убедимого преимущества не показано',
     signalRisk: 'Неблагоприятный сигнал / риск',
     signalUnknown: 'Направление эффекта не определено автоматически',
+    aiPending: 'Анализируем найденные исследования…',
+    aiProvenance: 'Gemma 4 · синтез найденных публикаций',
+    aiFallback: 'Автоматический синтез временно недоступен · показан локальный анализ доказательств',
+    aiConfidence: 'Уверенность',
+    aiEvidence: 'Что показывают данные',
+    aiLimitations: 'Ограничения',
+    aiSources: 'Источники ответа',
+    confidence: { high: 'высокая', moderate: 'средняя', low: 'низкая', insufficient: 'недостаточная' },
     answerBenefit: (i, c, p) => `${i || 'Изучаемый подход'} по найденным публикациям скорее имеет преимущество${c ? ` перед ${c}` : ''}${p ? ` у пациентов с ${p}` : ''}. Вывод основан на автоматически отобранных аннотациях исследований более высокого уровня; ниже показаны ключевые источники.`,
     answerNeutral: (i, c, p) => `По найденным публикациям убедительного преимущества ${i || 'изучаемого подхода'}${c ? ` перед ${c}` : ''}${p ? ` у пациентов с ${p}` : ''} не показано. Ниже приведены исследования, которые в наибольшей степени определили этот вывод.`,
     answerMixed: (i, c, p) => `Однозначного ответа нет: найденные исследования дают разнонаправленные результаты по ${i || 'изучаемому подходу'}${c ? ` по сравнению с ${c}` : ''}${p ? ` при ${p}` : ''}. Ориентироваться следует прежде всего на систематические обзоры и RCT, представленные ниже.`,
@@ -35,6 +43,14 @@ const UI = {
     signalNeutral: 'No convincing advantage shown',
     signalRisk: 'Adverse / risk signal',
     signalUnknown: 'Direction of effect not classified automatically',
+    aiPending: 'Synthesizing the retrieved evidence…',
+    aiProvenance: 'Gemma 4 · synthesis of retrieved publications',
+    aiFallback: 'AI synthesis is temporarily unavailable · local evidence analysis shown',
+    aiConfidence: 'Confidence',
+    aiEvidence: 'What the evidence shows',
+    aiLimitations: 'Limitations',
+    aiSources: 'Answer sources',
+    confidence: { high: 'high', moderate: 'moderate', low: 'low', insufficient: 'insufficient' },
     answerBenefit: (i, c, p) => `${i || 'The studied approach'} appears to have an advantage${c ? ` over ${c}` : ''}${p ? ` in ${p}` : ''} in the retrieved literature. The conclusion is based on automatically selected higher-level study abstracts; the key sources are shown below.`,
     answerNeutral: (i, c, p) => `The retrieved literature does not show a convincing advantage of ${i || 'the studied approach'}${c ? ` over ${c}` : ''}${p ? ` in ${p}` : ''}. The studies contributing most to this conclusion are shown below.`,
     answerMixed: (i, c, p) => `The evidence is mixed for ${i || 'the studied approach'}${c ? ` versus ${c}` : ''}${p ? ` in ${p}` : ''}. Systematic reviews and randomized trials below should carry the greatest weight.`,
@@ -185,11 +201,13 @@ function restructureClinicalPanel(panel, copy) {
     answerSummary.prepend(direct);
   }
 
-  const pico = picoValues(panel);
-  const counts = signalCounts(panel);
-  direct.querySelector('.ophtha-direct-answer-text').textContent = directAnswer(copy, pico, counts);
-  const strength = panel.querySelector('[data-strength]')?.textContent.trim();
-  direct.querySelector('.ophtha-direct-answer-basis').textContent = strength ? `${copy.evidenceBasis}: ${strength}` : '';
+  if (!['pending', 'success'].includes(panel.dataset.aiState)) {
+    const pico = picoValues(panel);
+    const counts = signalCounts(panel);
+    direct.querySelector('.ophtha-direct-answer-text').textContent = directAnswer(copy, pico, counts);
+    const strength = panel.querySelector('[data-strength]')?.textContent.trim();
+    direct.querySelector('.ophtha-direct-answer-basis').textContent = strength ? `${copy.evidenceBasis}: ${strength}` : '';
+  }
 
   let technical = panel.querySelector('.ophtha-answer-method');
   if (!technical) {
@@ -234,6 +252,120 @@ function rebuildKeyEvidence(panel, resultsEl, copy) {
   }
 }
 
+function ensureAiProvenance(panel) {
+  restructureClinicalPanel(panel, langCopy());
+  const direct = panel.querySelector('.ophtha-direct-answer');
+  if (!direct) return null;
+  let provenance = direct.querySelector('.ophtha-ai-provenance');
+  if (!provenance) {
+    provenance = create('p', 'ophtha-ai-provenance');
+    direct.append(provenance);
+  }
+  return provenance;
+}
+
+function clearAiDetails(panel) {
+  panel.querySelector('.ophtha-ai-details')?.remove();
+}
+
+function safeSourceUrl(result) {
+  const candidates = [
+    ...(Array.isArray(result?.sourceLinks) ? result.sourceLinks.map((item) => item?.url) : []),
+    result?.pubMedUrl,
+    result?.doiUrl,
+    result?.fullTextUrl,
+    result?.sourceUrl
+  ];
+  for (const candidate of candidates) {
+    try {
+      const url = new URL(candidate);
+      if (['http:', 'https:'].includes(url.protocol)) return url.href;
+    } catch {}
+  }
+  return '';
+}
+
+function buildTextList(className, title, items) {
+  if (!Array.isArray(items) || !items.length) return null;
+  const section = create('section', className);
+  section.append(create('h3', 'ophtha-ai-section-title', title));
+  const list = create('ul', 'ophtha-ai-list');
+  for (const item of items.slice(0, 4)) list.append(create('li', '', item));
+  section.append(list);
+  return section;
+}
+
+function buildAiCitations(detail, copy) {
+  const citations = Array.isArray(detail.synthesis?.citations) ? detail.synthesis.citations : [];
+  if (!citations.length || !(detail.sourceMap instanceof Map)) return null;
+  const section = create('section', 'ophtha-ai-citations');
+  section.append(create('h3', 'ophtha-ai-section-title', copy.aiSources));
+  const list = create('div', 'ophtha-ai-citations-list');
+
+  for (const citation of citations.slice(0, 8)) {
+    const result = detail.sourceMap.get(citation.sourceId);
+    if (!result) continue;
+    const card = create('article', 'ophtha-ai-citation');
+    const title = [citation.sourceId, result.title, result.year].filter(Boolean).join(' · ');
+    card.append(create('strong', 'ophtha-ai-citation-title', title));
+    card.append(create('p', 'ophtha-ai-citation-statement', citation.statement));
+    const url = safeSourceUrl(result);
+    if (url) {
+      const link = create('a', 'ophtha-result-link', copy.source);
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      card.append(link);
+    }
+    list.append(card);
+  }
+
+  if (!list.children.length) return null;
+  section.append(list);
+  return section;
+}
+
+function renderAiPending(panel, copy) {
+  panel.dataset.aiState = 'pending';
+  restructureClinicalPanel(panel, copy);
+  const direct = panel.querySelector('.ophtha-direct-answer');
+  if (!direct) return;
+  direct.querySelector('.ophtha-direct-answer-text').textContent = copy.aiPending;
+  direct.querySelector('.ophtha-direct-answer-basis').textContent = '';
+  const provenance = ensureAiProvenance(panel);
+  if (provenance) provenance.textContent = '';
+  clearAiDetails(panel);
+}
+
+function renderAiSuccess(panel, detail, copy) {
+  panel.dataset.aiState = 'success';
+  restructureClinicalPanel(panel, copy);
+  const direct = panel.querySelector('.ophtha-direct-answer');
+  if (!direct) return;
+  direct.querySelector('.ophtha-direct-answer-text').textContent = detail.synthesis.answer;
+  direct.querySelector('.ophtha-direct-answer-basis').textContent = `${copy.aiConfidence}: ${copy.confidence[detail.synthesis.confidence] || detail.synthesis.confidence}`;
+  const provenance = ensureAiProvenance(panel);
+  if (provenance) provenance.textContent = copy.aiProvenance;
+
+  clearAiDetails(panel);
+  const container = create('div', 'ophtha-ai-details');
+  const evidence = buildTextList('ophtha-ai-evidence', copy.aiEvidence, detail.synthesis.evidenceSummary);
+  const limitations = buildTextList('ophtha-ai-limitations', copy.aiLimitations, detail.synthesis.limitations);
+  const citations = buildAiCitations(detail, copy);
+  if (evidence) container.append(evidence);
+  if (limitations) container.append(limitations);
+  if (citations) container.append(citations);
+  if (container.children.length) direct.insertAdjacentElement('afterend', container);
+}
+
+function renderAiFallback(panel, copy) {
+  panel.dataset.aiState = 'fallback';
+  clearAiDetails(panel);
+  restructureClinicalPanel(panel, copy);
+  const provenance = ensureAiProvenance(panel);
+  if (provenance) provenance.textContent = copy.aiFallback;
+}
+
 function simplifyStaticCopy() {
   const root = document.querySelector('[data-ophthasearch]');
   if (!root) return;
@@ -255,6 +387,24 @@ function initAnswerFirst() {
   const panel = document.querySelector('#ophtha-clinical-answer');
   const resultsEl = document.querySelector('#ophtha-results');
   if (!panel || !resultsEl) return;
+
+  let newestAiSearchId = 0;
+  const acceptAiEvent = (event) => {
+    const searchId = Number(event.detail?.searchId || 0);
+    if (searchId < newestAiSearchId) return false;
+    newestAiSearchId = searchId;
+    return true;
+  };
+
+  root.addEventListener('ophthasearch:ai-pending', (event) => {
+    if (acceptAiEvent(event)) renderAiPending(panel, copy);
+  });
+  root.addEventListener('ophthasearch:ai-success', (event) => {
+    if (acceptAiEvent(event)) renderAiSuccess(panel, event.detail, copy);
+  });
+  root.addEventListener('ophthasearch:ai-fallback', (event) => {
+    if (acceptAiEvent(event)) renderAiFallback(panel, copy);
+  });
 
   let scheduled = false;
   const refresh = () => {

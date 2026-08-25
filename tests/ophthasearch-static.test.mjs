@@ -69,5 +69,23 @@ test('mobile OphthaSearch prevents long medical terms and identifiers from overf
   assert.match(answerCss, /@media\s*\(max-width:\s*480px\)[\s\S]*\.ophtha-brand h1[^{}]*\{[^}]*max-width:\s*100%/);
   assert.match(answerCss, /@media\s*\(max-width:\s*480px\)[\s\S]*\.ophtha-result-title[^{}]*\{[^}]*font-size:\s*24px/);
   assert.match(loader, /ophthasearch-style-refresh\.js/);
-  assert.match(refresh, /ophthasearch-answer-first\.css\?v=20260816-2/);
+  assert.match(refresh, /ophthasearch-answer-first\.css\?v=20260824-1/);
+});
+
+test('loader enables AI before answer-first rendering', async () => {
+  const loader = await read('for-doctors/ophthasearch/ophthasearch.js');
+  const aiIndex = loader.indexOf('ophthasearch-ai.js');
+  const answerIndex = loader.indexOf('ophthasearch-answer-first.js');
+  assert.ok(aiIndex >= 0 && answerIndex > aiIndex);
+});
+
+test('answer-first contains AI provenance and citation hooks with responsive CSS', async () => {
+  const js = await read('for-doctors/ophthasearch/ophthasearch-answer-first.js');
+  const css = await read('for-doctors/ophthasearch/ophthasearch-answer-first.css');
+  assert.match(js, /ophthasearch:ai-pending/);
+  assert.match(js, /ophthasearch:ai-success/);
+  assert.match(js, /Gemma 4/);
+  assert.match(css, /\.ophtha-ai-provenance/);
+  assert.match(css, /\.ophtha-ai-citation/);
+  assert.doesNotMatch(js, /\sstyle="/i);
 });

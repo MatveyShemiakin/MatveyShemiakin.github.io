@@ -1,4 +1,4 @@
-const ANSWER_FIRST_MOBILE_CSS = '/for-doctors/ophthasearch/ophthasearch-answer-first.css?v=20260816-2';
+const ANSWER_FIRST_MOBILE_CSS = '/for-doctors/ophthasearch/ophthasearch-answer-first.css?v=20260824-1';
 
 function refreshOphthaSearchStyles() {
   const link = document.querySelector('link[data-ophtha-answer-first]');
