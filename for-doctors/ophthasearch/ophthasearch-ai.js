@@ -1,4 +1,4 @@
-export const DEFAULT_AI_ENDPOINT = '';
+export const DEFAULT_AI_ENDPOINT = '/';
 const MAX_SOURCES = 12;
 const MAX_TEXT = 3000;
 const CONCLUSIONS = new Set(['benefit', 'no_difference', 'mixed', 'risk', 'insufficient']);
