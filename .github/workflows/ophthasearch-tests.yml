@@ -49,3 +49,4 @@ jobs:
           tests/ophthasearch-v2-adapters.test.mjs
           tests/ophthasearch-v2-guidelines.test.mjs
           tests/ophthasearch-v2-reasoner.test.mjs
+          tests/ophthasearch-v2-pipeline.test.mjs
