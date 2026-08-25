@@ -168,10 +168,8 @@ function monotherapyComparisonPenalty(text, intent = {}) {
   if (!requested.every((term) => DRUG_TERMS.has(term))) return 0;
   if (!containsAny(text, FIXED_COMBINATION_TERMS)) return 0;
 
-  // Fixed-combination studies can remain secondary context, but they must not outrank
-  // direct evidence when the clinician asked for A versus B as separate therapies.
-  if (containsAny(text, DIRECT_MONOTHERAPY_TERMS) && containsPhrase(text, 'monotherapy')) return 0.25;
-  return 0.85;
+  if (containsAny(text, DIRECT_MONOTHERAPY_TERMS) && containsPhrase(text, 'monotherapy')) return 0.35;
+  return 1.2;
 }
 
 function outcomeScore(text, outcomes = []) {
