@@ -15,6 +15,11 @@ test('Wrangler production config targets the live OphthaSearch Worker with Worke
   assert.match(config, /"run_worker_first"\s*:\s*\[[^\]]*"\/v2\/\*"/s);
 });
 
+test('Worker asset upload excludes build-time dependencies', async () => {
+  const ignore = await read('.assetsignore');
+  assert.match(ignore, /^node_modules\/\*\*$/m);
+});
+
 test('OphthaSearch Worker changes are automatically deployed and live-smoke verified', async () => {
   const workflow = await read('.github/workflows/deploy-ophthasearch-worker.yml');
   assert.match(workflow, /CLOUDFLARE_API_TOKEN/);
