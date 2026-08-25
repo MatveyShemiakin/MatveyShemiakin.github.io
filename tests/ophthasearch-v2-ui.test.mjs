@@ -6,6 +6,7 @@ import { requestResearch, DEFAULT_RESEARCH_ENDPOINT } from '../for-doctors/ophth
 const pagePath = new URL('../for-doctors/ophthasearch-v2/index.html', import.meta.url);
 const clientPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.js', import.meta.url);
 const cssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.css', import.meta.url);
+const workerEndpoint = 'https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev/v2/research';
 
 test('canary page exposes physician-facing structured answer hooks without inline styles', async () => {
   const html = await fs.readFile(pagePath, 'utf8');
@@ -18,8 +19,8 @@ test('canary page exposes physician-facing structured answer hooks without inlin
   assert.match(html, /ophthasearch-v2\.js/);
 });
 
-test('canary client uses exactly one same-origin POST to /v2/research', async () => {
-  assert.equal(DEFAULT_RESEARCH_ENDPOINT, '/v2/research');
+test('canary client posts to the deployed workers.dev research endpoint', async () => {
+  assert.equal(DEFAULT_RESEARCH_ENDPOINT, workerEndpoint);
   const calls = [];
   const response = await requestResearch('Медикаментозная терапия ПОУГ', 'ru', {
     fetchImpl: async (...args) => {
@@ -28,7 +29,7 @@ test('canary client uses exactly one same-origin POST to /v2/research', async ()
     }
   });
   assert.equal(calls.length, 1);
-  assert.equal(calls[0][0], '/v2/research');
+  assert.equal(calls[0][0], workerEndpoint);
   assert.equal(calls[0][1].method, 'POST');
   assert.equal(JSON.parse(calls[0][1].body).question, 'Медикаментозная терапия ПОУГ');
   assert.equal(response.status, 'complete');
