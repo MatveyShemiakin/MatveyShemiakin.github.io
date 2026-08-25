@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { interpretClinicalQuestion } from '../workers/ophthasearch-v2/query-interpreter.js';
+import { resolveClinicalIntent } from '../workers/ophthasearch-v2/query-resolver.js';
 import { buildResearchPlan } from '../workers/ophthasearch-v2/research-planner.js';
 
 test('SLT versus latanoprost preserves procedure as intervention and drug as comparator', async () => {
-  const intent = await interpretClinicalQuestion({
+  const intent = await resolveClinicalIntent({
     schemaVersion: '2.0',
     language: 'en',
     question: 'SLT vs latanoprost as initial treatment for primary open-angle glaucoma',
