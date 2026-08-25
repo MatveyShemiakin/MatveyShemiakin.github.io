@@ -45,6 +45,18 @@ jobs:
           echo "code=$code" >> "$GITHUB_OUTPUT"
           cat /tmp/contact-worker-response || true
           test "$code" = "204"
+      - name: Verify email sending
+        id: sendcheck
+        if: steps.deploy.outcome == 'success' && steps.verify.outcome == 'success'
+        continue-on-error: true
+        run: |
+          started_at="$(( $(date +%s%3N) - 5000 ))"
+          payload="$(printf '{\"name\":\"Deployment test\",\"organization\":\"matveyshemyakin.ru\",\"reply_email\":\"test@example.com\",\"topic\":\"other\",\"message\":\"Automated Cloudflare Worker deployment verification message.\",\"honeypot\":\"\",\"consent\":true,\"started_at\":%s}' "$started_at")"
+          code="$(curl --silent --show-error --output /tmp/contact-send-response --write-out '%{http_code}' --request POST https://matveyshemyakin.ru/api/contact --header 'Origin: https://matveyshemyakin.ru' --header 'Content-Type: application/json' --data "$payload")"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          cat /tmp/contact-send-response || true
+          test "$code" = "200"
+          grep -Eq '"ok"[[:space:]]*:[[:space:]]*true' /tmp/contact-send-response
       - name: Record deployment status
         if: always()
         env:
@@ -52,13 +64,18 @@ jobs:
           DEPLOY_STDERR: ${{ steps.deploy.outputs.command-stderr }}
           VERIFY_OUTCOME: ${{ steps.verify.outcome }}
           ROUTE_CODE: ${{ steps.verify.outputs.code }}
+          SEND_OUTCOME: ${{ steps.sendcheck.outcome }}
+          SEND_CODE: ${{ steps.sendcheck.outputs.code }}
         run: |
           status="failed"
           reason="cloudflare_deploy"
           route_code="${ROUTE_CODE:-0}"
-          if [ "$DEPLOY_OUTCOME" = "success" ] && [ "$VERIFY_OUTCOME" = "success" ] && [ "$route_code" = "204" ]; then
+          send_code="${SEND_CODE:-0}"
+          if [ "$DEPLOY_OUTCOME" = "success" ] && [ "$VERIFY_OUTCOME" = "success" ] && [ "$SEND_OUTCOME" = "success" ] && [ "$route_code" = "204" ] && [ "$send_code" = "200" ]; then
             status="deployed"
             reason="ok"
+          elif [ "$DEPLOY_OUTCOME" = "success" ] && [ "$VERIFY_OUTCOME" = "success" ]; then
+            reason="email_send_verification"
           elif [ "$DEPLOY_OUTCOME" = "success" ]; then
             reason="route_verification"
           else
@@ -72,7 +89,7 @@ jobs:
             fi
           fi
           mkdir -p .deployment
-          printf '{\n  "service": "contact-worker",\n  "status": "%s",\n  "reason": "%s",\n  "route_check": %s,\n  "source_sha": "%s",\n  "checked_at_utc": "%s"\n}\n' "$status" "$reason" "$route_code" "$GITHUB_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > .deployment/contact-worker.json
+          printf '{\n  "service": "contact-worker",\n  "status": "%s",\n  "reason": "%s",\n  "route_check": %s,\n  "email_send_check": %s,\n  "source_sha": "%s",\n  "checked_at_utc": "%s"\n}\n' "$status" "$reason" "$route_code" "$send_code" "$GITHUB_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > .deployment/contact-worker.json
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .deployment/contact-worker.json
