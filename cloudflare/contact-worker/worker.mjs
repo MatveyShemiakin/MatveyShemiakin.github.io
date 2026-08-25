@@ -95,6 +95,11 @@ function emailText(value, request) {
   ].filter(Boolean).join('\n');
 }
 
+function safeEmailErrorCode(error) {
+  const code = String(error?.code || error?.name || 'EMAIL_SEND_FAILED').trim();
+  return /^[A-Z0-9_:-]{1,80}$/.test(code) ? code : 'EMAIL_SEND_FAILED';
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -138,7 +143,7 @@ export default {
 
     if (!env.EMAIL || typeof env.EMAIL.send !== 'function' || !env.CONTACT_RECIPIENT) {
       console.error('Contact Worker is missing EMAIL binding or CONTACT_RECIPIENT secret');
-      return json({ ok: false, message: 'Service unavailable' }, 503, origin);
+      return json({ ok: false, message: 'Service unavailable', code: 'EMAIL_BINDING_UNAVAILABLE' }, 503, origin);
     }
 
     const value = checked.value;
@@ -154,8 +159,9 @@ export default {
       });
       return json({ ok: true }, 200, origin);
     } catch (error) {
-      console.error('Contact email send failed', error);
-      return json({ ok: false, message: 'Service unavailable' }, 503, origin);
+      const code = safeEmailErrorCode(error);
+      console.error('Contact email send failed', code, error);
+      return json({ ok: false, message: 'Service unavailable', code }, 503, origin);
     }
   }
 };
