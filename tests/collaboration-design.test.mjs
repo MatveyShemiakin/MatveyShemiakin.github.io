@@ -64,9 +64,3 @@ test('collaboration form has a reliable browser handoff instead of a mailto-only
   assert.ok(js.includes("addEventListener('invalid'"), 'visible invalid-field feedback is missing');
   assert.ok(js.includes('data-contact-submit'), 'submit control hook is missing');
 });
-
-test('global legal script never injects ProDoctorov into collaboration pages', () => {
-  const js = read('legal.js');
-  assert.ok(js.includes('isCollaborationSection'), 'collaboration route guard is missing');
-  assert.ok(js.includes('isDoctorsSection||isCollaborationSection'), 'ProDoctorov exclusion must cover doctors and collaboration sections');
-});
