@@ -49,7 +49,9 @@ function modifierPhrase(intent = {}) {
   const condition = clean(intent.condition).toLowerCase();
   const size = modifiers.find((value) => /(?:>|<|≥|≤)?\s*\d{2,4}\s*µm/i.test(value));
   if (size && condition === 'full-thickness macular hole') return `large macular hole ${size}`;
-  return modifiers.slice(0, 3).join(' ');
+  const phakic = modifiers.find((value) => /^phakic$/i.test(value));
+  if (phakic && condition === 'full-thickness macular hole') return phakic;
+  return '';
 }
 
 export function buildResearchPlan(intent = {}) {
