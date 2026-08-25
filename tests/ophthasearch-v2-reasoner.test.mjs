@@ -78,16 +78,28 @@ test('reasoning prompt defines ophthalmologist-scientist role and forbids invent
   assert.match(system, /dose|dosing/i);
 });
 
-test('claim verifier rejects hallucinated source IDs', () => {
+test('claim verifier keeps the main conclusion strict against hallucinated source IDs', () => {
   const draft = validDraft();
-  draft.management[0].citations = ['S9'];
+  draft.bottom_line_citations = ['S9'];
   assert.throws(() => verifyClaimsAndCitations(draft, evidencePack), /unknown source/i);
 });
 
-test('claim verifier rejects a dosing regimen not supported by cited source text', () => {
+test('claim verifier drops a secondary management item with hallucinated source IDs without losing the conclusion', () => {
+  const draft = validDraft();
+  draft.management[0].citations = ['S9'];
+  const answer = verifyClaimsAndCitations(draft, evidencePack);
+  assert.equal(answer.clinical_bottom_line, draft.clinical_bottom_line);
+  assert.equal(answer.management.length, 0);
+});
+
+test('claim verifier removes an unsupported dosing detail without discarding the verified clinical conclusion', () => {
   const draft = validDraft();
   draft.management[0].dose = '0.01%';
-  assert.throws(() => verifyClaimsAndCitations(draft, evidencePack), /unsupported.*dose/i);
+  const answer = verifyClaimsAndCitations(draft, evidencePack);
+  assert.equal(answer.clinical_bottom_line, draft.clinical_bottom_line);
+  assert.equal(answer.management.length, 1);
+  assert.equal(answer.management[0].dose, '');
+  assert.equal(answer.management[0].frequency, 'once daily');
 });
 
 test('claim verifier accepts source-backed dosing and renders identifiers only from Evidence Pack', () => {
