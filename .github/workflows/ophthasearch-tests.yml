@@ -47,3 +47,4 @@ jobs:
           tests/ophthasearch-v2-query.test.mjs
           tests/ophthasearch-v2-evidence.test.mjs
           tests/ophthasearch-v2-adapters.test.mjs
+          tests/ophthasearch-v2-guidelines.test.mjs
