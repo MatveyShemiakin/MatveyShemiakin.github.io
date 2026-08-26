@@ -160,6 +160,8 @@
   }
 
   function findMount(){
+    const unified=document.querySelector('.unified-site-header__nav-mount');
+    if(unified)return{mode:'insert',target:unified,before:null};
     const replacements=[
       document.querySelector('.site-header .nav-right > nav'),
       document.querySelector('.patient-header .header-row > nav'),
