@@ -17,7 +17,7 @@ jobs:
           set -euo pipefail
           mkdir -p for-doctors/iol-dislocation/assets
           python - <<'PY'
-          import urllib.request
+          import urllib.request, http.cookiejar, re
           files = {
             'iol-haptic-pupil.jpg':'1GusMCp3iK8i6Kac8zAg6JDq2v9QXPwBS',
             'iol-optic-edge-pupil.jpg':'1W4Lg0v4b-KrHFFfeWg8hXOx5YuwFo11c',
@@ -28,10 +28,19 @@ jobs:
             'dislocated-iol-glaucoma.jpg':'1E9YvsYOk0nOhZ_Sz7yuWA0N9gs2UVB3h',
             'pupillary-capture.mp4':'1ck_g-ve03LSrocj6DBGls2hzb8RA98BK',
           }
-          for name, fid in files.items():
+          def download(fid, dest):
+              cj=http.cookiejar.CookieJar(); op=urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
               url=f'https://drive.usercontent.google.com/download?id={fid}&export=download&confirm=t'
-              print('Downloading', name)
-              urllib.request.urlretrieve(url, 'for-doctors/iol-dislocation/assets/'+name)
+              data=op.open(url).read()
+              if data[:4] not in (b'\xff\xd8\xff\xe0',b'\xff\xd8\xff\xe1') and b'ftyp' not in data[:64]:
+                  text=data.decode('utf-8','ignore')
+                  m=re.search(r'href="([^"]*confirm=[^"]*)"',text)
+                  if m:
+                      import html
+                      data=op.open(html.unescape(m.group(1))).read()
+              open(dest,'wb').write(data)
+          for name,fid in files.items():
+              print('Downloading',name); download(fid,'for-doctors/iol-dislocation/assets/'+name)
           PY
       - name: Verify originals without recompression
         shell: bash
@@ -41,12 +50,12 @@ jobs:
           python - <<'PY'
           from PIL import Image
           from pathlib import Path
+          names=['iol-haptic-pupil.jpg','iol-optic-edge-pupil.jpg','pupillary-capture-front.jpg','pupillary-capture-side.jpg','intrascleral-flange.jpg','three-point-corneoscleral-fixation.jpg','dislocated-iol-glaucoma.jpg']
           base=Path('for-doctors/iol-dislocation/assets')
-          for p in base.glob('*.jpg'):
-              with Image.open(p) as im:
-                  im.verify()
-              with Image.open(p) as im:
-                  assert im.size == (3072,4080), (p,im.size)
+          for n in names:
+              p=base/n
+              with Image.open(p) as im: im.verify()
+              with Image.open(p) as im: assert im.size==(3072,4080),(p,im.size)
               print('VERIFIED',p,p.stat().st_size)
           PY
           test "$(stat -c%s for-doctors/iol-dislocation/assets/pupillary-capture.mp4)" -eq 27150836
