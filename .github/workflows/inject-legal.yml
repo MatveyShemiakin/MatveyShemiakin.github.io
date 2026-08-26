@@ -1,3 +1,4 @@
+# Shared site-module injection is idempotent; this commit triggers the unified-header rollout.
 name: Inject legal, analytics and professional modules
 
 on:
