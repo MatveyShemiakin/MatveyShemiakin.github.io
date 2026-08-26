@@ -1,0 +1,112 @@
+name: sync-iol-media
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/sync-iol-media.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --disable-pip-version-check google-api-python-client google-auth pillow
+
+      - name: Download originals from Google Drive
+        env:
+          GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          mkdir -p for-doctors/iol-dislocation/assets
+          python - <<'PY'
+          import io, json, os
+          from pathlib import Path
+          from google.oauth2 import service_account
+          from googleapiclient.discovery import build
+          from googleapiclient.http import MediaIoBaseDownload
+
+          files = {
+              'iol-haptic-pupil.jpg': '1GusMCp3iK8i6Kac8zAg6JDq2v9QXPwBS',
+              'iol-optic-edge-pupil.jpg': '1W4Lg0v4b-KrHFFfeWg8hXOx5YuwFo11c',
+              'pupillary-capture-front.jpg': '1ln2wPsBe0gDq65kTOGqYUmoTUX3LWoAN',
+              'pupillary-capture-side.jpg': '1BuTO5t-S29SOlsGR7OX-rDzA6Dhay_LH',
+              'intrascleral-flange.jpg': '1ecqWAc8hwmXcZUJ670vcsQXwmgG25P7n',
+              'three-point-corneoscleral-fixation.jpg': '1VR1agq7ePS7QGxhHz86MXwkDlQN4jVsA',
+              'dislocated-iol-glaucoma.jpg': '1E9YvsYOk0nOhZ_Sz7yuWA0N9gs2UVB3h',
+              'pupillary-capture.mp4': '1ck_g-ve03LSrocj6DBGls2hzb8RA98BK',
+          }
+
+          raw = os.environ.get('GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON', '').strip()
+          if not raw:
+              raise SystemExit('GOOGLE_DRIVE_SERVICE_ACCOUNT_JSON is empty')
+          info = json.loads(raw)
+          creds = service_account.Credentials.from_service_account_info(
+              info,
+              scopes=['https://www.googleapis.com/auth/drive.readonly'],
+          )
+          service = build('drive', 'v3', credentials=creds, cache_discovery=False)
+          out = Path('for-doctors/iol-dislocation/assets')
+
+          for name, file_id in files.items():
+              meta = service.files().get(fileId=file_id, fields='id,name,mimeType,size').execute()
+              request = service.files().get_media(fileId=file_id)
+              target = out / name
+              with target.open('wb') as fh:
+                  downloader = MediaIoBaseDownload(fh, request, chunksize=8 * 1024 * 1024)
+                  done = False
+                  while not done:
+                      _, done = downloader.next_chunk()
+              actual = target.stat().st_size
+              expected = int(meta.get('size', actual))
+              if actual != expected:
+                  raise RuntimeError(f'{name}: size mismatch {actual} != {expected}')
+              print(f'DOWNLOADED {name} {actual} bytes from {meta["name"]}')
+          PY
+
+      - name: Validate media integrity
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+
+          base = Path('for-doctors/iol-dislocation/assets')
+          photos = [
+              'iol-haptic-pupil.jpg',
+              'iol-optic-edge-pupil.jpg',
+              'pupillary-capture-front.jpg',
+              'pupillary-capture-side.jpg',
+              'intrascleral-flange.jpg',
+              'three-point-corneoscleral-fixation.jpg',
+              'dislocated-iol-glaucoma.jpg',
+          ]
+          for name in photos:
+              p = base / name
+              with Image.open(p) as im:
+                  im.verify()
+              with Image.open(p) as im:
+                  if im.width < 2000 or im.height < 2000:
+                      raise RuntimeError(f'{name}: unexpected low resolution {im.size}')
+                  print('VERIFIED', name, im.size, p.stat().st_size)
+          PY
+          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height,duration -of default=nw=1 for-doctors/iol-dislocation/assets/pupillary-capture.mp4
+
+      - name: Commit exact originals
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add for-doctors/iol-dislocation/assets/*.jpg for-doctors/iol-dislocation/assets/pupillary-capture.mp4
+          if git diff --cached --quiet; then
+            echo 'No media changes'
+            exit 0
+          fi
+          git commit -m 'media: sync full-quality IOL clinical assets'
+          git push
