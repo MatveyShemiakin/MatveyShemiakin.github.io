@@ -1,0 +1,1 @@
+Temporary marker to keep the unified header PR branch distinct during RED/GREEN validation. Remove before merge.
