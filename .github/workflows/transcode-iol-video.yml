@@ -1,0 +1,35 @@
+name: Transcode IOL clinical video
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/transcode-iol-video.yml'
+      - 'for-doctors/iol-dislocation/assets/pupillary-capture.mp4'
+
+permissions:
+  contents: write
+
+jobs:
+  transcode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create browser-compatible H.264 MP4
+        run: |
+          ffmpeg -y -i for-doctors/iol-dislocation/assets/pupillary-capture.mp4 \
+            -map 0:v:0 -an -c:v libx264 -preset medium -crf 18 \
+            -pix_fmt yuv420p -movflags +faststart \
+            for-doctors/iol-dislocation/assets/pupillary-capture-h264.mp4
+          ffprobe -v error -select_streams v:0 \
+            -show_entries stream=codec_name,width,height,pix_fmt \
+            -of default=noprint_wrappers=1 \
+            for-doctors/iol-dislocation/assets/pupillary-capture-h264.mp4
+      - name: Commit compatible video
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add for-doctors/iol-dislocation/assets/pupillary-capture-h264.mp4
+          git diff --cached --quiet && exit 0
+          git commit -m 'media: add H.264 IOL clinical video'
+          git push
