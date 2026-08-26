@@ -41,6 +41,15 @@ test('language routes preserve equivalent RU and EN paths', () => {
   assert.deepEqual(languageRoutes('/collaboration/', 'ru'), {ru:'/collaboration/', en:'/en/collaboration/'});
 });
 
+test('theme resolution bridges legacy collaboration state into the shared theme contract', () => {
+  const { resolveThemeValue } = api();
+  assert.equal(resolveThemeValue('dark', 'light', 'light', 'light', false), 'dark');
+  assert.equal(resolveThemeValue(undefined, 'dark', undefined, undefined, false), 'dark');
+  assert.equal(resolveThemeValue(undefined, undefined, 'light', 'dark', true), 'light');
+  assert.equal(resolveThemeValue(undefined, undefined, undefined, 'dark', false), 'dark');
+  assert.equal(resolveThemeValue(undefined, undefined, undefined, undefined, true), 'dark');
+});
+
 test('canonical markup contains one nav mount and localized accessible controls', () => {
   const { headerMarkup } = api();
   const ru = headerMarkup({path:'/patients/', lang:'ru', hasPatientBell:true, hasDoctorBell:false});
