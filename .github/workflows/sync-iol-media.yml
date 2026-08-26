@@ -17,8 +17,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg
           python -m pip install --disable-pip-version-check google-api-python-client google-auth pillow
 
       - name: Download originals from Google Drive
@@ -97,8 +95,15 @@ jobs:
                   if im.width < 2000 or im.height < 2000:
                       raise RuntimeError(f'{name}: unexpected low resolution {im.size}')
                   print('VERIFIED', name, im.size, p.stat().st_size)
+
+          video = base / 'pupillary-capture.mp4'
+          data = video.read_bytes()[:64]
+          if b'ftyp' not in data:
+              raise RuntimeError('pupillary-capture.mp4: invalid MP4 header')
+          if video.stat().st_size < 20_000_000:
+              raise RuntimeError(f'pupillary-capture.mp4: unexpectedly small {video.stat().st_size}')
+          print('VERIFIED', video.name, video.stat().st_size)
           PY
-          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height,duration -of default=nw=1 for-doctors/iol-dislocation/assets/pupillary-capture.mp4
 
       - name: Commit exact originals
         run: |
