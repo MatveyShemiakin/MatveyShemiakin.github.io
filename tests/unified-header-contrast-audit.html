@@ -17,7 +17,7 @@
   const ratio=(a,b)=>{const A=lum(a),B=lum(b);return(Math.max(A,B)+.05)/(Math.min(A,B)+.05)};
   const directText=el=>Array.from(el.childNodes).some(n=>n.nodeType===3&&n.textContent.trim());
   const label=el=>`${el.tagName.toLowerCase()}${el.id?'#'+el.id:''}${el.classList.length?'.'+Array.from(el.classList).slice(0,3).join('.'):''} :: ${(el.innerText||el.textContent||'').trim().replace(/\s+/g,' ').slice(0,90)}`;
-  const effectiveBg=(el,win)=>{let node=el;while(node&&node.nodeType===1){const s=win.getComputedStyle(node);const c=parseColor(s.backgroundColor);if(c&&c.a>.96)return{color:c};node=node.parentElement}return{color:{r:4,g:18,b:37,a:1}}};
+  const effectiveBg=(el,win)=>{const header=el.closest('.unified-site-header');let node=el;while(node&&node.nodeType===1){const s=win.getComputedStyle(node);const c=parseColor(s.backgroundColor);if(c&&c.a>.96)return{color:c};if(node===header)return{color:{r:4,g:18,b:37,a:1}};node=node.parentElement}return{color:{r:4,g:18,b:37,a:1}}};
   const shouldSkip=(el,s)=>{if(['SCRIPT','STYLE','SVG','PATH','IMG'].includes(el.tagName))return true;if(el.closest('[aria-hidden="true"]'))return true;if(s.display==='none'||s.visibility==='hidden'||Number(s.opacity)===0)return true;const r=el.getBoundingClientRect();if(r.width<2||r.height<2)return true;return!directText(el)};
   const load=(url,theme)=>new Promise(resolve=>{let done=false;const finish=()=>{if(done)return;done=true;setTimeout(resolve,140)};localStorage.setItem('site_theme_v1',theme);frame.onload=finish;frame.src=url+(url.includes('?')?'&':'?')+'header-contrast='+theme+'-'+Date.now();setTimeout(finish,2200)});
   for(const theme of ['light','dark'])for(const url of pages){
