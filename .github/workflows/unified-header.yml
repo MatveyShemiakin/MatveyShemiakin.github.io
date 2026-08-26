@@ -33,5 +33,11 @@ jobs:
         run: node --test tests/site-header-unified.test.mjs
       - name: Existing mega navigation regression
         run: node tests/site-mega-nav.test.mjs
+      - name: Inject shared header into public HTML checkout
+        run: python scripts/inject_unified_header.py
       - name: Global shared-header coverage
         run: python -m unittest tests/test_unified_header_coverage.py
+      - name: Syntax checks
+        run: |
+          node --check site-header-unified.js
+          node --check site-mega-nav.js
