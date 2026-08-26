@@ -105,15 +105,82 @@ jobs:
           print('VERIFIED', video.name, video.stat().st_size)
           PY
 
-      - name: Commit exact originals
+      - name: Update IOL page media markup
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          page = Path('for-doctors/iol-dislocation/index.html')
+          html = page.read_text(encoding='utf-8')
+
+          html = html.replace('assets/iol-haptic-pupil.webp', 'assets/iol-haptic-pupil.jpg')
+          html = html.replace('assets/pupillary-capture-front.webp', 'assets/pupillary-capture-front.jpg')
+          html = html.replace('assets/intrascleral-flange.webp', 'assets/intrascleral-flange.jpg')
+          html = html.replace('assets/dislocated-iol-glaucoma.webp', 'assets/dislocated-iol-glaucoma.jpg')
+
+          photo2 = '<figure class="clinical-figure" data-clinical-media="optic-edge"><div class="clinical-photo protected-media"><img src="assets/iol-optic-edge-pupil.jpg" alt="Дислокация ИОЛ: край оптики в просвете зрачка" data-lightbox loading="lazy"></div><figcaption><span class="figure-label">Клиническое фото 2</span>Дислокация ИОЛ: край оптики визуализируется в просвете зрачка.</figcaption></figure>'
+          if 'data-clinical-media="optic-edge"' not in html:
+              needle = '</tbody></table></div></section><section class="section-card red-flags" id="urgent">'
+              if needle not in html:
+                  raise RuntimeError('diagnostics insertion point not found')
+              html = html.replace(needle, '</tbody></table></div>' + photo2 + '</section><section class="section-card red-flags" id="urgent">', 1)
+
+          photo4 = '<figure class="clinical-figure" data-clinical-media="pupillary-capture-side"><div class="clinical-photo protected-media"><img src="assets/pupillary-capture-side.jpg" alt="Ущемление дислоцированной ИОЛ в зрачке, боковой вид" data-lightbox loading="lazy"></div><figcaption><span class="figure-label">Клиническое фото 4</span>Ущемление дислоцированной ИОЛ в зрачке — боковой вид.</figcaption></figure>'
+          video = '<div class="video-shell" data-clinical-media="pupillary-video"><div class="video-frame protected-media"><video controls muted playsinline preload="metadata" poster="assets/pupillary-capture-front.jpg" aria-label="Видео ущемления вывихнутой ИОЛ в зрачке"><source src="assets/pupillary-capture.mp4" type="video/mp4">Ваш браузер не поддерживает видео.</video></div><div class="video-caption"><strong>Видео: ущемление вывихнутой ИОЛ в зрачке <span class="silent-badge">без звука</span></strong>Клинический видеоматериал из архива автора.</div></div>'
+          if 'data-clinical-media="pupillary-capture-side"' not in html:
+              needle = '</figcaption></figure></section><section class="section-card" id="surgery-indications">'
+              pos = html.find(needle, html.find('data-clinical-media="pupillary-capture"'))
+              if pos < 0:
+                  raise RuntimeError('urgent insertion point not found')
+              html = html[:pos] + '</figcaption></figure>' + photo4 + video + html[pos + len('</figcaption></figure>'):]
+
+          photo6 = '<figure class="clinical-figure" data-clinical-media="three-point-fixation"><div class="clinical-photo protected-media"><img src="assets/three-point-corneoscleral-fixation.jpg" alt="Трёхточечная корнеосклеральная фиксация ИОЛ" data-lightbox loading="lazy"></div><figcaption><span class="figure-label">Клиническое фото 6</span>Трёхточечная корнеосклеральная фиксация ИОЛ.</figcaption></figure>'
+          if 'data-clinical-media="three-point-fixation"' not in html:
+              start = html.find('data-clinical-media="intrascleral-flange"')
+              needle = '</figcaption></figure><div class="disclaimer">'
+              pos = html.find(needle, start)
+              if pos < 0:
+                  raise RuntimeError('fixation insertion point not found')
+              html = html[:pos] + '</figcaption></figure>' + photo6 + html[pos + len('</figcaption></figure>'):]
+
+          html = html.replace('<span class="figure-label">Клиническое фото 5</span>Интрасклеральный фланцевый элемент фиксации: оценивать положение относительно роговицы, конъюнктивы и предполагаемой оси фиксации.', '<span class="figure-label">Клиническое фото 5</span>Интрасклеральная нить с фланцем в парацентезе.')
+          html = html.replace('media.css?v=20260825-2', 'media.css?v=20260826-1')
+          html = html.replace('script.js?v=20260825-4', 'script.js?v=20260826-1')
+
+          for i in range(1, 8):
+              if f'Клиническое фото {i}' not in html:
+                  raise RuntimeError(f'clinical photo label {i} missing')
+          for asset in [
+              'iol-haptic-pupil.jpg','iol-optic-edge-pupil.jpg','pupillary-capture-front.jpg',
+              'pupillary-capture-side.jpg','intrascleral-flange.jpg',
+              'three-point-corneoscleral-fixation.jpg','dislocated-iol-glaucoma.jpg','pupillary-capture.mp4'
+          ]:
+              if f'assets/{asset}' not in html:
+                  raise RuntimeError(f'asset reference missing: {asset}')
+
+          page.write_text(html, encoding='utf-8')
+
+          css = Path('for-doctors/iol-dislocation/media.css')
+          text = css.read_text(encoding='utf-8')
+          if '.video-frame{' not in text:
+              text += '.video-frame{position:relative;overflow:hidden;background:#07172c}.video-frame video{position:relative;z-index:1}'
+          css.write_text(text, encoding='utf-8')
+          print('PAGE MEDIA MARKUP VERIFIED: 7 photos + video')
+          PY
+
+      - name: Commit exact originals and page markup
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add for-doctors/iol-dislocation/assets/*.jpg for-doctors/iol-dislocation/assets/pupillary-capture.mp4
+          git add for-doctors/iol-dislocation/assets/*.jpg \
+                  for-doctors/iol-dislocation/assets/pupillary-capture.mp4 \
+                  for-doctors/iol-dislocation/index.html \
+                  for-doctors/iol-dislocation/media.css
           if git diff --cached --quiet; then
-            echo 'No media changes'
+            echo 'No changes'
             exit 0
           fi
-          git commit -m 'media: sync full-quality IOL clinical assets'
+          git commit -m 'media: publish complete IOL clinical set'
           git push
