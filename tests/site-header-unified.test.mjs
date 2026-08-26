@@ -72,5 +72,7 @@ test('shared stylesheet defines canonical desktop mobile theme and focus contrac
     ':focus-visible',
     'prefers-reduced-motion'
   ]) assert.ok(css.includes(token), `missing CSS contract: ${token}`);
+  assert.ok(css.includes('.unified-site-header .site-language-switch a[aria-current="page"]'), 'existing language switch active state must be overridden inside canonical header');
+  assert.ok(css.includes('background:#2f62b9!important'), 'active language segment must use the accessible action blue');
   assert.ok(!css.includes('style='), 'stylesheet must not encode inline style attributes');
 });
