@@ -7,6 +7,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const MODULE = path.join(ROOT, 'site-header-unified.js');
+const CSS = path.join(ROOT, 'site-header-unified.css');
 
 function api(){
   assert.equal(fs.existsSync(MODULE), true, 'site-header-unified.js must exist');
@@ -42,4 +43,20 @@ test('canonical markup contains one nav mount and localized accessible controls'
   assert.match(en, /aria-label="Site language"/);
   assert.match(en, /aria-label="Switch color theme"/);
   assert.match(en, /data-unified-context="doctors-updates"/);
+});
+
+test('shared stylesheet defines canonical desktop mobile theme and focus contracts', () => {
+  assert.equal(fs.existsSync(CSS), true, 'site-header-unified.css must exist');
+  const css = fs.readFileSync(CSS, 'utf8');
+  for (const token of [
+    '.unified-site-header',
+    '.unified-site-header__inner',
+    '.unified-site-header__controls',
+    '@media(max-width:1020px)',
+    '[data-site-theme="light"]',
+    '[data-site-theme="dark"]',
+    ':focus-visible',
+    'prefers-reduced-motion'
+  ]) assert.ok(css.includes(token), `missing CSS contract: ${token}`);
+  assert.ok(!css.includes('style='), 'stylesheet must not encode inline style attributes');
 });
