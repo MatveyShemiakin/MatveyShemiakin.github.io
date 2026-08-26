@@ -9,6 +9,15 @@ JS_TAG = f'<script defer src="{JS_SRC}"></script>'
 EXCLUDED_PARTS = {'.git', '.github', 'tests', 'docs', '.worktrees', 'worktrees'}
 
 
+def _insert_runtime(result: str) -> str:
+    mega_pos = result.find('/site-mega-nav.js')
+    if mega_pos != -1:
+        script_start = result.rfind('<script', 0, mega_pos)
+        if script_start != -1:
+            return result[:script_start] + JS_TAG + result[script_start:]
+    return result.replace('</body>', JS_TAG + '</body>', 1)
+
+
 def inject_unified_header(text: str) -> str:
     if '</head>' not in text or '</body>' not in text:
         return text
@@ -17,7 +26,7 @@ def inject_unified_header(text: str) -> str:
     if CSS_HREF not in result:
         result = result.replace('</head>', CSS_TAG + '</head>', 1)
     if JS_SRC not in result:
-        result = result.replace('</body>', JS_TAG + '</body>', 1)
+        result = _insert_runtime(result)
     return result
 
 
