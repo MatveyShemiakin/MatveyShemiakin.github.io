@@ -32,6 +32,14 @@ class UnifiedHeaderInjectorTests(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertNotIn('style=', second)
 
+    def test_runtime_is_loaded_before_mega_nav_when_mega_nav_exists(self):
+        self.assertTrue(SCRIPT.exists(), 'scripts/inject_unified_header.py must exist')
+        module = load_module()
+        source = '<html><head></head><body><main>Content</main><script defer src="/site-theme.js"></script><script defer src="/site-mega-nav.js?v=20260816-2"></script></body></html>'
+        updated = module.inject_unified_header(source)
+        self.assertLess(updated.index(JS_SRC), updated.index('/site-mega-nav.js'))
+        self.assertGreater(updated.index(JS_SRC), updated.index('/site-theme.js'))
+
     def test_missing_closing_tags_is_left_unchanged(self):
         self.assertTrue(SCRIPT.exists(), 'scripts/inject_unified_header.py must exist')
         module = load_module()
