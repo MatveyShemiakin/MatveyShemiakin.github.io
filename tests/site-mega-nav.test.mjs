@@ -21,6 +21,7 @@ for (const token of ['aria-expanded','focusin','Escape','closest','site-mega-nav
   assert.ok(js.includes(token), `missing accessibility/interaction hook: ${token}`);
 }
 
+assert.ok(js.includes('.unified-site-header__nav-mount'), 'canonical unified header mount must be preferred');
 assert.ok(css.includes('@media (max-width:1020px)') || css.includes('@media(max-width:1020px)'), 'desktop cutoff missing');
 assert.ok(css.includes('.site-mega-nav'), 'component styles missing');
 assert.ok(!js.includes('style='), 'generated markup must not contain inline style attributes');
