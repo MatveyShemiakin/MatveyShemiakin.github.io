@@ -46,6 +46,43 @@
     return {ru:normalized,en:'/en'+normalized};
   }
 
+  function resolveThemeValue(siteTheme,legacyTheme,storedSite,storedLegacy,prefersDark){
+    for(const value of [siteTheme,legacyTheme,storedSite,storedLegacy]){
+      if(value==='light'||value==='dark')return value;
+    }
+    return prefersDark?'dark':'light';
+  }
+
+  function bridgeThemeState(doc,win){
+    const html=doc.documentElement;
+    let storedSite=null,storedLegacy=null;
+    try{
+      storedSite=win.localStorage.getItem('site_theme_v1');
+      storedLegacy=win.localStorage.getItem('ms-theme');
+    }catch(_){ }
+    const prefersDark=!!(win.matchMedia&&win.matchMedia('(prefers-color-scheme: dark)').matches);
+    const theme=resolveThemeValue(html.dataset.siteTheme,html.dataset.theme,storedSite,storedLegacy,prefersDark);
+    html.dataset.siteTheme=theme;
+    html.dataset.theme=theme;
+
+    if(win.MutationObserver&&!html.dataset.unifiedThemeBridge){
+      html.dataset.unifiedThemeBridge='ready';
+      const observer=new win.MutationObserver(function(records){
+        for(const record of records){
+          if(record.attributeName==='data-theme'){
+            const value=html.dataset.theme;
+            if((value==='light'||value==='dark')&&html.dataset.siteTheme!==value)html.dataset.siteTheme=value;
+          }else if(record.attributeName==='data-site-theme'){
+            const value=html.dataset.siteTheme;
+            if((value==='light'||value==='dark')&&html.dataset.theme!==value)html.dataset.theme=value;
+          }
+        }
+      });
+      observer.observe(html,{attributes:true,attributeFilter:['data-theme','data-site-theme']});
+    }
+    return theme;
+  }
+
   function escapeAttr(value){
     return String(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
   }
@@ -111,6 +148,7 @@
 
   function normalizeHeader(doc,win){
     if(!doc||!win)return null;
+    bridgeThemeState(doc,win);
     const existingCanonical=doc.querySelector('[data-unified-site-header="true"]');
     if(existingCanonical)return existingCanonical;
 
@@ -152,5 +190,5 @@
     return header;
   }
 
-  return {normalizePath,pageContext,headerLayout,languageRoutes,headerMarkup,normalizeHeader};
+  return {normalizePath,pageContext,headerLayout,languageRoutes,resolveThemeValue,bridgeThemeState,headerMarkup,normalizeHeader};
 });
