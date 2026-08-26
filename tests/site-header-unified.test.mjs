@@ -23,6 +23,17 @@ test('page context distinguishes main, patients, doctors and collaboration', () 
   assert.equal(pageContext('/collaboration/', 'ru').section, 'collaboration');
 });
 
+test('header layout preserves flow on hubs and overlays hero-led pages', () => {
+  const { headerLayout } = api();
+  assert.equal(headerLayout('/'), 'overlay');
+  assert.equal(headerLayout('/patients/'), 'overlay');
+  assert.equal(headerLayout('/patients/cataract/'), 'overlay');
+  assert.equal(headerLayout('/for-doctors/'), 'flow');
+  assert.equal(headerLayout('/for-doctors/events/'), 'overlay');
+  assert.equal(headerLayout('/collaboration/'), 'flow');
+  assert.equal(headerLayout('/privacy.html'), 'flow');
+});
+
 test('language routes preserve equivalent RU and EN paths', () => {
   const { languageRoutes } = api();
   assert.deepEqual(languageRoutes('/patients/cataract/', 'ru'), {ru:'/patients/cataract/', en:'/en/patients/cataract/'});
@@ -37,12 +48,14 @@ test('canonical markup contains one nav mount and localized accessible controls'
   assert.match(ru, /aria-label="Язык сайта"/);
   assert.match(ru, /aria-label="Переключить цветовую гамму"/);
   assert.match(ru, /data-unified-context="patient-updates"/);
+  assert.match(ru, /data-unified-layout="overlay"/);
   assert.doesNotMatch(ru, /style=/);
 
   const en = headerMarkup({path:'/en/for-doctors/', lang:'en', hasPatientBell:false, hasDoctorBell:true});
   assert.match(en, /aria-label="Site language"/);
   assert.match(en, /aria-label="Switch color theme"/);
   assert.match(en, /data-unified-context="doctors-updates"/);
+  assert.match(en, /data-unified-layout="flow"/);
 });
 
 test('shared stylesheet defines canonical desktop mobile theme and focus contracts', () => {
@@ -55,6 +68,7 @@ test('shared stylesheet defines canonical desktop mobile theme and focus contrac
     '@media(max-width:1020px)',
     '[data-site-theme="light"]',
     '[data-site-theme="dark"]',
+    '[data-unified-layout="flow"]',
     ':focus-visible',
     'prefers-reduced-motion'
   ]) assert.ok(css.includes(token), `missing CSS contract: ${token}`);
