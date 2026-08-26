@@ -8,6 +8,7 @@ on:
       - 'site-mega-nav.js'
       - 'scripts/inject_unified_header.py'
       - 'tests/test_unified_header_inject.py'
+      - 'tests/test_unified_header_coverage.py'
       - 'tests/site-header-unified.test.mjs'
       - 'tests/site-mega-nav.test.mjs'
       - '.github/workflows/unified-header.yml'
@@ -32,3 +33,5 @@ jobs:
         run: node --test tests/site-header-unified.test.mjs
       - name: Existing mega navigation regression
         run: node tests/site-mega-nav.test.mjs
+      - name: Global shared-header coverage
+        run: python -m unittest tests/test_unified_header_coverage.py
