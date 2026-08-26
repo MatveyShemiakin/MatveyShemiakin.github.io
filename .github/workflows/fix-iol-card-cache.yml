@@ -1,0 +1,64 @@
+name: fix-iol-card-cache
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-iol-card-cache.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fix IOL library preview and cache versions
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          card = Path('for-doctors/iol-card.css')
+          css = card.read_text(encoding='utf-8')
+          css = css.replace('/for-doctors/iol-dislocation/assets/iol-haptic-pupil.webp', '/for-doctors/iol-dislocation/assets/iol-haptic-pupil.jpg')
+          card.write_text(css, encoding='utf-8')
+
+          library = Path('for-doctors/index.html')
+          html = library.read_text(encoding='utf-8')
+          html = html.replace('/for-doctors/iol-card.css?v=20260825-1', '/for-doctors/iol-card.css?v=20260826-2')
+          library.write_text(html, encoding='utf-8')
+
+          detail = Path('for-doctors/iol-dislocation/index.html')
+          detail_html = detail.read_text(encoding='utf-8')
+          detail_html = detail_html.replace('page.css?v=20260825-3', 'page.css?v=20260826-3')
+          detail_html = detail_html.replace('page.css?v=20260826-2', 'page.css?v=20260826-3')
+          detail_html = detail_html.replace('media.css?v=20260826-1', 'media.css?v=20260826-3')
+          detail_html = detail_html.replace('script.js?v=20260826-1', 'script.js?v=20260826-3')
+          detail.write_text(detail_html, encoding='utf-8')
+
+          assert 'iol-haptic-pupil.jpg' in card.read_text(encoding='utf-8')
+          assert 'iol-card.css?v=20260826-2' in library.read_text(encoding='utf-8')
+          assert 'page.css?v=20260826-3' in detail.read_text(encoding='utf-8')
+          assert 'script.js?v=20260826-3' in detail.read_text(encoding='utf-8')
+          print('IOL CARD + CACHE FIX VERIFIED')
+          PY
+
+      - name: Commit fixes
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add for-doctors/iol-card.css for-doctors/index.html for-doctors/iol-dislocation/index.html
+          if git diff --cached --quiet; then
+            echo 'No changes'
+            exit 0
+          fi
+          git commit -m 'fix: restore IOL preview and bust stale page assets'
+          git pull --rebase origin main
+          git push origin main
