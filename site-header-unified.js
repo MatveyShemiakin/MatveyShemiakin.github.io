@@ -14,15 +14,28 @@
     return raw.endsWith('/')?raw:raw+'/';
   }
 
+  function barePath(path){
+    const normalized=normalizePath(path);
+    return normalized.startsWith('/en/')?normalized.slice(3):normalized;
+  }
+
   function pageContext(path,lang){
     const normalized=normalizePath(path);
-    const bare=normalized.startsWith('/en/')?normalized.slice(3):normalized;
+    const bare=barePath(normalized);
     let section='other';
     if(bare==='/')section='main';
     else if(bare.startsWith('/patients/'))section='patients';
     else if(bare.startsWith('/for-doctors/'))section='doctors';
     else if(bare.startsWith('/collaboration/'))section='collaboration';
     return {path:normalized,lang:(lang||'ru').toLowerCase().startsWith('en')?'en':'ru',section};
+  }
+
+  function headerLayout(path){
+    const bare=barePath(path);
+    if(bare==='/'||bare.startsWith('/patients/'))return'overlay';
+    if(bare==='/for-doctors/')return'flow';
+    if(bare.startsWith('/for-doctors/'))return'overlay';
+    return'flow';
   }
 
   function languageRoutes(path){
@@ -40,6 +53,7 @@
   function headerMarkup(options){
     const opts=options||{};
     const context=pageContext(opts.path||'/',opts.lang||'ru');
+    const layout=headerLayout(context.path);
     const routes=languageRoutes(context.path);
     const en=context.lang==='en';
     const brand=en?'MS':'МШ';
@@ -54,7 +68,7 @@
     else if(opts.hasDoctorBell)contextMarkup='<div class="unified-site-header__context" data-unified-context="doctors-updates"></div>';
     else contextMarkup='<div class="unified-site-header__context" data-unified-context="none" hidden></div>';
 
-    return '<header class="unified-site-header" data-unified-site-header="true">'+
+    return '<header class="unified-site-header" data-unified-site-header="true" data-unified-layout="'+layout+'" data-unified-section="'+context.section+'">'+
       '<div class="container unified-site-header__inner">'+
         '<a class="unified-site-header__brand monogram" href="'+escapeAttr(home)+'" aria-label="'+escapeAttr(homeLabel)+'">'+brand+'</a>'+
         '<div class="unified-site-header__nav-mount" data-unified-nav-mount="true"></div>'+
@@ -134,8 +148,9 @@
     else doc.body.insertBefore(header,doc.body.firstChild);
 
     doc.documentElement.classList.add('unified-site-header-ready');
+    try{doc.dispatchEvent(new win.CustomEvent('unified-site-header-ready',{detail:{header}}));}catch(_){ }
     return header;
   }
 
-  return {normalizePath,pageContext,languageRoutes,headerMarkup,normalizeHeader};
+  return {normalizePath,pageContext,headerLayout,languageRoutes,headerMarkup,normalizeHeader};
 });
