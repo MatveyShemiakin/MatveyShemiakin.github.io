@@ -24,6 +24,7 @@ assert.match(css,/\.library-grid/,'doctor library grid must participate in stagg
 assert.match(css,/>\s*\.site-motion-reveal:nth-child\(2\)/,'second child stagger selector missing');
 assert.match(css,/transition-delay:\s*80ms/,'first stagger delay missing');
 assert.match(css,/transition-delay:\s*160ms/,'second stagger delay missing');
+assert.match(css,/\.hero-focus\[data-site-mission=[^\]]+\]/,'homepage mission needs a responsive hero treatment');
 assert.match(css,/\.direction-card\.site-motion-reveal/,'direction cards need component-level sequencing');
 assert.match(css,/\.condition-number/,'icon/number reveal part missing');
 assert.match(css,/:where\(h2, h3, strong, \.library-label\)/,'heading reveal sequence missing');
