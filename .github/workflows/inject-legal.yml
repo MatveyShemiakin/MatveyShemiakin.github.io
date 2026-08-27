@@ -1,4 +1,3 @@
-# Shared site-module injection is idempotent; this commit triggers the unified-header rollout.
 name: Inject legal, analytics and professional modules
 
 on:
@@ -26,8 +25,6 @@ on:
       - 'patients/patients-updates.js'
       - 'patients/patients-updates.css'
       - 'patients/consultation-cta.css'
-      - 'site-header-unified.js'
-      - 'site-header-unified.css'
       - 'site-mega-nav.js'
       - 'site-mega-nav.css'
       - 'scripts/generate_doctors_updates.py'
@@ -37,7 +34,6 @@ on:
       - 'scripts/inject_content_analytics.py'
       - 'scripts/inject_patient_updates.py'
       - 'scripts/inject_patient_consultation_cta.py'
-      - 'scripts/inject_unified_header.py'
       - 'scripts/inject_site_mega_nav.py'
       - 'tests/test_generate_doctors_updates.py'
       - 'tests/test_doctors_updates_inject.py'
@@ -50,9 +46,6 @@ on:
       - 'tests/patient-updates.test.mjs'
       - 'tests/test_patient_updates_inject.py'
       - 'tests/test_patient_consultation_cta.py'
-      - 'tests/test_unified_header_inject.py'
-      - 'tests/test_unified_header_coverage.py'
-      - 'tests/site-header-unified.test.mjs'
       - 'tests/test_site_mega_nav.py'
       - 'tests/site-mega-nav.test.mjs'
       - '.github/workflows/inject-legal.yml'
@@ -77,7 +70,6 @@ jobs:
       - run: python scripts/inject_content_analytics.py
       - run: python scripts/inject_patient_updates.py
       - run: python scripts/inject_patient_consultation_cta.py
-      - run: python scripts/inject_unified_header.py
       - run: python scripts/inject_site_mega_nav.py
       - run: python -m unittest tests/test_generate_doctors_updates.py
       - run: python -m unittest tests/test_doctors_updates_inject.py
@@ -86,8 +78,6 @@ jobs:
       - run: python -m unittest tests/test_content_analytics.py
       - run: python -m unittest tests/test_patient_updates_inject.py
       - run: python -m unittest tests/test_patient_consultation_cta.py
-      - run: python -m unittest tests/test_unified_header_inject.py
-      - run: python -m unittest tests/test_unified_header_coverage.py
       - run: python -m unittest tests/test_site_mega_nav.py
       - run: node --check analytics.js
       - run: node tests/test_analytics_events.mjs
@@ -97,8 +87,6 @@ jobs:
       - run: node --test tests/doctor-retention.test.mjs
       - run: node --check patients/patients-updates.js
       - run: node --test tests/patient-updates.test.mjs
-      - run: node --check site-header-unified.js
-      - run: node --test tests/site-header-unified.test.mjs
       - run: node --check site-mega-nav.js
       - run: node tests/site-mega-nav.test.mjs
       - name: Commit generated changes
@@ -110,5 +98,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html' '**/*.html' sitemap.xml for-doctors/updates.json for-doctors/updates-manifest.json || true
-          git commit -m "Inject site modules and unified header"
+          git commit -m "Inject site modules and clinician retention"
           git push
