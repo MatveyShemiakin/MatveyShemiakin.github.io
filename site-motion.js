@@ -214,6 +214,67 @@
     return element;
   }
 
+  function ensureHomepageMissionStyles(){
+    if(document.querySelector('link[data-homepage-mission]'))return;
+    var link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href='/homepage-mission.css?v=20260827-1';
+    link.dataset.homepageMission='true';
+    document.head.appendChild(link);
+  }
+
+  function createMissionLine(text,isAccent){
+    var line=document.createElement('span');
+    line.className='hero-mission__line';
+    if(isAccent){
+      var accent=document.createElement('span');
+      accent.className='hero-mission__accent';
+      accent.textContent=text;
+      line.appendChild(accent);
+    }else{
+      line.textContent=text;
+    }
+    return line;
+  }
+
+  function mountHomepageMission(){
+    var path=normalisePath(window.location.pathname);
+    var isRu=path==='/';
+    var isEn=path==='/en/';
+    if(!isRu&&!isEn)return;
+
+    var copy=document.querySelector('.hero .hero-copy');
+    var credentials=copy&&copy.querySelector('.hero-credentials');
+    if(!copy||!credentials||copy.querySelector('.hero-mission'))return;
+
+    var focus=copy.querySelector('.hero-focus');
+    if(focus)focus.remove();
+    ensureHomepageMissionStyles();
+
+    var mission=document.createElement('div');
+    mission.className='hero-mission';
+    mission.setAttribute('aria-label',isRu?'Миссия':'Mission');
+
+    var label=createTextElement('span','hero-mission__label',isRu?'Миссия':'Mission');
+    var text=document.createElement('p');
+    text.className='hero-mission__text';
+
+    var lines=isRu?[
+      ['Сделать современную офтальмохирургию',false],
+      ['понятной, предсказуемой и безопасной',true],
+      ['для пациента — от первого диагноза до восстановления зрения.',false]
+    ]:[
+      ['Make modern ophthalmic surgery',false],
+      ['understandable, predictable and safe',true],
+      ['for patients — from first diagnosis to visual recovery.',false]
+    ];
+
+    lines.forEach(function(item){text.appendChild(createMissionLine(item[0],item[1]));});
+    mission.appendChild(label);
+    mission.appendChild(text);
+    credentials.parentNode.insertBefore(mission,credentials.nextSibling);
+  }
+
   function mountNextMaterial(){
     var main=document.querySelector('main');
     var route=routes[normalisePath(window.location.pathname)];
@@ -353,6 +414,7 @@
   function init(){
     if(root.dataset.siteMotionReady==='true')return;
     root.dataset.siteMotionReady='true';
+    mountHomepageMission();
     mountCards();
     mountDetails();
     mountNextMaterial();
