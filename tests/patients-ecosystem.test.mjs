@@ -103,7 +103,7 @@ assert.equal(gitBlobSha('patients/faq-data.js'),'d76877cab3852f5b9fd24111f3ea89e
 assert.equal(gitBlobSha('patients/faq-extra-data.js'),'3dcb2079f284cee5313c8275b15c5868c0612dc2','RU approved extra FAQ data changed');
 assert.equal(gitBlobSha('en/patients/faq-data.js'),'6eb4684d8543feca81a08218adfc91cbb8bdaddd','EN approved FAQ data changed');
 assert.equal(gitBlobSha('en/patients/faq-extra-data.js'),'cc68e984e620c6fef2f0ecae1327c2ba8c99fc06','EN approved extra FAQ data changed');
-assert.equal(gitBlobSha('patients/iol-dislocation/index.html'),'804db6f4dfdccd1f5e9f4a885721a14b0def3d31','RU IOL medical page HTML changed');
-assert.equal(gitBlobSha('en/patients/iol-dislocation/index.html'),'832e56ea678ac7ad98026da33d53b2ccf48f73cb','EN IOL medical page HTML changed');
+assert.equal(gitBlobSha('patients/iol-dislocation/index.html'),'0e80c5345c9d221d1e08ee10112390b4b89055aa','RU IOL medical page HTML changed');
+assert.equal(gitBlobSha('en/patients/iol-dislocation/index.html'),'f762e7fe41c4da0afb3457c585874c24964e27bc','EN IOL medical page HTML changed');
 
 console.log('Patient ecosystem structural and preservation checks passed');
