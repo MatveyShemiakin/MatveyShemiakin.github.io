@@ -125,6 +125,13 @@
     return doc.querySelector('body > header')||doc.querySelector('.site-header,.patient-header,.doctors-header,.site-head');
   }
 
+  function legacyHeaderContainsHero(header){
+    if(!header||!header.classList||!header.classList.contains('site-head'))return false;
+    return Array.prototype.some.call(header.children||[],function(child){
+      return !!(child.classList&&child.classList.contains('hero'));
+    });
+  }
+
   function detachFirst(doc,selectors){
     for(const selector of selectors){
       const node=doc.querySelector(selector);
@@ -155,6 +162,7 @@
     const lang=(doc.documentElement.lang||'ru').toLowerCase().startsWith('en')?'en':'ru';
     const path=win.location&&win.location.pathname?win.location.pathname:'/';
     const oldHeader=findLegacyHeader(doc);
+    const preserveHeroHost=legacyHeaderContainsHero(oldHeader);
 
     const mega=detachFirst(doc,['.site-mega-nav']);
     const patientBell=detachFirst(doc,['#patient-updates','.patient-updates']);
@@ -182,13 +190,23 @@
     if(theme&&controls){fallbackTheme&&fallbackTheme.remove();controls.appendChild(theme);}
     else bindFallbackTheme(fallbackTheme,doc,win);
 
-    if(oldHeader&&oldHeader.parentNode)oldHeader.replaceWith(header);
-    else doc.body.insertBefore(header,doc.body.firstChild);
+    if(oldHeader&&oldHeader.parentNode){
+      if(preserveHeroHost){
+        const legacyNav=Array.prototype.find.call(oldHeader.children||[],function(child){
+          return !!(child.classList&&child.classList.contains('nav'));
+        });
+        if(legacyNav){
+          legacyNav.classList.add('unified-site-header__legacy-spacer');
+          legacyNav.setAttribute('aria-hidden','true');
+        }
+        oldHeader.parentNode.insertBefore(header,oldHeader);
+      }else oldHeader.replaceWith(header);
+    }else doc.body.insertBefore(header,doc.body.firstChild);
 
     doc.documentElement.classList.add('unified-site-header-ready');
     try{doc.dispatchEvent(new win.CustomEvent('unified-site-header-ready',{detail:{header}}));}catch(_){ }
     return header;
   }
 
-  return {normalizePath,pageContext,headerLayout,languageRoutes,resolveThemeValue,bridgeThemeState,headerMarkup,normalizeHeader};
+  return {normalizePath,pageContext,headerLayout,languageRoutes,resolveThemeValue,bridgeThemeState,headerMarkup,legacyHeaderContainsHero,normalizeHeader};
 });
