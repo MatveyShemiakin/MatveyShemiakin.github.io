@@ -85,3 +85,22 @@ test('shared stylesheet defines canonical desktop mobile theme and focus contrac
   assert.ok(css.includes('background:#2f62b9!important'), 'active language segment must use the accessible action blue');
   assert.ok(!css.includes('style='), 'stylesheet must not encode inline style attributes');
 });
+
+test('site-head wrappers that contain a hero are preserved instead of replaced', () => {
+  const { legacyHeaderContainsHero } = api();
+  const fakeHeader = {
+    classList: { contains: (name) => name === 'site-head' },
+    children: [
+      { classList: { contains: (name) => name === 'nav' } },
+      { classList: { contains: (name) => name === 'hero' } }
+    ]
+  };
+  assert.equal(legacyHeaderContainsHero(fakeHeader), true);
+  const css = fs.readFileSync(CSS, 'utf8');
+  assert.match(css, /\.site-head>\.unified-site-header__legacy-spacer\{/);
+});
+
+test('cataract hero subtitle wraps inside narrow mobile viewports', () => {
+  const css = fs.readFileSync(path.join(ROOT, 'patients/accessibility-fixes.css'), 'utf8');
+  assert.match(css, /\.patient-hero h1 em\{[^}]*white-space:normal;[^}]*overflow-wrap:break-word/);
+});
