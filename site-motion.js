@@ -32,31 +32,17 @@
     'main .resource-card',
     'main .publication-card',
     'main .timeline-item',
-    'main .faq-item',
-    'main .direction-card',
-    'main .condition-card',
-    'main .library-card',
-    'main .doctor-workspace-panel',
-    'main .fact',
-    'main .metric',
-    'main .publication',
-    'main .contact-link',
-    'main .doctor-collaboration-entry__link',
-    'main .author-panel',
-    'main .path-grid > *',
-    'main .faq-index > *'
+    'main .faq-item'
   ].join(',');
 
   var cardSelector=[
     'a.topic-card',
-    '.direction-card',
-    '.condition-card',
+    'a.direction-card',
     'a.pathway-card',
     'a.resource-card',
     'a.stage-card',
     'a.publication-card',
     'a.doctor-card',
-    'a.library-card',
     'a.card',
     '.topic-card a',
     '.direction-card a',
@@ -66,11 +52,6 @@
     '.publication-card a',
     '.doctor-card a',
     '.related a',
-    '.doctor-workspace-panel',
-    '.metric',
-    '.publication',
-    '.contact-link',
-    '.doctor-collaboration-entry__link',
     'button.card',
     'details.faq-item'
   ].join(',');
@@ -208,28 +189,6 @@
     if(element.matches(criticalSelector))return true;
     if(element.closest(criticalSelector))return true;
     return Boolean(element.querySelector&&element.querySelector(criticalSelector));
-  }
-
-  function mountHeroMission(){
-    var path=normalisePath(window.location.pathname);
-    if(path!=='/'&&path!=='/en/')return;
-
-    var focus=document.querySelector('.hero-copy .hero-focus');
-    var credentials=document.querySelector('.hero-copy .hero-credentials');
-    if(!focus||!credentials||focus.dataset.siteMission==='true')return;
-
-    var clinicalText=(focus.textContent||'').trim();
-    if(clinicalText){
-      var clinicalFocus=document.createElement('p');
-      clinicalFocus.textContent=clinicalText;
-      var academic=credentials.querySelector('.academic');
-      credentials.insertBefore(clinicalFocus,academic||null);
-    }
-
-    focus.textContent=path==='/en/'
-      ?'Make modern ophthalmic surgery understandable, predictable, and safe for the patient — from the first diagnosis to vision recovery.'
-      :'Сделать современную офтальмохирургию понятной, предсказуемой и безопасной для пациента — от первого диагноза до восстановления зрения.';
-    focus.dataset.siteMission='true';
   }
 
   function mountCards(){
@@ -394,7 +353,6 @@
   function init(){
     if(root.dataset.siteMotionReady==='true')return;
     root.dataset.siteMotionReady='true';
-    mountHeroMission();
     mountCards();
     mountDetails();
     mountNextMaterial();
