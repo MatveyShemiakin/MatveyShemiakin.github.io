@@ -12,6 +12,12 @@
   --site-motion-shadow: 0 14px 34px rgba(20, 45, 70, .12);
 }
 
+.hero-focus[data-site-mission="true"] {
+  max-width: 780px;
+  font-size: clamp(30px, 2.75vw, 44px);
+  line-height: 1.12;
+}
+
 .site-reading-progress {
   position: fixed;
   z-index: 2147482000;
@@ -345,6 +351,11 @@ html.site-motion-ready :where(
 @media (max-width: 720px) {
   :root {
     --site-motion-distance: 10px;
+  }
+
+  .hero-focus[data-site-mission="true"] {
+    font-size: 31px;
+    line-height: 1.14;
   }
 
   .site-next-material {
