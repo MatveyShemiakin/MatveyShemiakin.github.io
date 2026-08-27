@@ -1,5 +1,20 @@
 [
   {
+    "id": "iol-dislocation",
+    "event_id": "iol-dislocation:4",
+    "published": "2026-08-25",
+    "updated": "2026-08-27",
+    "revision": 4,
+    "kind": "updated",
+    "title": "Дислокация ИОЛ: диагностика, выбор тактики и хирургическое лечение",
+    "title_en": "IOL dislocation: diagnosis, decision-making and surgical management",
+    "description": "Практический клинический конспект для офтальмологов по дислокации ИОЛ: диагностика, показания к операции, репозиция, замена ИОЛ, вторичная фиксация и витрэктомия.",
+    "description_en": "Practical clinical guide for ophthalmologists on IOL dislocation: diagnosis, indications for surgery, repositioning, IOL exchange, secondary fixation and vitrectomy.",
+    "url": "/for-doctors/iol-dislocation/",
+    "url_en": "/en/for-doctors/iol-dislocation/",
+    "topics": []
+  },
+  {
     "id": "ophthasearch-v2",
     "event_id": "ophthasearch-v2:2",
     "published": "2026-08-25",
@@ -30,21 +45,6 @@
     "topics": [
       "research"
     ]
-  },
-  {
-    "id": "iol-dislocation",
-    "event_id": "iol-dislocation:3",
-    "published": "2026-08-25",
-    "updated": "2026-08-25",
-    "revision": 3,
-    "kind": "updated",
-    "title": "Дислокация ИОЛ: диагностика, выбор тактики и хирургическое лечение",
-    "title_en": "IOL dislocation: diagnosis, decision-making and surgical management",
-    "description": "Практический клинический конспект для офтальмологов по дислокации ИОЛ: диагностика, показания к операции, репозиция, замена ИОЛ, вторичная фиксация и витрэктомия.",
-    "description_en": "Practical clinical guide for ophthalmologists on IOL dislocation: diagnosis, indications for surgery, repositioning, IOL exchange, secondary fixation and vitrectomy.",
-    "url": "/for-doctors/iol-dislocation/",
-    "url_en": "/en/for-doctors/iol-dislocation/",
-    "topics": []
   },
   {
     "id": "penetrating-keratoplasty",
