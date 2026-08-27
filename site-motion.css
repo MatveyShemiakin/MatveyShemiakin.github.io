@@ -1,8 +1,8 @@
 :root {
   --site-motion-fast: 180ms;
   --site-motion-medium: 300ms;
-  --site-motion-slow: 420ms;
-  --site-motion-distance: 14px;
+  --site-motion-slow: 560ms;
+  --site-motion-distance: 18px;
   --site-motion-ease: cubic-bezier(.2, .72, .2, 1);
   --site-motion-progress: var(--accent, var(--primary, #2f79a8));
   --site-motion-surface: var(--surface, var(--card-bg, #ffffff));
@@ -10,6 +10,12 @@
   --site-motion-text: var(--text, var(--ink, #17283a));
   --site-motion-muted: var(--muted, var(--text-muted, #667789));
   --site-motion-shadow: 0 14px 34px rgba(20, 45, 70, .12);
+}
+
+.hero-focus[data-site-mission="true"] {
+  max-width: 780px;
+  font-size: clamp(30px, 2.75vw, 44px);
+  line-height: 1.12;
 }
 
 .site-reading-progress {
@@ -56,6 +62,137 @@ html.site-motion-ready .site-motion-reveal.is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0);
   will-change: auto;
+}
+
+html.site-motion-ready :where(
+  .direction-grid,
+  .condition-grid,
+  .library-grid,
+  .facts-grid,
+  .metrics-grid,
+  .publication-list,
+  .contact-actions,
+  .doctor-workspace-grid,
+  .path-grid,
+  .faq-index
+) > .site-motion-reveal:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+html.site-motion-ready :where(
+  .direction-grid,
+  .condition-grid,
+  .library-grid,
+  .facts-grid,
+  .metrics-grid,
+  .publication-list,
+  .contact-actions,
+  .doctor-workspace-grid,
+  .path-grid,
+  .faq-index
+) > .site-motion-reveal:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+html.site-motion-ready :where(
+  .direction-grid,
+  .condition-grid,
+  .library-grid,
+  .facts-grid,
+  .metrics-grid,
+  .publication-list,
+  .contact-actions,
+  .doctor-workspace-grid,
+  .path-grid,
+  .faq-index
+) > .site-motion-reveal:nth-child(4) {
+  transition-delay: 240ms;
+}
+
+html.site-motion-ready :where(
+  .direction-card.site-motion-reveal,
+  .condition-card.site-motion-reveal,
+  .library-card.site-motion-reveal,
+  .doctor-workspace-panel.site-motion-reveal,
+  .metric.site-motion-reveal,
+  .publication.site-motion-reveal,
+  .contact-link.site-motion-reveal,
+  .doctor-collaboration-entry__link.site-motion-reveal
+) :where(
+  .condition-number,
+  .library-image,
+  .visual-stage,
+  .doctor-collaboration-entry__icon,
+  .card-icon,
+  svg
+) {
+  opacity: 0;
+  transform: translate3d(0, 8px, 0) scale(.985);
+  transition:
+    opacity var(--site-motion-medium) var(--site-motion-ease),
+    transform var(--site-motion-medium) var(--site-motion-ease);
+}
+
+html.site-motion-ready :where(
+  .direction-card.site-motion-reveal,
+  .condition-card.site-motion-reveal,
+  .library-card.site-motion-reveal,
+  .doctor-workspace-panel.site-motion-reveal,
+  .metric.site-motion-reveal,
+  .publication.site-motion-reveal,
+  .contact-link.site-motion-reveal,
+  .doctor-collaboration-entry__link.site-motion-reveal
+) :where(h2, h3, strong, .library-label) {
+  opacity: 0;
+  transform: translate3d(0, 9px, 0);
+  transition:
+    opacity var(--site-motion-medium) var(--site-motion-ease) 80ms,
+    transform var(--site-motion-medium) var(--site-motion-ease) 80ms;
+}
+
+html.site-motion-ready :where(
+  .direction-card.site-motion-reveal,
+  .condition-card.site-motion-reveal,
+  .library-card.site-motion-reveal,
+  .doctor-workspace-panel.site-motion-reveal,
+  .metric.site-motion-reveal,
+  .publication.site-motion-reveal,
+  .contact-link.site-motion-reveal,
+  .doctor-collaboration-entry__link.site-motion-reveal
+) :where(p, .library-link, .doctor-collaboration-entry__copy) {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  transition:
+    opacity var(--site-motion-medium) var(--site-motion-ease) 160ms,
+    transform var(--site-motion-medium) var(--site-motion-ease) 160ms;
+}
+
+html.site-motion-ready :where(
+  .direction-card.site-motion-reveal.is-visible,
+  .condition-card.site-motion-reveal.is-visible,
+  .library-card.site-motion-reveal.is-visible,
+  .doctor-workspace-panel.site-motion-reveal.is-visible,
+  .metric.site-motion-reveal.is-visible,
+  .publication.site-motion-reveal.is-visible,
+  .contact-link.site-motion-reveal.is-visible,
+  .doctor-collaboration-entry__link.site-motion-reveal.is-visible
+) :where(
+  .condition-number,
+  .library-image,
+  .visual-stage,
+  .doctor-collaboration-entry__icon,
+  .card-icon,
+  svg,
+  h2,
+  h3,
+  strong,
+  .library-label,
+  p,
+  .library-link,
+  .doctor-collaboration-entry__copy
+) {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
 .site-motion-card {
@@ -213,7 +350,12 @@ html.site-motion-ready .site-motion-reveal.is-visible {
 
 @media (max-width: 720px) {
   :root {
-    --site-motion-distance: 9px;
+    --site-motion-distance: 10px;
+  }
+
+  .hero-focus[data-site-mission="true"] {
+    font-size: 31px;
+    line-height: 1.14;
   }
 
   .site-next-material {
@@ -242,7 +384,22 @@ html.site-motion-ready .site-motion-reveal.is-visible {
 
 @media (prefers-reduced-motion: reduce) {
   html.site-motion-ready .site-motion-reveal,
-  html.site-motion-ready .site-motion-reveal.is-visible {
+  html.site-motion-ready .site-motion-reveal.is-visible,
+  html.site-motion-ready .site-motion-reveal :where(
+    .condition-number,
+    .library-image,
+    .visual-stage,
+    .doctor-collaboration-entry__icon,
+    .card-icon,
+    svg,
+    h2,
+    h3,
+    strong,
+    .library-label,
+    p,
+    .library-link,
+    .doctor-collaboration-entry__copy
+  ) {
     opacity: 1;
     transform: none;
     transition: none;
