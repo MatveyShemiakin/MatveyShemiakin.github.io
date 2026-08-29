@@ -17,12 +17,23 @@ for (const [label, page] of [['RU', ruPage], ['EN', enPage]]) {
     assert.match(html, /data-v2-management/);
     assert.match(html, /data-v2-important/);
     assert.match(html, /data-v2-sources/);
-    assert.match(html, /ophthasearch-v2\/ophthasearch-v2\.css/);
-    assert.match(html, /ophthasearch-v2\/ophthasearch-v2\.js/);
+    assert.match(html, /data-v2-privacy-notice/);
+    assert.match(html, /data-v2-feedback-shell/);
+    assert.match(html, /data-v2-feedback-helpful/);
+    assert.match(html, /data-v2-feedback-problem/);
+    assert.match(html, /ophthasearch-v2\/ophthasearch-v2\.css\?v=20260829-1/);
+    assert.match(html, /ophthasearch-v2\/ophthasearch-v2\.js\?v=20260829-1/);
     assert.doesNotMatch(html, /ophtha-source-board|ophtha-pico-grid|data-signal-grid|ophthasearch-v3\.js|7931/i);
     assert.doesNotMatch(html, /\sstyle\s*=/i);
   });
 }
+
+test('RU and EN production pages carry direct-identifier warnings in their own language', async () => {
+  const ru = await fs.readFile(ruPage, 'utf8');
+  const en = await fs.readFile(enPage, 'utf8');
+  assert.match(ru, /не вводите[\s\S]*(?:ФИО|имя)[\s\S]*(?:контакт|телефон)[\s\S]*(?:истори|карт)/i);
+  assert.match(en, /do not enter[\s\S]*(?:patient names?|names?)[\s\S]*(?:contact|phone)[\s\S]*(?:chart|record)/i);
+});
 
 test('production browser client does not call scientific provider APIs directly', async () => {
   const source = await fs.readFile(clientPath, 'utf8');
