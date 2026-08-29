@@ -3,7 +3,7 @@ const DIRECT_IDENTIFIER_PATTERNS = [
   /(?:^|\D)(?:\+?\d[\s().-]*){10,}(?:$|\D)/u,
   /\b\d{7,}\b/u,
   /https?:\/\/\S+\?\S+/iu,
-  /(?:ф\.?\s*и\.?\s*о\.?|имя\s+пациента|телефон|e-?mail|номер\s+(?:истории|карты)|адрес|patient\s+name|phone|email|chart\s+(?:number|no\.?|#)|medical\s+record|address)\b/iu
+  /(?:ф\.?\s*и\.?\s*о\.?|имя\s+пациента|телефон|e-?mail|номер\s+(?:истории|карты)|адрес|patient\s+name|phone|email|chart\s+(?:number|no\.?|#)|medical\s+record|address)(?=\s|:|,|;|\.|$)/iu
 ];
 
 export function normalizeQuestionText(value) {
