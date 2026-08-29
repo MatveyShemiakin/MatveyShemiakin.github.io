@@ -20,8 +20,9 @@
   <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
   <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">
   <link rel="stylesheet" href="/for-doctors/doctors-updates.css?v=20260816-1">
-  <link rel="stylesheet" href="/for-doctors/ophthasearch-v2/ophthasearch-v2.css?v=20260825-1">
-<link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=20260825-1"></head>
+  <link rel="stylesheet" href="/for-doctors/ophthasearch-v2/ophthasearch-v2.css?v=20260829-1">
+  <link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=20260825-1">
+</head>
 <body class="ophtha-v2-page">
   <header class="doctors-header">
     <div class="container doctors-nav">
@@ -56,6 +57,7 @@
             <input class="ophtha-v2-search-input" id="ophtha-v2-query" data-v2-query name="q" type="search" autocomplete="off" placeholder="Например: современная медикаментозная терапия ПОУГ — первая линия, комбинации и критерии эскалации">
             <button class="button primary ophtha-v2-search-button" data-v2-submit type="submit">Исследовать</button>
           </form>
+          <p class="ophtha-v2-privacy-notice" data-v2-privacy-notice>Не вводите ФИО пациента, контакты, номер истории/карты или другие прямые идентификаторы.</p>
           <p class="ophtha-v2-status" data-v2-status role="status" aria-live="polite">Введите вопрос так, как сформулировали бы его при обсуждении клинического случая с коллегой.</p>
         </div>
 
@@ -84,6 +86,30 @@
             <summary>Ключевые источники</summary>
             <div data-v2-sources></div>
           </details>
+
+          <section class="ophtha-v2-feedback" data-v2-feedback-shell hidden aria-labelledby="ophtha-v2-feedback-title">
+            <p class="ophtha-v2-feedback-title" id="ophtha-v2-feedback-title">Помог ли этот ответ?</p>
+            <div class="ophtha-v2-feedback-actions">
+              <button class="button secondary ophtha-v2-feedback-button" data-v2-feedback-helpful type="button">Полезно</button>
+              <button class="button secondary ophtha-v2-feedback-button" data-v2-feedback-problem type="button">Есть проблема</button>
+            </div>
+            <div class="ophtha-v2-feedback-details" data-v2-feedback-details hidden>
+              <fieldset class="ophtha-v2-feedback-fieldset">
+                <legend>Что требует исправления?</legend>
+                <label><input data-v2-feedback-tag type="checkbox" value="irrelevant_sources"> Нерелевантные источники</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="wrong_conclusion"> Неверный вывод</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="missing_evidence"> Пропущены важные данные</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="wrong_management"> Неверная тактика</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="citation_problem"> Проблема со ссылками</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="too_slow"> Слишком долго</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="other"> Другое</label>
+              </fieldset>
+              <label class="ophtha-v2-feedback-comment-label" for="ophtha-v2-feedback-comment">Комментарий — необязательно</label>
+              <textarea class="ophtha-v2-feedback-comment" id="ophtha-v2-feedback-comment" data-v2-feedback-comment rows="3" maxlength="1000"></textarea>
+              <button class="button secondary ophtha-v2-feedback-submit" data-v2-feedback-submit type="button">Отправить оценку</button>
+            </div>
+            <p class="ophtha-v2-feedback-status" data-v2-feedback-status role="status" aria-live="polite"></p>
+          </section>
         </div>
 
         <p class="ophtha-v2-disclaimer">OphthaSearch — инструмент поиска и синтеза научной информации для врачей, а не автономная система назначения лечения. Перед клиническим решением необходимо сопоставлять вывод с оригинальными публикациями, актуальными рекомендациями, инструкциями к препаратам и конкретной клинической ситуацией.</p>
@@ -100,6 +126,6 @@
   <script defer src="/site-theme.js?v=20260806-1"></script>
   <script defer src="/site-motion.js?v=20260806-1"></script>
   <script defer src="/site-mega-nav.js?v=20260816-2"></script>
-  <script type="module" src="/for-doctors/ophthasearch-v2/ophthasearch-v2.js?v=20260825-2"></script>
+  <script type="module" src="/for-doctors/ophthasearch-v2/ophthasearch-v2.js?v=20260829-1"></script>
 <script defer src="/for-doctors/doctor-retention.js?v=20260825-1"></script></body>
 </html>
