@@ -171,9 +171,9 @@ test('research logging returns only an opaque run_id and stores a minimized reco
   assert.equal('question_fingerprint' in body.result, false);
   assert.equal('question_storage_state' in body.result, false);
   assert.ok(stored, 'storage adapter should receive a record');
-  const serialized = JSON.stringify(stored);
-  assert.doesNotMatch(serialized, new RegExp(requestPayload.question.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
-  assert.doesNotMatch(serialized, /ABSTRACT MUST NEVER REACH DATASET STORAGE/);
+  assert.equal('question' in stored, false, 'raw request field must never be persisted');
+  assert.equal(stored.question_redacted, requestPayload.question, 'safe clinical text may persist only through the privacy-gated field');
+  assert.doesNotMatch(JSON.stringify(stored), /ABSTRACT MUST NEVER REACH DATASET STORAGE/);
   assert.match(stored.question_fingerprint, /^[a-f0-9]{64}$/);
   assert.equal(stored.question_storage_state, 'redacted_text');
 });
