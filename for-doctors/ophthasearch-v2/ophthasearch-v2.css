@@ -27,6 +27,7 @@ body.ophtha-v2-page{min-height:100vh;background:var(--site-theme-bg);color:var(-
 .ophtha-v2-search-button:disabled{opacity:.62;cursor:wait}
 .ophtha-v2-query-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
 .ophtha-v2-query-meta span{padding:6px 9px;border:1px solid var(--site-theme-border);border-radius:999px;background:var(--site-theme-surface-2);color:var(--site-theme-muted);font-size:11px;font-weight:700}
+.ophtha-v2-privacy-notice{margin:12px 2px 0;color:var(--site-theme-muted);font-size:12px;line-height:1.5}
 .ophtha-v2-status{margin:14px 2px 0;color:var(--site-theme-muted);font-size:13px;line-height:1.5}
 .ophtha-v2-status[data-state="loading"]{color:var(--site-theme-accent)}
 .ophtha-v2-status[data-state="error"]{color:#b64b43}
@@ -79,15 +80,38 @@ body.ophtha-v2-page{min-height:100vh;background:var(--site-theme-bg);color:var(-
 .ophtha-v2-diagnostics-list{display:grid;gap:7px;margin-top:12px}
 .ophtha-v2-diagnostic{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--site-theme-border);color:var(--site-theme-muted);font-size:11px;line-height:1.45}
 .ophtha-v2-diagnostic:last-child{border-bottom:0}
+
+.ophtha-v2-feedback{padding:22px 24px;border:1px solid var(--site-theme-border);border-radius:21px;background:var(--site-theme-surface)}
+.ophtha-v2-feedback[hidden]{display:none}
+.ophtha-v2-feedback-title{margin:0;color:var(--site-theme-text);font-size:15px;font-weight:800;line-height:1.5}
+.ophtha-v2-feedback-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.ophtha-v2-feedback-button,.ophtha-v2-feedback-submit{min-height:44px}
+.ophtha-v2-feedback-details{margin-top:18px}
+.ophtha-v2-feedback-details[hidden]{display:none}
+.ophtha-v2-feedback-fieldset{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;min-width:0;margin:0;padding:0;border:0}
+.ophtha-v2-feedback-fieldset legend{margin:0 0 12px;color:var(--site-theme-text);font-size:13px;font-weight:750}
+.ophtha-v2-feedback-fieldset label{display:flex;align-items:flex-start;gap:8px;color:var(--site-theme-muted);font-size:12px;line-height:1.45}
+.ophtha-v2-feedback-fieldset input{flex:0 0 auto;margin-top:.2em}
+.ophtha-v2-feedback-comment-label{display:block;margin-top:18px;color:var(--site-theme-muted);font-size:12px;font-weight:700}
+.ophtha-v2-feedback-comment{width:100%;min-height:88px;margin-top:8px;padding:12px 14px;border:1px solid var(--site-theme-border);border-radius:13px;background:var(--site-theme-surface-2);color:var(--site-theme-text);font:inherit;line-height:1.5;resize:vertical;outline:none}
+.ophtha-v2-feedback-comment:focus{border-color:var(--site-theme-accent);box-shadow:0 0 0 4px rgba(77,142,255,.13)}
+.ophtha-v2-feedback-submit{margin-top:12px}
+.ophtha-v2-feedback-status{min-height:1.4em;margin:12px 0 0;color:var(--site-theme-muted);font-size:12px;line-height:1.5}
+.ophtha-v2-feedback-status[data-state="ready"]{color:#2f7d50}
+.ophtha-v2-feedback-status[data-state="error"]{color:#b64b43}
+
 .ophtha-v2-disclaimer{margin:20px 0 0;padding:17px 19px;border:1px solid var(--site-theme-border);border-radius:17px;background:var(--site-theme-surface-2);color:var(--site-theme-muted);font-size:12px;line-height:1.6}
 .ophtha-v2-page .site-footer{background:#020d1c;color:#aebdce}
 
 html[data-site-theme="dark"] .ophtha-v2-query-card,
 html[data-site-theme="dark"] .ophtha-v2-bottom-line,
-html[data-site-theme="dark"] .ophtha-v2-card{box-shadow:0 18px 45px rgba(0,0,0,.16)}
-html[data-site-theme="dark"] .ophtha-v2-status[data-state="error"]{color:#ff9e96}
+html[data-site-theme="dark"] .ophtha-v2-card,
+html[data-site-theme="dark"] .ophtha-v2-feedback{box-shadow:0 18px 45px rgba(0,0,0,.16)}
+html[data-site-theme="dark"] .ophtha-v2-status[data-state="error"],
+html[data-site-theme="dark"] .ophtha-v2-feedback-status[data-state="error"]{color:#ff9e96}
 html[data-site-theme="dark"] .ophtha-v2-status[data-state="partial"],
 html[data-site-theme="dark"] .ophtha-v2-interpretation-label{color:#f0c36b}
+html[data-site-theme="dark"] .ophtha-v2-feedback-status[data-state="ready"]{color:#8ed1a9}
 
 @media(max-width:960px){
   .ophtha-v2-grid{grid-template-columns:1fr}
@@ -106,12 +130,16 @@ html[data-site-theme="dark"] .ophtha-v2-interpretation-label{color:#f0c36b}
   .ophtha-v2-search-form{grid-template-columns:1fr}
   .ophtha-v2-search-button{width:100%;min-height:48px}
   .ophtha-v2-bottom-line,.ophtha-v2-card{padding:17px;border-radius:17px}
+  .ophtha-v2-feedback{padding:17px;border-radius:17px}
   .ophtha-v2-bottom-line p{font-size:15px}
   .ophtha-v2-section-kicker{align-items:flex-start;flex-direction:column;gap:7px}
   .ophtha-v2-step{grid-template-columns:32px minmax(0,1fr);padding:13px;gap:10px}
   .ophtha-v2-step-number{width:30px;height:30px}
   .ophtha-v2-regimen{grid-template-columns:1fr}
-  .ophtha-v2-source,.ophtha-v2-item,.ophtha-v2-step,.ophtha-v2-bottom-line,.ophtha-v2-card{overflow-wrap:anywhere;word-break:normal}
+  .ophtha-v2-feedback-fieldset{grid-template-columns:1fr}
+  .ophtha-v2-feedback-actions{display:grid;grid-template-columns:1fr}
+  .ophtha-v2-feedback-button,.ophtha-v2-feedback-submit{width:100%}
+  .ophtha-v2-source,.ophtha-v2-item,.ophtha-v2-step,.ophtha-v2-bottom-line,.ophtha-v2-card,.ophtha-v2-feedback{overflow-wrap:anywhere;word-break:normal}
   .ophtha-v2-source-links{display:grid;grid-template-columns:1fr}
   .ophtha-v2-source-links a{justify-content:flex-start;min-width:0}
   .ophtha-v2-diagnostic{display:grid;gap:3px}
