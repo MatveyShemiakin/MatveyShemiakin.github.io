@@ -5,6 +5,7 @@ on:
     paths:
       - '_worker.js'
       - 'wrangler.jsonc'
+      - 'migrations/**'
       - 'for-doctors/ophthasearch/**'
       - 'for-doctors/ophthasearch-v2/**'
       - 'en/for-doctors/ophthasearch/**'
@@ -18,6 +19,7 @@ on:
     paths:
       - '_worker.js'
       - 'wrangler.jsonc'
+      - 'migrations/**'
       - 'for-doctors/ophthasearch/**'
       - 'for-doctors/ophthasearch-v2/**'
       - 'en/for-doctors/ophthasearch/**'
@@ -55,6 +57,7 @@ jobs:
           tests/ophthasearch-v2-adapters.test.mjs
           tests/ophthasearch-v2-guidelines.test.mjs
           tests/ophthasearch-v2-reasoner.test.mjs
+          tests/ophthasearch-v2-storage.test.mjs
           tests/ophthasearch-v2-pipeline.test.mjs
           tests/ophthasearch-v2-ui.test.mjs
           tests/ophthasearch-production-v2.test.mjs
