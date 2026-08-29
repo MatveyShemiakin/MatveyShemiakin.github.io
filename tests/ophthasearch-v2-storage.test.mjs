@@ -131,6 +131,29 @@ test('metadata-only privacy state suppresses question and generated answer text'
   assert.doesNotMatch(JSON.stringify(record), /Иванов Иван|123456789/);
 });
 
+test('evidence-only fallback is logged but not persisted as an approved answer candidate', async () => {
+  await requireFile(serializeUrl, 'serialization module');
+  const { serializeResearchRun } = await import(serializeUrl.href);
+  const record = serializeResearchRun({
+    request: { language: 'ru', question: 'Тактика хирургии при отслойке сетчатки?' },
+    result: {
+      status: 'evidence_only',
+      intent: { condition: 'rhegmatogenous retinal detachment' },
+      evidencePack: { sources: [{ source_id: 'S1', title: 'Relevant source', pmid: '12345678' }] },
+      answer: { schemaVersion: '2.0', clinical_bottom_line: 'Fallback text is not a verified synthesis', sources: [{ source_id: 'S1' }] }
+    },
+    runId: '00000000-0000-4000-8000-000000000004',
+    fingerprint: 'c'.repeat(64),
+    privacy: { storageState: 'redacted_text', redactedText: 'Тактика хирургии при отслойке сетчатки?' },
+    latencyMs: 500,
+    pipelineVersion: '2.0'
+  });
+
+  assert.equal(record.status, 'evidence_only');
+  assert.equal(record.answer_json, null);
+  assert.match(record.source_refs_json, /12345678/);
+});
+
 test('feedback contract accepts only bounded ratings and error tags', async () => {
   await requireFile(feedbackUrl, 'feedback module');
   const { validateFeedbackRequest } = await import(feedbackUrl.href);
