@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
   <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">
   <link rel="stylesheet" href="/for-doctors/doctors-updates.css?v=20260816-1">
-  <link rel="stylesheet" href="/for-doctors/ophthasearch-v2/ophthasearch-v2.css?v=20260825-3">
+  <link rel="stylesheet" href="/for-doctors/ophthasearch-v2/ophthasearch-v2.css?v=20260829-1">
   <link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=20260825-1">
 </head>
 <body class="ophtha-v2-page">
@@ -75,6 +75,7 @@
             <input class="ophtha-v2-search-input" id="ophtha-v2-query" data-v2-query name="q" type="search" autocomplete="off" placeholder="Example: is latanoprost superior to timolol in primary open-angle glaucoma?">
             <button class="button primary ophtha-v2-search-button" data-v2-submit type="submit">Research</button>
           </form>
+          <p class="ophtha-v2-privacy-notice" data-v2-privacy-notice>Do not enter patient names, contacts, chart/medical record numbers, or other direct identifiers.</p>
           <p class="ophtha-v2-status" data-v2-status role="status" aria-live="polite">Enter the question as you would phrase it when discussing a clinical case with a colleague.</p>
         </div>
 
@@ -103,6 +104,30 @@
             <summary>Key sources</summary>
             <div data-v2-sources></div>
           </details>
+
+          <section class="ophtha-v2-feedback" data-v2-feedback-shell hidden aria-labelledby="ophtha-v2-feedback-title">
+            <p class="ophtha-v2-feedback-title" id="ophtha-v2-feedback-title">Was this answer useful?</p>
+            <div class="ophtha-v2-feedback-actions">
+              <button class="button secondary ophtha-v2-feedback-button" data-v2-feedback-helpful type="button">Helpful</button>
+              <button class="button secondary ophtha-v2-feedback-button" data-v2-feedback-problem type="button">There is a problem</button>
+            </div>
+            <div class="ophtha-v2-feedback-details" data-v2-feedback-details hidden>
+              <fieldset class="ophtha-v2-feedback-fieldset">
+                <legend>What needs correction?</legend>
+                <label><input data-v2-feedback-tag type="checkbox" value="irrelevant_sources"> Irrelevant sources</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="wrong_conclusion"> Incorrect conclusion</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="missing_evidence"> Important evidence is missing</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="wrong_management"> Incorrect management</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="citation_problem"> Citation problem</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="too_slow"> Too slow</label>
+                <label><input data-v2-feedback-tag type="checkbox" value="other"> Other</label>
+              </fieldset>
+              <label class="ophtha-v2-feedback-comment-label" for="ophtha-v2-feedback-comment">Comment — optional</label>
+              <textarea class="ophtha-v2-feedback-comment" id="ophtha-v2-feedback-comment" data-v2-feedback-comment rows="3" maxlength="1000"></textarea>
+              <button class="button secondary ophtha-v2-feedback-submit" data-v2-feedback-submit type="button">Send rating</button>
+            </div>
+            <p class="ophtha-v2-feedback-status" data-v2-feedback-status role="status" aria-live="polite"></p>
+          </section>
         </div>
 
         <p class="ophtha-v2-disclaimer">OphthaSearch is a research and synthesis tool for clinicians, not an autonomous prescribing system. Clinical decisions should be checked against the original publications, current guidelines, drug labelling and the individual clinical context.</p>
@@ -124,7 +149,7 @@
   <script defer src="/site-motion.js?v=20260806-1"></script>
   <script defer src="/site-mega-nav.js?v=20260816-2"></script>
   <script defer src="/for-doctors/doctors-updates.js?v=20260816-1"></script>
-  <script type="module" src="/for-doctors/ophthasearch-v2/ophthasearch-v2.js?v=20260825-3"></script>
+  <script type="module" src="/for-doctors/ophthasearch-v2/ophthasearch-v2.js?v=20260829-1"></script>
   <script defer src="/for-doctors/doctor-retention.js?v=20260825-1"></script>
 </body>
 </html>
