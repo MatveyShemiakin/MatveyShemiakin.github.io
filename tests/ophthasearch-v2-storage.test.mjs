@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 
+// RED gate: these contracts intentionally precede the storage implementation.
 const privacyUrl = new URL('../workers/ophthasearch-v2/storage/privacy.js', import.meta.url);
 const serializeUrl = new URL('../workers/ophthasearch-v2/storage/serialize.js', import.meta.url);
 const feedbackUrl = new URL('../workers/ophthasearch-v2/storage/feedback.js', import.meta.url);
