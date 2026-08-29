@@ -10,9 +10,13 @@ import { search as searchClinicalTrials } from './adapters/clinicaltrials.js';
 import { search as searchJStage } from './adapters/jstage.js';
 import { search as searchOpenAlex } from './adapters/openalex.js';
 import { reasonOverEvidence, buildEvidenceOnlyFallback } from './reasoner.js';
+import { sanitizeFreeText, fingerprintQuestion } from './storage/privacy.js';
+import { serializeResearchRun } from './storage/serialize.js';
+import { insertResearchRun } from './storage/d1.js';
 
 export const RESEARCH_ALLOWED_ORIGIN = 'https://matveyshemyakin.ru';
 export const MAX_RESEARCH_BODY_BYTES = 32 * 1024;
+export const OPHTHASEARCH_PIPELINE_VERSION = '2.0';
 
 function defaultAdapters(env = {}, deps = {}) {
   const fetchImpl = deps.fetchImpl || globalThis.fetch;
@@ -166,8 +170,8 @@ function json(body, status = 200) {
   });
 }
 
-function publicResult(result) {
-  return {
+function publicResult(result, runId = '') {
+  const value = {
     schemaVersion: result.schemaVersion,
     status: result.status,
     intent: result.intent,
@@ -175,6 +179,38 @@ function publicResult(result) {
     answer: result.answer,
     diagnostics: result.diagnostics
   };
+  if (runId) value.run_id = runId;
+  return value;
+}
+
+function datasetLoggingEnabled(env = {}) {
+  return Boolean(
+    env?.OPHTHASEARCH_DB &&
+    String(env?.OPHTHASEARCH_DATASET_HASH_KEY || '').trim()
+  );
+}
+
+async function persistResearchRun(payload, result, env = {}, deps = {}, latencyMs = null) {
+  if (!datasetLoggingEnabled(env)) return '';
+
+  const runIdFactory = typeof deps.randomUUID === 'function'
+    ? deps.randomUUID
+    : () => globalThis.crypto.randomUUID();
+  const runId = runIdFactory();
+  const privacy = sanitizeFreeText(payload.question);
+  const fingerprint = await fingerprintQuestion(payload.question, env.OPHTHASEARCH_DATASET_HASH_KEY);
+  const record = serializeResearchRun({
+    request: payload,
+    result,
+    runId,
+    fingerprint,
+    privacy,
+    latencyMs,
+    pipelineVersion: deps.pipelineVersion || OPHTHASEARCH_PIPELINE_VERSION
+  });
+  const write = deps?.datasetStore?.insertResearchRun || insertResearchRun;
+  await write(env.OPHTHASEARCH_DB, record);
+  return runId;
 }
 
 export async function handleResearchRequest(request, env, ctx, deps = {}) {
@@ -196,8 +232,17 @@ export async function handleResearchRequest(request, env, ctx, deps = {}) {
 
   try {
     const pipeline = deps.researchPipeline || runResearchPipeline;
+    const startedAt = Date.now();
     const result = await pipeline(payload, env, deps);
-    return json({ ok: true, result: publicResult(result) }, 200);
+    const latencyMs = Math.max(0, Date.now() - startedAt);
+    let runId = '';
+    try {
+      runId = await persistResearchRun(payload, result, env, deps, latencyMs);
+    } catch {
+      // Dataset persistence is deliberately fail-open. Never expose storage internals to physicians.
+      runId = '';
+    }
+    return json({ ok: true, result: publicResult(result, runId) }, 200);
   } catch (error) {
     return json({ ok: false, error: { code: 'RESEARCH_UNAVAILABLE', message: String(error?.message || 'Research pipeline unavailable') } }, 503);
   }
