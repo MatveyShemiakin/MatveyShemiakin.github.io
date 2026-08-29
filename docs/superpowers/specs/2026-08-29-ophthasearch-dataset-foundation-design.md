@@ -1,7 +1,7 @@
 # OphthaSearch Dataset Foundation — Design
 
 Date: 2026-08-29
-Status: proposed, user-approved architecture pending written-spec review
+Status: user-approved architecture, pending written-spec review
 Owner: matveyshemyakin.ru / OphthaSearch
 
 ## 1. Goal
@@ -28,7 +28,7 @@ OphthaSearch v2 already runs server-side as:
 
 `question -> intent -> research plan -> retrieval -> Evidence Pack -> Gemma -> validation -> public result`
 
-The dataset subsystem is attached after a research result is produced. It observes the run and writes a minimized record asynchronously when possible. Failure of storage must never change the research response returned to the physician.
+The dataset subsystem attaches after a research result is produced. It observes the verified run, minimizes it, applies the privacy gate, and attempts a D1 write. Storage failure must never change the clinical response returned to the physician.
 
 ## 4. Recommended architecture
 
@@ -49,10 +49,10 @@ OphthaSearch /v2/research
                                                   |
                          +------------------------+---------------------+
                          |                                              |
-                  safe-to-store                                      blocked
+                  safe-to-store                                  sensitive/uncertain
                          |                                              |
                          v                                              v
-                 D1 research_runs                         hash + structured metadata only
+                 D1 research_runs                     metadata + source refs only
                          |
                          v
                   physician feedback
@@ -77,7 +77,7 @@ OphthaSearch /v2/research
 
 Binding name: `OPHTHASEARCH_DB`.
 
-D1 stores normalized metadata, approved answers, feedback, and references to scientific identifiers. It does not store article full text.
+D1 stores normalized metadata, privacy-approved question text, verified answers when eligible, feedback, and references to scientific identifiers. It does not store article full text.
 
 D1 is selected because the Worker already runs on Cloudflare and D1 avoids introducing another application server.
 
@@ -89,7 +89,7 @@ R2 is introduced only when versioned dataset exports are useful. It will store i
 
 ### 6.1 `research_runs`
 
-One row per research request that reaches the pipeline.
+One row per research request that reaches the pipeline and for which dataset logging is enabled.
 
 Fields:
 
@@ -98,17 +98,22 @@ Fields:
 - `schema_version TEXT NOT NULL` — dataset schema version;
 - `pipeline_version TEXT NOT NULL` — application/pipeline version identifier;
 - `language TEXT NOT NULL` — `ru` or `en`;
-- `question_hash TEXT NOT NULL` — SHA-256 of normalized original question; used for deduplication without requiring raw storage;
-- `question_redacted TEXT NULL` — only stored when privacy gate classifies the text as safe;
-- `question_storage_state TEXT NOT NULL` — `redacted_text`, `metadata_only`, or `rejected`;
+- `question_fingerprint TEXT NOT NULL` — HMAC-SHA-256 of normalized original question using a server-only secret; used for deduplication without storing the original text;
+- `question_redacted TEXT NULL` — only stored when the privacy gate classifies the text as safe;
+- `question_storage_state TEXT NOT NULL` — `redacted_text` or `metadata_only`;
 - `intent_json TEXT NOT NULL` — normalized structured intent;
 - `status TEXT NOT NULL` — `complete`, `partial`, or `evidence_only`;
 - `source_refs_json TEXT NOT NULL` — minimized list of source identifiers and metadata;
-- `answer_json TEXT NULL` — verified structured answer; null if no safe synthesis exists;
-- `latency_ms INTEGER NULL`;
-- `storage_error TEXT NULL` — reserved for controlled internal diagnostics if a deferred write is retried; never sent to the UI.
+- `answer_json TEXT NULL` — verified structured answer only when the question passed the free-text privacy gate; otherwise null;
+- `latency_ms INTEGER NULL`.
 
-`source_refs_json` may contain PMID, DOI, NCT, guideline registry ID, title, year, and evidence class. It must not contain article full text or fetched abstracts.
+`source_refs_json` may contain PMID, DOI, NCT, guideline registry ID, canonical URL, title, year, evidence class, and provider provenance. It must not contain article full text or fetched abstracts.
+
+Recommended indexes:
+
+- `research_runs(created_at)`;
+- `research_runs(question_fingerprint)`;
+- `research_runs(status)`.
 
 ### 6.2 `feedback`
 
@@ -122,9 +127,15 @@ Fields:
 - `rating TEXT NOT NULL` — initially `helpful` or `problem`;
 - `error_tags_json TEXT NOT NULL` — bounded allow-list of error categories;
 - `comment_redacted TEXT NULL` — optional text after privacy gate;
-- `comment_storage_state TEXT NOT NULL`;
+- `comment_storage_state TEXT NOT NULL` — `redacted_text` or `metadata_only`;
 - `review_status TEXT NOT NULL DEFAULT 'unreviewed'`;
 - foreign key to `research_runs(run_id)`.
+
+Recommended indexes:
+
+- `feedback(run_id)`;
+- `feedback(created_at)`;
+- `feedback(review_status)`.
 
 Initial error-tag allow-list:
 
@@ -156,11 +167,16 @@ Fields:
 
 No record is eligible for model training unless `curation_status='approved'` and `quality_score>=4`.
 
+Recommended indexes:
+
+- `training_cases(curation_status, quality_score)`;
+- `training_cases(dataset_version)`.
+
 ## 7. Privacy and minimization gate
 
 Privacy is enforced before any free-text write.
 
-### 7.1 Always retained
+### 7.1 Always eligible for retention
 
 The system may retain:
 
@@ -168,12 +184,13 @@ The system may retain:
 - UTC timestamp;
 - language;
 - pipeline/schema versions;
-- question hash;
+- HMAC question fingerprint;
 - normalized intent;
 - status;
 - minimized scientific source identifiers;
-- verified structured answer;
 - latency.
+
+The HMAC key is stored only as a Worker secret, proposed name `OPHTHASEARCH_DATASET_HASH_KEY`. If the secret is missing, dataset logging is disabled rather than falling back to an unhashed or weak fingerprint.
 
 ### 7.2 Free-text policy
 
@@ -187,15 +204,19 @@ A deterministic sanitizer produces `question_redacted`. The sanitizer detects an
 - long digit sequences that may be chart/document/account numbers;
 - explicit labels such as `ФИО`, `имя пациента`, `телефон`, `email`, `номер истории`, `номер карты`, `адрес`, and English equivalents.
 
-If a suspicious identifier remains or confidence is insufficient, `question_redacted` is not stored and `question_storage_state='metadata_only'`.
+If a suspicious identifier remains or confidence is insufficient:
 
-The same rule applies to optional feedback comments.
+- `question_redacted` is null;
+- `question_storage_state='metadata_only'`;
+- `answer_json` is also null because a generated answer may echo identifiers from the input.
 
-The sanitizer is a minimization guard, not a guarantee of perfect anonymization. Therefore the storage default is conservative: uncertainty means no free-text persistence.
+The same conservative rule applies to optional feedback comments.
+
+The sanitizer is a minimization guard, not a guarantee of perfect anonymization. Uncertainty therefore means no free-text persistence.
 
 ### 7.3 UI warning
 
-The search form should include a short physician-facing reminder not to enter patient names, contacts, chart numbers, or other direct identifiers. This is informational and must not obstruct normal use.
+The search form should include a short physician-facing reminder not to enter patient names, contacts, chart numbers, addresses, or other direct identifiers. This is informational and must not obstruct normal use.
 
 ## 8. Scientific-source policy
 
@@ -219,11 +240,12 @@ Abstracts, full text, figures, tables, and long quoted passages are not persiste
 
 ### 9.1 Storage module
 
-Add a focused module under `workers/ophthasearch-v2/storage/` with three responsibilities:
+Add focused modules under `workers/ophthasearch-v2/storage/` with separate responsibilities:
 
-1. privacy-safe normalization;
-2. D1 writes;
-3. dataset-specific serialization.
+- `privacy.js` — normalization, direct-identifier detection, redaction, HMAC fingerprinting;
+- `serialize.js` — minimize research results and scientific source references;
+- `d1.js` — D1 persistence only;
+- `feedback.js` — feedback validation/serialization.
 
 The research pipeline remains responsible for research only.
 
@@ -234,10 +256,13 @@ After the pipeline produces the final verified result:
 1. generate `run_id`;
 2. construct a minimized storage record;
 3. run privacy gate;
-4. write to D1 through `ctx.waitUntil(...)` when a valid D1 binding and execution context exist;
-5. return the physician-facing answer immediately with `run_id` included as opaque metadata for later feedback.
+4. if D1 binding and HMAC secret exist, attempt the D1 insert with `await` inside a local `try/catch`;
+5. if the insert fails, log the storage failure internally and continue;
+6. return the physician-facing answer with the opaque `run_id` only when dataset logging is enabled for that request.
 
-If D1 is unavailable, missing, or write fails, the `/v2/research` response remains successful. Storage failure is observable in Worker logs only.
+The D1 insert is intentionally awaited in milestone 1 to avoid a race where a physician submits feedback before the corresponding `research_runs` row exists. D1 write latency is measured. If it becomes material, a later design may introduce a queue or other durable asynchronous mechanism.
+
+Storage success or failure never changes `status`, `answer`, citations, or HTTP success of a valid research request.
 
 ### 9.3 Feedback endpoint
 
@@ -256,17 +281,20 @@ The endpoint:
 - uses the same production-origin CORS policy;
 - validates body size and JSON content type;
 - verifies `runId` exists before inserting feedback;
-- applies privacy gate to comment text;
-- never returns the stored research content;
-- rate-limits by existing Cloudflare mechanisms if abuse becomes a real problem; custom rate-limiting is deferred.
+- applies the privacy gate to comment text;
+- never returns stored research content;
+- returns a neutral success response with a feedback ID;
+- rate-limits by Cloudflare-native controls if abuse becomes a demonstrated problem; custom rate-limiting is deferred.
 
 ## 10. Physician-facing feedback UI
 
-After a successful answer, show a compact feedback control:
+After a successful answer with a `run_id`, show a compact feedback control:
 
 `Полезно` / `Есть проблема`
 
 When `Есть проблема` is selected, show the bounded error-tag choices. A free-text comment is optional and secondary.
+
+If no `run_id` is returned because dataset logging is disabled/unavailable, the feedback control is hidden. The clinical answer remains fully usable.
 
 The feedback UI must not expose dataset terminology, training concepts, D1, diagnostic adapters, or pipeline internals.
 
@@ -311,9 +339,10 @@ Required invariants:
 1. D1 failure must never make scientific search fail.
 2. Feedback failure must never alter an already-rendered answer.
 3. Invalid or suspicious free text must degrade to metadata-only storage, not to a failed clinical request.
-4. Missing D1 binding in local/test environments is treated as storage-disabled, not as an application error.
+4. Missing D1 binding or HMAC secret in local/test environments is treated as storage-disabled, not as an application error.
 5. No storage error details are returned to physicians.
 6. No unverified answer is promoted to a training case.
+7. No raw question or feedback comment is written before the privacy gate.
 
 ## 14. Testing strategy
 
@@ -321,38 +350,45 @@ Implementation follows TDD.
 
 ### Unit tests
 
-- privacy sanitizer redacts email, phone, direct identifiers, and long numeric IDs;
+- privacy sanitizer redacts email, phone, direct identifier labels, and long numeric IDs;
 - uncertain free text becomes metadata-only;
-- question hashing is deterministic after normalization;
+- HMAC question fingerprint is deterministic for normalized equivalent inputs and changes with a different secret;
+- no raw question is present in storage payloads;
+- answer storage is disabled when the question is metadata-only;
 - source serializer excludes abstracts/full text;
 - dataset serializer keeps only approved fields;
 - invalid feedback tags are rejected.
 
 ### D1 contract tests
 
-- migrations create all expected tables/indexes;
+- migrations create all expected tables, constraints, and indexes;
 - research run inserts are idempotent by `run_id`;
 - feedback requires an existing run;
 - one run can accept multiple feedback rows;
-- training case requires valid run and curation constraints.
+- training case requires a valid run and curation constraints;
+- `quality_score` is restricted to 1–5;
+- status fields are constrained to their allow-lists.
 
 ### Pipeline tests
 
 - research success is preserved when D1 insert throws;
 - storage receives only minimized records;
-- public response includes opaque `run_id` but no private storage metadata;
-- `evidence_only` runs may be logged but are never auto-promoted.
+- public response includes opaque `run_id` only when logging is enabled;
+- public response never includes private storage state or HMAC fingerprint;
+- `evidence_only` runs may be logged but are never auto-promoted;
+- D1 write latency is recorded separately from scientific pipeline latency.
 
 ### UI tests
 
-- feedback controls appear only after a successful answer;
+- feedback controls appear only after a successful answer with `run_id`;
 - stale result reset also removes stale feedback state;
 - feedback request uses `/v2/feedback` and the returned `run_id`;
-- user sees a neutral success/error state without internal diagnostics.
+- user sees a neutral feedback success/error state without internal diagnostics;
+- direct-identifier warning is visible but non-blocking.
 
 ### Deployment tests
 
-- Wrangler config declares `OPHTHASEARCH_DB` only in environments where the D1 resource exists;
+- production Wrangler config is not given a D1 binding until the production database exists;
 - canary deployment runs migrations against canary D1 first;
 - production D1 migration occurs only after canary tests are green;
 - production scientific response is smoke-tested with storage deliberately unavailable to verify fail-open behavior.
@@ -364,14 +400,16 @@ Implementation follows TDD.
 - migrations;
 - storage/privacy modules;
 - unit and contract tests;
-- no production binding yet.
+- feedback endpoint contract with fake/in-memory D1 in tests;
+- no production binding or dataset secret yet.
 
 ### Phase B — isolated canary D1
 
 - create canary D1 database;
-- bind canary Worker;
+- configure canary `OPHTHASEARCH_DB` and `OPHTHASEARCH_DATASET_HASH_KEY`;
 - run migrations;
 - verify research writes, metadata-only privacy fallback, and feedback writes;
+- measure D1 write overhead;
 - execute existing OphthaSearch live clinical acceptance suite.
 
 ### Phase C — production D1
@@ -379,6 +417,7 @@ Implementation follows TDD.
 Only after canary is green:
 
 - create/bind production D1;
+- configure production HMAC secret;
 - run production migrations;
 - enable research-run logging;
 - enable compact feedback UI;
@@ -399,14 +438,15 @@ Deferred until sufficient real, reviewed cases accumulate.
 Milestone 1 is complete only when:
 
 - OphthaSearch returns the same clinical answers with or without D1;
-- every stored run has a stable opaque `run_id` and question hash;
+- every stored run has a stable opaque `run_id` and HMAC question fingerprint;
 - no raw input question is written directly;
-- suspicious questions persist metadata only;
+- suspicious questions persist metadata only and do not persist generated answer text;
 - scientific full text/abstracts are not stored;
 - feedback can be linked to a run without exposing research records;
 - only explicitly curated cases can enter `training_cases`;
 - all unit/contract/pipeline/UI tests are green;
 - existing live clinical acceptance cases remain green;
+- measured D1 write overhead is acceptable before production enablement;
 - production is not enabled before isolated canary verification.
 
 ## 17. Future extension points
@@ -418,5 +458,6 @@ Explicitly deferred but supported by this schema:
 - authenticated curation interface;
 - R2 JSONL/Parquet exports;
 - automated evaluation harness comparing pipeline versions;
+- durable asynchronous logging via Cloudflare Queues if justified by latency/reliability data;
 - LoRA/QLoRA experiments against a fixed validation set;
 - model-independent dataset portability.
