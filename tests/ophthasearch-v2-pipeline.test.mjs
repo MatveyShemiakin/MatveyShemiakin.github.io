@@ -24,6 +24,49 @@ function relevantArticle(overrides = {}) {
   };
 }
 
+function stubPipelineResult(bottomLine = 'ok') {
+  return {
+    schemaVersion: '2.0',
+    status: 'complete',
+    intent: { condition: 'primary open-angle glaucoma', task: 'treatment' },
+    plan: [],
+    evidencePack: {
+      sources: [{
+        source_id: 'S1',
+        title: 'Stored source title',
+        abstractText: 'ABSTRACT MUST NEVER REACH DATASET STORAGE',
+        doi: '10.1000/storage-test',
+        pmid: '12345678',
+        year: 2025,
+        evidence: { label: 'Randomized controlled trial' }
+      }]
+    },
+    diagnostics: { sourceCount: 1 },
+    answer: {
+      schemaVersion: '2.0',
+      clinical_bottom_line: bottomLine,
+      bottom_line_citations: ['S1'],
+      confidence: 'moderate',
+      management: [],
+      arguments_for: [],
+      arguments_against: [],
+      alternatives: [],
+      guideline_positions: [],
+      uncertainties: [],
+      clinical_interpretation: '',
+      sources: [{ source_id: 'S1' }]
+    }
+  };
+}
+
+async function postResearch(payload, env = {}, deps = {}) {
+  return handleRootRequest(new Request('https://matveyshemyakin.ru/v2/research', {
+    method: 'POST',
+    headers: { 'Origin': 'https://matveyshemyakin.ru', 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }), { ASSETS: { fetch: async () => new Response('asset') }, ...env }, {}, deps);
+}
+
 test('research pipeline interprets, plans, retrieves, deduplicates and reasons over one server-side request', async () => {
   const adapters = {
     pubmed: async () => ({ records: [relevantArticle()] }),
@@ -92,17 +135,10 @@ test('reasoning failure degrades to evidence-only result instead of failing the 
 
 test('root Worker routes POST /v2/research without changing v1 or static fallback behavior', async () => {
   let called = 0;
-  const response = await handleRootRequest(new Request('https://matveyshemyakin.ru/v2/research', {
-    method: 'POST',
-    headers: { 'Origin': 'https://matveyshemyakin.ru', 'Content-Type': 'application/json' },
-    body: JSON.stringify(requestPayload)
-  }), { ASSETS: { fetch: async () => new Response('asset') } }, {}, {
+  const response = await postResearch(requestPayload, {}, {
     researchPipeline: async () => {
       called += 1;
-      return {
-        schemaVersion: '2.0', status: 'complete', intent: {}, plan: [], diagnostics: {},
-        answer: { schemaVersion: '2.0', clinical_bottom_line: 'ok', bottom_line_citations: [], confidence: 'moderate', management: [], arguments_for: [], arguments_against: [], alternatives: [], guideline_positions: [], uncertainties: [], clinical_interpretation: '', sources: [] }
-      };
+      return stubPipelineResult();
     }
   });
   assert.equal(called, 1);
@@ -110,6 +146,84 @@ test('root Worker routes POST /v2/research without changing v1 or static fallbac
   const body = await response.json();
   assert.equal(body.ok, true);
   assert.equal(body.result.schemaVersion, '2.0');
+  assert.equal('run_id' in body.result, false, 'storage-disabled response must not invent a feedback run id');
+});
+
+test('research logging returns only an opaque run_id and stores a minimized record', async () => {
+  let stored = null;
+  const runId = '11111111-1111-4111-8111-111111111111';
+  const response = await postResearch(requestPayload, {
+    OPHTHASEARCH_DB: { binding: 'test-db' },
+    OPHTHASEARCH_DATASET_HASH_KEY: 'test-only-secret'
+  }, {
+    randomUUID: () => runId,
+    researchPipeline: async () => stubPipelineResult('Verified clinical answer'),
+    datasetStore: {
+      insertResearchRun: async (_db, record) => { stored = record; }
+    }
+  });
+
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.ok, true);
+  assert.equal(body.result.run_id, runId);
+  assert.equal(body.result.answer.clinical_bottom_line, 'Verified clinical answer');
+  assert.equal('question_fingerprint' in body.result, false);
+  assert.equal('question_storage_state' in body.result, false);
+  assert.ok(stored, 'storage adapter should receive a record');
+  const serialized = JSON.stringify(stored);
+  assert.doesNotMatch(serialized, new RegExp(requestPayload.question.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  assert.doesNotMatch(serialized, /ABSTRACT MUST NEVER REACH DATASET STORAGE/);
+  assert.match(stored.question_fingerprint, /^[a-f0-9]{64}$/);
+  assert.equal(stored.question_storage_state, 'redacted_text');
+});
+
+test('D1 write failure is fail-open and cannot change the clinical answer', async () => {
+  const response = await postResearch(requestPayload, {
+    OPHTHASEARCH_DB: { binding: 'test-db' },
+    OPHTHASEARCH_DATASET_HASH_KEY: 'test-only-secret'
+  }, {
+    randomUUID: () => '22222222-2222-4222-8222-222222222222',
+    researchPipeline: async () => stubPipelineResult('Clinical answer survives storage failure'),
+    datasetStore: {
+      insertResearchRun: async () => { throw new Error('simulated D1 outage'); }
+    }
+  });
+
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.ok, true);
+  assert.equal(body.result.status, 'complete');
+  assert.equal(body.result.answer.clinical_bottom_line, 'Clinical answer survives storage failure');
+  assert.equal('run_id' in body.result, false, 'failed persistence must not expose an unusable feedback id');
+});
+
+test('sensitive question persists metadata only and suppresses answer text', async () => {
+  let stored = null;
+  const sensitivePayload = {
+    ...requestPayload,
+    question: 'ФИО Иванов Иван, номер истории 123456789. Тактика при ПОУГ?'
+  };
+  const response = await postResearch(sensitivePayload, {
+    OPHTHASEARCH_DB: { binding: 'test-db' },
+    OPHTHASEARCH_DATASET_HASH_KEY: 'test-only-secret'
+  }, {
+    randomUUID: () => '33333333-3333-4333-8333-333333333333',
+    researchPipeline: async () => stubPipelineResult('Иванов Иван: generated answer could echo input'),
+    datasetStore: {
+      insertResearchRun: async (_db, record) => { stored = record; }
+    }
+  });
+
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.ok, true, 'privacy fallback must not block clinical response');
+  assert.equal(body.result.answer.clinical_bottom_line, 'Иванов Иван: generated answer could echo input');
+  assert.ok(stored);
+  assert.equal(stored.question_storage_state, 'metadata_only');
+  assert.equal(stored.question_redacted, null);
+  assert.equal(stored.answer_json, null);
+  assert.doesNotMatch(JSON.stringify(stored), /Иванов Иван|123456789/);
 });
 
 test('Wrangler routes both v1 and v2 API namespaces through the Worker before static assets', async () => {
