@@ -41,7 +41,8 @@ export function serializeResearchRun({
   const storageState = privacy.storageState === 'redacted_text' ? 'redacted_text' : 'metadata_only';
   const questionRedacted = storageState === 'redacted_text' ? clean(privacy.redactedText, 1200) || null : null;
   const sourceRefs = serializeSourceRefs(result.evidencePack || {});
-  const answerJson = storageState === 'redacted_text' && result.answer && typeof result.answer === 'object'
+  const status = ['complete', 'partial', 'evidence_only'].includes(result.status) ? result.status : 'evidence_only';
+  const answerJson = storageState === 'redacted_text' && status !== 'evidence_only' && result.answer && typeof result.answer === 'object'
     ? safeJson(result.answer, null)
     : null;
 
@@ -55,7 +56,7 @@ export function serializeResearchRun({
     question_redacted: questionRedacted,
     question_storage_state: storageState,
     intent_json: safeJson(result.intent || {}, {}),
-    status: ['complete', 'partial', 'evidence_only'].includes(result.status) ? result.status : 'evidence_only',
+    status,
     source_refs_json: safeJson(sourceRefs, []),
     answer_json: answerJson,
     latency_ms: Number.isFinite(Number(latencyMs)) ? Math.max(0, Math.round(Number(latencyMs))) : null
