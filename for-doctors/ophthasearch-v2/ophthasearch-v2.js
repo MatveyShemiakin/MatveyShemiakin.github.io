@@ -1,4 +1,5 @@
 export const DEFAULT_RESEARCH_ENDPOINT = 'https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev/v2/research';
+export const DEFAULT_FEEDBACK_ENDPOINT = 'https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev/v2/feedback';
 
 const COPY = {
   ru: {
@@ -6,6 +7,9 @@ const COPY = {
     networkUnavailable: 'Сетевой запрос недоступен.',
     invalidResponse: 'Сервер вернул некорректный ответ.',
     unavailable: 'Исследовательский агент временно недоступен.',
+    feedbackUnavailable: 'Не удалось отправить оценку. Клинический ответ сохранён на экране.',
+    feedbackThanks: 'Спасибо. Оценка принята.',
+    feedbackChoose: 'Отметьте, что именно требует исправления.',
     sourceAria: (id) => `Источник ${id}`,
     noManagement: 'Безопасно конкретизировать схему по найденным данным не удалось. Используйте клинический вывод и оригинальные источники ниже.',
     regimen: ['Препарат / вмешательство', 'Доза / концентрация', 'Частота', 'Длительность'],
@@ -36,6 +40,9 @@ const COPY = {
     networkUnavailable: 'Network request is unavailable.',
     invalidResponse: 'The server returned an invalid response.',
     unavailable: 'The research agent is temporarily unavailable.',
+    feedbackUnavailable: 'The rating could not be sent. The clinical answer remains available on screen.',
+    feedbackThanks: 'Thank you. Your rating was recorded.',
+    feedbackChoose: 'Select what needs correction.',
     sourceAria: (id) => `Source ${id}`,
     noManagement: 'The retrieved evidence does not support a safe specific regimen. Use the clinical bottom line and original sources below.',
     regimen: ['Drug / procedure', 'Dose / concentration', 'Frequency', 'Duration'],
@@ -122,6 +129,30 @@ export async function requestResearch(question, language = 'ru', options = {}) {
     throw new Error(message);
   }
   return payload.result;
+}
+
+export async function requestFeedback(runId, feedback = {}, options = {}) {
+  const id = clean(runId);
+  if (!id) throw new Error('Feedback run ID is required.');
+  const fetchImpl = options.fetchImpl || globalThis.fetch;
+  if (typeof fetchImpl !== 'function') throw new Error('Network request is unavailable.');
+  const endpoint = options.endpoint || DEFAULT_FEEDBACK_ENDPOINT;
+  const response = await fetchImpl(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      schemaVersion: '2.0',
+      runId: id,
+      rating: clean(feedback.rating),
+      errorTags: Array.isArray(feedback.errorTags) ? feedback.errorTags.map(clean).filter(Boolean) : [],
+      comment: clean(feedback.comment)
+    })
+  });
+  let payload;
+  try { payload = await response.json(); }
+  catch { throw new Error('Invalid feedback response.'); }
+  if (!response.ok || !payload?.ok || !payload.feedback_id) throw new Error('Feedback unavailable.');
+  return payload;
 }
 
 function citationList(ids, target, copy) {
@@ -280,6 +311,34 @@ function statusText(status, copy) {
   return copy.received;
 }
 
+function resetFeedback(root = document) {
+  const shell = root.querySelector('[data-v2-feedback-shell]');
+  const details = root.querySelector('[data-v2-feedback-details]');
+  const status = root.querySelector('[data-v2-feedback-status]');
+  const comment = root.querySelector('[data-v2-feedback-comment]');
+  if (shell) {
+    shell.hidden = true;
+    delete shell.dataset.runId;
+  }
+  if (details) details.hidden = true;
+  if (status) {
+    status.textContent = '';
+    status.dataset.state = 'idle';
+  }
+  if (comment) comment.value = '';
+  root.querySelectorAll('[data-v2-feedback-tag]').forEach((input) => { input.checked = false; });
+  root.querySelectorAll('[data-v2-feedback-helpful], [data-v2-feedback-problem], [data-v2-feedback-submit]').forEach((button) => { button.disabled = false; });
+}
+
+function prepareFeedback(runId, root = document) {
+  resetFeedback(root);
+  const id = clean(runId);
+  const shell = root.querySelector('[data-v2-feedback-shell]');
+  if (!id || !shell) return;
+  shell.dataset.runId = id;
+  shell.hidden = false;
+}
+
 export function renderResearchResult(result, root = document) {
   const lang = currentLanguage(root);
   const copy = copyFor(lang);
@@ -296,6 +355,7 @@ export function renderResearchResult(result, root = document) {
   renderManagement(answer.management, root.querySelector('[data-v2-management]'), copy);
   renderImportant(answer, root.querySelector('[data-v2-important]'), copy);
   renderSources(answer.sources, root.querySelector('[data-v2-sources]'), copy);
+  prepareFeedback(result?.run_id, root);
 
   const status = root.querySelector('[data-v2-status]');
   if (status) {
@@ -310,16 +370,66 @@ function initResearchUi() {
   const button = document.querySelector('[data-v2-submit]');
   const status = document.querySelector('[data-v2-status]');
   const shell = document.querySelector('[data-v2-answer-shell]');
+  const feedbackShell = document.querySelector('[data-v2-feedback-shell]');
+  const feedbackDetails = document.querySelector('[data-v2-feedback-details]');
+  const helpfulButton = document.querySelector('[data-v2-feedback-helpful]');
+  const problemButton = document.querySelector('[data-v2-feedback-problem]');
+  const feedbackSubmit = document.querySelector('[data-v2-feedback-submit]');
+  const feedbackStatus = document.querySelector('[data-v2-feedback-status]');
+  const feedbackComment = document.querySelector('[data-v2-feedback-comment]');
   if (!form || !input || !button || !status) return;
 
   const lang = currentLanguage();
   const copy = copyFor(lang);
   let lastSubmittedQuestion = '';
 
+  async function submitFeedback(feedback) {
+    const runId = clean(feedbackShell?.dataset?.runId);
+    if (!runId || !feedbackStatus) return;
+    const controls = [helpfulButton, problemButton, feedbackSubmit].filter(Boolean);
+    controls.forEach((control) => { control.disabled = true; });
+    feedbackStatus.textContent = '';
+    feedbackStatus.dataset.state = 'loading';
+    try {
+      await requestFeedback(runId, feedback);
+      feedbackStatus.textContent = copy.feedbackThanks;
+      feedbackStatus.dataset.state = 'ready';
+      if (feedbackDetails) feedbackDetails.hidden = true;
+    } catch {
+      feedbackStatus.textContent = copy.feedbackUnavailable;
+      feedbackStatus.dataset.state = 'error';
+      controls.forEach((control) => { control.disabled = false; });
+    }
+  }
+
+  helpfulButton?.addEventListener('click', () => {
+    submitFeedback({ rating: 'helpful', errorTags: [], comment: '' });
+  });
+
+  problemButton?.addEventListener('click', () => {
+    if (feedbackDetails) feedbackDetails.hidden = false;
+    if (feedbackStatus) {
+      feedbackStatus.textContent = copy.feedbackChoose;
+      feedbackStatus.dataset.state = 'idle';
+    }
+  });
+
+  feedbackSubmit?.addEventListener('click', () => {
+    const errorTags = Array.from(document.querySelectorAll('[data-v2-feedback-tag]:checked'))
+      .map((node) => clean(node.value))
+      .filter(Boolean);
+    submitFeedback({
+      rating: 'problem',
+      errorTags,
+      comment: clean(feedbackComment?.value)
+    });
+  });
+
   input.addEventListener('input', () => {
     const current = clean(input.value);
     if (lastSubmittedQuestion && current !== lastSubmittedQuestion) {
       if (shell) shell.hidden = true;
+      resetFeedback(document);
       status.textContent = copy.prompt;
       status.dataset.state = 'idle';
     }
@@ -336,6 +446,7 @@ function initResearchUi() {
     }
     lastSubmittedQuestion = question;
     if (shell) shell.hidden = true;
+    resetFeedback(document);
     button.disabled = true;
     status.textContent = copy.loading;
     status.dataset.state = 'loading';
