@@ -5,6 +5,7 @@ on:
     paths:
       - '_worker.js'
       - 'wrangler.jsonc'
+      - '.assetsignore'
       - 'migrations/**'
       - 'for-doctors/ophthasearch/**'
       - 'for-doctors/ophthasearch-v2/**'
@@ -19,6 +20,7 @@ on:
     paths:
       - '_worker.js'
       - 'wrangler.jsonc'
+      - '.assetsignore'
       - 'migrations/**'
       - 'for-doctors/ophthasearch/**'
       - 'for-doctors/ophthasearch-v2/**'
