@@ -52,5 +52,5 @@ test('D1 dataset canary is isolated from the production Worker and validates per
   assert.match(workflow, /\/v2\/feedback/);
   assert.match(workflow, /question_storage_state/);
   assert.match(workflow, /metadata_only/);
-  assert.match(workflow, /answer_json IS NULL/);
+  assert.match(workflow, /sensitive\.answer_json\s*!==\s*null/);
 });
