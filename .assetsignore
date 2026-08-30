@@ -6,3 +6,4 @@ workers/**
 tests/**
 node_modules/**
 .wrangler/**
+for-doctors/iol-dislocation/assets/pupillary-capture.mp4
