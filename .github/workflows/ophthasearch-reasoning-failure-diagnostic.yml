@@ -1,0 +1,58 @@
+name: OphthaSearch Reasoning Failure Diagnostic
+
+on:
+  push:
+    branches:
+      - feature/ophthasearch-dataset-foundation-20260829
+    paths:
+      - '.github/workflows/ophthasearch-reasoning-failure-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    strategy:
+      fail-fast: false
+      matrix:
+        case: [G5, R4, C1, K2]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CASE_ID: ${{ matrix.case }}
+    steps:
+      - name: Reproduce one reasoning path
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const cases = {
+            G5: { language:'ru', question:'Тактика лечения глаукомы нормального давления при прогрессировании поля зрения' },
+            R4: { language:'ru', question:'Когда показана операция при эпиретинальной мембране и метаморфопсиях?' },
+            C1: { language:'ru', question:'Фемтосекундная лазерная хирургия катаракты или стандартная факоэмульсификация: есть ли клиническое преимущество?' },
+            K2: { language:'en', question:'Natamycin versus voriconazole for fungal keratitis' }
+          };
+          const item = cases[process.env.CASE_ID];
+          const started = Date.now();
+          const response = await fetch('https://matveyshemyakin-ophthasearch-dataset-canary.matvei-shemyakin.workers.dev/v2/research', {
+            method:'POST',
+            headers:{ Origin:'https://matveyshemyakin.ru', 'Content-Type':'application/json' },
+            body:JSON.stringify({ schemaVersion:'2.0', language:item.language, question:item.question, mode:'standard', filters:{} }),
+            signal:AbortSignal.timeout(90000)
+          });
+          const body = await response.json();
+          const result = body?.result || {};
+          const adapters = Array.isArray(result?.diagnostics?.adapters) ? result.diagnostics.adapters : [];
+          console.log(JSON.stringify({
+            id:process.env.CASE_ID,
+            http:response.status,
+            ok:body?.ok === true,
+            status:result.status || null,
+            latency_ms:Date.now()-started,
+            source_count:Number(result?.diagnostics?.sourceCount || 0),
+            intent:result.intent || null,
+            reasoning:adapters.filter((x) => x?.trackId === 'reasoning' || x?.adapter === 'workers-ai'),
+            run_id_present:Boolean(result.run_id)
+          }, null, 2));
+          NODE
