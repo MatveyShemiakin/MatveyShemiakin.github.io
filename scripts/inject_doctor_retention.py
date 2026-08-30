@@ -8,7 +8,7 @@ CSS_LINK = '<link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=202
 JS_SCRIPT = '<script defer src="/for-doctors/doctor-retention.js?v=20260825-1"></script>'
 START = '<!-- doctor-retention:start -->'
 END = '<!-- doctor-retention:end -->'
-SERVICE_SLUGS = {'updates'}
+SERVICE_SLUGS = {'updates', 'ophtha-arcade'}
 
 
 def is_material_slug(slug: str) -> bool:
