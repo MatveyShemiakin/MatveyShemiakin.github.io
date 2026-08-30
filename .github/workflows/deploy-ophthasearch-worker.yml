@@ -13,6 +13,7 @@ on:
       - 'workers/ophthasearch-v2/**'
       - 'workers/ophtha-merge/**'
       - 'for-doctors/ophtha-arcade/**'
+      - 'tests/ophtha-merge-v2.test.mjs'
       - '.github/workflows/deploy-ophthasearch-worker.yml'
 
 permissions:
@@ -37,6 +38,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+
+      - name: Run Ophtha Merge regression tests
+        run: node --test tests/ophtha-merge-v2.test.mjs
 
       - name: Check Cloudflare deployment secrets
         shell: bash
