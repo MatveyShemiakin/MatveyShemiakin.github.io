@@ -33,17 +33,17 @@
   },
   {
     "id": "ophtha-arcade",
-    "event_id": "ophtha-arcade:2",
+    "event_id": "ophtha-arcade:3",
     "published": "2026-08-30",
     "updated": "2026-08-30",
-    "revision": 2,
+    "revision": 3,
     "kind": "updated",
     "title": "Ophtha Arcade",
     "title_en": "Ophtha Arcade",
     "description": "Ophtha Arcade — короткие браузерные игры для офтальмологов. Начните с Ophtha Merge.",
-    "description_en": "Ophtha Arcade — короткие браузерные игры для офтальмологов. Начните с Ophtha Merge.",
+    "description_en": "Ophtha Arcade — short browser games for ophthalmologists. Start with Ophtha Merge.",
     "url": "/for-doctors/ophtha-arcade/",
-    "url_en": "",
+    "url_en": "/en/for-doctors/ophtha-arcade/",
     "topics": []
   },
   {
