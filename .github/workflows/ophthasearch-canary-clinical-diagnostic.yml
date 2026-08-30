@@ -1,0 +1,52 @@
+name: OphthaSearch Canary Clinical Diagnostic
+
+on:
+  push:
+    branches:
+      - feature/ophthasearch-dataset-foundation-20260829
+    paths:
+      - '.github/workflows/ophthasearch-canary-clinical-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Diagnose latanoprost versus timolol synthesis
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint='https://matveyshemyakin-ophthasearch-dataset-canary.matvei-shemyakin.workers.dev/v2/research'
+          payload='{"schemaVersion":"2.0","language":"ru","question":"Есть ли преимущество латанопроста перед тимололом при первичной открытоугольной глаукоме?","mode":"standard","filters":{}}'
+          start="$(date +%s)"
+          curl --fail-with-body --silent --show-error --max-time 150 \
+            -H 'Origin: https://matveyshemyakin.ru' \
+            -H 'Content-Type: application/json' \
+            -X POST --data "$payload" "$endpoint" > /tmp/response.json
+          end="$(date +%s)"
+          LATENCY="$((end-start))" node <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/response.json', 'utf8'));
+          const result = body?.result || {};
+          const adapters = Array.isArray(result?.diagnostics?.adapters) ? result.diagnostics.adapters : [];
+          const reasoning = adapters.filter((entry) => entry?.trackId === 'reasoning' || entry?.adapter === 'workers-ai');
+          const sourceIds = Array.isArray(result?.answer?.sources) ? result.answer.sources.map((s) => s?.source_id).filter(Boolean) : [];
+          console.log(JSON.stringify({
+            ok: body?.ok === true,
+            status: result.status || null,
+            run_id_present: Boolean(result.run_id),
+            latency_seconds: Number(process.env.LATENCY),
+            intent: result.intent || null,
+            source_count: Number(result?.diagnostics?.sourceCount || 0),
+            reasoning,
+            storage: result?.diagnostics?.storage || null,
+            bottom_line_present: Boolean(String(result?.answer?.clinical_bottom_line || '').trim()),
+            bottom_line_citations: Array.isArray(result?.answer?.bottom_line_citations) ? result.answer.bottom_line_citations : [],
+            answer_source_ids: sourceIds
+          }, null, 2));
+          if (body?.ok !== true) process.exit(1);
+          NODE
