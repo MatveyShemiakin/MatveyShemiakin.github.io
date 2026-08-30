@@ -45,7 +45,7 @@ test('D1 dataset canary is isolated from the production Worker and validates per
   assert.match(workflow, /d1 list --json/);
   assert.match(workflow, /d1 create[^\n]*--jurisdiction[= ]eu/);
   assert.match(workflow, /d1 migrations apply[^\n]*--remote/);
-  assert.match(workflow, /"binding"\s*:\s*"OPHTHASEARCH_DB"/);
+  assert.match(workflow, /binding\s*:\s*['"]OPHTHASEARCH_DB['"]/);
   assert.match(workflow, /OPHTHASEARCH_DATASET_HASH_KEY/);
   assert.match(workflow, /secret put OPHTHASEARCH_DATASET_HASH_KEY/);
   assert.match(workflow, /\/v2\/research/);
