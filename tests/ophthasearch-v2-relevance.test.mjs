@@ -129,3 +129,22 @@ test('Yamane evidence stays relevant for a dislocated-IOL comparison', () => {
   assert.ok(scoreMedicalRelevance(paper, intent) >= 0.45);
   assert.equal(filterRelevantDocuments([paper], intent).length, 1);
 });
+
+test('secondary-IOL fixation literature can support a dislocation comparison without lowering threshold', () => {
+  const intent = {
+    domain: 'lens-iol',
+    condition: 'intraocular lens dislocation',
+    question_type: 'comparison',
+    interventions: ['Yamane fixation'],
+    comparators: ['sutured scleral fixation'],
+    outcomes: [],
+    modifiers: []
+  };
+  const paper = {
+    title: 'Scleral Fixated Secondary IOLs: Comparative Outcomes of Yamane and Gore-Tex-Sutured Techniques',
+    abstract_or_summary: 'Secondary intraocular lens implantation with flanged intrascleral fixation and Gore-Tex sutured scleral fixation was compared for visual and postoperative outcomes.'
+  };
+
+  assert.ok(scoreMedicalRelevance(paper, intent) >= 0.45);
+  assert.equal(filterRelevantDocuments([paper], intent).length, 1);
+});
