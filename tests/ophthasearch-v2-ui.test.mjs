@@ -7,6 +7,7 @@ import { requestResearch, DEFAULT_RESEARCH_ENDPOINT } from '../for-doctors/ophth
 const pagePath = new URL('../for-doctors/ophthasearch-v2/index.html', import.meta.url);
 const clientPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.js', import.meta.url);
 const cssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.css', import.meta.url);
+const modernCssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2-modern.css', import.meta.url);
 const workerEndpoint = 'https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev/v2/research';
 
 test('OphthaSearch page prioritizes clinical conclusion and hides pipeline internals', async () => {
@@ -63,4 +64,16 @@ test('stylesheet guards mobile viewport against long identifiers', async () => {
   const css = await fs.readFile(cssPath, 'utf8');
   assert.match(css, /overflow-wrap:\s*anywhere/);
   assert.match(css, /@media\s*\(max-width:\s*760px\)/);
+});
+
+test('mobile clinical composer clears the persistent bottom navigation', async () => {
+  const css = await fs.readFile(modernCssPath, 'utf8');
+  assert.match(css, /\.ophtha-v2-composer-wrap\{[^}]*position:fixed[^}]*bottom:calc\(104px \+ env\(safe-area-inset-bottom\)\)/s);
+});
+
+test('OphthaSearch header controls inherit theme-aware foreground colors', async () => {
+  const css = await fs.readFile(modernCssPath, 'utf8');
+  assert.match(css, /\.ophtha-v2-page \.monogram\{[^}]*color:var\(--site-theme-text\)/s);
+  assert.match(css, /\.ophtha-v2-page \.doctors-updates-toggle\{[^}]*color:var\(--site-theme-text\)/s);
+  assert.match(css, /\.ophtha-v2-page \.site-theme-toggle\{[^}]*color:var\(--site-theme-text\)/s);
 });
