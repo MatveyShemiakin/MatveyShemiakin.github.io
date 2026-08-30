@@ -1,13 +1,16 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <script src="/analytics.js?v=20260811-2"></script><script type="application/ld+json" data-yandex-content-analytics="true">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://matveyshemyakin.ru/for-doctors/","name":"Для врачей"}},{"@type":"ListItem","position":2,"item":{"@id":"https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/","name":"Ophtha Merge"}}]},{"@type":"Article","@id":"https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/#content-material","url":"https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/#content-material","headline":"Ophtha Merge","mainEntityOfPage":"https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/","inLanguage":"ru","author":{"@type":"Person","@id":"https://matveyshemyakin.ru/#person","name":"Матвей Юрьевич Шемякин"},"about":[{"@type":"MedicalCondition","name":"Ophtha Merge"},{"@type":"Thing","name":"Офтальмология"}]}]}</script>
+  <script src="/analytics.js?v=20260811-2"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Ophtha Merge — Ophtha Arcade | Матвей Шемякин</title>
   <meta name="description" content="Ophtha Merge — короткая браузерная игра для офтальмологов на основе механики объединения плиток.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/">
+  <link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/">
+  <link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/for-doctors/ophtha-arcade/ophtha-merge/">
+  <link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/mobile-fix.css?v=20260806-3">
@@ -16,16 +19,21 @@
   <link rel="stylesheet" href="/site-theme.css?v=20260806-1">
   <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
   <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">
-  <link rel="stylesheet" href="./ophtha-merge.css?v=20260830-2">
+  <link rel="stylesheet" href="../arcade-shell.css?v=20260830-1">
+  <link rel="stylesheet" href="./ophtha-merge.css?v=20260830-3">
 </head>
 <body class="ophtha-merge-page">
-  <header class="ophtha-merge-header">
-    <div class="container ophtha-merge-nav">
+  <header class="doctors-header">
+    <div class="container doctors-nav">
       <a class="monogram" href="/" aria-label="На главную">МШ</a>
-      <nav class="ophtha-merge-nav-links" aria-label="Навигация Ophtha Arcade">
-        <a href="/for-doctors/">← Для врачей</a>
-        <a href="/for-doctors/ophtha-arcade/">Ophtha Arcade</a>
-      </nav>
+      <div class="doctors-nav-actions">
+        <a class="ophtha-arcade-shell-link" href="/for-doctors/ophtha-arcade/">← Ophtha Arcade</a>
+        <a href="/for-doctors/">Для врачей</a>
+        <div class="doctors-language" aria-label="Язык раздела">
+          <a class="active" href="/for-doctors/ophtha-arcade/ophtha-merge/" lang="ru" hreflang="ru" aria-current="page">RU</a>
+          <a href="/en/for-doctors/ophtha-arcade/ophtha-merge/" lang="en" hreflang="en">EN</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -83,7 +91,7 @@
         </div>
 
         <aside class="ophtha-merge-sidebar" aria-label="Прогресс и рейтинг">
-          <section class="ophtha-merge-panel">
+          <section class="ophtha-merge-panel" id="ranking">
             <div class="ophtha-merge-panel-head"><div><p class="section-kicker dark-kicker">Онлайн</p><h2>Глобальный рейтинг</h2></div><span class="ophtha-merge-live-dot" aria-hidden="true"></span></div>
             <ol class="ophtha-merge-leaderboard-preview" id="leaderboard-preview" aria-live="polite">
               <li class="ophtha-merge-loading">Загрузка рейтинга…</li>
@@ -93,8 +101,8 @@
 
           <section class="ophtha-merge-panel">
             <p class="section-kicker dark-kicker">Ваш профиль</p>
-            <h2 id="profile-name">Доктор</h2>
-            <p class="ophtha-merge-profile-copy">Псевдоним хранится в этом браузере. Регистрация не требуется.</p>
+            <div class="ophtha-merge-profile-name-row"><h2 id="profile-name">Доктор</h2><span class="ophtha-merge-player-level ophtha-merge-profile-level" id="profile-level">Resident</span></div>
+            <p class="ophtha-merge-profile-copy">Уровень растёт вместе с вашим личным рекордом. Псевдоним хранится в этом браузере.</p>
             <button class="button secondary" id="edit-profile-button" type="button">Изменить имя</button>
           </section>
 
@@ -145,9 +153,13 @@
 
   <button class="ophtha-merge-settings-fab" id="settings-button" type="button" aria-label="Настройки игры">⚙</button>
 
-  <script type="module" src="./app.js?v=20260830-2"></script>
+  <footer class="site-footer"><div class="container footer-row"><span>МШ</span><p>Матвей Юрьевич Шемякин · врач-офтальмолог · офтальмохирург</p></div></footer>
+  <script type="module" src="./app.js?v=20260830-3"></script>
   <script src="/site-theme.js?v=20260806-1" defer></script>
   <script src="/site-motion.js?v=20260806-1" defer></script>
   <script src="/mobile-nav.js?v=20260806-3" defer></script>
-<script src="/legal.js?v=20260721-3"></script><script src="/doctors-legal.js?v=20260816-2"></script><script defer src="/site-mega-nav.js?v=20260816-2"></script></body>
+  <script src="/legal.js?v=20260721-3"></script>
+  <script src="/doctors-legal.js?v=20260816-2"></script>
+  <script defer src="/site-mega-nav.js?v=20260816-2"></script>
+</body>
 </html>
