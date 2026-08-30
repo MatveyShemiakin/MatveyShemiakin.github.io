@@ -58,8 +58,9 @@ class DoctorRetentionInjectorTests(unittest.TestCase):
         self.assertIn('id="keep-me"', result)
         self.assertIn('Клинический текст', result)
 
-    def test_updates_service_slug_is_not_a_material_target(self):
+    def test_service_slugs_are_not_material_targets(self):
         self.assertFalse(self.module.is_material_slug('updates'))
+        self.assertFalse(self.module.is_material_slug('ophtha-arcade'))
         self.assertTrue(self.module.is_material_slug('bacterial-keratitis'))
 
 
