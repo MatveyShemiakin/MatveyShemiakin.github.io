@@ -43,10 +43,38 @@ const GENERIC_INTERVENTIONS = new Set([
   'surgical management', 'treatment', 'therapy'
 ]);
 
+const CONDITION_ALIASES = new Map([
+  ['intraocular lens dislocation', [
+    'intraocular lens dislocation', 'iol dislocation', 'dislocated intraocular lens',
+    'dislocated iol', 'subluxated intraocular lens', 'subluxated iol'
+  ]],
+  ['neovascular age-related macular degeneration', [
+    'neovascular age-related macular degeneration', 'neovascular amd', 'namd', 'wet amd'
+  ]],
+  ['diabetic macular edema', [
+    'diabetic macular edema', 'diabetic macular oedema', 'dme'
+  ]],
+  ['retinal vein occlusion', [
+    'retinal vein occlusion', 'rvo', 'central retinal vein occlusion', 'crvo',
+    'branch retinal vein occlusion', 'brvo'
+  ]],
+  ['fungal keratitis', ['fungal keratitis', 'mycotic keratitis']],
+  ['bacterial keratitis', ['bacterial keratitis', 'microbial keratitis']]
+]);
+
 const GLAUCOMA_TERMS = ['glaucoma', 'primary open-angle glaucoma', 'open-angle glaucoma', 'poag', 'глауком', 'поуг'];
 const RETINAL_DETACHMENT_TERMS = ['retinal detachment', 'rhegmatogenous retinal detachment', 'rrd', 'отслойка сетчатки'];
 const MACULAR_HOLE_TERMS = ['macular hole', 'full-thickness macular hole', 'ftmh', 'макулярный разрыв'];
 const ERM_TERMS = ['epiretinal membrane', 'erm', 'эпиретинальная мембрана', 'эпиретинальный фиброз'];
+const IOL_DISLOCATION_TERMS = CONDITION_ALIASES.get('intraocular lens dislocation');
+
+function conditionMatchScore(text, condition) {
+  const normalized = normalizeText(condition);
+  if (!normalized) return 0;
+  if (containsPhrase(text, normalized)) return 0.55;
+  const aliases = CONDITION_ALIASES.get(normalized) || [];
+  return containsAny(text, aliases) ? 0.55 : 0;
+}
 
 function competingDomainPenalty(text, intent) {
   const target = normalizeText([intent?.domain, intent?.condition].filter(Boolean).join(' '));
@@ -54,7 +82,8 @@ function competingDomainPenalty(text, intent) {
     { terms: GLAUCOMA_TERMS, targetTerms: GLAUCOMA_TERMS },
     { terms: RETINAL_DETACHMENT_TERMS, targetTerms: RETINAL_DETACHMENT_TERMS },
     { terms: MACULAR_HOLE_TERMS, targetTerms: MACULAR_HOLE_TERMS },
-    { terms: ERM_TERMS, targetTerms: ERM_TERMS }
+    { terms: ERM_TERMS, targetTerms: ERM_TERMS },
+    { terms: IOL_DISLOCATION_TERMS, targetTerms: IOL_DISLOCATION_TERMS }
   ];
 
   let penalty = 0;
@@ -140,9 +169,8 @@ export function scoreMedicalRelevance(document = {}, intent = {}) {
   const domain = normalizeText(intent.domain);
   let score = 0;
 
-  if (condition && containsPhrase(text, condition)) {
-    score += 0.55;
-  } else if (condition && domain && condition.includes(domain) && containsPhrase(text, domain)) {
+  score += conditionMatchScore(text, condition);
+  if (!conditionMatchScore(text, condition) && condition && domain && condition.includes(domain) && containsPhrase(text, domain)) {
     score += 0.15;
   }
 
