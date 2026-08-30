@@ -1,0 +1,43 @@
+name: Patch OphthaSearch antibiotic aliases
+
+on:
+  push:
+    branches:
+      - feature/ophthasearch-dataset-foundation-20260829
+    paths:
+      - '.github/workflows/patch-ophthasearch-antibiotic-aliases.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/ophthasearch-dataset-foundation-20260829
+      - name: Apply exact intervention aliases
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          path = Path('workers/ophthasearch-v2/query-interpreter.js')
+          text = path.read_text()
+          needle = "  ['voriconazole', ['voriconazole', 'вориконазол']],\n"
+          replacement = needle + "  ['fluoroquinolone monotherapy', ['fluoroquinolone monotherapy', 'fluoroquinolone', 'фторхинолон в монотерапии', 'фторхинолон']],\n  ['fortified antibiotics', ['fortified antibiotics', 'fortified antibiotic', 'фортифицированные антибиотики', 'фортифицированные антибиотик']],\n"
+          if "['fluoroquinolone monotherapy'" not in text:
+              if needle not in text:
+                  raise SystemExit('expected voriconazole anchor not found')
+              text = text.replace(needle, replacement, 1)
+          path.write_text(text)
+          PY
+      - name: Commit production patch and remove helper workflow
+        shell: bash
+        run: |
+          rm .github/workflows/patch-ophthasearch-antibiotic-aliases.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add workers/ophthasearch-v2/query-interpreter.js .github/workflows/patch-ophthasearch-antibiotic-aliases.yml
+          git commit -m 'fix: recognize antibiotic class comparisons'
+          git push origin HEAD:feature/ophthasearch-dataset-foundation-20260829
