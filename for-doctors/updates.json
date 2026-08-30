@@ -1,5 +1,37 @@
 [
   {
+    "id": "ophthasearch-v2",
+    "event_id": "ophthasearch-v2:3",
+    "published": "2026-08-25",
+    "updated": "2026-08-30",
+    "revision": 3,
+    "kind": "updated",
+    "title": "OphthaSearch",
+    "title_en": "OphthaSearch",
+    "description": "OphthaSearch помогает врачу найти релевантные офтальмологические публикации и получить краткий клинический вывод со ссылками на источники.",
+    "description_en": "OphthaSearch помогает врачу найти релевантные офтальмологические публикации и получить краткий клинический вывод со ссылками на источники.",
+    "url": "/for-doctors/ophthasearch-v2/",
+    "url_en": "",
+    "topics": []
+  },
+  {
+    "id": "ophthasearch",
+    "event_id": "ophthasearch:6",
+    "published": "2026-08-16",
+    "updated": "2026-08-30",
+    "revision": 6,
+    "kind": "updated",
+    "title": "OphthaSearch",
+    "title_en": "OphthaSearch",
+    "description": "OphthaSearch помогает офтальмологу находить релевантные научные данные и получать краткий клинический вывод со ссылками на первичные источники.",
+    "description_en": "OphthaSearch helps ophthalmologists retrieve relevant evidence and obtain a concise clinical synthesis linked to original sources.",
+    "url": "/for-doctors/ophthasearch/",
+    "url_en": "/en/for-doctors/ophthasearch/",
+    "topics": [
+      "research"
+    ]
+  },
+  {
     "id": "iol-dislocation",
     "event_id": "iol-dislocation:4",
     "published": "2026-08-25",
@@ -13,38 +45,6 @@
     "url": "/for-doctors/iol-dislocation/",
     "url_en": "/en/for-doctors/iol-dislocation/",
     "topics": []
-  },
-  {
-    "id": "ophthasearch-v2",
-    "event_id": "ophthasearch-v2:2",
-    "published": "2026-08-25",
-    "updated": "2026-08-25",
-    "revision": 2,
-    "kind": "updated",
-    "title": "OphthaSearch",
-    "title_en": "OphthaSearch",
-    "description": "OphthaSearch помогает врачу найти релевантные офтальмологические публикации и получить единый клинический вывод со ссылками на источники.",
-    "description_en": "OphthaSearch помогает врачу найти релевантные офтальмологические публикации и получить единый клинический вывод со ссылками на источники.",
-    "url": "/for-doctors/ophthasearch-v2/",
-    "url_en": "",
-    "topics": []
-  },
-  {
-    "id": "ophthasearch",
-    "event_id": "ophthasearch:5",
-    "published": "2026-08-16",
-    "updated": "2026-08-25",
-    "revision": 5,
-    "kind": "updated",
-    "title": "OphthaSearch",
-    "title_en": "OphthaSearch",
-    "description": "OphthaSearch — профессиональный поиск для офтальмологов: релевантные публикации, клинические исследования, рекомендации и единый проверяемый клинический вывод.",
-    "description_en": "OphthaSearch is a professional ophthalmology research tool that retrieves relevant publications, trials and guidance and returns a verifiable clinical synthesis.",
-    "url": "/for-doctors/ophthasearch/",
-    "url_en": "/en/for-doctors/ophthasearch/",
-    "topics": [
-      "research"
-    ]
   },
   {
     "id": "penetrating-keratoplasty",
