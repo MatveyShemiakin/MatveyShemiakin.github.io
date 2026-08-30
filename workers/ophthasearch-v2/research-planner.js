@@ -28,6 +28,30 @@ function comparisonPhrase(intent = {}) {
   return '';
 }
 
+function isIolDislocation(intent = {}) {
+  return clean(intent.condition).toLowerCase() === 'intraocular lens dislocation';
+}
+
+function applyIolRetrievalQueries(tracks, intent = {}) {
+  if (!isIolDislocation(intent)) return;
+  const byId = new Map(tracks.map((track) => [track.id, track]));
+  const comparison = clean(intent.question_type).toLowerCase() === 'comparison';
+  const yamaneRequested = [...(intent.interventions || []), ...(intent.comparators || [])]
+    .some((value) => /yamane|sutured scleral fixation/i.test(clean(value)));
+
+  const dislocationContext = '("intraocular lens dislocation" OR "dislocated intraocular lens" OR "dislocated IOL" OR "posterior lens dislocation" OR "secondary intraocular lens" OR "secondary IOL")';
+  const fixationContext = '("scleral fixation" OR "intrascleral fixation" OR "sutureless scleral fixation" OR "IOL repositioning" OR "IOL exchange")';
+  const yamaneComparison = '(Yamane OR "flanged intrascleral fixation" OR "sutureless scleral fixation") ("sutured scleral fixation" OR "scleral-sutured IOL" OR "Gore-Tex")';
+  const requested = comparison && yamaneRequested ? yamaneComparison : `${dislocationContext} ${fixationContext}`;
+
+  byId.get('efficacy').query = `${requested} outcomes comparative study systematic review`;
+  byId.get('safety').query = `${requested} complications safety adverse outcomes`;
+  byId.get('alternatives').query = `${dislocationContext} (repositioning OR exchange OR "scleral fixation" OR "iris fixation")`;
+  byId.get('monitoring-escalation').query = `${dislocationContext} postoperative outcomes complications follow-up`;
+  byId.get('pivotal-evidence').query = `${requested} review meta-analysis`;
+  byId.get('ongoing-trials').query = `${dislocationContext} fixation`;
+}
+
 export function buildResearchPlan(intent = {}) {
   const condition = clean(intent.condition || intent.domain || 'ophthalmic condition');
   const treatment = treatmentLabel(intent);
@@ -98,5 +122,6 @@ export function buildResearchPlan(intent = {}) {
     byId.get('ongoing-trials').query = `${condition} pharmacological therapy`;
   }
 
+  applyIolRetrievalQueries(tracks, intent);
   return tracks;
 }
