@@ -1,0 +1,117 @@
+name: OphthaSearch 20-Case Canary Acceptance
+
+on:
+  push:
+    branches:
+      - feature/ophthasearch-dataset-foundation-20260829
+    paths:
+      - '.github/workflows/ophthasearch-20-case-canary.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SHARD: ${{ matrix.shard }}
+      ENDPOINT: https://matveyshemyakin-ophthasearch-dataset-canary.matvei-shemyakin.workers.dev/v2/research
+      ORIGIN: https://matveyshemyakin.ru
+      LATENCY_BUDGET_MS: '35000'
+    steps:
+      - name: Run five live ophthalmology cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const shard = Number(process.env.SHARD);
+          const endpoint = process.env.ENDPOINT;
+          const origin = process.env.ORIGIN;
+          const latencyBudget = Number(process.env.LATENCY_BUDGET_MS || 35000);
+          const cases = [
+            { id:'G1', q:'Есть ли преимущество латанопроста перед тимололом при первичной открытоугольной глаукоме?', type:'comparison', intent:/primary open-angle glaucoma/i },
+            { id:'G2', q:'SLT или латанопрост как стартовая терапия при первичной открытоугольной глаукоме?', type:'comparison', intent:/primary open-angle glaucoma/i },
+            { id:'G3', q:'Биматопрост или латанопрост: что эффективнее снижает ВГД при ПОУГ?', type:'comparison', intent:/primary open-angle glaucoma/i },
+            { id:'G4', q:'Дорзоламид или бринзоламид при ПОУГ: сравнительная эффективность и переносимость', type:'comparison', intent:/primary open-angle glaucoma/i },
+            { id:'G5', q:'Тактика лечения глаукомы нормального давления при прогрессировании поля зрения', type:'management', intent:/normal-tension glaucoma/i },
+            { id:'R1', q:'Тактика хирургического лечения регматогенной отслойки сетчатки', type:'surgery', intent:/retinal detachment/i },
+            { id:'R2', q:'Витрэктомия или эписклеральное пломбирование при первичной регматогенной отслойке сетчатки?', type:'comparison', intent:/retinal detachment/i },
+            { id:'R3', q:'Пневматическая ретинопексия или витрэктомия при неосложнённой регматогенной отслойке сетчатки?', type:'comparison', intent:/retinal detachment/i },
+            { id:'R4', q:'Когда показана операция при эпиретинальной мембране и метаморфопсиях?', type:'surgery', intent:/epiretinal membrane/i },
+            { id:'R5', q:'Inverted ILM flap vs conventional ILM peeling for full-thickness macular hole larger than 400 µm', type:'comparison', intent:/full-thickness macular hole/i, language:'en' },
+            { id:'I1', q:'Тактика хирургического лечения дислокации ИОЛ', type:'surgery', intent:/intraocular lens dislocation/i },
+            { id:'I2', q:'Yamane fixation versus sutured scleral fixation for dislocated intraocular lens', type:'comparison', intent:/intraocular lens dislocation/i, language:'en' },
+            { id:'C1', q:'Фемтосекундная лазерная хирургия катаракты или стандартная факоэмульсификация: есть ли клиническое преимущество?', type:'comparison', intent:/cataract/i },
+            { id:'G6', q:'MIGS versus trabeculectomy for primary open-angle glaucoma: efficacy and safety', type:'comparison', intent:/primary open-angle glaucoma/i, language:'en' },
+            { id:'K1', q:'Фторхинолон в монотерапии или фортифицированные антибиотики при бактериальном кератите?', type:'comparison', intent:/keratitis|bacterial/i },
+            { id:'K2', q:'Natamycin versus voriconazole for fungal keratitis', type:'comparison', intent:/keratitis|fungal/i, language:'en' },
+            { id:'U1', q:'Современная терапия острого переднего увеита у взрослого пациента', type:'therapy', intent:/uveitis/i },
+            { id:'M1', q:'Aflibercept versus ranibizumab for neovascular age-related macular degeneration', type:'comparison', intent:/macular degeneration|amd/i, language:'en' },
+            { id:'M2', q:'Faricimab versus aflibercept for diabetic macular edema', type:'comparison', intent:/diabetic macular edema|dme/i, language:'en' },
+            { id:'M3', q:'Bevacizumab versus aflibercept for macular edema due to retinal vein occlusion', type:'comparison', intent:/retinal vein occlusion|rvo/i, language:'en' }
+          ];
+
+          const selected = cases.filter((_, index) => index % 4 === shard);
+          const failures = [];
+          const results = [];
+
+          for (const item of selected) {
+            const started = Date.now();
+            let resultRow = { id: item.id, ok: false };
+            try {
+              const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: { Origin: origin, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ schemaVersion:'2.0', language:item.language || 'ru', question:item.q, mode:'standard', filters:{} }),
+                signal: AbortSignal.timeout(90000)
+              });
+              const latency = Date.now() - started;
+              const body = await response.json();
+              const result = body?.result || {};
+              const intentText = JSON.stringify(result.intent || {});
+              const citations = Array.isArray(result?.answer?.bottom_line_citations) ? result.answer.bottom_line_citations : [];
+              const bottomLine = String(result?.answer?.clinical_bottom_line || '').trim();
+              const sourceCount = Number(result?.diagnostics?.sourceCount || 0);
+              const issues = [];
+              if (!response.ok || body?.ok !== true) issues.push(`HTTP/API failure ${response.status}`);
+              if (result.status === 'evidence_only') issues.push('evidence_only');
+              if (!['complete','partial'].includes(result.status)) issues.push(`status=${result.status || 'missing'}`);
+              if (!/^[0-9a-f-]{36}$/i.test(String(result.run_id || ''))) issues.push('run_id missing');
+              if (!bottomLine) issues.push('clinical_bottom_line missing');
+              if (!citations.length) issues.push('verified bottom-line citations missing');
+              if (sourceCount < 1) issues.push('source_count < 1');
+              if (item.type && result?.intent?.question_type !== item.type) issues.push(`question_type=${result?.intent?.question_type || 'missing'}`);
+              if (item.intent && !item.intent.test(intentText)) issues.push(`intent mismatch: ${intentText}`);
+              if (result?.diagnostics?.storage?.status === 'rejected') issues.push(`storage rejected: ${result.diagnostics.storage.error || ''}`);
+              if (latency > latencyBudget) issues.push(`latency ${latency}ms > ${latencyBudget}ms`);
+              resultRow = {
+                id:item.id,
+                ok:issues.length === 0,
+                status:result.status || null,
+                latency_ms:latency,
+                source_count:sourceCount,
+                citations:citations.length,
+                run_id:Boolean(result.run_id),
+                question_type:result?.intent?.question_type || null,
+                condition:result?.intent?.condition || null,
+                issues
+              };
+              if (issues.length) failures.push(resultRow);
+            } catch (error) {
+              resultRow = { id:item.id, ok:false, latency_ms:Date.now()-started, issues:[String(error?.message || error)] };
+              failures.push(resultRow);
+            }
+            results.push(resultRow);
+            console.log(JSON.stringify(resultRow));
+          }
+
+          console.log('\nSHARD SUMMARY');
+          console.log(JSON.stringify({ shard, total:results.length, passed:results.length-failures.length, failed:failures.length, results }, null, 2));
+          if (failures.length) process.exit(1);
+          NODE
