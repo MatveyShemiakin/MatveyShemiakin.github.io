@@ -62,6 +62,19 @@ const CONDITION_ALIASES = new Map([
   ['bacterial keratitis', ['bacterial keratitis', 'microbial keratitis']]
 ]);
 
+const INTERVENTION_ALIASES = new Map([
+  ['yamane fixation', [
+    'yamane fixation', 'yamane technique', 'yamane', 'flanged intrascleral fixation',
+    'flanged haptic fixation', 'sutureless scleral fixation', 'double needle technique'
+  ]],
+  ['sutured scleral fixation', [
+    'sutured scleral fixation', 'scleral sutured fixation', 'scleral-sutured fixation',
+    'scleral-sutured iol', 'gore-tex', 'gore tex', 'polypropylene scleral fixation'
+  ]],
+  ['fluoroquinolone monotherapy', ['fluoroquinolone', 'fluoroquinolone monotherapy', 'фторхинолон']],
+  ['fortified antibiotics', ['fortified antibiotics', 'fortified antibiotic', 'фортифицированные антибиотики']]
+]);
+
 const GLAUCOMA_TERMS = ['glaucoma', 'primary open-angle glaucoma', 'open-angle glaucoma', 'poag', 'глауком', 'поуг'];
 const RETINAL_DETACHMENT_TERMS = ['retinal detachment', 'rhegmatogenous retinal detachment', 'rrd', 'отслойка сетчатки'];
 const MACULAR_HOLE_TERMS = ['macular hole', 'full-thickness macular hole', 'ftmh', 'макулярный разрыв'];
@@ -74,6 +87,15 @@ function conditionMatchScore(text, condition) {
   if (containsPhrase(text, normalized)) return 0.55;
   const aliases = CONDITION_ALIASES.get(normalized) || [];
   return containsAny(text, aliases) ? 0.55 : 0;
+}
+
+function interventionAliases(value) {
+  const normalized = normalizeText(value);
+  return [normalized, ...(INTERVENTION_ALIASES.get(normalized) || [])].filter(Boolean);
+}
+
+function interventionMatches(text, value) {
+  return containsAny(text, interventionAliases(value));
 }
 
 function competingDomainPenalty(text, intent) {
@@ -112,7 +134,7 @@ function interventionScore(text, interventions = []) {
   for (const intervention of interventions) {
     const normalized = normalizeText(intervention);
     if (!normalized) continue;
-    if (containsPhrase(text, normalized)) {
+    if (interventionMatches(text, normalized)) {
       score = Math.max(score, 0.22);
       continue;
     }
@@ -134,8 +156,8 @@ function namedTreatmentRelevance(text, intent = {}) {
   const comparators = specificTerms(intent.comparators || []);
   if (!interventions.length && !comparators.length) return 0;
 
-  const interventionMatch = interventions.some((value) => containsPhrase(text, value));
-  const comparatorMatch = comparators.some((value) => containsPhrase(text, value));
+  const interventionMatch = interventions.some((value) => interventionMatches(text, value));
+  const comparatorMatch = comparators.some((value) => interventionMatches(text, value));
   const isComparison = normalizeText(intent.question_type) === 'comparison' && interventions.length && comparators.length;
 
   if (isComparison) {
@@ -168,9 +190,10 @@ export function scoreMedicalRelevance(document = {}, intent = {}) {
   const condition = normalizeText(intent.condition);
   const domain = normalizeText(intent.domain);
   let score = 0;
+  const conditionScore = conditionMatchScore(text, condition);
 
-  score += conditionMatchScore(text, condition);
-  if (!conditionMatchScore(text, condition) && condition && domain && condition.includes(domain) && containsPhrase(text, domain)) {
+  score += conditionScore;
+  if (!conditionScore && condition && domain && condition.includes(domain) && containsPhrase(text, domain)) {
     score += 0.15;
   }
 
