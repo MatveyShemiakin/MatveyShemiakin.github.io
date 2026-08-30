@@ -1,4 +1,5 @@
 name: OphthaSearch 20-Case Canary Acceptance
+# Acceptance revision: bounded-synthesis-and-iol-retrieval
 
 on:
   push:
