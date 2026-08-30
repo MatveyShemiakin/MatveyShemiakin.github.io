@@ -11,6 +11,8 @@ on:
       - '.assetsignore'
       - 'workers/ophthasearch-ai/**'
       - 'workers/ophthasearch-v2/**'
+      - 'workers/ophtha-merge/**'
+      - 'for-doctors/ophtha-arcade/**'
       - '.github/workflows/deploy-ophthasearch-worker.yml'
 
 permissions:
@@ -49,6 +51,22 @@ jobs:
 
       - name: Deploy OphthaSearch Worker
         run: npx wrangler deploy --config wrangler.jsonc
+
+      - name: Verify Ophtha Merge leaderboard
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint='https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev/api/ophtha-merge/leaderboard?mode=classic&limit=5'
+          curl --fail-with-body --silent --show-error --max-time 30 \
+            -H 'Origin: https://matveyshemyakin.ru' \
+            "$endpoint" > /tmp/ophtha-merge-leaderboard.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/ophtha-merge-leaderboard.json', 'utf8'));
+          if (body?.ok !== true) throw new Error(`Leaderboard returned ok=${body?.ok}`);
+          if (!Array.isArray(body.entries)) throw new Error('Leaderboard entries are not an array');
+          console.log(`Ophtha Merge leaderboard online: ${body.entries.length} entries`);
+          NODE
 
       - name: Verify named comparison synthesis
         shell: bash
