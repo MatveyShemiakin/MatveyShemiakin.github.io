@@ -9,10 +9,11 @@ const css = fs.readFileSync(new URL('ophtha-merge.css', gameBase), 'utf8');
 const doctors = fs.readFileSync(new URL('../for-doctors/index.html', import.meta.url), 'utf8');
 
 test('mobile play zone owns swipe gestures instead of scrolling the page', () => {
-  assert.match(html, /class=["'][^"']*ophtha-merge-touch-zone[^"']*["'][^>]*id=["']game-play-zone["']/);
+  assert.match(html, /id=["']game-play-zone["']/);
+  assert.match(app, /classList\.add\(['"]ophtha-merge-touch-zone['"]\)/);
   assert.match(css, /\.ophtha-merge-touch-zone\{[^}]*touch-action:\s*none[^}]*overscroll-behavior:\s*contain/s);
   assert.match(app, /setPointerCapture\(/);
-  assert.match(app, /addEventListener\(['"]pointermove['"],\s*onPointerMove,\s*\{\s*passive:\s*false\s*\}\)/);
+  assert.match(app, /addEventListener\(['"]pointermove['"],\s*onPointerMove,\s*\{\s*capture:\s*true,\s*passive:\s*false\s*\}\)/);
   assert.match(app, /function onPointerMove[\s\S]*?preventDefault\(\)/);
 });
 
