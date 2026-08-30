@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { levelForScore } from '../for-doctors/ophtha-arcade/ophtha-merge/levels.js';
-import { tileLabel, uiText } from '../for-doctors/ophtha-arcade/ophtha-merge/i18n.js';
+import { parseFormattedInteger, tileLabel, uiText } from '../for-doctors/ophtha-arcade/ophtha-merge/i18n.js';
 
 test('career levels unlock from personal-best score', () => {
   assert.equal(levelForScore(0).name, 'Resident');
@@ -22,6 +22,12 @@ test('ophthalmology terminology is correct in Russian and localized in English',
   assert.equal(tileLabel(16, 'en'), 'Iris');
   assert.equal(uiText('profileLevel', 'ru'), 'Уровень');
   assert.equal(uiText('profileLevel', 'en'), 'Level');
+});
+
+test('localized tile numbers parse identically for icon selection', () => {
+  assert.equal(parseFormattedInteger('1,024'), 1024);
+  assert.equal(parseFormattedInteger('1\u00a0024'), 1024);
+  assert.equal(parseFormattedInteger('16'), 16);
 });
 
 test('RU Arcade landing uses standard shell and contains no injected material tools or MVP label', () => {
@@ -65,9 +71,7 @@ test('game runtime derives a visible level badge for profiles and leaderboard en
   assert.match(core, /ophtha-merge-player-level/);
 });
 
-test('tile icon level uses raw numeric data instead of localized formatted text', () => {
-  const core = fs.readFileSync(new URL('../for-doctors/ophtha-arcade/ophtha-merge/app-core.js', import.meta.url), 'utf8');
+test('tile icon level uses locale-safe integer parsing', () => {
   const app = fs.readFileSync(new URL('../for-doctors/ophtha-arcade/ophtha-merge/app.js', import.meta.url), 'utf8');
-  assert.match(core, /tile\.dataset\.value\s*=\s*String\(value\)/);
-  assert.match(app, /tile\.dataset\.value/);
+  assert.match(app, /parseFormattedInteger/);
 });
