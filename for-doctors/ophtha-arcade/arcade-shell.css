@@ -1,0 +1,15 @@
+.doctors-header{position:relative;z-index:30;background:var(--navy-950);border-bottom:1px solid rgba(255,255,255,.12)}
+.doctors-nav{min-height:98px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.doctors-nav-actions{display:flex;align-items:center;gap:18px}
+.doctors-nav-actions>a{font-size:13px;color:var(--blue-soft);font-weight:700}
+.doctors-language{display:flex;gap:6px;padding:4px;border:1px solid rgba(255,255,255,.16);border-radius:999px}
+.doctors-language a{min-width:38px;padding:7px 9px;border-radius:999px;text-align:center;color:rgba(255,255,255,.68);font-size:12px;font-weight:800}
+.doctors-language a.active{background:#fff;color:#06162c}
+.ophtha-arcade-shell-link{white-space:nowrap}
+.site-footer{border-top:1px solid rgba(255,255,255,.12)}
+@media(max-width:680px){
+  .doctors-nav{min-height:78px}
+  .doctors-nav-actions{gap:10px}
+  .doctors-nav-actions>a:not(.ophtha-arcade-shell-link){display:none}
+  .ophtha-arcade-shell-link{font-size:12px!important}
+}
