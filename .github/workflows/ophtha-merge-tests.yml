@@ -1,0 +1,31 @@
+name: Ophtha Merge tests
+
+on:
+  push:
+    paths:
+      - 'for-doctors/ophtha-arcade/**'
+      - 'for-doctors/index.html'
+      - 'tests/ophtha-merge*.test.mjs'
+      - '.github/workflows/ophtha-merge-tests.yml'
+  pull_request:
+    paths:
+      - 'for-doctors/ophtha-arcade/**'
+      - 'for-doctors/index.html'
+      - 'tests/ophtha-merge*.test.mjs'
+      - '.github/workflows/ophtha-merge-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Run Ophtha Merge tests
+        run: node --test tests/ophtha-merge-v2.test.mjs tests/ophtha-merge-mobile-polish.test.mjs
