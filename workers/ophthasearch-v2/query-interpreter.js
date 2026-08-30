@@ -174,7 +174,7 @@ function detectQuestionType(text, condition, named = []) {
   if (hasExplicitComparison(text, named)) return 'comparison';
   const safetyText = text.replace(/неосложненн?[а-я]*/g, '');
   if (/безопас|осложн|риск|safety|risk|adverse/.test(safetyText)) return 'safety';
-  if (/медикаментоз|лекарствен|фармаколог|препарат|капл|\bтерапи[а-я]*\b|pharmacolog|medication|medical therapy|drug therapy|first[- ]line|\btherapy\b/.test(text)) return 'therapy';
+  if (/медикаментоз|лекарствен|фармаколог|препарат|капл|терапи[а-я]*|pharmacolog|medication|medical therapy|drug therapy|first[- ]line|\btherapy\b/.test(text)) return 'therapy';
   if (/операц|оперир|хирург|surgery|surgical|vitrectom|витрэктом|витреэктом|пилинг|peeling/.test(text)) return 'surgery';
   if (['epiretinal membrane', 'full-thickness macular hole'].includes(condition) && /тактик|management|preferred management|стоит ли/.test(text)) return 'surgery';
   if (/диагност|diagnos|screen/.test(text)) return 'diagnosis';
@@ -270,7 +270,7 @@ function hasStrongTypeAnchor(text, fallback) {
   const named = findNamedInterventions(text);
   if (hasExplicitComparison(text, named)) return true;
   if (fallback.question_type === 'surgery' && /операц|оперир|хирург|surgery|surgical|vitrectom|витрэктом|витреэктом|пилинг|peeling/.test(text)) return true;
-  if (fallback.question_type === 'therapy' && /медикаментоз|лекарствен|фармаколог|\bтерапи[а-я]*\b|pharmacolog|medication|\btherapy\b|treat/.test(text)) return true;
+  if (fallback.question_type === 'therapy' && /медикаментоз|лекарствен|фармаколог|терапи[а-я]*|pharmacolog|medication|\btherapy\b|treat/.test(text)) return true;
   if (fallback.question_type === 'management' && /тактик|management|ведение/.test(text)) return true;
   if (fallback.question_type === 'diagnosis' && /диагност|diagnos|screen/.test(text)) return true;
   if (fallback.question_type === 'prognosis' && /прогноз|prognos/.test(text)) return true;
