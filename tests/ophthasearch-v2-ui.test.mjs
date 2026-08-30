@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { requestResearch, DEFAULT_RESEARCH_ENDPOINT } from '../for-doctors/ophthasearch-v2/ophthasearch-v2.js';
 
+// Production UI contract for the published calm search-first interface.
 const pagePath = new URL('../for-doctors/ophthasearch-v2/index.html', import.meta.url);
 const clientPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.js', import.meta.url);
 const cssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.css', import.meta.url);
