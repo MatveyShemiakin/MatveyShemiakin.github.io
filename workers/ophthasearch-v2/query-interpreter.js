@@ -5,7 +5,7 @@ export const INTENT_MODEL = '@cf/google/gemma-4-26b-a4b-it';
 
 const QUESTION_TYPES = ['general', 'comparison', 'therapy', 'surgery', 'management', 'diagnosis', 'prognosis', 'safety'];
 
-const NAMED_THERAPIES = [
+const NAMED_INTERVENTIONS = [
   ['latanoprost', ['latanoprost', 'латанопрост']],
   ['timolol', ['timolol', 'тимолол']],
   ['travoprost', ['travoprost', 'травопрост']],
@@ -19,7 +19,21 @@ const NAMED_THERAPIES = [
   ['faricimab', ['faricimab', 'фарицимаб']],
   ['ranibizumab', ['ranibizumab', 'ранибизумаб']],
   ['bevacizumab', ['bevacizumab', 'бевацизумаб']],
-  ['brolucizumab', ['brolucizumab', 'бролуцизумаб']]
+  ['brolucizumab', ['brolucizumab', 'бролуцизумаб']],
+  ['natamycin', ['natamycin', 'натамицин']],
+  ['voriconazole', ['voriconazole', 'вориконазол']],
+  ['selective laser trabeculoplasty', ['selective laser trabeculoplasty', 'slt', 'слт', 'селективная лазерная трабекулопластика']],
+  ['pars plana vitrectomy', ['pars plana vitrectomy', 'vitrectomy', 'витрэктомия', 'витреэктомия']],
+  ['scleral buckling', ['scleral buckling', 'scleral buckle', 'эписклеральное пломбирование', 'склеральное пломбирование']],
+  ['pneumatic retinopexy', ['pneumatic retinopexy', 'пневматическая ретинопексия']],
+  ['Yamane fixation', ['yamane fixation', 'yamane technique', 'фиксация yamane', 'техника yamane']],
+  ['sutured scleral fixation', ['sutured scleral fixation', 'scleral-sutured fixation', 'suture scleral fixation']],
+  ['femtosecond laser-assisted cataract surgery', ['femtosecond laser-assisted cataract surgery', 'flacs', 'фемтосекундная лазерная хирургия катаракты']],
+  ['phacoemulsification', ['phacoemulsification', 'факоэмульсификация']],
+  ['MIGS', ['migs', 'microinvasive glaucoma surgery', 'minimally invasive glaucoma surgery']],
+  ['trabeculectomy', ['trabeculectomy', 'трабекулэктомия']],
+  ['inverted internal limiting membrane flap', ['inverted ilm flap', 'inverted internal limiting membrane flap', 'инвертированный лоскут впм']],
+  ['internal limiting membrane peeling', ['conventional ilm peeling', 'ilm peeling', 'internal limiting membrane peeling', 'пилинг впм']]
 ];
 
 function normalizedQuestion(value) {
@@ -89,6 +103,7 @@ export async function interpretIntentWithAi(payload, env = {}, deps = {}) {
   const response = await run(INTENT_MODEL, {
     messages: buildIntentMessages(request),
     response_format: { type: 'json_schema', json_schema: buildIntentSchema() },
+    chat_template_kwargs: { enable_thinking: false },
     max_completion_tokens: 700,
     temperature: 0
   });
@@ -105,6 +120,15 @@ function detectCondition(text) {
   if (/angle[- ]closure\s+glaucoma|закрытоугольн[а-я]*\s+глауком|зоуг/.test(text)) {
     return { domain: 'glaucoma', condition: 'angle-closure glaucoma' };
   }
+  if (/neovascular\s+age[- ]related\s+macular\s+degeneration|\bnamd\b|wet\s+amd|влажн[а-я]*\s+(?:форма\s+)?вмд/.test(text)) {
+    return { domain: 'retina', condition: 'neovascular age-related macular degeneration' };
+  }
+  if (/diabetic\s+macular\s+(?:edema|oedema)|\bdme\b|диабетическ[а-я]*\s+макулярн[а-я]*\s+отек/.test(text)) {
+    return { domain: 'retina', condition: 'diabetic macular edema' };
+  }
+  if (/retinal\s+vein\s+occlusion|\b(?:crvo|brvo|rvo)\b|окклюз[а-я]*\s+(?:центральн[а-я]*\s+|ветв[а-я]*\s+)?вен[а-я]*\s+сетчатк/.test(text)) {
+    return { domain: 'retina', condition: 'retinal vein occlusion' };
+  }
   if (/epiretinal\s+membrane|\berm\b|эпиретинальн[а-я]*\s+(?:мембран|фиброз)/.test(text)) {
     return { domain: 'retina', condition: 'epiretinal membrane' };
   }
@@ -114,21 +138,44 @@ function detectCondition(text) {
   if (/rhegmatogenous\s+retinal\s+detachment|retinal\s+detachment|регматогенн[а-я]*\s+отслойк[а-я]*\s+сетчатк|отслойк[а-я]*\s+сетчатк/.test(text)) {
     return { domain: 'retina', condition: 'retinal detachment' };
   }
-  if (/iol\s+dislocation|intraocular\s+lens\s+dislocation|дислокац[а-я]*\s+иол|смещен[а-я]*\s+иол|дислокац[а-я]*\s+интраокулярн[а-я]*\s+линз/.test(text)) {
+  if (/iol\s+dislocation|intraocular\s+lens\s+dislocation|dislocated\s+(?:posterior\s+chamber\s+)?intraocular\s+lens|dislocated\s+iol|subluxated\s+(?:intraocular\s+lens|iol)|дислокац[а-я]*\s+иол|смещен[а-я]*\s+иол|дислокац[а-я]*\s+интраокулярн[а-я]*\s+линз/.test(text)) {
     return { domain: 'lens-iol', condition: 'intraocular lens dislocation' };
   }
+  if (/fungal\s+keratitis|mycotic\s+keratitis|грибков[а-я]*\s+кератит/.test(text)) return { domain: 'cornea', condition: 'fungal keratitis' };
+  if (/bacterial\s+keratitis|бактериальн[а-я]*\s+кератит/.test(text)) return { domain: 'cornea', condition: 'bacterial keratitis' };
   if (/glaucoma|глауком/.test(text)) return { domain: 'glaucoma', condition: 'glaucoma' };
   if (/cataract|катаракт/.test(text)) return { domain: 'lens-iol', condition: 'cataract' };
+  if (/anterior\s+uveitis|передн[а-я]*\s+увеит/.test(text)) return { domain: 'uveitis', condition: 'uveitis' };
   if (/uveitis|увеит/.test(text)) return { domain: 'uveitis', condition: 'uveitis' };
   if (/keratitis|кератит/.test(text)) return { domain: 'cornea', condition: 'keratitis' };
   return { domain: 'ophthalmology', condition: '' };
 }
 
-function detectQuestionType(text, condition) {
-  if (/преимущ|сравн|по сравнению|\bversus\b|\bvs\b|better|superior|inferior/.test(text)) return 'comparison';
-  if (/безопас|осложн|риск|safety|risk|adverse/.test(text)) return 'safety';
-  if (/медикаментоз|лекарствен|фармаколог|препарат|капл|pharmacolog|medication|medical therapy|drug therapy|first[- ]line/.test(text)) return 'therapy';
-  if (/операц|оперир|хирург|surgery|surgical|vitrectom|пилинг|peeling/.test(text)) return 'surgery';
+function findNamedInterventions(text) {
+  const found = [];
+  for (const [canonical, aliases] of NAMED_INTERVENTIONS) {
+    let position = Number.POSITIVE_INFINITY;
+    for (const alias of aliases) {
+      const normalized = normalizedQuestion(alias);
+      const index = text.indexOf(normalized);
+      if (index >= 0 && index < position) position = index;
+    }
+    if (Number.isFinite(position)) found.push({ canonical, position });
+  }
+  return found.sort((a, b) => a.position - b.position).map((entry) => entry.canonical);
+}
+
+function hasExplicitComparison(text, named = []) {
+  if (/преимущ|сравн|по сравнению|что\s+(?:эффективнее|лучше)|\bversus\b|\bvs\.?\b|better|superior|inferior/.test(text)) return true;
+  return named.length >= 2 && /\sили\s/.test(text);
+}
+
+function detectQuestionType(text, condition, named = []) {
+  if (hasExplicitComparison(text, named)) return 'comparison';
+  const safetyText = text.replace(/неосложненн?[а-я]*/g, '');
+  if (/безопас|осложн|риск|safety|risk|adverse/.test(safetyText)) return 'safety';
+  if (/медикаментоз|лекарствен|фармаколог|препарат|капл|\bтерапи[а-я]*\b|pharmacolog|medication|medical therapy|drug therapy|first[- ]line|\btherapy\b/.test(text)) return 'therapy';
+  if (/операц|оперир|хирург|surgery|surgical|vitrectom|витрэктом|витреэктом|пилинг|peeling/.test(text)) return 'surgery';
   if (['epiretinal membrane', 'full-thickness macular hole'].includes(condition) && /тактик|management|preferred management|стоит ли/.test(text)) return 'surgery';
   if (/диагност|diagnos|screen/.test(text)) return 'diagnosis';
   if (/прогноз|исход|prognos/.test(text)) return 'prognosis';
@@ -137,22 +184,12 @@ function detectQuestionType(text, condition) {
   return 'general';
 }
 
-function detectNamedTherapies(text) {
-  const result = [];
-  for (const [canonical, aliases] of NAMED_THERAPIES) {
-    if (aliases.some((alias) => text.includes(normalizedQuestion(alias)))) result.push(canonical);
-  }
-  return result;
-}
-
-function detectInterventions(text, questionType) {
+function detectInterventions(text, questionType, named) {
   const interventions = [];
   if (questionType === 'therapy' && /медикаментоз|лекарствен|фармаколог|препарат|капл|pharmacolog|medication|medical therapy|drug therapy|first[- ]line/.test(text)) {
     interventions.push('pharmacological therapy');
   }
-  if (/selective laser trabeculoplasty|\bslt\b|слт|селективн[а-я]*\s+лазерн[а-я]*\s+трабекулопласт/.test(text)) interventions.push('selective laser trabeculoplasty');
-  if (/vitrectom|витрэктом|витреэктом/.test(text)) interventions.push('pars plana vitrectomy');
-  if (/ilm\s+peel|пилинг[а-я]*\s+впм/.test(text)) interventions.push('internal limiting membrane peeling');
+  if (questionType !== 'comparison') interventions.push(...named);
   return [...new Set(interventions)];
 }
 
@@ -161,6 +198,7 @@ function detectOutcomes(text, domain) {
   if (/intraocular\s+pressure|\biop\b|внутриглазн[а-я]*\s+давлен|вгд/.test(text) || domain === 'glaucoma') outcomes.push('intraocular pressure');
   if (/visual\s+acuity|\bvis\b|острот[а-я]*\s+зрен/.test(text)) outcomes.push('visual acuity');
   if (/metamorph|метаморф/.test(text)) outcomes.push('metamorphopsia');
+  if (/central\s+retinal\s+thickness|retinal\s+thickness|crt|толщин[а-я]*\s+сетчатк/.test(text)) outcomes.push('retinal thickness');
   return outcomes;
 }
 
@@ -173,7 +211,7 @@ function detectModifiers(text, condition) {
   if (/phakic|факич/.test(text)) modifiers.push('phakic');
   if (/metamorph|метаморф/.test(text)) modifiers.push('metamorphopsia');
   if (/ocular\s+surface\s+disease|синдром[а-я]*\s+сух[а-я]*\s+глаз|сух[а-я]*\s+глаз/.test(text)) modifiers.push('ocular surface disease');
-  if (condition !== 'glaucoma' && /glaucoma|глауком/.test(text)) modifiers.push('glaucoma');
+  if (!/glaucoma/i.test(condition) && /glaucoma|глауком/.test(text)) modifiers.push('glaucoma');
   if (/стекловидн[а-я]*\s+тел|vitreous/.test(text)) modifiers.push('vitreous involvement');
   return [...new Set(modifiers)];
 }
@@ -181,16 +219,14 @@ function detectModifiers(text, condition) {
 function fallbackInterpret(request) {
   const text = normalizedQuestion(request.question);
   const { domain, condition } = detectCondition(text);
-  const question_type = detectQuestionType(text, condition);
-  const namedTherapies = detectNamedTherapies(text);
-  let interventions = detectInterventions(text, question_type);
+  const named = findNamedInterventions(text);
+  const question_type = detectQuestionType(text, condition, named);
+  let interventions = detectInterventions(text, question_type, named);
   let comparators = [];
 
-  if (question_type === 'comparison' && namedTherapies.length >= 2) {
-    interventions = [namedTherapies[0]];
-    comparators = namedTherapies.slice(1);
-  } else {
-    interventions = [...new Set([...interventions, ...namedTherapies])];
+  if (question_type === 'comparison' && named.length >= 2) {
+    interventions = [named[0]];
+    comparators = named.slice(1);
   }
 
   const outcomes = detectOutcomes(text, domain);
@@ -215,15 +251,73 @@ function fallbackInterpret(request) {
   });
 }
 
+function mergeUnique(...arrays) {
+  const seen = new Set();
+  const result = [];
+  for (const values of arrays) {
+    for (const raw of values || []) {
+      const value = String(raw || '').trim();
+      const key = value.toLowerCase();
+      if (!value || seen.has(key)) continue;
+      seen.add(key);
+      result.push(value);
+    }
+  }
+  return result;
+}
+
+function hasStrongTypeAnchor(text, fallback) {
+  const named = findNamedInterventions(text);
+  if (hasExplicitComparison(text, named)) return true;
+  if (fallback.question_type === 'surgery' && /операц|оперир|хирург|surgery|surgical|vitrectom|витрэктом|витреэктом|пилинг|peeling/.test(text)) return true;
+  if (fallback.question_type === 'therapy' && /медикаментоз|лекарствен|фармаколог|\bтерапи[а-я]*\b|pharmacolog|medication|\btherapy\b|treat/.test(text)) return true;
+  if (fallback.question_type === 'management' && /тактик|management|ведение/.test(text)) return true;
+  if (fallback.question_type === 'diagnosis' && /диагност|diagnos|screen/.test(text)) return true;
+  if (fallback.question_type === 'prognosis' && /прогноз|prognos/.test(text)) return true;
+  return false;
+}
+
+function reconcileExplicitIntent(request, modelIntent, fallback) {
+  const text = normalizedQuestion(request.question);
+  const named = findNamedInterventions(text);
+  const explicitComparison = hasExplicitComparison(text, named);
+  const knownCondition = Boolean(fallback.condition);
+  const result = normalizeIntent({ ...modelIntent, language: request.language });
+
+  if (knownCondition) {
+    result.domain = fallback.domain;
+    result.condition = fallback.condition;
+    result.ambiguities = result.ambiguities.filter((value) => !/condition|ophthalmic/i.test(value));
+  }
+
+  if (hasStrongTypeAnchor(text, fallback)) result.question_type = fallback.question_type;
+
+  if (explicitComparison && fallback.interventions.length && fallback.comparators.length) {
+    result.interventions = fallback.interventions;
+    result.comparators = fallback.comparators;
+  } else {
+    result.interventions = mergeUnique(result.interventions, fallback.interventions);
+    result.comparators = mergeUnique(result.comparators, fallback.comparators);
+  }
+
+  result.outcomes = mergeUnique(result.outcomes, fallback.outcomes);
+  result.modifiers = mergeUnique(result.modifiers, fallback.modifiers);
+  result.needs_dosing = Boolean(result.needs_dosing || fallback.needs_dosing);
+  result.needs_alternatives = Boolean(result.needs_alternatives || fallback.needs_alternatives);
+  if (knownCondition && !result.ambiguities.length) result.ambiguities = [];
+  return normalizeIntent(result);
+}
+
 export async function interpretClinicalQuestion(payload, deps = {}) {
   const request = validateResearchRequest(payload);
+  const fallback = fallbackInterpret(request);
   if (typeof deps.interpretIntent === 'function') {
     try {
       const modelIntent = await deps.interpretIntent(request);
-      if (modelIntent && typeof modelIntent === 'object') return normalizeIntent({ ...modelIntent, language: request.language });
+      if (modelIntent && typeof modelIntent === 'object') return reconcileExplicitIntent(request, modelIntent, fallback);
     } catch {
       // Deterministic fallback is required so interpretation failure never blocks retrieval.
     }
   }
-  return fallbackInterpret(request);
+  return fallback;
 }
