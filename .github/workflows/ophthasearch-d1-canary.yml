@@ -100,6 +100,7 @@ jobs:
             main: '_worker.js',
             compatibility_date: '2026-08-30',
             observability: { enabled: true },
+            vars: { OPHTHASEARCH_CANARY_STORAGE_DIAGNOSTICS: '1' },
             ai: { binding: 'AI' },
             d1_databases: [
               {
@@ -118,6 +119,7 @@ jobs:
           const c = JSON.parse(fs.readFileSync(process.env.CANARY_CONFIG, 'utf8'));
           if (c.name === 'matveyshemyakin-github-io') process.exit(1);
           if (c.d1_databases?.[0]?.binding !== 'OPHTHASEARCH_DB') process.exit(1);
+          if (c.vars?.OPHTHASEARCH_CANARY_STORAGE_DIAGNOSTICS !== '1') process.exit(1);
           NODE
 
       - name: Apply D1 migrations remotely
@@ -180,7 +182,10 @@ jobs:
           const body = JSON.parse(fs.readFileSync('/tmp/safe-research.json', 'utf8'));
           if (body?.ok !== true) throw new Error('safe research request failed');
           const id = String(body?.result?.run_id || '');
-          if (!/^[0-9a-f-]{36}$/i.test(id)) throw new Error('safe research run_id missing');
+          if (!/^[0-9a-f-]{36}$/i.test(id)) {
+            console.error('storage diagnostics:', JSON.stringify(body?.result?.diagnostics?.storage || null));
+            throw new Error('safe research run_id missing');
+          }
           process.stdout.write(id);
           NODE
           )"
@@ -212,7 +217,10 @@ jobs:
           const body = JSON.parse(fs.readFileSync('/tmp/sensitive-research.json', 'utf8'));
           if (body?.ok !== true) throw new Error('sensitive research request failed');
           const id = String(body?.result?.run_id || '');
-          if (!/^[0-9a-f-]{36}$/i.test(id)) throw new Error('sensitive research run_id missing');
+          if (!/^[0-9a-f-]{36}$/i.test(id)) {
+            console.error('storage diagnostics:', JSON.stringify(body?.result?.diagnostics?.storage || null));
+            throw new Error('sensitive research run_id missing');
+          }
           process.stdout.write(id);
           NODE
           )"
