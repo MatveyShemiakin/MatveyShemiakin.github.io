@@ -64,3 +64,10 @@ test('game runtime derives a visible level badge for profiles and leaderboard en
   assert.match(core, /profile-level/);
   assert.match(core, /ophtha-merge-player-level/);
 });
+
+test('tile icon level uses raw numeric data instead of localized formatted text', () => {
+  const core = fs.readFileSync(new URL('../for-doctors/ophtha-arcade/ophtha-merge/app-core.js', import.meta.url), 'utf8');
+  const app = fs.readFileSync(new URL('../for-doctors/ophtha-arcade/ophtha-merge/app.js', import.meta.url), 'utf8');
+  assert.match(core, /tile\.dataset\.value\s*=\s*String\(value\)/);
+  assert.match(app, /tile\.dataset\.value/);
+});
