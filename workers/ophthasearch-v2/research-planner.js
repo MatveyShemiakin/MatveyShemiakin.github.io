@@ -1,3 +1,4 @@
+// Keep condition-specific retrieval expansions narrow; the global relevance threshold remains unchanged.
 function clean(value) {
   return String(value || '').replace(/\s+/g, ' ').trim();
 }
