@@ -111,7 +111,7 @@ test('deterministic explicit anchors repair a plausible but wrong AI intent', as
 test('research planner creates independent evidence tracks for specialist therapy questions', async () => {
   const intent = await interpret('Современная медикаментозная терапия ПОУГ: что использовать первой линией и когда переходить на комбинацию?');
   const plan = buildResearchPlan(intent);
-  const ids = new Set(plan.map((track) => [track.id, track]));
+  const ids = new Set(plan.map((track) => track.id));
   for (const required of ['guidelines', 'efficacy', 'safety', 'alternatives', 'monitoring-escalation', 'pivotal-evidence', 'ongoing-trials']) {
     assert.ok(ids.has(required), `missing ${required}`);
   }
