@@ -32,6 +32,21 @@
     ]
   },
   {
+    "id": "ophtha-arcade",
+    "event_id": "ophtha-arcade:1",
+    "published": "2026-08-30",
+    "updated": "2026-08-30",
+    "revision": 1,
+    "kind": "new",
+    "title": "Ophtha Arcade",
+    "title_en": "Ophtha Arcade",
+    "description": "Ophtha Arcade — короткие браузерные игры для офтальмологов. Начните с Ophtha Merge.",
+    "description_en": "Ophtha Arcade — короткие браузерные игры для офтальмологов. Начните с Ophtha Merge.",
+    "url": "/for-doctors/ophtha-arcade/",
+    "url_en": "",
+    "topics": []
+  },
+  {
     "id": "iol-dislocation",
     "event_id": "iol-dislocation:4",
     "published": "2026-08-25",

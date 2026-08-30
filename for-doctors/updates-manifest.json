@@ -22,6 +22,13 @@
       "revision": 4,
       "kind": "updated"
     },
+    "ophtha-arcade": {
+      "fingerprint": "ceba4c399cc751916f774f5047ec4893b8b0a2c064bf821948ba7d217604cc75",
+      "published": "2026-08-30",
+      "updated": "2026-08-30",
+      "revision": 1,
+      "kind": "new"
+    },
     "ophthasearch": {
       "fingerprint": "9b2797c54960b59711f692a00dfddfaefddf7b9d5d5ca8535b69893c5b821d3f",
       "published": "2026-08-16",
