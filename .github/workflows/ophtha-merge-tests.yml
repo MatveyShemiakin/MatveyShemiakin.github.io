@@ -4,14 +4,22 @@ on:
   push:
     paths:
       - 'for-doctors/ophtha-arcade/**'
+      - 'en/for-doctors/ophtha-arcade/**'
       - 'for-doctors/index.html'
+      - 'en/for-doctors/index.html'
+      - 'scripts/inject_doctor_retention.py'
       - 'tests/ophtha-merge*.test.mjs'
+      - 'tests/test_doctor_retention_inject.py'
       - '.github/workflows/ophtha-merge-tests.yml'
   pull_request:
     paths:
       - 'for-doctors/ophtha-arcade/**'
+      - 'en/for-doctors/ophtha-arcade/**'
       - 'for-doctors/index.html'
+      - 'en/for-doctors/index.html'
+      - 'scripts/inject_doctor_retention.py'
       - 'tests/ophtha-merge*.test.mjs'
+      - 'tests/test_doctor_retention_inject.py'
       - '.github/workflows/ophtha-merge-tests.yml'
 
 permissions:
@@ -28,4 +36,6 @@ jobs:
         with:
           node-version: '24'
       - name: Run Ophtha Merge tests
-        run: node --test tests/ophtha-merge-v2.test.mjs tests/ophtha-merge-mobile-polish.test.mjs
+        run: node --test tests/ophtha-merge*.test.mjs
+      - name: Run retention injector regression
+        run: python -m unittest tests/test_doctor_retention_inject.py
