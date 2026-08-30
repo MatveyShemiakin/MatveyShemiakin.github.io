@@ -33,3 +33,24 @@ test('OphthaSearch Worker changes are automatically deployed and live-smoke veri
   assert.match(workflow, /timolol/i);
   assert.match(workflow, /evidence_only/);
 });
+
+test('D1 dataset canary is isolated from the production Worker and validates persistence', async () => {
+  const production = await read('wrangler.jsonc');
+  assert.doesNotMatch(production, /d1_databases|OPHTHASEARCH_DB|OPHTHASEARCH_DATASET_HASH_KEY/);
+
+  const workflow = await read('.github/workflows/ophthasearch-d1-canary.yml');
+  assert.match(workflow, /feature\/ophthasearch-dataset-foundation-20260829/);
+  assert.match(workflow, /ophthasearch-dataset-canary/);
+  assert.match(workflow, /matveyshemyakin-ophthasearch-dataset-canary/);
+  assert.match(workflow, /d1 list --json/);
+  assert.match(workflow, /d1 create[^\n]*--jurisdiction[= ]eu/);
+  assert.match(workflow, /d1 migrations apply[^\n]*--remote/);
+  assert.match(workflow, /"binding"\s*:\s*"OPHTHASEARCH_DB"/);
+  assert.match(workflow, /OPHTHASEARCH_DATASET_HASH_KEY/);
+  assert.match(workflow, /secret put OPHTHASEARCH_DATASET_HASH_KEY/);
+  assert.match(workflow, /\/v2\/research/);
+  assert.match(workflow, /\/v2\/feedback/);
+  assert.match(workflow, /question_storage_state/);
+  assert.match(workflow, /metadata_only/);
+  assert.match(workflow, /answer_json IS NULL/);
+});
