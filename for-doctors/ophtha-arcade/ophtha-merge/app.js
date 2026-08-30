@@ -83,15 +83,24 @@ function upgradeTileIcons(root = document) {
 }
 
 const board = document.querySelector('#game-board');
-const originalPlayZone = document.querySelector('#game-play-zone');
-const playZone = originalPlayZone?.closest('.ophtha-merge-play-column') || originalPlayZone;
+const boardWrap = document.querySelector('#game-play-zone');
+const swipeHint = boardWrap?.nextElementSibling?.classList.contains('ophtha-merge-swipe-hint')
+  ? boardWrap.nextElementSibling
+  : null;
+let playZone = boardWrap;
 
-if (originalPlayZone && playZone && originalPlayZone !== playZone) {
-  originalPlayZone.removeAttribute('id');
+if (boardWrap?.parentElement) {
+  playZone = document.createElement('div');
+  playZone.classList.add('ophtha-merge-touch-zone');
   playZone.id = 'game-play-zone';
+  boardWrap.removeAttribute('id');
+  boardWrap.parentElement.insertBefore(playZone, boardWrap);
+  playZone.append(boardWrap);
+  if (swipeHint) playZone.append(swipeHint);
+} else {
+  playZone?.classList.add('ophtha-merge-touch-zone');
 }
 
-playZone?.classList.add('ophtha-merge-touch-zone');
 upgradeTileIcons(board || document);
 
 if (board) {
