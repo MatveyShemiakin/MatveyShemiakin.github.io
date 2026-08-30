@@ -40,6 +40,15 @@ class DoctorRetentionInjectorTests(unittest.TestCase):
         self.assertIn('Saved', result)
         self.assertIn('/en/for-doctors/updates/', result)
 
+    def test_hub_injection_exposes_ophtha_arcade_in_both_languages(self):
+        ru_source = '<html lang="ru"><head></head><body><main><section class="library"><div class="library-grid"><a href="/collaboration/">C</a></div></section></main></body></html>'
+        en_source = '<html lang="en"><head></head><body><main><section class="library"><div class="library-grid"><a href="/en/collaboration/">C</a></div></section></main></body></html>'
+        ru = self.module.inject_hub(ru_source, 'ru')
+        en = self.module.inject_hub(en_source, 'en')
+        self.assertIn('href="/for-doctors/ophtha-arcade/"', ru)
+        self.assertIn('href="/en/for-doctors/ophtha-arcade/"', en)
+        self.assertIn('Ophtha Arcade', en)
+
     def test_material_injection_adds_tools_related_and_shared_assets_once(self):
         source = '<html lang="ru"><head></head><body><main><article><h1>Материал</h1><p>Текст</p></article></main><footer></footer></body></html>'
         once = self.module.inject_material(source, 'ru')
