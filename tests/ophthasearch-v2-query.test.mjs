@@ -61,6 +61,14 @@ test('explicit Russian A-or-B comparative wording wins over generic therapy word
   assert.deepEqual(drops.comparators, ['latanoprost']);
 });
 
+test('antibiotic-class A-or-B wording is interpreted as a comparison', async () => {
+  const intent = await interpret('Фторхинолон в монотерапии или фортифицированные антибиотики при бактериальном кератите?');
+  assert.equal(intent.condition, 'bacterial keratitis');
+  assert.equal(intent.question_type, 'comparison');
+  assert.ok(intent.interventions.some((value) => /fluoroquinolone/i.test(value)));
+  assert.ok(intent.comparators.some((value) => /fortified antibiotics/i.test(value)));
+});
+
 test('uncomplicated retinal detachment comparison is not misclassified as safety', async () => {
   const intent = await interpret('Пневматическая ретинопексия или витрэктомия при неосложнённой регматогенной отслойке сетчатки?');
   assert.equal(intent.condition, 'retinal detachment');
@@ -78,6 +86,20 @@ test('recognizes English dislocated-IOL phrasing used by surgeons', async () => 
   assert.equal(intent.domain, 'lens-iol');
   assert.equal(intent.condition, 'intraocular lens dislocation');
   assert.equal(intent.question_type, 'comparison');
+});
+
+test('IOL research plan broadens fixation vocabulary used in secondary-IOL literature', async () => {
+  const management = await interpret('Тактика хирургического лечения дислокации ИОЛ');
+  const managementQueries = buildResearchPlan(management).map((track) => track.query).join(' ');
+  assert.match(managementQueries, /secondary intraocular lens|secondary IOL/i);
+  assert.match(managementQueries, /scleral fixation|intrascleral fixation/i);
+  assert.match(managementQueries, /reposition|exchange/i);
+
+  const comparison = await interpret('Yamane fixation versus sutured scleral fixation for dislocated intraocular lens', 'en');
+  const comparisonQueries = buildResearchPlan(comparison).map((track) => track.query).join(' ');
+  assert.match(comparisonQueries, /Yamane/i);
+  assert.match(comparisonQueries, /flanged intrascleral fixation|sutureless scleral fixation/i);
+  assert.match(comparisonQueries, /sutured scleral fixation|Gore-Tex/i);
 });
 
 test('recognizes AMD, DME and retinal-vein-occlusion conditions in English comparisons', async () => {
