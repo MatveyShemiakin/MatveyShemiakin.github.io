@@ -5,3 +5,4 @@ wrangler.jsonc
 workers/**
 tests/**
 node_modules/**
+.wrangler/**
