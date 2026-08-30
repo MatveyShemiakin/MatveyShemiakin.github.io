@@ -1,4 +1,5 @@
 import './app-core.js';
+import { parseFormattedInteger } from './i18n.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const INTERACTIVE_SELECTOR = 'button,a,input,select,textarea,label';
@@ -69,7 +70,7 @@ function createTileIcon(level) {
 }
 
 function tileLevel(tile) {
-  const value = Number((tile.querySelector('.ophtha-merge-tile-number')?.textContent || '2').replace(/\s/g, '')) || 2;
+  const value = parseFormattedInteger(tile.querySelector('.ophtha-merge-tile-number')?.textContent, 2);
   return Math.max(1, Math.round(Math.log2(value)));
 }
 
