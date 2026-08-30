@@ -22,6 +22,8 @@ const NAMED_INTERVENTIONS = [
   ['brolucizumab', ['brolucizumab', 'бролуцизумаб']],
   ['natamycin', ['natamycin', 'натамицин']],
   ['voriconazole', ['voriconazole', 'вориконазол']],
+  ['fluoroquinolone monotherapy', ['fluoroquinolone monotherapy', 'fluoroquinolone', 'фторхинолон в монотерапии', 'фторхинолон']],
+  ['fortified antibiotics', ['fortified antibiotics', 'fortified antibiotic', 'фортифицированные антибиотики', 'фортифицированные антибиотик']],
   ['selective laser trabeculoplasty', ['selective laser trabeculoplasty', 'slt', 'слт', 'селективная лазерная трабекулопластика']],
   ['pars plana vitrectomy', ['pars plana vitrectomy', 'vitrectomy', 'витрэктомия', 'витреэктомия']],
   ['scleral buckling', ['scleral buckling', 'scleral buckle', 'эписклеральное пломбирование', 'склеральное пломбирование']],
