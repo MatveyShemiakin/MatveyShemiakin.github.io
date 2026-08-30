@@ -69,6 +69,17 @@ test('reasoning schema restricts every citation to Evidence Pack source IDs', ()
   assert.deepEqual(schema.properties.management.items.properties.citations.items.enum, ['S1', 'S2']);
 });
 
+test('reasoning schema is compact and omits physician-invisible duplicate sections', () => {
+  const schema = buildReasoningSchema(['S1', 'S2']);
+  assert.ok(schema.properties.clinical_bottom_line.maxLength <= 1400);
+  assert.ok(schema.properties.management.maxItems <= 5);
+  assert.ok(schema.properties.arguments_against.maxItems <= 4);
+  assert.ok(schema.properties.alternatives.maxItems <= 4);
+  assert.ok(schema.properties.uncertainties.maxItems <= 4);
+  assert.equal('arguments_for' in schema.properties, false);
+  assert.equal('guideline_positions' in schema.properties, false);
+});
+
 test('reasoning prompt defines ophthalmologist-scientist role and forbids invented bibliography', () => {
   const messages = buildReasoningMessages(evidencePack);
   const system = messages.find((message) => message.role === 'system')?.content || '';
@@ -115,7 +126,7 @@ test('clinical interpretation may remain explicitly separated from sourced recom
   assert.match(finalAnswer.clinical_interpretation, /^Клиническая интерпретация:/);
 });
 
-test('reasonOverEvidence disables Gemma thinking for bounded structured synthesis', async () => {
+test('reasonOverEvidence disables Gemma thinking and constrains reasoning/output budget', async () => {
   let invocation;
   const env = { AI: { run: async (model, options) => {
     invocation = { model, options };
@@ -125,6 +136,8 @@ test('reasonOverEvidence disables Gemma thinking for bounded structured synthesi
   assert.equal(invocation.model, MODEL);
   assert.equal(invocation.options.response_format.type, 'json_schema');
   assert.equal(invocation.options.chat_template_kwargs?.enable_thinking, false);
+  assert.equal(invocation.options.reasoning_effort, 'low');
+  assert.ok(invocation.options.max_completion_tokens <= 3200);
   assert.equal(answer.management[0].dose, '0.005%');
   assert.equal(answer.sources[0].source_id, 'S1');
 });
