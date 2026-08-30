@@ -1,0 +1,80 @@
+name: OphthaSearch Cloudflare Auth Diagnostic
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/ophthasearch-dataset-foundation-20260829
+    paths:
+      - '.github/workflows/ophthasearch-cloudflare-auth-diagnostic.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - name: Validate secret presence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test "${#CLOUDFLARE_ACCOUNT_ID}" -eq 32
+
+      - name: Verify API token itself
+        shell: bash
+        run: |
+          set -euo pipefail
+          code="$(curl --silent --show-error -o /tmp/token-verify.json -w '%{http_code}' \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            'https://api.cloudflare.com/client/v4/user/tokens/verify')"
+          TOKEN_HTTP="$code" node <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/token-verify.json', 'utf8'));
+          const errors = Array.isArray(body?.errors) ? body.errors.map((e) => ({ code: e?.code, message: e?.message })) : [];
+          console.log(JSON.stringify({ boundary: 'token_verify', http: Number(process.env.TOKEN_HTTP), success: body?.success === true, status: body?.result?.status || null, errors }));
+          if (Number(process.env.TOKEN_HTTP) >= 400 || body?.success !== true) process.exit(1);
+          NODE
+
+      - name: Check existing Worker account access
+        shell: bash
+        run: |
+          set -euo pipefail
+          code="$(curl --silent --show-error -o /tmp/worker-access.json -w '%{http_code}' \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/scripts/matveyshemiakin-github-io/settings")"
+          WORKER_HTTP="$code" node <<'NODE'
+          const fs = require('node:fs');
+          let body = {};
+          try { body = JSON.parse(fs.readFileSync('/tmp/worker-access.json', 'utf8')); } catch {}
+          const errors = Array.isArray(body?.errors) ? body.errors.map((e) => ({ code: e?.code, message: e?.message })) : [];
+          console.log(JSON.stringify({ boundary: 'workers_api', http: Number(process.env.WORKER_HTTP), success: body?.success === true, errors }));
+          if (Number(process.env.WORKER_HTTP) >= 400 || body?.success !== true) process.exit(1);
+          NODE
+
+      - name: Check D1 account access
+        shell: bash
+        run: |
+          set -euo pipefail
+          code="$(curl --silent --show-error -o /tmp/d1-access.json -w '%{http_code}' \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/d1/database")"
+          D1_HTTP="$code" node <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/d1-access.json', 'utf8'));
+          const errors = Array.isArray(body?.errors) ? body.errors.map((e) => ({ code: e?.code, message: e?.message })) : [];
+          console.log(JSON.stringify({ boundary: 'd1_api', http: Number(process.env.D1_HTTP), success: body?.success === true, database_count: Array.isArray(body?.result) ? body.result.length : null, errors }));
+          if (Number(process.env.D1_HTTP) >= 400 || body?.success !== true) process.exit(1);
+          NODE
+
+      - name: Diagnostic summary
+        if: always()
+        run: |
+          echo 'Cloudflare diagnostic completed without modifying Workers, D1 databases, or production configuration.' >> "$GITHUB_STEP_SUMMARY"
