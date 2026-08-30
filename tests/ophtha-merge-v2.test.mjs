@@ -99,8 +99,14 @@ test('ranking and write origin rules are deterministic', () => {
 test('production page has mobile game controls and no inline styles', () => {
   const base = new URL('../for-doctors/ophtha-arcade/ophtha-merge/', import.meta.url);
   const html = fs.readFileSync(new URL('index.html', base), 'utf8');
-  const app = fs.readFileSync(new URL('app.js', base), 'utf8');
-  const css = fs.readFileSync(new URL('ophtha-merge.css', base), 'utf8');
+  const app = [
+    fs.readFileSync(new URL('app.js', base), 'utf8'),
+    fs.readFileSync(new URL('app-core.js', base), 'utf8')
+  ].join('\n');
+  const css = [
+    fs.readFileSync(new URL('ophtha-merge.css', base), 'utf8'),
+    fs.readFileSync(new URL('ophtha-merge-core.css', base), 'utf8')
+  ].join('\n');
   assert.match(html, /\/styles\.css/);
   assert.match(html, /\/mobile-fix\.css/);
   assert.doesNotMatch(html, /style\s*=/i);
