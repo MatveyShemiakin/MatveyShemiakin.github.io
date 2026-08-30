@@ -9,8 +9,11 @@ import {
 } from '../for-doctors/ophthasearch-v2/ophthasearch-v2.js';
 
 const pagePath = new URL('../for-doctors/ophthasearch-v2/index.html', import.meta.url);
+const enPagePath = new URL('../en/for-doctors/ophthasearch/index.html', import.meta.url);
 const clientPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.js', import.meta.url);
 const cssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.css', import.meta.url);
+const modernCssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2-modern.css', import.meta.url);
+const motionPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2-motion.js', import.meta.url);
 const workerBase = 'https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev';
 const workerEndpoint = `${workerBase}/v2/research`;
 const feedbackEndpoint = `${workerBase}/v2/feedback`;
@@ -31,13 +34,35 @@ test('OphthaSearch page prioritizes clinical conclusion and hides pipeline inter
     assert.match(html, new RegExp(`data-v2-${hook}`));
   }
   assert.match(html, /Клинический вывод/);
-  assert.match(html, /Тактика/);
+  assert.match(html, /Практическая тактика/);
   assert.match(html, /Важно учесть/);
   assert.match(html, /<details[\s\S]*Ключевые источники/);
   assert.doesNotMatch(html, /data-v2-diagnostics|data-v2-guidelines|data-v2-arguments-for|data-v2-arguments-against|data-v2-uncertainties/);
-  assert.doesNotMatch(html, /Диагностика research pipeline|Evidence Pack|Архитектура поиска/i);
+  assert.doesNotMatch(html, /Диагностика research pipeline|Evidence Pack|Архитектура поиска|Gemma 4|server-side|multiple sources/i);
   assert.match(html, /ophthasearch-v2\.css/);
-  assert.match(html, /ophthasearch-v2\.js\?v=20260829-1/);
+  assert.match(html, /ophthasearch-v2-modern\.css/);
+  assert.match(html, /ophthasearch-v2\.js/);
+  assert.match(html, /ophthasearch-v2-motion\.js/);
+});
+
+test('RU and EN pages share the calm search-first structure', async () => {
+  const [ru, en] = await Promise.all([
+    fs.readFile(pagePath, 'utf8'),
+    fs.readFile(enPagePath, 'utf8')
+  ]);
+  for (const html of [ru, en]) {
+    assert.doesNotMatch(html, /\sstyle\s*=/i);
+    for (const hook of ['data-v2-landing', 'data-v2-eye-mark', 'data-v2-search-form', 'data-v2-query', 'data-v2-submit', 'data-v2-example']) {
+      assert.match(html, new RegExp(hook));
+    }
+    assert.match(html, /ophthasearch-v2-modern\.css/);
+    assert.match(html, /ophthasearch-v2-motion\.js/);
+    assert.doesNotMatch(html, /Evidence Pack|Gemma 4|research pipeline|server-side|multi-source orchestration/i);
+  }
+  assert.match(ru, /Клинический поиск и краткий синтез научных данных для офтальмолога/);
+  assert.match(en, /Clinical evidence search and concise synthesis for ophthalmologists/);
+  assert.match(ru, />МШ</);
+  assert.match(en, />MS</);
 });
 
 test('search UI warns physicians not to enter direct patient identifiers', async () => {
@@ -134,4 +159,29 @@ test('stylesheet guards mobile viewport and styles feedback without inline CSS',
   assert.match(css, /@media\s*\(max-width:\s*760px\)/);
   assert.match(css, /\.ophtha-v2-privacy-notice/);
   assert.match(css, /\.ophtha-v2-feedback/);
+});
+
+test('modern stylesheet implements eye focus, floating composer, result reveal and reduced motion', async () => {
+  const css = await fs.readFile(modernCssPath, 'utf8');
+  for (const token of ['.ophtha-v2-eye-mark', '.ophtha-v2-eye-iris', '.ophtha-v2-composer-wrap', '.ophtha-v2-example', '.ophtha-v2-answer-shell']) {
+    assert.match(css, new RegExp(token.replaceAll('.', '\\.')));
+  }
+  assert.match(css, /@keyframes\s+ophthaEyeFocus/);
+  assert.match(css, /@keyframes\s+ophthaResultReveal/);
+  assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)/);
+  assert.match(css, /@media\s*\(max-width:\s*760px\)/);
+  assert.match(css, /@media\s*\(min-width:\s*761px\)/);
+});
+
+test('motion controller types examples, stops on physician input, and observes result visibility', async () => {
+  const source = await fs.readFile(motionPath, 'utf8');
+  assert.doesNotMatch(source, /innerHTML|insertAdjacentHTML|document\.write/i);
+  assert.match(source, /TYPEWRITER_COPY/);
+  assert.match(source, /data-v2-example/);
+  assert.match(source, /prefers-reduced-motion:\s*reduce/);
+  assert.match(source, /addEventListener\(['"]input['"]/);
+  assert.match(source, /addEventListener\(['"]focus['"]/);
+  assert.match(source, /MutationObserver/);
+  assert.match(source, /is-searching/);
+  assert.match(source, /has-answer/);
 });
