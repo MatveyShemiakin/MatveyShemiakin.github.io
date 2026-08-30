@@ -4,10 +4,15 @@
 .ophtha-merge-tile-mark{display:grid;place-items:center;min-height:34px;margin:2px 0 2px;font-size:0;line-height:1}
 .ophtha-merge-tile-icon{width:clamp(28px,6.5vw,46px);height:clamp(28px,6.5vw,46px);fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ophtha-merge-tile-number{letter-spacing:-.02em}
+.ophtha-merge-tile.level-1{color:#17243a!important}.ophtha-merge-tile.level-2{color:#17243a!important}.ophtha-merge-tile.level-3{color:#173a2e!important}.ophtha-merge-tile.level-4{color:#3e3970!important}.ophtha-merge-tile.level-5{color:#7d321f!important}.ophtha-merge-tile.level-6{color:#6a4709!important}.ophtha-merge-tile.level-7{color:#205a4d!important}.ophtha-merge-tile.level-8{color:#254f76!important}.ophtha-merge-tile.level-9{color:#443679!important}.ophtha-merge-tile.level-10{color:#5e4107!important}.ophtha-merge-tile.tile-super{color:#f4d98a!important}
 .ophtha-merge-page .button.secondary,.ophtha-merge-compact-button{background:#fff!important;border-color:#aebed0!important;color:#10233c!important;box-shadow:0 5px 16px rgba(4,18,37,.06)}
 .ophtha-merge-page .button.secondary:hover,.ophtha-merge-compact-button:hover{background:#edf3f9!important;border-color:#6f8eae!important;color:#071a31!important}
 .ophtha-merge-compact-button:disabled{background:#738292!important;border-color:#738292!important;color:#fff!important;opacity:1!important;cursor:not-allowed;box-shadow:none}
 .ophtha-merge-mode{color:#42546b}.ophtha-merge-mode.is-active{color:#fff}
+.ophtha-merge-profile-name-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:4px 0 12px}.ophtha-merge-profile-name-row h2{margin:0!important}
+.ophtha-merge-player-name-row{display:flex!important;align-items:center;gap:6px;min-width:0}.ophtha-merge-player-name-row strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ophtha-merge-player-level{display:inline-flex!important;align-items:center;justify-content:center;flex:none;max-width:120px;padding:3px 7px;border:1px solid rgba(139,106,40,.34);border-radius:999px;background:#fff6dc;color:#6a4a0a;font-size:9px!important;font-weight:900;letter-spacing:.03em;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ophtha-merge-profile-level{max-width:none;padding:5px 9px;font-size:10px!important}
 
 html[data-site-theme="dark"] .ophtha-merge-score-card,
 html[data-site-theme="dark"] .ophtha-merge-modes,
@@ -20,6 +25,7 @@ html[data-site-theme="dark"] .ophtha-merge-stats dd,
 html[data-site-theme="dark"] .ophtha-merge-dialog-tab:not(.is-active){color:#edf4fb}
 html[data-site-theme="dark"] .ophtha-merge-stats div{background:#102a47;color:#edf4fb}
 html[data-site-theme="dark"] .ophtha-merge-rank{background:#17304d;color:#edf4fb}
+html[data-site-theme="dark"] .ophtha-merge-player-level{background:#2b2514;border-color:#8d7435;color:#f4d98a}
 html[data-site-theme="dark"] .ophtha-merge-page .button.secondary,
 html[data-site-theme="dark"] .ophtha-merge-compact-button{background:#17304d!important;border-color:#456786!important;color:#edf4fb!important}
 html[data-site-theme="dark"] .ophtha-merge-page .button.secondary:hover,
@@ -36,4 +42,6 @@ html[data-site-theme="dark"] .ophtha-merge-mode.is-active{background:#4d8eff;col
   .ophtha-merge-tile-icon{width:clamp(26px,8vw,38px);height:clamp(26px,8vw,38px);stroke-width:2.2}
   .ophtha-merge-tile-label{font-size:9px;line-height:1.05}
   .ophtha-merge-board-wrap{box-shadow:0 14px 38px rgba(4,18,37,.18)}
+  .ophtha-merge-player-level{max-width:92px;font-size:8px!important;padding:3px 6px}
+  .ophtha-merge-profile-level{max-width:none;font-size:10px!important}
 }

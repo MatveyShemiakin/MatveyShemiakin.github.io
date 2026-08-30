@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script src="/analytics.js?v=20260811-2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ophtha Merge — Ophtha Arcade | Matvey Shemyakin</title>
+  <meta name="description" content="Ophtha Merge — a short browser merge game for ophthalmologists with persistent progress and a global leaderboard.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://matveyshemyakin.ru/en/for-doctors/ophtha-arcade/ophtha-merge/">
+  <link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/">
+  <link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/for-doctors/ophtha-arcade/ophtha-merge/">
+  <link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/mobile-fix.css?v=20260806-3">
+  <link rel="stylesheet" href="/mobile-nav.css?v=20260806-3">
+  <script src="/site-theme-init.js?v=20260806-1"></script>
+  <link rel="stylesheet" href="/site-theme.css?v=20260806-1">
+  <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
+  <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">
+  <link rel="stylesheet" href="/for-doctors/ophtha-arcade/arcade-shell.css?v=20260830-1">
+  <link rel="stylesheet" href="/for-doctors/ophtha-arcade/ophtha-merge/ophtha-merge.css?v=20260830-3">
+</head>
+<body class="ophtha-merge-page">
+  <header class="doctors-header">
+    <div class="container doctors-nav">
+      <a class="monogram" href="/en/" aria-label="Home">MS</a>
+      <div class="doctors-nav-actions">
+        <a class="ophtha-arcade-shell-link" href="/en/for-doctors/ophtha-arcade/">← Ophtha Arcade</a>
+        <a href="/en/for-doctors/">For clinicians</a>
+        <div class="doctors-language" aria-label="Section language">
+          <a href="/for-doctors/ophtha-arcade/ophtha-merge/" lang="ru" hreflang="ru">RU</a>
+          <a class="active" href="/en/for-doctors/ophtha-arcade/ophtha-merge/" lang="en" hreflang="en" aria-current="page">EN</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="ophtha-merge-main" id="content-material">
+    <section class="ophtha-merge-hero">
+      <div class="container">
+        <p class="eyebrow">Ophtha Arcade · game #1</p>
+        <div class="ophtha-merge-title-row">
+          <div>
+            <h1>Ophtha Merge</h1>
+            <p>Swipe, merge matching tiles and keep climbing with no maximum tile limit.</p>
+          </div>
+          <span class="ophtha-merge-save-status" id="save-status" aria-live="polite">Progress saves automatically</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="ophtha-merge-game-section" aria-label="Ophtha Merge game board">
+      <div class="container ophtha-merge-layout">
+        <div class="ophtha-merge-play-column">
+          <div class="ophtha-merge-scorebar" aria-label="Current result">
+            <div class="ophtha-merge-score-card"><span>Score</span><strong id="score-value">0</strong><em id="score-gain" aria-live="polite"></em></div>
+            <div class="ophtha-merge-score-card"><span>Best</span><strong id="best-value">0</strong></div>
+            <div class="ophtha-merge-score-card"><span>Tile</span><strong id="max-tile-value">2</strong></div>
+            <div class="ophtha-merge-score-card ophtha-merge-timer-card" id="timer-card"><span>Time</span><strong id="timer-value">∞</strong></div>
+          </div>
+
+          <div class="ophtha-merge-toolbar" aria-label="Mode and actions">
+            <div class="ophtha-merge-modes" role="group" aria-label="Game mode">
+              <button class="ophtha-merge-mode is-active" id="mode-classic" type="button" data-mode="classic">Classic</button>
+              <button class="ophtha-merge-mode" id="mode-sprint" type="button" data-mode="sprint">Sprint 60s</button>
+            </div>
+            <div class="ophtha-merge-actions">
+              <button class="button secondary ophtha-merge-compact-button" id="undo-button" type="button">↶ Undo</button>
+              <button class="button secondary ophtha-merge-compact-button" id="new-game-button" type="button">New game</button>
+            </div>
+          </div>
+
+          <div class="ophtha-merge-board-wrap" id="game-play-zone">
+            <div class="ophtha-merge-board" id="game-board" role="application" aria-label="4 by 4 board. Use swipes or arrow keys." tabindex="0"></div>
+            <div class="ophtha-merge-game-over" id="game-over-panel" hidden>
+              <p class="eyebrow">Game over</p>
+              <h2 id="game-over-title">No moves left</h2>
+              <p id="game-over-summary"></p>
+              <button class="button primary" id="game-over-restart" type="button">Play again</button>
+            </div>
+          </div>
+
+          <p class="ophtha-merge-swipe-hint">Swipe ← ↑ → ↓ · arrow keys on desktop</p>
+
+          <div class="ophtha-merge-mobile-actions">
+            <button class="button primary" id="leaderboard-button" type="button">Global leaderboard</button>
+            <button class="button secondary" id="share-button" type="button">Share result</button>
+          </div>
+        </div>
+
+        <aside class="ophtha-merge-sidebar" aria-label="Progress and leaderboard">
+          <section class="ophtha-merge-panel" id="ranking">
+            <div class="ophtha-merge-panel-head"><div><p class="section-kicker dark-kicker">Online</p><h2>Global leaderboard</h2></div><span class="ophtha-merge-live-dot" aria-hidden="true"></span></div>
+            <ol class="ophtha-merge-leaderboard-preview" id="leaderboard-preview" aria-live="polite">
+              <li class="ophtha-merge-loading">Loading leaderboard…</li>
+            </ol>
+            <button class="button secondary" id="leaderboard-open-secondary" type="button">Show Top 20</button>
+          </section>
+
+          <section class="ophtha-merge-panel">
+            <p class="section-kicker dark-kicker">Your profile</p>
+            <div class="ophtha-merge-profile-name-row"><h2 id="profile-name">Doctor</h2><span class="ophtha-merge-player-level ophtha-merge-profile-level" id="profile-level">Resident</span></div>
+            <p class="ophtha-merge-profile-copy">Your level grows with your personal best. Your nickname is stored in this browser.</p>
+            <button class="button secondary" id="edit-profile-button" type="button">Edit name</button>
+          </section>
+
+          <section class="ophtha-merge-panel">
+            <p class="section-kicker dark-kicker">Statistics</p>
+            <dl class="ophtha-merge-stats">
+              <div><dt>Games</dt><dd id="stat-games">0</dd></div>
+              <div><dt>Best tile</dt><dd id="stat-tile">0</dd></div>
+              <div><dt>Total moves</dt><dd id="stat-moves">0</dd></div>
+              <div><dt>Best score</dt><dd id="stat-score">0</dd></div>
+            </dl>
+          </section>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="ophtha-merge-dialog" id="leaderboard-dialog">
+    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Ophtha Merge</p><h2>Global leaderboard</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Close">×</button></div>
+    <div class="ophtha-merge-dialog-tabs" role="group" aria-label="Leaderboard mode">
+      <button class="ophtha-merge-dialog-tab is-active" type="button" data-rank-mode="classic">Classic</button>
+      <button class="ophtha-merge-dialog-tab" type="button" data-rank-mode="sprint">Sprint 60s</button>
+    </div>
+    <ol class="ophtha-merge-leaderboard-full" id="leaderboard-full"></ol>
+    <p class="ophtha-merge-dialog-note" id="leaderboard-status" aria-live="polite"></p>
+  </dialog>
+
+  <dialog class="ophtha-merge-dialog ophtha-merge-profile-dialog" id="profile-dialog">
+    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Leaderboard profile</p><h2>How should we show you?</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Close">×</button></div>
+    <label class="ophtha-merge-field">Nickname<input id="profile-input" type="text" maxlength="23" autocomplete="nickname" placeholder="Doctor 4F2A"></label>
+    <p class="ophtha-merge-dialog-note">Do not enter personal data unless you want it shown publicly on the leaderboard.</p>
+    <button class="button primary" id="profile-save-button" type="button">Save</button>
+  </dialog>
+
+  <dialog class="ophtha-merge-dialog ophtha-merge-milestone-dialog" id="milestone-dialog">
+    <div class="ophtha-merge-milestone-tile" id="milestone-tile">1024</div>
+    <p class="eyebrow">New milestone</p>
+    <h2 id="milestone-title">Legendary IOL</h2>
+    <p id="milestone-copy">The game continues — there is no final cap.</p>
+    <button class="button primary" id="milestone-continue" type="button">Continue</button>
+  </dialog>
+
+  <dialog class="ophtha-merge-dialog" id="settings-dialog">
+    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Settings</p><h2>Game feel</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Close">×</button></div>
+    <div class="ophtha-merge-settings-row"><span>Merge sound</span><button class="button secondary" id="sound-toggle" type="button">Off</button></div>
+    <div class="ophtha-merge-settings-row"><span>Haptics</span><button class="button secondary" id="haptics-toggle" type="button">On</button></div>
+  </dialog>
+
+  <button class="ophtha-merge-settings-fab" id="settings-button" type="button" aria-label="Game settings">⚙</button>
+
+  <footer class="site-footer"><div class="container footer-row"><span>MS</span><p>Matvey Yuryevich Shemyakin · ophthalmologist · ophthalmic surgeon</p></div></footer>
+  <script type="module" src="/for-doctors/ophtha-arcade/ophtha-merge/app.js?v=20260830-3"></script>
+  <script src="/site-theme.js?v=20260806-1" defer></script>
+  <script src="/site-motion.js?v=20260806-1" defer></script>
+  <script src="/mobile-nav.js?v=20260806-3" defer></script>
+  <script src="/legal.js?v=20260721-3"></script>
+  <script src="/doctors-legal.js?v=20260816-2"></script>
+  <script defer src="/site-mega-nav.js?v=20260816-2"></script>
+</body>
+</html>

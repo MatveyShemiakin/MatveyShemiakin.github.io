@@ -8,12 +8,46 @@ CSS_LINK = '<link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=202
 JS_SCRIPT = '<script defer src="/for-doctors/doctor-retention.js?v=20260825-1"></script>'
 START = '<!-- doctor-retention:start -->'
 END = '<!-- doctor-retention:end -->'
-SERVICE_SLUGS = {'updates'}
+SERVICE_SLUGS = {'updates', 'ophtha-arcade'}
 
 
 def is_material_slug(slug: str) -> bool:
     value = str(slug or '').strip()
     return bool(value) and value not in SERVICE_SLUGS and not value.startswith('.')
+
+
+def arcade_card(lang: str) -> str:
+    en = str(lang or '').lower().startswith('en')
+    if en:
+        href = '/en/for-doctors/ophtha-arcade/'
+        label = 'Ophtha Arcade · game breaks'
+        copy = 'Short ophthalmology mini-games for 1–3 minute breaks. Start with Ophtha Merge, persistent progress and a global leaderboard.'
+        link = 'Open Ophtha Arcade →'
+        aria = 'Ophtha Arcade — short games for ophthalmologists'
+    else:
+        href = '/for-doctors/ophtha-arcade/'
+        label = 'Ophtha Arcade · игровые паузы'
+        copy = 'Короткие офтальмологические мини‑игры на 1–3 минуты. Первый режим — Ophtha Merge с сохранением прогресса и глобальным рейтингом.'
+        link = 'Открыть Ophtha Arcade →'
+        aria = 'Ophtha Arcade — короткие офтальмологические игры для врачей'
+    return (
+        f'<a class="library-card" href="{href}">'
+        f'<div class="library-image collaboration" role="img" aria-label="{aria}">'
+        '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="8" width="20" height="20" rx="5"/><rect x="36" y="8" width="20" height="20" rx="5"/><rect x="8" y="36" width="20" height="20" rx="5"/><rect class="gold" x="36" y="36" width="20" height="20" rx="5"/><path class="gold" d="M42 46h8M46 42v8"/></svg>'
+        '</div><div class="library-copy">'
+        f'<span class="library-label">{label}</span><h2>Ophtha Arcade</h2><p>{copy}</p>'
+        f'<span class="library-link">{link}</span></div></a>'
+    )
+
+
+def ensure_arcade_card(text: str, lang: str) -> str:
+    href = '/en/for-doctors/ophtha-arcade/' if str(lang or '').lower().startswith('en') else '/for-doctors/ophtha-arcade/'
+    if f'href="{href}"' in text:
+        return text
+    match = re.search(r'<div\s+class="library-grid"[^>]*>', text)
+    if not match:
+        return text
+    return text[:match.end()] + arcade_card(lang) + text[match.end():]
 
 
 def _assets(text: str) -> str:
@@ -125,6 +159,7 @@ def _replace_marker(text: str, shell: str) -> tuple[str, bool]:
 
 def inject_hub(text: str, lang: str) -> str:
     text = _assets(text)
+    text = ensure_arcade_card(text, lang)
     shell = hub_shell(lang)
     text, replaced = _replace_marker(text, shell)
     if replaced:

@@ -38,12 +38,12 @@ export function clearGame(mode, store = defaultStore()) {
   store.removeItem(gameKey(mode));
 }
 
-export function loadProfile(store = defaultStore(), uuidFactory = () => globalThis.crypto.randomUUID()) {
+export function loadProfile(store = defaultStore(), uuidFactory = () => globalThis.crypto.randomUUID(), defaultLabel = 'Доктор') {
   const stored = safeParse(store.getItem(PROFILE_KEY), null);
   if (stored?.playerId && stored?.displayName) return stored;
   const playerId = uuidFactory();
   const suffix = String(playerId).replace(/-/g, '').slice(-4).toUpperCase();
-  const profile = { playerId, displayName: `Доктор ${suffix}` };
+  const profile = { playerId, displayName: `${String(defaultLabel || 'Доктор').trim()} ${suffix}` };
   saveProfile(profile, store);
   return profile;
 }

@@ -18,12 +18,15 @@ import {
   saveProfile
 } from './storage.js';
 import { loadLeaderboard, submitScore } from './leaderboard-client.js';
+import { levelForScore } from './levels.js';
+import { pageLanguage, tileLabel, uiText } from './i18n.js';
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
-const numberFormat = new Intl.NumberFormat('ru-RU');
+const language = pageLanguage();
+const numberFormat = new Intl.NumberFormat(language === 'en' ? 'en-US' : 'ru-RU');
 const stateByMode = new Map();
-const profile = loadProfile();
+const profile = loadProfile(undefined, undefined, uiText('defaultDoctor', language));
 let prefs = loadPrefs();
 let state;
 let timerHandle = null;
@@ -33,16 +36,16 @@ let submitting = false;
 let touchStart = null;
 let audioContext = null;
 
-const TILE_META = new Map([
-  [2, ['∙', 'Капля']],
-  [4, ['◒', 'Линза']],
-  [8, ['◉', 'Роговица']],
-  [16, ['◎', 'Ирис']],
-  [32, ['⌁', 'Сетчатка']],
-  [64, ['IOL', 'ИОЛ']],
-  [128, ['OCT', 'ОСТ']],
-  [256, ['✦', 'Лазер']],
-  [512, ['⌖', 'Микроскоп']]
+const TILE_MARKS = new Map([
+  [2, '∙'],
+  [4, '◒'],
+  [8, '◉'],
+  [16, '◎'],
+  [32, '⌁'],
+  [64, 'IOL'],
+  [128, 'OCT'],
+  [256, '✦'],
+  [512, '⌖']
 ]);
 
 function now() { return Date.now(); }
@@ -121,9 +124,8 @@ function setModeButtons() {
 }
 
 function tileMeta(value) {
-  if (TILE_META.has(value)) return TILE_META.get(value);
   const level = Math.log2(value);
-  return ['◆', level === 10 ? 'Legendary IOL' : `Legendary IOL · L${level - 9}`];
+  return [TILE_MARKS.get(value) || '◆', tileLabel(value, language), level];
 }
 
 function renderBoard({ mergedValues = [], newIndex = -1, direction = '' } = {}) {
@@ -178,6 +180,13 @@ function renderScores() {
 function renderProfile() {
   $('#profile-name').textContent = profile.displayName;
   $('#profile-input').value = profile.displayName;
+  const savedBest = loadStats().bestScore || 0;
+  const level = levelForScore(Math.max(state?.bestScore || 0, state?.score || 0, savedBest));
+  const badge = $('#profile-level');
+  if (badge) {
+    badge.textContent = level.name;
+    badge.setAttribute('aria-label', `${uiText('profileLevel', language)}: ${level.name}`);
+  }
 }
 
 function renderStats() {
@@ -197,8 +206,8 @@ function render() {
   const over = $('#game-over-panel');
   over.hidden = !state.finished;
   if (state.finished) {
-    $('#game-over-title').textContent = state.mode === 'sprint' ? '60 секунд закончились' : 'Ходов больше нет';
-    $('#game-over-summary').textContent = `Счёт ${format(state.score)} · плитка ${format(state.maxTile)}`;
+    $('#game-over-title').textContent = state.mode === 'sprint' ? uiText('gameOverTime', language) : uiText('gameOverMoves', language);
+    $('#game-over-summary').textContent = `${uiText('score', language)} ${format(state.score)} · ${uiText('tile', language)} ${format(state.maxTile)}`;
   }
   updateTimer();
 }
@@ -268,6 +277,7 @@ function move(direction) {
 
   renderBoard({ mergedValues: result.merges, newIndex, direction });
   renderScores();
+  renderProfile();
   showGain(result.gained);
   if (result.merges.length) {
     haptic(result.merges.length > 1 ? [8, 20, 8] : 12);
@@ -294,7 +304,7 @@ function undo() {
   saveGame(state);
   haptic(14);
   render();
-  announceSave('Последний ход отменён');
+  announceSave(uiText('undoDone', language));
 }
 
 function restart(mode = state.mode) {
@@ -307,7 +317,7 @@ function restart(mode = state.mode) {
   saveGame(state);
   startTimer();
   render();
-  announceSave('Новая партия');
+  announceSave(uiText('newGame', language));
 }
 
 function finishGame(reason) {
@@ -329,17 +339,17 @@ function checkMilestone() {
   saveGame(state);
   const level = Math.log2(state.maxTile);
   $('#milestone-tile').textContent = format(state.maxTile);
-  $('#milestone-title').textContent = level === 10 ? 'Legendary IOL' : `Legendary IOL · уровень ${level - 9}`;
-  $('#milestone-copy').textContent = `Плитка ${format(state.maxTile)} достигнута. Игра продолжается — следующего предела нет.`;
+  $('#milestone-title').textContent = level === 10 ? 'Legendary IOL' : `Legendary IOL · ${uiText('milestoneLevel', language)} ${level - 9}`;
+  $('#milestone-copy').textContent = `${uiText('milestoneCopyPrefix', language)} ${format(state.maxTile)} ${uiText('milestoneCopySuffix', language)}`;
   $('#milestone-dialog').showModal();
   tone(660, .12);
 }
 
-function announceSave(text = 'Прогресс сохранён') {
+function announceSave(text = uiText('saved', language)) {
   const node = $('#save-status');
   node.textContent = text;
   clearTimeout(announceSave.timer);
-  announceSave.timer = setTimeout(() => { node.textContent = 'Прогресс сохраняется автоматически'; }, 1500);
+  announceSave.timer = setTimeout(() => { node.textContent = uiText('autosave', language); }, 1500);
 }
 
 function startTimer() {
@@ -363,7 +373,7 @@ function updateTimer() {
     return;
   }
   const remaining = Math.max(0, (state.endsAt || now()) - now());
-  $('#timer-value').textContent = `${(remaining / 1000).toFixed(1)}с`;
+  $('#timer-value').textContent = `${(remaining / 1000).toFixed(1)}s`;
 }
 
 async function maybeSubmit(force = false) {
@@ -373,10 +383,10 @@ async function maybeSubmit(force = false) {
   try {
     const response = await submitScore(profile, state, elapsedMs());
     lastSubmittedScore = Math.max(lastSubmittedScore, state.score);
-    $('#leaderboard-status').textContent = `Ваш текущий ранг: #${response.rank}`;
+    $('#leaderboard-status').textContent = `${uiText('currentRank', language)}: #${response.rank}`;
     refreshLeaderboardPreview();
   } catch (error) {
-    if (error.status !== 429) $('#leaderboard-status').textContent = 'Рейтинг временно недоступен. Игра и локальный прогресс продолжают работать.';
+    if (error.status !== 429) $('#leaderboard-status').textContent = uiText('leaderboardUnavailable', language);
   } finally {
     submitting = false;
   }
@@ -389,11 +399,17 @@ function leaderboardItem(entry) {
   rank.textContent = entry.rank;
   const player = document.createElement('span');
   player.className = 'ophtha-merge-player';
+  const nameRow = document.createElement('span');
+  nameRow.className = 'ophtha-merge-player-name-row';
   const name = document.createElement('strong');
   name.textContent = entry.displayName;
+  const playerLevel = document.createElement('span');
+  playerLevel.className = 'ophtha-merge-player-level';
+  playerLevel.textContent = levelForScore(entry.score).name;
+  nameRow.append(name, playerLevel);
   const detail = document.createElement('span');
-  detail.textContent = `плитка ${format(entry.maxTile)}`;
-  player.append(name, detail);
+  detail.textContent = `${uiText('tile', language)} ${format(entry.maxTile)}`;
+  player.append(nameRow, detail);
   const score = document.createElement('strong');
   score.className = 'ophtha-merge-leader-score';
   score.textContent = format(entry.score);
@@ -410,13 +426,13 @@ async function refreshLeaderboardPreview() {
     if (!data.entries.length) {
       const empty = document.createElement('li');
       empty.className = 'ophtha-merge-loading';
-      empty.textContent = 'Будьте первым в рейтинге.';
+      empty.textContent = uiText('firstInRanking', language);
       list.append(empty);
       return;
     }
     data.entries.forEach((entry) => list.append(leaderboardItem(entry)));
   } catch {
-    list.innerHTML = '<li class="ophtha-merge-loading">Офлайн: локальная игра доступна.</li>';
+    list.innerHTML = `<li class="ophtha-merge-loading">${uiText('offline', language)}</li>`;
   }
 }
 
@@ -424,14 +440,14 @@ async function renderFullLeaderboard(mode = leaderboardMode) {
   leaderboardMode = mode;
   $$('.ophtha-merge-dialog-tab').forEach((button) => button.classList.toggle('is-active', button.dataset.rankMode === mode));
   const list = $('#leaderboard-full');
-  list.innerHTML = '<li class="ophtha-merge-loading">Загрузка…</li>';
+  list.innerHTML = `<li class="ophtha-merge-loading">${uiText('loading', language)}</li>`;
   try {
     const data = await loadLeaderboard(mode, 20);
     list.innerHTML = '';
     data.entries.forEach((entry) => list.append(leaderboardItem(entry)));
-    if (!data.entries.length) list.innerHTML = '<li class="ophtha-merge-loading">Рейтинг пока пуст.</li>';
+    if (!data.entries.length) list.innerHTML = `<li class="ophtha-merge-loading">${uiText('rankingEmpty', language)}</li>`;
   } catch {
-    list.innerHTML = '<li class="ophtha-merge-loading">Не удалось загрузить рейтинг. Попробуйте позже.</li>';
+    list.innerHTML = `<li class="ophtha-merge-loading">${uiText('rankingLoadFailed', language)}</li>`;
   }
 }
 
@@ -441,13 +457,15 @@ function openLeaderboard() {
 }
 
 async function shareResult() {
-  const text = `Ophtha Merge — ${format(state.score)} очков · плитка ${format(state.maxTile)}. Сможете выше?`;
-  const url = 'https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/';
+  const text = `Ophtha Merge — ${format(state.score)} ${uiText('sharePoints', language)} · ${uiText('tile', language)} ${format(state.maxTile)}. ${uiText('shareChallenge', language)}`;
+  const url = language === 'en'
+    ? 'https://matveyshemyakin.ru/en/for-doctors/ophtha-arcade/ophtha-merge/'
+    : 'https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/';
   try {
     if (navigator.share) await navigator.share({ title: 'Ophtha Merge', text, url });
     else {
       await navigator.clipboard.writeText(`${text}\n${url}`);
-      announceSave('Результат скопирован');
+      announceSave(uiText('resultCopied', language));
     }
   } catch {}
 }
@@ -463,8 +481,8 @@ function saveProfileFromDialog() {
 }
 
 function updateSettings() {
-  $('#sound-toggle').textContent = prefs.sound ? 'Вкл' : 'Выкл';
-  $('#haptics-toggle').textContent = prefs.haptics ? 'Вкл' : 'Выкл';
+  $('#sound-toggle').textContent = prefs.sound ? uiText('on', language) : uiText('off', language);
+  $('#haptics-toggle').textContent = prefs.haptics ? uiText('on', language) : uiText('off', language);
 }
 
 function onPointerDown(event) {
@@ -513,7 +531,7 @@ function bindEvents() {
 function init() {
   const saved = loadGame('classic');
   state = normalizeState(saved, 'classic');
-  if (saved) $('#save-status').textContent = 'Партия восстановлена';
+  if (saved) $('#save-status').textContent = uiText('restored', language);
   state.maxTile = Math.max(state.maxTile || 0, maxTile(state.board));
   state.bestScore = Math.max(state.bestScore || 0, state.score);
   saveGame(state);
