@@ -113,7 +113,12 @@ jobs:
           fs.writeFileSync(process.env.CANARY_CONFIG, JSON.stringify(config, null, 2));
           NODE
 
-          node -e "const c=require(process.env.CANARY_CONFIG); if(c.name==='matveyshemyakin-github-io') process.exit(1); if(c.d1_databases?.[0]?.binding!=='OPHTHASEARCH_DB') process.exit(1)"
+          node <<'NODE'
+          const fs = require('node:fs');
+          const c = JSON.parse(fs.readFileSync(process.env.CANARY_CONFIG, 'utf8'));
+          if (c.name === 'matveyshemyakin-github-io') process.exit(1);
+          if (c.d1_databases?.[0]?.binding !== 'OPHTHASEARCH_DB') process.exit(1);
+          NODE
 
       - name: Apply D1 migrations remotely
         shell: bash
