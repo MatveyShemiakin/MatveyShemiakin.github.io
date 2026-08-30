@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <script src="/analytics.js?v=20260811-2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ophtha Merge — Ophtha Arcade | Матвей Шемякин</title>
+  <meta name="description" content="Ophtha Merge — короткая браузерная игра для офтальмологов на основе механики объединения плиток.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://matveyshemyakin.ru/for-doctors/ophtha-arcade/ophtha-merge/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/mobile-fix.css?v=20260806-3">
+  <link rel="stylesheet" href="/mobile-nav.css?v=20260806-3">
+  <script src="/site-theme-init.js?v=20260806-1"></script>
+  <link rel="stylesheet" href="/site-theme.css?v=20260806-1">
+  <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
+  <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">
+  <link rel="stylesheet" href="./ophtha-merge.css?v=20260830-1">
+</head>
+<body class="ophtha-merge-page">
+  <header class="ophtha-merge-header">
+    <div class="container ophtha-merge-nav">
+      <a class="monogram" href="/" aria-label="На главную">МШ</a>
+      <nav class="ophtha-merge-nav-links" aria-label="Навигация Ophtha Arcade">
+        <a href="/for-doctors/">← Для врачей</a>
+        <a href="/for-doctors/ophtha-arcade/">Ophtha Arcade</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="ophtha-merge-main">
+    <section class="ophtha-merge-hero">
+      <div class="container">
+        <p class="eyebrow">Ophtha Arcade · игра №1</p>
+        <div class="ophtha-merge-title-row">
+          <div>
+            <h1>Ophtha Merge</h1>
+            <p>Свайпайте, объединяйте одинаковые плитки и поднимайтесь выше без ограничения максимального числа.</p>
+          </div>
+          <span class="ophtha-merge-save-status" id="save-status" aria-live="polite">Прогресс сохраняется автоматически</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="ophtha-merge-game-section" aria-label="Игровое поле Ophtha Merge">
+      <div class="container ophtha-merge-layout">
+        <div class="ophtha-merge-play-column">
+          <div class="ophtha-merge-scorebar" aria-label="Текущий результат">
+            <div class="ophtha-merge-score-card"><span>Счёт</span><strong id="score-value">0</strong><em id="score-gain" aria-live="polite"></em></div>
+            <div class="ophtha-merge-score-card"><span>Лучший</span><strong id="best-value">0</strong></div>
+            <div class="ophtha-merge-score-card"><span>Плитка</span><strong id="max-tile-value">2</strong></div>
+            <div class="ophtha-merge-score-card ophtha-merge-timer-card" id="timer-card"><span>Время</span><strong id="timer-value">∞</strong></div>
+          </div>
+
+          <div class="ophtha-merge-toolbar" aria-label="Режим и действия">
+            <div class="ophtha-merge-modes" role="group" aria-label="Режим игры">
+              <button class="ophtha-merge-mode is-active" id="mode-classic" type="button" data-mode="classic">Классика</button>
+              <button class="ophtha-merge-mode" id="mode-sprint" type="button" data-mode="sprint">Sprint 60s</button>
+            </div>
+            <div class="ophtha-merge-actions">
+              <button class="button secondary ophtha-merge-compact-button" id="undo-button" type="button">↶ Undo</button>
+              <button class="button secondary ophtha-merge-compact-button" id="new-game-button" type="button">Новая игра</button>
+            </div>
+          </div>
+
+          <div class="ophtha-merge-board-wrap" id="game-play-zone">
+            <div class="ophtha-merge-board" id="game-board" role="application" aria-label="Поле 4 на 4. Используйте свайпы или стрелки клавиатуры." tabindex="0"></div>
+            <div class="ophtha-merge-game-over" id="game-over-panel" hidden>
+              <p class="eyebrow">Партия завершена</p>
+              <h2 id="game-over-title">Ходов больше нет</h2>
+              <p id="game-over-summary"></p>
+              <button class="button primary" id="game-over-restart" type="button">Играть снова</button>
+            </div>
+          </div>
+
+          <p class="ophtha-merge-swipe-hint">Свайп ← ↑ → ↓ · клавиши-стрелки на компьютере</p>
+
+          <div class="ophtha-merge-mobile-actions">
+            <button class="button primary" id="leaderboard-button" type="button">Глобальный рейтинг</button>
+            <button class="button secondary" id="share-button" type="button">Поделиться результатом</button>
+          </div>
+        </div>
+
+        <aside class="ophtha-merge-sidebar" aria-label="Прогресс и рейтинг">
+          <section class="ophtha-merge-panel">
+            <div class="ophtha-merge-panel-head"><div><p class="section-kicker dark-kicker">Онлайн</p><h2>Глобальный рейтинг</h2></div><span class="ophtha-merge-live-dot" aria-hidden="true"></span></div>
+            <ol class="ophtha-merge-leaderboard-preview" id="leaderboard-preview" aria-live="polite">
+              <li class="ophtha-merge-loading">Загрузка рейтинга…</li>
+            </ol>
+            <button class="button secondary" id="leaderboard-open-secondary" type="button">Показать Top‑20</button>
+          </section>
+
+          <section class="ophtha-merge-panel">
+            <p class="section-kicker dark-kicker">Ваш профиль</p>
+            <h2 id="profile-name">Доктор</h2>
+            <p class="ophtha-merge-profile-copy">Псевдоним хранится в этом браузере. Регистрация не требуется.</p>
+            <button class="button secondary" id="edit-profile-button" type="button">Изменить имя</button>
+          </section>
+
+          <section class="ophtha-merge-panel">
+            <p class="section-kicker dark-kicker">Статистика</p>
+            <dl class="ophtha-merge-stats">
+              <div><dt>Партий</dt><dd id="stat-games">0</dd></div>
+              <div><dt>Лучшая плитка</dt><dd id="stat-tile">0</dd></div>
+              <div><dt>Всего ходов</dt><dd id="stat-moves">0</dd></div>
+              <div><dt>Рекорд</dt><dd id="stat-score">0</dd></div>
+            </dl>
+          </section>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="ophtha-merge-dialog" id="leaderboard-dialog">
+    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Ophtha Merge</p><h2>Глобальный рейтинг</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button></div>
+    <div class="ophtha-merge-dialog-tabs" role="group" aria-label="Режим рейтинга">
+      <button class="ophtha-merge-dialog-tab is-active" type="button" data-rank-mode="classic">Классика</button>
+      <button class="ophtha-merge-dialog-tab" type="button" data-rank-mode="sprint">Sprint 60s</button>
+    </div>
+    <ol class="ophtha-merge-leaderboard-full" id="leaderboard-full"></ol>
+    <p class="ophtha-merge-dialog-note" id="leaderboard-status" aria-live="polite"></p>
+  </dialog>
+
+  <dialog class="ophtha-merge-dialog ophtha-merge-profile-dialog" id="profile-dialog">
+    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Профиль рейтинга</p><h2>Как вас показывать?</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button></div>
+    <label class="ophtha-merge-field">Псевдоним<input id="profile-input" type="text" maxlength="23" autocomplete="nickname" placeholder="Доктор 4F2A"></label>
+    <p class="ophtha-merge-dialog-note">Не указывайте персональные данные, если не хотите публиковать их в рейтинге.</p>
+    <button class="button primary" id="profile-save-button" type="button">Сохранить</button>
+  </dialog>
+
+  <dialog class="ophtha-merge-dialog ophtha-merge-milestone-dialog" id="milestone-dialog">
+    <div class="ophtha-merge-milestone-tile" id="milestone-tile">1024</div>
+    <p class="eyebrow">Новая вершина</p>
+    <h2 id="milestone-title">Legendary IOL</h2>
+    <p id="milestone-copy">Игра продолжается — следующего предела нет.</p>
+    <button class="button primary" id="milestone-continue" type="button">Продолжить</button>
+  </dialog>
+
+  <dialog class="ophtha-merge-dialog" id="settings-dialog">
+    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Настройки</p><h2>Ощущение игры</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button></div>
+    <div class="ophtha-merge-settings-row"><span>Звук merge</span><button class="button secondary" id="sound-toggle" type="button">Выкл</button></div>
+    <div class="ophtha-merge-settings-row"><span>Виброотдача</span><button class="button secondary" id="haptics-toggle" type="button">Вкл</button></div>
+  </dialog>
+
+  <button class="ophtha-merge-settings-fab" id="settings-button" type="button" aria-label="Настройки игры">⚙</button>
+
+  <script type="module" src="./app.js?v=20260830-1"></script>
+  <script src="/site-theme.js?v=20260806-1" defer></script>
+  <script src="/site-motion.js?v=20260806-1" defer></script>
+  <script src="/mobile-nav.js?v=20260806-3" defer></script>
+</body>
+</html>
