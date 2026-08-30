@@ -1,12 +1,11 @@
 <!doctype html>
 <html lang="ru" data-site-theme-family="doctors">
 <head>
-  <script src="/analytics.js?v=20260811-2"></script><script type="application/ld+json" data-yandex-content-analytics="true">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://matveyshemyakin.ru/for-doctors/","name":"Для врачей"}},{"@type":"ListItem","position":2,"item":{"@id":"https://matveyshemyakin.ru/for-doctors/ophthasearch/","name":"Ophthasearch"}}]},{"@type":"Article","@id":"https://matveyshemyakin.ru/for-doctors/ophthasearch/#content-material","url":"https://matveyshemyakin.ru/for-doctors/ophthasearch/#content-material","headline":"OphthaSearch","mainEntityOfPage":"https://matveyshemyakin.ru/for-doctors/ophthasearch/","inLanguage":"ru","author":{"@type":"Person","@id":"https://matveyshemyakin.ru/#person","name":"Матвей Юрьевич Шемякин"},"about":[{"@type":"MedicalCondition","name":"Ophthasearch"},{"@type":"Thing","name":"Офтальмология"}]}]}</script>
-  
+  <script src="/analytics.js?v=20260811-2"></script><script type="application/ld+json" data-yandex-content-analytics="true">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://matveyshemyakin.ru/for-doctors/","name":"Для врачей"}},{"@type":"ListItem","position":2,"item":{"@id":"https://matveyshemyakin.ru/for-doctors/ophthasearch/","name":"OphthaSearch"}}]},{"@type":"Article","@id":"https://matveyshemyakin.ru/for-doctors/ophthasearch/#content-material","url":"https://matveyshemyakin.ru/for-doctors/ophthasearch/#content-material","headline":"OphthaSearch","mainEntityOfPage":"https://matveyshemyakin.ru/for-doctors/ophthasearch/","inLanguage":"ru","author":{"@type":"Person","@id":"https://matveyshemyakin.ru/#person","name":"Матвей Юрьевич Шемякин"},"about":[{"@type":"MedicalCondition","name":"Офтальмологические заболевания"},{"@type":"Thing","name":"Офтальмология"}]}]}</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OphthaSearch — клинический поиск доказательств в офтальмологии</title>
-  <meta name="description" content="OphthaSearch — профессиональный поиск для офтальмологов: релевантные публикации, клинические исследования, рекомендации и единый проверяемый клинический вывод.">
+  <meta name="description" content="OphthaSearch помогает офтальмологу находить релевантные научные данные и получать краткий клинический вывод со ссылками на первичные источники.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Матвей Юрьевич Шемякин">
   <meta name="theme-color" content="#041225">
@@ -25,7 +24,8 @@
   <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
   <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">
   <link rel="stylesheet" href="/for-doctors/doctors-updates.css?v=20260816-1">
-  <link rel="stylesheet" href="/for-doctors/ophthasearch-v2/ophthasearch-v2.css?v=20260825-3">
+  <link rel="stylesheet" href="/for-doctors/ophthasearch-v2/ophthasearch-v2.css?v=20260829-1">
+  <link rel="stylesheet" href="/for-doctors/ophthasearch-v2/ophthasearch-v2-modern.css?v=20260830-1">
   <link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=20260825-1">
 </head>
 <body class="ophtha-v2-page">
@@ -56,58 +56,104 @@
   </header>
 
   <main id="content-material">
-    <section class="ophtha-v2-hero" aria-labelledby="ophtha-v2-title">
-      <div class="container ophtha-v2-hero-grid">
-        <div class="ophtha-v2-brand">
-          <p class="eyebrow">Клинический поиск для офтальмологов</p>
-          <h1 id="ophtha-v2-title">OphthaSearch</h1>
-          <p class="ophtha-v2-brand-subtitle">От клинического вопроса — к проверяемому выводу</p>
-          <p class="ophtha-v2-brand-lead">Задайте вопрос в свободной форме. OphthaSearch интерпретирует его на сервере, ищет публикации и исследования в нескольких источниках, отбрасывает нерелевантные материалы и только после этого передаёт Evidence Pack в Gemma 4 для клинического синтеза.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="ophtha-v2-main" aria-labelledby="ophtha-v2-search-title">
-      <div class="container">
-        <div class="ophtha-v2-query-card">
-          <form class="ophtha-v2-search-form" data-v2-search-form role="search">
-            <label class="ophtha-v2-search-label" for="ophtha-v2-query" id="ophtha-v2-search-title">Клинический вопрос</label>
-            <input class="ophtha-v2-search-input" id="ophtha-v2-query" data-v2-query name="q" type="search" autocomplete="off" placeholder="Например: есть ли преимущество латанопроста перед тимололом при ПОУГ?">
-            <button class="button primary ophtha-v2-search-button" data-v2-submit type="submit">Исследовать</button>
-          </form>
-          <p class="ophtha-v2-status" data-v2-status role="status" aria-live="polite">Введите вопрос так, как сформулировали бы его при обсуждении клинического случая с коллегой.</p>
-        </div>
-
-        <div class="ophtha-v2-answer-shell" data-v2-answer-shell hidden>
-          <section class="ophtha-v2-bottom-line" aria-labelledby="ophtha-v2-bottom-line-title">
-            <div class="ophtha-v2-section-kicker">
-              <span>Клинический синтез</span>
-              <span class="ophtha-v2-confidence" data-v2-confidence></span>
+    <div class="ophtha-v2-experience">
+      <section class="ophtha-v2-landing" data-v2-landing aria-labelledby="ophtha-v2-title">
+        <div class="container ophtha-v2-landing-inner">
+          <div class="ophtha-v2-eye-stage" aria-hidden="true">
+            <div class="ophtha-v2-eye-mark" data-v2-eye-mark>
+              <span class="ophtha-v2-eye-lid ophtha-v2-eye-lid-top"></span>
+              <span class="ophtha-v2-eye-lid ophtha-v2-eye-lid-bottom"></span>
+              <span class="ophtha-v2-eye-iris"></span>
+              <span class="ophtha-v2-eye-pupil"></span>
+              <span class="ophtha-v2-eye-glint"></span>
+              <span class="ophtha-v2-eye-monogram">МШ</span>
             </div>
-            <h2 id="ophtha-v2-bottom-line-title">Клинический вывод</h2>
-            <p data-v2-bottom-line></p>
-            <div class="ophtha-v2-citations" data-v2-bottom-line-citations aria-label="Источники клинического вывода"></div>
-          </section>
-
-          <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-management-title">
-            <h2 id="ophtha-v2-management-title">Тактика</h2>
-            <div data-v2-management></div>
-          </section>
-
-          <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-important-title">
-            <h2 id="ophtha-v2-important-title">Важно учесть</h2>
-            <div data-v2-important></div>
-          </section>
-
-          <details class="ophtha-v2-card ophtha-v2-diagnostics">
-            <summary>Ключевые источники</summary>
-            <div data-v2-sources></div>
-          </details>
+          </div>
+          <h1 id="ophtha-v2-title">OphthaSearch</h1>
+          <p class="ophtha-v2-landing-copy">Клинический поиск и краткий синтез научных данных для офтальмолога.</p>
+          <div class="ophtha-v2-examples" aria-label="Примеры клинических запросов">
+            <button class="ophtha-v2-example" data-v2-example="Латанопрост или тимолол при первичной открытоугольной глаукоме?" type="button">ПОУГ · латанопрост vs тимолол</button>
+            <button class="ophtha-v2-example" data-v2-example="Витрэктомия или эписклеральное пломбирование при первичной регматогенной отслойке сетчатки?" type="button">RRD · PPV vs buckle</button>
+            <button class="ophtha-v2-example" data-v2-example="Yamane fixation versus sutured scleral fixation for dislocated intraocular lens" type="button">Дислокация ИОЛ · Yamane</button>
+          </div>
         </div>
+      </section>
 
-        <p class="ophtha-v2-disclaimer">OphthaSearch — инструмент поиска и синтеза научной информации для врачей, а не автономная система назначения лечения. Перед клиническим решением необходимо сопоставлять вывод с оригинальными публикациями, актуальными рекомендациями, инструкциями к препаратам и конкретной клинической ситуацией.</p>
-      </div>
-    </section>
+      <section class="ophtha-v2-search-zone" aria-labelledby="ophtha-v2-search-title">
+        <div class="ophtha-v2-composer-wrap">
+          <div class="container">
+            <div class="ophtha-v2-query-card">
+              <form class="ophtha-v2-search-form ophtha-v2-composer" data-v2-search-form role="search">
+                <label class="ophtha-v2-search-label" for="ophtha-v2-query" id="ophtha-v2-search-title">Клинический вопрос</label>
+                <input class="ophtha-v2-search-input" id="ophtha-v2-query" data-v2-query name="q" type="search" autocomplete="off" placeholder="Задайте клинический вопрос">
+                <button class="ophtha-v2-search-button" data-v2-submit type="submit" aria-label="Найти">↑</button>
+              </form>
+              <div class="ophtha-v2-query-meta">
+                <p class="ophtha-v2-privacy-notice" data-v2-privacy-notice>Не вводите ФИО пациента, контакты, номер истории/карты или другие прямые идентификаторы.</p>
+                <p class="ophtha-v2-status" data-v2-status role="status" aria-live="polite">Введите вопрос так, как сформулировали бы его при обсуждении клинического случая с коллегой.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ophtha-v2-results">
+        <div class="container">
+          <div class="ophtha-v2-answer-shell" data-v2-answer-shell hidden>
+            <section class="ophtha-v2-bottom-line" aria-labelledby="ophtha-v2-bottom-line-title">
+              <div class="ophtha-v2-section-kicker">
+                <span>Клинический вывод</span>
+                <span class="ophtha-v2-confidence" data-v2-confidence></span>
+              </div>
+              <h2 id="ophtha-v2-bottom-line-title">Что показывает литература</h2>
+              <p data-v2-bottom-line></p>
+              <div class="ophtha-v2-citations" data-v2-bottom-line-citations aria-label="Источники клинического вывода"></div>
+            </section>
+
+            <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-management-title">
+              <h2 id="ophtha-v2-management-title">Практическая тактика</h2>
+              <div data-v2-management></div>
+            </section>
+
+            <section class="ophtha-v2-card" aria-labelledby="ophtha-v2-important-title">
+              <h2 id="ophtha-v2-important-title">Важно учесть</h2>
+              <div data-v2-important></div>
+            </section>
+
+            <details class="ophtha-v2-card ophtha-v2-diagnostics">
+              <summary>Ключевые источники</summary>
+              <div data-v2-sources></div>
+            </details>
+
+            <section class="ophtha-v2-feedback" data-v2-feedback-shell hidden aria-labelledby="ophtha-v2-feedback-title">
+              <p class="ophtha-v2-feedback-title" id="ophtha-v2-feedback-title">Помог ли этот ответ?</p>
+              <div class="ophtha-v2-feedback-actions">
+                <button class="button secondary ophtha-v2-feedback-button" data-v2-feedback-helpful type="button">Полезно</button>
+                <button class="button secondary ophtha-v2-feedback-button" data-v2-feedback-problem type="button">Есть проблема</button>
+              </div>
+              <div class="ophtha-v2-feedback-details" data-v2-feedback-details hidden>
+                <fieldset class="ophtha-v2-feedback-fieldset">
+                  <legend>Что требует исправления?</legend>
+                  <label><input data-v2-feedback-tag type="checkbox" value="irrelevant_sources"> Нерелевантные источники</label>
+                  <label><input data-v2-feedback-tag type="checkbox" value="wrong_conclusion"> Неверный вывод</label>
+                  <label><input data-v2-feedback-tag type="checkbox" value="missing_evidence"> Пропущены важные данные</label>
+                  <label><input data-v2-feedback-tag type="checkbox" value="wrong_management"> Неверная тактика</label>
+                  <label><input data-v2-feedback-tag type="checkbox" value="citation_problem"> Проблема со ссылками</label>
+                  <label><input data-v2-feedback-tag type="checkbox" value="too_slow"> Слишком долго</label>
+                  <label><input data-v2-feedback-tag type="checkbox" value="other"> Другое</label>
+                </fieldset>
+                <label class="ophtha-v2-feedback-comment-label" for="ophtha-v2-feedback-comment">Комментарий — необязательно</label>
+                <textarea class="ophtha-v2-feedback-comment" id="ophtha-v2-feedback-comment" data-v2-feedback-comment rows="3" maxlength="1000"></textarea>
+                <button class="button secondary ophtha-v2-feedback-submit" data-v2-feedback-submit type="button">Отправить оценку</button>
+              </div>
+              <p class="ophtha-v2-feedback-status" data-v2-feedback-status role="status" aria-live="polite"></p>
+            </section>
+          </div>
+
+          <p class="ophtha-v2-disclaimer">OphthaSearch помогает находить и синтезировать научную информацию. Клиническое решение остаётся за врачом и требует проверки первичных источников.</p>
+        </div>
+      </section>
+    </div>
 
     <!-- doctor-retention:start --><section class="doctor-material-tools" id="doctor-material-tools" aria-label="Инструменты профессионального пространства"><div class="doctor-material-tools-row"><p class="doctor-material-tools-copy">Сохраните материал в своём профессиональном пространстве на этом устройстве.</p><button class="doctor-bookmark-toggle" id="doctor-bookmark-toggle" type="button" aria-pressed="false">Сохранить</button></div></section><section class="doctor-related" aria-labelledby="doctor-related-title"><h2 id="doctor-related-title">Связанные профессиональные материалы</h2><div class="doctor-workspace-list" id="doctor-related-list"></div></section><div class="doctor-material-telegram"><p>Новые и обновлённые материалы для врачей публикуются в Telegram-канале.</p><a class="button secondary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer" data-doctor-telegram>Получать обновления</a></div><!-- doctor-retention:end -->
   </main>
@@ -124,7 +170,8 @@
   <script defer src="/site-motion.js?v=20260806-1"></script>
   <script defer src="/site-mega-nav.js?v=20260816-2"></script>
   <script defer src="/for-doctors/doctors-updates.js?v=20260816-1"></script>
-  <script type="module" src="/for-doctors/ophthasearch-v2/ophthasearch-v2.js?v=20260825-3"></script>
+  <script type="module" src="/for-doctors/ophthasearch-v2/ophthasearch-v2.js?v=20260829-1"></script>
+  <script defer src="/for-doctors/ophthasearch-v2/ophthasearch-v2-motion.js?v=20260830-1"></script>
   <script defer src="/for-doctors/doctor-retention.js?v=20260825-1"></script>
 </body>
 </html>
