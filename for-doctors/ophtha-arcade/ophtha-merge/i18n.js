@@ -86,6 +86,12 @@ function normalizeLanguage(language) {
   return String(language || '').toLowerCase().startsWith('en') ? 'en' : 'ru';
 }
 
+export function parseFormattedInteger(text, fallback = 0) {
+  const digits = String(text ?? '').replace(/[^\d]/g, '');
+  const value = Number(digits);
+  return Number.isFinite(value) && digits ? value : fallback;
+}
+
 export function tileLabel(value, language = 'ru') {
   const lang = normalizeLanguage(language);
   const exact = TILE_LABELS[lang].get(Number(value));
