@@ -115,7 +115,7 @@ test('clinical interpretation may remain explicitly separated from sourced recom
   assert.match(finalAnswer.clinical_interpretation, /^Клиническая интерпретация:/);
 });
 
-test('reasonOverEvidence accepts Workers AI response wrapper and returns verified answer', async () => {
+test('reasonOverEvidence disables Gemma thinking for bounded structured synthesis', async () => {
   let invocation;
   const env = { AI: { run: async (model, options) => {
     invocation = { model, options };
@@ -124,7 +124,7 @@ test('reasonOverEvidence accepts Workers AI response wrapper and returns verifie
   const answer = await reasonOverEvidence(evidencePack, env);
   assert.equal(invocation.model, MODEL);
   assert.equal(invocation.options.response_format.type, 'json_schema');
-  assert.ok(invocation.options.max_completion_tokens >= 6000, 'Gemma reasoning budget must leave room for hidden reasoning plus structured JSON');
+  assert.equal(invocation.options.chat_template_kwargs?.enable_thinking, false);
   assert.equal(answer.management[0].dose, '0.005%');
   assert.equal(answer.sources[0].source_id, 'S1');
 });
