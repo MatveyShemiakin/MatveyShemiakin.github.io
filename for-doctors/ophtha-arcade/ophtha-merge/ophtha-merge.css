@@ -1,6 +1,6 @@
 @import url('./ophtha-merge-core.css');
 
-.ophtha-merge-touch-zone{touch-action:none;overscroll-behavior:contain;-webkit-user-select:none;user-select:none}
+.ophtha-merge-touch-zone{margin:0 -8px;padding:0 8px;touch-action:none;overscroll-behavior:contain;-webkit-user-select:none;user-select:none}
 .ophtha-merge-tile-mark{display:grid;place-items:center;min-height:34px;margin:2px 0 2px;font-size:0;line-height:1}
 .ophtha-merge-tile-icon{width:clamp(28px,6.5vw,46px);height:clamp(28px,6.5vw,46px);fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ophtha-merge-tile-number{letter-spacing:-.02em}
@@ -29,7 +29,7 @@ html[data-site-theme="dark"] .ophtha-merge-mode{color:#c4d1df}
 html[data-site-theme="dark"] .ophtha-merge-mode.is-active{background:#4d8eff;color:#fff}
 
 @media(max-width:680px){
-  .ophtha-merge-touch-zone{margin:0 -4px;padding:4px;border-radius:22px}
+  .ophtha-merge-touch-zone{margin:0 -12px;padding:0 12px}
   .ophtha-merge-tile{padding:5px}
   .ophtha-merge-tile-number{font-size:clamp(25px,9vw,36px)}
   .ophtha-merge-tile-mark{min-height:30px;margin:1px 0}
