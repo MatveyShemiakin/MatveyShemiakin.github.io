@@ -91,3 +91,41 @@ test('named comparison requires evidence about the requested drugs, not just the
   assert.equal(filterRelevantDocuments([conditionOnly], intent).length, 0);
   assert.equal(filterRelevantDocuments([conditionOnly, exact], intent)[0].document.title, exact.title);
 });
+
+test('IOL dislocation aliases pass the relevance gate without lowering the global threshold', () => {
+  const intent = {
+    domain: 'lens-iol',
+    condition: 'intraocular lens dislocation',
+    question_type: 'surgery',
+    interventions: [],
+    comparators: [],
+    outcomes: [],
+    modifiers: []
+  };
+  const dislocatedIol = {
+    title: 'Scleral fixation of dislocated intraocular lenses',
+    abstract_or_summary: 'Surgical management of dislocated IOLs using flanged intrascleral fixation was evaluated in this comparative series.'
+  };
+
+  assert.ok(scoreMedicalRelevance(dislocatedIol, intent) >= 0.45);
+  assert.equal(filterRelevantDocuments([dislocatedIol], intent).length, 1);
+});
+
+test('Yamane evidence stays relevant for a dislocated-IOL comparison', () => {
+  const intent = {
+    domain: 'lens-iol',
+    condition: 'intraocular lens dislocation',
+    question_type: 'comparison',
+    interventions: ['Yamane fixation'],
+    comparators: ['sutured scleral fixation'],
+    outcomes: [],
+    modifiers: []
+  };
+  const paper = {
+    title: 'Yamane technique versus sutured scleral fixation for dislocated IOL',
+    abstract_or_summary: 'Comparative outcomes of flanged intrascleral fixation and sutured scleral fixation for dislocated intraocular lenses.'
+  };
+
+  assert.ok(scoreMedicalRelevance(paper, intent) >= 0.45);
+  assert.equal(filterRelevantDocuments([paper], intent).length, 1);
+});
