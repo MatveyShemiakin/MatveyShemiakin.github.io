@@ -27,7 +27,7 @@ jobs:
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       CANARY_DB_NAME: ophthasearch-dataset-canary
       CANARY_WORKER_NAME: matveyshemyakin-ophthasearch-dataset-canary
-      CANARY_CONFIG: /tmp/wrangler.ophthasearch-d1-canary.jsonc
+      CANARY_CONFIG: wrangler.ophthasearch-d1-canary.jsonc
     steps:
       - name: Checkout
         uses: actions/checkout@v4
