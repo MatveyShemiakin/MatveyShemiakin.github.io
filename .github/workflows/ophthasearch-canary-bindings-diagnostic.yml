@@ -1,0 +1,40 @@
+name: OphthaSearch Canary Bindings Diagnostic
+
+on:
+  push:
+    branches:
+      - feature/ophthasearch-dataset-foundation-20260829
+    paths:
+      - '.github/workflows/ophthasearch-canary-bindings-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CANARY_WORKER_NAME: matveyshemyakin-ophthasearch-dataset-canary
+    steps:
+      - name: Inspect deployed canary bindings
+        shell: bash
+        run: |
+          set -euo pipefail
+          code="$(curl --silent --show-error -o /tmp/settings.json -w '%{http_code}' \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/scripts/${CANARY_WORKER_NAME}/settings")"
+          SETTINGS_HTTP="$code" node <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/settings.json', 'utf8'));
+          const bindings = Array.isArray(body?.result?.bindings) ? body.result.bindings : [];
+          const safe = bindings.map((binding) => ({ name: binding.name || '', type: binding.type || '' }));
+          console.log(JSON.stringify({ http: Number(process.env.SETTINGS_HTTP), success: body?.success === true, bindings: safe }, null, 2));
+          if (Number(process.env.SETTINGS_HTTP) >= 400 || body?.success !== true) process.exit(1);
+          const names = new Set(safe.map((binding) => binding.name));
+          for (const required of ['AI', 'OPHTHASEARCH_DB', 'OPHTHASEARCH_DATASET_HASH_KEY']) {
+            if (!names.has(required)) throw new Error(`Missing deployed binding: ${required}`);
+          }
+          NODE
