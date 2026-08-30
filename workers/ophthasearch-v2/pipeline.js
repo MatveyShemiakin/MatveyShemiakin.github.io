@@ -190,6 +190,10 @@ function datasetLoggingEnabled(env = {}) {
   );
 }
 
+function canaryStorageDiagnosticsEnabled(env = {}) {
+  return String(env?.OPHTHASEARCH_CANARY_STORAGE_DIAGNOSTICS || '') === '1';
+}
+
 async function persistResearchRun(payload, result, env = {}, deps = {}, latencyMs = null) {
   if (!datasetLoggingEnabled(env)) return '';
 
@@ -238,9 +242,18 @@ export async function handleResearchRequest(request, env, ctx, deps = {}) {
     let runId = '';
     try {
       runId = await persistResearchRun(payload, result, env, deps, latencyMs);
-    } catch {
+    } catch (error) {
       // Dataset persistence is deliberately fail-open. Never expose storage internals to physicians.
       runId = '';
+      if (canaryStorageDiagnosticsEnabled(env)) {
+        result.diagnostics = {
+          ...(result.diagnostics || {}),
+          storage: {
+            status: 'rejected',
+            error: String(error?.message || error || 'storage-failure').slice(0, 240)
+          }
+        };
+      }
     }
     return json({ ok: true, result: publicResult(result, runId) }, 200);
   } catch (error) {
