@@ -78,6 +78,9 @@ jobs:
               const citations = Array.isArray(result?.answer?.bottom_line_citations) ? result.answer.bottom_line_citations : [];
               const bottomLine = String(result?.answer?.clinical_bottom_line || '').trim();
               const sourceCount = Number(result?.diagnostics?.sourceCount || 0);
+              const reasoningDiagnostics = (result?.diagnostics?.adapters || [])
+                .filter((entry) => entry?.trackId === 'reasoning')
+                .map((entry) => ({ status: entry.status || '', error: String(entry.error || '').slice(0, 900) }));
               const issues = [];
               if (!response.ok || body?.ok !== true) issues.push(`HTTP/API failure ${response.status}`);
               if (result.status === 'evidence_only') issues.push('evidence_only');
@@ -100,6 +103,7 @@ jobs:
                 run_id:Boolean(result.run_id),
                 question_type:result?.intent?.question_type || null,
                 condition:result?.intent?.condition || null,
+                reasoning_diagnostics:reasoningDiagnostics,
                 issues
               };
               if (issues.length) failures.push(resultRow);
