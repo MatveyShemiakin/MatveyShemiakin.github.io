@@ -23,11 +23,11 @@
       "kind": "updated"
     },
     "ophtha-arcade": {
-      "fingerprint": "ceba4c399cc751916f774f5047ec4893b8b0a2c064bf821948ba7d217604cc75",
+      "fingerprint": "26e370c6a74bcf96e3f093156b78081a2758a974412e3151fdf0a75bb7b25a77",
       "published": "2026-08-30",
       "updated": "2026-08-30",
-      "revision": 1,
-      "kind": "new"
+      "revision": 2,
+      "kind": "updated"
     },
     "ophthasearch": {
       "fingerprint": "9b2797c54960b59711f692a00dfddfaefddf7b9d5d5ca8535b69893c5b821d3f",
