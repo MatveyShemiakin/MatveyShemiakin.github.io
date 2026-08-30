@@ -1,0 +1,293 @@
+name: OphthaSearch D1 Canary
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/ophthasearch-dataset-foundation-20260829
+    paths:
+      - '.github/workflows/ophthasearch-d1-canary.yml'
+      - '_worker.js'
+      - 'migrations/**'
+      - 'workers/ophthasearch-v2/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ophthasearch-d1-canary
+  cancel-in-progress: true
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CANARY_DB_NAME: ophthasearch-dataset-canary
+      CANARY_WORKER_NAME: matveyshemyakin-ophthasearch-dataset-canary
+      CANARY_CONFIG: /tmp/wrangler.ophthasearch-d1-canary.jsonc
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check Cloudflare credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test "${#CLOUDFLARE_ACCOUNT_ID}" -eq 32
+
+      - name: Install Wrangler
+        run: npm install --no-save wrangler@4
+
+      - name: Resolve or create isolated EU D1 database
+        id: d1
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          npx wrangler d1 list --json > /tmp/d1-list.json
+          DB_ID="$(CANARY_DB_NAME="$CANARY_DB_NAME" node <<'NODE'
+          const fs = require('node:fs');
+          const name = process.env.CANARY_DB_NAME;
+          const list = JSON.parse(fs.readFileSync('/tmp/d1-list.json', 'utf8'));
+          const values = Array.isArray(list) ? list : (Array.isArray(list?.result) ? list.result : []);
+          const db = values.find((item) => item?.name === name);
+          process.stdout.write(String(db?.uuid || db?.id || ''));
+          NODE
+          )"
+
+          if [ -z "$DB_ID" ]; then
+            npx wrangler d1 create "$CANARY_DB_NAME" --jurisdiction=eu
+            npx wrangler d1 list --json > /tmp/d1-list.json
+            DB_ID="$(CANARY_DB_NAME="$CANARY_DB_NAME" node <<'NODE'
+          const fs = require('node:fs');
+          const name = process.env.CANARY_DB_NAME;
+          const list = JSON.parse(fs.readFileSync('/tmp/d1-list.json', 'utf8'));
+          const values = Array.isArray(list) ? list : (Array.isArray(list?.result) ? list.result : []);
+          const db = values.find((item) => item?.name === name);
+          process.stdout.write(String(db?.uuid || db?.id || ''));
+          NODE
+            )"
+          fi
+
+          if ! printf '%s' "$DB_ID" | grep -Eq '^[0-9a-fA-F-]{32,36}$'; then
+            echo 'Could not resolve the canary D1 database ID.' >&2
+            exit 1
+          fi
+
+          echo "database_id=$DB_ID" >> "$GITHUB_OUTPUT"
+          echo "Resolved isolated D1 database: $CANARY_DB_NAME"
+
+      - name: Generate canary-only Wrangler configuration
+        shell: bash
+        env:
+          CANARY_DB_ID: ${{ steps.d1.outputs.database_id }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs');
+          const config = {
+            name: process.env.CANARY_WORKER_NAME,
+            main: '_worker.js',
+            compatibility_date: '2026-08-30',
+            observability: { enabled: true },
+            ai: { binding: 'AI' },
+            d1_databases: [
+              {
+                binding: 'OPHTHASEARCH_DB',
+                database_name: process.env.CANARY_DB_NAME,
+                database_id: process.env.CANARY_DB_ID,
+                migrations_dir: 'migrations'
+              }
+            ]
+          };
+          fs.writeFileSync(process.env.CANARY_CONFIG, JSON.stringify(config, null, 2));
+          NODE
+
+          node -e "const c=require(process.env.CANARY_CONFIG); if(c.name==='matveyshemyakin-github-io') process.exit(1); if(c.d1_databases?.[0]?.binding!=='OPHTHASEARCH_DB') process.exit(1)"
+
+      - name: Apply D1 migrations remotely
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx wrangler d1 migrations apply "$CANARY_DB_NAME" --remote --config "$CANARY_CONFIG"
+          npx wrangler d1 execute "$CANARY_DB_NAME" --remote --json --config "$CANARY_CONFIG" \
+            --command "SELECT name FROM sqlite_schema WHERE type='table' AND name IN ('research_runs','feedback','training_cases') ORDER BY name" \
+            > /tmp/schema.json
+          node <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/schema.json', 'utf8'));
+          function rows(node) {
+            if (Array.isArray(node) && node.every((item) => item && typeof item === 'object' && 'name' in item)) return node;
+            if (!node || typeof node !== 'object') return null;
+            for (const value of Object.values(node)) {
+              const found = rows(value);
+              if (found) return found;
+            }
+            return null;
+          }
+          const names = new Set((rows(body) || []).map((row) => row.name));
+          for (const required of ['research_runs', 'feedback', 'training_cases']) {
+            if (!names.has(required)) throw new Error(`Missing D1 table: ${required}`);
+          }
+          NODE
+
+      - name: Deploy isolated canary Worker
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx wrangler deploy --config "$CANARY_CONFIG"
+
+      - name: Configure ephemeral canary fingerprint secret
+        shell: bash
+        run: |
+          set -euo pipefail
+          HASH_KEY="$(openssl rand -hex 32)"
+          printf '%s' "$HASH_KEY" | npx wrangler secret put OPHTHASEARCH_DATASET_HASH_KEY \
+            --name "$CANARY_WORKER_NAME" --config "$CANARY_CONFIG"
+          unset HASH_KEY
+
+      - name: Exercise persisted research and feedback paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint="https://${CANARY_WORKER_NAME}.matvei-shemyakin.workers.dev"
+          origin='https://matveyshemyakin.ru'
+
+          safe_payload='{"schemaVersion":"2.0","language":"ru","question":"Есть ли преимущество латанопроста перед тимололом при первичной открытоугольной глаукоме?","mode":"standard","filters":{}}'
+          curl --fail-with-body --silent --show-error --max-time 150 \
+            -H "Origin: ${origin}" \
+            -H 'Content-Type: application/json' \
+            -X POST --data "$safe_payload" \
+            "${endpoint}/v2/research" > /tmp/safe-research.json
+
+          SAFE_RUN_ID="$(node <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/safe-research.json', 'utf8'));
+          if (body?.ok !== true) throw new Error('safe research request failed');
+          const id = String(body?.result?.run_id || '');
+          if (!/^[0-9a-f-]{36}$/i.test(id)) throw new Error('safe research run_id missing');
+          process.stdout.write(id);
+          NODE
+          )"
+
+          feedback_payload="{\"schemaVersion\":\"2.0\",\"runId\":\"${SAFE_RUN_ID}\",\"rating\":\"helpful\",\"errorTags\":[],\"comment\":\"\"}"
+          curl --fail-with-body --silent --show-error --max-time 60 \
+            -H "Origin: ${origin}" \
+            -H 'Content-Type: application/json' \
+            -X POST --data "$feedback_payload" \
+            "${endpoint}/v2/feedback" > /tmp/feedback.json
+
+          node <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/feedback.json', 'utf8'));
+          if (body?.ok !== true || !/^[0-9a-f-]{36}$/i.test(String(body?.feedback_id || ''))) {
+            throw new Error('feedback persistence failed');
+          }
+          NODE
+
+          sensitive_payload='{"schemaVersion":"2.0","language":"ru","question":"ФИО Иванов Иван, номер истории 123456789: тактика лечения первичной открытоугольной глаукомы?","mode":"standard","filters":{}}'
+          curl --fail-with-body --silent --show-error --max-time 150 \
+            -H "Origin: ${origin}" \
+            -H 'Content-Type: application/json' \
+            -X POST --data "$sensitive_payload" \
+            "${endpoint}/v2/research" > /tmp/sensitive-research.json
+
+          SENSITIVE_RUN_ID="$(node <<'NODE'
+          const fs = require('node:fs');
+          const body = JSON.parse(fs.readFileSync('/tmp/sensitive-research.json', 'utf8'));
+          if (body?.ok !== true) throw new Error('sensitive research request failed');
+          const id = String(body?.result?.run_id || '');
+          if (!/^[0-9a-f-]{36}$/i.test(id)) throw new Error('sensitive research run_id missing');
+          process.stdout.write(id);
+          NODE
+          )"
+
+          echo "SAFE_RUN_ID=$SAFE_RUN_ID" >> "$GITHUB_ENV"
+          echo "SENSITIVE_RUN_ID=$SENSITIVE_RUN_ID" >> "$GITHUB_ENV"
+
+      - name: Verify persisted D1 privacy invariants
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          npx wrangler d1 execute "$CANARY_DB_NAME" --remote --json --config "$CANARY_CONFIG" \
+            --command "SELECT run_id, question_storage_state, question_redacted, status, source_refs_json, answer_json FROM research_runs WHERE run_id IN ('${SAFE_RUN_ID}','${SENSITIVE_RUN_ID}') ORDER BY run_id" \
+            > /tmp/research-rows.json
+
+          npx wrangler d1 execute "$CANARY_DB_NAME" --remote --json --config "$CANARY_CONFIG" \
+            --command "SELECT run_id, rating, comment_storage_state, comment_redacted FROM feedback WHERE run_id='${SAFE_RUN_ID}' ORDER BY created_at DESC LIMIT 1" \
+            > /tmp/feedback-row.json
+
+          npx wrangler d1 execute "$CANARY_DB_NAME" --remote --json --config "$CANARY_CONFIG" \
+            --command "SELECT COUNT(*) AS leaked FROM research_runs WHERE COALESCE(question_redacted,'') LIKE '%Иванов%' OR COALESCE(answer_json,'') LIKE '%Иванов%' OR COALESCE(question_redacted,'') LIKE '%123456789%' OR COALESCE(answer_json,'') LIKE '%123456789%'" \
+            > /tmp/leak-check.json
+
+          node <<'NODE'
+          const fs = require('node:fs');
+
+          function findRows(node, predicate) {
+            if (Array.isArray(node) && node.length && node.every((item) => item && typeof item === 'object') && node.some(predicate)) return node;
+            if (!node || typeof node !== 'object') return null;
+            for (const value of Object.values(node)) {
+              const found = findRows(value, predicate);
+              if (found) return found;
+            }
+            return null;
+          }
+
+          const research = JSON.parse(fs.readFileSync('/tmp/research-rows.json', 'utf8'));
+          const rows = findRows(research, (row) => 'run_id' in row) || [];
+          const safe = rows.find((row) => row.run_id === process.env.SAFE_RUN_ID);
+          const sensitive = rows.find((row) => row.run_id === process.env.SENSITIVE_RUN_ID);
+          if (!safe || !sensitive) throw new Error('Expected both canary research rows');
+          if (safe.question_storage_state !== 'redacted_text') throw new Error(`safe storage state=${safe.question_storage_state}`);
+          if (!/латанопрост/i.test(String(safe.question_redacted || ''))) throw new Error('safe redacted question missing');
+          if (safe.status === 'evidence_only' && safe.answer_json !== null) throw new Error('evidence_only answer_json must be null');
+          const sourceRefs = JSON.parse(String(safe.source_refs_json || '[]'));
+          const forbidden = /abstractText|fullText|abstract_text|full_text/;
+          if (forbidden.test(JSON.stringify(sourceRefs))) throw new Error('source refs contain copyrighted text fields');
+
+          if (sensitive.question_storage_state !== 'metadata_only') throw new Error(`sensitive storage state=${sensitive.question_storage_state}`);
+          if (sensitive.question_redacted !== null) throw new Error('sensitive question text persisted');
+          if (sensitive.answer_json !== null) throw new Error('sensitive generated answer persisted');
+
+          const feedback = JSON.parse(fs.readFileSync('/tmp/feedback-row.json', 'utf8'));
+          const feedbackRows = findRows(feedback, (row) => 'rating' in row) || [];
+          const linked = feedbackRows.find((row) => row.run_id === process.env.SAFE_RUN_ID);
+          if (!linked || linked.rating !== 'helpful') throw new Error('linked feedback row missing');
+          if (linked.comment_storage_state !== 'metadata_only' || linked.comment_redacted !== null) throw new Error('empty feedback comment was not minimized');
+
+          const leak = JSON.parse(fs.readFileSync('/tmp/leak-check.json', 'utf8'));
+          const leakRows = findRows(leak, (row) => 'leaked' in row) || [];
+          if (Number(leakRows[0]?.leaked || 0) !== 0) throw new Error('direct identifier leaked into D1 text columns');
+
+          console.log(JSON.stringify({
+            safe_status: safe.status,
+            safe_storage: safe.question_storage_state,
+            sensitive_storage: sensitive.question_storage_state,
+            feedback: linked.rating,
+            leaked_identifiers: 0
+          }, null, 2));
+          NODE
+
+      - name: Canary summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '### OphthaSearch D1 canary'
+            echo '- Production Worker/config was not modified by this workflow.'
+            echo "- Canary Worker: ${CANARY_WORKER_NAME}"
+            echo "- D1 database: ${CANARY_DB_NAME} (EU jurisdiction)"
+            echo '- Tests cover persisted research, linked feedback, metadata-only privacy fallback, source minimization, and evidence_only answer suppression.'
+          } >> "$GITHUB_STEP_SUMMARY"
