@@ -16,13 +16,15 @@ test('OphthaSearch page prioritizes clinical conclusion and hides pipeline inter
     assert.match(html, new RegExp(`data-v2-${hook}`));
   }
   assert.match(html, /Клинический вывод/);
-  assert.match(html, /Тактика/);
+  assert.match(html, /Практическая тактика/);
   assert.match(html, /Важно учесть/);
   assert.match(html, /<details[\s\S]*Ключевые источники/);
   assert.doesNotMatch(html, /data-v2-diagnostics|data-v2-guidelines|data-v2-arguments-for|data-v2-arguments-against|data-v2-uncertainties/);
   assert.doesNotMatch(html, /Диагностика research pipeline|Evidence Pack|Архитектура поиска/i);
   assert.match(html, /ophthasearch-v2\.css/);
-  assert.match(html, /ophthasearch-v2\.js\?v=20260825-2/);
+  assert.match(html, /ophthasearch-v2\.js\?v=20260829-1/);
+  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260830-1/);
+  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260830-1/);
 });
 
 test('OphthaSearch client posts to the deployed workers.dev research endpoint', async () => {
