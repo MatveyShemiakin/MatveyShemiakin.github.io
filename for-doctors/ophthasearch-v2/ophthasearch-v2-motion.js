@@ -97,8 +97,12 @@ function wireMobileComposerViewport(root) {
       if (!host) {
         host = document.createElement('div');
         host.className = 'ophtha-v2-mobile-composer-host';
-        document.body.appendChild(host);
       }
+
+      const mobileNav = document.querySelector('.site-mobile-nav');
+      const target = mobileNav || document.body;
+      host.classList.toggle('is-nav-anchored', Boolean(mobileNav));
+      if (host.parentNode !== target) target.appendChild(host);
       if (composerWrap.parentNode !== host) host.appendChild(composerWrap);
       return;
     }
@@ -113,6 +117,14 @@ function wireMobileComposerViewport(root) {
   };
 
   sync();
+
+  if ('MutationObserver' in window && document.body) {
+    const navObserver = new MutationObserver(() => {
+      if (mobileQuery.matches) sync();
+    });
+    navObserver.observe(document.body, { childList: true });
+  }
+
   if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', sync);
   else mobileQuery.addListener(sync);
 }
