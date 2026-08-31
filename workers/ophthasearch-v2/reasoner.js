@@ -5,13 +5,13 @@ export const MODEL = '@cf/google/gemma-4-26b-a4b-it';
 
 const CONFIDENCE = ['high', 'moderate', 'low', 'insufficient'];
 
-function citedTextItemSchema(sourceIds) {
+function citedTextItemSchema(sourceIds, maxLength = 500) {
   return {
     type: 'object',
     additionalProperties: false,
     properties: {
-      text: { type: 'string', minLength: 1, maxLength: 1200 },
-      citations: { type: 'array', maxItems: 8, items: { type: 'string', enum: sourceIds } }
+      text: { type: 'string', minLength: 1, maxLength },
+      citations: { type: 'array', maxItems: 4, items: { type: 'string', enum: sourceIds } }
     },
     required: ['text', 'citations']
   };
@@ -23,37 +23,35 @@ export function buildReasoningSchema(sourceIds) {
     additionalProperties: false,
     properties: {
       schemaVersion: { type: 'string', enum: ['2.0'] },
-      clinical_bottom_line: { type: 'string', minLength: 1, maxLength: 3000 },
-      bottom_line_citations: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'string', enum: sourceIds } },
+      clinical_bottom_line: { type: 'string', minLength: 1, maxLength: 1200 },
+      bottom_line_citations: { type: 'array', minItems: 1, maxItems: 4, items: { type: 'string', enum: sourceIds } },
       confidence: { type: 'string', enum: CONFIDENCE },
       management: {
-        type: 'array', maxItems: 10,
+        type: 'array', maxItems: 5,
         items: {
           type: 'object', additionalProperties: false,
           properties: {
-            step: { type: 'integer', minimum: 1, maximum: 20 },
-            action: { type: 'string', minLength: 1, maxLength: 1200 },
-            drug_or_procedure: { type: 'string', maxLength: 300 },
-            dose: { type: 'string', maxLength: 160 },
-            frequency: { type: 'string', maxLength: 160 },
-            duration: { type: 'string', maxLength: 240 },
-            monitoring: { type: 'string', maxLength: 700 },
-            change_if: { type: 'string', maxLength: 700 },
-            citations: { type: 'array', minItems: 1, maxItems: 8, items: { type: 'string', enum: sourceIds } }
+            step: { type: 'integer', minimum: 1, maximum: 10 },
+            action: { type: 'string', minLength: 1, maxLength: 600 },
+            drug_or_procedure: { type: 'string', maxLength: 220 },
+            dose: { type: 'string', maxLength: 120 },
+            frequency: { type: 'string', maxLength: 120 },
+            duration: { type: 'string', maxLength: 160 },
+            monitoring: { type: 'string', maxLength: 380 },
+            change_if: { type: 'string', maxLength: 380 },
+            citations: { type: 'array', minItems: 1, maxItems: 4, items: { type: 'string', enum: sourceIds } }
           },
           required: ['step', 'action', 'drug_or_procedure', 'dose', 'frequency', 'duration', 'monitoring', 'change_if', 'citations']
         }
       },
-      arguments_for: { type: 'array', maxItems: 8, items: citedTextItemSchema(sourceIds) },
-      arguments_against: { type: 'array', maxItems: 8, items: citedTextItemSchema(sourceIds) },
-      alternatives: { type: 'array', maxItems: 8, items: citedTextItemSchema(sourceIds) },
-      guideline_positions: { type: 'array', maxItems: 8, items: citedTextItemSchema(sourceIds) },
-      uncertainties: { type: 'array', maxItems: 8, items: citedTextItemSchema(sourceIds) },
-      clinical_interpretation: { type: 'string', maxLength: 2500 }
+      arguments_against: { type: 'array', maxItems: 4, items: citedTextItemSchema(sourceIds) },
+      alternatives: { type: 'array', maxItems: 4, items: citedTextItemSchema(sourceIds) },
+      uncertainties: { type: 'array', maxItems: 4, items: citedTextItemSchema(sourceIds) },
+      clinical_interpretation: { type: 'string', maxLength: 900 }
     },
     required: [
       'schemaVersion', 'clinical_bottom_line', 'bottom_line_citations', 'confidence', 'management',
-      'arguments_for', 'arguments_against', 'alternatives', 'guideline_positions', 'uncertainties', 'clinical_interpretation'
+      'arguments_against', 'alternatives', 'uncertainties', 'clinical_interpretation'
     ]
   };
 }
@@ -87,7 +85,8 @@ export function buildReasoningMessages(evidencePack) {
         'You are the Clinical Reasoning Agent of OphthaSearch Research Agent v2, acting as an experienced ophthalmologist-scientist writing for another ophthalmologist.',
         'Use only the supplied Evidence Pack as evidence for factual recommendations.',
         'Answer the clinician’s actual question and give practical ophthalmic management, not a literature dump.',
-        'Weigh guideline positions, systematic reviews, randomized trials, comparative studies, safety evidence, alternatives, patient modifiers and uncertainty.',
+        'Be concise: one direct bottom line, at most five management steps, and at most four short items in each limitation/alternative/uncertainty section. Do not repeat the same claim across sections.',
+        'Weigh guideline positions, systematic reviews, randomized trials, comparative studies, safety evidence, alternatives, patient modifiers and uncertainty internally; do not create a separate guideline or arguments-for section.',
         'For therapy questions, specify treatment sequence, monitoring and escalation/de-escalation criteria when supported.',
         'Dose, concentration, frequency and duration may be stated only when those exact regimen elements are supported by cited Evidence Pack text. If not supported, leave the relevant field empty.',
         'Never invent a DOI, PMID, NCT, URL, paper, guideline, author, source ID, statistic or dose.',
@@ -106,8 +105,12 @@ export function buildReasoningMessages(evidencePack) {
 
 function normalizeReasoningDraft(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return value;
-  if (!value.schemaVersion && value.schema_version === '2.0') return { ...value, schemaVersion: '2.0' };
-  return value;
+  const normalized = !value.schemaVersion && value.schema_version === '2.0'
+    ? { ...value, schemaVersion: '2.0' }
+    : { ...value };
+  if (!Array.isArray(normalized.arguments_for)) normalized.arguments_for = [];
+  if (!Array.isArray(normalized.guideline_positions)) normalized.guideline_positions = [];
+  return normalized;
 }
 
 export async function reasonOverEvidence(evidencePack, env, deps = {}) {
@@ -118,7 +121,9 @@ export async function reasonOverEvidence(evidencePack, env, deps = {}) {
   const response = await run(MODEL, {
     messages: buildReasoningMessages(evidencePack),
     response_format: { type: 'json_schema', json_schema: buildReasoningSchema(sourceIds) },
-    max_completion_tokens: 6000,
+    chat_template_kwargs: { enable_thinking: false },
+    reasoning_effort: 'low',
+    max_completion_tokens: 3000,
     temperature: 0.1
   });
   const draft = normalizeReasoningDraft(parseStructuredModelResponse(response, {
