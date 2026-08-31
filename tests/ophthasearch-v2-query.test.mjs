@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { interpretClinicalQuestion } from '../workers/ophthasearch-v2/query-interpreter.js';
+import { resolveClinicalIntent } from '../workers/ophthasearch-v2/query-resolver.js';
 import { buildResearchPlan } from '../workers/ophthasearch-v2/research-planner.js';
 
 async function interpret(question, language = 'ru') {
@@ -66,4 +67,88 @@ test('planner does not create retinal-detachment search terms for glaucoma pharm
   const plan = buildResearchPlan(intent);
   const combined = plan.map((track) => track.query).join(' ').toLowerCase();
   assert.doesNotMatch(combined, /retinal detachment|vitrectomy|scleral buckle/);
+});
+
+test('acceptance: latanoprost versus timolol is a named POAG comparison', async () => {
+  const intent = await interpret('Есть ли преимущество латанопроста перед тимололом при первичной открытоугольной глаукоме?');
+  assert.equal(intent.condition, 'primary open-angle glaucoma');
+  assert.equal(intent.question_type, 'comparison');
+  assert.deepEqual(intent.interventions, ['latanoprost']);
+  assert.deepEqual(intent.comparators, ['timolol']);
+  const efficacy = buildResearchPlan(intent).find((track) => track.id === 'efficacy');
+  assert.match(efficacy.query, /latanoprost/i);
+  assert.match(efficacy.query, /timolol/i);
+});
+
+test('acceptance: rhegmatogenous retinal detachment surgery resolves the subtype and surgical search domain', async () => {
+  const intent = await interpret('Тактика хирургического лечения регматогенной отслойки сетчатки');
+  assert.equal(intent.domain, 'retina');
+  assert.equal(intent.condition, 'rhegmatogenous retinal detachment');
+  assert.equal(intent.question_type, 'surgery');
+  assert.ok(intent.interventions.some((value) => /vitrectomy|scleral buckl|pneumatic retinopexy|surgical management/i.test(value)));
+
+  const plan = buildResearchPlan(intent);
+  const efficacy = plan.find((track) => track.id === 'efficacy');
+  assert.match(efficacy.query, /rhegmatogenous retinal detachment/i);
+  assert.match(efficacy.query, /vitrectomy|scleral buckl|pneumatic retinopexy/i);
+});
+
+test('acceptance: inverted ILM flap versus conventional peeling preserves both comparison arms and hole size', async () => {
+  const intent = await interpret(
+    'Inverted ILM flap vs conventional ILM peeling for macular hole >400 µm',
+    'en'
+  );
+  assert.equal(intent.domain, 'retina');
+  assert.equal(intent.condition, 'full-thickness macular hole');
+  assert.equal(intent.question_type, 'comparison');
+  assert.deepEqual(intent.interventions, ['inverted ILM flap']);
+  assert.deepEqual(intent.comparators, ['internal limiting membrane peeling']);
+  assert.ok(intent.modifiers.some((value) => />?400\s*µm/i.test(value)));
+
+  const efficacy = buildResearchPlan(intent).find((track) => track.id === 'efficacy');
+  assert.match(efficacy.query, /inverted ILM flap/i);
+  assert.match(efficacy.query, /internal limiting membrane peeling/i);
+  assert.match(efficacy.query, /400|large macular hole/i);
+});
+
+test('resolved standard ophthalmology intent skips a redundant AI interpretation call', async () => {
+  let aiCalls = 0;
+  const intent = await resolveClinicalIntent({
+    schemaVersion: '2.0',
+    language: 'ru',
+    question: 'Есть ли преимущество латанопроста перед тимололом при первичной открытоугольной глаукоме?',
+    mode: 'standard',
+    filters: {}
+  }, {}, {
+    interpretIntent: async () => {
+      aiCalls += 1;
+      return { domain: 'wrong', condition: 'wrong' };
+    }
+  });
+  assert.equal(aiCalls, 0);
+  assert.equal(intent.condition, 'primary open-angle glaucoma');
+  assert.deepEqual(intent.interventions, ['latanoprost']);
+  assert.deepEqual(intent.comparators, ['timolol']);
+});
+
+test('unresolved ophthalmology question may use AI interpretation as a fallback', async () => {
+  let aiCalls = 0;
+  const intent = await resolveClinicalIntent({
+    schemaVersion: '2.0',
+    language: 'ru',
+    question: 'Какова современная тактика при редкой хориоидальной патологии с серозной отслойкой?',
+    mode: 'standard',
+    filters: {}
+  }, {}, {
+    interpretIntent: async () => {
+      aiCalls += 1;
+      return {
+        language: 'ru', domain: 'retina', condition: 'choroidal disease', question_type: 'management',
+        population: [], interventions: [], comparators: [], outcomes: [], modifiers: [],
+        requested_depth: 'specialist', needs_dosing: false, needs_alternatives: true, ambiguities: []
+      };
+    }
+  });
+  assert.equal(aiCalls, 1);
+  assert.equal(intent.condition, 'choroidal disease');
 });

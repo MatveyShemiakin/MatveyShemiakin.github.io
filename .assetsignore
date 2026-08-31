@@ -2,6 +2,7 @@ _worker.js
 wrangler.jsonc
 .git/**
 .github/**
+.wrangler/**
 workers/**
 tests/**
 node_modules/**

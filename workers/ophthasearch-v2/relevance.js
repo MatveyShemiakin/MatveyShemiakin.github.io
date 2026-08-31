@@ -33,6 +33,35 @@ const THERAPY_TERMS = [
   'терапия', 'лечение', 'медикаментоз', 'препарат', 'капли'
 ];
 
+const DRUG_TERMS = new Set([
+  'latanoprost', 'timolol', 'travoprost', 'bimatoprost', 'tafluprost', 'brimonidine',
+  'dorzolamide', 'brinzolamide', 'netarsudil', 'aflibercept', 'faricimab',
+  'ranibizumab', 'bevacizumab', 'brolucizumab'
+]);
+
+const FIXED_COMBINATION_TERMS = [
+  'fixed combination', 'fixed-dose combination', 'fixed dose combination', 'fixed-combination',
+  'combination product', 'комбинац'
+];
+
+const DIRECT_MONOTHERAPY_TERMS = [
+  'monotherapy', 'head-to-head', 'head to head', 'versus', ' vs ', 'compared with', 'compared to',
+  'монотерап', 'сравнен'
+];
+
+const SURGERY_TERMS = [
+  'surgery', 'surgical', 'operation', 'operative', 'vitrectomy', 'pars plana vitrectomy',
+  'scleral buckle', 'scleral buckling', 'pneumatic retinopexy', 'retinopexy', 'tamponade',
+  'ilm peeling', 'internal limiting membrane peeling', 'inverted ilm flap', 'membrane peeling',
+  'хирург', 'операц', 'витрэктом', 'витреэктом', 'склеральн', 'пломбирован', 'пневморетинопекс', 'пилинг'
+];
+
+const MOLECULAR_CONTEXT_TERMS = [
+  'proteome', 'proteomic', 'protein expression', 'biomarker', 'molecular', 'metabolomic',
+  'transcriptomic', 'cytokine', 'gene expression', 'pathway analysis',
+  'протеом', 'биомаркер', 'молекуляр', 'метаболом', 'цитокин'
+];
+
 const DIAGNOSIS_TERMS = [
   'diagnosis', 'diagnostic', 'screening', 'optical coherence tomography', 'oct',
   'диагност', 'скрининг', 'томография'
@@ -43,10 +72,25 @@ const GENERIC_INTERVENTIONS = new Set([
   'surgical management', 'treatment', 'therapy'
 ]);
 
+const CONDITION_ALIASES = new Map([
+  ['intraocular lens dislocation', [
+    'intraocular lens dislocation',
+    'dislocated intraocular lens',
+    'dislocated posterior chamber intraocular lens',
+    'iol dislocation',
+    'dislocated iol'
+  ]]
+]);
+
 const GLAUCOMA_TERMS = ['glaucoma', 'primary open-angle glaucoma', 'open-angle glaucoma', 'poag', 'глауком', 'поуг'];
 const RETINAL_DETACHMENT_TERMS = ['retinal detachment', 'rhegmatogenous retinal detachment', 'rrd', 'отслойка сетчатки'];
 const MACULAR_HOLE_TERMS = ['macular hole', 'full-thickness macular hole', 'ftmh', 'макулярный разрыв'];
 const ERM_TERMS = ['epiretinal membrane', 'erm', 'эпиретинальная мембрана', 'эпиретинальный фиброз'];
+
+function conditionPhrases(condition) {
+  const normalized = normalizeText(condition);
+  return CONDITION_ALIASES.get(normalized) || (normalized ? [normalized] : []);
+}
 
 function competingDomainPenalty(text, intent) {
   const target = normalizeText([intent?.domain, intent?.condition].filter(Boolean).join(' '));
@@ -72,6 +116,13 @@ function questionTypeScore(text, questionType) {
     if (containsAny(text, THERAPY_TERMS)) return 0.12;
     if (containsAny(text, DIAGNOSIS_TERMS)) return -0.08;
   }
+  if (type === 'surgery') {
+    const surgical = containsAny(text, SURGERY_TERMS);
+    const molecularOnly = containsAny(text, MOLECULAR_CONTEXT_TERMS) && !surgical;
+    if (molecularOnly) return -0.22;
+    if (surgical) return 0.18;
+    return -0.08;
+  }
   if (type === 'diagnosis') {
     if (containsAny(text, DIAGNOSIS_TERMS)) return 0.12;
   }
@@ -89,6 +140,9 @@ function interventionScore(text, interventions = []) {
     }
     if (/pharmac|medical|medication|drug|медикамент|лекарств/.test(normalized) && containsAny(text, THERAPY_TERMS)) {
       score = Math.max(score, 0.2);
+    }
+    if (/surg|vitrect|buckl|retinopex|peel|flap|хирург|витрэкт|пилинг/.test(normalized) && containsAny(text, SURGERY_TERMS)) {
+      score = Math.max(score, 0.18);
     }
   }
   return score;
@@ -110,13 +164,27 @@ function namedTreatmentRelevance(text, intent = {}) {
   const isComparison = normalizeText(intent.question_type) === 'comparison' && interventions.length && comparators.length;
 
   if (isComparison) {
-    if (interventionMatch && comparatorMatch) return 0.32;
-    if (interventionMatch || comparatorMatch) return 0.04;
+    if (interventionMatch && comparatorMatch) return 0.45;
+    if (interventionMatch || comparatorMatch) return -0.12;
     return -0.5;
   }
 
   if (interventionMatch || comparatorMatch) return 0.18;
   return -0.28;
+}
+
+function monotherapyComparisonPenalty(text, intent = {}) {
+  if (normalizeText(intent.question_type) !== 'comparison') return 0;
+  const interventions = specificTerms(intent.interventions || []);
+  const comparators = specificTerms(intent.comparators || []);
+  if (!interventions.length || !comparators.length) return 0;
+
+  const requested = [...interventions, ...comparators];
+  if (!requested.every((term) => DRUG_TERMS.has(term))) return 0;
+  if (!containsAny(text, FIXED_COMBINATION_TERMS)) return 0;
+
+  if (containsAny(text, DIRECT_MONOTHERAPY_TERMS) && containsPhrase(text, 'monotherapy')) return 0.35;
+  return 1.2;
 }
 
 function outcomeScore(text, outcomes = []) {
@@ -140,7 +208,7 @@ export function scoreMedicalRelevance(document = {}, intent = {}) {
   const domain = normalizeText(intent.domain);
   let score = 0;
 
-  if (condition && containsPhrase(text, condition)) {
+  if (condition && containsAny(text, conditionPhrases(condition))) {
     score += 0.55;
   } else if (condition && domain && condition.includes(domain) && containsPhrase(text, domain)) {
     score += 0.15;
@@ -153,6 +221,7 @@ export function scoreMedicalRelevance(document = {}, intent = {}) {
   score += outcomeScore(text, intent.outcomes);
   score += questionTypeScore(text, intent.question_type);
   score -= competingDomainPenalty(text, intent);
+  score -= monotherapyComparisonPenalty(text, intent);
 
   return Math.max(0, Math.min(1, Number(score.toFixed(4))));
 }

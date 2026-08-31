@@ -28,16 +28,44 @@ function comparisonPhrase(intent = {}) {
   return '';
 }
 
+function conditionSpecificSurgery(intent = {}) {
+  const condition = clean(intent.condition).toLowerCase();
+  if (intent.question_type !== 'surgery') return '';
+  if (condition === 'rhegmatogenous retinal detachment') {
+    return 'pars plana vitrectomy scleral buckling pneumatic retinopexy';
+  }
+  if (condition === 'full-thickness macular hole') {
+    return 'pars plana vitrectomy internal limiting membrane peeling';
+  }
+  if (condition === 'epiretinal membrane') {
+    return 'pars plana vitrectomy epiretinal membrane peeling internal limiting membrane peeling';
+  }
+  return '';
+}
+
+function modifierPhrase(intent = {}) {
+  const modifiers = (intent.modifiers || []).map(clean).filter(Boolean);
+  if (!modifiers.length) return '';
+  const condition = clean(intent.condition).toLowerCase();
+  const size = modifiers.find((value) => /(?:>|<|≥|≤)?\s*\d{2,4}\s*µm/i.test(value));
+  if (size && condition === 'full-thickness macular hole') return `large macular hole ${size}`;
+  const phakic = modifiers.find((value) => /^phakic$/i.test(value));
+  if (phakic && condition === 'full-thickness macular hole') return phakic;
+  return '';
+}
+
 export function buildResearchPlan(intent = {}) {
   const condition = clean(intent.condition || intent.domain || 'ophthalmic condition');
   const treatment = treatmentLabel(intent);
   const named = specificInterventions(intent);
-  const requested = comparisonPhrase(intent) || named.join(' ') || treatment;
+  const requested = comparisonPhrase(intent) || named.join(' ') || conditionSpecificSurgery(intent) || treatment;
+  const modifiers = modifierPhrase(intent);
+  const focused = clean(`${requested} ${modifiers}`);
   const tracks = [
     makeTrack(
       'guidelines',
       'Current professional-society and authority recommendations',
-      `${condition} ${requested} guideline recommendation`,
+      `${condition} ${focused} guideline recommendation`,
       ['guideline-registry'],
       ['guideline', 'consensus'],
       'current'
@@ -45,35 +73,35 @@ export function buildResearchPlan(intent = {}) {
     makeTrack(
       'efficacy',
       'Comparative effectiveness for the requested management domain',
-      `${condition} ${requested} comparative efficacy randomized trial systematic review`,
+      `${condition} ${focused} comparative efficacy randomized trial systematic review`,
       ['pubmed', 'europepmc', 'jstage'],
       ['systematic-review', 'meta-analysis', 'randomized-controlled-trial', 'comparative-study']
     ),
     makeTrack(
       'safety',
       'Adverse events, contraindications and tolerability',
-      `${condition} ${requested} safety adverse effects contraindications tolerability`,
+      `${condition} ${focused} safety adverse effects contraindications tolerability`,
       ['pubmed', 'europepmc', 'jstage'],
       ['systematic-review', 'randomized-controlled-trial', 'cohort', 'safety-study']
     ),
     makeTrack(
       'alternatives',
       'Competing treatment strategies and when to choose them',
-      `${condition} ${requested} alternative treatment comparative management`,
+      `${condition} ${focused} alternative treatment comparative management`,
       ['pubmed', 'europepmc', 'jstage', 'guideline-registry'],
       ['guideline', 'systematic-review', 'randomized-controlled-trial', 'comparative-study']
     ),
     makeTrack(
       'monitoring-escalation',
       'Monitoring, failure criteria and escalation/de-escalation triggers',
-      `${condition} ${requested} monitoring treatment failure escalation target outcomes follow-up`,
+      `${condition} ${focused} monitoring treatment failure escalation target outcomes follow-up`,
       ['guideline-registry', 'pubmed', 'europepmc'],
       ['guideline', 'consensus', 'prospective-study', 'comparative-study']
     ),
     makeTrack(
       'pivotal-evidence',
       'Practice-changing and recent pivotal evidence',
-      `${condition} ${requested} pivotal trial meta-analysis recent`,
+      `${condition} ${focused} pivotal trial meta-analysis recent`,
       ['pubmed', 'europepmc', 'jstage', 'openalex'],
       ['systematic-review', 'meta-analysis', 'randomized-controlled-trial'],
       'recent-10y-plus-landmark'
@@ -81,7 +109,7 @@ export function buildResearchPlan(intent = {}) {
     makeTrack(
       'ongoing-trials',
       'Registered ongoing or recently completed trials that may change practice',
-      `${condition} ${requested}`,
+      `${condition} ${focused}`,
       ['clinicaltrials'],
       ['registered-trial'],
       'current'

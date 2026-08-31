@@ -1,5 +1,5 @@
 import { validateResearchRequest, validateStructuredAnswer } from './contracts.js';
-import { interpretClinicalQuestion, interpretIntentWithAi } from './query-interpreter.js';
+import { resolveClinicalIntent } from './query-resolver.js';
 import { buildResearchPlan } from './research-planner.js';
 import { buildEvidencePack } from './evidence.js';
 import { findGuidelines } from './guidelines/registry.js';
@@ -97,11 +97,12 @@ async function retrievePlan(plan, adapterMap, deps) {
 
 export async function runResearchPipeline(payload, env = {}, deps = {}) {
   const request = validateResearchRequest(payload);
-  const interpreterDeps = { ...(deps.interpreterDeps || {}) };
-  if (typeof interpreterDeps.interpretIntent !== 'function' && typeof env?.AI?.run === 'function') {
-    interpreterDeps.interpretIntent = (validatedRequest) => interpretIntentWithAi(validatedRequest, env, deps.intentReasonerDeps || {});
-  }
-  const intent = await (deps.interpreter || interpretClinicalQuestion)(request, interpreterDeps);
+  const intent = deps.interpreter
+    ? await deps.interpreter(request, deps.interpreterDeps || {})
+    : await resolveClinicalIntent(request, env, {
+      ...(deps.interpreterDeps || {}),
+      intentReasonerDeps: deps.intentReasonerDeps || {}
+    });
   const plan = (deps.planner || buildResearchPlan)(intent);
   const adapterMap = deps.adapters || defaultAdapters(env, deps);
   const retrieval = await retrievePlan(plan, adapterMap, deps);
@@ -111,7 +112,7 @@ export async function runResearchPipeline(payload, env = {}, deps = {}) {
   const documents = [...guidelineRecords, ...retrieval.documents];
   const evidencePack = buildEvidencePack(intent, documents, {
     relevanceThreshold: Number.isFinite(Number(deps.relevanceThreshold)) ? Number(deps.relevanceThreshold) : 0.45,
-    maxSources: Number.isFinite(Number(deps.maxSources)) ? Number(deps.maxSources) : 24
+    maxSources: Number.isFinite(Number(deps.maxSources)) ? Number(deps.maxSources) : 14
   });
 
   const adapterProblems = retrieval.diagnostics.filter((entry) => entry.status !== 'fulfilled').length;
