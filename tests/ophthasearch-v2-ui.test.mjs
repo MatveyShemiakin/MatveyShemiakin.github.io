@@ -5,7 +5,9 @@ import { requestResearch, DEFAULT_RESEARCH_ENDPOINT } from '../for-doctors/ophth
 
 // Production UI contract for the published calm search-first interface.
 const pagePath = new URL('../for-doctors/ophthasearch-v2/index.html', import.meta.url);
+const publishedPagePath = new URL('../for-doctors/ophthasearch/index.html', import.meta.url);
 const clientPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.js', import.meta.url);
+const motionPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2-motion.js', import.meta.url);
 const cssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.css', import.meta.url);
 const modernCssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2-modern.css', import.meta.url);
 const workerEndpoint = 'https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev/v2/research';
@@ -25,8 +27,14 @@ test('OphthaSearch page prioritizes clinical conclusion and hides pipeline inter
   assert.doesNotMatch(html, /Диагностика research pipeline|Evidence Pack|Архитектура поиска/i);
   assert.match(html, /ophthasearch-v2\.css/);
   assert.match(html, /ophthasearch-v2\.js\?v=20260829-1/);
-  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260830-1/);
-  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260830-1/);
+  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-1/);
+  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-1/);
+});
+
+test('published OphthaSearch page cache-busts the fixed mobile composer assets', async () => {
+  const html = await fs.readFile(publishedPagePath, 'utf8');
+  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-1/);
+  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-1/);
 });
 
 test('OphthaSearch client posts to the deployed workers.dev research endpoint', async () => {
@@ -66,9 +74,13 @@ test('stylesheet guards mobile viewport against long identifiers', async () => {
   assert.match(css, /@media\s*\(max-width:\s*760px\)/);
 });
 
-test('mobile clinical composer clears the persistent bottom navigation', async () => {
+test('mobile clinical composer is portaled to a viewport-level fixed layer', async () => {
   const css = await fs.readFile(modernCssPath, 'utf8');
-  assert.match(css, /\.ophtha-v2-composer-wrap\{[^}]*position:fixed[^}]*bottom:calc\(104px \+ env\(safe-area-inset-bottom\)\)/s);
+  const motion = await fs.readFile(motionPath, 'utf8');
+  assert.match(motion, /document\.body\.appendChild\(host\)/);
+  assert.match(motion, /host\.appendChild\(composerWrap\)/);
+  assert.match(css, /\.ophtha-v2-mobile-composer-host\{[^}]*position:fixed[^}]*bottom:calc\(104px \+ env\(safe-area-inset-bottom\)\)/s);
+  assert.match(css, /\.ophtha-v2-mobile-composer-host \.ophtha-v2-composer-wrap\{[^}]*position:static/s);
 });
 
 test('OphthaSearch header controls inherit theme-aware foreground colors', async () => {
