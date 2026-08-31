@@ -34,7 +34,7 @@ test('OphthaSearch page prioritizes clinical conclusion and hides pipeline inter
 test('published OphthaSearch page cache-busts the fixed mobile composer assets', async () => {
   const html = await fs.readFile(publishedPagePath, 'utf8');
   assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-2/);
-  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-2/);
+  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-3/);
 });
 
 test('OphthaSearch client posts to the deployed workers.dev research endpoint', async () => {
@@ -83,6 +83,14 @@ test('mobile clinical composer anchors to the persistent mobile nav when availab
   assert.match(motion, /target\.appendChild\(host\)/);
   assert.match(css, /\.ophtha-v2-mobile-composer-host\.is-nav-anchored\{[^}]*position:absolute[^}]*bottom:calc\(100% \+ 6px\)/s);
   assert.match(css, /\.ophtha-v2-mobile-composer-host\.is-nav-anchored \.ophtha-v2-composer-wrap\{[^}]*position:static/s);
+});
+
+test('OphthaSearch mobile rail cancels Android browser-chrome viewport growth while preserving keyboard behavior', async () => {
+  const motion = await fs.readFile(motionPath, 'utf8');
+  assert.match(motion, /100dvh - 100svh/);
+  assert.match(motion, /max\(0px, 100dvh - 100svh\)/);
+  assert.match(motion, /mobileNav\.style\.bottom/);
+  assert.match(motion, /env\(safe-area-inset-bottom\)/);
 });
 
 test('OphthaSearch header controls inherit theme-aware foreground colors', async () => {
