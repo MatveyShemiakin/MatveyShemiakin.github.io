@@ -139,6 +139,6 @@ html[data-site-theme="dark"] .ophtha-v2-eye-glint{background:#dff1ff}
   .ophtha-v2-eye-mark *,.ophtha-v2-landing,.ophtha-v2-example,.ophtha-v2-search-form.ophtha-v2-composer,.ophtha-v2-search-button,body.has-answer .ophtha-v2-answer-shell>*{animation:none!important;transition:none!important}
   .ophtha-v2-eye-monogram{opacity:0}
   .ophtha-v2-eye-lid-top,.ophtha-v2-eye-lid-bottom{opacity:.82;transform:rotate(42deg) scale(1)}
-  .ophtha-v2-iris,.ophtha-v2-pupil{opacity:1;transform:scale(1)}
+  .ophtha-v2-eye-iris,.ophtha-v2-eye-pupil{opacity:1;transform:scale(1)}
   .ophtha-v2-eye-glint{opacity:.88}
 }
