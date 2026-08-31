@@ -68,3 +68,9 @@ test('Vault styling stays inside the existing Ophtha Merge visual system', () =>
   assert.match(css, /html\[data-site-theme=["']dark["']\][^\n]*\.ophtha-merge-vault-card/s);
   assert.doesNotMatch(css, /font-family:\s*(?!inherit)/);
 });
+
+test('Vault discovery actions keep full touch-target height on mobile', () => {
+  assert.match(css, /\.ophtha-merge-vault-unlock-actions \.button\{[^}]*flex:0 0 auto[^}]*min-height:(?:50|52|54|56|58)px[^}]*\}/);
+  const mobileBlock = css.slice(css.indexOf('@media(max-width:680px)'));
+  assert.doesNotMatch(mobileBlock, /\.ophtha-merge-vault-unlock-actions \.button\{[^}]*flex:1 1 0/);
+});
