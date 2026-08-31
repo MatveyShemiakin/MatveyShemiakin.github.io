@@ -83,12 +83,48 @@ function wireAnswerObserver(root, answerShell) {
   sync();
 }
 
+function wireMobileComposerViewport(root) {
+  const composerWrap = root.querySelector('.ophtha-v2-composer-wrap');
+  if (!composerWrap || !composerWrap.parentNode) return;
+
+  const marker = document.createComment('ophtha-v2-composer-origin');
+  composerWrap.parentNode.insertBefore(marker, composerWrap);
+  const mobileQuery = window.matchMedia('(max-width: 760px)');
+  let host = null;
+
+  const sync = () => {
+    if (mobileQuery.matches) {
+      if (!host) {
+        host = document.createElement('div');
+        host.className = 'ophtha-v2-mobile-composer-host';
+        document.body.appendChild(host);
+      }
+      if (composerWrap.parentNode !== host) host.appendChild(composerWrap);
+      return;
+    }
+
+    if (marker.parentNode && composerWrap.parentNode !== marker.parentNode) {
+      marker.parentNode.insertBefore(composerWrap, marker.nextSibling);
+    }
+    if (host) {
+      host.remove();
+      host = null;
+    }
+  };
+
+  sync();
+  if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', sync);
+  else mobileQuery.addListener(sync);
+}
+
 function initOphthaSearchMotion(root = document) {
   const form = root.querySelector('[data-v2-search-form]');
   const input = root.querySelector('[data-v2-query]');
   const answerShell = root.querySelector('[data-v2-answer-shell]');
   const eye = root.querySelector('[data-v2-eye-mark]');
   if (!form || !input) return;
+
+  wireMobileComposerViewport(root);
 
   const state = { stopped: false };
   if (eye) window.requestAnimationFrame(() => eye.classList.add('is-ready'));
