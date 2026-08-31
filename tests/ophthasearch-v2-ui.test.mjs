@@ -28,7 +28,7 @@ test('OphthaSearch page prioritizes clinical conclusion and hides pipeline inter
   assert.doesNotMatch(html, /Диагностика research pipeline|Evidence Pack|Архитектура поиска/i);
   assert.match(html, /ophthasearch-v2\.css/);
   assert.match(html, /ophthasearch-v2\.js\?v=20260829-1/);
-  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-1/);
+  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-5/);
   assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-1/);
 });
 
@@ -37,9 +37,9 @@ test('published OphthaSearch pages load the current mobile motion asset', async 
     fs.readFile(publishedPagePath, 'utf8'),
     fs.readFile(publishedEnPagePath, 'utf8')
   ]);
-  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-2/);
+  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-5/);
   assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-4/);
-  assert.match(enHtml, /ophthasearch-v2-modern\.css\?v=20260831-2/);
+  assert.match(enHtml, /ophthasearch-v2-modern\.css\?v=20260831-5/);
   assert.match(enHtml, /ophthasearch-v2-motion\.js\?v=20260831-4/);
 });
 
