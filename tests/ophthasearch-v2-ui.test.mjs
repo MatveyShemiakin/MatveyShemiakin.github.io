@@ -85,15 +85,12 @@ test('mobile clinical composer anchors to the persistent mobile nav when availab
   assert.match(css, /\.ophtha-v2-mobile-composer-host\.is-nav-anchored \.ophtha-v2-composer-wrap\{[^}]*position:static/s);
 });
 
-test('mobile composer pins a stable screen top instead of following Android Chrome viewport height changes', async () => {
-  const css = await fs.readFile(modernCssPath, 'utf8');
+test('OphthaSearch mobile rail cancels Android browser-chrome viewport growth while preserving keyboard behavior', async () => {
   const motion = await fs.readFile(motionPath, 'utf8');
-  assert.match(motion, /getBoundingClientRect\(\)\.top/);
-  assert.match(motion, /--ophtha-v2-composer-screen-top/);
-  assert.match(motion, /is-screen-pinned/);
-  assert.match(motion, /input\.addEventListener\('focus'/);
-  assert.match(motion, /input\.addEventListener\('blur'/);
-  assert.match(css, /\.ophtha-v2-mobile-composer-host\.is-screen-pinned\{[^}]*position:fixed[^}]*top:var\(--ophtha-v2-composer-screen-top\)[^}]*bottom:auto/s);
+  assert.match(motion, /100dvh - 100svh/);
+  assert.match(motion, /max\(0px, 100dvh - 100svh\)/);
+  assert.match(motion, /mobileNav\.style\.bottom/);
+  assert.match(motion, /env\(safe-area-inset-bottom\)/);
 });
 
 test('OphthaSearch header controls inherit theme-aware foreground colors', async () => {
