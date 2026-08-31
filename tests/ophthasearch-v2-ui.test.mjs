@@ -74,13 +74,15 @@ test('stylesheet guards mobile viewport against long identifiers', async () => {
   assert.match(css, /@media\s*\(max-width:\s*760px\)/);
 });
 
-test('mobile clinical composer is portaled to a viewport-level fixed layer', async () => {
+test('mobile clinical composer anchors to the persistent mobile nav when available', async () => {
   const css = await fs.readFile(modernCssPath, 'utf8');
   const motion = await fs.readFile(motionPath, 'utf8');
-  assert.match(motion, /document\.body\.appendChild\(host\)/);
-  assert.match(motion, /host\.appendChild\(composerWrap\)/);
-  assert.match(css, /\.ophtha-v2-mobile-composer-host\{[^}]*position:fixed[^}]*bottom:calc\(104px \+ env\(safe-area-inset-bottom\)\)/s);
-  assert.match(css, /\.ophtha-v2-mobile-composer-host \.ophtha-v2-composer-wrap\{[^}]*position:static/s);
+  assert.match(motion, /document\.querySelector\('\.site-mobile-nav'\)/);
+  assert.match(motion, /const target = mobileNav \|\| document\.body;/);
+  assert.match(motion, /host\.classList\.toggle\('is-nav-anchored', Boolean\(mobileNav\)\)/);
+  assert.match(motion, /target\.appendChild\(host\)/);
+  assert.match(css, /\.ophtha-v2-mobile-composer-host\.is-nav-anchored\{[^}]*position:absolute[^}]*bottom:calc\(100% \+ 6px\)/s);
+  assert.match(css, /\.ophtha-v2-mobile-composer-host\.is-nav-anchored \.ophtha-v2-composer-wrap\{[^}]*position:static/s);
 });
 
 test('OphthaSearch header controls inherit theme-aware foreground colors', async () => {
