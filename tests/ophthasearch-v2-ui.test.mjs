@@ -28,7 +28,7 @@ test('OphthaSearch page prioritizes clinical conclusion and hides pipeline inter
   assert.doesNotMatch(html, /Диагностика research pipeline|Evidence Pack|Архитектура поиска/i);
   assert.match(html, /ophthasearch-v2\.css/);
   assert.match(html, /ophthasearch-v2\.js\?v=20260829-1/);
-  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-1/);
+  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-5/);
   assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-1/);
 });
 
@@ -37,9 +37,9 @@ test('published OphthaSearch pages load the current mobile motion asset', async 
     fs.readFile(publishedPagePath, 'utf8'),
     fs.readFile(publishedEnPagePath, 'utf8')
   ]);
-  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-2/);
+  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-5/);
   assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-4/);
-  assert.match(enHtml, /ophthasearch-v2-modern\.css\?v=20260831-2/);
+  assert.match(enHtml, /ophthasearch-v2-modern\.css\?v=20260831-5/);
   assert.match(enHtml, /ophthasearch-v2-motion\.js\?v=20260831-4/);
 });
 
@@ -78,6 +78,13 @@ test('stylesheet guards mobile viewport against long identifiers', async () => {
   const css = await fs.readFile(cssPath, 'utf8');
   assert.match(css, /overflow-wrap:\s*anywhere/);
   assert.match(css, /@media\s*\(max-width:\s*760px\)/);
+});
+
+test('mobile search exposes progress instead of looking frozen', async () => {
+  const css = await fs.readFile(modernCssPath, 'utf8');
+  assert.match(css, /\.ophtha-v2-status\[data-state="loading"\][^{]*\{[^}]*display:block/s);
+  assert.match(css, /\.ophtha-v2-search-button:disabled::after\{[^}]*border-radius:50%/s);
+  assert.match(css, /@keyframes\s+ophthaSearchSpin/);
 });
 
 test('mobile clinical composer anchors to the persistent mobile nav when available', async () => {
