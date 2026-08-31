@@ -33,8 +33,8 @@ test('OphthaSearch page prioritizes clinical conclusion and hides pipeline inter
 
 test('published OphthaSearch page cache-busts the fixed mobile composer assets', async () => {
   const html = await fs.readFile(publishedPagePath, 'utf8');
-  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-1/);
-  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-1/);
+  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-2/);
+  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-2/);
 });
 
 test('OphthaSearch client posts to the deployed workers.dev research endpoint', async () => {
