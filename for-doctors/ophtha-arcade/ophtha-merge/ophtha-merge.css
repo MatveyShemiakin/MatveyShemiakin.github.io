@@ -16,6 +16,16 @@
 .ophtha-merge-player-name-row{display:flex!important;align-items:center;gap:6px;min-width:0}.ophtha-merge-player-name-row strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ophtha-merge-player-level{display:inline-flex!important;align-items:center;justify-content:center;flex:none;max-width:120px;padding:3px 7px;border:1px solid rgba(139,106,40,.34);border-radius:999px;background:#fff6dc;color:#6a4a0a;font-size:9px!important;font-weight:900;letter-spacing:.03em;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ophtha-merge-profile-level{max-width:none;padding:5px 9px;font-size:10px!important}
+.ophtha-merge-profile-actions{display:flex;flex-wrap:wrap;gap:8px}.ophtha-merge-profile-actions .button{flex:1 1 145px}
+.ophtha-merge-vault-button{display:inline-flex!important;align-items:center;justify-content:space-between;gap:10px}.ophtha-merge-vault-button span{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:3px 7px;border-radius:999px;background:#fff3cf;color:#76530d;font-size:10px;font-weight:900;letter-spacing:.02em}
+.ophtha-merge-vault-dialog{width:min(920px,calc(100vw - 24px))}
+.ophtha-merge-vault-progress{margin:0 0 6px;color:#5b6c7e;font-size:13px;font-weight:700}.ophtha-merge-vault-progress strong{color:#8b6a28;font-size:15px}
+.ophtha-merge-vault-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-height:60vh;margin-top:16px;padding:2px 4px 2px 0;overflow:auto}
+.ophtha-merge-vault-card{display:flex;flex-direction:column;min-height:230px;padding:16px;border:1px solid #d8e1eb;border-radius:16px;background:#fff;color:#10233c;box-shadow:0 6px 20px rgba(4,18,37,.05)}
+.ophtha-merge-vault-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.ophtha-merge-vault-icon{display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(139,106,40,.3);border-radius:12px;background:#fff6dc;color:#76530d;font-size:19px;font-weight:900}.ophtha-merge-vault-kind{padding:4px 7px;border-radius:999px;background:#edf3f9;color:#53687f;font-size:9px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}
+.ophtha-merge-vault-card h3{margin:0 0 8px;font-size:16px;line-height:1.2}.ophtha-merge-vault-card p{margin:0 0 14px;color:#5a6b7d;font-size:12px;line-height:1.5}.ophtha-merge-vault-card .ophtha-merge-vault-source{margin-top:auto;width:100%;padding:8px 10px;font-size:11px}
+.ophtha-merge-vault-card.is-locked{background:#f3f6f9;border-style:dashed;color:#738292;box-shadow:none}.ophtha-merge-vault-card.is-locked .ophtha-merge-vault-icon{background:#e9eef3;border-color:#cbd5df;color:#738292}.ophtha-merge-vault-card.is-locked h3{color:#738292}.ophtha-merge-vault-card.is-locked p{color:#8290a0}
+.ophtha-merge-vault-unlock-dialog{width:min(520px,calc(100vw - 24px));text-align:center}.ophtha-merge-vault-unlock-dialog .ophtha-merge-dialog-close{position:absolute;top:14px;right:14px}.ophtha-merge-vault-unlock-icon{display:grid;place-items:center;width:76px;height:76px;margin:4px auto 16px;border:1px solid rgba(139,106,40,.42);border-radius:24px;background:#fff3cf;color:#76530d;font-size:36px;box-shadow:0 12px 32px rgba(139,106,40,.14)}.ophtha-merge-vault-unlock-dialog h2{margin-bottom:10px}.ophtha-merge-vault-unlock-dialog>p:not(.eyebrow){color:#56687c;line-height:1.55}.ophtha-merge-vault-unlock-actions{display:flex;gap:8px;justify-content:center;margin-top:20px}.ophtha-merge-vault-unlock-actions .button{flex:1 1 0}
 
 html[data-site-theme="dark"] .ophtha-merge-score-card,
 html[data-site-theme="dark"] .ophtha-merge-modes,
@@ -37,6 +47,8 @@ html[data-site-theme="dark"] .ophtha-merge-compact-button:disabled{background:#5
 html[data-site-theme="dark"] .ophtha-merge-mode{color:#c4d1df}
 html[data-site-theme="dark"] .ophtha-merge-mode.is-active{background:#4d8eff;color:#fff}
 html[data-site-theme="dark"] .ophtha-merge-touch-tip{background:rgba(3,15,32,.96);border-color:#456786;color:#f4f8fc}
+html[data-site-theme="dark"] .ophtha-merge-vault-card{background:#102a47;border-color:#365574;color:#edf4fb}
+html[data-site-theme="dark"] .ophtha-merge-vault-card p{color:#c4d1df}html[data-site-theme="dark"] .ophtha-merge-vault-card.is-locked{background:#0a2344;border-color:#365574;color:#8ea0b3}html[data-site-theme="dark"] .ophtha-merge-vault-card.is-locked h3,html[data-site-theme="dark"] .ophtha-merge-vault-card.is-locked p{color:#8ea0b3}html[data-site-theme="dark"] .ophtha-merge-vault-icon{background:#2b2514;border-color:#8d7435;color:#f4d98a}html[data-site-theme="dark"] .ophtha-merge-vault-kind{background:#17304d;color:#c4d1df}html[data-site-theme="dark"] .ophtha-merge-vault-progress{color:#c4d1df}html[data-site-theme="dark"] .ophtha-merge-vault-progress strong{color:#f4d98a}html[data-site-theme="dark"] .ophtha-merge-vault-button span{background:#2b2514;color:#f4d98a}html[data-site-theme="dark"] .ophtha-merge-vault-unlock-icon{background:#2b2514;border-color:#8d7435;color:#f4d98a}html[data-site-theme="dark"] .ophtha-merge-vault-unlock-dialog>p:not(.eyebrow){color:#c4d1df}
 
 @media(max-width:680px){
   .ophtha-merge-touch-zone{margin:0 -12px;padding:0 12px}
@@ -49,4 +61,6 @@ html[data-site-theme="dark"] .ophtha-merge-touch-tip{background:rgba(3,15,32,.96
   .ophtha-merge-board-wrap{box-shadow:0 14px 38px rgba(4,18,37,.18)}
   .ophtha-merge-player-level{max-width:92px;font-size:8px!important;padding:3px 6px}
   .ophtha-merge-profile-level{max-width:none;font-size:10px!important}
+  .ophtha-merge-profile-actions{display:grid;grid-template-columns:1fr}.ophtha-merge-profile-actions .button{width:100%}
+  .ophtha-merge-vault-grid{grid-template-columns:1fr;max-height:62vh}.ophtha-merge-vault-card{min-height:0}.ophtha-merge-vault-dialog{padding-left:14px;padding-right:14px}.ophtha-merge-vault-unlock-actions{flex-direction:column}.ophtha-merge-vault-unlock-actions .button{width:100%}
 }
