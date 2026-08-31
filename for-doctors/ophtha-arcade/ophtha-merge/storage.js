@@ -4,6 +4,7 @@ const PREFIX = 'ophthaMerge:v2';
 const PROFILE_KEY = `${PREFIX}:profile`;
 const STATS_KEY = `${PREFIX}:stats`;
 const PREFS_KEY = `${PREFIX}:prefs`;
+const VAULT_KEY = `${PREFIX}:vault`;
 
 function gameKey(mode) {
   return `${PREFIX}:game:${mode}`;
@@ -89,4 +90,19 @@ export function loadPrefs(store = defaultStore()) {
 
 export function savePrefs(prefs, store = defaultStore()) {
   store.setItem(PREFS_KEY, JSON.stringify({ sound: Boolean(prefs.sound), haptics: Boolean(prefs.haptics) }));
+}
+
+export function loadVault(store = defaultStore()) {
+  const stored = safeParse(store.getItem(VAULT_KEY), {});
+  const unlockedIds = Array.isArray(stored?.unlockedIds)
+    ? Array.from(new Set(stored.unlockedIds.filter((id) => typeof id === 'string')))
+    : [];
+  return { unlockedIds };
+}
+
+export function saveVault(vault, store = defaultStore()) {
+  const unlockedIds = Array.isArray(vault?.unlockedIds)
+    ? Array.from(new Set(vault.unlockedIds.filter((id) => typeof id === 'string')))
+    : [];
+  store.setItem(VAULT_KEY, JSON.stringify({ unlockedIds }));
 }
