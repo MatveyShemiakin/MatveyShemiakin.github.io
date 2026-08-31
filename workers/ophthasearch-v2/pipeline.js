@@ -72,27 +72,36 @@ function selectAdapters(track, adapterMap) {
   return { selected, unavailable };
 }
 
-async function retrievePlan(plan, adapterMap, deps) {
+async function retrieveTrack(track, adapterMap, deps) {
   const documents = [];
   const diagnostics = [];
-  for (const track of plan) {
-    const { selected, unavailable } = selectAdapters(track, adapterMap);
-    for (const adapter of unavailable) diagnostics.push({ trackId: track.id, adapter, status: 'unavailable', total: 0, error: 'adapter-unavailable' });
-    if (!Object.keys(selected).length) continue;
-    const results = await runAdaptersWithDeadlines(track, selected, { timeoutMs: deps.timeoutMs || 2500 });
-    for (const [adapter, result] of Object.entries(results)) {
-      diagnostics.push({
-        trackId: track.id,
-        adapter,
-        status: result.status,
-        total: Number(result.total || result.records?.length || 0),
-        error: result.error || ''
-      });
-      if (result.status !== 'fulfilled') continue;
-      for (const record of result.records || []) documents.push({ ...record, providerKey: record.providerKey || adapter });
-    }
+  const { selected, unavailable } = selectAdapters(track, adapterMap);
+  for (const adapter of unavailable) diagnostics.push({ trackId: track.id, adapter, status: 'unavailable', total: 0, error: 'adapter-unavailable' });
+  if (!Object.keys(selected).length) return { documents, diagnostics };
+
+  const results = await runAdaptersWithDeadlines(track, selected, { timeoutMs: deps.timeoutMs || 2500 });
+  for (const [adapter, result] of Object.entries(results)) {
+    diagnostics.push({
+      trackId: track.id,
+      adapter,
+      status: result.status,
+      total: Number(result.total || result.records?.length || 0),
+      error: result.error || ''
+    });
+    if (result.status !== 'fulfilled') continue;
+    for (const record of result.records || []) documents.push({ ...record, providerKey: record.providerKey || adapter });
   }
   return { documents, diagnostics };
+}
+
+async function retrievePlan(plan, adapterMap, deps) {
+  const trackResults = await Promise.all(
+    plan.map((track) => retrieveTrack(track, adapterMap, deps))
+  );
+  return {
+    documents: trackResults.flatMap((result) => result.documents),
+    diagnostics: trackResults.flatMap((result) => result.diagnostics)
+  };
 }
 
 export async function runResearchPipeline(payload, env = {}, deps = {}) {
