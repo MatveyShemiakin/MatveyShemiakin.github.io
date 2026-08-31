@@ -6,6 +6,7 @@ import { requestResearch, DEFAULT_RESEARCH_ENDPOINT } from '../for-doctors/ophth
 // Production UI contract for the published calm search-first interface.
 const pagePath = new URL('../for-doctors/ophthasearch-v2/index.html', import.meta.url);
 const publishedPagePath = new URL('../for-doctors/ophthasearch/index.html', import.meta.url);
+const publishedEnPagePath = new URL('../en/for-doctors/ophthasearch/index.html', import.meta.url);
 const clientPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.js', import.meta.url);
 const motionPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2-motion.js', import.meta.url);
 const cssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.css', import.meta.url);
@@ -31,10 +32,15 @@ test('OphthaSearch page prioritizes clinical conclusion and hides pipeline inter
   assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-1/);
 });
 
-test('published OphthaSearch page cache-busts the fixed mobile composer assets', async () => {
-  const html = await fs.readFile(publishedPagePath, 'utf8');
+test('published OphthaSearch pages load the current mobile motion asset', async () => {
+  const [html, enHtml] = await Promise.all([
+    fs.readFile(publishedPagePath, 'utf8'),
+    fs.readFile(publishedEnPagePath, 'utf8')
+  ]);
   assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-2/);
-  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-3/);
+  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-4/);
+  assert.match(enHtml, /ophthasearch-v2-modern\.css\?v=20260831-2/);
+  assert.match(enHtml, /ophthasearch-v2-motion\.js\?v=20260831-4/);
 });
 
 test('OphthaSearch client posts to the deployed workers.dev research endpoint', async () => {
@@ -85,12 +91,17 @@ test('mobile clinical composer anchors to the persistent mobile nav when availab
   assert.match(css, /\.ophtha-v2-mobile-composer-host\.is-nav-anchored \.ophtha-v2-composer-wrap\{[^}]*position:static/s);
 });
 
-test('OphthaSearch mobile rail cancels Android browser-chrome viewport growth while preserving keyboard behavior', async () => {
+test('OphthaSearch pins the mobile nav to measured VisualViewport coordinates', async () => {
   const motion = await fs.readFile(motionPath, 'utf8');
-  assert.match(motion, /100dvh - 100svh/);
-  assert.match(motion, /max\(0px, 100dvh - 100svh\)/);
-  assert.match(motion, /mobileNav\.style\.bottom/);
-  assert.match(motion, /env\(safe-area-inset-bottom\)/);
+  assert.match(motion, /window\.visualViewport/);
+  assert.match(motion, /visualViewport\.pageTop/);
+  assert.match(motion, /visualViewport\.height/);
+  assert.match(motion, /mobileNav\.style\.position\s*=\s*'absolute'/);
+  assert.match(motion, /mobileNav\.style\.top/);
+  assert.match(motion, /visualViewport\.addEventListener\('resize'/);
+  assert.match(motion, /visualViewport\.addEventListener\('scroll'/);
+  assert.match(motion, /window\.addEventListener\('scroll'/);
+  assert.doesNotMatch(motion, /100dvh - 100svh/);
 });
 
 test('OphthaSearch header controls inherit theme-aware foreground colors', async () => {
