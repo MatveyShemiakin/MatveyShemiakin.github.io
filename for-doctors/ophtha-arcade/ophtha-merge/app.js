@@ -3,6 +3,14 @@ import { parseFormattedInteger } from './i18n.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const INTERACTIVE_SELECTOR = 'button,a,input,select,textarea,label';
+const SWIPE_HINT_KEY = 'ophthaMergeSwipeHintSeenV1';
+const isEnglish = String(document.documentElement.lang || '').toLowerCase().startsWith('en');
+const SWIPE_GUIDANCE = isEnglish
+  ? 'Swipes inside the board move tiles. To scroll the page, start the gesture outside the game area.'
+  : 'Свайпы внутри поля управляют плитками. Чтобы прокрутить страницу, начните жест за пределами игровой зоны.';
+const SWIPE_HINT_LINE = isEnglish
+  ? '← ↑ → ↓ Swipe inside the game area · scroll outside'
+  : '← ↑ → ↓ Свайпайте внутри игровой зоны · прокручивайте страницу снаружи';
 
 const ICON_SHAPES = {
   1: [
@@ -89,6 +97,7 @@ const swipeHint = boardWrap?.nextElementSibling?.classList.contains('ophtha-merg
   ? boardWrap.nextElementSibling
   : null;
 let playZone = boardWrap;
+let touchTip = null;
 
 if (boardWrap?.parentElement) {
   playZone = document.createElement('div');
@@ -102,6 +111,17 @@ if (boardWrap?.parentElement) {
   playZone?.classList.add('ophtha-merge-touch-zone');
 }
 
+if (swipeHint) swipeHint.textContent = SWIPE_HINT_LINE;
+
+if (playZone) {
+  touchTip = document.createElement('div');
+  touchTip.className = 'ophtha-merge-touch-tip';
+  touchTip.setAttribute('role', 'status');
+  touchTip.setAttribute('aria-live', 'polite');
+  touchTip.textContent = SWIPE_GUIDANCE;
+  playZone.append(touchTip);
+}
+
 upgradeTileIcons(board || document);
 
 if (board) {
@@ -110,9 +130,26 @@ if (board) {
 }
 
 let gesture = null;
+let touchGesture = null;
+let hintTimer = null;
 
 function isInteractiveTarget(target) {
   return target instanceof Element && Boolean(target.closest(INTERACTIVE_SELECTOR));
+}
+
+function setPlayZoneActive(active) {
+  playZone?.classList.toggle('is-touch-active', Boolean(active));
+}
+
+function showSwipeGuidanceOnce() {
+  if (!touchTip) return;
+  let seen = false;
+  try { seen = localStorage.getItem(SWIPE_HINT_KEY) === '1'; } catch {}
+  if (seen) return;
+  touchTip.classList.add('is-visible');
+  try { localStorage.setItem(SWIPE_HINT_KEY, '1'); } catch {}
+  clearTimeout(hintTimer);
+  hintTimer = setTimeout(() => touchTip?.classList.remove('is-visible'), 3600);
 }
 
 function releaseGesture(pointerId) {
@@ -122,9 +159,19 @@ function releaseGesture(pointerId) {
   } catch {}
 }
 
+function dispatchSwipe(dx, dy) {
+  if (!board || Math.max(Math.abs(dx), Math.abs(dy)) < 24) return;
+  const key = Math.abs(dx) > Math.abs(dy)
+    ? (dx > 0 ? 'ArrowRight' : 'ArrowLeft')
+    : (dy > 0 ? 'ArrowDown' : 'ArrowUp');
+  board.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+}
+
 function onPointerDown(event) {
   if (!playZone || !board || isInteractiveTarget(event.target)) return;
   gesture = { pointerId: event.pointerId, x: event.clientX, y: event.clientY };
+  setPlayZoneActive(true);
+  if (event.pointerType === 'touch') showSwipeGuidanceOnce();
   try { playZone.setPointerCapture(event.pointerId); } catch {}
   event.preventDefault();
   event.stopPropagation();
@@ -143,13 +190,8 @@ function onPointerUp(event) {
   const current = gesture;
   gesture = null;
   releaseGesture(event.pointerId);
-  const dx = event.clientX - current.x;
-  const dy = event.clientY - current.y;
-  if (Math.max(Math.abs(dx), Math.abs(dy)) < 24) return;
-  const key = Math.abs(dx) > Math.abs(dy)
-    ? (dx > 0 ? 'ArrowRight' : 'ArrowLeft')
-    : (dy > 0 ? 'ArrowDown' : 'ArrowUp');
-  board.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
+  setPlayZoneActive(false);
+  dispatchSwipe(event.clientX - current.x, event.clientY - current.y);
 }
 
 function onPointerCancel(event) {
@@ -158,6 +200,52 @@ function onPointerCancel(event) {
   event.stopPropagation();
   gesture = null;
   releaseGesture(event.pointerId);
+  setPlayZoneActive(false);
+}
+
+function trackedTouch(list, identifier) {
+  return Array.from(list || []).find((touch) => touch.identifier === identifier) || null;
+}
+
+function onTouchStart(event) {
+  if (!playZone || !board || isInteractiveTarget(event.target) || event.touches.length !== 1) return;
+  const touch = event.changedTouches[0] || event.touches[0];
+  touchGesture = {
+    identifier: touch.identifier,
+    x: touch.clientX,
+    y: touch.clientY,
+    pointerSupported: 'PointerEvent' in window
+  };
+  setPlayZoneActive(true);
+  showSwipeGuidanceOnce();
+}
+
+function onTouchMove(event) {
+  if (!touchGesture) return;
+  const touch = trackedTouch(event.touches, touchGesture.identifier);
+  if (!touch) return;
+  event.preventDefault();
+  event.stopPropagation();
+}
+
+function onTouchEnd(event) {
+  if (!touchGesture) return;
+  const touch = trackedTouch(event.changedTouches, touchGesture.identifier);
+  const current = touchGesture;
+  touchGesture = null;
+  setPlayZoneActive(false);
+  if (!touch) return;
+  event.preventDefault();
+  event.stopPropagation();
+  if (!current.pointerSupported) dispatchSwipe(touch.clientX - current.x, touch.clientY - current.y);
+}
+
+function onTouchCancel(event) {
+  if (!touchGesture) return;
+  touchGesture = null;
+  setPlayZoneActive(false);
+  event.preventDefault();
+  event.stopPropagation();
 }
 
 if (playZone) {
@@ -165,4 +253,8 @@ if (playZone) {
   playZone.addEventListener('pointermove', onPointerMove, { capture: true, passive: false });
   playZone.addEventListener('pointerup', onPointerUp, { capture: true, passive: false });
   playZone.addEventListener('pointercancel', onPointerCancel, { capture: true, passive: false });
+  playZone.addEventListener('touchstart', onTouchStart, { capture: true, passive: false });
+  playZone.addEventListener('touchmove', onTouchMove, { capture: true, passive: false });
+  playZone.addEventListener('touchend', onTouchEnd, { capture: true, passive: false });
+  playZone.addEventListener('touchcancel', onTouchCancel, { capture: true, passive: false });
 }

@@ -1,6 +1,9 @@
 @import url('./ophtha-merge-core.css');
 
-.ophtha-merge-touch-zone{margin:0 -8px;padding:0 8px;touch-action:none;overscroll-behavior:contain;-webkit-user-select:none;user-select:none}
+.ophtha-merge-touch-zone{position:relative;margin:0 -8px;padding:0 8px;touch-action:none;overscroll-behavior:contain;-webkit-user-select:none;user-select:none}
+.ophtha-merge-touch-zone.is-touch-active .ophtha-merge-board-wrap{outline:2px solid rgba(77,142,255,.55);outline-offset:3px;box-shadow:0 16px 42px rgba(4,18,37,.22)}
+.ophtha-merge-touch-tip{position:absolute;z-index:30;left:50%;top:12px;width:min(88%,430px);padding:10px 14px;border:1px solid rgba(122,151,184,.45);border-radius:14px;background:rgba(5,24,49,.94);color:#fff;font-size:12px;font-weight:700;line-height:1.35;text-align:center;box-shadow:0 12px 30px rgba(4,18,37,.28);opacity:0;transform:translate(-50%,-8px);pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.ophtha-merge-touch-tip.is-visible{opacity:1;transform:translate(-50%,0)}
 .ophtha-merge-tile-mark{display:grid;place-items:center;min-height:34px;margin:2px 0 2px;font-size:0;line-height:1}
 .ophtha-merge-tile-icon{width:clamp(28px,6.5vw,46px);height:clamp(28px,6.5vw,46px);fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ophtha-merge-tile-number{letter-spacing:-.02em}
@@ -33,9 +36,11 @@ html[data-site-theme="dark"] .ophtha-merge-compact-button:hover{background:#2143
 html[data-site-theme="dark"] .ophtha-merge-compact-button:disabled{background:#536579!important;border-color:#536579!important;color:#fff!important;opacity:1!important}
 html[data-site-theme="dark"] .ophtha-merge-mode{color:#c4d1df}
 html[data-site-theme="dark"] .ophtha-merge-mode.is-active{background:#4d8eff;color:#fff}
+html[data-site-theme="dark"] .ophtha-merge-touch-tip{background:rgba(3,15,32,.96);border-color:#456786;color:#f4f8fc}
 
 @media(max-width:680px){
   .ophtha-merge-touch-zone{margin:0 -12px;padding:0 12px}
+  .ophtha-merge-touch-tip{top:10px;width:min(92%,400px);font-size:11px}
   .ophtha-merge-tile{padding:5px}
   .ophtha-merge-tile-number{font-size:clamp(25px,9vw,36px)}
   .ophtha-merge-tile-mark{min-height:30px;margin:1px 0}
