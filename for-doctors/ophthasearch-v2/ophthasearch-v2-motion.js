@@ -83,13 +83,50 @@ function wireAnswerObserver(root, answerShell) {
   sync();
 }
 
-function stabilizeMobileRail(mobileNav) {
-  if (!mobileNav) return;
-  const supportsStableViewportUnits = window.CSS?.supports?.('height', '100svh') === true
-    && window.CSS?.supports?.('height', '100dvh') === true;
-  if (!supportsStableViewportUnits) return;
+function pinMobileNavToVisualViewport(mobileNav) {
+  const visualViewport = window.visualViewport;
+  if (!mobileNav || !visualViewport) return () => {};
 
-  mobileNav.style.bottom = 'calc(max(10px, env(safe-area-inset-bottom)) + max(0px, 100dvh - 100svh))';
+  const original = {
+    position: mobileNav.style.position,
+    top: mobileNav.style.top,
+    bottom: mobileNav.style.bottom
+  };
+  let rafId = 0;
+
+  const place = () => {
+    rafId = 0;
+    const navHeight = mobileNav.getBoundingClientRect().height || 84;
+    const pageTop = Number.isFinite(visualViewport.pageTop) ? visualViewport.pageTop : window.scrollY;
+    const visibleBottom = pageTop + visualViewport.height;
+    const navTop = Math.max(0, visibleBottom - navHeight);
+
+    mobileNav.style.position = 'absolute';
+    mobileNav.style.bottom = 'auto';
+    mobileNav.style.top = `calc(${Math.round(navTop)}px - max(10px, env(safe-area-inset-bottom)))`;
+  };
+
+  const schedule = () => {
+    if (rafId) return;
+    rafId = window.requestAnimationFrame(place);
+  };
+
+  visualViewport.addEventListener('resize', schedule, { passive: true });
+  visualViewport.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  place();
+
+  return () => {
+    visualViewport.removeEventListener('resize', schedule);
+    visualViewport.removeEventListener('scroll', schedule);
+    window.removeEventListener('scroll', schedule);
+    window.removeEventListener('resize', schedule);
+    if (rafId) window.cancelAnimationFrame(rafId);
+    mobileNav.style.position = original.position;
+    mobileNav.style.top = original.top;
+    mobileNav.style.bottom = original.bottom;
+  };
 }
 
 function wireMobileComposerViewport(root) {
@@ -100,6 +137,8 @@ function wireMobileComposerViewport(root) {
   composerWrap.parentNode.insertBefore(marker, composerWrap);
   const mobileQuery = window.matchMedia('(max-width: 760px)');
   let host = null;
+  let pinnedNav = null;
+  let releaseViewportPin = null;
 
   const sync = () => {
     if (mobileQuery.matches) {
@@ -109,7 +148,12 @@ function wireMobileComposerViewport(root) {
       }
 
       const mobileNav = document.querySelector('.site-mobile-nav');
-      stabilizeMobileRail(mobileNav);
+      if (mobileNav !== pinnedNav) {
+        if (releaseViewportPin) releaseViewportPin();
+        pinnedNav = mobileNav;
+        releaseViewportPin = pinMobileNavToVisualViewport(mobileNav);
+      }
+
       const target = mobileNav || document.body;
       host.classList.toggle('is-nav-anchored', Boolean(mobileNav));
       if (host.parentNode !== target) target.appendChild(host);
@@ -117,6 +161,11 @@ function wireMobileComposerViewport(root) {
       return;
     }
 
+    if (releaseViewportPin) {
+      releaseViewportPin();
+      releaseViewportPin = null;
+      pinnedNav = null;
+    }
     if (marker.parentNode && composerWrap.parentNode !== marker.parentNode) {
       marker.parentNode.insertBefore(composerWrap, marker.nextSibling);
     }
