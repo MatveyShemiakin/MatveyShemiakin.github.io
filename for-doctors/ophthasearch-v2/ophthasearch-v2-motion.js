@@ -83,6 +83,15 @@ function wireAnswerObserver(root, answerShell) {
   sync();
 }
 
+function stabilizeMobileRail(mobileNav) {
+  if (!mobileNav) return;
+  const supportsStableViewportUnits = window.CSS?.supports?.('height', '100svh') === true
+    && window.CSS?.supports?.('height', '100dvh') === true;
+  if (!supportsStableViewportUnits) return;
+
+  mobileNav.style.bottom = 'calc(max(10px, env(safe-area-inset-bottom)) + max(0px, 100dvh - 100svh))';
+}
+
 function wireMobileComposerViewport(root) {
   const composerWrap = root.querySelector('.ophtha-v2-composer-wrap');
   if (!composerWrap || !composerWrap.parentNode) return;
@@ -100,6 +109,7 @@ function wireMobileComposerViewport(root) {
       }
 
       const mobileNav = document.querySelector('.site-mobile-nav');
+      stabilizeMobileRail(mobileNav);
       const target = mobileNav || document.body;
       host.classList.toggle('is-nav-anchored', Boolean(mobileNav));
       if (host.parentNode !== target) target.appendChild(host);
