@@ -80,6 +80,13 @@ test('stylesheet guards mobile viewport against long identifiers', async () => {
   assert.match(css, /@media\s*\(max-width:\s*760px\)/);
 });
 
+test('mobile search exposes progress instead of looking frozen', async () => {
+  const css = await fs.readFile(modernCssPath, 'utf8');
+  assert.match(css, /\.ophtha-v2-status\[data-state="loading"\][^{]*\{[^}]*display:block/s);
+  assert.match(css, /\.ophtha-v2-search-button:disabled::after\{[^}]*border-radius:50%/s);
+  assert.match(css, /@keyframes\s+ophthaSearchSpin/);
+});
+
 test('mobile clinical composer anchors to the persistent mobile nav when available', async () => {
   const css = await fs.readFile(modernCssPath, 'utf8');
   const motion = await fs.readFile(motionPath, 'utf8');
