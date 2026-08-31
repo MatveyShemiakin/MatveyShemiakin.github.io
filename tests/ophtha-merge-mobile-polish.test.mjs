@@ -17,6 +17,21 @@ test('mobile play zone owns swipe gestures instead of scrolling the page', () =>
   assert.match(app, /function onPointerMove[\s\S]*?preventDefault\(\)/);
 });
 
+test('cross-browser swipe lock adds a touch fallback without globally freezing the page', () => {
+  assert.match(app, /addEventListener\(['"]touchstart['"],[\s\S]*?passive:\s*false/);
+  assert.match(app, /addEventListener\(['"]touchmove['"],[\s\S]*?passive:\s*false/);
+  assert.match(app, /function onTouchMove[\s\S]*?preventDefault\(\)/);
+  assert.match(app, /SWIPE_HINT_KEY/);
+  assert.match(app, /localStorage\.getItem\(SWIPE_HINT_KEY\)/);
+  assert.match(app, /localStorage\.setItem\(SWIPE_HINT_KEY/);
+  assert.match(app, /Свайпы внутри поля управляют плитками/);
+  assert.match(app, /Swipes inside the board move tiles/);
+  assert.match(css, /\.ophtha-merge-touch-tip/);
+  assert.match(css, /\.ophtha-merge-touch-zone\.is-touch-active/);
+  assert.doesNotMatch(app, /document\.body\.style\.overflow/);
+  assert.doesNotMatch(app, /document\.documentElement\.style\.overflow/);
+});
+
 test('ophthalmology tiles use scalable visual icons and explicit readable controls', () => {
   assert.match(app, /function createTileIcon\(/);
   assert.match(app, /ophtha-merge-tile-icon/);
