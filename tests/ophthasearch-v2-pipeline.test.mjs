@@ -77,6 +77,57 @@ test('research pipeline interprets, plans, retrieves, deduplicates and reasons o
   assert.ok(result.diagnostics.adapters.some((entry) => entry.status === 'timeout'));
 });
 
+test('independent research tracks are retrieved concurrently', async () => {
+  let active = 0;
+  let maxActive = 0;
+  const tracks = ['efficacy', 'safety', 'alternatives'].map((id) => ({
+    id,
+    purpose: id,
+    query: `primary open-angle glaucoma ${id}`,
+    sourceClasses: ['pubmed'],
+    evidenceTypes: ['comparative-study'],
+    dateWindow: 'current-plus-pivotal'
+  }));
+
+  const result = await runResearchPipeline(requestPayload, {}, {
+    planner: () => tracks,
+    adapters: {
+      pubmed: async (track) => {
+        active += 1;
+        maxActive = Math.max(maxActive, active);
+        await new Promise((resolve) => setTimeout(resolve, 30));
+        active -= 1;
+        return {
+          records: [relevantArticle({
+            title: `Primary open-angle glaucoma pharmacological therapy ${track.id}`,
+            doi: `10.1000/${track.id}`,
+            pmid: String(1000 + tracks.findIndex((item) => item.id === track.id))
+          })]
+        };
+      }
+    },
+    timeoutMs: 200,
+    guidelineFinder: () => [],
+    reasoner: async (pack) => ({
+      schemaVersion: '2.0',
+      clinical_bottom_line: 'Concurrent retrieval preserves a verified conclusion.',
+      bottom_line_citations: [pack.sources[0].source_id],
+      confidence: 'moderate',
+      management: [],
+      arguments_for: [],
+      arguments_against: [],
+      alternatives: [],
+      guideline_positions: [],
+      uncertainties: [],
+      clinical_interpretation: '',
+      sources: pack.sources.map((source) => ({ source_id: source.source_id }))
+    })
+  });
+
+  assert.equal(maxActive, 3, 'all independent track retrievals should overlap');
+  assert.equal(result.evidencePack.sources.length, 3);
+});
+
 test('reasoning failure degrades to evidence-only result instead of failing the research request', async () => {
   const result = await runResearchPipeline(requestPayload, {}, {
     adapters: { pubmed: async () => ({ records: [relevantArticle()] }) },
