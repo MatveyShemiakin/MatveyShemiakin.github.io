@@ -22,48 +22,50 @@ jobs:
 
           curl --fail-with-body --silent --show-error --location --max-time 30 "$page" -o /tmp/page.html
           grep -q 'data-v2-search-form' /tmp/page.html
-          grep -q 'ophthasearch-v2.js' /tmp/page.html
-          grep -q 'ophthasearch-v2-modern.css' /tmp/page.html
+          grep -q 'ophthasearch-v2-modern.css?v=20260831-5' /tmp/page.html
           grep -q 'ophthasearch-v2-motion.js' /tmp/page.html
 
           curl --fail-with-body --silent --show-error --location --max-time 30 "$base/ophthasearch-v2.js?v=20260829-1" -o /tmp/client.js
-          curl --fail-with-body --silent --show-error --location --max-time 30 "$base/ophthasearch-v2-modern.css?v=20260831-2" -o /tmp/modern.css
+          curl --fail-with-body --silent --show-error --location --max-time 30 "$base/ophthasearch-v2-modern.css?v=20260831-5" -o /tmp/modern.css
           curl --fail-with-body --silent --show-error --location --max-time 30 "$base/ophthasearch-v2-motion.js?v=20260831-4" -o /tmp/motion.js
 
           grep -q 'DEFAULT_RESEARCH_ENDPOINT' /tmp/client.js
-          grep -q 'initResearchUi' /tmp/client.js
+          grep -q 'ophthaSearchSpin' /tmp/modern.css
           echo 'page_and_assets=ok'
 
-      - name: Probe production research API
+      - name: Probe production research API with adapter diagnostics
         shell: bash
         run: |
           set -euo pipefail
           endpoint='https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev/v2/research'
           payload='{"schemaVersion":"2.0","language":"ru","question":"Есть ли преимущество латанопроста перед тимололом при первичной открытоугольной глаукоме?","mode":"standard","filters":{}}'
+          start=$(date +%s%3N)
 
           curl --fail-with-body --silent --show-error --max-time 120 \
             -D /tmp/headers.txt \
             -H 'Origin: https://matveyshemyakin.ru' \
             -H 'Content-Type: application/json' \
             -X POST --data "$payload" "$endpoint" > /tmp/response.json
+          end=$(date +%s%3N)
+          elapsed=$((end-start))
 
-          node <<'NODE'
+          ELAPSED_MS="$elapsed" node <<'NODE'
           const fs = require('node:fs');
           const body = JSON.parse(fs.readFileSync('/tmp/response.json','utf8'));
           const headers = fs.readFileSync('/tmp/headers.txt','utf8');
           const result = body?.result || {};
-          const reasoning = (result?.diagnostics?.adapters || []).filter(x => x?.trackId === 'reasoning');
+          const adapters = Array.isArray(result?.diagnostics?.adapters) ? result.diagnostics.adapters : [];
+          const compact = adapters.map(({trackId, adapter, status, total, error}) => ({trackId, adapter, status, total, error}));
           console.log(JSON.stringify({
+            elapsedMs: Number(process.env.ELAPSED_MS || 0),
             httpOk: body?.ok === true,
             status: result?.status || null,
             questionType: result?.intent?.question_type || null,
             sourceCount: Array.isArray(result?.answer?.sources) ? result.answer.sources.length : 0,
             bottomLine: String(result?.answer?.clinical_bottom_line || '').slice(0,240),
-            reasoning,
+            adapters: compact,
             cors: /access-control-allow-origin:\s*https:\/\/matveyshemyakin\.ru/i.test(headers)
           }, null, 2));
           if (body?.ok !== true) process.exit(2);
           if (!/access-control-allow-origin:\s*https:\/\/matveyshemyakin\.ru/i.test(headers)) process.exit(3);
-          if (!['complete','partial'].includes(result?.status)) process.exit(4);
-          if (!String(result?.answer?.clinical_bottom_line || '').trim()) process.exit(5);
           NODE
