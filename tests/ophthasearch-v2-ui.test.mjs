@@ -11,7 +11,6 @@ const clientPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.js', 
 const motionPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2-motion.js', import.meta.url);
 const cssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.css', import.meta.url);
 const modernCssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2-modern.css', import.meta.url);
-const workerEndpoint = 'https://matveyshemiakin-github-io.matvei-shemyakin.workers.dev/v2/research';
 
 test('OphthaSearch page prioritizes clinical conclusion and hides pipeline internals', async () => {
   const html = await fs.readFile(pagePath, 'utf8');
@@ -32,19 +31,18 @@ test('OphthaSearch page prioritizes clinical conclusion and hides pipeline inter
   assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-1/);
 });
 
-test('published OphthaSearch pages load the current mobile motion asset', async () => {
+test('published OphthaSearch pages load the current sticky-search assets', async () => {
   const [html, enHtml] = await Promise.all([
     fs.readFile(publishedPagePath, 'utf8'),
     fs.readFile(publishedEnPagePath, 'utf8')
   ]);
-  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-5/);
-  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-4/);
-  assert.match(enHtml, /ophthasearch-v2-modern\.css\?v=20260831-5/);
-  assert.match(enHtml, /ophthasearch-v2-motion\.js\?v=20260831-4/);
+  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260901-1/);
+  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260901-1/);
+  assert.match(enHtml, /ophthasearch-v2-modern\.css\?v=20260901-1/);
+  assert.match(enHtml, /ophthasearch-v2-motion\.js\?v=20260901-1/);
 });
 
-test('OphthaSearch client posts to the deployed workers.dev research endpoint', async () => {
-  assert.equal(DEFAULT_RESEARCH_ENDPOINT, workerEndpoint);
+test('OphthaSearch client posts through its configured research endpoint', async () => {
   const calls = [];
   const response = await requestResearch('Медикаментозная терапия ПОУГ', 'ru', {
     fetchImpl: async (...args) => {
@@ -53,7 +51,7 @@ test('OphthaSearch client posts to the deployed workers.dev research endpoint', 
     }
   });
   assert.equal(calls.length, 1);
-  assert.equal(calls[0][0], workerEndpoint);
+  assert.equal(calls[0][0], DEFAULT_RESEARCH_ENDPOINT);
   assert.equal(calls[0][1].method, 'POST');
   assert.equal(JSON.parse(calls[0][1].body).question, 'Медикаментозная терапия ПОУГ');
   assert.equal(response.status, 'complete');
@@ -87,28 +85,13 @@ test('mobile search exposes progress instead of looking frozen', async () => {
   assert.match(css, /@keyframes\s+ophthaSearchSpin/);
 });
 
-test('mobile clinical composer anchors to the persistent mobile nav when available', async () => {
+test('mobile clinical search stays in document flow and sticks independently of browser chrome', async () => {
   const css = await fs.readFile(modernCssPath, 'utf8');
   const motion = await fs.readFile(motionPath, 'utf8');
-  assert.match(motion, /document\.querySelector\('\.site-mobile-nav'\)/);
-  assert.match(motion, /const target = mobileNav \|\| document\.body;/);
-  assert.match(motion, /host\.classList\.toggle\('is-nav-anchored', Boolean\(mobileNav\)\)/);
-  assert.match(motion, /target\.appendChild\(host\)/);
-  assert.match(css, /\.ophtha-v2-mobile-composer-host\.is-nav-anchored\{[^}]*position:absolute[^}]*bottom:calc\(100% \+ 6px\)/s);
-  assert.match(css, /\.ophtha-v2-mobile-composer-host\.is-nav-anchored \.ophtha-v2-composer-wrap\{[^}]*position:static/s);
-});
-
-test('OphthaSearch pins the mobile nav to measured VisualViewport coordinates', async () => {
-  const motion = await fs.readFile(motionPath, 'utf8');
-  assert.match(motion, /window\.visualViewport/);
-  assert.match(motion, /visualViewport\.pageTop/);
-  assert.match(motion, /visualViewport\.height/);
-  assert.match(motion, /mobileNav\.style\.position\s*=\s*'absolute'/);
-  assert.match(motion, /mobileNav\.style\.top/);
-  assert.match(motion, /visualViewport\.addEventListener\('resize'/);
-  assert.match(motion, /visualViewport\.addEventListener\('scroll'/);
-  assert.match(motion, /window\.addEventListener\('scroll'/);
-  assert.doesNotMatch(motion, /100dvh - 100svh/);
+  assert.match(css, /@media\s*\(max-width:760px\)[\s\S]*\.ophtha-v2-search-zone\{[^}]*position:sticky[^}]*top:calc\(8px \+ env\(safe-area-inset-top\)\)/s);
+  assert.match(css, /@media\s*\(max-width:760px\)[\s\S]*\.ophtha-v2-composer-wrap\{[^}]*position:static/s);
+  assert.doesNotMatch(css, /\.ophtha-v2-mobile-composer-host/);
+  assert.doesNotMatch(motion, /wireMobileComposerViewport|pinMobileNavToVisualViewport|window\.visualViewport|\.site-mobile-nav|appendChild\(host\)/);
 });
 
 test('OphthaSearch header controls inherit theme-aware foreground colors', async () => {
