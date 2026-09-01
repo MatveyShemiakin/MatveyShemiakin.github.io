@@ -51,3 +51,12 @@
   .patient-fab{pointer-events:none!important}
   .patient-fab__main,.patient-fab.is-open .patient-fab__menu,.patient-fab.is-open .patient-fab__action{pointer-events:auto!important}
 }
+
+/* CATARACT_MOBILE_HERO_TEXT_FIX_V1 */
+@media(max-width:760px){
+  .cataract-page .patient-hero-copy,.cataract-page .patient-hero h1{min-width:0;max-width:100%}
+  .cataract-page .patient-hero h1 em{display:block;width:100%;max-width:100%;white-space:normal;overflow-wrap:normal;word-break:normal;font-size:clamp(24px,6.8vw,31px);line-height:1.08;letter-spacing:-.035em}
+}
+@media(max-width:390px){
+  .cataract-page .patient-hero h1 em{font-size:clamp(23px,6.6vw,27px);line-height:1.1}
+}
