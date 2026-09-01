@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <script src="/analytics.js?v=20260811-2"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Послеоперационный план после удаления катаракты и имплантации ИОЛ | Матвей Шемякин</title>
+  <meta name="description" content="Интерактивный послеоперационный план после удаления катаракты и имплантации ИОЛ: схема глазных капель по неделям, напоминания, журнал выполнения и памятка пациенту.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="author" content="Матвей Юрьевич Шемякин">
+  <meta name="theme-color" content="#06182f">
+  <link rel="canonical" href="https://matveyshemyakin.ru/patients/cataract-postop-plan/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/patients/patients.css?v=20260723-2">
+  <link rel="stylesheet" href="/patients/accessibility-fixes.css?v=20260723-2">
+  <link rel="stylesheet" href="/patients/patients-ecosystem.css?v=20260809-1">
+  <link rel="stylesheet" href="/site-language-switch.css?v=20260729-2">
+  <link rel="stylesheet" href="/mobile-nav.css?v=20260806-3">
+  <script src="/site-theme-init.js?v=20260806-1"></script>
+  <link rel="stylesheet" href="/site-theme.css?v=20260806-1">
+  <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
+  <link rel="stylesheet" href="/patients/consultation-cta.css?v=20260816-1">
+  <link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalWebPage","name":"Послеоперационный план после удаления катаракты и имплантации ИОЛ","url":"https://matveyshemyakin.ru/patients/cataract-postop-plan/","inLanguage":"ru","author":{"@type":"Person","@id":"https://matveyshemyakin.ru/#person","name":"Матвей Юрьевич Шемякин"},"about":{"@type":"MedicalProcedure","name":"Хирургия катаракты с имплантацией интраокулярной линзы"}}</script>
+</head>
+<body id="top" class="cataract-page">
+  <header class="patient-header">
+    <div class="container header-row">
+      <a class="monogram" href="/" aria-label="На главную">МШ</a>
+      <nav aria-label="Навигация раздела">
+        <a href="/patients/">Пациентам</a>
+        <a href="/patients/cataract/">Катаракта</a>
+        <a href="#plan">Схема капель</a>
+        <a href="#journal">Журнал</a>
+        <a href="#urgent">Срочно к врачу</a>
+      </nav>
+      <div class="patient-language-switch" aria-label="Язык раздела">
+        <a class="active" href="/patients/cataract-postop-plan/" lang="ru" aria-current="page">RU</a>
+      </div>
+      <a class="back-link" href="/patients/cataract/">К странице «Катаракта» <span>↗</span></a>
+    </div>
+  </header>
+
+  <nav class="breadcrumbs" aria-label="Хлебные крошки">
+    <div class="container">
+      <ol>
+        <li><a href="/patients/">Пациентам</a></li>
+        <li><a href="/patients/cataract/">Катаракта</a></li>
+        <li aria-current="page">Послеоперационный план</li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="content-material">
+    <section class="patient-hero">
+      <div class="hero-orb orb-one" aria-hidden="true"></div>
+      <div class="container patient-hero-grid">
+        <div class="patient-hero-copy">
+          <p class="eyebrow">Катаракта · после операции</p>
+          <h1>Послеоперационный<br><em>план лечения</em></h1>
+          <p class="hero-lead">Схема глазных капель по неделям, напоминания и журнал выполнения после удаления катаракты и имплантации ИОЛ.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#plan">Открыть план на сегодня</a>
+            <button class="button secondary" id="show-journal" type="button">Мой журнал</button>
+          </div>
+          <p class="hero-note">План помогает соблюдать уже назначенную терапию. Выписка и индивидуальные рекомендации лечащего врача имеют приоритет.</p>
+        </div>
+        <div class="cataract-hero-visual" aria-hidden="true">
+          <div class="visual-stage">
+            <div class="cataract-eye"></div>
+            <div class="cataract-lens"><div class="cataract-cloud"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="paths-section" id="plan">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Мой план</p>
+            <h2>Укажите дату операции</h2>
+          </div>
+          <p>Дата нужна только на этом устройстве: она позволяет автоматически определить текущую неделю лечения и подготовить календарные напоминания.</p>
+        </div>
+
+        <div class="faq-toolbar">
+          <div>
+            <label class="search-box">
+              <span aria-hidden="true">◷</span>
+              <input id="operation-date" type="date" aria-label="Дата операции">
+            </label>
+          </div>
+          <div class="hero-actions">
+            <button class="button primary" id="enable-reminders" type="button">Включить уведомления</button>
+            <button class="button secondary" id="calendar-download" type="button">Добавить в календарь</button>
+          </div>
+        </div>
+        <p class="hero-note">Браузерные уведомления работают, пока эта страница остаётся открытой. Для системных напоминаний при закрытом браузере используйте «Добавить в календарь».</p>
+
+        <div class="filter-row" id="period-tabs" role="group" aria-label="Неделя после операции"></div>
+        <article class="path-card" id="today-summary" aria-live="polite"></article>
+
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Сегодня</p>
+            <h2>Схема закапывания</h2>
+          </div>
+          <p>Каждый вид капель закапывайте через равные промежутки времени в течение дня. Интервал между разными видами капель — 5 минут.</p>
+        </div>
+        <div class="path-grid" id="medication-grid"></div>
+      </div>
+    </section>
+
+    <section class="faq-section" aria-labelledby="medicine-names">
+      <div class="container">
+        <div class="faq-toolbar">
+          <div>
+            <p class="section-kicker">Названия лекарств</p>
+            <h2 id="medicine-names">Ориентируйтесь на действующее вещество</h2>
+          </div>
+          <p>Торговые названия у разных производителей могут отличаться. В плане сначала указано действующее вещество (МНН), а затем — пример торгового названия из выданной памятки.</p>
+        </div>
+        <div class="faq-list">
+          <article class="faq-item">
+            <div class="faq-content no-video">
+              <div class="answer-copy">
+                <p class="short-answer"><span>Важно</span>Если название препарата в вашей выписке или назначении отличается от примера на этой странице, не заменяйте препарат самостоятельно.</p>
+                <div class="answer-detail"><h4>Как проверить</h4><p>Сверьте действующее вещество на упаковке и в инструкции. При сомнениях используйте именно назначение из выписки или уточните у лечащего врача.</p></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section" id="journal">
+      <div class="container">
+        <div class="faq-toolbar">
+          <div>
+            <p class="section-kicker">Контроль выполнения</p>
+            <h2>Мой журнал</h2>
+          </div>
+          <button class="button secondary" id="print-journal" type="button">Показать врачу / распечатать</button>
+        </div>
+        <p class="search-status" id="journal-summary" role="status" aria-live="polite"></p>
+        <div class="faq-list" id="journal-list"></div>
+        <p class="hero-note">Отметки и дата операции сохраняются только в памяти вашего браузера на этом устройстве и не отправляются на сайт.</p>
+      </div>
+    </section>
+
+    <section class="faq-section" aria-labelledby="first-days-title">
+      <div class="container">
+        <div class="faq-toolbar">
+          <div>
+            <p class="section-kicker">Первые дни</p>
+            <h2 id="first-days-title">Первые 2–3 суток</h2>
+          </div>
+        </div>
+        <div class="faq-list">
+          <article class="faq-item">
+            <div class="faq-content no-video">
+              <div class="answer-copy">
+                <div class="answer-detail">
+                  <p>До оперированного глаза нельзя дотрагиваться руками, давить и тереть его, кроме аккуратного умывания.</p>
+                  <p>Глаз может слезиться, возможно чувство соринки. Слезу можно вытирать только со щеки, предварительно вымыв руки.</p>
+                  <p>Очки для чтения или дали подбираются у окулиста по месту жительства или в оптике через 1 месяц.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="paths-section" aria-labelledby="restrictions-title">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">В течение 1 месяца</p>
+            <h2 id="restrictions-title">Что временно запрещено</h2>
+          </div>
+          <p>Ограничения из вашей послеоперационной памятки.</p>
+        </div>
+        <div class="path-grid">
+          <article class="path-card"><span>01</span><h3>Не закрывать глаз</h3><p>Не заклеивать глаз лейкопластырем и не накладывать повязку.</p></article>
+          <article class="path-card"><span>02</span><h3>Без перегрева</h3><p>Не распаривать лицо, не посещать баню и сауну, не принимать горячий душ или горячую ванну.</p></article>
+          <article class="path-card"><span>03</span><h3>Без бассейна и водоёмов</h3><p>Не купаться в бассейне, реке, море и других открытых водоёмах.</p></article>
+          <article class="path-card"><span>04</span><h3>Не более 5 кг</h3><p>Не поднимать тяжести более 5 кг, особенно резко.</p></article>
+          <article class="path-card"><span>05</span><h3>Без пыли и грязи</h3><p>Не подметать, не выполнять ремонт и другие работы, связанные с пылью или грязью.</p></article>
+          <article class="path-card"><span>06</span><h3>Без интенсивной нагрузки</h3><p>Временно исключить бег, лыжи, коньки и другие повышенные физические нагрузки.</p></article>
+          <article class="path-card"><span>07</span><h3>Алкоголь запрещён</h3><p>Не употреблять алкоголь в течение первого месяца.</p></article>
+          <article class="path-card"><span>3 недели</span><h3>Косметика для глаз</h3><p>Тушь, тени и другую косметику в области глаз не использовать в течение 3 недель.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section" aria-labelledby="allowed-title">
+      <div class="container">
+        <div class="faq-toolbar">
+          <div>
+            <p class="section-kicker">После операции</p>
+            <h2 id="allowed-title">Что можно</h2>
+          </div>
+        </div>
+        <div class="faq-list">
+          <article class="faq-item">
+            <div class="faq-content no-video">
+              <div class="answer-copy">
+                <div class="answer-important">
+                  <h4>Можно</h4>
+                  <ul>
+                    <li>На следующий день аккуратно умываться: закрыть глаз и водой протирать веки без давления на глаз.</li>
+                    <li>Спать на любом боку.</li>
+                    <li>Принимать тёплый душ.</li>
+                    <li>Мыть голову как в парикмахерской — смывать шампунь, запрокинув голову назад.</li>
+                    <li>Наклоняться, чтобы завязать шнурки или поднять предмет.</li>
+                    <li>Читать, писать, готовить, убираться и выполнять лёгкую бытовую работу без пыли и грязи.</li>
+                    <li>Поднимать тяжести не более 5 кг плавно, без рывков.</li>
+                  </ul>
+                </div>
+                <p class="short-answer"><span>Главное</span>Чтобы в глаз ничего не попадало.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="urgent-wrap" id="urgent" aria-label="Срочные симптомы">
+      <div class="container">
+        <div class="urgent-card">
+          <div class="urgent-icon">!</div>
+          <div>
+            <span>Не ждите планового осмотра</span>
+            <h2>Срочно обратиться к врачу</h2>
+            <p>Если снизилось зрение, глаз сильно покраснел, появилась боль в глазу или обильное отделяемое — немедленно обратитесь в поликлинику по месту жительства или в кабинет неотложной помощи. Возьмите с собой выписку.</p>
+            <p><strong>Контакт-центр: +7 (499) 490-0303</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="patient-consultation-cta" data-patient-consultation-cta="true">
+      <div class="container">
+        <div class="patient-consultation-card">
+          <div>
+            <p class="section-kicker">Очная консультация</p>
+            <h2>Есть вопросы по восстановлению после операции?</h2>
+            <p>Если схема вызывает сомнения или появились необычные симптомы, не изменяйте лечение самостоятельно.</p>
+          </div>
+          <a class="button primary patient-consultation-link" href="https://t.me/ShemMYu" target="_blank" rel="noopener">Записаться на консультацию <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="author-section" id="author">
+      <div class="container author-panel">
+        <div class="author-portrait"><img src="/assets/portrait.jpg" alt="Матвей Юрьевич Шемякин" loading="lazy"></div>
+        <div class="author-copy">
+          <p class="section-kicker dark">План подготовлен врачом</p>
+          <h2>Матвей Юрьевич Шемякин</h2>
+          <p class="author-role">Врач-офтальмолог · офтальмохирург</p>
+          <div class="author-links"><a href="/">О враче</a><a href="/patients/cataract/">О катаракте</a><a href="https://t.me/ShemMYu" target="_blank" rel="noopener">Написать лично</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="references-section">
+      <div class="container references-grid">
+        <div>
+          <p class="section-kicker">Важно</p>
+          <h2>Ограничения этого плана</h2>
+        </div>
+        <div>
+          <p>Схема на странице воспроизводит послеоперационную памятку и предназначена для удобного выполнения уже назначенного лечения. Торговые названия приведены как примеры; приоритет имеют выписка и индивидуальное назначение лечащего врача.</p>
+          <p class="disclaimer">Информация носит справочный и образовательный характер и не заменяет очный осмотр, медицинское назначение или экстренную помощь. Не начинайте, не отменяйте и не заменяйте лекарственные препараты самостоятельно.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="patient-footer">
+    <div class="container footer-row">
+      <div><strong>Матвей Шемякин</strong><span>Офтальмолог · офтальмохирург</span></div>
+      <div><a href="/patients/cataract/">Катаракта</a><a href="/patients/">Пациентам</a><a href="#top">Наверх ↑</a></div>
+    </div>
+  </footer>
+
+  <script src="/patients/cataract-postop-plan.js?v=20260901-1"></script>
+  <script src="/site-language-switch.js?v=20260729-2"></script>
+  <script src="/site-theme.js?v=20260806-1"></script>
+  <script src="/mobile-nav.js?v=20260806-3"></script>
+  <script src="/site-mega-nav.js?v=20260816-2"></script>
+  <script src="/site-motion.js?v=20260806-1"></script>
+</body>
+</html>
