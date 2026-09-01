@@ -132,17 +132,21 @@
     return Date.UTC(parts.year, parts.month - 1, parts.day);
   }
 
+  function periodFromDayOffset(diff) {
+    if (diff <= 6) return 'week1';
+    if (diff <= 13) return 'week2';
+    if (diff <= 20) return 'week3';
+    if (diff <= 27) return 'week4';
+    return 'afterMonth';
+  }
+
   function periodFromOperationDate(operationDate, currentDate) {
     const operation = parseDateParts(operationDate);
     if (!operation) return 'week1';
     const now = currentDate instanceof Date ? currentDate : new Date();
     const current = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
     const diff = Math.floor((utcDay(current) - utcDay(operation)) / 86400000);
-    if (diff <= 6) return 'week1';
-    if (diff <= 13) return 'week2';
-    if (diff <= 20) return 'week3';
-    if (diff <= 27) return 'week4';
-    return 'afterMonth';
+    return periodFromDayOffset(diff);
   }
 
   function addDays(parts, days) {
@@ -152,6 +156,10 @@
 
   function pad(value) {
     return String(value).padStart(2, '0');
+  }
+
+  function isoDate(parts) {
+    return `${parts.year}-${pad(parts.month)}-${pad(parts.day)}`;
   }
 
   function icsDate(parts, time) {
@@ -247,7 +255,42 @@
   function statusLabel(status) {
     if (status === 'done') return '✓ Выполнено';
     if (status === 'missed') return '× Пропущено';
-    return 'Ожидается';
+    return 'Не отмечено';
+  }
+
+  function buildJournalSchedule(operationDate, currentDate, log) {
+    const operation = parseDateParts(operationDate);
+    if (!operation) return [];
+    const now = currentDate instanceof Date ? currentDate : new Date();
+    const current = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+    const elapsedDays = Math.floor((utcDay(current) - utcDay(operation)) / 86400000);
+    if (elapsedDays < 0) return [];
+    const lastOffset = Math.min(elapsedDays, 117);
+    const currentTime = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+    const stateLog = log && typeof log === 'object' ? log : {};
+    const rows = [];
+
+    for (let offset = 0; offset <= lastOffset; offset += 1) {
+      const dateParts = addDays(operation, offset);
+      const date = isoDate(dateParts);
+      const periodKey = periodFromDayOffset(offset);
+      const period = PLAN[periodKey];
+      for (const medication of period.medications) {
+        for (const time of medication.times) {
+          if (offset === elapsedDays && time > currentTime) continue;
+          const key = logKey(date, periodKey, medication.id, time);
+          rows.push({
+            key,
+            date,
+            time,
+            periodKey,
+            medication,
+            status: stateLog[key] || ''
+          });
+        }
+      }
+    }
+    return rows;
   }
 
   function init() {
@@ -307,33 +350,32 @@
       }).join('');
     }
 
-    function journalEntries() {
-      return Object.entries(state.log)
-        .map(function ([key, status]) {
-          const parts = key.split('|');
-          const [date, periodKey, medicationId, time] = parts;
-          const period = PLAN[periodKey];
-          const medication = period && period.medications.find(item => item.id === medicationId);
-          return medication ? { key, date, periodKey, time, status, medication } : null;
-        })
-        .filter(Boolean)
-        .sort((a, b) => `${b.date}${b.time}`.localeCompare(`${a.date}${a.time}`));
-    }
-
     function renderJournal() {
-      const entries = journalEntries();
-      const done = entries.filter(entry => entry.status === 'done').length;
-      const missed = entries.filter(entry => entry.status === 'missed').length;
-      const denominator = done + missed;
-      const adherence = denominator ? Math.round(done * 100 / denominator) : 0;
-      journalSummary.textContent = denominator
-        ? `Выполнено: ${done}. Пропущено: ${missed}. Отмеченная приверженность: ${adherence}%.`
-        : 'Пока нет отметок. После каждого закапывания нажимайте «Выполнено» или «Пропущено».';
-      journalList.innerHTML = entries.length
-        ? entries.map(function (entry) {
-            return `<article class="faq-item"><div class="answer-meta"><span>${escapeHtml(entry.date)} · ${escapeHtml(entry.time)} · ${escapeHtml(PLAN[entry.periodKey].label)}</span><strong>${escapeHtml(statusLabel(entry.status))}</strong></div><p>${escapeHtml(entry.medication.active)} · пример: ${escapeHtml(entry.medication.trade)}</p></article>`;
-          }).join('')
-        : '<p class="search-empty">Журнал пока пуст.</p>';
+      if (!journalList || !journalSummary) return;
+      if (!state.operationDate) {
+        journalSummary.textContent = 'Укажите дату операции, чтобы сформировать журнал с первого дня лечения.';
+        journalList.innerHTML = '<p class="search-empty">После выбора даты здесь появится таблица всех приёмов с дня операции по текущий момент.</p>';
+        return;
+      }
+
+      const rows = buildJournalSchedule(state.operationDate, new Date(), state.log);
+      const done = rows.filter(row => row.status === 'done').length;
+      const missed = rows.filter(row => row.status === 'missed').length;
+      const unmarked = rows.filter(row => !row.status).length;
+      const marked = done + missed;
+      const adherence = marked ? Math.round(done * 100 / marked) : 0;
+      journalSummary.textContent = rows.length
+        ? `С момента операции: ${rows.length}. Выполнено: ${done}. Пропущено: ${missed}. Не отмечено: ${unmarked}.${marked ? ` Приверженность среди отмеченных: ${adherence}%.` : ''}`
+        : 'С момента операции пока нет прошедших по времени закапываний.';
+
+      if (!rows.length) {
+        journalList.innerHTML = '<p class="search-empty">Пока нет данных для таблицы.</p>';
+        return;
+      }
+
+      journalList.innerHTML = `<div class="postop-journal-table-wrap"><table class="postop-journal-table"><thead><tr><th>Дата</th><th>Время</th><th>Период</th><th>Препарат</th><th>Статус</th></tr></thead><tbody>${rows.map(function (row) {
+        return `<tr><td>${escapeHtml(row.date)}</td><td>${escapeHtml(row.time)}</td><td>${escapeHtml(PLAN[row.periodKey].label)}</td><td><strong>${escapeHtml(row.medication.active)}</strong><br>пример: ${escapeHtml(row.medication.trade)}</td><td><span class="postop-journal-status">${escapeHtml(statusLabel(row.status))}</span></td></tr>`;
+      }).join('')}</tbody></table></div>`;
     }
 
     function renderAll() {
@@ -370,6 +412,7 @@
     });
 
     showJournalButton?.addEventListener('click', function () {
+      renderJournal();
       document.getElementById('journal')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
@@ -441,6 +484,7 @@
     getPeriodPlan,
     periodFromOperationDate,
     buildCalendar,
+    buildJournalSchedule,
     init
   };
 });
