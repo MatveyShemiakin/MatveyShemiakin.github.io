@@ -8,10 +8,11 @@ const require = createRequire(import.meta.url);
 const root = path.resolve(import.meta.dirname, '..');
 const modulePath = path.join(root, 'patients', 'cataract-postop-plan.js');
 const pagePath = path.join(root, 'patients', 'cataract-postop-plan', 'index.html');
+const pageCssPath = path.join(root, 'patients', 'cataract-postop-plan.css');
 const patientsJsPath = path.join(root, 'patients', 'patients.js');
 
-function localDate(iso) {
-  return new Date(`${iso}T12:00:00`);
+function localDate(iso, time = '12:00:00') {
+  return new Date(`${iso}T${time}`);
 }
 
 test('logic module exists and exports the expected API', () => {
@@ -20,6 +21,7 @@ test('logic module exists and exports the expected API', () => {
   assert.equal(typeof api.periodFromOperationDate, 'function');
   assert.equal(typeof api.getPeriodPlan, 'function');
   assert.equal(typeof api.buildCalendar, 'function');
+  assert.equal(typeof api.buildJournalSchedule, 'function');
 });
 
 test('period calculation follows postoperative weeks', () => {
@@ -59,17 +61,39 @@ test('calendar export contains alarms and all treatment stages', () => {
   assert.match(ics, /COUNT=90/);
 });
 
-test('patient page uses existing styles, required controls, red flags and no inline styles', () => {
+test('journal schedule contains every elapsed dose from operation to current moment', () => {
+  const api = require(modulePath);
+  const log = {
+    '2026-09-01|week1|cipro-dexa|08:00': 'done',
+    '2026-09-01|week1|bromfenac|09:00': 'missed'
+  };
+  const rows = api.buildJournalSchedule('2026-09-01', localDate('2026-09-01', '13:00:00'), log);
+  assert.deepEqual(rows.map(row => row.time), ['08:00', '12:00', '09:00', '10:00']);
+  assert.equal(rows[0].status, 'done');
+  assert.equal(rows[2].status, 'missed');
+  assert.equal(rows[1].status, '');
+  assert.equal(rows.every(row => row.date === '2026-09-01'), true);
+});
+
+test('patient page uses mobile fix, journal table hooks and no public consultation CTA', () => {
   assert.equal(fs.existsSync(pagePath), true);
+  assert.equal(fs.existsSync(pageCssPath), true);
   const html = fs.readFileSync(pagePath, 'utf8');
+  const css = fs.readFileSync(pageCssPath, 'utf8');
   assert.match(html, /\/patients\/patients\.css/);
+  assert.match(html, /\/patients\/cataract-postop-plan\.css/);
   assert.doesNotMatch(html, /\sstyle\s*=/i);
   for (const id of ['operation-date','period-tabs','medication-grid','today-summary','journal-list','journal-summary','enable-reminders','calendar-download','show-journal','print-journal']) {
     assert.match(html, new RegExp(`id=["']${id}["']`));
   }
   assert.match(html, /Срочно обратиться к врачу/);
   assert.match(html, /Информация носит справочный/);
-  assert.match(html, /\+7 \(499\) 490-0303/);
+  assert.doesNotMatch(html, /\+7 \(499\) 490-0303/);
+  assert.doesNotMatch(html, /Записаться на консультацию/);
+  assert.doesNotMatch(html, /patient-consultation-cta/);
+  assert.match(css, /\.postop-journal-table-wrap/);
+  assert.match(css, /overflow-x:\s*auto/);
+  assert.match(css, /patient-hero-copy h1/);
 });
 
 test('cataract path renderer contains the approved postoperative entry card', () => {
