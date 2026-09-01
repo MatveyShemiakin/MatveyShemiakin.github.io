@@ -6,15 +6,179 @@
   min-width: 0;
 }
 
+.cataract-page .patient-hero {
+  min-height: 0;
+  background: linear-gradient(135deg, #06182f, #041225 78%);
+}
+
+.cataract-page .patient-hero:before {
+  opacity: .35;
+}
+
+.cataract-page .patient-hero-grid {
+  min-height: 0;
+  grid-template-columns: minmax(0, 760px);
+  gap: 0;
+  align-items: end;
+  padding: 142px 0 64px;
+}
+
+.cataract-page .patient-hero-copy {
+  max-width: 760px;
+}
+
+.cataract-page .eyebrow {
+  margin-bottom: 14px;
+  font-size: 11px;
+  letter-spacing: .16em;
+}
+
 .cataract-page .patient-hero-copy h1 {
   max-width: 100%;
+  margin-bottom: 18px;
+  font-size: clamp(42px, 5.5vw, 68px);
+  line-height: 1;
+  letter-spacing: -.03em;
   overflow-wrap: anywhere;
   word-break: normal;
 }
 
+.cataract-page .hero-lead {
+  max-width: 660px;
+  margin: 0;
+  font-family: var(--sans);
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.5;
+  color: #cbd6e5;
+}
+
+.cataract-page .hero-actions {
+  gap: 10px;
+  margin: 24px 0 16px;
+}
+
 .cataract-page .button {
+  min-height: 50px;
+  padding: 0 20px;
+  border-radius: 13px;
   white-space: normal;
   text-align: center;
+  box-shadow: none;
+}
+
+.cataract-page .button:hover {
+  transform: none;
+}
+
+.cataract-page .patient-hero .button.secondary {
+  color: #fff;
+}
+
+.cataract-page .hero-note {
+  max-width: 650px;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.cataract-page .paths-section,
+.cataract-page .faq-section {
+  padding: 72px 0;
+}
+
+.cataract-page .section-head {
+  gap: 48px;
+  margin-bottom: 30px;
+}
+
+.cataract-page .section-head h2,
+.cataract-page .faq-toolbar h2,
+.cataract-page .references-grid h2 {
+  font-size: clamp(34px, 4vw, 50px);
+  line-height: 1.08;
+}
+
+.cataract-page .section-head > p {
+  font-size: 15px;
+}
+
+.cataract-page .faq-toolbar {
+  gap: 36px;
+}
+
+.cataract-page .filter-row {
+  margin: 24px 0 36px;
+}
+
+.cataract-page .path-card {
+  min-height: 0;
+  padding: 22px;
+  border-radius: 18px;
+}
+
+.cataract-page .path-card h3 {
+  margin: 22px 0 8px;
+  font-size: 26px;
+}
+
+.cataract-page .path-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.cataract-page .short-answer {
+  font-size: 18px;
+  padding: 20px;
+}
+
+.cataract-page .urgent-wrap {
+  margin-top: 0;
+  padding: 0 0 72px;
+}
+
+.cataract-page .urgent-card {
+  grid-template-columns: 50px 1fr;
+  gap: 18px;
+  padding: 24px 28px;
+  border-radius: 20px;
+  box-shadow: none;
+  background: linear-gradient(135deg, #2b1c24, #172031);
+}
+
+.cataract-page .urgent-icon {
+  width: 46px;
+  height: 46px;
+  font-size: 28px;
+}
+
+.cataract-page .urgent-card h2 {
+  font-size: clamp(26px, 2.5vw, 34px);
+}
+
+.cataract-page .urgent-card p {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.cataract-page .author-section {
+  padding: 72px 0;
+}
+
+.cataract-page .author-panel {
+  gap: 40px;
+  padding: 32px;
+  border-radius: 22px;
+}
+
+.cataract-page .author-portrait img {
+  height: 300px;
+}
+
+.cataract-page .author-copy h2 {
+  font-size: 40px;
+}
+
+.cataract-page .references-section {
+  padding: 64px 0;
 }
 
 .postop-journal-table-wrap {
@@ -59,24 +223,121 @@
 }
 
 @media (max-width: 760px) {
+  .cataract-page .patient-hero-grid {
+    padding: 118px 0 44px;
+  }
+
+  .cataract-page .eyebrow {
+    margin-bottom: 10px;
+  }
+
   .cataract-page .patient-hero-copy h1 {
-    font-size: clamp(2.85rem, 12.2vw, 4rem);
-    line-height: .96;
-    letter-spacing: -.035em;
-  }
-
-  .cataract-page .patient-hero-copy h1 br {
-    display: none;
-  }
-
-  .cataract-page .patient-hero-copy h1 em {
-    display: block;
-    margin-top: .12em;
+    margin-bottom: 14px;
+    font-size: clamp(2.3rem, 10vw, 3.1rem);
+    line-height: 1.02;
+    letter-spacing: -.025em;
   }
 
   .cataract-page .hero-lead {
-    font-size: clamp(1.25rem, 5.4vw, 1.6rem);
-    line-height: 1.25;
+    font-size: 1.05rem;
+    line-height: 1.45;
+  }
+
+  .cataract-page .hero-actions {
+    margin: 20px 0 14px;
+  }
+
+  .cataract-page .hero-actions .button {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .cataract-page .paths-section,
+  .cataract-page .faq-section {
+    padding: 48px 0;
+  }
+
+  .cataract-page .section-head,
+  .cataract-page .faq-toolbar {
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  .cataract-page .section-head h2,
+  .cataract-page .faq-toolbar h2,
+  .cataract-page .references-grid h2 {
+    font-size: clamp(2rem, 8.5vw, 2.55rem);
+    line-height: 1.08;
+  }
+
+  .cataract-page .section-head > p {
+    font-size: 14px;
+  }
+
+  .cataract-page .filter-row {
+    margin: 20px 0 30px;
+  }
+
+  .cataract-page .path-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .cataract-page .path-card h3 {
+    margin: 18px 0 8px;
+    font-size: 1.55rem;
+  }
+
+  .cataract-page .short-answer {
+    font-size: 16px;
+    padding: 18px;
+  }
+
+  .cataract-page .urgent-wrap {
+    padding-bottom: 48px;
+  }
+
+  .cataract-page .urgent-card {
+    grid-template-columns: 40px 1fr;
+    gap: 14px;
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .cataract-page .urgent-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .cataract-page .urgent-card h2 {
+    margin-top: 5px;
+    font-size: 1.75rem;
+  }
+
+  .cataract-page .urgent-card p {
+    font-size: 14px;
+  }
+
+  .cataract-page .author-section {
+    padding: 48px 0;
+  }
+
+  .cataract-page .author-panel {
+    padding: 24px;
+    border-radius: 18px;
+  }
+
+  .cataract-page .author-portrait img {
+    height: 260px;
+  }
+
+  .cataract-page .author-copy h2 {
+    font-size: 2rem;
+  }
+
+  .cataract-page .references-section {
+    padding: 48px 0;
   }
 
   .postop-journal-table {
