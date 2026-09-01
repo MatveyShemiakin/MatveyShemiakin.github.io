@@ -83,119 +83,12 @@ function wireAnswerObserver(root, answerShell) {
   sync();
 }
 
-function pinMobileNavToVisualViewport(mobileNav) {
-  const visualViewport = window.visualViewport;
-  if (!mobileNav || !visualViewport) return () => {};
-
-  const original = {
-    position: mobileNav.style.position,
-    top: mobileNav.style.top,
-    bottom: mobileNav.style.bottom
-  };
-  let rafId = 0;
-
-  const place = () => {
-    rafId = 0;
-    const navHeight = mobileNav.getBoundingClientRect().height || 84;
-    const pageTop = Number.isFinite(visualViewport.pageTop) ? visualViewport.pageTop : window.scrollY;
-    const visibleBottom = pageTop + visualViewport.height;
-    const navTop = Math.max(0, visibleBottom - navHeight);
-
-    mobileNav.style.position = 'absolute';
-    mobileNav.style.bottom = 'auto';
-    mobileNav.style.top = `calc(${Math.round(navTop)}px - max(10px, env(safe-area-inset-bottom)))`;
-  };
-
-  const schedule = () => {
-    if (rafId) return;
-    rafId = window.requestAnimationFrame(place);
-  };
-
-  visualViewport.addEventListener('resize', schedule, { passive: true });
-  visualViewport.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule, { passive: true });
-  place();
-
-  return () => {
-    visualViewport.removeEventListener('resize', schedule);
-    visualViewport.removeEventListener('scroll', schedule);
-    window.removeEventListener('scroll', schedule);
-    window.removeEventListener('resize', schedule);
-    if (rafId) window.cancelAnimationFrame(rafId);
-    mobileNav.style.position = original.position;
-    mobileNav.style.top = original.top;
-    mobileNav.style.bottom = original.bottom;
-  };
-}
-
-function wireMobileComposerViewport(root) {
-  const composerWrap = root.querySelector('.ophtha-v2-composer-wrap');
-  if (!composerWrap || !composerWrap.parentNode) return;
-
-  const marker = document.createComment('ophtha-v2-composer-origin');
-  composerWrap.parentNode.insertBefore(marker, composerWrap);
-  const mobileQuery = window.matchMedia('(max-width: 760px)');
-  let host = null;
-  let pinnedNav = null;
-  let releaseViewportPin = null;
-
-  const sync = () => {
-    if (mobileQuery.matches) {
-      if (!host) {
-        host = document.createElement('div');
-        host.className = 'ophtha-v2-mobile-composer-host';
-      }
-
-      const mobileNav = document.querySelector('.site-mobile-nav');
-      if (mobileNav !== pinnedNav) {
-        if (releaseViewportPin) releaseViewportPin();
-        pinnedNav = mobileNav;
-        releaseViewportPin = pinMobileNavToVisualViewport(mobileNav);
-      }
-
-      const target = mobileNav || document.body;
-      host.classList.toggle('is-nav-anchored', Boolean(mobileNav));
-      if (host.parentNode !== target) target.appendChild(host);
-      if (composerWrap.parentNode !== host) host.appendChild(composerWrap);
-      return;
-    }
-
-    if (releaseViewportPin) {
-      releaseViewportPin();
-      releaseViewportPin = null;
-      pinnedNav = null;
-    }
-    if (marker.parentNode && composerWrap.parentNode !== marker.parentNode) {
-      marker.parentNode.insertBefore(composerWrap, marker.nextSibling);
-    }
-    if (host) {
-      host.remove();
-      host = null;
-    }
-  };
-
-  sync();
-
-  if ('MutationObserver' in window && document.body) {
-    const navObserver = new MutationObserver(() => {
-      if (mobileQuery.matches) sync();
-    });
-    navObserver.observe(document.body, { childList: true });
-  }
-
-  if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', sync);
-  else mobileQuery.addListener(sync);
-}
-
 function initOphthaSearchMotion(root = document) {
   const form = root.querySelector('[data-v2-search-form]');
   const input = root.querySelector('[data-v2-query]');
   const answerShell = root.querySelector('[data-v2-answer-shell]');
   const eye = root.querySelector('[data-v2-eye-mark]');
   if (!form || !input) return;
-
-  wireMobileComposerViewport(root);
 
   const state = { stopped: false };
   if (eye) window.requestAnimationFrame(() => eye.classList.add('is-ready'));
