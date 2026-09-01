@@ -46,7 +46,6 @@ body.ophtha-v2-page{min-height:100vh;padding-bottom:0;background:var(--site-them
 
 .ophtha-v2-search-zone{position:relative;z-index:12}
 .ophtha-v2-composer-wrap{width:100%;pointer-events:none}
-.ophtha-v2-mobile-composer-host{display:none}
 .ophtha-v2-composer-wrap .container{pointer-events:none}
 .ophtha-v2-query-card{width:min(820px,100%);margin:0 auto;padding:0;border:0;background:transparent;box-shadow:none;pointer-events:auto}
 .ophtha-v2-search-form.ophtha-v2-composer{display:grid;grid-template-columns:minmax(0,1fr) 52px;gap:8px;align-items:center;min-height:72px;padding:9px 9px 9px 22px;border:1px solid color-mix(in srgb,var(--site-theme-border) 88%,transparent);border-radius:38px;background:color-mix(in srgb,var(--site-theme-surface) 94%,transparent);box-shadow:0 18px 48px rgba(4,32,65,.14);backdrop-filter:blur(18px);transition:box-shadow .2s ease,border-color .2s ease,transform .2s ease}
@@ -97,39 +96,37 @@ html[data-site-theme="dark"] .ophtha-v2-search-form.ophtha-v2-composer{box-shado
 html[data-site-theme="dark"] .ophtha-v2-eye-glint{background:#dff1ff}
 
 @media (max-width:760px){
-  body.ophtha-v2-page{padding-bottom:calc(196px + env(safe-area-inset-bottom))}
+  body.ophtha-v2-page{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
   .ophtha-v2-page .doctors-nav{height:70px}
   .ophtha-v2-page .doctors-nav-actions>a:first-child{display:none}
-  .ophtha-v2-experience{min-height:calc(100dvh - 70px);overflow:visible}
-  .ophtha-v2-landing{min-height:calc(100dvh - 182px);padding:36px 0 128px}
+  .ophtha-v2-experience{min-height:auto;overflow:visible}
+  .ophtha-v2-landing{min-height:auto;padding:32px 0 24px}
   .ophtha-v2-eye-stage{width:92px;height:72px;margin-bottom:15px}
   .ophtha-v2-eye-mark{transform:scale(.88)}
   .ophtha-v2-landing h1{font-size:clamp(45px,15vw,64px)}
   .ophtha-v2-landing-copy{max-width:340px;margin-top:14px;font-size:14px;line-height:1.55}
   .ophtha-v2-examples{gap:7px;margin-top:23px;padding:0 2px}
   .ophtha-v2-example{min-height:37px;padding:8px 11px;font-size:11px}
-  .ophtha-v2-composer-wrap{position:fixed;left:0;right:0;bottom:calc(104px + env(safe-area-inset-bottom));z-index:10030;padding:10px 12px 13px;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--site-theme-bg) 80%,transparent) 20%,var(--site-theme-bg) 78%)}
-  .ophtha-v2-mobile-composer-host{position:fixed;left:0;right:0;bottom:calc(104px + env(safe-area-inset-bottom));z-index:10030;display:block;pointer-events:none}
-  .ophtha-v2-mobile-composer-host.is-nav-anchored{position:absolute;left:-1px;right:-1px;bottom:calc(100% + 6px);z-index:2}
-  .ophtha-v2-mobile-composer-host .ophtha-v2-composer-wrap{position:static;left:auto;right:auto;bottom:auto;z-index:auto;width:100%;padding:10px 12px 13px;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--site-theme-bg) 80%,transparent) 20%,var(--site-theme-bg) 78%);pointer-events:none}
-  .ophtha-v2-mobile-composer-host.is-nav-anchored .ophtha-v2-composer-wrap{position:static}
+  .ophtha-v2-search-zone{position:sticky;top:calc(8px + env(safe-area-inset-top));z-index:10020;padding:8px 0 12px;background:linear-gradient(180deg,color-mix(in srgb,var(--site-theme-bg) 96%,transparent) 0%,color-mix(in srgb,var(--site-theme-bg) 90%,transparent) 78%,transparent 100%);backdrop-filter:blur(12px)}
+  .ophtha-v2-composer-wrap{position:static;left:auto;right:auto;bottom:auto;z-index:auto;width:100%;padding:0 12px;background:transparent}
   .ophtha-v2-query-card{position:relative}
   .ophtha-v2-search-form.ophtha-v2-composer{grid-template-columns:minmax(0,1fr) 48px;min-height:68px;padding:8px 8px 8px 18px;border-radius:35px}
   .ophtha-v2-search-input{height:50px;font-size:16px}
   .ophtha-v2-search-button{width:48px;min-width:48px;height:48px}
-  .ophtha-v2-query-meta{position:absolute;left:14px;right:14px;bottom:calc(100% + 6px);display:block;margin:0;padding:0;pointer-events:none}
+  .ophtha-v2-query-meta{position:static;display:block;margin:7px 8px 0;padding:0;pointer-events:none}
   .ophtha-v2-privacy-notice{margin:0 auto;font-size:10px;opacity:.78}
   .ophtha-v2-status{display:none}
-  .ophtha-v2-status[data-state="loading"]{display:block;margin:0 auto;padding:5px 10px;border:1px solid color-mix(in srgb,var(--site-theme-accent) 22%,var(--site-theme-border));border-radius:999px;background:color-mix(in srgb,var(--site-theme-surface) 94%,transparent);font-size:11px;font-weight:700;box-shadow:0 8px 22px rgba(4,32,65,.10)}
-  .ophtha-v2-status[data-state="error"]{display:block;margin:0 auto;padding:5px 10px;border-radius:12px;background:var(--site-theme-surface);font-size:11px;font-weight:700}
+  .ophtha-v2-status[data-state="loading"]{display:block;margin:5px auto 0;padding:5px 10px;border:1px solid color-mix(in srgb,var(--site-theme-accent) 22%,var(--site-theme-border));border-radius:999px;background:color-mix(in srgb,var(--site-theme-surface) 94%,transparent);font-size:11px;font-weight:700;box-shadow:0 8px 22px rgba(4,32,65,.10)}
+  .ophtha-v2-status[data-state="error"]{display:block;margin:5px auto 0;padding:5px 10px;border-radius:12px;background:var(--site-theme-surface);font-size:11px;font-weight:700}
   body.is-searching .ophtha-v2-privacy-notice{display:none}
   .ophtha-v2-results{padding:18px 0 42px}
+  .ophtha-v2-answer-shell{scroll-margin-top:132px}
   .ophtha-v2-bottom-line,.ophtha-v2-card,.ophtha-v2-feedback{padding:19px;border-radius:19px}
   .ophtha-v2-bottom-line h2{font-size:30px}
   .ophtha-v2-card h2{font-size:25px}
   .ophtha-v2-bottom-line p{font-size:15px;line-height:1.65}
   .ophtha-v2-feedback-fieldset{grid-template-columns:1fr}
-  body.is-searching .ophtha-v2-landing,body.has-answer .ophtha-v2-landing{min-height:118px;padding:18px 0 8px}
+  body.is-searching .ophtha-v2-landing,body.has-answer .ophtha-v2-landing{min-height:auto;padding:18px 0 8px}
   body.is-searching .ophtha-v2-eye-stage,body.has-answer .ophtha-v2-eye-stage{display:none}
   body.is-searching .ophtha-v2-landing h1,body.has-answer .ophtha-v2-landing h1{font-size:31px}
 }
