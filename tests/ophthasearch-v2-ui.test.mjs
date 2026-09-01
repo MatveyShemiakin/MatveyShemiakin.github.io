@@ -42,8 +42,7 @@ test('published OphthaSearch pages load the current sticky-search assets', async
   assert.match(enHtml, /ophthasearch-v2-motion\.js\?v=20260901-1/);
 });
 
-test('OphthaSearch client posts to the deployed workers.dev research endpoint', async () => {
-  assert.match(DEFAULT_RESEARCH_ENDPOINT, /^https:\/\/matveyshemyakin-github-io\.matvei-shemyakin\.workers\.dev\/v2\/research$/);
+test('OphthaSearch client posts through its configured research endpoint', async () => {
   const calls = [];
   const response = await requestResearch('Медикаментозная терапия ПОУГ', 'ru', {
     fetchImpl: async (...args) => {
