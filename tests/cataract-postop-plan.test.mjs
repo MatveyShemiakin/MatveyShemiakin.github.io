@@ -75,7 +75,7 @@ test('journal schedule contains every elapsed dose from operation to current mom
   assert.equal(rows.every(row => row.date === '2026-09-01'), true);
 });
 
-test('patient page uses mobile fix, journal table hooks and no public consultation CTA', () => {
+test('patient page uses a calm compact hero, mobile fix and no public consultation CTA', () => {
   assert.equal(fs.existsSync(pagePath), true);
   assert.equal(fs.existsSync(pageCssPath), true);
   const html = fs.readFileSync(pagePath, 'utf8');
@@ -86,6 +86,9 @@ test('patient page uses mobile fix, journal table hooks and no public consultati
   for (const id of ['operation-date','period-tabs','medication-grid','today-summary','journal-list','journal-summary','enable-reminders','calendar-download','show-journal','print-journal']) {
     assert.match(html, new RegExp(`id=["']${id}["']`));
   }
+  assert.match(html, /План восстановления/);
+  assert.doesNotMatch(html, /cataract-hero-visual/);
+  assert.doesNotMatch(html, /hero-orb/);
   assert.match(html, /Срочно обратиться к врачу/);
   assert.match(html, /Информация носит справочный/);
   assert.doesNotMatch(html, /\+7 \(499\) 490-0303/);
@@ -93,7 +96,9 @@ test('patient page uses mobile fix, journal table hooks and no public consultati
   assert.doesNotMatch(html, /patient-consultation-cta/);
   assert.match(css, /\.postop-journal-table-wrap/);
   assert.match(css, /overflow-x:\s*auto/);
-  assert.match(css, /patient-hero-copy h1/);
+  assert.match(css, /\.cataract-page \.patient-hero\s*\{/);
+  assert.match(css, /\.cataract-page \.patient-hero-copy h1/);
+  assert.match(css, /\.cataract-page \.paths-section/);
 });
 
 test('cataract path renderer contains the approved postoperative entry card', () => {
