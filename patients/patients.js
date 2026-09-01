@@ -1,5 +1,6 @@
 (function(){
 const lang=(document.documentElement.lang||'ru').toLowerCase().startsWith('en')?'en':'ru';
+const POSTOP_PLAN_PUBLIC=false;
 const T=lang==='en'?{
  all:'All questions',short:'Short answer',details:'Details',important:'Important',review:'Medical review: 20 July 2026',copy:'Copy link',copied:'Link copied',topic:'Open topic page →',results:n=>`${n} ${n===1?'answer':'answers'} shown`,search:n=>`${n} ${n===1?'answer':'answers'} found`,empty:'No answers found. Try another word or clear the search.',query:'for'
 }:{
@@ -16,7 +17,7 @@ const path=document.getElementById('path-grid'),filters=document.getElementById(
 function video(id){const v=VIDEOS[id];if(!v)return '';if(v.kind==='youtube')return `<aside class="video-slot"><iframe src="${esc(v.src)}" title="${esc(v.title||'Video answer')}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></aside>`;return `<aside class="video-slot"><video controls playsinline preload="metadata" src="${esc(v.src)}"${v.poster?` poster="${esc(v.poster)}"`:''}></video></aside>`}
 function item(f){const ps=f.paragraphs.map(p=>`<p>${esc(p)}</p>`).join(''),li=f.important.map(x=>`<li>${esc(x)}</li>`).join(''),index=[f.q,f.short,...f.paragraphs,...f.important].join(' '),hasVideo=Boolean(VIDEOS[f.id]);return `<details class="faq-item" id="${esc(f.id)}" data-category="${esc(f.cat)}" data-search="${esc(index)}"><summary><span class="faq-question">${esc(f.q)}</span><span class="faq-toggle" aria-hidden="true">+</span></summary><div class="faq-content ${hasVideo?'has-video':'no-video'}"><div class="answer-copy"><p class="short-answer"><span>${T.short}</span>${esc(f.short)}</p><div class="answer-detail"><h4>${T.details}</h4>${ps}</div><div class="answer-important"><h4>${T.important}</h4><ul>${li}</ul></div><div class="answer-meta"><span>${T.review}</span><button class="copy-link" type="button" data-copy-id="${esc(f.id)}">${T.copy}</button></div></div>${video(f.id)}</div></details>`}
 path.innerHTML=DATA.categories.map(c=>`<a class="path-card" href="${TOPIC_URLS[c.key]||'#section-'+c.key}"><span>${c.number}</span><h3>${esc(c.title)}</h3><p>${esc(c.description)}</p><strong>${questionCount(DATA.faqs.filter(f=>f.cat===c.key).length)} →</strong></a>`).join('');
-if(lang==='ru'&&document.body.classList.contains('cataract-page')){
+if(POSTOP_PLAN_PUBLIC&&lang==='ru'&&document.body.classList.contains('cataract-page')){
  path.insertAdjacentHTML('afterbegin','<a class="path-card" href="/patients/cataract-postop-plan/"><span>После операции</span><h3>Послеоперационный план лечения Шемякина М.Ю.</h3><p>Схема капель по неделям, напоминания и журнал выполнения, который можно показать врачу.</p><strong>Открыть план →</strong></a>');
 }
 filters.innerHTML=`<button class="filter-button active" type="button" data-filter="all">${T.all}</button>`+DATA.categories.map(c=>`<button class="filter-button" type="button" data-filter="${c.key}">${esc(c.title)}</button>`).join('');
