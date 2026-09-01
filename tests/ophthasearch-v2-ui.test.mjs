@@ -31,19 +31,19 @@ test('OphthaSearch page prioritizes clinical conclusion and hides pipeline inter
   assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-1/);
 });
 
-test('published OphthaSearch pages load the current mobile motion asset', async () => {
+test('published OphthaSearch pages load the current sticky-search assets', async () => {
   const [html, enHtml] = await Promise.all([
     fs.readFile(publishedPagePath, 'utf8'),
     fs.readFile(publishedEnPagePath, 'utf8')
   ]);
-  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-5/);
-  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-4/);
-  assert.match(enHtml, /ophthasearch-v2-modern\.css\?v=20260831-5/);
-  assert.match(enHtml, /ophthasearch-v2-motion\.js\?v=20260831-4/);
+  assert.match(html, /ophthasearch-v2-modern\.css\?v=20260901-1/);
+  assert.match(html, /ophthasearch-v2-motion\.js\?v=20260901-1/);
+  assert.match(enHtml, /ophthasearch-v2-modern\.css\?v=20260901-1/);
+  assert.match(enHtml, /ophthasearch-v2-motion\.js\?v=20260901-1/);
 });
 
 test('OphthaSearch client posts to the deployed workers.dev research endpoint', async () => {
-  assert.match(DEFAULT_RESEARCH_ENDPOINT, /^https:\/\/matveyshemiakin-github-io\.matvei-shemyakin\.workers\.dev\/v2\/research$/);
+  assert.match(DEFAULT_RESEARCH_ENDPOINT, /^https:\/\/matveyshemyakin-github-io\.matvei-shemyakin\.workers\.dev\/v2\/research$/);
   const calls = [];
   const response = await requestResearch('Медикаментозная терапия ПОУГ', 'ru', {
     fetchImpl: async (...args) => {
