@@ -11,7 +11,6 @@ const clientPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.js', 
 const motionPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2-motion.js', import.meta.url);
 const cssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2.css', import.meta.url);
 const modernCssPath = new URL('../for-doctors/ophthasearch-v2/ophthasearch-v2-modern.css', import.meta.url);
-const workerEndpoint = 'https://matveyshemyakin-github-io.matvei-shemyakin.workers.dev/v2/research';
 
 test('OphthaSearch page prioritizes clinical conclusion and hides pipeline internals', async () => {
   const html = await fs.readFile(pagePath, 'utf8');
@@ -44,7 +43,7 @@ test('published OphthaSearch pages load the current mobile motion asset', async 
 });
 
 test('OphthaSearch client posts to the deployed workers.dev research endpoint', async () => {
-  assert.equal(DEFAULT_RESEARCH_ENDPOINT, workerEndpoint);
+  assert.match(DEFAULT_RESEARCH_ENDPOINT, /^https:\/\/matveyshemiakin-github-io\.matvei-shemyakin\.workers\.dev\/v2\/research$/);
   const calls = [];
   const response = await requestResearch('Медикаментозная терапия ПОУГ', 'ru', {
     fetchImpl: async (...args) => {
@@ -53,7 +52,7 @@ test('OphthaSearch client posts to the deployed workers.dev research endpoint', 
     }
   });
   assert.equal(calls.length, 1);
-  assert.equal(calls[0][0], workerEndpoint);
+  assert.equal(calls[0][0], DEFAULT_RESEARCH_ENDPOINT);
   assert.equal(calls[0][1].method, 'POST');
   assert.equal(JSON.parse(calls[0][1].body).question, 'Медикаментозная терапия ПОУГ');
   assert.equal(response.status, 'complete');
