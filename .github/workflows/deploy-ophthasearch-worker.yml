@@ -42,6 +42,9 @@ jobs:
       - name: Run Ophtha Merge regression tests
         run: node --test tests/ophtha-merge-v2.test.mjs
 
+      - name: Run OphthaSearch regression tests
+        run: node --test tests/ophthasearch*.test.mjs
+
       - name: Check Cloudflare deployment secrets
         shell: bash
         run: |
@@ -102,6 +105,7 @@ jobs:
           if (result.status === 'evidence_only') throw new Error('deployed Worker returned evidence_only');
           const bottomLine = String(result?.answer?.clinical_bottom_line || '').trim();
           if (!bottomLine) throw new Error('clinical_bottom_line is empty');
+          if (!/латанопрост|latanoprost/i.test(bottomLine) || !/тимолол|timolol/i.test(bottomLine)) throw new Error('Conclusion changed the requested comparison');
           const citations = Array.isArray(result?.answer?.bottom_line_citations) ? result.answer.bottom_line_citations.length : 0;
           if (!citations) throw new Error('clinical_bottom_line has no verified citations');
           const adapters = Array.isArray(result?.diagnostics?.adapters) ? result.diagnostics.adapters : [];

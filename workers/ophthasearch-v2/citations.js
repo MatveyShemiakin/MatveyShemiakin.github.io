@@ -1,3 +1,4 @@
+import { directComparisonEvidence, isNamedComparison, mentionsBoth } from './clinical-terms.js';
 import { validateStructuredAnswer } from './contracts.js';
 
 function clean(value) { return String(value ?? '').replace(/\s+/g, ' ').trim(); }
@@ -109,6 +110,10 @@ export function verifyClaimsAndCitations(draft, evidencePack) {
 
   // The main conclusion remains strict: it must be traceable to known Evidence Pack sources.
   const bottomLineCitations = citationIds(draft.bottom_line_citations || [], 'clinical_bottom_line', map, { required: true });
+
+  if (isNamedComparison(evidencePack.intent) && (!mentionsBoth(bottomLine, evidencePack.intent) || !bottomLineCitations.some(id => directComparisonEvidence(map.get(id), evidencePack.intent)))) {
+    throw new Error('ANSWER_MISMATCH: comparison does not match question or direct evidence');
+  }
 
   // Secondary sections are fail-soft. Unsupported regimen details or bad secondary
   // citations are removed instead of discarding an otherwise verified conclusion.

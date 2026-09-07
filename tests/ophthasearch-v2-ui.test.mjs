@@ -26,7 +26,7 @@ test('OphthaSearch page prioritizes clinical conclusion and hides pipeline inter
   assert.doesNotMatch(html, /data-v2-diagnostics|data-v2-guidelines|data-v2-arguments-for|data-v2-arguments-against|data-v2-uncertainties/);
   assert.doesNotMatch(html, /Диагностика research pipeline|Evidence Pack|Архитектура поиска/i);
   assert.match(html, /ophthasearch-v2\.css/);
-  assert.match(html, /ophthasearch-v2\.js\?v=20260829-1/);
+  assert.match(html, /ophthasearch-v2\.js\?v=20260907-1/);
   assert.match(html, /ophthasearch-v2-modern\.css\?v=20260831-5/);
   assert.match(html, /ophthasearch-v2-motion\.js\?v=20260831-1/);
 });

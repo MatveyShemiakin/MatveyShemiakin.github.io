@@ -1,3 +1,4 @@
+import { directComparisonEvidence, isNamedComparison } from './clinical-terms.js';
 function normalizeText(value) {
   return String(value || '')
     .toLowerCase()
@@ -135,6 +136,9 @@ function outcomeScore(text, outcomes = []) {
 export function scoreMedicalRelevance(document = {}, intent = {}) {
   const text = joinedDocumentText(document);
   if (!text) return 0;
+  if (/\b(feline|canine|rabbits?|mice|murine|rats|porcine|animal model)\b/i.test(document.title || '') && !/veterinar|animal|feline|canine/i.test(JSON.stringify(intent))) return 0;
+
+  if (/\b(?:in|using|randomized|randomised|studied) (?:\w+ ){0,2}(?:rabbits|cats|dogs|mice|rats|pigs)\b|\b(?:rabbits|cats|dogs|mice|rats) with induced/i.test(document.abstract_or_summary || '') && !/veterinar|animal|feline|canine/i.test(JSON.stringify(intent))) return 0;
 
   const condition = normalizeText(intent.condition);
   const domain = normalizeText(intent.domain);
@@ -154,7 +158,8 @@ export function scoreMedicalRelevance(document = {}, intent = {}) {
   score += questionTypeScore(text, intent.question_type);
   score -= competingDomainPenalty(text, intent);
 
-  return Math.max(0, Math.min(1, Number(score.toFixed(4))));
+  const ceiling = isNamedComparison(intent) && !directComparisonEvidence(document, intent) ? 0.44 : 1;
+  return Math.max(0, Math.min(ceiling, Number(score.toFixed(4))));
 }
 
 export function filterRelevantDocuments(documents = [], intent = {}, threshold = 0.45) {

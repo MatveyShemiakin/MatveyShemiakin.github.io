@@ -98,5 +98,9 @@ export function buildResearchPlan(intent = {}) {
     byId.get('ongoing-trials').query = `${condition} pharmacological therapy`;
   }
 
+  // First retrieve the actual question without AND-ing in every desired study feature.
+  const primary = tracks.find(track => track.id === 'efficacy');
+  primary.query = [condition, ...named].join(' ');
+  if (!named.length) primary.query += ` ${treatment}`;
   return tracks;
 }

@@ -1,3 +1,4 @@
+import { providerFetch, cachedResearch, RELEASE } from './runtime.js';
 import { validateResearchRequest, validateStructuredAnswer } from './contracts.js';
 import { interpretClinicalQuestion, interpretIntentWithAi } from './query-interpreter.js';
 import { buildResearchPlan } from './research-planner.js';
@@ -15,7 +16,7 @@ export const RESEARCH_ALLOWED_ORIGIN = 'https://matveyshemyakin.ru';
 export const MAX_RESEARCH_BODY_BYTES = 32 * 1024;
 
 function defaultAdapters(env = {}, deps = {}) {
-  const fetchImpl = deps.fetchImpl || globalThis.fetch;
+  const fetchImpl = providerFetch(deps.fetchImpl || globalThis.fetch);
   const common = { fetchImpl, limit: deps.sourceLimit || 8 };
   const adapters = {
     pubmed: (track, runtime) => searchPubMed(track, {
@@ -79,7 +80,7 @@ async function retrieveTrack(track, adapterMap, deps) {
   for (const adapter of unavailable) diagnostics.push({ trackId: track.id, adapter, status: 'unavailable', total: 0, error: 'adapter-unavailable' });
   if (!Object.keys(selected).length) return { documents, diagnostics };
 
-  const results = await runAdaptersWithDeadlines(track, selected, { timeoutMs: deps.timeoutMs || 2500 });
+  const results = await runAdaptersWithDeadlines(track, selected, { timeoutMs: deps.timeoutMs || 10000 });
   for (const [adapter, result] of Object.entries(results)) {
     diagnostics.push({
       trackId: track.id,
@@ -110,7 +111,9 @@ export async function runResearchPipeline(payload, env = {}, deps = {}) {
   if (typeof interpreterDeps.interpretIntent !== 'function' && typeof env?.AI?.run === 'function') {
     interpreterDeps.interpretIntent = (validatedRequest) => interpretIntentWithAi(validatedRequest, env, deps.intentReasonerDeps || {});
   }
-  const intent = await (deps.interpreter || interpretClinicalQuestion)(request, interpreterDeps);
+  const localIntent = await interpretClinicalQuestion(request);
+  const locallyResolved = localIntent.condition && localIntent.question_type === 'comparison' && localIntent.interventions.length === 1 && localIntent.comparators.length === 1;
+  const intent = locallyResolved && !deps.interpreter ? localIntent : await (deps.interpreter || interpretClinicalQuestion)(request, interpreterDeps);
   const plan = (deps.planner || buildResearchPlan)(intent);
   const adapterMap = deps.adapters || defaultAdapters(env, deps);
   const retrieval = await retrievePlan(plan, adapterMap, deps);
@@ -123,13 +126,17 @@ export async function runResearchPipeline(payload, env = {}, deps = {}) {
     maxSources: Number.isFinite(Number(deps.maxSources)) ? Number(deps.maxSources) : 24
   });
 
+  evidencePack.question = request.question;
   const adapterProblems = retrieval.diagnostics.filter((entry) => entry.status !== 'fulfilled').length;
   let status = adapterProblems ? 'partial' : 'complete';
   let answer;
+  let reason = null;
 
   if (!evidencePack.sources.length) {
     status = 'evidence_only';
-    answer = buildEvidenceOnlyFallback(evidencePack, request.language);
+    reason = retrieval.diagnostics.some(entry => entry.status === 'fulfilled') ? 'NO_EVIDENCE' : 'SOURCES_UNAVAILABLE';
+    if (!Object.keys(adapterMap).length) reason = 'NO_EVIDENCE';
+    answer = buildEvidenceOnlyFallback(evidencePack, request.language, reason);
   } else {
     try {
       const reasoner = deps.reasoner || ((pack) => reasonOverEvidence(pack, env, deps.reasonerDeps || {}));
@@ -137,7 +144,9 @@ export async function runResearchPipeline(payload, env = {}, deps = {}) {
       validateStructuredAnswer(answer, new Set(evidencePack.sources.map((source) => source.source_id)));
     } catch (error) {
       status = 'evidence_only';
-      answer = buildEvidenceOnlyFallback(evidencePack, request.language);
+      const message = String(error?.message || '');
+      reason = /4006|quota|daily free allocation/i.test(message) ? 'AI_QUOTA_EXCEEDED' : /ANSWER_MISMATCH/.test(message) ? 'ANSWER_MISMATCH' : /AI_TIMEOUT/.test(message) ? 'AI_TIMEOUT' : 'AI_UNAVAILABLE';
+      answer = buildEvidenceOnlyFallback(evidencePack, request.language, reason);
       retrieval.diagnostics.push({ trackId: 'reasoning', adapter: 'workers-ai', status: 'rejected', total: 0, error: String(error?.message || error || 'reasoning-unavailable') });
     }
   }
@@ -151,6 +160,7 @@ export async function runResearchPipeline(payload, env = {}, deps = {}) {
     answer,
     diagnostics: {
       adapters: retrieval.diagnostics,
+      reason,
       guidelineCount: guidelineRecords.length,
       sourceCount: evidencePack.sources.length,
       ongoingTrialCount: evidencePack.ongoing_trials.length
@@ -164,6 +174,7 @@ function corsHeaders(extra = {}) {
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Vary': 'Origin',
+    'X-Ophtha-Release': RELEASE,
     ...extra
   };
 }
@@ -205,7 +216,7 @@ export async function handleResearchRequest(request, env, ctx, deps = {}) {
 
   try {
     const pipeline = deps.researchPipeline || runResearchPipeline;
-    const result = await pipeline(payload, env, deps);
+    const result = await cachedResearch(request, validateResearchRequest(payload), () => pipeline(payload, env, deps), deps.cache ?? globalThis.caches?.default, ctx);
     return json({ ok: true, result: publicResult(result) }, 200);
   } catch (error) {
     return json({ ok: false, error: { code: 'RESEARCH_UNAVAILABLE', message: String(error?.message || 'Research pipeline unavailable') } }, 503);

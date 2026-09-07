@@ -3,6 +3,9 @@ export const DEFAULT_RESEARCH_ENDPOINT = 'https://matveyshemiakin-github-io.matv
 const COPY = {
   ru: {
     emptyQuestion: 'Введите клинический вопрос.',
+    timeout: 'Поиск занял слишком много времени. Попробуйте ещё раз.',
+    waiting: 'Поиск и подготовка ответа продолжаются…',
+    cached: 'Показан сохранённый результат недавнего поиска.',
     networkUnavailable: 'Сетевой запрос недоступен.',
     invalidResponse: 'Сервер вернул некорректный ответ.',
     unavailable: 'Исследовательский агент временно недоступен.',
@@ -33,6 +36,9 @@ const COPY = {
   },
   en: {
     emptyQuestion: 'Enter a clinical question.',
+    timeout: 'The search took too long. Please try again.',
+    waiting: 'Search and answer preparation are still in progress…',
+    cached: 'Showing a saved result from a recent search.',
     networkUnavailable: 'Network request is unavailable.',
     invalidResponse: 'The server returned an invalid response.',
     unavailable: 'The research agent is temporarily unavailable.',
@@ -103,25 +109,32 @@ export async function requestResearch(question, language = 'ru', options = {}) {
   const fetchImpl = options.fetchImpl || globalThis.fetch;
   if (typeof fetchImpl !== 'function') throw new Error(copy.networkUnavailable);
   const endpoint = options.endpoint || DEFAULT_RESEARCH_ENDPOINT;
-  const response = await fetchImpl(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      schemaVersion: '2.0',
-      language: lang,
-      question: query,
-      mode: 'standard',
-      filters: {}
-    })
-  });
-  let payload;
-  try { payload = await response.json(); }
-  catch { throw new Error(copy.invalidResponse); }
-  if (!response.ok || !payload?.ok || !payload.result) {
-    const message = clean(payload?.error?.message) || copy.unavailable;
-    throw new Error(message);
+  const controller = new AbortController();
+  let timer;
+  const abort = () => controller.abort();
+  options.signal?.addEventListener('abort', abort, {once:true});
+  if (options.signal?.aborted) controller.abort();
+  try {
+    const response = await Promise.race([
+      fetchImpl(endpoint, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({schemaVersion:'2.0',language:lang,question:query,mode:'standard',filters:{}})
+      }),
+      new Promise((_, reject) => {timer = setTimeout(() => {
+        reject(new Error(copy.timeout)); controller.abort();
+      }, options.timeoutMs || 65000);})
+    ]);
+    let payload;
+    try { payload = await response.json(); }
+    catch { throw new Error(copy.invalidResponse); }
+    if (!response.ok || !payload?.ok || !payload.result) throw new Error(copy.unavailable);
+    return payload.result;
+  } finally {
+    clearTimeout(timer);
+    options.signal?.removeEventListener('abort', abort);
   }
-  return payload.result;
 }
 
 function citationList(ids, target, copy) {
@@ -299,7 +312,8 @@ export function renderResearchResult(result, root = document) {
 
   const status = root.querySelector('[data-v2-status]');
   if (status) {
-    status.textContent = statusText(result?.status, copy);
+    status.textContent = result?.status === 'evidence_only' ? clean(answer.clinical_bottom_line) : statusText(result?.status, copy);
+    if (result?.diagnostics?.cached) status.textContent += ` ${copy.cached}`;
     status.dataset.state = result?.status === 'partial' || result?.status === 'evidence_only' ? 'partial' : 'ready';
   }
 }
@@ -315,6 +329,8 @@ function initResearchUi() {
   const lang = currentLanguage();
   const copy = copyFor(lang);
   let lastSubmittedQuestion = '';
+  let activeController = null;
+  let sequence = 0;
 
   input.addEventListener('input', () => {
     const current = clean(input.value);
@@ -334,21 +350,26 @@ function initResearchUi() {
       input.focus();
       return;
     }
+    const requestId = ++sequence;
+    activeController?.abort();
+    activeController = new AbortController();
     lastSubmittedQuestion = question;
     if (shell) shell.hidden = true;
     button.disabled = true;
     status.textContent = copy.loading;
     status.dataset.state = 'loading';
+    const progressTimer = setTimeout(() => { if (sequence === requestId) status.textContent = copy.waiting; }, 8000);
     try {
-      const result = await requestResearch(question, lang);
-      if (clean(input.value) !== lastSubmittedQuestion) return;
+      const result = await requestResearch(question, lang, {signal:activeController.signal});
+      if (sequence !== requestId || clean(input.value) !== lastSubmittedQuestion) return;
       renderResearchResult(result);
     } catch (error) {
-      if (clean(input.value) !== lastSubmittedQuestion) return;
+      if (sequence !== requestId || clean(input.value) !== lastSubmittedQuestion) return;
       status.textContent = clean(error?.message) || copy.unavailable;
       status.dataset.state = 'error';
     } finally {
-      button.disabled = false;
+      clearTimeout(progressTimer);
+      if (sequence === requestId) button.disabled = false;
     }
   });
 }

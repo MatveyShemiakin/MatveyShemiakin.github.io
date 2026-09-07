@@ -1,3 +1,5 @@
+import { boundedModel } from './runtime.js';
+import { NAMED_THERAPIES } from './clinical-terms.js';
 import { normalizeIntent, validateResearchRequest } from './contracts.js';
 import { parseStructuredModelResponse } from './structured-response.js';
 
@@ -5,22 +7,7 @@ export const INTENT_MODEL = '@cf/google/gemma-4-26b-a4b-it';
 
 const QUESTION_TYPES = ['general', 'comparison', 'therapy', 'surgery', 'management', 'diagnosis', 'prognosis', 'safety'];
 
-const NAMED_THERAPIES = [
-  ['latanoprost', ['latanoprost', 'латанопрост']],
-  ['timolol', ['timolol', 'тимолол']],
-  ['travoprost', ['travoprost', 'травопрост']],
-  ['bimatoprost', ['bimatoprost', 'биматопрост']],
-  ['tafluprost', ['tafluprost', 'тафлупрост']],
-  ['brimonidine', ['brimonidine', 'бримонидин']],
-  ['dorzolamide', ['dorzolamide', 'дорзоламид']],
-  ['brinzolamide', ['brinzolamide', 'бринзоламид']],
-  ['netarsudil', ['netarsudil', 'нетарсудил']],
-  ['aflibercept', ['aflibercept', 'афлиберцепт']],
-  ['faricimab', ['faricimab', 'фарицимаб']],
-  ['ranibizumab', ['ranibizumab', 'ранибизумаб']],
-  ['bevacizumab', ['bevacizumab', 'бевацизумаб']],
-  ['brolucizumab', ['brolucizumab', 'бролуцизумаб']]
-];
+
 
 function normalizedQuestion(value) {
   return String(value || '').toLowerCase().replace(/ё/g, 'е').replace(/[–—]/g, '-').replace(/\s+/g, ' ').trim();
@@ -86,12 +73,13 @@ export async function interpretIntentWithAi(payload, env = {}, deps = {}) {
   const request = validateResearchRequest(payload);
   const run = deps.runModel || env?.AI?.run?.bind(env.AI);
   if (typeof run !== 'function') throw new Error('Workers AI binding unavailable');
-  const response = await run(INTENT_MODEL, {
+  const response = await boundedModel(run, INTENT_MODEL, {
     messages: buildIntentMessages(request),
     response_format: { type: 'json_schema', json_schema: buildIntentSchema() },
     max_completion_tokens: 700,
-    temperature: 0
-  });
+    temperature: 0,
+    chat_template_kwargs: { enable_thinking: false }
+  }, 12000);
   return normalizeIntent({ ...parseModelIntent(response), language: request.language });
 }
 
@@ -117,6 +105,7 @@ function detectCondition(text) {
   if (/iol\s+dislocation|intraocular\s+lens\s+dislocation|дислокац[а-я]*\s+иол|смещен[а-я]*\s+иол|дислокац[а-я]*\s+интраокулярн[а-я]*\s+линз/.test(text)) {
     return { domain: 'lens-iol', condition: 'intraocular lens dislocation' };
   }
+  if (/macular (?:edema|oedema)|макулярн[а-я]*\s+отек/.test(text)) return { domain: 'retina', condition: 'macular edema' };
   if (/glaucoma|глауком/.test(text)) return { domain: 'glaucoma', condition: 'glaucoma' };
   if (/cataract|катаракт/.test(text)) return { domain: 'lens-iol', condition: 'cataract' };
   if (/uveitis|увеит/.test(text)) return { domain: 'uveitis', condition: 'uveitis' };
@@ -125,7 +114,7 @@ function detectCondition(text) {
 }
 
 function detectQuestionType(text, condition) {
-  if (/преимущ|сравн|по сравнению|\bversus\b|\bvs\b|better|superior|inferior/.test(text)) return 'comparison';
+  if (/преимущ|сравн|по сравнению|против| или |\bor\b|\bversus\b|\bvs\b|better|superior|inferior/.test(text)) return 'comparison';
   if (/безопас|осложн|риск|safety|risk|adverse/.test(text)) return 'safety';
   if (/медикаментоз|лекарствен|фармаколог|препарат|капл|pharmacolog|medication|medical therapy|drug therapy|first[- ]line/.test(text)) return 'therapy';
   if (/операц|оперир|хирург|surgery|surgical|vitrectom|пилинг|peeling/.test(text)) return 'surgery';
@@ -142,7 +131,10 @@ function detectNamedTherapies(text) {
   for (const [canonical, aliases] of NAMED_THERAPIES) {
     if (aliases.some((alias) => text.includes(normalizedQuestion(alias)))) result.push(canonical);
   }
-  return result;
+  return result.sort((a, b) => {
+    const position = term => Math.min(...NAMED_THERAPIES.find(([name]) => name === term)[1].map(alias => text.indexOf(alias)).filter(n => n >= 0));
+    return position(a) - position(b);
+  });
 }
 
 function detectInterventions(text, questionType) {
