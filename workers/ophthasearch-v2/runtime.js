@@ -1,5 +1,5 @@
 // Runtime safeguards; no dependencies and no model requests in tests.
-export const RELEASE = '20260908-r3';
+export const RELEASE = '20260908-r4';
 const inFlight = new Map();
 const gates = new WeakMap();
 let quotaUntil = 0;

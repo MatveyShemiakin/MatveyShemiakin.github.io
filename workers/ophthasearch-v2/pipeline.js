@@ -114,7 +114,7 @@ export async function runResearchPipeline(payload, env = {}, deps = {}) {
     interpreterDeps.interpretIntent = (validatedRequest) => interpretIntentWithAi(validatedRequest, env, deps.intentReasonerDeps || {});
   }
   const localIntent = await interpretClinicalQuestion(request);
-  const locallyResolved = localIntent.condition && localIntent.question_type === 'comparison' && localIntent.interventions.length === 1 && localIntent.comparators.length === 1;
+  const locallyResolved = localIntent.condition && ((localIntent.question_type === 'comparison' && localIntent.interventions.length === 1 && localIntent.comparators.length === 1) || (localIntent.domain === 'neuro-ophthalmology' && localIntent.interventions.length === 1 && !localIntent.ambiguities.length));
   const intent = locallyResolved && !deps.interpreter ? localIntent : await (deps.interpreter || interpretClinicalQuestion)(request, interpreterDeps);
   const plan = (deps.planner || buildResearchPlan)(intent);
   const adapterMap = deps.adapters || defaultAdapters(env, deps);

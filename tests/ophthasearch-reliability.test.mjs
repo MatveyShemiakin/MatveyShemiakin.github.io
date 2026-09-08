@@ -225,3 +225,9 @@ test('Crossref search includes smaller-journal abstracts and uses primary retrie
   }});
   assert.equal(r.records[0].doi,'10.1000/rare');assert.match(r.records[0].abstractText,/Not statistically significant/);assert.doesNotMatch(r.records[0].abstractText,/<jats/);
 });
+
+test('known neuropathy abbreviation cannot be overwritten by an AI interpretation',async()=>{
+  let modelCalls=0;
+  const r=await runResearchPipeline({...payload,question:'Использование цитиколина в терапии ПИОН'}, {AI:{run:async()=>{modelCalls++;return {response:JSON.stringify({domain:'neuro-ophthalmology',condition:'neuroretinitis',question_type:'therapy',interventions:['citicoline']})};}}}, {adapters:{},guidelineFinder:()=>[]});
+  assert.equal(r.intent.condition,'anterior ischemic optic neuropathy');assert.equal(modelCalls,0);
+});
