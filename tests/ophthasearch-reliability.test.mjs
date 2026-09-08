@@ -168,7 +168,7 @@ for (const [domain,condition,a,b] of clinicalScenarios) test(`offline pipeline: 
   const adapter=async()=>({records:[record,{...article,doi:'10.1000/unrelated',title:'Unrelated diagnostic imaging',abstractText:'A different disease.'}]});
   const r=await runResearchPipeline({...payload,question:q}, {}, {
     interpreter:async()=>i,
-    adapters:Object.fromEntries(['pubmed','europepmc','jstage','clinicaltrials','openalex'].map(k=>[k,adapter])),
+    adapters:Object.fromEntries(['pubmed','europepmc','jstage','clinicaltrials','openalex','crossref'].map(k=>[k,adapter])),
     guidelineFinder:()=>[],
     reasoner:async p=>{
       assert.equal(p.question,q);assert.equal(p.sources.length,1);
@@ -195,4 +195,33 @@ test('primary comparison retrieval searches named treatments in titles, not inci
 for (const title of ['Co-delivery of latanoprost and timolol for glaucoma', 'Additive effect of latanoprost and timolol', 'Latanoprost in glaucoma patients treated concomitantly with timolol', 'Effects of latanoprost and timolol: an ex vivo and in vitro study']) test(`excludes non-comparative evidence: ${title}`,()=>{
   const p=pack();p.sources[0].title=title;
   assert.throws(()=>verifyClaimsAndCitations(draft('Латанопрост эффективнее тимолола.'),p),/comparison/);
+});
+
+test('recognizes Russian anterior neuropathy separately from English posterior PION and citicoline', async()=>{
+  const a=await interpretClinicalQuestion({...payload,question:'Цитиколин в терапии ПИОН'});
+  assert.equal(a.condition,'anterior ischemic optic neuropathy');assert.ok(a.interventions.includes('citicoline'));
+  const b=await interpretClinicalQuestion({...payload,language:'en',question:'Citicoline for PION'});
+  assert.equal(b.condition,'posterior ischemic optic neuropathy');
+});
+test('rare neuropathy query excludes stroke-only evidence and retains NAION aliases',()=>{
+  const i={language:'ru',domain:'neuro-ophthalmology',condition:'anterior ischemic optic neuropathy',question_type:'therapy',interventions:['citicoline'],comparators:[]};
+  const p=buildEvidencePack(i,[{title:'Citicoline in NAION: randomized pilot study',abstractText:'Patients with NAION received citicoline treatment.',pmid:'1'}, {title:'Citicoline for stroke',abstractText:'Citicoline treatment improved visual function after stroke.',pmid:'2'}]);
+  assert.deepEqual(p.sources.map(s=>s.pmid),['1']);assert.ok(p.sources[0].quality_flags.includes('pilot-study'));
+});
+test('pilot-only support cannot become a routine treatment recommendation',()=>{
+  const p=pack();p.intent.question_type='therapy';p.sources[0].quality_flags=['pilot-study'];
+  const a=verifyClaimsAndCitations({...draft('Предварительные данные об эффективности латанопроста.'),confidence:'high',management:[{action:'Start treatment',citations:['S1']}]},p);
+  assert.equal(a.confidence,'low');assert.equal(a.management.length,0);assert.ok(a.uncertainties.length);
+});
+
+test('Crossref search includes smaller-journal abstracts and uses primary retrieval track',async()=>{
+  const {search}=await import('../workers/ophthasearch-v2/adapters/crossref.js');
+  assert.equal(typeof search,'function');
+  const primary=buildResearchPlan({...intent,question_type:'therapy',condition:'anterior ischemic optic neuropathy',interventions:['citicoline'],comparators:[]}).find(t=>t.id==='efficacy');
+  assert.ok(primary.sourceClasses.includes('crossref'));
+  const r=await search(primary,{fetchImpl:async url=>{
+    assert.ok(new URL(url).searchParams.get('query.bibliographic').includes('citicoline'));
+    return Response.json({message:{'total-results':1,items:[{DOI:'10.1000/rare',type:'journal-article',title:['Citicoline in NAION'],abstract:'<jats:p>Not statistically significant versus placebo.</jats:p>'}]}});
+  }});
+  assert.equal(r.records[0].doi,'10.1000/rare');assert.match(r.records[0].abstractText,/Not statistically significant/);assert.doesNotMatch(r.records[0].abstractText,/<jats/);
 });

@@ -147,6 +147,7 @@ export function classifyEvidence(document = {}) {
 export function qualityFlags(document = {}, intent = {}) {
   const flags = [];
   const text = cleanLower([...(document.publication_types || []), document.title, document.abstract_or_summary].join(' '));
+  if (/\bpilot\b|\bfeasibility\b/.test(cleanLower(document.title))) flags.push('pilot-study');
   if (/retrospective/.test(text)) flags.push('retrospective-design');
   if (Number.isFinite(document.sample_size) && document.sample_size > 0 && document.sample_size < 50) flags.push('small-sample');
   const outcomes = (document.primary_outcomes || []).map(cleanLower);

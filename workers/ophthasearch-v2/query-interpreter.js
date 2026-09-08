@@ -84,6 +84,8 @@ export async function interpretIntentWithAi(payload, env = {}, deps = {}) {
 }
 
 function detectCondition(text) {
+  if (/posterior isch[ae]*emic optic neuropathy|\bpion\b|задн[а-я]* ишемическ[а-я]* (?:оптическ[а-я]* )?нейропат|зион/.test(text)) return {domain:'neuro-ophthalmology',condition:'posterior ischemic optic neuropathy'};
+  if (/anterior isch[ae]*emic optic neuropathy|\bnaion\b|\baion\b|передн[а-я]* ишемическ[а-я]* (?:оптическ[а-я]* )?нейропат|пион/.test(text)) return {domain:'neuro-ophthalmology',condition:'anterior ischemic optic neuropathy'};
   if (/\bpoag\b|поуг|первич[а-я]*\s+открытоугольн[а-я]*\s+глауком|primary\s+open[- ]angle\s+glaucoma/.test(text)) {
     return { domain: 'glaucoma', condition: 'primary open-angle glaucoma' };
   }
@@ -122,7 +124,7 @@ function detectQuestionType(text, condition) {
   if (/диагност|diagnos|screen/.test(text)) return 'diagnosis';
   if (/прогноз|исход|prognos/.test(text)) return 'prognosis';
   if (/тактик|management|вести|ведение/.test(text)) return 'management';
-  if (/лечен|treat|therap/.test(text)) return 'therapy';
+  if (/лечен|терап|treat|therap/.test(text)) return 'therapy';
   return 'general';
 }
 

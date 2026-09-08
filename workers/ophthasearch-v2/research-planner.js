@@ -100,6 +100,7 @@ export function buildResearchPlan(intent = {}) {
 
   // First retrieve the actual question without AND-ing in every desired study feature.
   const primary = tracks.find(track => track.id === 'efficacy');
+  if (named.length) primary.sourceClasses.push('crossref');
   primary.query = [condition, ...named].join(' ');
   if (!named.length) primary.query += ` ${treatment}`;
   if (intent.question_type === 'comparison' && (intent.interventions || []).length && (intent.comparators || []).length) {

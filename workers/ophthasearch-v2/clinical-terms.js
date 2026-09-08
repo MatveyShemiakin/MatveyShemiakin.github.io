@@ -1,4 +1,5 @@
 export const NAMED_THERAPIES = [
+  ['citicoline', ['citicoline', 'цитиколин']],
   ['latanoprost', ['latanoprost', 'латанопрост']],
   ['timolol', ['timolol', 'тимолол']],
   ['travoprost', ['travoprost', 'травопрост']],

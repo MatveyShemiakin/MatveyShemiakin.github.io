@@ -134,6 +134,16 @@ export function verifyClaimsAndCitations(draft, evidencePack) {
     sources: [...map.values()].map(safeSource)
   };
 
+  const cited = bottomLineCitations.map(id => map.get(id));
+  const preliminaryOnly = cited.length && cited.every(source => source.quality_flags?.includes('pilot-study') || source.evidence?.group === 'case' || source.source_type === 'trial_registry');
+  if (preliminaryOnly) {
+    answer.confidence = answer.confidence === 'insufficient' ? 'insufficient' : 'low';
+    answer.management = [];
+    const limitation = evidencePack.intent?.language === 'ru'
+      ? 'Прямые источники этого вывода дают предварительные данные и не устанавливают эффективность для рутинного назначения. Поиск не гарантирует полноту всех исследований.'
+      : 'The direct sources supporting this conclusion provide preliminary evidence and do not establish efficacy for routine prescribing. Retrieval does not guarantee complete coverage of all studies.';
+    answer.uncertainties.unshift({text:limitation,citations:bottomLineCitations});
+  }
   validateStructuredAnswer(answer, new Set(map.keys()));
   return answer;
 }

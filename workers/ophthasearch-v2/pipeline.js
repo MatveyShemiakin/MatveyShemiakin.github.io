@@ -9,6 +9,7 @@ import { search as searchPubMed } from './adapters/pubmed.js';
 import { search as searchEuropePmc } from './adapters/europepmc.js';
 import { search as searchClinicalTrials } from './adapters/clinicaltrials.js';
 import { search as searchJStage } from './adapters/jstage.js';
+import { search as searchCrossref } from './adapters/crossref.js';
 import { search as searchOpenAlex } from './adapters/openalex.js';
 import { reasonOverEvidence, buildEvidenceOnlyFallback } from './reasoner.js';
 
@@ -26,6 +27,7 @@ function defaultAdapters(env = {}, deps = {}) {
       email: deps.ncbiEmail || env.NCBI_EMAIL || '',
       tool: 'OphthaSearch'
     }),
+    crossref: (track, runtime) => searchCrossref(track, { ...common, ...runtime }),
     europepmc: (track, runtime) => searchEuropePmc(track, { ...common, ...runtime }),
     clinicaltrials: (track, runtime) => searchClinicalTrials(track, { ...common, ...runtime }),
     jstage: (track, runtime) => searchJStage(track, { ...common, ...runtime })

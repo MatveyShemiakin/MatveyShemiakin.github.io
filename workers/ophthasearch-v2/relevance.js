@@ -1,4 +1,4 @@
-import { directComparisonEvidence, isNamedComparison } from './clinical-terms.js';
+import { directComparisonEvidence, isNamedComparison, mentions } from './clinical-terms.js';
 function normalizeText(value) {
   return String(value || '')
     .toLowerCase()
@@ -143,8 +143,15 @@ export function scoreMedicalRelevance(document = {}, intent = {}) {
   const condition = normalizeText(intent.condition);
   const domain = normalizeText(intent.domain);
   let score = 0;
+  const anterior = condition === 'anterior ischemic optic neuropathy';
+  const posterior = condition === 'posterior ischemic optic neuropathy';
+  const conditionMatch = anterior
+    ? /anterior isch[ae]*emic optic neuropathy|\bnaion\b|\baion\b|non.?arteritic isch[ae]*emic optic neuropathy/.test(text)
+    : posterior ? /posterior isch[ae]*emic optic neuropathy|\bpion\b/.test(text) : containsPhrase(text, condition);
+  if ((anterior || posterior) && !conditionMatch) return 0;
+  if ((anterior || posterior) && specificTerms(intent.interventions).length && !specificTerms(intent.interventions).some(term=>mentions(text,term))) return 0;
 
-  if (condition && containsPhrase(text, condition)) {
+  if (condition && conditionMatch) {
     score += 0.55;
   } else if (condition && domain && condition.includes(domain) && containsPhrase(text, domain)) {
     score += 0.15;
