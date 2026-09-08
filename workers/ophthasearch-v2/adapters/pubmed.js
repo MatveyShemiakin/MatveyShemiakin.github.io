@@ -64,7 +64,10 @@ function addNcbiIdentity(params, deps) {
 export async function search(track, deps = {}) {
   const fetchImpl = deps.fetchImpl || globalThis.fetch;
   if (typeof fetchImpl !== 'function') throw new Error('Fetch API is unavailable');
-  const query = clean(track?.query);
+  const terms = (track?.comparisonTerms || []).map(term => clean(term).replace(/"/g, ''));
+  const query = terms.length > 1
+    ? `${terms.map(term => `"${term}"[Title]`).join(' AND ')} AND ${clean(track.conditionTerm)} NOT combination*[Title]`
+    : clean(track?.query);
   if (!query) return { provider: 'pubmed', records: [], total: 0 };
 
   const searchParams = new URLSearchParams({ db: 'pubmed', term: query, retmode: 'json', retmax: String(deps.limit || 10) });

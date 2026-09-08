@@ -102,5 +102,11 @@ export function buildResearchPlan(intent = {}) {
   const primary = tracks.find(track => track.id === 'efficacy');
   primary.query = [condition, ...named].join(' ');
   if (!named.length) primary.query += ` ${treatment}`;
+  if (intent.question_type === 'comparison' && (intent.interventions || []).length && (intent.comparators || []).length) {
+    primary.comparisonTerms = named;
+    primary.conditionTerm = condition.includes('glaucoma') ? 'glaucoma' : condition;
+    // Europe PMC covers the secondary journal tracks; reserve NCBI for the primary question.
+    for (const track of tracks) if (track !== primary) track.sourceClasses = track.sourceClasses.filter(name => name !== 'pubmed');
+  }
   return tracks;
 }

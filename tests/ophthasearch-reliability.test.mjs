@@ -183,3 +183,16 @@ test('an abstract about A/B combination versus C cannot support A versus B',()=>
   const p=pack();p.sources[0].title='Comparative glaucoma therapy';p.sources[0].abstract_or_summary='Latanoprost/timolol was compared with bimatoprost in glaucoma.';
   assert.throws(()=>verifyClaimsAndCitations(draft('Латанопрост эффективнее тимолола.'),p),/comparison/);
 });
+
+const {search:searchEurope}=await import('../workers/ophthasearch-v2/adapters/europepmc.js');
+const {buildResearchPlan}=await import('../workers/ophthasearch-v2/research-planner.js');
+test('primary comparison retrieval searches named treatments in titles, not incidental full-text mentions',async()=>{
+  let actual;
+  await searchEurope(buildResearchPlan(intent).find(t=>t.id==='efficacy'),{fetchImpl:async url=>{actual=new URL(url).searchParams.get('query');return Response.json({resultList:{result:[]}});}});
+  assert.match(actual,/TITLE:"latanoprost"/);assert.match(actual,/TITLE:"timolol"/);
+});
+
+for (const title of ['Co-delivery of latanoprost and timolol for glaucoma', 'Additive effect of latanoprost and timolol', 'Latanoprost in glaucoma patients treated concomitantly with timolol', 'Effects of latanoprost and timolol: an ex vivo and in vitro study']) test(`excludes non-comparative evidence: ${title}`,()=>{
+  const p=pack();p.sources[0].title=title;
+  assert.throws(()=>verifyClaimsAndCitations(draft('Латанопрост эффективнее тимолола.'),p),/comparison/);
+});

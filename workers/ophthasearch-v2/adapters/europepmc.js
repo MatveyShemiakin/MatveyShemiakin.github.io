@@ -29,9 +29,12 @@ function normalize(record = {}) {
 export async function search(track, deps = {}) {
   const fetchImpl = deps.fetchImpl || globalThis.fetch;
   if (typeof fetchImpl !== 'function') throw new Error('Fetch API is unavailable');
-  const query = clean(track?.query);
+  const terms = (track?.comparisonTerms || []).map(term => clean(term).replace(/"/g, ''));
+  const query = terms.length > 1
+    ? `${terms.map(term => `TITLE:"${term}"`).join(' AND ')} AND ${clean(track.conditionTerm)} NOT TITLE:combination* sort_cited:y`
+    : clean(track?.query);
   if (!query) return { provider: 'europepmc', records: [], total: 0 };
-  const params = new URLSearchParams({ query, resultType: 'core', format: 'json', pageSize: String(deps.limit || 12) });
+  const params = new URLSearchParams({ query, resultType: 'core', format: 'json', pageSize: String(terms.length > 1 ? 20 : (deps.limit || 12)) });
   const response = await fetchImpl(`${SEARCH_URL}?${params}`, { headers: { Accept: 'application/json' }, signal: deps.signal });
   if (!response.ok) throw new Error(`Europe PMC HTTP ${response.status}`);
   const data = await response.json();

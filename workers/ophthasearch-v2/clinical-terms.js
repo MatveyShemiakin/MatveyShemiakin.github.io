@@ -53,7 +53,7 @@ export function directComparisonEvidence(source, intent) {
   const title = String(source.title || '');
   const abstract = String(source.abstract_or_summary || source.abstractText || '');
   // A fixed-combination study does not establish A versus B monotherapy.
-  if (/fixed.?combination|combination of|combined|комбинац/i.test(title)) return false;
+  if (/fixed.?combination|combination of|combined|co.?delivery|additive|concomitant|in vitro|ex vivo|комбинац/i.test(title)) return false;
   const opposing = text => {
     const parts = text.split(/\s+(?:versus|vs\.?|compared (?:with|to))\s+/i);
     if (parts.length !== 2) return null;
