@@ -1,0 +1,25 @@
+name: Sync clinical preview
+
+on:
+  push:
+    branches:
+      - agent/clinical-navigator-foundation
+
+permissions:
+  contents: write
+
+concurrency:
+  group: clinical-preview-sync
+  cancel-in-progress: true
+
+jobs:
+  sync-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout working branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update preview branch
+        run: git push origin HEAD:refs/heads/clinical-preview --force

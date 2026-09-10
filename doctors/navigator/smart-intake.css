@@ -1,0 +1,47 @@
+.recognized-facts-note,
+.smart-prefill-note {
+  flex-basis: 100%;
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 4px;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: 16px;
+  background: rgba(219, 234, 254, 0.54);
+  color: #334155;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.smart-prefill-note {
+  margin-bottom: 12px;
+}
+
+.recognized-facts-note strong,
+.smart-prefill-note strong {
+  color: #0f3d74;
+}
+
+.recognized-facts-note span {
+  display: block;
+  margin-top: 4px;
+  color: #64748b;
+}
+
+.recognized-facts-note button,
+.smart-prefill-note button {
+  margin-top: 9px;
+  padding: 7px 10px;
+  border: 1px solid rgba(15, 61, 116, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.75);
+  color: #0f3d74;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.chat-suggestions .suggestion-chip[hidden],
+.inline-chat-form label[hidden] {
+  display: none !important;
+}
