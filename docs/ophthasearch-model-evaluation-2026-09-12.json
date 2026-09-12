@@ -1,0 +1,1211 @@
+{
+  "runId": 34693642883,
+  "commit": "bb22b9a5acaed1e33335db6b8bfe8fa27ad4d3c9",
+  "note": "Single-sample screening with curated evidence. Outputs are untrusted model responses, not clinical advice.",
+  "rows": [
+    {
+      "caseId": "naion-conflicting",
+      "elapsedMs": 10829,
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "result": {
+        "draft": {
+          "alternatives": [
+            {
+              "citations": [],
+              "text": "В предоставленных данных нет информации о других методах лечения NAION."
+            }
+          ],
+          "arguments_against": [
+            {
+              "citations": [
+                "S2"
+              ],
+              "text": "В плацебо-контролируемом исследовании не было обнаружено значимых различий в амплитуде PERG, отклонении поля зрения или толщине ганглионарных клеток сетчатки."
+            }
+          ],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина при неартериитной передней ишемической оптической нейропатии (NAION) не доказана; данные противоречивы, так как небольшое пилотное исследование показало потенциальную пользу (S1), в то время как плацебо-контролируемое исследование не выявило преимуществ перед плацебо (S2).",
+          "clinical_interpretation": "Результаты исследований демонстрируют несоответствие: пилотное исследование (S1) указывает на улучшение функциональных показателей и сохранение толщины слоя нервных волокон, однако более строгое двойное слепое исследование (S2) не подтвердило превосходства цитиколина над плацебо в отношении электрофизиологических и структурных параметров сетчатки.",
+          "confidence": "low",
+          "management": [],
+          "schemaVersion": "2.0",
+          "uncertainties": [
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Малый размер выборок в обоих исследованиях ограничивает возможность обобщения результатов."
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Отсутствие плацебо-контроля в пилотном исследовании (S1) повышает риск систематической ошибки."
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 484,
+          "neurons": 21.14545440673828,
+          "prompt_tokens": 874,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "total_tokens": 1358
+        },
+        "validationError": null,
+        "verified": {
+          "alternatives": [],
+          "arguments_against": [
+            {
+              "citations": [
+                "S2"
+              ],
+              "text": "В плацебо-контролируемом исследовании не было обнаружено значимых различий в амплитуде PERG, отклонении поля зрения или толщине ганглионарных клеток сетчатки."
+            }
+          ],
+          "arguments_for": [],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина при неартериитной передней ишемической оптической нейропатии (NAION) не доказана; данные противоречивы, так как небольшое пилотное исследование показало потенциальную пользу (S1), в то время как плацебо-контролируемое исследование не выявило преимуществ перед плацебо (S2).",
+          "clinical_interpretation": "Результаты исследований демонстрируют несоответствие: пилотное исследование (S1) указывает на улучшение функциональных показателей и сохранение толщины слоя нервных волокон, однако более строгое двойное слепое исследование (S2) не подтвердило превосходства цитиколина над плацебо в отношении электрофизиологических и структурных параметров сетчатки.",
+          "confidence": "low",
+          "guideline_positions": [],
+          "management": [],
+          "schemaVersion": "2.0",
+          "sources": [
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.1371/journal.pone.0220435",
+              "doi": "10.1371/journal.pone.0220435",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "pilot-study",
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S1",
+              "source_type": "journal_article",
+              "title": "Citicoline for NAION: Parisi et al., randomized pilot (2019)",
+              "year": null
+            },
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.35749/journal.v48i1.100495",
+              "doi": "10.35749/journal.v48i1.100495",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S2",
+              "source_type": "journal_article",
+              "title": "Citicoline for chronic NAION: Chia et al., placebo-controlled trial (2022)",
+              "year": null
+            }
+          ],
+          "uncertainties": [
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Малый размер выборок в обоих исследованиях ограничивает возможность обобщения результатов."
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Отсутствие плацебо-контроля в пилотном исследовании (S1) повышает риск систематической ошибки."
+            }
+          ]
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "caseId": "glaucoma-comparison",
+      "elapsedMs": 9363,
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "result": {
+        "draft": {
+          "alternatives": [
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Другие гипотензивные препараты могут рассматриваться в зависимости от профиля безопасности пациента."
+            }
+          ],
+          "arguments_against": [
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Тимолол может вызывать снижение частоты сердечных сокращений."
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Латанопрост чаще вызывает пигментацию радужки и гиперемию конъюнктивы."
+            }
+          ],
+          "bottom_line_citations": [
+            "S1"
+          ],
+          "clinical_bottom_line": "Согласно метаанализу рандомизированных исследований, латанопрост снижает ВГД эффективнее, чем тимолол, однако это не является доказательством превосходства в долгосрочном сохранении зрения.",
+          "clinical_interpretation": "Латанопрост демонстрирует более выраженный гипотензивный эффект, но имеет специфический профиль побочных эффектов со стороны переднего отрезка глаза, в то время как тимолол несет риск системных кардиоваскулярных эффектов.",
+          "confidence": "high",
+          "management": [],
+          "schemaVersion": "2.0",
+          "uncertainties": [
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Недостаточно данных для подтверждения превосходства в долгосрочном сохранении зрительных функций."
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 404,
+          "neurons": 17.600000381469727,
+          "prompt_tokens": 724,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "total_tokens": 1128
+        },
+        "validationError": null,
+        "verified": {
+          "alternatives": [
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Другие гипотензивные препараты могут рассматриваться в зависимости от профиля безопасности пациента."
+            }
+          ],
+          "arguments_against": [
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Тимолол может вызывать снижение частоты сердечных сокращений."
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Латанопрост чаще вызывает пигментацию радужки и гиперемию конъюнктивы."
+            }
+          ],
+          "arguments_for": [],
+          "bottom_line_citations": [
+            "S1"
+          ],
+          "clinical_bottom_line": "Согласно метаанализу рандомизированных исследований, латанопрост снижает ВГД эффективнее, чем тимолол, однако это не является доказательством превосходства в долгосрочном сохранении зрения.",
+          "clinical_interpretation": "Латанопрост демонстрирует более выраженный гипотензивный эффект, но имеет специфический профиль побочных эффектов со стороны переднего отрезка глаза, в то время как тимолол несет риск системных кардиоваскулярных эффектов.",
+          "confidence": "high",
+          "guideline_positions": [],
+          "management": [],
+          "schemaVersion": "2.0",
+          "sources": [
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.1136/bjo.85.8.983",
+              "doi": "10.1136/bjo.85.8.983",
+              "evidence": {
+                "group": "systematic",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [],
+              "retrieved_from": [],
+              "source_id": "S1",
+              "source_type": "journal_article",
+              "title": "Latanoprost versus timolol: Zhang et al., meta-analysis (2001)",
+              "year": null
+            }
+          ],
+          "uncertainties": [
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Недостаточно данных для подтверждения превосходства в долгосрочном сохранении зрительных функций."
+            }
+          ]
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "caseId": "posterior-evidence-gap",
+      "elapsedMs": 8622,
+      "model": "@cf/google/gemma-4-26b-a4b-it",
+      "result": {
+        "draft": {
+          "alternatives": [
+            {
+              "citations": [],
+              "text": "В предоставленном наборе данных отсутствуют альтернативные методы лечения для задней ишемической оптической нейропатии."
+            }
+          ],
+          "arguments_against": [
+            {
+              "citations": [
+                "S2"
+              ],
+              "text": "В плацебо-контролируемом исследовании при хронической форме NAION не было выявлено значимых различий в амплитуде PERG, отклонении поля зрения или толщине ганглионарных клеток сетчатки."
+            }
+          ],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина именно при задней ишемической оптической нейропатии не доказана; имеющиеся данные ограничены исследованиями передней формы (NAION), которые демонстрируют противоречивые или статистически незначимые результаты.",
+          "clinical_interpretation": "Представленные данные касаются исключительно передней ишемической оптической нейропатии (NAION). Пилотное исследование (S1) показало потенциальное улучшение функций и сохранность слоя нервных волокон при NAION, однако оно не было плацебо-контролируемым. В то же время двойное слепое плацебо-контролируемое исследование (S2) не подтвердило превосходства цитиколина над плацебо при хронической NAION по ключевым параметрам (PERG, поле зрения, толщина ГКС). Прямых доказательств применимости препарата именно к задней форме нейропатии в предоставленных источниках нет.",
+          "confidence": "low",
+          "management": [],
+          "schemaVersion": "2.0",
+          "uncertainties": [
+            {
+              "citations": [],
+              "text": "Отсутствуют данные по эффективности цитиколина при задней ишемической оптической нейропатии."
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Результаты пилотного исследования (S1) требуют подтверждения в крупномасштабных плацебо-контролируемых испытаниях."
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 538,
+          "neurons": 22.68181800842285,
+          "prompt_tokens": 881,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "total_tokens": 1419
+        },
+        "validationError": null,
+        "verified": {
+          "alternatives": [],
+          "arguments_against": [
+            {
+              "citations": [
+                "S2"
+              ],
+              "text": "В плацебо-контролируемом исследовании при хронической форме NAION не было выявлено значимых различий в амплитуде PERG, отклонении поля зрения или толщине ганглионарных клеток сетчатки."
+            }
+          ],
+          "arguments_for": [],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина именно при задней ишемической оптической нейропатии не доказана; имеющиеся данные ограничены исследованиями передней формы (NAION), которые демонстрируют противоречивые или статистически незначимые результаты.",
+          "clinical_interpretation": "Представленные данные касаются исключительно передней ишемической оптической нейропатии (NAION). Пилотное исследование (S1) показало потенциальное улучшение функций и сохранность слоя нервных волокон при NAION, однако оно не было плацебо-контролируемым. В то же время двойное слепое плацебо-контролируемое исследование (S2) не подтвердило превосходства цитиколина над плацебо при хронической NAION по ключевым параметрам (PERG, поле зрения, толщина ГКС). Прямых доказательств применимости препарата именно к задней форме нейропатии в предоставленных источниках нет.",
+          "confidence": "low",
+          "guideline_positions": [],
+          "management": [],
+          "schemaVersion": "2.0",
+          "sources": [
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.1371/journal.pone.0220435",
+              "doi": "10.1371/journal.pone.0220435",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "pilot-study",
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S1",
+              "source_type": "journal_article",
+              "title": "Citicoline for NAION: Parisi et al., randomized pilot (2019)",
+              "year": null
+            },
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.35749/journal.v48i1.100495",
+              "doi": "10.35749/journal.v48i1.100495",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S2",
+              "source_type": "journal_article",
+              "title": "Citicoline for chronic NAION: Chia et al., placebo-controlled trial (2022)",
+              "year": null
+            }
+          ],
+          "uncertainties": [
+            {
+              "citations": [],
+              "text": "Отсутствуют данные по эффективности цитиколина при задней ишемической оптической нейропатии."
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Результаты пилотного исследования (S1) требуют подтверждения в крупномасштабных плацебо-контролируемых испытаниях."
+            }
+          ]
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "caseId": "naion-conflicting",
+      "elapsedMs": 9122,
+      "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+      "result": {
+        "draft": {
+          "alternatives": [],
+          "arguments_against": [],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина при неартериитной передней ишемической оптической нейропатии (NAION) не доказана из-за противоречивых данных и ограниченных объемов исследований.",
+          "clinical_interpretation": "Данные из двух малых исследований показывают противоречивые результаты: одно наблюдение за улучшением функциональных показателей, другое - отсутствие значимой разницы по сравнению с плацебо. Необходимы более крупные контролируемые испытания для подтверждения потенциальной пользы.",
+          "confidence": "low",
+          "management": [],
+          "schemaVersion": "2.0",
+          "uncertainties": [
+            {
+              "citations": [],
+              "text": "Недостаточно доказательств для рекомендации цитиколина как стандартной терапии NAION из-за малого размера выборки и разногласий между исследованиями"
+            },
+            {
+              "citations": [],
+              "text": "Отсутствие плацебо-контроля в первом исследовании ограничивает интерпретацию результатов"
+            },
+            {
+              "citations": [],
+              "text": "Недостаточная мощность второго исследования для выявления клинически значимых различий"
+            },
+            {
+              "citations": [],
+              "text": "Нет данных о долгосрочной эффективности и безопасности цитиколина при NAION"
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 741,
+          "neurons": 26.59131622314453,
+          "prompt_tokens": 867,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "total_tokens": 1608
+        },
+        "validationError": null,
+        "verified": {
+          "alternatives": [],
+          "arguments_against": [],
+          "arguments_for": [],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина при неартериитной передней ишемической оптической нейропатии (NAION) не доказана из-за противоречивых данных и ограниченных объемов исследований.",
+          "clinical_interpretation": "Данные из двух малых исследований показывают противоречивые результаты: одно наблюдение за улучшением функциональных показателей, другое - отсутствие значимой разницы по сравнению с плацебо. Необходимы более крупные контролируемые испытания для подтверждения потенциальной пользы.",
+          "confidence": "low",
+          "guideline_positions": [],
+          "management": [],
+          "schemaVersion": "2.0",
+          "sources": [
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.1371/journal.pone.0220435",
+              "doi": "10.1371/journal.pone.0220435",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "pilot-study",
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S1",
+              "source_type": "journal_article",
+              "title": "Citicoline for NAION: Parisi et al., randomized pilot (2019)",
+              "year": null
+            },
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.35749/journal.v48i1.100495",
+              "doi": "10.35749/journal.v48i1.100495",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S2",
+              "source_type": "journal_article",
+              "title": "Citicoline for chronic NAION: Chia et al., placebo-controlled trial (2022)",
+              "year": null
+            }
+          ],
+          "uncertainties": [
+            {
+              "citations": [],
+              "text": "Недостаточно доказательств для рекомендации цитиколина как стандартной терапии NAION из-за малого размера выборки и разногласий между исследованиями"
+            },
+            {
+              "citations": [],
+              "text": "Отсутствие плацебо-контроля в первом исследовании ограничивает интерпретацию результатов"
+            },
+            {
+              "citations": [],
+              "text": "Недостаточная мощность второго исследования для выявления клинически значимых различий"
+            },
+            {
+              "citations": [],
+              "text": "Нет данных о долгосрочной эффективности и безопасности цитиколина при NAION"
+            }
+          ]
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "caseId": "glaucoma-comparison",
+      "elapsedMs": 11494,
+      "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+      "result": {
+        "draft": {
+          "alternatives": [],
+          "arguments_against": [],
+          "bottom_line_citations": [
+            "S1"
+          ],
+          "clinical_bottom_line": "Латанопрост более эффективен в снижении ВГД по сравнению с тимололом, но с ограничениями: риск изменения цвета радужной оболочки и гиперемии у латанопроста, снижение ЧСС у тимолола. Долгосрочная защита зрения не доказана.",
+          "clinical_interpretation": "",
+          "confidence": "moderate",
+          "management": [
+            {
+              "action": "Начать терапию латанопростом для максимального снижения ВГД в первом приоритете у пациентов без противопоказаний",
+              "change_if": "При наличии бронхоспазма, брадикардии или сердечной недостаточности перейти на тимолол",
+              "citations": [
+                "S1"
+              ],
+              "dose": "",
+              "drug_or_procedure": "latanoprost",
+              "duration": "",
+              "frequency": "раз в сутки",
+              "monitoring": "Контроль ВГД и офтальмоскопия для выявления изменений радужной оболочки",
+              "step": 1
+            },
+            {
+              "action": "Рассмотреть тимолол при противопоказаниях к латанопросту или при необходимости снижения ЧСС",
+              "change_if": "Если ВГД не контролируется, добавить альтернативные препараты (например, бета-блокаторы, агонисты альфа-2, ингибиторы карбоангидразы)",
+              "citations": [
+                "S1"
+              ],
+              "dose": "",
+              "drug_or_procedure": "timolol",
+              "duration": "",
+              "frequency": "раз в сутки",
+              "monitoring": "Контроль ЧСС и АД",
+              "step": 2
+            }
+          ],
+          "schemaVersion": "2.0",
+          "uncertainties": [
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Долгосрочные данные о защите зрения отсутствуют, только краткосрочное снижение ВГД"
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Ограниченные данные о безопасности у пациентов с сердечно-сосудистыми заболеваниями"
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Не изучены взаимодействия с другими препаратами в комбинации"
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Исследования 2001 года, актуальность современных данных не проверена"
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 1029,
+          "neurons": 34.69286346435547,
+          "prompt_tokens": 721,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "total_tokens": 1750
+        },
+        "validationError": null,
+        "verified": {
+          "alternatives": [],
+          "arguments_against": [],
+          "arguments_for": [],
+          "bottom_line_citations": [
+            "S1"
+          ],
+          "clinical_bottom_line": "Латанопрост более эффективен в снижении ВГД по сравнению с тимололом, но с ограничениями: риск изменения цвета радужной оболочки и гиперемии у латанопроста, снижение ЧСС у тимолола. Долгосрочная защита зрения не доказана.",
+          "clinical_interpretation": "",
+          "confidence": "moderate",
+          "guideline_positions": [],
+          "management": [
+            {
+              "action": "Начать терапию латанопростом для максимального снижения ВГД в первом приоритете у пациентов без противопоказаний",
+              "change_if": "При наличии бронхоспазма, брадикардии или сердечной недостаточности перейти на тимолол",
+              "citations": [
+                "S1"
+              ],
+              "dose": "",
+              "drug_or_procedure": "latanoprost",
+              "duration": "",
+              "frequency": "",
+              "monitoring": "Контроль ВГД и офтальмоскопия для выявления изменений радужной оболочки",
+              "step": 1
+            },
+            {
+              "action": "Рассмотреть тимолол при противопоказаниях к латанопросту или при необходимости снижения ЧСС",
+              "change_if": "Если ВГД не контролируется, добавить альтернативные препараты (например, бета-блокаторы, агонисты альфа-2, ингибиторы карбоангидразы)",
+              "citations": [
+                "S1"
+              ],
+              "dose": "",
+              "drug_or_procedure": "timolol",
+              "duration": "",
+              "frequency": "",
+              "monitoring": "Контроль ЧСС и АД",
+              "step": 2
+            }
+          ],
+          "schemaVersion": "2.0",
+          "sources": [
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.1136/bjo.85.8.983",
+              "doi": "10.1136/bjo.85.8.983",
+              "evidence": {
+                "group": "systematic",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [],
+              "retrieved_from": [],
+              "source_id": "S1",
+              "source_type": "journal_article",
+              "title": "Latanoprost versus timolol: Zhang et al., meta-analysis (2001)",
+              "year": null
+            }
+          ],
+          "uncertainties": [
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Долгосрочные данные о защите зрения отсутствуют, только краткосрочное снижение ВГД"
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Ограниченные данные о безопасности у пациентов с сердечно-сосудистыми заболеваниями"
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Не изучены взаимодействия с другими препаратами в комбинации"
+            },
+            {
+              "citations": [
+                "S1"
+              ],
+              "text": "Исследования 2001 года, актуальность современных данных не проверена"
+            }
+          ]
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "caseId": "posterior-evidence-gap",
+      "elapsedMs": 5638,
+      "model": "@cf/qwen/qwen3-30b-a3b-fp8",
+      "result": {
+        "draft": {
+          "alternatives": [],
+          "arguments_against": [],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина при задней ишемической оптической нейропатии (PION) не доказана. Исследования показали результаты только при передней ишемической оптической нейропатии (NAION), и данные о NAION не могут быть напрямую применены к PION.",
+          "clinical_interpretation": "Данные о цитиколине ограничены передней формой ИОН. Нет прямых доказательств его эффективности при PION. Исследования на NAION были небольшими и пилотными, без плацебо-контроля в первом случае и без значимых различий во втором.",
+          "confidence": "low",
+          "management": [],
+          "schemaVersion": "2.0",
+          "uncertainties": [
+            {
+              "citations": [],
+              "text": "Нет прямых данных о цитиколине при PION. Исследования проводились только на NAION."
+            },
+            {
+              "citations": [],
+              "text": "Пилотные и малые образцы ограничивают выводы. Второе исследование не показало значимой эффективности по основным конечным точкам."
+            },
+            {
+              "citations": [],
+              "text": "Неясно, применимы ли результаты на NAION к PION из-за различий в патофизиологии и локализации поражения."
+            },
+            {
+              "citations": [],
+              "text": "Нужны крупные плацебо-контролируемые испытания для оценки цитиколина при PION."
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 687,
+          "neurons": 24.982675552368164,
+          "prompt_tokens": 875,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "total_tokens": 1562
+        },
+        "validationError": null,
+        "verified": {
+          "alternatives": [],
+          "arguments_against": [],
+          "arguments_for": [],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина при задней ишемической оптической нейропатии (PION) не доказана. Исследования показали результаты только при передней ишемической оптической нейропатии (NAION), и данные о NAION не могут быть напрямую применены к PION.",
+          "clinical_interpretation": "Данные о цитиколине ограничены передней формой ИОН. Нет прямых доказательств его эффективности при PION. Исследования на NAION были небольшими и пилотными, без плацебо-контроля в первом случае и без значимых различий во втором.",
+          "confidence": "low",
+          "guideline_positions": [],
+          "management": [],
+          "schemaVersion": "2.0",
+          "sources": [
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.1371/journal.pone.0220435",
+              "doi": "10.1371/journal.pone.0220435",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "pilot-study",
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S1",
+              "source_type": "journal_article",
+              "title": "Citicoline for NAION: Parisi et al., randomized pilot (2019)",
+              "year": null
+            },
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.35749/journal.v48i1.100495",
+              "doi": "10.35749/journal.v48i1.100495",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S2",
+              "source_type": "journal_article",
+              "title": "Citicoline for chronic NAION: Chia et al., placebo-controlled trial (2022)",
+              "year": null
+            }
+          ],
+          "uncertainties": [
+            {
+              "citations": [],
+              "text": "Нет прямых данных о цитиколине при PION. Исследования проводились только на NAION."
+            },
+            {
+              "citations": [],
+              "text": "Пилотные и малые образцы ограничивают выводы. Второе исследование не показало значимой эффективности по основным конечным точкам."
+            },
+            {
+              "citations": [],
+              "text": "Неясно, применимы ли результаты на NAION к PION из-за различий в патофизиологии и локализации поражения."
+            },
+            {
+              "citations": [],
+              "text": "Нужны крупные плацебо-контролируемые испытания для оценки цитиколина при PION."
+            }
+          ]
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "caseId": "naion-conflicting",
+      "elapsedMs": 20795,
+      "model": "@cf/openai/gpt-oss-120b",
+      "result": {
+        "draft": {
+          "alternatives": [
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Наблюдение и контроль сосудистых факторов риска (гипертензия, дислипидемия, диабет) остаются основной стратегией при NAION."
+            }
+          ],
+          "arguments_against": [],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина при неартериитной передней ишемической оптической нейропатии не доказана.",
+          "clinical_interpretation": "Два небольших рандомизированных исследования дают противоречивые результаты: пилотное исследование (S1) показало улучшение функциональных показателей и сохранение толщины нервных волокон по сравнению с отсутствием лечения, однако оно не было плацебо‑контролируемым и включало лишь 40 пациентов. Позднее двойное слепое плацебо‑контролируемое исследование (S2) с 34 пациентами не обнаружило статистически значимых различий в PERG, полях зрения и толщине ганглионарных клеток после 60‑дневного курса. Оба исследования ограничены небольшим размером выборки, короткой продолжительностью наблюдения и отсутствием данных о длительном клиническом эффекте.",
+          "confidence": "low",
+          "management": [],
+          "schemaVersion": "2.0",
+          "uncertainties": [
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Отсутствие данных о длительном влиянии цитиколина на зрительную функцию и структуру зрительного нерва."
+            },
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Неясна оптимальная дозировка, режим и длительность терапии."
+            },
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Неизвестно, будет ли эффект различаться между острой и хронической фазой NAION."
+            },
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Не проведены крупные многоцентровые рандомизированные контролируемые исследования."
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 902,
+          "neurons": 90.16799926757812,
+          "prompt_tokens": 901,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "total_tokens": 1803
+        },
+        "validationError": null,
+        "verified": {
+          "alternatives": [
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Наблюдение и контроль сосудистых факторов риска (гипертензия, дислипидемия, диабет) остаются основной стратегией при NAION."
+            }
+          ],
+          "arguments_against": [],
+          "arguments_for": [],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина при неартериитной передней ишемической оптической нейропатии не доказана.",
+          "clinical_interpretation": "Два небольших рандомизированных исследования дают противоречивые результаты: пилотное исследование (S1) показало улучшение функциональных показателей и сохранение толщины нервных волокон по сравнению с отсутствием лечения, однако оно не было плацебо‑контролируемым и включало лишь 40 пациентов. Позднее двойное слепое плацебо‑контролируемое исследование (S2) с 34 пациентами не обнаружило статистически значимых различий в PERG, полях зрения и толщине ганглионарных клеток после 60‑дневного курса. Оба исследования ограничены небольшим размером выборки, короткой продолжительностью наблюдения и отсутствием данных о длительном клиническом эффекте.",
+          "confidence": "low",
+          "guideline_positions": [],
+          "management": [],
+          "schemaVersion": "2.0",
+          "sources": [
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.1371/journal.pone.0220435",
+              "doi": "10.1371/journal.pone.0220435",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "pilot-study",
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S1",
+              "source_type": "journal_article",
+              "title": "Citicoline for NAION: Parisi et al., randomized pilot (2019)",
+              "year": null
+            },
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.35749/journal.v48i1.100495",
+              "doi": "10.35749/journal.v48i1.100495",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S2",
+              "source_type": "journal_article",
+              "title": "Citicoline for chronic NAION: Chia et al., placebo-controlled trial (2022)",
+              "year": null
+            }
+          ],
+          "uncertainties": [
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Отсутствие данных о длительном влиянии цитиколина на зрительную функцию и структуру зрительного нерва."
+            },
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Неясна оптимальная дозировка, режим и длительность терапии."
+            },
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Неизвестно, будет ли эффект различаться между острой и хронической фазой NAION."
+            },
+            {
+              "citations": [
+                "S1",
+                "S2"
+              ],
+              "text": "Не проведены крупные многоцентровые рандомизированные контролируемые исследования."
+            }
+          ]
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "caseId": "glaucoma-comparison",
+      "elapsedMs": 25084,
+      "model": "@cf/openai/gpt-oss-120b",
+      "result": {
+        "draft": {
+          "alternatives": [
+            {
+              "citations": [],
+              "text": "Комбинация латанопроста с бета‑блокатором при недостаточном контроле IOP."
+            },
+            {
+              "citations": [],
+              "text": "Другие простагландины (биматопрост, травопрост) или препараты иных классов (альфа‑агонисты, ингибиторы карбоангидразы)."
+            }
+          ],
+          "arguments_against": [],
+          "bottom_line_citations": [
+            "S1"
+          ],
+          "clinical_bottom_line": "Метанализ 11 РКИ (1256 пациентов) показывает, что латанопрост снижает внутриглазное давление сильнее, чем тимолол; однако данные о влиянии на прогрессирование зрительного поля отсутствуют, поэтому нельзя утверждать, что латанопрост лучше предотвращает ВГД.",
+          "clinical_interpretation": "Снижение IOP является признанным фактором замедления прогрессии открытоугольной глаукомы, но прямая связь между более сильным снижением IOP латанопростом и замедлением потери полей зрения не подтверждена в представленных исследованиях.",
+          "confidence": "moderate",
+          "management": [],
+          "schemaVersion": "2.0",
+          "uncertainties": [
+            {
+              "citations": [],
+              "text": "Связь более сильного снижения IOP с реальным замедлением прогрессии зрительного поля при латанопросте."
+            },
+            {
+              "citations": [],
+              "text": "Долгосрочная эффективность и безопасность в разных популяциях."
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 1081,
+          "neurons": 97.63165283203125,
+          "prompt_tokens": 752,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "total_tokens": 1833
+        },
+        "validationError": null,
+        "verified": {
+          "alternatives": [],
+          "arguments_against": [],
+          "arguments_for": [],
+          "bottom_line_citations": [
+            "S1"
+          ],
+          "clinical_bottom_line": "Метанализ 11 РКИ (1256 пациентов) показывает, что латанопрост снижает внутриглазное давление сильнее, чем тимолол; однако данные о влиянии на прогрессирование зрительного поля отсутствуют, поэтому нельзя утверждать, что латанопрост лучше предотвращает ВГД.",
+          "clinical_interpretation": "Снижение IOP является признанным фактором замедления прогрессии открытоугольной глаукомы, но прямая связь между более сильным снижением IOP латанопростом и замедлением потери полей зрения не подтверждена в представленных исследованиях.",
+          "confidence": "moderate",
+          "guideline_positions": [],
+          "management": [],
+          "schemaVersion": "2.0",
+          "sources": [
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.1136/bjo.85.8.983",
+              "doi": "10.1136/bjo.85.8.983",
+              "evidence": {
+                "group": "systematic",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [],
+              "retrieved_from": [],
+              "source_id": "S1",
+              "source_type": "journal_article",
+              "title": "Latanoprost versus timolol: Zhang et al., meta-analysis (2001)",
+              "year": null
+            }
+          ],
+          "uncertainties": [
+            {
+              "citations": [],
+              "text": "Связь более сильного снижения IOP с реальным замедлением прогрессии зрительного поля при латанопросте."
+            },
+            {
+              "citations": [],
+              "text": "Долгосрочная эффективность и безопасность в разных популяциях."
+            }
+          ]
+        }
+      },
+      "status": "ok"
+    },
+    {
+      "caseId": "posterior-evidence-gap",
+      "elapsedMs": 11780,
+      "model": "@cf/openai/gpt-oss-120b",
+      "result": {
+        "draft": {
+          "alternatives": [
+            {
+              "citations": [],
+              "text": "Поддержка зрительной функции при задней ишемической оптической нейропатии ограничивается наблюдением, контролем сосудистых факторов риска и, при необходимости, лечением сопутствующих заболеваний; специфической доказанной терапии нет."
+            }
+          ],
+          "arguments_against": [],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина при задней ишемической оптической нейропатии не доказана; существующие исследования оценивают только переднюю форму (NAION) и не могут быть напрямую перенесены.",
+          "clinical_interpretation": "Данные из рандомизированных пилотных и небольших двойных слепых исследований показывают некоторые улучшения при передней ишемической оптической нейропатии, однако они не охватывают заднюю форму. Поэтому нельзя утверждать о пользе цитиколина при задней ИОН.",
+          "confidence": "low",
+          "management": [],
+          "schemaVersion": "2.0",
+          "uncertainties": [
+            {
+              "citations": [],
+              "text": "Отсутствие рандомизированных контролируемых исследований, специально направленных на заднюю ишемическую оптическую нейропатию."
+            }
+          ]
+        },
+        "usage": {
+          "completion_tokens": 473,
+          "neurons": 61.10891342163086,
+          "prompt_tokens": 907,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "total_tokens": 1380
+        },
+        "validationError": null,
+        "verified": {
+          "alternatives": [],
+          "arguments_against": [],
+          "arguments_for": [],
+          "bottom_line_citations": [
+            "S1",
+            "S2"
+          ],
+          "clinical_bottom_line": "Эффективность цитиколина при задней ишемической оптической нейропатии не доказана; существующие исследования оценивают только переднюю форму (NAION) и не могут быть напрямую перенесены.",
+          "clinical_interpretation": "Данные из рандомизированных пилотных и небольших двойных слепых исследований показывают некоторые улучшения при передней ишемической оптической нейропатии, однако они не охватывают заднюю форму. Поэтому нельзя утверждать о пользе цитиколина при задней ИОН.",
+          "confidence": "low",
+          "guideline_positions": [],
+          "management": [],
+          "schemaVersion": "2.0",
+          "sources": [
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.1371/journal.pone.0220435",
+              "doi": "10.1371/journal.pone.0220435",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "pilot-study",
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S1",
+              "source_type": "journal_article",
+              "title": "Citicoline for NAION: Parisi et al., randomized pilot (2019)",
+              "year": null
+            },
+            {
+              "authors": [],
+              "canonical_url": "https://doi.org/10.35749/journal.v48i1.100495",
+              "doi": "10.35749/journal.v48i1.100495",
+              "evidence": {
+                "group": "rct",
+                "useForEfficacy": true
+              },
+              "guideline_version": null,
+              "journal_or_body": "",
+              "nct": "",
+              "pmcid": "",
+              "pmid": "",
+              "quality_flags": [
+                "small-sample"
+              ],
+              "retrieved_from": [],
+              "source_id": "S2",
+              "source_type": "journal_article",
+              "title": "Citicoline for chronic NAION: Chia et al., placebo-controlled trial (2022)",
+              "year": null
+            }
+          ],
+          "uncertainties": [
+            {
+              "citations": [],
+              "text": "Отсутствие рандомизированных контролируемых исследований, специально направленных на заднюю ишемическую оптическую нейропатию."
+            }
+          ]
+        }
+      },
+      "status": "ok"
+    }
+  ]
+}
