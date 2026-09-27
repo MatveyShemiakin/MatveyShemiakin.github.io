@@ -30,11 +30,11 @@
     `<img src="${src}" alt="${alt}" loading="${eager ? 'eager' : 'lazy'}" decoding="async"${eager ? ' fetchpriority="high"' : ''}>`;
 
   const statsData = ru
-    ? [['15', 'статей'], ['17', 'докладов'], ['4', 'патента'], ['1', 'свидетельство на ПО']]
-    : [['15', 'articles'], ['17', 'presentations'], ['4', 'patents'], ['1', 'software certificate']];
+    ? [['16', 'статей'], ['18', 'докладов'], ['4', 'патента'], ['1', 'свидетельство на ПО']]
+    : [['16', 'articles'], ['18', 'presentations'], ['4', 'patents'], ['1', 'software certificate']];
 
   const stats = statsData
-    .map(([value, label]) => `<div class="science-fact"><strong>${value}</strong><span>${label}</span></div>`)
+    .map(([value, label]) => `<div class="science-fact"><strong data-science-count="${value}">${value}</strong><span>${label}</span></div>`)
     .join('');
 
   const conferenceImages = [
@@ -191,4 +191,41 @@
       </div>
     </div>
   </div>`;
+
+  const counters = Array.from(target.querySelectorAll('[data-science-count]'));
+  const facts = target.querySelector('.science-facts');
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const showFinalValues = () => {
+    counters.forEach((counter) => {
+      counter.textContent = counter.dataset.scienceCount;
+    });
+  };
+
+  const runCounters = () => {
+    const duration = 1050;
+    counters.forEach((counter) => {
+      const endValue = Number(counter.dataset.scienceCount) || 0;
+      const startTime = performance.now();
+      const tick = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        counter.textContent = String(Math.round(endValue * eased));
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  };
+
+  if (!facts || reducedMotion || !('IntersectionObserver' in window)) {
+    showFinalValues();
+  } else {
+    counters.forEach((counter) => { counter.textContent = '0'; });
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.28)) return;
+      observer.disconnect();
+      runCounters();
+    }, { threshold: [0.28, 0.5] });
+    observer.observe(facts);
+  }
 })();
