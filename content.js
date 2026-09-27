@@ -150,16 +150,20 @@ window.SITE_CONTENT = {
       "intro": "Научная работа посвящена трансплантации роговицы, осложнённой хирургии переднего отрезка глаза и организации офтальмологической помощи.",
       "metrics": [
         {
-          "value": "12",
+          "value": "16",
           "label": "статей в научных журналах"
         },
         {
-          "value": "3",
+          "value": "18",
+          "label": "научных докладов"
+        },
+        {
+          "value": "4",
           "label": "патента Российской Федерации"
         },
         {
           "value": "1",
-          "label": "глава в международном издании"
+          "label": "свидетельство на ПО"
         }
       ],
       "publications": [
@@ -332,16 +336,20 @@ window.SITE_CONTENT = {
       "intro": "My research focuses on corneal transplantation, complex anterior segment surgery, and the organization of ophthalmic care.",
       "metrics": [
         {
-          "value": "12",
+          "value": "16",
           "label": "peer-reviewed journal articles"
         },
         {
-          "value": "3",
+          "value": "18",
+          "label": "scientific presentations"
+        },
+        {
+          "value": "4",
           "label": "Russian Federation patents"
         },
         {
           "value": "1",
-          "label": "chapter in an international volume"
+          "label": "software certificate"
         }
       ],
       "publications": [
