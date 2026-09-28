@@ -28,7 +28,7 @@ def inject_assets(text: str) -> str:
 def main() -> None:
     changed = 0
     for path in ROOT.rglob('*.html'):
-        if '.git' in path.parts:
+        if '.git' in path.parts or path.relative_to(ROOT).parts[0] == 'logbook':
             continue
         original = path.read_text(encoding='utf-8')
         updated = inject_assets(original)

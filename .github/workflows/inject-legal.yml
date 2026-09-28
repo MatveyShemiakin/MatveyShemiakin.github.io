@@ -79,6 +79,7 @@ jobs:
       - run: python -m unittest tests/test_patient_updates_inject.py
       - run: python -m unittest tests/test_patient_consultation_cta.py
       - run: python -m unittest tests/test_site_mega_nav.py
+      - run: python -m unittest tests/test_logbook_injection_isolation.py
       - run: node --check analytics.js
       - run: node tests/test_analytics_events.mjs
       - run: node --check for-doctors/doctors-updates.js
