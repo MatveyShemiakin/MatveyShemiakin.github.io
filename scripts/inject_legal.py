@@ -17,7 +17,7 @@ PROFESSIONAL_TERMS = {
 changed = []
 for path in ROOT.rglob('*.html'):
     relative = path.relative_to(ROOT)
-    if any(part.startswith('.') for part in relative.parts):
+    if any(part.startswith('.') for part in relative.parts) or relative.parts[0] == 'logbook':
         continue
 
     text = path.read_text(encoding='utf-8')
