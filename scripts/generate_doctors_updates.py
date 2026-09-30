@@ -14,7 +14,7 @@ MANIFEST_PATH = ROOT / 'for-doctors' / 'updates-manifest.json'
 META_PATH = ROOT / 'for-doctors' / 'professional-meta.json'
 DATE_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 TOPIC_RE = re.compile(r'^[a-z0-9-]+$')
-SERVICE_SLUGS = {'updates'}
+SERVICE_SLUGS = {'simple-questions', 'updates'}
 
 
 def _read(path: Path) -> str:

@@ -17,6 +17,7 @@
       ]},
       {key:'doctors',label:'For doctors',href:'/en/for-doctors/',lead:'Professional library',note:'Clinical ophthalmology resources',sections:[
         {title:'Clinical materials',items:[
+          {label:'Simple questions — complex decisions',href:'/en/for-doctors/simple-questions/'},
           {label:'Bacterial keratitis and corneal ulcer',href:'/en/for-doctors/bacterial-keratitis/'},
           {label:'Follow-up after penetrating keratoplasty',href:'/en/for-doctors/penetrating-keratoplasty/'}
         ]},
@@ -54,6 +55,7 @@
       ]},
       {key:'doctors',label:'Для врачей',href:'/for-doctors/',lead:'Для врачей',note:'Профессиональная библиотека',sections:[
         {title:'Клинические материалы',items:[
+          {label:'Простые вопросы — сложные решения',href:'/for-doctors/simple-questions/'},
           {label:'Бактериальный кератит и язва роговицы',href:'/for-doctors/bacterial-keratitis/'},
           {label:'Ведение после сквозной кератопластики',href:'/for-doctors/penetrating-keratoplasty/'}
         ]},

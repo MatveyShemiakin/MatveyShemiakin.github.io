@@ -8,6 +8,13 @@
       "revision": 2,
       "kind": "updated"
     },
+    "complicated-cataract": {
+      "fingerprint": "51d094679a4a71a680ac6b0ba3d740c3cfb2739cc0d37d38cf62eb4a0173a00f",
+      "published": "2026-09-30",
+      "updated": "2026-09-30",
+      "revision": 1,
+      "kind": "new"
+    },
     "events": {
       "fingerprint": "1e24a7a9019dc80bd067b2f0f04a71bb963efb3026b1f5610344abdeb7f415dd",
       "published": "2026-08-16",
