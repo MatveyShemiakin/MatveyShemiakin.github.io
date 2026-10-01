@@ -128,3 +128,76 @@ test('question-style section headings end with a question mark',()=>{
   assert.match(en,/<h3>Why does a shallow anterior chamber make surgery more difficult\?<\/h3>/);
   assert.match(en,/<h3>What should be prepared in the operating room\?<\/h3>/);
 });
+
+test('series headers keep language and colour controls in one non-wrapping action row',()=>{
+  for(const path of Object.values(paths)){
+    const html=read(path);
+    assert.match(html,/<div class="header-actions" aria-label="[^"]+"><\/div>/);
+  }
+
+  const css=read('for-doctors/simple-questions/series.css');
+  assert.match(css,/\.simple-questions-page \.header-actions\{[^}]*display:flex!important[^}]*flex-wrap:nowrap!important/s);
+  assert.match(css,/\.simple-questions-page \.header-actions>\.site-language-switch[^}]*margin:0!important/s);
+  assert.match(css,/\.simple-questions-page \.header-actions>\.site-theme-toggle[^}]*margin:0!important/s);
+});
+
+test('article author cards use the standard portrait-led medical review pattern',()=>{
+  const expectations=[
+    [paths.ruArticle,'Материал подготовлен и проверен врачом','О враче','/#about','Медицинская проверка: 30 сентября 2026 года.'],
+    [paths.enArticle,'Prepared and medically reviewed by','About the doctor','/en/#about','Medical review: 30 September 2026.'],
+  ];
+
+  for(const [path,kicker,about,aboutHref,reviewed] of expectations){
+    const html=read(path);
+    assert.match(html,/<div class="author-photo"><img src="\/assets\/portrait\.jpg"[^>]*width="1200"[^>]*height="1800"[^>]*><\/div>/);
+    assert.match(html,new RegExp(kicker));
+    assert.match(html,new RegExp(`href="${aboutHref.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}"[^>]*>${about}<`));
+    assert.match(html,/href="https:\/\/t\.me\/DrShemMYu"/);
+    assert.match(html,/href="https:\/\/prodoctorov\.ru\/moskva\/vrach\/1115864-shemyakin\/"/);
+    assert.match(html,new RegExp(reviewed.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
+    assert.doesNotMatch(html,/<div class="author-monogram">/);
+  }
+});
+
+test('legal, retention and CTA links keep explicit accessible contrast without sharing the primary button style',()=>{
+  const css=read('for-doctors/simple-questions/series.css');
+  assert.match(css,/--sq-footer-text:#d7e2ef/);
+  assert.match(css,/--sq-action:#315b93/);
+  assert.match(css,/\.personal-cta>a\{[^}]*background:#fff[^}]*color:var\(--sq-navy\)/s);
+  assert.match(css,/\.personal-cta \.telegram-privacy-note a\{[^}]*background:transparent!important[^}]*color:inherit!important/s);
+  assert.match(css,/\.simple-questions-page \.site-footer a,[^{]*\.simple-questions-page \.site-footer button\{[^}]*color:var\(--sq-footer-text\)!important/s);
+  assert.match(css,/\.simple-questions-page \.doctor-material-telegram \.button\{[^}]*background:var\(--sq-action\)[^}]*color:#fff!important/s);
+  assert.match(css,/html\[data-site-theme="dark"\] \.simple-questions-page \.doctor-bookmark-toggle\{[^}]*border-color:var\(--sq-link\)[^}]*color:var\(--sq-link\)/s);
+  assert.match(css,/html\[data-site-theme="dark"\] \.simple-questions-page \.doctor-bookmark-toggle:hover,[^{]*\.doctor-bookmark-toggle:focus-visible,[^{]*\.doctor-bookmark-toggle\[aria-pressed="true"\]\{[^}]*background:#3567ad[^}]*color:#fff/s);
+  assert.doesNotMatch(css,/\.personal-cta a\{display:inline-flex/);
+});
+
+test('all principal text and action colour pairs meet WCAG AA contrast',()=>{
+  const luminance=(hex)=>{
+    const channels=hex.match(/[0-9a-f]{2}/gi).map(value=>parseInt(value,16)/255);
+    const linear=channels.map(value=>value<=0.04045?value/12.92:((value+0.055)/1.055)**2.4);
+    return 0.2126*linear[0]+0.7152*linear[1]+0.0722*linear[2];
+  };
+  const contrast=(foreground,background)=>{
+    const values=[luminance(foreground),luminance(background)].sort((a,b)=>b-a);
+    return (values[0]+0.05)/(values[1]+0.05);
+  };
+  const pairs=[
+    ['light body','#111a27','#ffffff'],
+    ['light muted','#596679','#f4f1eb'],
+    ['light link','#315b93','#ffffff'],
+    ['light action','#ffffff','#315b93'],
+    ['footer and CTA copy','#d7e2ef','#041225'],
+    ['dark body','#edf4fb','#06182f'],
+    ['dark muted','#c4d1df','#06182f'],
+    ['dark link','#9fc4f4','#06182f'],
+    ['dark action','#ffffff','#315b93'],
+    ['dark saved action','#ffffff','#3567ad'],
+  ];
+  for(const [name,foreground,background] of pairs){
+    assert.ok(contrast(foreground,background)>=4.5,`${name} contrast is below 4.5:1`);
+  }
+
+  const css=read('for-doctors/simple-questions/series.css');
+  assert.match(css,/html\[data-site-theme="dark"\]\{[^}]*--sq-action:#315b93/);
+});
