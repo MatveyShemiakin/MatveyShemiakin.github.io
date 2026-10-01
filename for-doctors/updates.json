@@ -1,11 +1,11 @@
 [
   {
     "id": "complicated-cataract",
-    "event_id": "complicated-cataract:1",
+    "event_id": "complicated-cataract:2",
     "published": "2026-09-30",
-    "updated": "2026-09-30",
-    "revision": 1,
-    "kind": "new",
+    "updated": "2026-10-01",
+    "revision": 2,
+    "kind": "updated",
     "title": "Осложнённая катаракта: как распознать риск и спланировать операцию?",
     "title_en": "Complicated cataract: how can risk be recognised and surgery planned?",
     "description": "Осложнённая катаракта: предоперационная оценка, риск разрыва задней капсулы, оснащение, резервная фиксация ИОЛ и авторский протокол наблюдения.",
