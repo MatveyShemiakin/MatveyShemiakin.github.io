@@ -6,7 +6,7 @@
   if (!document.querySelector('link[href*="science-section.css"]')) {
     const stylesheet = document.createElement('link');
     stylesheet.rel = 'stylesheet';
-    stylesheet.href = '/science-section.css?v=20260712-4';
+    stylesheet.href = '/science-section.css?v=20261003-harbin';
     document.head.appendChild(stylesheet);
   }
 
@@ -44,6 +44,7 @@
   ];
 
   const conferencesData = ru ? [
+{"year":"2026","title":"XIV Китайско-российский международный офтальмологический форум","meta":"Харбин · сентябрь 2026","text":"Доклад: «Penetrating Keratoplasty as an Interdisciplinary Challenge in a Multidisciplinary Tertiary-Care Hospital: Experience from the Moscow City Ophthalmology Center, Botkin Hospital».","image":"/assets/science/harbin-2026-stage.jpg","alt":"Матвей Шемякин выступает на XIV Китайско-российском международном офтальмологическом форуме в Харбине","wide":true,"href":"https://istina.msu.ru/workers/691089486/talks/","linkText":"Проверить в ИСТИНЕ ↗"},
     {
       year: '2026',
       title: 'II Московский конгресс офтальмологов',
@@ -77,6 +78,7 @@
       linkText: 'Проверить в источнике ↗'
     }
   ] : [
+{"year":"2026","title":"14th Sino-Russian International Ophthalmology Forum","meta":"Harbin · September 2026","text":"Presentation: “Penetrating Keratoplasty as an Interdisciplinary Challenge in a Multidisciplinary Tertiary-Care Hospital: Experience from the Moscow City Ophthalmology Center, Botkin Hospital”.","image":"/assets/science/harbin-2026-stage.jpg","alt":"Matvey Shemyakin presenting at the 14th Sino-Russian International Ophthalmology Forum in Harbin","wide":true,"href":"https://istina.msu.ru/workers/691089486/talks/","linkText":"Verify on ISTINA ↗"},
     {
       year: '2026',
       title: 'Second Moscow Congress of Ophthalmologists',
