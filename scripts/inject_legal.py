@@ -6,7 +6,9 @@ import re
 # to every clinician-facing page.
 ROOT = Path(__file__).resolve().parents[1]
 ANALYTICS_SCRIPT = '<script src="/analytics.js?v=20260811-2"></script>'
+HOME_ANALYTICS_SCRIPT = '<script defer src="/analytics.js?v=20260811-2"></script>'
 LEGAL_SCRIPT = '<script src="/legal.js?v=20260721-3"></script>'
+HOME_LEGAL_SCRIPT = '<script src="/legal.js?v=20261004-1"></script>'
 DOCTORS_SCRIPT = '<script src="/doctors-legal.js?v=20260816-2"></script>'
 PRIVACY_PAGES = {ROOT / 'privacy.html', ROOT / 'en' / 'privacy.html'}
 PROFESSIONAL_TERMS = {
@@ -22,26 +24,31 @@ for path in ROOT.rglob('*.html'):
 
     text = path.read_text(encoding='utf-8')
     original = text
+    # Only homepages have been verified for deferred analytics. The events
+    # calendar still relies on the early fetch patch in the synchronous loader.
+    is_home = relative.as_posix() in {'index.html', 'en/index.html'}
+    analytics_script = HOME_ANALYTICS_SCRIPT if is_home else ANALYTICS_SCRIPT
+    legal_script = HOME_LEGAL_SCRIPT if is_home else LEGAL_SCRIPT
 
     if '/analytics.js' in text:
-        text = re.sub(r'<script\s+src="/analytics\.js(?:\?v=[^"]*)?"></script>', ANALYTICS_SCRIPT, text)
+        text = re.sub(r'<script\s+(?:defer\s+)?src="/analytics\.js(?:\?v=[^"]*)?"></script>', analytics_script, text)
     else:
         head_match = re.search(r'<head(?:\s[^>]*)?>', text, flags=re.IGNORECASE)
         if head_match:
-            text = text[:head_match.end()] + '\n  ' + ANALYTICS_SCRIPT + text[head_match.end():]
+            text = text[:head_match.end()] + '\n  ' + analytics_script + text[head_match.end():]
         elif '</body>' in text:
-            text = text.replace('</body>', ANALYTICS_SCRIPT + '</body>', 1)
+            text = text.replace('</body>', analytics_script + '</body>', 1)
         elif '</html>' in text:
-            text = text.replace('</html>', ANALYTICS_SCRIPT + '</html>', 1)
+            text = text.replace('</html>', analytics_script + '</html>', 1)
 
     if path not in PRIVACY_PAGES:
         if '/legal.js' in text:
-            text = re.sub(r'<script\s+src="/legal\.js(?:\?v=[^"]*)?"></script>', LEGAL_SCRIPT, text)
+            text = re.sub(r'<script\s+src="/legal\.js(?:\?v=[^"]*)?"></script>', legal_script, text)
         else:
             if '</body>' in text:
-                text = text.replace('</body>', LEGAL_SCRIPT + '</body>', 1)
+                text = text.replace('</body>', legal_script + '</body>', 1)
             elif '</html>' in text:
-                text = text.replace('</html>', LEGAL_SCRIPT + '</html>', 1)
+                text = text.replace('</html>', legal_script + '</html>', 1)
 
     relative_posix = relative.as_posix()
     is_doctors_page = relative_posix.startswith('for-doctors/') or relative_posix.startswith('en/for-doctors/')

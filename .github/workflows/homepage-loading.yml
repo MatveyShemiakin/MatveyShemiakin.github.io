@@ -1,0 +1,49 @@
+name: Homepage loading regression check
+on:
+  push:
+    branches: ['perf/home-loading-20261004']
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'en/index.html'
+      - 'site.js'
+      - 'science-section.css'
+      - 'scripts/inject_legal.py'
+      - 'scripts/test-homepage-loading.mjs'
+      - '.github/workflows/homepage-loading.yml'
+permissions:
+  contents: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare original site and development-only browser tools
+        run: |
+          mkdir -p /tmp/homepage-original
+          git archive 0fd4c65f3125f71d3a2f82a02f8454010b105d2c | tar -x -C /tmp/homepage-original
+          npm install --prefix "$RUNNER_TEMP/homepage-browser" playwright@1.62.1 pixelmatch@7.1.0 pngjs@7.0.0
+      - name: Compare languages, themes, layouts and functions
+        run: |
+          python3 -m http.server 8010 --bind 127.0.0.1 --directory /tmp/homepage-original >/tmp/homepage-original-http.log 2>&1 &
+          ORIGINAL_PID=$!
+          python3 -m http.server 8011 --bind 127.0.0.1 >/tmp/homepage-current-http.log 2>&1 &
+          CURRENT_PID=$!
+          trap 'kill $ORIGINAL_PID $CURRENT_PID || true' EXIT
+          export CHROME="$(command -v google-chrome || command -v chromium)"
+          export HOMEPAGE_BROWSER_MODULES="$RUNNER_TEMP/homepage-browser"
+          export HOMEPAGE_TEST_OUTPUT="$RUNNER_TEMP/homepage-results"
+          node scripts/test-homepage-loading.mjs
+      - name: Upload comparisons and loading measurements
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-loading-comparison
+          path: ${{ runner.temp }}/homepage-results/
+          if-no-files-found: warn
