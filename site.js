@@ -109,7 +109,11 @@
     const video = document.getElementById('media-video');
     if (video) {
       video.poster = content.media.poster;
-      if (video.currentSrc !== content.media.video) {
+      const source = video.querySelector('source');
+      const configuredSrc = video.getAttribute('src') || (source && source.getAttribute('src'));
+      // currentSrc is absolute (and may still be empty before media selection).
+      // Preserve the existing source rather than resetting the player on render.
+      if (!configuredSrc || new URL(configuredSrc, window.location.href).href !== new URL(content.media.video, window.location.href).href) {
         video.src = content.media.video;
         video.load();
       }
@@ -282,6 +286,20 @@
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const saveData = Boolean(navigator.connection && navigator.connection.saveData);
     const autoplayEnabled = !reduceMotion && !saveData;
+
+    // Prepare native controls shortly before the player enters the viewport.
+    // A manual play still works with preload="none", including without an observer.
+    if ('IntersectionObserver' in window && !saveData) {
+      const preloadObserver = new IntersectionObserver((entries) => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        if (video.preload === 'none' && video.paused) {
+          video.preload = 'metadata';
+          video.load();
+        }
+        preloadObserver.disconnect();
+      }, { rootMargin: '300px 0px' });
+      preloadObserver.observe(video);
+    }
 
     if ('IntersectionObserver' in window && autoplayEnabled) {
       const observer = new IntersectionObserver((entries) => {
