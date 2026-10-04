@@ -29,6 +29,7 @@ try {
     const name = `${lang}-${width}-${theme}`;
     const results = [];
     const screenshots = [];
+    const pageErrors = [];
     for (const port of [8010, 8011]) {
       const context = await browser.newContext({ viewport: { width, height: 1000 }, reducedMotion: 'reduce' });
       // Isolate visual comparison from external rating/network updates, identically for both versions.
@@ -47,13 +48,18 @@ try {
       await page.evaluate(() => scrollTo(0, 0));
       await page.waitForTimeout(500);
       results.push(await page.evaluate(snapshot));
-      check(errors.length === 0, `${name} ${port}: JS errors ${errors}`);
+      pageErrors.push(errors);
       check(await page.evaluate(theme => document.documentElement.dataset.siteTheme === theme, theme), `${name}: initial theme`);
       await page.locator('[data-site-theme-toggle]').first().click();
       check(await page.evaluate(theme => document.documentElement.dataset.siteTheme !== theme, theme), `${name}: theme toggle`);
       const langHref = await page.locator(`.site-language-switch a[hreflang="${lang === 'ru' ? 'en' : 'ru'}"]`).getAttribute('href');
       check(langHref === (lang === 'ru' ? '/en/' : '/'), `${name}: language route ${langHref}`);
       if (width > 1000) {
+        // Existing navigation opens on focus; the next click toggles it closed.
+        await page.locator('.site-mega-nav__toggle').first().focus();
+        check(await page.locator('.site-mega-nav__toggle').first().getAttribute('aria-expanded') === 'true', `${name}: menu focus`);
+        await page.locator('.site-mega-nav__toggle').first().click();
+        check(await page.locator('.site-mega-nav__toggle').first().getAttribute('aria-expanded') === 'false', `${name}: menu close`);
         await page.locator('.site-mega-nav__toggle').first().click();
         check(await page.locator('.site-mega-nav__toggle').first().getAttribute('aria-expanded') === 'true', `${name}: desktop menu`);
         await page.keyboard.press('Escape');
@@ -71,6 +77,8 @@ try {
       check(await page.locator('.patient-fab__main').getAttribute('aria-expanded') === 'true', `${name}: contact menu`);
       await context.close();
     }
+    try { assert.deepEqual(pageErrors[1], pageErrors[0]); } catch { failures.push(`${name}: new JS errors ${pageErrors[1]}`); }
+    report.push({name,baselineErrors:pageErrors[0],currentErrors:pageErrors[1]});
     try { assert.deepEqual(results[1], results[0]); } catch (e) { failures.push(`${name}: content/geometry changed: ${e.message.slice(0,1000)}`); fs.writeFileSync(path.join(output, `${name}-content.json`), JSON.stringify(results,null,2)); }
     const [a,b] = screenshots;
     const diff = new PNG({ width:a.width, height:a.height });
@@ -91,7 +99,7 @@ try {
     const audit=await page.evaluate(()=>window.loadingAudit); report.push({lang,width,...audit});
     check(audit.cls<=0.1,`${lang} ${width}: CLS ${audit.cls}`);
     await page.locator('#media-video').scrollIntoViewIfNeeded();
-    await page.waitForFunction(()=>!document.querySelector('#media-video').paused, {timeout:15000}).catch(()=>failures.push(`${lang} ${width}: viewport autoplay`));
+    await page.waitForFunction(()=>!document.querySelector('#media-video').paused, undefined, {timeout:15000}).catch(()=>failures.push(`${lang} ${width}: viewport autoplay`));
     check(media.length>0,`${lang} ${width}: video failed to load on approach`);
     await page.locator('.video-sound-toggle').click();
     check(await page.locator('#media-video').evaluate(v=>!v.muted),`${lang} ${width}: enable sound`);
@@ -101,6 +109,23 @@ try {
     await page.evaluate(()=>scrollTo(0,0)); await page.waitForTimeout(500);
     await page.locator('#media-video').scrollIntoViewIfNeeded(); await page.waitForTimeout(500);
     check(await page.locator('#media-video').evaluate(v=>v.paused),`${lang} ${width}: manual pause was lost`);
+    await context.close();
+  }
+  // Native manual playback must remain available when autoplay/preloading is disabled.
+  for(const mode of ['reduced-motion','save-data','no-observer']) {
+    const context=await browser.newContext({reducedMotion:mode==='reduced-motion'?'reduce':'no-preference'});
+    await context.route('**/*',route=>new URL(route.request().url()).hostname==='127.0.0.1'?route.continue():route.abort());
+    await context.addInitScript(mode=>{
+      localStorage.setItem('site_cookie_choice','essential');
+      if(mode==='save-data')Object.defineProperty(navigator.connection,'saveData',{value:true});
+      if(mode==='no-observer')delete window.IntersectionObserver;
+    },mode);
+    const page=await context.newPage();
+    await page.goto('http://127.0.0.1:8011/'); await settle(page);
+    await page.locator('#media-video').scrollIntoViewIfNeeded(); await page.waitForTimeout(500);
+    check(await page.locator('#media-video').evaluate(v=>v.paused),`${mode}: unexpected autoplay`);
+    await page.locator('.video-sound-toggle').click();
+    await page.waitForFunction(()=>!document.querySelector('#media-video').paused,undefined,{timeout:15000}).catch(()=>failures.push(`${mode}: manual playback`));
     await context.close();
   }
   // Homepage deferral must keep saved consent and analytics events operational.
