@@ -19,7 +19,8 @@
       return;
     }
     const container=document.querySelector('.hero-actions');
-    if(!container||container.querySelector('.prodoctorov-widget-card'))return;
+    if(!container)return;
+    if(!container.querySelector('.prodoctorov-widget-card')){
     const oldButton=container.querySelector('a[data-href="links.prodoctorov"],a[href*="prodoctorov.ru/moskva/vrach/1115864"]');
     if(oldButton)oldButton.remove();
     const card=document.createElement('div');
@@ -39,6 +40,7 @@
         </a>
       </div>`;
     container.appendChild(card);
+    }
     if(!document.querySelector('script[src*="widget_footer.js"]')){
       const script=document.createElement('script');script.src='https://prodoctorov.ru/static/js/widget_footer.js?v06';script.async=true;document.body.appendChild(script);
     }
