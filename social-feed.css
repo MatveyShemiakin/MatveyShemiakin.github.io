@@ -1,0 +1,3 @@
+.social-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.social-card{min-width:0;padding:28px;border:1px solid var(--line,rgba(128,128,128,.25));border-radius:20px;background:var(--surface,transparent)}.social-meta{font-size:.85rem;opacity:.7;margin-bottom:18px}.social-caption{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7}.social-card img{display:block;max-width:100%;width:100%;height:auto;border-radius:12px;margin-bottom:16px}.social-empty{grid-column:1/-1}@media(max-width:700px){.social-grid{grid-template-columns:1fr}.social-card{padding:20px}}
+
+@media(max-width:620px){html[lang="ru"] .nav-actions>a[href="/social/"],html[lang="en"] .nav-actions>a[href="/en/social/"]{display:none}}

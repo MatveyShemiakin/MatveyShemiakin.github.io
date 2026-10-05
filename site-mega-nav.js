@@ -34,7 +34,8 @@
           {label:'Specialties',href:'/en/#directions'},
           {label:'Education',href:'/en/#education'},
           {label:'Research',href:'/en/#science'},
-          {label:'Contacts',href:'/en/#contacts'}
+          {label:'Contacts',href:'/en/#contacts'},
+          {label:'Social media posts',href:'/en/social/'}
         ]}
       ]}
     ]
@@ -72,7 +73,8 @@
           {label:'Направления',href:'/#directions'},
           {label:'Образование',href:'/#education'},
           {label:'Наука',href:'/#science'},
-          {label:'Контакты',href:'/#contacts'}
+          {label:'Контакты',href:'/#contacts'},
+          {label:'Публикации из соцсетей',href:'/social/'}
         ]}
       ]}
     ]
