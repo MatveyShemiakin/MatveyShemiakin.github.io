@@ -27,17 +27,8 @@ def main():
  endpoint='https://shemyakin-social-feed.'+sub['result']['subdomain']+'.workers.dev'
  current=tg(token,'getWebhookInfo').get('url','')
  if current and current!=endpoint+'/telegram':raise RuntimeError('Existing unrelated webhook: no changes made')
- print('Checking dedicated storage access',flush=True)
- spaces=api(base+'/storage/kv/namespaces?per_page=100',cf)
- if not spaces.get('success'):raise RuntimeError('Cannot list KV namespaces')
- space=next((s for s in spaces['result'] if s['title']=='shemyakin-social-feed-posts'),None)
- if not space:
-  print('Creating dedicated storage',flush=True)
-  created=api(base+'/storage/kv/namespaces',cf,{'title':'shemyakin-social-feed-posts'})
-  if not created.get('success'):raise RuntimeError('Cannot create dedicated KV namespace')
-  space=created['result']
  config=ROOT/'workers/social-feed/runtime.json'
- config.write_text(json.dumps({'name':'shemyakin-social-feed','main':'worker.mjs','compatibility_date':'2026-10-05','workers_dev':True,'kv_namespaces':[{'binding':'POSTS','id':space['id']}]}))
+ config.write_text(json.dumps({'name':'shemyakin-social-feed','main':'worker.mjs','compatibility_date':'2026-10-05','workers_dev':True,'durable_objects':{'bindings':[{'name':'POSTS','class_name':'SocialFeedStore'}]},'migrations':[{'tag':'v1','new_sqlite_classes':['SocialFeedStore']}]}))
  subprocess.run(['npx','wrangler','deploy','--config',str(config)],check=True)
  for name,purpose in [('WEBHOOK_SECRET','webhook'),('EXPORT_SECRET','export')]:
   result=subprocess.run(['npx','wrangler','secret','put',name,'--config',str(config)],input=derived(token,purpose)+'\n',text=True,capture_output=True)

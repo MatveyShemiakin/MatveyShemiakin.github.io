@@ -4,8 +4,7 @@ export default {async fetch(request,env){
  if(u.pathname==='/health')return json({ok:true});
  if(u.pathname==='/export'&&request.method==='GET'){
   if(!env.EXPORT_SECRET||request.headers.get('Authorization')!==`Bearer ${env.EXPORT_SECRET}`)return json({ok:false},403);
-  const latest=new Map();let cursor;do{const page=await env.POSTS.list({prefix:'post:',cursor});for(const k of page.keys){const v=await env.POSTS.get(k.name);if(v){const p=JSON.parse(v);if(!latest.has(p.id)||latest.get(p.id).update_id<p.update_id)latest.set(p.id,p);}}cursor=page.list_complete?undefined:page.cursor;}while(cursor);
-  return json({posts:[...latest.values()]});
+  return env.POSTS.getByName('DrShemMYu').fetch(new Request('https://storage/export'));
  }
  if(u.pathname!=='/telegram'||request.method!=='POST')return json({ok:false},404);
  if(!env.WEBHOOK_SECRET||request.headers.get('X-Telegram-Bot-Api-Secret-Token')!==env.WEBHOOK_SECRET)return json({ok:false},403);
@@ -19,6 +18,24 @@ export default {async fetch(request,env){
  const cover=photos.length?photos.at(-1)?.file_id:m.video?.thumbnail?.file_id;
  const text=String(m.text||m.caption||'').slice(0,20000);
  if(!text&&!cover)return json({ok:true});
- await env.POSTS.put(`${key}:${update.update_id}`,JSON.stringify({id:key,update_id:update.update_id,source:'telegram',text,date:m.date,edited:m.edit_date||null,album:m.media_group_id||null,cover_file_id:cover||null,url:`https://t.me/DrShemMYu/${m.message_id}`}));
+ await env.POSTS.getByName('DrShemMYu').fetch(new Request('https://storage/record',{method:'POST',body:JSON.stringify({id:key,update_id:update.update_id,source:'telegram',text,date:m.date,edited:m.edit_date||null,album:m.media_group_id||null,cover_file_id:cover||null,url:`https://t.me/DrShemMYu/${m.message_id}`} )}));
  return json({ok:true});
 }};
+
+export class SocialFeedStore {
+ constructor(ctx){this.storage=ctx.storage;}
+ async fetch(request){
+  const u=new URL(request.url);
+  if(u.pathname==='/record'&&request.method==='POST'){
+   const post=await request.json();
+   await this.storage.transaction(async tx=>{const old=await tx.get(post.id);if(!old||old.update_id<post.update_id)await tx.put(post.id,post)});
+   return json({ok:true});
+  }
+  if(u.pathname==='/export'){
+   const posts=[];let startAfter;
+   while(true){const page=await this.storage.list({prefix:'post:',limit:1000,...(startAfter?{startAfter}:{})});posts.push(...page.values());if(page.size<1000)break;startAfter=[...page.keys()].at(-1);}
+   return json({posts});
+  }
+  return json({ok:false},404);
+ }
+}
