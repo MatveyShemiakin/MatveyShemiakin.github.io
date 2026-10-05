@@ -1,4 +1,4 @@
-import hashlib,json,os,subprocess,sys,urllib.request
+import hashlib,json,os,subprocess,sys,urllib.request,urllib.error
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def derived(token,purpose):return hashlib.sha256((purpose+':'+token).encode()).hexdigest()
@@ -6,6 +6,7 @@ def api(url,token=None,data=None,method=None):
  req=urllib.request.Request(url,data=json.dumps(data).encode() if data is not None else None,method=method,headers={'Content-Type':'application/json',**({'Authorization':'Bearer '+token} if token else {})})
  try:
   with urllib.request.urlopen(req,timeout=40) as r:return json.load(r)
+ except urllib.error.HTTPError as e:raise RuntimeError('API request rejected (HTTP '+str(e.code)+'); credentials and response suppressed') from None
  except Exception:raise RuntimeError('API request failed; credentials and response suppressed') from None
 def tg(token,method,data=None):
  result=api('https://api.telegram.org/bot'+token+'/'+method,data=data)
@@ -13,20 +14,25 @@ def tg(token,method,data=None):
  return result['result']
 def main():
  token=os.environ['TELEGRAM_BOT_TOKEN'];cf=os.environ['CLOUDFLARE_API_TOKEN'];account=os.environ['CLOUDFLARE_ACCOUNT_ID']
+ print('Checking bot identity',flush=True)
  me=tg(token,'getMe')
  if me.get('username')!='DrShemMYubot':raise RuntimeError('Unexpected bot username')
+ print('Checking channel access',flush=True)
  member=tg(token,'getChatMember',{'chat_id':'@DrShemMYu','user_id':me['id']})
  if member.get('status') not in ('administrator','member','creator'):raise RuntimeError('Bot has no channel access')
  base='https://api.cloudflare.com/client/v4/accounts/'+account
+ print('Checking Cloudflare worker subdomain',flush=True)
  sub=api(base+'/workers/subdomain',cf)
  if not sub.get('success'):raise RuntimeError('Cannot read Cloudflare workers subdomain')
  endpoint='https://shemyakin-social-feed.'+sub['result']['subdomain']+'.workers.dev'
  current=tg(token,'getWebhookInfo').get('url','')
  if current and current!=endpoint+'/telegram':raise RuntimeError('Existing unrelated webhook: no changes made')
+ print('Checking dedicated storage access',flush=True)
  spaces=api(base+'/storage/kv/namespaces?per_page=100',cf)
  if not spaces.get('success'):raise RuntimeError('Cannot list KV namespaces')
  space=next((s for s in spaces['result'] if s['title']=='shemyakin-social-feed-posts'),None)
  if not space:
+  print('Creating dedicated storage',flush=True)
   created=api(base+'/storage/kv/namespaces',cf,{'title':'shemyakin-social-feed-posts'})
   if not created.get('success'):raise RuntimeError('Cannot create dedicated KV namespace')
   space=created['result']
