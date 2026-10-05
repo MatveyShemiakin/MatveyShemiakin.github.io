@@ -18,7 +18,8 @@ export default {async fetch(request,env){
  const cover=photos.length?photos.at(-1)?.file_id:m.video?.thumbnail?.file_id;
  const text=String(m.text||m.caption||'').slice(0,20000);
  if(!text&&!cover)return json({ok:true});
- await env.POSTS.getByName('DrShemMYu').fetch(new Request('https://storage/record',{method:'POST',body:JSON.stringify({id:key,update_id:update.update_id,source:'telegram',text,date:m.date,edited:m.edit_date||null,album:m.media_group_id||null,cover_file_id:cover||null,url:`https://t.me/DrShemMYu/${m.message_id}`} )}));
+ const stored=await env.POSTS.getByName('DrShemMYu').fetch(new Request('https://storage/record',{method:'POST',body:JSON.stringify({id:key,update_id:update.update_id,source:'telegram',text,date:m.date,edited:m.edit_date||null,album:m.media_group_id||null,cover_file_id:cover||null,url:`https://t.me/DrShemMYu/${m.message_id}`} )}));
+ if(!stored.ok)return json({ok:false},503);
  return json({ok:true});
 }};
 
@@ -28,7 +29,7 @@ export class SocialFeedStore {
   const u=new URL(request.url);
   if(u.pathname==='/record'&&request.method==='POST'){
    const post=await request.json();
-   await this.storage.transaction(async tx=>{const old=await tx.get(post.id);if(!old||old.update_id<post.update_id)await tx.put(post.id,post)});
+   await this.storage.transaction(async tx=>{const old=await tx.get(post.id);if(!old||(old.edited||old.date)<(post.edited||post.date)||((old.edited||old.date)===(post.edited||post.date)&&old.update_id<post.update_id))await tx.put(post.id,post)});
    return json({ok:true});
   }
   if(u.pathname==='/export'){

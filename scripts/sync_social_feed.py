@@ -29,7 +29,7 @@ def main():
  excludes=ROOT/'social/excluded.json';ids=json.loads(excludes.read_text()) if excludes.exists() else []
  merged={p['id']:p for p in previous}
  for p in posts:
-  if p['id'] not in merged or p.get('update_id',0)>=merged[p['id']].get('update_id',0):merged[p['id']]=p
+  if p['id'] not in merged or (p.get('edited') or p.get('date',0),p.get('update_id',0))>=(merged[p['id']].get('edited') or merged[p['id']].get('date',0),merged[p['id']].get('update_id',0)):merged[p['id']]=p
  posts=sorted((p for p in merged.values() if p['id'] not in ids),key=lambda p:p.get('date',0),reverse=True)
  feed.write_text(json.dumps(posts,ensure_ascii=False,indent=2)+'\n');build_pages(posts)
  print('Public feed generated: '+str(len(posts))+' records')
