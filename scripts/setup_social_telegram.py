@@ -1,12 +1,12 @@
-import hashlib,json,os,subprocess,sys,urllib.request,urllib.error
+import hashlib,json,os,subprocess,sys,urllib.request,urllib.error,urllib.parse
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def derived(token,purpose):return hashlib.sha256((purpose+':'+token).encode()).hexdigest()
 def api(url,token=None,data=None,method=None):
- req=urllib.request.Request(url,data=json.dumps(data).encode() if data is not None else None,method=method,headers={'Content-Type':'application/json',**({'Authorization':'Bearer '+token} if token else {})})
+ req=urllib.request.Request(url,data=json.dumps(data).encode() if data is not None else None,method=method,headers={'Content-Type':'application/json','User-Agent':'MatveyShemyakin-SocialFeed/1.0',**({'Authorization':'Bearer '+token} if token else {})})
  try:
   with urllib.request.urlopen(req,timeout=40) as r:return json.load(r)
- except urllib.error.HTTPError as e:raise RuntimeError('API request rejected (HTTP '+str(e.code)+'); credentials and response suppressed') from None
+ except urllib.error.HTTPError as e:raise RuntimeError('API request rejected at '+urllib.parse.urlsplit(url).hostname+' (HTTP '+str(e.code)+'); credentials and response suppressed') from None
  except Exception:raise RuntimeError('API request failed; credentials and response suppressed') from None
 def tg(token,method,data=None):
  result=api('https://api.telegram.org/bot'+token+'/'+method,data=data)
@@ -33,8 +33,10 @@ def main():
  for name,purpose in [('WEBHOOK_SECRET','webhook'),('EXPORT_SECRET','export')]:
   result=subprocess.run(['npx','wrangler','secret','put',name,'--config',str(config)],input=derived(token,purpose)+'\n',text=True,capture_output=True)
   if result.returncode:raise RuntimeError('Worker secret setup failed: '+name)
+ print('Configuring Telegram delivery',flush=True)
  if not current:
   tg(token,'setWebhook',{'url':endpoint+'/telegram','secret_token':derived(token,'webhook'),'allowed_updates':['channel_post','edited_channel_post'],'drop_pending_updates':False})
+ print('Checking worker health',flush=True)
  health=api(endpoint+'/health')
  if health.get('ok') is not True:raise RuntimeError('Worker health check failed')
  check=tg(token,'getWebhookInfo')
