@@ -11,3 +11,5 @@ Secrets: TELEGRAM_BOT_TOKEN, CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID. Creden
 Run tests: node --test tests/social-feed-worker.test.mjs; python -m unittest tests/test_social_feed.py.
 
 2026-10-05 review: corrected asset paths and mobile CTA; transactional webhook update records; GitHub Pages build replaces full-site Cloudflare deployment. Tests cover authorization, channel filtering, concurrent edits, metadata minimization, escaping, albums, and localized page assets.
+
+Live verification 2026-10-05: workflow run 37328748479 completed successfully, including webhook configuration, health check, export, regressions, and Pages build request. Public Russian and English routes return their localized social titles and stylesheet. Export initially has zero records; no fabricated channel posts were published.

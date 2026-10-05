@@ -2,7 +2,7 @@ import datetime,html,json,os
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def render_cards(posts,lang):
- if not posts:return '<p class="social-empty">'+('Публикации появятся после подключения канала.' if lang=='ru' else 'Posts will appear after the channel is connected.')+'</p>'
+ if not posts:return '<p class="social-empty">'+('Публикации ещё не поступили. Пока можно читать канал в Telegram.' if lang=='ru' else 'Posts have not arrived yet. You can read the channel on Telegram.')+'</p>'
  groups={}
  for p in sorted(posts,key=lambda x:x.get('date',0),reverse=True):groups.setdefault(p.get('album') or p['id'],[]).append(p)
  out=[]
