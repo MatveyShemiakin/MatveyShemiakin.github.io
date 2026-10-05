@@ -1,0 +1,60 @@
+name: Telegram social feed
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/sync-social-feed.yml', 'workers/social-feed/**', 'scripts/*social*', 'social-feed.css']
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: telegram-social-feed
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test social feed
+        run: |
+          node --test tests/social-feed-worker.test.mjs
+          python -m unittest tests/test_social_feed.py
+      - name: Install deployment tool
+        run: npm install --no-save wrangler@4
+      - name: Configure isolated intake
+        id: intake
+        run: python scripts/setup_social_telegram.py
+      - name: Export and generate static feed
+        env:
+          SOCIAL_ENDPOINT: ${{ steps.intake.outputs.endpoint }}
+        run: python scripts/sync_social_feed.py
+      - name: Site regression tests
+        run: |
+          node --test tests/ophtha-merge-v2.test.mjs
+          node --test tests/ophthasearch*.test.mjs
+      - name: Persist public feed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add social/feed.json social/media social/index.html en/social/index.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update Telegram social feed'
+            git push origin HEAD:main
+          fi
+      - name: Request existing GitHub Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/${{ github.repository }}/pages/builds

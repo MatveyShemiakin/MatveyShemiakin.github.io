@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import worker from '../workers/social-feed/worker.mjs';
+const env=()=>{const db=new Map();return {WEBHOOK_SECRET:'hook',EXPORT_SECRET:'export',POSTS:{get:async k=>db.get(k),put:async(k,v)=>db.set(k,v),list:async()=>({keys:[...db.keys()].map(name=>({name})),list_complete:true})}}};
+const post=(id,text='hello',username='DrShemMYu',date=100)=>({update_id:id,channel_post:{message_id:1,date,chat:{id:-100,type:'channel',username},text}});
+const send=(e,u,key='hook')=>worker.fetch(new Request('https://example.org/telegram',{method:'POST',headers:{'X-Telegram-Bot-Api-Secret-Token':key,'Content-Type':'application/json'},body:JSON.stringify(u)}),e);
+test('rejects unauthenticated webhook and export',async()=>{const e=env();assert.equal((await send(e,post(1),'bad')).status,403);assert.equal((await worker.fetch(new Request('https://example.org/export'),e)).status,403)});
+test('ignores wrong channels and private messages',async()=>{const e=env();await send(e,post(1,'x','Other'));await send(e,{update_id:2,message:{text:'private'}});assert.equal((await e.POSTS.list()).keys.length,0)});
+test('edits replace records and stale deliveries cannot overwrite',async()=>{const e=env();await send(e,post(1));await send(e,{update_id:2,edited_channel_post:{...post(1).channel_post,text:'edited',edit_date:120}});await send(e,post(1));const r=await worker.fetch(new Request('https://example.org/export',{headers:{Authorization:'Bearer export'}}),e);const data=await r.json();assert.equal(data.posts.length,1);assert.equal(data.posts[0].text,'edited');assert.equal(data.posts[0].url,'https://t.me/DrShemMYu/1')});
+test('preserves album identity but removes nonpublic metadata',async()=>{const e=env();const u=post(1);u.channel_post.media_group_id='album';u.channel_post.from={id:12};await send(e,u);const record=JSON.parse(await e.POSTS.get('post:-100:1:1'));assert.equal(record.album,'album');assert.equal(record.from,undefined)});
+
+test('concurrent original and edit preserve latest record',async()=>{const e=env();const put=e.POSTS.put;e.POSTS.put=async(k,v)=>{if(JSON.parse(v).update_id===1)await new Promise(r=>setTimeout(r,15));return put(k,v)};await Promise.all([send(e,post(1)),send(e,{update_id:2,edited_channel_post:{...post(1).channel_post,text:'latest'}})]);const r=await worker.fetch(new Request('https://example.org/export',{headers:{Authorization:'Bearer export'}}),e);assert.equal((await r.json()).posts[0].text,'latest')});
