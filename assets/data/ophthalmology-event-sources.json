@@ -163,6 +163,18 @@
       ]
     },
     {
+      "id": "apvrs-2027-official",
+      "official": true,
+      "url": "https://apvrs.org/congresses/",
+      "eventIds": [
+        "apvrs-2027"
+      ],
+      "watchTerms": [
+        "20th APVRS Congress",
+        "Kuala Lumpur"
+      ]
+    },
+    {
       "id": "arvo",
       "official": true,
       "url": "https://www.arvo.org/annual-meeting",
@@ -661,6 +673,18 @@
         "20-23 April 2027",
         "Abstract",
         "19 October 2026"
+      ]
+    },
+    {
+      "id": "wsopras-2027-official",
+      "official": true,
+      "url": "https://www.wsopras2027.org/",
+      "eventIds": [
+        "wsopras-2027"
+      ],
+      "watchTerms": [
+        "WSOPRAS 2027",
+        "Beijing Kerry Hotel"
       ]
     },
     {
