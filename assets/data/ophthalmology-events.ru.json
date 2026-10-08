@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "language": "ru",
-  "verifiedAt": "2026-08-16",
-  "generatedAt": "2026-08-16T16:40:06+00:00",
+  "verifiedAt": "2026-10-08",
+  "generatedAt": "2026-10-08T08:36:00+03:00",
   "events": [
     {
       "id": "fedorov-2026",
@@ -1140,10 +1140,29 @@
       "official": "https://www.epomec.ae/",
       "program": "https://www.epomec.ae/",
       "registration": "https://www.epomec.ae/",
-      "submit": null,
-      "verified": "2026-08-16",
+      "submit": "https://www.epomec.ae/abstract-submission/",
+      "verified": "2026-10-08",
       "description": "13-я MENA-конференция по современной офтальмологической практике в Дубае; организаторы ожидают более 3000 участников и экспонентов.",
-      "deadlines": []
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Финальный дедлайн подачи (закрыт)",
+          "date": "2026-09-25T18:00:00+04:00",
+          "timeKnown": true,
+          "zone": "GST",
+          "url": "https://www.epomec.ae/abstract-submission/",
+          "note": "Подача oral, ePoster и video завершена."
+        },
+        {
+          "kind": "faculty",
+          "label": "Решение научного комитета",
+          "date": "2026-10-16T23:59:00+04:00",
+          "timeKnown": true,
+          "zone": "GST",
+          "url": "https://www.epomec.ae/abstract-submission/",
+          "note": ""
+        }
+      ]
     },
     {
       "id": "mioc-2026",
@@ -1628,6 +1647,62 @@
       ]
     },
     {
+      "id": "wsopras-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "WSOPRAS 2027",
+      "fullTitle": "World Society of Ophthalmic Plastic Reconstructive and Aesthetic Surgery Congress",
+      "org": "WSOPRAS",
+      "start": "2027-04-08",
+      "end": "2027-04-10",
+      "city": "Пекин",
+      "country": "Китай",
+      "region": "Китай / Greater China",
+      "mode": "Очно",
+      "venue": "Beijing Kerry Hotel",
+      "categories": [
+        "Окулопластика",
+        "Research"
+      ],
+      "credits": "CME/НМО: уточняется организатором",
+      "submissionOpen": true,
+      "official": "https://www.wsopras2027.org/",
+      "program": "https://www.wsopras2027.org/index.php?c=category&id=2",
+      "registration": "https://www.wsopras2027.org/",
+      "submit": "https://www.wsopras2027.org/index.php?c=category&id=3",
+      "verified": "2026-10-08",
+      "description": "WSOPRAS 2027 в Пекине: хирургия орбиты, слезоотводящих путей, век и эстетическая хирургия, научные доклады и live surgery.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Подача E-Poster / E-Video",
+          "date": "2026-11-30",
+          "timeKnown": false,
+          "zone": "Asia/Shanghai",
+          "url": "https://www.wsopras2027.org/",
+          "note": "Видео MP4 до 3 минут; письменный abstract обязателен."
+        },
+        {
+          "kind": "faculty",
+          "label": "Результаты отбора",
+          "date": "2027-01-04",
+          "timeKnown": false,
+          "zone": "Asia/Shanghai",
+          "url": "https://www.wsopras2027.org/",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Регистрация выступающего",
+          "date": "2027-01-25",
+          "timeKnown": false,
+          "zone": "Asia/Shanghai",
+          "url": "https://www.wsopras2027.org/",
+          "note": ""
+        }
+      ]
+    },
+    {
       "id": "apspos-capos-2027",
       "featured": true,
       "level": "specialty",
@@ -1768,11 +1843,11 @@
       "credits": "Continuing education: смотреть официальный planner",
       "submissionOpen": false,
       "official": "https://www.arvo.org/annual-meeting",
-      "program": "https://www.arvo.org/annual-meeting",
+      "program": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
       "registration": "https://www.arvo.org/annual-meeting",
       "submit": "https://www.arvo.org/annual-meeting/abstracts",
-      "verified": "2026-08-16",
-      "description": "Крупнейшая международная встреча по eye & vision research. Официальный календарь указывает, что abstract submission открывается в октябре и закрывается в декабре; точные даты в прототипе намеренно не выдуманы.",
+      "verified": "2026-10-08",
+      "description": "ARVO 2027 в Сан-Диего. Применение генеративного ИИ для создания или редактирования текста и изображений тезисов необходимо раскрывать с указанием названия, версии, модели, источника и даты использования; автор отвечает за достоверность и оригинальность.",
       "deadlines": [],
       "submissionNote": "Abstract submission: октябрь–декабрь 2026; точные даты требуют подтверждения на официальной странице."
     },
@@ -2033,6 +2108,34 @@
       "submit": null,
       "verified": "2026-08-16",
       "description": "Подтверждённая календарём APAO будущая ежегодная встреча American Academy of Ophthalmology в Лас-Вегасе.",
+      "deadlines": []
+    },
+    {
+      "id": "apvrs-2027",
+      "featured": true,
+      "level": "specialty",
+      "title": "APVRS 2027",
+      "fullTitle": "20th Asia-Pacific Vitreo-retina Society Congress",
+      "org": "APVRS",
+      "start": "2027-12-03",
+      "end": "2027-12-05",
+      "city": "Куала-Лумпур",
+      "country": "Малайзия",
+      "region": "Азия–Тихоокеанский",
+      "mode": "Очно",
+      "venue": "Куала-Лумпур, Малайзия",
+      "categories": [
+        "Retina",
+        "Research"
+      ],
+      "credits": "CME/НМО: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://apvrs.org/congresses/",
+      "program": "https://apvrs.org/congresses/",
+      "registration": "https://apvrs.org/congresses/",
+      "submit": null,
+      "verified": "2026-10-08",
+      "description": "APVRS подтверждает 20-й конгресс 3–5 декабря 2027 года в Куала-Лумпуре; дедлайны тезисов и регистрации пока не опубликованы.",
       "deadlines": []
     }
   ]
