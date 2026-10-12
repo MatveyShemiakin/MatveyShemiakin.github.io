@@ -120,9 +120,8 @@
       ],
       "watchTerms": [
         "Abstract Submission",
-        "7 September 2026",
-        "Early Bird Registration",
-        "12 October 2026"
+        "September 23",
+        "October 12"
       ]
     },
     {
@@ -312,13 +311,13 @@
     {
       "id": "escrs-winter-global",
       "official": true,
-      "url": "https://www.escrs.org/meetings-and-events",
+      "url": "https://wintermeeting.escrs.org/",
       "eventIds": [
         "escrs-winter-2027"
       ],
       "watchTerms": [
-        "31st ESCRS Winter Meeting",
-        "17 March"
+        "1 November 2026",
+        "23:59 CET"
       ]
     },
     {
@@ -697,6 +696,99 @@
       "watchTerms": [
         "May 13",
         "May 15 2027"
+      ]
+    },
+    {
+      "id": "oor-2027-calendar",
+      "official": true,
+      "url": "https://oor.ru/events",
+      "eventIds": [
+        "glaucoma-vector-2027",
+        "oculoplastics-2027",
+        "vitreoretinal-technologies-2027",
+        "fedorov-readings-2027",
+        "cataract-refractive-cornea-2027"
+      ],
+      "watchTerms": [
+        "2027"
+      ]
+    },
+    {
+      "id": "sos-2026-official",
+      "official": true,
+      "url": "https://sos-conferences.com/",
+      "eventIds": [
+        "sos-2026"
+      ],
+      "watchTerms": [
+        "5–7 November 2026"
+      ]
+    },
+    {
+      "id": "arvo-2027-policies",
+      "official": true,
+      "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+      "eventIds": [
+        "arvo-2027"
+      ],
+      "watchTerms": [
+        "October 16, 2026",
+        "December 4, 2026"
+      ]
+    },
+    {
+      "id": "paao-2027-deadline",
+      "official": true,
+      "url": "https://abstracts.paao2027.com/landing/",
+      "eventIds": [
+        "paao-2027"
+      ],
+      "watchTerms": [
+        "21 de octubre de 2026"
+      ]
+    },
+    {
+      "id": "wgc-2027-movies",
+      "official": true,
+      "url": "https://worldglaucomacongress.org/film-festival-submissions/",
+      "eventIds": [
+        "wgc-2027"
+      ],
+      "watchTerms": [
+        "October 19, 2026"
+      ]
+    },
+    {
+      "id": "wgc-2027-photos",
+      "official": true,
+      "url": "https://worldglaucomacongress.org/photo-exhibition-submission/",
+      "eventIds": [
+        "wgc-2027"
+      ],
+      "watchTerms": [
+        "October 19, 2026"
+      ]
+    },
+    {
+      "id": "apao-2027-authors",
+      "official": true,
+      "url": "https://2027.apaophth.org/apao-2027-faqs/",
+      "eventIds": [
+        "apao-2027"
+      ],
+      "watchTerms": [
+        "October 30, 2026"
+      ]
+    },
+    {
+      "id": "epomec-2026-dates",
+      "official": true,
+      "url": "https://www.epomec.ae/welcome-message/",
+      "eventIds": [
+        "epomec-2026"
+      ],
+      "watchTerms": [
+        "3-5 December 2026"
       ]
     }
   ]

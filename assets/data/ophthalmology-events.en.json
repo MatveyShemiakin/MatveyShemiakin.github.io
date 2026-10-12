@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "language": "en",
-  "verifiedAt": "2026-10-08",
-  "generatedAt": "2026-10-08T08:36:00+03:00",
+  "verifiedAt": "2026-10-12",
+  "generatedAt": "2026-10-12T11:15:00+03:00",
   "events": [
     {
       "id": "fedorov-2026",
@@ -1066,7 +1066,7 @@
       "program": "https://www.acshk26.com/web/subpage.php?mid=123",
       "registration": "https://www.acshk26.com/web/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-10-12",
       "description": "Asia Cornea Society biennial meeting featuring wet labs, DMEK/DSAEK/DALK, keratoconus, corneal infection, ocular surface disease, eye banking and modern keratoplasty.",
       "deadlines": [
         {
@@ -1162,7 +1162,8 @@
           "url": "https://www.epomec.ae/abstract-submission/",
           "note": ""
         }
-      ]
+      ],
+      "submissionNote": "3–5 December retained; official materials also display 4–6 December. Confirm dates with the organiser before booking."
     },
     {
       "id": "mioc-2026",
@@ -1285,6 +1286,59 @@
       "submit": null,
       "verified": "2026-08-16",
       "description": "International Latin American congress focused on paediatric ophthalmology and strabismus.",
+      "deadlines": []
+    },
+    {
+      "id": "glaucoma-vector-2027",
+      "featured": false,
+      "title": "Glaucoma Treatment: Innovative Vector 2027",
+      "fullTitle": "Glaucoma Treatment: Innovative Vector 2027",
+      "org": "Russian Society of Ophthalmologists / MNTK",
+      "start": "2027-02-12",
+      "end": "2027-02-13",
+      "city": "Moscow",
+      "country": "Russia",
+      "region": "Russia",
+      "mode": "In person",
+      "venue": "Moscow",
+      "categories": [
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "Accreditation: to be confirmed",
+      "submissionOpen": false,
+      "official": "https://oor.ru/events",
+      "program": "https://oor.ru/events",
+      "registration": "https://oor.ru/events",
+      "submit": null,
+      "verified": "2026-10-12",
+      "description": "Dates published in the official RSO calendar; registration and submission details pending.",
+      "deadlines": []
+    },
+    {
+      "id": "oculoplastics-2027",
+      "featured": false,
+      "title": "Oculoplastics 2027",
+      "fullTitle": "Oculoplastics 2027",
+      "org": "Russian Society of Ophthalmologists / MNTK",
+      "start": "2027-02-26",
+      "end": "2027-02-26",
+      "city": "Moscow",
+      "country": "Russia",
+      "region": "Russia",
+      "mode": "In person",
+      "venue": "Moscow",
+      "categories": [
+        "Oculoplastics"
+      ],
+      "credits": "Accreditation: to be confirmed",
+      "submissionOpen": false,
+      "official": "https://oor.ru/events",
+      "program": "https://oor.ru/events",
+      "registration": "https://oor.ru/events",
+      "submit": null,
+      "verified": "2026-10-12",
+      "description": "Dates published in the official RSO calendar; registration and submission details pending.",
       "deadlines": []
     },
     {
@@ -1432,14 +1486,25 @@
         "Cornea"
       ],
       "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://www.escrs.org/meetings-and-events",
-      "program": "https://www.escrs.org/meetings-and-events",
-      "registration": "https://www.escrs.org/meetings-and-events",
-      "submit": null,
-      "verified": "2026-08-16",
+      "submissionOpen": true,
+      "official": "https://wintermeeting.escrs.org/",
+      "program": "https://wintermeeting.escrs.org/",
+      "registration": "https://wintermeeting.escrs.org/",
+      "submit": "https://wintermeeting.escrs.org/",
+      "verified": "2026-10-12",
       "description": "The 2027 ESCRS Winter Meeting in Cairo, focused on cataract, refractive and anterior-segment surgery.",
-      "deadlines": []
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Abstracts and YOP surgical videos",
+          "date": "2026-11-01T23:59:00+01:00",
+          "timeKnown": true,
+          "zone": "CET",
+          "url": "https://wintermeeting.escrs.org/",
+          "note": ""
+        }
+      ],
+      "submissionNote": "Free papers, cornea cases, posters/ePosters; YOP surgical videos up to 3 minutes. Best educational video: €750 and registration. Selected ESCRS trainee members with accepted work may receive registration support."
     },
     {
       "id": "paao-2027",
@@ -1473,8 +1538,8 @@
       "official": "https://paao2027.com/landing/",
       "program": "https://paao2027.com/landing/program/",
       "registration": "https://paao2027.com/landing/",
-      "submit": "https://abstracts.paao2027.com/",
-      "verified": "2026-08-16",
+      "submit": "https://abstracts.paao2027.com/landing/",
+      "verified": "2026-10-12",
       "description": "The flagship Pan-American ophthalmology congress in Lima, expected to bring together more than 5,000 delegates across all major subspecialties.",
       "deadlines": [
         {
@@ -1484,9 +1549,18 @@
           "timeKnown": false,
           "zone": "America/Lima",
           "url": "https://paao2027.com/landing/"
+        },
+        {
+          "kind": "abstract",
+          "label": "Scientific submissions",
+          "date": "2026-10-21T17:00:00-05:00",
+          "timeKnown": true,
+          "zone": "America/Lima",
+          "url": "https://abstracts.paao2027.com/landing/",
+          "note": ""
         }
       ],
-      "submissionNote": "The free paper, video and poster submission portal is open; no exact closing date is published on the checked public page."
+      "submissionNote": "Free papers, posters and videos; single case reports must be posters."
     },
     {
       "id": "apao-2027",
@@ -1514,21 +1588,21 @@
         "AI / management"
       ],
       "credits": "CME: check with organiser",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://2027.apaophth.org/",
       "program": "https://2027.apaophth.org/program-overview/",
       "registration": "https://2027.apaophth.org/registration/",
       "submit": "https://congress.2027.apaophth.org/",
-      "verified": "2026-08-16",
+      "verified": "2026-10-12",
       "description": "The 42nd APAO Congress in Singapore, expected to host more than 7,000 ophthalmologists and over 800 international speakers across 19 subspecialties, with dedicated AI, wet-lab and practical-course content.",
       "deadlines": [
         {
           "kind": "abstract",
           "label": "Abstract submission closes",
-          "date": "2026-09-07T23:59:00+08:00",
+          "date": "2026-09-23T23:59:00+08:00",
           "timeKnown": true,
           "zone": "SGT / GMT+8",
-          "url": "https://congress.2027.apaophth.org/",
+          "url": "https://2027.apaophth.org/abstract-submission/",
           "note": "Instruction Courses, Free Papers, Posters, E-posters and Videos."
         },
         {
@@ -1557,8 +1631,18 @@
           "zone": "SGT / GMT+8",
           "url": "https://2027.apaophth.org/important-dates/",
           "note": "Onsite registration follows."
+        },
+        {
+          "kind": "faculty",
+          "label": "Accepted author attendance confirmation",
+          "date": "2026-10-30",
+          "timeKnown": false,
+          "zone": "Asia/Singapore",
+          "url": "https://2027.apaophth.org/apao-2027-faqs/",
+          "note": "Respond using the acceptance email link; registration and payment are required."
         }
-      ]
+      ],
+      "submissionNote": "Submission closed on 23 September 2026, extended from 7 September."
     },
     {
       "id": "fuji-retina-2027",
@@ -1645,6 +1729,33 @@
           "note": "Speaker registration deadline."
         }
       ]
+    },
+    {
+      "id": "vitreoretinal-technologies-2027",
+      "featured": false,
+      "title": "Modern Technologies in Vitreoretinal Disease Treatment 2027",
+      "fullTitle": "Modern Technologies in Vitreoretinal Disease Treatment 2027",
+      "org": "Russian Society of Ophthalmologists / MNTK",
+      "start": "2027-04-02",
+      "end": "2027-04-03",
+      "city": "Ufa",
+      "country": "Russia",
+      "region": "Russia",
+      "mode": "In person",
+      "venue": "Ufa",
+      "categories": [
+        "Retina",
+        "Research"
+      ],
+      "credits": "Accreditation: to be confirmed",
+      "submissionOpen": false,
+      "official": "https://oor.ru/events",
+      "program": "https://oor.ru/events",
+      "registration": "https://oor.ru/events",
+      "submit": null,
+      "verified": "2026-10-12",
+      "description": "Dates published in the official RSO calendar; registration and submission details pending.",
+      "deadlines": []
     },
     {
       "id": "wsopras-2027",
@@ -1798,7 +1909,7 @@
       "program": "https://worldglaucomacongress.org/program/",
       "registration": "https://worldglaucomacongress.org/registration/",
       "submit": "https://worldglaucomacongress.org/abstracts/",
-      "verified": "2026-08-16",
+      "verified": "2026-10-12",
       "description": "Global World Glaucoma Association congress. Abstract submission and registration are open; the interactive programme is available on the official website.",
       "deadlines": [
         {
@@ -1818,8 +1929,27 @@
           "zone": "Europe/Amsterdam",
           "url": "https://worldglaucomacongress.org/registration/",
           "note": "Early-bird deadline."
+        },
+        {
+          "kind": "abstract",
+          "label": "WGA Movie Awards",
+          "date": "2026-10-19T23:59:00+02:00",
+          "timeKnown": true,
+          "zone": "CEST",
+          "url": "https://worldglaucomacongress.org/film-festival-submissions/",
+          "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "Photo exhibition",
+          "date": "2026-10-19T23:59:00+02:00",
+          "timeKnown": true,
+          "zone": "CEST",
+          "url": "https://worldglaucomacongress.org/photo-exhibition-submission/",
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Surgery and Wound Healing and AI / Big Data topics; abstracts up to 2,500 characters in English. WGA Movie Awards: films up to 6 minutes. Photo exhibition: Me and My Mentor."
     },
     {
       "id": "arvo-2027",
@@ -1846,10 +1976,38 @@
       "program": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
       "registration": "https://www.arvo.org/annual-meeting",
       "submit": "https://www.arvo.org/annual-meeting/abstracts",
-      "verified": "2026-10-08",
+      "verified": "2026-10-12",
       "description": "ARVO 2027 Annual Meeting in San Diego. Generative AI used to create or edit abstract text or images must be disclosed with its name, version, model, source, and date of use; authors verify accuracy and originality.",
-      "deadlines": [],
-      "submissionNote": "Abstract submission: October–December 2026; exact dates require confirmation on the official page."
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Submission opens",
+          "date": "2026-10-16T09:00:00-04:00",
+          "timeKnown": true,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "Deadline to begin a draft",
+          "date": "2026-12-04T17:00:00-05:00",
+          "timeKnown": true,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "Finalize and submit existing draft",
+          "date": "2026-12-06T23:59:00-05:00",
+          "timeKnown": true,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "note": ""
+        }
+      ],
+      "submissionNote": "ARVO membership paid through 31 December 2027 is required. Opens 16 October; begin a draft by 4 December and finalize by 6 December. Oral, poster and on-demand options."
     },
     {
       "id": "wcpos-vi-2027",
@@ -1950,6 +2108,32 @@
       "deadlines": []
     },
     {
+      "id": "fedorov-readings-2027",
+      "featured": false,
+      "title": "Fyodorov Readings 2027: Young Scientists Conference",
+      "fullTitle": "Fyodorov Readings 2027: Young Scientists Conference",
+      "org": "Russian Society of Ophthalmologists / MNTK",
+      "start": "2027-06-04",
+      "end": "2027-06-04",
+      "city": "Moscow",
+      "country": "Russia",
+      "region": "Russia",
+      "mode": "In person",
+      "venue": "Moscow",
+      "categories": [
+        "Research"
+      ],
+      "credits": "Accreditation: to be confirmed",
+      "submissionOpen": false,
+      "official": "https://oor.ru/events",
+      "program": "https://oor.ru/events",
+      "registration": "https://oor.ru/events",
+      "submit": null,
+      "verified": "2026-10-12",
+      "description": "Dates published in the official RSO calendar; registration and submission details pending.",
+      "deadlines": []
+    },
+    {
       "id": "macula-society-2027",
       "featured": true,
       "level": "specialty",
@@ -2044,6 +2228,34 @@
       "submit": null,
       "verified": "2026-08-16",
       "description": "Future annual meeting of the American Society of Retina Specialists, a major international meeting for vitreoretinal specialists.",
+      "deadlines": []
+    },
+    {
+      "id": "cataract-refractive-cornea-2027",
+      "featured": false,
+      "title": "Modern Technologies in Cataract, Refractive and Corneal Surgery 2027",
+      "fullTitle": "Modern Technologies in Cataract, Refractive and Corneal Surgery 2027",
+      "org": "Russian Society of Ophthalmologists / MNTK",
+      "start": "2027-10-07",
+      "end": "2027-10-09",
+      "city": "Moscow",
+      "country": "Russia",
+      "region": "Russia",
+      "mode": "In person",
+      "venue": "Moscow",
+      "categories": [
+        "Cataract / IOL",
+        "Refractive",
+        "Cornea"
+      ],
+      "credits": "Accreditation: to be confirmed",
+      "submissionOpen": false,
+      "official": "https://oor.ru/events",
+      "program": "https://oor.ru/events",
+      "registration": "https://oor.ru/events",
+      "submit": null,
+      "verified": "2026-10-12",
+      "description": "Dates published in the official RSO calendar; registration and submission details pending.",
       "deadlines": []
     },
     {

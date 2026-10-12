@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "language": "ru",
-  "verifiedAt": "2026-10-08",
-  "generatedAt": "2026-10-08T08:36:00+03:00",
+  "verifiedAt": "2026-10-12",
+  "generatedAt": "2026-10-12T11:15:00+03:00",
   "events": [
     {
       "id": "fedorov-2026",
@@ -1066,7 +1066,7 @@
       "program": "https://www.acshk26.com/web/subpage.php?mid=123",
       "registration": "https://www.acshk26.com/web/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-10-12",
       "description": "Биеннале Asia Cornea Society с wet-lab, DMEK/DSAEK/DALK, кератоконусом, инфекциями роговицы, ocular surface disease, eye banking и современной кератопластикой.",
       "deadlines": [
         {
@@ -1162,7 +1162,8 @@
           "url": "https://www.epomec.ae/abstract-submission/",
           "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Даты 3–5 декабря сохранены; в официальных материалах также встречаются 4–6 декабря. Перед бронированием уточните у организатора."
     },
     {
       "id": "mioc-2026",
@@ -1285,6 +1286,59 @@
       "submit": null,
       "verified": "2026-08-16",
       "description": "Международный латиноамериканский конгресс по детской офтальмологии и страбизмологии.",
+      "deadlines": []
+    },
+    {
+      "id": "glaucoma-vector-2027",
+      "featured": false,
+      "title": "Лечение глаукомы: инновационный вектор — 2027",
+      "fullTitle": "Лечение глаукомы: инновационный вектор — 2027",
+      "org": "Общество офтальмологов России / МНТК",
+      "start": "2027-02-12",
+      "end": "2027-02-13",
+      "city": "Москва",
+      "country": "Россия",
+      "region": "Россия",
+      "mode": "Очно",
+      "venue": "Москва",
+      "categories": [
+        "Глаукома",
+        "Research"
+      ],
+      "credits": "НМО: уточняется",
+      "submissionOpen": false,
+      "official": "https://oor.ru/events",
+      "program": "https://oor.ru/events",
+      "registration": "https://oor.ru/events",
+      "submit": null,
+      "verified": "2026-10-12",
+      "description": "Даты опубликованы в официальном календаре ООР; условия регистрации и подачи уточняются.",
+      "deadlines": []
+    },
+    {
+      "id": "oculoplastics-2027",
+      "featured": false,
+      "title": "Окулопластика 2027",
+      "fullTitle": "Окулопластика 2027",
+      "org": "Общество офтальмологов России / МНТК",
+      "start": "2027-02-26",
+      "end": "2027-02-26",
+      "city": "Москва",
+      "country": "Россия",
+      "region": "Россия",
+      "mode": "Очно",
+      "venue": "Москва",
+      "categories": [
+        "Окулопластика"
+      ],
+      "credits": "НМО: уточняется",
+      "submissionOpen": false,
+      "official": "https://oor.ru/events",
+      "program": "https://oor.ru/events",
+      "registration": "https://oor.ru/events",
+      "submit": null,
+      "verified": "2026-10-12",
+      "description": "Даты опубликованы в официальном календаре ООР; условия регистрации и подачи уточняются.",
       "deadlines": []
     },
     {
@@ -1432,14 +1486,25 @@
         "Роговица"
       ],
       "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://www.escrs.org/meetings-and-events",
-      "program": "https://www.escrs.org/meetings-and-events",
-      "registration": "https://www.escrs.org/meetings-and-events",
-      "submit": null,
-      "verified": "2026-08-16",
+      "submissionOpen": true,
+      "official": "https://wintermeeting.escrs.org/",
+      "program": "https://wintermeeting.escrs.org/",
+      "registration": "https://wintermeeting.escrs.org/",
+      "submit": "https://wintermeeting.escrs.org/",
+      "verified": "2026-10-12",
       "description": "Зимняя встреча ESCRS 2027 в Каире — специализированное международное событие по катарактальной, рефракционной и переднесегментной хирургии.",
-      "deadlines": []
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Тезисы и хирургические видео YOP",
+          "date": "2026-11-01T23:59:00+01:00",
+          "timeKnown": true,
+          "zone": "CET",
+          "url": "https://wintermeeting.escrs.org/",
+          "note": ""
+        }
+      ],
+      "submissionNote": "Free Papers, Cornea Case Presentations, Posters/ePosters; YOP: видео до 3 минут. Лучшее образовательное видео: €750 и регистрация. Поддержка отдельных trainee-членов ESCRS с принятыми работами."
     },
     {
       "id": "paao-2027",
@@ -1473,8 +1538,8 @@
       "official": "https://paao2027.com/landing/",
       "program": "https://paao2027.com/landing/program/",
       "registration": "https://paao2027.com/landing/",
-      "submit": "https://abstracts.paao2027.com/",
-      "verified": "2026-08-16",
+      "submit": "https://abstracts.paao2027.com/landing/",
+      "verified": "2026-10-12",
       "description": "Главный Панамериканский конгресс 2027 года в Лиме, ожидающий более 5000 участников и охватывающий все ключевые субспециальности.",
       "deadlines": [
         {
@@ -1484,9 +1549,18 @@
           "timeKnown": false,
           "zone": "America/Lima",
           "url": "https://paao2027.com/landing/"
+        },
+        {
+          "kind": "abstract",
+          "label": "Подача научных работ",
+          "date": "2026-10-21T17:00:00-05:00",
+          "timeKnown": true,
+          "zone": "America/Lima",
+          "url": "https://abstracts.paao2027.com/landing/",
+          "note": ""
         }
       ],
-      "submissionNote": "Портал подачи free papers, videos и posters открыт; точный дедлайн на проверенной публичной странице не указан."
+      "submissionNote": "Free Papers, Posters и Videos; единичные клинические случаи — постер."
     },
     {
       "id": "apao-2027",
@@ -1514,21 +1588,21 @@
         "AI / управление"
       ],
       "credits": "CME: уточняется организатором",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://2027.apaophth.org/",
       "program": "https://2027.apaophth.org/program-overview/",
       "registration": "https://2027.apaophth.org/registration/",
       "submit": "https://congress.2027.apaophth.org/",
-      "verified": "2026-08-16",
+      "verified": "2026-10-12",
       "description": "42-й конгресс APAO в Сингапуре. Ожидается более 7 000 офтальмологов, более 800 международных спикеров и 19 субспециальностей; отдельный акцент — AI в офтальмологии, wet-lab и практические курсы.",
       "deadlines": [
         {
           "kind": "abstract",
           "label": "Abstract submission closes",
-          "date": "2026-09-07T23:59:00+08:00",
+          "date": "2026-09-23T23:59:00+08:00",
           "timeKnown": true,
           "zone": "SGT / GMT+8",
-          "url": "https://congress.2027.apaophth.org/",
+          "url": "https://2027.apaophth.org/abstract-submission/",
           "note": "Instruction Courses, Free Papers, Posters, E-posters и Videos."
         },
         {
@@ -1557,8 +1631,18 @@
           "zone": "SGT / GMT+8",
           "url": "https://2027.apaophth.org/important-dates/",
           "note": "После — onsite registration."
+        },
+        {
+          "kind": "faculty",
+          "label": "Подтверждение участия автора",
+          "date": "2026-10-30",
+          "timeKnown": false,
+          "zone": "Asia/Singapore",
+          "url": "https://2027.apaophth.org/apao-2027-faqs/",
+          "note": "Ответ по ссылке из письма о принятии; регистрация и оплата обязательны."
         }
-      ]
+      ],
+      "submissionNote": "Подача закрыта 23 сентября 2026 после продления первоначального срока 7 сентября."
     },
     {
       "id": "fuji-retina-2027",
@@ -1645,6 +1729,33 @@
           "note": "Speaker registration deadline."
         }
       ]
+    },
+    {
+      "id": "vitreoretinal-technologies-2027",
+      "featured": false,
+      "title": "Современные технологии лечения витреоретинальной патологии 2027",
+      "fullTitle": "Современные технологии лечения витреоретинальной патологии 2027",
+      "org": "Общество офтальмологов России / МНТК",
+      "start": "2027-04-02",
+      "end": "2027-04-03",
+      "city": "Уфа",
+      "country": "Россия",
+      "region": "Россия",
+      "mode": "Очно",
+      "venue": "Уфа",
+      "categories": [
+        "Retina",
+        "Research"
+      ],
+      "credits": "НМО: уточняется",
+      "submissionOpen": false,
+      "official": "https://oor.ru/events",
+      "program": "https://oor.ru/events",
+      "registration": "https://oor.ru/events",
+      "submit": null,
+      "verified": "2026-10-12",
+      "description": "Даты опубликованы в официальном календаре ООР; условия регистрации и подачи уточняются.",
+      "deadlines": []
     },
     {
       "id": "wsopras-2027",
@@ -1798,7 +1909,7 @@
       "program": "https://worldglaucomacongress.org/program/",
       "registration": "https://worldglaucomacongress.org/registration/",
       "submit": "https://worldglaucomacongress.org/abstracts/",
-      "verified": "2026-08-16",
+      "verified": "2026-10-12",
       "description": "Глобальный конгресс World Glaucoma Association. Подача тезисов и регистрация открыты; интерактивная программа доступна на официальном сайте.",
       "deadlines": [
         {
@@ -1818,8 +1929,27 @@
           "zone": "Europe/Amsterdam",
           "url": "https://worldglaucomacongress.org/registration/",
           "note": "Early bird deadline."
+        },
+        {
+          "kind": "abstract",
+          "label": "WGA Movie Awards",
+          "date": "2026-10-19T23:59:00+02:00",
+          "timeKnown": true,
+          "zone": "CEST",
+          "url": "https://worldglaucomacongress.org/film-festival-submissions/",
+          "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "Фотовыставка",
+          "date": "2026-10-19T23:59:00+02:00",
+          "timeKnown": true,
+          "zone": "CEST",
+          "url": "https://worldglaucomacongress.org/photo-exhibition-submission/",
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Направления Surgery and Wound Healing и AI / Big Data; тезисы до 2500 знаков, на английском. WGA Movie Awards: видео до 6 минут. Фотовыставка: Me and My Mentor."
     },
     {
       "id": "arvo-2027",
@@ -1846,10 +1976,38 @@
       "program": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
       "registration": "https://www.arvo.org/annual-meeting",
       "submit": "https://www.arvo.org/annual-meeting/abstracts",
-      "verified": "2026-10-08",
+      "verified": "2026-10-12",
       "description": "ARVO 2027 в Сан-Диего. Применение генеративного ИИ для создания или редактирования текста и изображений тезисов необходимо раскрывать с указанием названия, версии, модели, источника и даты использования; автор отвечает за достоверность и оригинальность.",
-      "deadlines": [],
-      "submissionNote": "Abstract submission: октябрь–декабрь 2026; точные даты требуют подтверждения на официальной странице."
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Открытие подачи",
+          "date": "2026-10-16T09:00:00-04:00",
+          "timeKnown": true,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "Создание черновика: крайний срок",
+          "date": "2026-12-04T17:00:00-05:00",
+          "timeKnown": true,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "Финальная отправка черновика",
+          "date": "2026-12-06T23:59:00-05:00",
+          "timeKnown": true,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "note": ""
+        }
+      ],
+      "submissionNote": "Членство ARVO оплачено по 31 декабря 2027. Подача открывается 16 октября; создать черновик до 4 декабря, финализировать до 6 декабря. Oral, poster, on-demand."
     },
     {
       "id": "wcpos-vi-2027",
@@ -1950,6 +2108,32 @@
       "deadlines": []
     },
     {
+      "id": "fedorov-readings-2027",
+      "featured": false,
+      "title": "Федоровские чтения — 2027: конференция молодых учёных",
+      "fullTitle": "Федоровские чтения — 2027: конференция молодых учёных",
+      "org": "Общество офтальмологов России / МНТК",
+      "start": "2027-06-04",
+      "end": "2027-06-04",
+      "city": "Москва",
+      "country": "Россия",
+      "region": "Россия",
+      "mode": "Очно",
+      "venue": "Москва",
+      "categories": [
+        "Research"
+      ],
+      "credits": "НМО: уточняется",
+      "submissionOpen": false,
+      "official": "https://oor.ru/events",
+      "program": "https://oor.ru/events",
+      "registration": "https://oor.ru/events",
+      "submit": null,
+      "verified": "2026-10-12",
+      "description": "Даты опубликованы в официальном календаре ООР; условия регистрации и подачи уточняются.",
+      "deadlines": []
+    },
+    {
       "id": "macula-society-2027",
       "featured": true,
       "level": "specialty",
@@ -2044,6 +2228,34 @@
       "submit": null,
       "verified": "2026-08-16",
       "description": "Будущая ежегодная встреча American Society of Retina Specialists — одна из ключевых международных конференций для витреоретинальных специалистов.",
+      "deadlines": []
+    },
+    {
+      "id": "cataract-refractive-cornea-2027",
+      "featured": false,
+      "title": "Современные технологии катарактальной, рефракционной и роговичной хирургии 2027",
+      "fullTitle": "Современные технологии катарактальной, рефракционной и роговичной хирургии 2027",
+      "org": "Общество офтальмологов России / МНТК",
+      "start": "2027-10-07",
+      "end": "2027-10-09",
+      "city": "Москва",
+      "country": "Россия",
+      "region": "Россия",
+      "mode": "Очно",
+      "venue": "Москва",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Рефракция",
+        "Роговица"
+      ],
+      "credits": "НМО: уточняется",
+      "submissionOpen": false,
+      "official": "https://oor.ru/events",
+      "program": "https://oor.ru/events",
+      "registration": "https://oor.ru/events",
+      "submit": null,
+      "verified": "2026-10-12",
+      "description": "Даты опубликованы в официальном календаре ООР; условия регистрации и подачи уточняются.",
       "deadlines": []
     },
     {
