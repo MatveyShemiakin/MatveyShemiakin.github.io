@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "language": "ru",
-  "verifiedAt": "2026-10-12",
-  "generatedAt": "2026-10-12T11:15:00+03:00",
+  "verifiedAt": "2026-10-15",
+  "generatedAt": "2026-10-15T08:33:17+03:00",
   "events": [
     {
       "id": "fedorov-2026",
@@ -1316,6 +1316,34 @@
       "deadlines": []
     },
     {
+      "id": "euretina-sfm-2027",
+      "featured": true,
+      "level": "specialty",
+      "title": "EURETINA Special Focus 2027",
+      "fullTitle": "Euretina Special Focus Meeting 2027 — Inherited Retinal Diseases",
+      "org": "Euretina",
+      "start": "2027-02-26",
+      "end": "2027-02-27",
+      "city": "Любляна",
+      "country": "Словения",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Ljubljana, Slovenia",
+      "categories": [
+        "Retina",
+        "Research"
+      ],
+      "credits": "Аккредитация: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://euretina.org/sfm-2027/",
+      "program": "https://euretina.org/sfm-2027/",
+      "registration": "https://euretina.org/sfm-2027/",
+      "submit": null,
+      "verified": "2026-10-15",
+      "description": "Встреча по наследственным заболеваниям сетчатки: генотипирование, визуализация, новые методы лечения и клинические случаи. Подробности регистрации ожидаются.",
+      "deadlines": []
+    },
+    {
       "id": "oculoplastics-2027",
       "featured": false,
       "title": "Окулопластика 2027",
@@ -1396,9 +1424,9 @@
       "submissionOpen": true,
       "official": "https://ossacongress.co.za/",
       "program": "https://ossacongress.co.za/programme/",
-      "registration": "https://ossacongress.co.za/",
+      "registration": "https://ossacongress.co.za/attendance/",
       "submit": "https://ossacongress.co.za/programme/",
-      "verified": "2026-08-16",
+      "verified": "2026-10-15",
       "description": "Национальный офтальмологический конгресс ЮАР: masterclasses 10 марта и основная научная программа 11–13 марта.",
       "deadlines": [
         {
@@ -1408,6 +1436,15 @@
           "timeKnown": false,
           "zone": "Africa/Johannesburg",
           "url": "https://ossacongress.co.za/introduction/"
+        },
+        {
+          "kind": "registration",
+          "label": "Early bird: регистрация и оплата",
+          "date": "2026-11-06",
+          "timeKnown": false,
+          "zone": "Africa/Johannesburg",
+          "url": "https://ossacongress.co.za/attendance/",
+          "note": "Тарифная таблица: по 6 ноября; стандартный тариф с 7 ноября. Точное время не указано."
         }
       ]
     },
@@ -1814,6 +1851,35 @@
       ]
     },
     {
+      "id": "euretinai-2027",
+      "featured": true,
+      "level": "specialty",
+      "title": "EuretinaAI 2027",
+      "fullTitle": "EuretinaAI: AI in Retina",
+      "org": "Euretina",
+      "start": "2027-04-09",
+      "end": "2027-04-10",
+      "city": "Лондон",
+      "country": "Великобритания",
+      "region": "Европа",
+      "mode": "Гибрид",
+      "venue": "London, United Kingdom",
+      "categories": [
+        "Retina",
+        "AI / управление",
+        "Research"
+      ],
+      "credits": "Аккредитация: уточняется организатором",
+      "submissionOpen": false,
+      "official": "https://euretina.org/euretinai-2027/",
+      "program": "https://euretina.org/euretinai-2027/",
+      "registration": "https://euretina.org/euretinai-2027/",
+      "submit": null,
+      "verified": "2026-10-15",
+      "description": "ИИ в диагностике и лечении заболеваний сетчатки, исследованиях и клинической практике. Предусмотрена онлайн-трансляция; детали регистрации ожидаются.",
+      "deadlines": []
+    },
+    {
       "id": "apspos-capos-2027",
       "featured": true,
       "level": "specialty",
@@ -2174,7 +2240,7 @@
       "id": "soe-2027",
       "featured": true,
       "level": "major",
-      "title": "SOE 2027",
+      "title": "SOE / ISOT 2027",
       "fullTitle": "25-й конгресс European Society of Ophthalmology",
       "org": "European Society of Ophthalmology · ISOT · EUPO",
       "start": "2027-06-18",
@@ -2194,14 +2260,43 @@
         "Research"
       ],
       "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
+      "submissionOpen": true,
       "official": "https://soe2027.soevision.org/",
       "program": "https://soe2027.soevision.org/",
       "registration": "https://soe2027.soevision.org/",
-      "submit": null,
-      "verified": "2026-08-16",
+      "submit": "https://soe2027.soevision.org/abstract-submission/",
+      "verified": "2026-10-15",
       "description": "25-й юбилейный мультиспециализированный конгресс SOE в Афинах совместно с ISOT и EUPO; симпозиумы, workshops, live surgery, debates и ocular trauma.",
-      "deadlines": []
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "SOE: тезисы",
+          "date": "2027-01-19T23:59:00+00:00",
+          "timeKnown": true,
+          "zone": "GMT",
+          "url": "https://soe2027.soevision.org/abstract-submission/",
+          "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "ISOT: oral / video / ePoster",
+          "date": "2027-01-19T23:59:00+00:00",
+          "timeKnown": true,
+          "zone": "GMT",
+          "url": "https://soe2027.soevision.org/isot-abstract-submission/",
+          "note": ""
+        },
+        {
+          "kind": "faculty",
+          "label": "Регистрация авторов принятых работ",
+          "date": "2027-03-24",
+          "timeKnown": false,
+          "zone": "Europe/Athens",
+          "url": "https://soe2027.soevision.org/abstract-submission/",
+          "note": "Для включения в сборник тезисов."
+        }
+      ],
+      "submissionNote": "SOE: oral papers и posters; ISOT: oral, video и ePoster по травме глаза. Английский язык, до 2000 знаков. Авторам принятых работ необходима очная презентация и регистрация до 24 марта."
     },
     {
       "id": "asrs-2027",
@@ -2231,6 +2326,86 @@
       "deadlines": []
     },
     {
+      "id": "euretina-2027",
+      "featured": true,
+      "level": "specialty",
+      "title": "EURETINA 2027",
+      "fullTitle": "27th Euretina Congress",
+      "org": "Euretina",
+      "start": "2027-09-16",
+      "end": "2027-09-19",
+      "city": "Копенгаген",
+      "country": "Дания",
+      "region": "Европа",
+      "mode": "Гибрид",
+      "venue": "Bella Center, Copenhagen",
+      "categories": [
+        "Retina",
+        "Research"
+      ],
+      "credits": "Аккредитация: уточняется организатором",
+      "submissionOpen": true,
+      "official": "https://euretina.org/copenhagen-27/",
+      "program": "https://euretina.org/copenhagen-27/",
+      "registration": "https://euretina.org/copenhagen-27/",
+      "submit": "https://euretina.org/copenhagen-27/session-submission-terms/",
+      "verified": "2026-10-15",
+      "description": "27-й конгресс EURETINA. Euretina Innovation Spotlight пройдёт 15 сентября в Bella Center перед основным конгрессом. Возможен онлайн-доступ.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Курсы и симпозиумы: предложения",
+          "date": "2026-11-18T23:59:00+01:00",
+          "timeKnown": true,
+          "zone": "CET",
+          "url": "https://euretina.org/copenhagen-27/session-submission-terms/",
+          "note": "Для подачи необходимо членство Euretina."
+        }
+      ],
+      "submissionNote": "Открыты предложения сессий; дедлайн обычных научных тезисов 2027 пока не подтверждён."
+    },
+    {
+      "id": "dog-2027",
+      "featured": true,
+      "level": "specialty",
+      "title": "DOG 2027",
+      "fullTitle": "DOG 2027 Congress",
+      "org": "Deutsche Ophthalmologische Gesellschaft",
+      "start": "2027-09-30",
+      "end": "2027-10-03",
+      "city": "Берлин",
+      "country": "Германия",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Estrel Berlin",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Retina",
+        "Глаукома",
+        "Research"
+      ],
+      "credits": "Аккредитация: уточняется организатором",
+      "submissionOpen": true,
+      "official": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
+      "program": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
+      "registration": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
+      "submit": "https://dog-kongress.de/",
+      "verified": "2026-10-15",
+      "description": "Ежегодный конгресс DOG. Объявлены даты и приём предложений научных сессий.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Предложения научных сессий",
+          "date": "2026-10-31",
+          "timeKnown": false,
+          "zone": "Europe/Berlin",
+          "url": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
+          "note": "Точное время не опубликовано; срок относится к предложениям сессий."
+        }
+      ]
+    },
+    {
       "id": "cataract-refractive-cornea-2027",
       "featured": false,
       "title": "Современные технологии катарактальной, рефракционной и роговичной хирургии 2027",
@@ -2257,6 +2432,45 @@
       "verified": "2026-10-12",
       "description": "Даты опубликованы в официальном календаре ООР; условия регистрации и подачи уточняются.",
       "deadlines": []
+    },
+    {
+      "id": "escrs-2027",
+      "featured": true,
+      "level": "specialty",
+      "title": "ESCRS Congress 2027",
+      "fullTitle": "45th Congress of the ESCRS",
+      "org": "European Society of Cataract and Refractive Surgeons",
+      "start": "2027-10-15",
+      "end": "2027-10-19",
+      "city": "Мадрид",
+      "country": "Испания",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "IFEMA Madrid",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Рефракция",
+        "Роговица"
+      ],
+      "credits": "Аккредитация: уточняется организатором",
+      "submissionOpen": true,
+      "official": "https://congress.escrs.org/",
+      "program": "https://congress.escrs.org/",
+      "registration": "https://congress.escrs.org/",
+      "submit": "https://congress.escrs.org/",
+      "verified": "2026-10-15",
+      "description": "45-й конгресс ESCRS. Открыта подача Instructional Courses; курс длится 90 минут, состав — 2–6 преподавателей, включая руководителя.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Instructional Courses: подача",
+          "date": "2026-10-23T23:59:00+02:00",
+          "timeKnown": true,
+          "zone": "CEST",
+          "url": "https://congress.escrs.org/",
+          "note": "Продления не предусмотрено. Срок относится к учебным курсам."
+        }
+      ]
     },
     {
       "id": "retina-society-2027",

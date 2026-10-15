@@ -790,6 +790,111 @@
       "watchTerms": [
         "3-5 December 2026"
       ]
+    },
+    {
+      "id": "escrs-2027-official",
+      "official": true,
+      "url": "https://congress.escrs.org/",
+      "eventIds": [
+        "escrs-2027"
+      ],
+      "watchTerms": [
+        "23 October 2026",
+        "15 – 19 October 2027"
+      ]
+    },
+    {
+      "id": "dog-2027-official",
+      "official": true,
+      "url": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
+      "eventIds": [
+        "dog-2027"
+      ],
+      "watchTerms": [
+        "31. Oktober 2026",
+        "Estrel Berlin"
+      ]
+    },
+    {
+      "id": "soe-2027-submissions",
+      "official": true,
+      "url": "https://soe2027.soevision.org/abstract-submission/",
+      "eventIds": [
+        "soe-2027"
+      ],
+      "watchTerms": [
+        "19 January 2027",
+        "24 March 2027"
+      ]
+    },
+    {
+      "id": "isot-2027-submissions",
+      "official": true,
+      "url": "https://soe2027.soevision.org/isot-abstract-submission/",
+      "eventIds": [
+        "soe-2027"
+      ],
+      "watchTerms": [
+        "19 January 2027"
+      ]
+    },
+    {
+      "id": "euretina-sfm-2027-official",
+      "official": true,
+      "url": "https://euretina.org/sfm-2027/",
+      "eventIds": [
+        "euretina-sfm-2027"
+      ],
+      "watchTerms": [
+        "26–27 February 2027",
+        "Ljubljana"
+      ]
+    },
+    {
+      "id": "euretinai-2027-official",
+      "official": true,
+      "url": "https://euretina.org/euretinai-2027/",
+      "eventIds": [
+        "euretinai-2027"
+      ],
+      "watchTerms": [
+        "9–10 April 2027",
+        "London"
+      ]
+    },
+    {
+      "id": "euretina-2027-official",
+      "official": true,
+      "url": "https://euretina.org/copenhagen-27/",
+      "eventIds": [
+        "euretina-2027"
+      ],
+      "watchTerms": [
+        "16-19 September 2027",
+        "15 September 2027"
+      ]
+    },
+    {
+      "id": "euretina-2027-sessions",
+      "official": true,
+      "url": "https://euretina.org/copenhagen-27/session-submission-terms/",
+      "eventIds": [
+        "euretina-2027"
+      ],
+      "watchTerms": [
+        "18th November 2026"
+      ]
+    },
+    {
+      "id": "ossa-2027-registration",
+      "official": true,
+      "url": "https://ossacongress.co.za/attendance/",
+      "eventIds": [
+        "ossa-2027"
+      ],
+      "watchTerms": [
+        "6 Nov 2026"
+      ]
     }
   ]
 }
