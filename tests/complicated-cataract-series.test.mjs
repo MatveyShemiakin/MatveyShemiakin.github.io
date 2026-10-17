@@ -104,9 +104,10 @@ test('navigation and sitemaps make every new page discoverable',()=>{
   const mega=read('site-mega-nav.js');
   assert.match(mega,/Простые вопросы — сложные решения/);
   assert.match(mega,/Simple questions — complex decisions/);
-  const mobile=read('mobile-nav.js');
-  assert.match(mobile,/Осложнённая катаракта/);
-  assert.match(mobile,/Complicated cataract/);
+  const index=JSON.parse(read('site-search-index.json'));
+  for(const url of ['/for-doctors/complicated-cataract/','/en/for-doctors/complicated-cataract/']){
+    assert.ok(index.records.some(item=>item.url.startsWith(url)),`Search must include ${url}`);
+  }
   const map=read('sitemap.xml');
   const text=read('sitemap.txt');
   for(const url of [
@@ -123,10 +124,10 @@ test('navigation and sitemaps make every new page discoverable',()=>{
 test('question-style section headings end with a question mark',()=>{
   const ru=read(paths.ruArticle);
   const en=read(paths.enArticle);
-  assert.match(ru,/<h3>Почему мелкая передняя камера делает операцию сложнее\?<\/h3>/);
-  assert.match(ru,/<h3>Что должно быть готово в операционной\?<\/h3>/);
-  assert.match(en,/<h3>Why does a shallow anterior chamber make surgery more difficult\?<\/h3>/);
-  assert.match(en,/<h3>What should be prepared in the operating room\?<\/h3>/);
+  assert.match(ru,/<h3\b[^>]*>Почему мелкая передняя камера делает операцию сложнее\?<\/h3>/);
+  assert.match(ru,/<h3\b[^>]*>Что должно быть готово в операционной\?<\/h3>/);
+  assert.match(en,/<h3\b[^>]*>Why does a shallow anterior chamber make surgery more difficult\?<\/h3>/);
+  assert.match(en,/<h3\b[^>]*>What should be prepared in the operating room\?<\/h3>/);
 });
 
 test('series headers keep language and colour controls in one non-wrapping action row',()=>{

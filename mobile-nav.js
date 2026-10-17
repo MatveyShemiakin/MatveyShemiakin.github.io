@@ -1,4 +1,5 @@
 (function(){
+  if(document.querySelector('.site-mobile-search'))return;
   const lang=(document.documentElement.lang||'ru').toLowerCase().startsWith('en')?'en':'ru';
   const cleanPath=window.location.pathname.replace(/\/{2,}/g,'/').replace(/\/+$/,'');
   const path=cleanPath?cleanPath+'/':'/';
@@ -20,41 +21,6 @@
     patients:'/patients/',doctors:'/for-doctors/',about:'/#about'
   };
 
-  const index=lang==='en'?[
-    {title:'Patients',note:'Patient information',url:'/en/patients/',keywords:'patients surgery recovery questions cataract'},
-    {title:'Intraocular lens dislocation',note:'Symptoms, examination and treatment',url:'/en/patients/iol-dislocation/',keywords:'iol lens dislocation displacement double vision surgery'},
-    {title:'Before eye surgery',note:'Preparation and common questions',url:'/en/patients/before-surgery/',keywords:'before surgery preparation food medicines'},
-    {title:'Surgery day',note:'What to expect in hospital',url:'/en/patients/surgery-day/',keywords:'operation day hospital pain anaesthesia'},
-    {title:'Early recovery',note:'The first days after surgery',url:'/en/patients/recovery/',keywords:'recovery after surgery restrictions warning signs'},
-    {title:'Daily life after surgery',note:'Activities and restrictions',url:'/en/patients/daily-life/',keywords:'daily life washing sleep sport work'},
-    {title:'Eye drops',note:'How to use prescribed drops',url:'/en/patients/eye-drops/',keywords:'drops medicines instillation schedule'},
-    {title:'Glasses and vision',note:'Vision correction after surgery',url:'/en/patients/glasses/',keywords:'glasses refraction vision correction'},
-    {title:'For doctors',note:'Professional ophthalmology library',url:'/en/for-doctors/',keywords:'doctors clinical notes ophthalmology'},
-    {title:'Simple questions — complex decisions',note:'Author-led ophthalmic surgery series',url:'/en/for-doctors/simple-questions/',keywords:'author series surgical decisions ophthalmology'},
-    {title:'Complicated cataract',note:'Risk recognition and surgical planning',url:'/en/for-doctors/complicated-cataract/',keywords:'complex complicated cataract iol posterior capsule shallow chamber surgery'},
-    {title:'Follow-up after penetrating keratoplasty',note:'Clinical material for doctors',url:'/en/for-doctors/penetrating-keratoplasty/',keywords:'corneal graft keratoplasty transplant follow up'},
-    {title:'About Matvey Shemyakin',note:'Clinical, surgical and research work',url:'/en/#about',keywords:'about doctor ophthalmologist surgeon biography'},
-    {title:'Clinical specialties',note:'Main surgical directions',url:'/en/#directions',keywords:'specialties cataract glaucoma cornea retina'},
-    {title:'Research and publications',note:'Scientific work',url:'/en/#science',keywords:'science research publications conferences'}
-  ]:[
-    {title:'Пациентам',note:'Информация для пациентов',url:'/patients/',keywords:'пациентам операция восстановление вопросы катаракта'},
-    {title:'Смещение искусственного хрусталика',note:'Симптомы, обследование и лечение',url:'/patients/iol-dislocation/',keywords:'иол дислокация смещение линза двоение операция'},
-    {title:'До операции на глазах',note:'Подготовка и частые вопросы',url:'/patients/before-surgery/',keywords:'до операции подготовка еда лекарства'},
-    {title:'День операции',note:'Что ожидает пациента в стационаре',url:'/patients/surgery-day/',keywords:'день операции стационар боль анестезия'},
-    {title:'Первые дни после операции',note:'Раннее восстановление',url:'/patients/recovery/',keywords:'восстановление после операции ограничения тревожные признаки'},
-    {title:'Повседневная жизнь после операции',note:'Режим и ограничения',url:'/patients/daily-life/',keywords:'жизнь умывание сон спорт работа'},
-    {title:'Глазные капли',note:'Как применять назначенные препараты',url:'/patients/eye-drops/',keywords:'капли лекарства закапывание схема'},
-    {title:'Очки и зрение',note:'Коррекция зрения после операции',url:'/patients/glasses/',keywords:'очки рефракция зрение коррекция'},
-    {title:'Для врачей',note:'Профессиональная библиотека по офтальмологии',url:'/for-doctors/',keywords:'врачам клинические конспекты офтальмология'},
-    {title:'Простые вопросы — сложные решения',note:'Авторский раздел по офтальмохирургии',url:'/for-doctors/simple-questions/',keywords:'авторский раздел хирургические решения офтальмология'},
-    {title:'Осложнённая катаракта',note:'Распознавание риска и планирование операции',url:'/for-doctors/complicated-cataract/',keywords:'осложненная сложная катаракта иол задняя капсула мелкая передняя камера хирургия'},
-    {title:'Бактериальный кератит',note:'Клинический конспект для врачей',url:'/for-doctors/bacterial-keratitis/',keywords:'кератит язва роговица инфекция антибиотики'},
-    {title:'Ведение после сквозной кератопластики',note:'Клинический материал для врачей',url:'/for-doctors/penetrating-keratoplasty/',keywords:'роговица трансплантат кератопластика наблюдение'},
-    {title:'О Матвее Шемякине',note:'Клиническая, хирургическая и научная работа',url:'/#about',keywords:'об авторе врач офтальмолог хирург биография'},
-    {title:'Направления работы',note:'Основные хирургические направления',url:'/#directions',keywords:'направления катаракта глаукома роговица сетчатка'},
-    {title:'Наука и публикации',note:'Научная деятельность',url:'/#science',keywords:'наука исследования публикации конференции'}
-  ];
-
   function icon(name){
     const icons={
       patients:'<path d="M8 11.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path><path d="M2.5 20.5v-1.2A5.3 5.3 0 0 1 7.8 14h.4a5.3 5.3 0 0 1 5.3 5.3v1.2"></path><path d="M17 8v6M14 11h6"></path>',
@@ -75,6 +41,8 @@
   }
 
   function detectTheme(){
+    const rootTheme=document.documentElement.dataset.siteTheme||document.documentElement.dataset.theme||document.body.dataset.theme;
+    if(rootTheme==='dark'||rootTheme==='light')return rootTheme;
     if(document.querySelector('.theme-dark,[data-theme="dark"]'))return'dark';
     if(document.querySelector('.theme-light,[data-theme="light"]'))return'light';
     const keys=['iol_dislocation_theme','site_theme','site-theme','theme','color-theme','pkp_theme'];
@@ -95,6 +63,7 @@
 
   const search=document.createElement('div');
   search.className='site-mobile-search';
+  search.id='site-search-dialog';
   search.hidden=true;
   search.innerHTML=`
     <button class="site-mobile-search__backdrop" type="button" data-mobile-search-close tabindex="-1" aria-label="${text.close}"></button>
@@ -107,7 +76,7 @@
         <input class="site-mobile-search__input" type="search" autocomplete="off" enterkeyhint="search" placeholder="${text.searchPlaceholder}" aria-label="${text.searchPlaceholder}">
         <button class="site-mobile-search__submit" type="submit" aria-label="${text.searchButton}">${icon('search')}</button>
       </form>
-      <div class="site-mobile-search__results" aria-live="polite"></div>
+      <p class="site-mobile-search__empty" role="status" aria-live="polite"></p><div class="site-mobile-search__results"></div>
     </section>`;
 
   document.body.append(nav,search);
@@ -124,29 +93,151 @@
     });
   }
 
-  function normalize(value){return value.toLowerCase().replace(/ё/g,'е').replace(/[^a-zа-я0-9\s-]/gi,' ').replace(/\s+/g,' ').trim()}
-  function render(query){
-    const terms=normalize(query).split(' ').filter(Boolean);
-    const matches=(terms.length?index.filter(item=>{const hay=normalize(item.title+' '+item.note+' '+item.keywords);return terms.every(term=>hay.includes(term))}):index.slice(0,6)).slice(0,8);
-    results.replaceChildren();
-    if(!matches.length){const empty=document.createElement('p');empty.className='site-mobile-search__empty';empty.textContent=text.noResults;results.appendChild(empty);return}
-    matches.forEach(item=>{
-      const link=document.createElement('a');link.className='site-mobile-search__result';link.href=item.url;
-      const copy=document.createElement('span');const strong=document.createElement('strong');strong.textContent=item.title;const small=document.createElement('small');small.textContent=item.note;copy.append(strong,small);
-      const arrow=document.createElementNS('http://www.w3.org/2000/svg','svg');arrow.setAttribute('viewBox','0 0 24 24');arrow.setAttribute('aria-hidden','true');arrow.innerHTML='<path d="M5 12h14M14 7l5 5-5 5"></path>';
-      link.append(copy,arrow);results.appendChild(link);
+  const status=search.querySelector('[role="status"]');
+  const messages=lang==='en'?{
+    loading:'Loading website search…',error:'Search could not load. Check your connection and try again.',retry:'Try again',
+    found:n=>`${n} matching sections`,more:'Show more',initial:'Search all public materials in Russian and English.'
+  }:{
+    loading:'Загрузка поиска по сайту…',error:'Не удалось загрузить поиск. Проверьте соединение и повторите попытку.',retry:'Повторить',
+    found:n=>`Найдено разделов: ${n}`,more:'Показать ещё',initial:'Поиск по всем открытым материалам на русском и английском.'
+  };
+  let records=null,loading=null,requestId=0,shown=20,opener=null;
+  let background=[];
+  const desktop=document.createElement('button');
+  desktop.className='site-mobile-nav__item';
+  desktop.type='button';
+  desktop.dataset.siteSearchOpen='';
+  desktop.innerHTML=icon('search')+'<span>'+text.search+'</span>';
+  desktop.setAttribute('aria-haspopup','dialog');
+  desktop.setAttribute('aria-controls',search.id);
+  desktop.setAttribute('aria-expanded','false');
+  const mount=['header .nav-right','header .header-actions','header .professional-updates-nav-actions','header .doctors-nav-actions','header .nav-actions','header .header-row','header .terms-nav-links','header .container.nav','header .header-inner','.site-head .container','.privacy-shell'].map(selector=>document.querySelector(selector)).find(Boolean);
+  if(mount){if(mount.matches('.privacy-shell'))mount.querySelector('.privacy-back')?.after(desktop);else mount.appendChild(desktop);}
+  searchButton.setAttribute('aria-controls',search.id);
+  searchButton.setAttribute('aria-haspopup','dialog');
+
+  function loadCore(){
+    if(window.SiteSearch)return Promise.resolve();
+    return new Promise((resolve,reject)=>{
+      const script=document.createElement('script');
+      script.src='/site-search-core.js?v=20261017-1';
+      const timeout=setTimeout(()=>{script.remove();reject(new Error('Search engine timeout'));},15000);
+      script.onload=()=>{clearTimeout(timeout);window.SiteSearch?resolve():reject(new Error('Invalid engine'));};
+      script.onerror=()=>{clearTimeout(timeout);script.remove();reject(new Error('Search engine unavailable'));};
+      document.head.appendChild(script);
     });
+  }
+  async function loadIndex(){
+    if(records)return records;
+    if(loading)return loading;
+    loading=(async()=>{
+      const controller=new AbortController();
+      const timeout=setTimeout(()=>controller.abort(),15000);
+      try{
+        const [,response]=await Promise.all([loadCore(),fetch('/site-search-index.json?v=20261017-1',{signal:controller.signal,cache:'no-cache'})]);
+        if(!response.ok)throw new Error('Search index HTTP '+response.status);
+        const data=await response.json();
+        if(data.version!==1||!Array.isArray(data.records))throw new Error('Invalid index');
+        records=data.records.filter(item=>item&&typeof item.title==='string'&&typeof item.text==='string'&&window.SiteSearch.safeURL(item.url));
+        return records;
+      }finally{clearTimeout(timeout);loading=null;}
+    })();
+    return loading;
+  }
+  function appendHighlight(host,value,query){
+    const terms=window.SiteSearch.terms(query);
+    String(value).split(/([\p{L}\p{N}]+)/gu).forEach(part=>{
+      const normalized=window.SiteSearch.stem(window.SiteSearch.normalize(part));
+      if(normalized&&terms.some(term=>normalized===term||(term.length>=4&&normalized.startsWith(term)))){
+        const mark=document.createElement('mark');mark.textContent=part;host.append(mark);
+      }else host.append(document.createTextNode(part));
+    });
+  }
+  function action(label,handler){
+    const button=document.createElement('button');button.type='button';button.className='site-mobile-search__result';button.textContent=label;button.addEventListener('click',handler);results.append(button);return button;
+  }
+  async function render(query){
+    const id=++requestId;
+    results.replaceChildren();
+    search.querySelector('form').removeAttribute('aria-busy');
+    if(!query.trim()){status.textContent=messages.initial;return;}
+    status.textContent=messages.loading;
+    search.querySelector('form').setAttribute('aria-busy','true');
+    try{
+      await loadIndex();
+      if(id!==requestId||search.hidden)return;
+      const matches=window.SiteSearch.search(records,query,lang);
+      status.textContent=matches.length?messages.found(matches.length):text.noResults;
+      matches.slice(0,shown).forEach(item=>{
+        const link=document.createElement('a');link.className='site-mobile-search__result';link.href=item.url;
+        const copy=document.createElement('span');
+        const strong=document.createElement('strong');appendHighlight(strong,item.title,query);
+        const small=document.createElement('small');small.textContent=item.page+' · '+item.lang.toUpperCase();
+        const excerpt=document.createElement('small');appendHighlight(excerpt,window.SiteSearch.snippet(item.text,query),query);
+        copy.append(strong,small,excerpt);
+        const arrow=document.createElement('span');arrow.setAttribute('aria-hidden','true');arrow.textContent='→';link.append(copy,arrow);results.append(link);
+        link.addEventListener('click',()=>{closeSearch(false);if(new URL(link.href).pathname===location.pathname)setTimeout(revealHash,0);});
+      });
+      if(matches.length>shown)action(messages.more,()=>{const position=shown;shown+=20;render(input.value).then(()=>results.children[position]?.focus());});
+    }catch(_){
+      if(id!==requestId||search.hidden)return;
+      status.textContent=messages.error;action(messages.retry,()=>render(input.value));
+    }finally{
+      if(id===requestId)search.querySelector('form').removeAttribute('aria-busy');
+    }
   }
 
   function syncTheme(){const theme=detectTheme();if(nav.dataset.theme!==theme)nav.dataset.theme=theme;if(search.dataset.theme!==theme)search.dataset.theme=theme}
-  function openSearch(){previousActive=currentSection();search.hidden=false;document.body.classList.add('site-mobile-search-open');searchButton.setAttribute('aria-expanded','true');applyActive('search');render(input.value);requestAnimationFrame(()=>input.focus())}
-  function closeSearch(){search.hidden=true;document.body.classList.remove('site-mobile-search-open');searchButton.setAttribute('aria-expanded','false');applyActive(previousActive);searchButton.focus()}
-
+  function openSearch(event){
+    if(!search.hidden)return;
+    opener=event?.currentTarget||searchButton;
+    previousActive=currentSection();search.hidden=false;
+    document.body.classList.add('site-mobile-search-open');
+    [searchButton,desktop].forEach(button=>button.setAttribute('aria-expanded','true'));
+    applyActive('search');syncTheme();shown=20;render(input.value);
+    background=[...document.body.children].filter(element=>element!==search&&!element.inert);
+    background.forEach(element=>element.inert=true);
+    requestAnimationFrame(()=>input.focus());
+  }
+  function closeSearch(restore=true){
+    ++requestId;clearTimeout(timer);search.hidden=true;document.body.classList.remove('site-mobile-search-open');
+    background.forEach(element=>element.inert=false);background=[];
+    [searchButton,desktop].forEach(button=>button.setAttribute('aria-expanded','false'));
+    applyActive(previousActive);if(restore)opener?.focus();
+  }
   searchButton.addEventListener('click',openSearch);
-  search.querySelectorAll('[data-mobile-search-close]').forEach(button=>button.addEventListener('click',closeSearch));
-  search.querySelector('form').addEventListener('submit',event=>{event.preventDefault();render(input.value)});
-  input.addEventListener('input',()=>render(input.value));
-  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!search.hidden)closeSearch()});
+  desktop.addEventListener('click',openSearch);
+  search.querySelectorAll('[data-mobile-search-close]').forEach(button=>button.addEventListener('click',()=>closeSearch()));
+  search.querySelector('form').addEventListener('submit',event=>{event.preventDefault();shown=20;render(input.value);});
+  let timer;
+  input.maxLength=200;
+  input.addEventListener('input',()=>{++requestId;clearTimeout(timer);shown=20;timer=setTimeout(()=>render(input.value),120);});
+  document.addEventListener('keydown',event=>{
+    if(search.hidden)return;
+    if(event.key==='Escape'){event.preventDefault();closeSearch();}
+    if(event.key==='Tab'){
+      const targets=[...search.querySelectorAll('button:not([tabindex="-1"]),input,a[href]')].filter(el=>!el.disabled);
+      const first=targets[0],last=targets[targets.length-1];
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+    }
+  });
+  // Open existing tabs/accordions when a result links into a collapsed section.
+  function revealHash(){
+    let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(_){return;}
+    const target=document.getElementById(id);if(!target)return;
+    let parent=target;
+    while(parent&&parent!==document.body){
+      if(parent.tagName==='DETAILS')parent.open=true;
+      if(parent.hasAttribute('data-panel')){
+        const tab=[...document.querySelectorAll('[data-tab]')].find(button=>button.dataset.tab===parent.dataset.panel);tab?.click();
+      }
+      parent=parent.parentElement;
+    }
+    if(id.startsWith('search-'))requestAnimationFrame(()=>target.scrollIntoView({block:'start'}));
+  }
+  window.addEventListener('hashchange',revealHash);
+  window.addEventListener('load',revealHash);
 
   const aboutLink=nav.querySelector('[data-mobile-nav="about"]');
   if(path==='/'||path==='/en/')aboutLink.addEventListener('click',event=>{const target=document.getElementById('about');if(!target)return;event.preventDefault();target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});history.replaceState(null,'','#about');applyActive('about')});
@@ -154,7 +245,8 @@
   applyActive(currentSection());
   syncTheme();
 
-  document.addEventListener('click',event=>{if(event.target.closest('[data-site-theme],.theme-toggle,.site-theme-toggle'))setTimeout(syncTheme,0)});
+  document.addEventListener('click',event=>{if(event.target.closest('[data-site-theme],[data-theme-toggle],.theme-toggle,.site-theme-toggle'))setTimeout(syncTheme,0)});
+  window.addEventListener('site-theme-change',syncTheme);
   window.addEventListener('storage',syncTheme);
   if(window.matchMedia){const media=window.matchMedia('(prefers-color-scheme: dark)');if(media.addEventListener)media.addEventListener('change',syncTheme)}
 })();
