@@ -14,7 +14,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/mobile-fix.css?v=20260806-3">
-  <link rel="stylesheet" href="/mobile-nav.css?v=20260806-3">
+  <link rel="stylesheet" href="/mobile-nav.css?v=20261017-1">
   <script src="/site-theme-init.js?v=20260806-1"></script>
   <link rel="stylesheet" href="/site-theme.css?v=20260806-1">
   <link rel="stylesheet" href="/site-motion.css?v=20260806-1">
@@ -92,7 +92,7 @@
 
         <aside class="ophtha-merge-sidebar" aria-label="Прогресс и рейтинг">
           <section class="ophtha-merge-panel" id="ranking">
-            <div class="ophtha-merge-panel-head"><div><p class="section-kicker dark-kicker">Онлайн</p><h2>Глобальный рейтинг</h2></div><span class="ophtha-merge-live-dot" aria-hidden="true"></span></div>
+            <div class="ophtha-merge-panel-head"><div><p class="section-kicker dark-kicker">Онлайн</p><h2 id="search-f7090f109f">Глобальный рейтинг</h2></div><span class="ophtha-merge-live-dot" aria-hidden="true"></span></div>
             <ol class="ophtha-merge-leaderboard-preview" id="leaderboard-preview" aria-live="polite">
               <li class="ophtha-merge-loading">Загрузка рейтинга…</li>
             </ol>
@@ -124,7 +124,7 @@
   </main>
 
   <dialog class="ophtha-merge-dialog" id="leaderboard-dialog">
-    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Ophtha Merge</p><h2>Глобальный рейтинг</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button></div>
+    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Ophtha Merge</p><h2 id="search-f7090f109f-2">Глобальный рейтинг</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button></div>
     <div class="ophtha-merge-dialog-tabs" role="group" aria-label="Режим рейтинга">
       <button class="ophtha-merge-dialog-tab is-active" type="button" data-rank-mode="classic">Классика</button>
       <button class="ophtha-merge-dialog-tab" type="button" data-rank-mode="sprint">Sprint 60s</button>
@@ -134,7 +134,7 @@
   </dialog>
 
   <dialog class="ophtha-merge-dialog ophtha-merge-profile-dialog" id="profile-dialog">
-    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Профиль рейтинга</p><h2>Как вас показывать?</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button></div>
+    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Профиль рейтинга</p><h2 id="search-7f62ea7441">Как вас показывать?</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button></div>
     <label class="ophtha-merge-field">Псевдоним<input id="profile-input" type="text" maxlength="23" autocomplete="nickname" placeholder="Доктор 4F2A"></label>
     <p class="ophtha-merge-dialog-note">Не указывайте персональные данные, если не хотите публиковать их в рейтинге.</p>
     <button class="button primary" id="profile-save-button" type="button">Сохранить</button>
@@ -149,7 +149,7 @@
   </dialog>
 
   <dialog class="ophtha-merge-dialog ophtha-merge-vault-dialog" id="vault-dialog">
-    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Секретная коллекция</p><h2>My Ophtha Vault</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button></div>
+    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Секретная коллекция</p><h2 id="search-2661b63da0">My Ophtha Vault</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button></div>
     <p class="ophtha-merge-vault-progress">Найдено <strong id="vault-dialog-count">0 / 24</strong></p>
     <p class="ophtha-merge-dialog-note">24 профессиональные находки открываются по мере игры. Они не влияют на счёт и глобальный рейтинг.</p>
     <div class="ophtha-merge-vault-grid" id="vault-grid"></div>
@@ -168,7 +168,7 @@
   </dialog>
 
   <dialog class="ophtha-merge-dialog" id="settings-dialog">
-    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Настройки</p><h2>Ощущение игры</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button></div>
+    <div class="ophtha-merge-dialog-head"><div><p class="eyebrow">Настройки</p><h2 id="search-b0c1c5db42">Ощущение игры</h2></div><button class="ophtha-merge-dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button></div>
     <div class="ophtha-merge-settings-row"><span>Звук merge</span><button class="button secondary" id="sound-toggle" type="button">Выкл</button></div>
     <div class="ophtha-merge-settings-row"><span>Виброотдача</span><button class="button secondary" id="haptics-toggle" type="button">Вкл</button></div>
   </dialog>
@@ -179,7 +179,7 @@
   <script type="module" src="./app.js?v=20260831-1"></script>
   <script src="/site-theme.js?v=20260806-1" defer></script>
   <script src="/site-motion.js?v=20260806-1" defer></script>
-  <script src="/mobile-nav.js?v=20260806-3" defer></script>
+  <script src="/mobile-nav.js?v=20261017-1"></script>
   <script src="/legal.js?v=20260721-3"></script>
   <script src="/doctors-legal.js?v=20260816-2"></script>
   <script defer src="/site-mega-nav.js?v=20260816-2"></script>

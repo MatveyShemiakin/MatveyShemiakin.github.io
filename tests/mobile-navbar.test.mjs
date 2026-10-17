@@ -34,8 +34,8 @@ for(const url of urls){
   const file=pagePath(url);
   assert.ok(fs.existsSync(file),`Missing sitemap page ${file}`);
   const html=fs.readFileSync(file,'utf8');
-  assert.equal((html.match(/\/mobile-nav\.css\?v=20260806-3/g)||[]).length,1,`CSS tag mismatch in ${file}`);
-  assert.equal((html.match(/\/mobile-nav\.js\?v=20260806-3/g)||[]).length,1,`JS tag mismatch in ${file}`);
+  assert.equal((html.match(/\/mobile-nav\.css\?v=20261017-1/g)||[]).length,1,`CSS tag mismatch in ${file}`);
+  assert.equal((html.match(/\/mobile-nav\.js\?v=20261017-1/g)||[]).length,1,`JS tag mismatch in ${file}`);
 }
 assert.doesNotMatch(fs.readFileSync('konspekt.html','utf8'),/\/mobile-nav\.(?:css|js)/);
 console.log(`Mobile navbar verified on ${urls.length} public pages.`);

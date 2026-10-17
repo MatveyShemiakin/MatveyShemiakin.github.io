@@ -4,8 +4,8 @@ import re
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-STYLE = '<link rel="stylesheet" href="/mobile-nav.css?v=20260806-3">'
-SCRIPT = '<script src="/mobile-nav.js?v=20260806-3"></script>'
+STYLE = '<link rel="stylesheet" href="/mobile-nav.css?v=20261017-1">'
+SCRIPT = '<script src="/mobile-nav.js?v=20261017-1"></script>'
 EXCLUDED = {ROOT / 'konspekt.html'}
 
 def public_pages():
