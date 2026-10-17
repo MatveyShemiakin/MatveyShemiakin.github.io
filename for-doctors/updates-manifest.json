@@ -2,17 +2,17 @@
   "version": 1,
   "materials": {
     "bacterial-keratitis": {
-      "fingerprint": "dfdb0c3142184b5f8fa0769aca8559eb2da692c759bfef977314d04b1f4fcf6a",
+      "fingerprint": "2251a87e7693a7099d2438ea5b18ef3dd8056882e8eb71e9ab461794157c2551",
       "published": "2026-07-20",
-      "updated": "2026-08-24",
-      "revision": 2,
+      "updated": "2026-10-17",
+      "revision": 3,
       "kind": "updated"
     },
     "complicated-cataract": {
-      "fingerprint": "579b351bdf05786fc814a5ed332ec0873473dda2f4051c48c06cdb49fac32221",
+      "fingerprint": "ac7c5f5f2d0a5ce3ee15bf4e18b523f7a3f1ad482dc28320679a4e10b31dfe32",
       "published": "2026-09-30",
-      "updated": "2026-10-01",
-      "revision": 5,
+      "updated": "2026-10-17",
+      "revision": 6,
       "kind": "updated"
     },
     "events": {
@@ -23,17 +23,17 @@
       "kind": "updated"
     },
     "iol-dislocation": {
-      "fingerprint": "0aabded68985093a27353fe5a4cf1d3245bad3f4b8b268aa230f634848360692",
+      "fingerprint": "7ecf06dd8171b9da9ada9d4eaa23edb6158acce008c6102da13c8d043994f5a9",
       "published": "2026-08-25",
-      "updated": "2026-08-27",
-      "revision": 4,
+      "updated": "2026-10-17",
+      "revision": 5,
       "kind": "updated"
     },
     "ophtha-arcade": {
-      "fingerprint": "4ef8303e6903295c271c9d3772eb8ef32e9c09e35dbd9e3a1874205738852873",
+      "fingerprint": "f5bc7324055af5030235bbc09cd2a339030fedc15416d22d7e159cce5ac8bd10",
       "published": "2026-08-30",
-      "updated": "2026-08-30",
-      "revision": 3,
+      "updated": "2026-10-17",
+      "revision": 4,
       "kind": "updated"
     },
     "ophthasearch": {
@@ -51,10 +51,10 @@
       "kind": "updated"
     },
     "penetrating-keratoplasty": {
-      "fingerprint": "804961fc1c6606b4ee2111fb4765409ef23ddf4975d9058bc9c99a145a9d7bcd",
+      "fingerprint": "3caf29583a1a9a37052062d72a047cfbe61a41f9bd5bbfdf341e4e4dac39851f",
       "published": "2026-08-16",
-      "updated": "2026-08-24",
-      "revision": 2,
+      "updated": "2026-10-17",
+      "revision": 3,
       "kind": "updated"
     }
   }

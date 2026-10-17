@@ -1,10 +1,57 @@
 [
   {
-    "id": "complicated-cataract",
-    "event_id": "complicated-cataract:5",
-    "published": "2026-09-30",
-    "updated": "2026-10-01",
+    "id": "penetrating-keratoplasty",
+    "event_id": "penetrating-keratoplasty:3",
+    "published": "2026-08-16",
+    "updated": "2026-10-17",
+    "revision": 3,
+    "kind": "updated",
+    "title": "Амбулаторное ведение пациента после сквозной кератопластики",
+    "title_en": "Outpatient management after penetrating keratoplasty",
+    "description": "Высококонцентрированный клинический конспект для врачей и ординаторов по амбулаторному ведению пациентов после сквозной кератопластики.",
+    "description_en": "High-density clinical quick reference for ophthalmologists and residents on outpatient management after penetrating keratoplasty.",
+    "url": "/for-doctors/penetrating-keratoplasty/",
+    "url_en": "/en/for-doctors/penetrating-keratoplasty/",
+    "topics": [
+      "cornea"
+    ]
+  },
+  {
+    "id": "ophtha-arcade",
+    "event_id": "ophtha-arcade:4",
+    "published": "2026-08-30",
+    "updated": "2026-10-17",
+    "revision": 4,
+    "kind": "updated",
+    "title": "Ophtha Arcade",
+    "title_en": "Ophtha Arcade",
+    "description": "Ophtha Arcade — короткие браузерные игры для офтальмологов. Начните с Ophtha Merge.",
+    "description_en": "Ophtha Arcade — short browser games for ophthalmologists. Start with Ophtha Merge.",
+    "url": "/for-doctors/ophtha-arcade/",
+    "url_en": "/en/for-doctors/ophtha-arcade/",
+    "topics": []
+  },
+  {
+    "id": "iol-dislocation",
+    "event_id": "iol-dislocation:5",
+    "published": "2026-08-25",
+    "updated": "2026-10-17",
     "revision": 5,
+    "kind": "updated",
+    "title": "Дислокация ИОЛ: диагностика, выбор тактики и хирургическое лечение",
+    "title_en": "IOL dislocation: diagnosis, decision-making and surgical management",
+    "description": "Практический клинический конспект для офтальмологов по дислокации ИОЛ: диагностика, показания к операции, репозиция, замена ИОЛ, вторичная фиксация и витрэктомия.",
+    "description_en": "Practical clinical guide for ophthalmologists on IOL dislocation: diagnosis, indications for surgery, repositioning, IOL exchange, secondary fixation and vitrectomy.",
+    "url": "/for-doctors/iol-dislocation/",
+    "url_en": "/en/for-doctors/iol-dislocation/",
+    "topics": []
+  },
+  {
+    "id": "complicated-cataract",
+    "event_id": "complicated-cataract:6",
+    "published": "2026-09-30",
+    "updated": "2026-10-17",
+    "revision": 6,
     "kind": "updated",
     "title": "Осложнённая катаракта: как распознать риск и спланировать операцию?",
     "title_en": "Complicated cataract: how can risk be recognised and surgery planned?",
@@ -15,6 +62,24 @@
     "topics": [
       "cataract-iol",
       "retina"
+    ]
+  },
+  {
+    "id": "bacterial-keratitis",
+    "event_id": "bacterial-keratitis:3",
+    "published": "2026-07-20",
+    "updated": "2026-10-17",
+    "revision": 3,
+    "kind": "updated",
+    "title": "Бактериальный кератит и язва роговицы",
+    "title_en": "Bacterial keratitis and corneal ulcer",
+    "description": "Практический клинический конспект для врачей по диагностике, стартовой терапии и контролю бактериального кератита и язвы роговицы.",
+    "description_en": "Clinical guide to bacterial keratitis and corneal ulcer: urgency, corneal scraping, microbiology, antibacterial therapy, monitoring and non-response.",
+    "url": "/for-doctors/bacterial-keratitis/",
+    "url_en": "/en/for-doctors/bacterial-keratitis/",
+    "topics": [
+      "cornea",
+      "drugs"
     ]
   },
   {
@@ -50,53 +115,6 @@
     ]
   },
   {
-    "id": "ophtha-arcade",
-    "event_id": "ophtha-arcade:3",
-    "published": "2026-08-30",
-    "updated": "2026-08-30",
-    "revision": 3,
-    "kind": "updated",
-    "title": "Ophtha Arcade",
-    "title_en": "Ophtha Arcade",
-    "description": "Ophtha Arcade — короткие браузерные игры для офтальмологов. Начните с Ophtha Merge.",
-    "description_en": "Ophtha Arcade — short browser games for ophthalmologists. Start with Ophtha Merge.",
-    "url": "/for-doctors/ophtha-arcade/",
-    "url_en": "/en/for-doctors/ophtha-arcade/",
-    "topics": []
-  },
-  {
-    "id": "iol-dislocation",
-    "event_id": "iol-dislocation:4",
-    "published": "2026-08-25",
-    "updated": "2026-08-27",
-    "revision": 4,
-    "kind": "updated",
-    "title": "Дислокация ИОЛ: диагностика, выбор тактики и хирургическое лечение",
-    "title_en": "IOL dislocation: diagnosis, decision-making and surgical management",
-    "description": "Практический клинический конспект для офтальмологов по дислокации ИОЛ: диагностика, показания к операции, репозиция, замена ИОЛ, вторичная фиксация и витрэктомия.",
-    "description_en": "Practical clinical guide for ophthalmologists on IOL dislocation: diagnosis, indications for surgery, repositioning, IOL exchange, secondary fixation and vitrectomy.",
-    "url": "/for-doctors/iol-dislocation/",
-    "url_en": "/en/for-doctors/iol-dislocation/",
-    "topics": []
-  },
-  {
-    "id": "penetrating-keratoplasty",
-    "event_id": "penetrating-keratoplasty:2",
-    "published": "2026-08-16",
-    "updated": "2026-08-24",
-    "revision": 2,
-    "kind": "updated",
-    "title": "Амбулаторное ведение пациента после сквозной кератопластики",
-    "title_en": "Outpatient management after penetrating keratoplasty",
-    "description": "Высококонцентрированный клинический конспект для врачей и ординаторов по амбулаторному ведению пациентов после сквозной кератопластики.",
-    "description_en": "High-density clinical quick reference for ophthalmologists and residents on outpatient management after penetrating keratoplasty.",
-    "url": "/for-doctors/penetrating-keratoplasty/",
-    "url_en": "/en/for-doctors/penetrating-keratoplasty/",
-    "topics": [
-      "cornea"
-    ]
-  },
-  {
     "id": "events",
     "event_id": "events:4",
     "published": "2026-08-16",
@@ -111,24 +129,6 @@
     "url_en": "/en/for-doctors/events/",
     "topics": [
       "events"
-    ]
-  },
-  {
-    "id": "bacterial-keratitis",
-    "event_id": "bacterial-keratitis:2",
-    "published": "2026-07-20",
-    "updated": "2026-08-24",
-    "revision": 2,
-    "kind": "updated",
-    "title": "Бактериальный кератит и язва роговицы",
-    "title_en": "Bacterial keratitis and corneal ulcer",
-    "description": "Практический клинический конспект для врачей по диагностике, стартовой терапии и контролю бактериального кератита и язвы роговицы.",
-    "description_en": "Clinical guide to bacterial keratitis and corneal ulcer: urgency, corneal scraping, microbiology, antibacterial therapy, monitoring and non-response.",
-    "url": "/for-doctors/bacterial-keratitis/",
-    "url_en": "/en/for-doctors/bacterial-keratitis/",
-    "topics": [
-      "cornea",
-      "drugs"
     ]
   }
 ]
