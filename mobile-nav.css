@@ -55,16 +55,17 @@
   .site-mobile-search__submit{width:48px;height:48px;display:grid;place-items:center;border:0;border-radius:14px;background:#06182f;color:#fff;cursor:pointer}
   .site-mobile-search[data-theme="dark"] .site-mobile-search__submit{background:#4d8eff}
   .site-mobile-search__submit svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-  .site-mobile-search__results{display:grid;gap:8px}
+  .site-mobile-search__results{display:grid;gap:8px;align-content:start;flex:1 1 auto;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
   .site-mobile-search__result{padding:13px 14px;display:grid;grid-template-columns:minmax(0,1fr) 18px;gap:10px;align-items:center;border:1px solid var(--ms-line);border-radius:14px;background:var(--ms-card);color:var(--ms-text);font-family:var(--mobile-nav-sans);text-decoration:none}
   .site-mobile-search__result strong{display:block;font-size:14px;line-height:1.25}
   .site-mobile-search__result small{display:block;margin-top:4px;color:var(--ms-muted);font-size:11px;line-height:1.35}
   .site-mobile-search__result svg{width:18px;height:18px;fill:none;stroke:#4d8eff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
   .site-mobile-search__empty{margin:0;padding:18px;border:1px dashed var(--ms-line);border-radius:14px;color:var(--ms-muted);font-size:13px;line-height:1.5;text-align:center}
-  body.site-mobile-search-open{overflow:hidden}
+  body.site-mobile-search-open{overflow:hidden;overscroll-behavior:none}
 
 .site-mobile-search{align-items:center;justify-items:center;padding:24px}
-.site-mobile-search__dialog{max-width:720px;max-height:calc(100dvh - 48px);overscroll-behavior:contain}
+.site-mobile-search__dialog{box-sizing:border-box;max-width:720px;height:min(680px,calc(100dvh - 48px));max-height:calc(100dvh - 48px);min-height:0;display:flex;flex-direction:column;overflow:hidden;overscroll-behavior:contain}
+.site-mobile-search__head,.site-mobile-search__form,.site-mobile-search__empty{flex:0 0 auto}
 .site-mobile-search__result{width:100%;text-align:left;cursor:pointer}
 .site-mobile-search__result span{min-width:0;overflow-wrap:anywhere}
 .site-mobile-search__result mark{background:rgba(77,142,255,.2);color:inherit;border-radius:3px}
@@ -76,8 +77,14 @@
 [id^="search-"]{scroll-margin-top:110px}
 @media(max-width:760px){
   :is(header,.privacy-shell) [data-site-search-open]{display:none}
-  .site-mobile-search{align-items:end;padding:12px 10px max(12px,env(safe-area-inset-bottom))}
-  .site-mobile-search__dialog{max-height:calc(100dvh - 24px);padding:20px;border-radius:24px}
+  /* Anchor the modal to the visible viewport, never to the number of results. */
+  .site-mobile-search{align-items:start;justify-items:stretch;box-sizing:border-box;padding:max(12px,env(safe-area-inset-top)) 10px max(12px,env(safe-area-inset-bottom))}
+  .site-mobile-search__dialog{width:100%;max-width:none;height:min(680px,100%);max-height:100%;padding:20px;border-radius:24px}
+  .site-mobile-search--compact .site-mobile-search__dialog{padding:12px}
+  .site-mobile-search--compact .site-mobile-search__head{gap:8px;margin-bottom:8px}
+  .site-mobile-search--compact .site-mobile-search__title{font-size:23px}
+  .site-mobile-search--compact .site-mobile-search__form{margin-bottom:8px}
+  .site-mobile-search--compact .site-mobile-search__empty{margin-bottom:8px}
 }
 
 .privacy-shell [data-site-search-open]{margin-left:14px}

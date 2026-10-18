@@ -83,6 +83,35 @@
   const searchButton=nav.querySelector('[data-mobile-nav="search"]');
   const input=search.querySelector('.site-mobile-search__input');
   const results=search.querySelector('.site-mobile-search__results');
+  // iOS and Android keyboards shrink the visual viewport without reliably
+  // changing the CSS layout viewport. Position with a CSS class rule (never
+  // an inline style) so the dialog stays inside the actually visible area.
+  const viewportStyles=document.createElement('style');
+  viewportStyles.id='site-search-visual-viewport';
+  let viewportFrame=0;
+  function syncSearchViewport(){
+    if(search.hidden)return;
+    if(!window.visualViewport||!window.matchMedia('(max-width:760px)').matches){
+      search.classList.remove('site-mobile-search--visual-viewport','site-mobile-search--compact');
+      return;
+    }
+    const viewport=window.visualViewport;
+    const top=Math.max(0,viewport.offsetTop);
+    const left=Math.max(0,viewport.offsetLeft);
+    viewportStyles.textContent=`@media(max-width:760px){.site-mobile-search.site-mobile-search--visual-viewport{inset:auto;top:${top}px;left:${left}px;width:${viewport.width}px;height:${viewport.height}px}}`;
+    if(!viewportStyles.isConnected)document.head.appendChild(viewportStyles);
+    search.classList.add('site-mobile-search--visual-viewport');
+    search.classList.toggle('site-mobile-search--compact',viewport.height<440);
+  }
+  function scheduleSearchViewportSync(){
+    if(viewportFrame)cancelAnimationFrame(viewportFrame);
+    viewportFrame=requestAnimationFrame(()=>{viewportFrame=0;syncSearchViewport();});
+  }
+  if(window.visualViewport){
+    window.visualViewport.addEventListener('resize',scheduleSearchViewportSync);
+    window.visualViewport.addEventListener('scroll',scheduleSearchViewportSync);
+  }
+  window.addEventListener('resize',scheduleSearchViewportSync);
   let previousActive=currentSection();
 
   function applyActive(section){
@@ -159,6 +188,7 @@
   async function render(query){
     const id=++requestId;
     results.replaceChildren();
+    results.scrollTop=0;
     search.querySelector('form').removeAttribute('aria-busy');
     if(!query.trim()){status.textContent=messages.initial;return;}
     status.textContent=messages.loading;
@@ -193,14 +223,18 @@
     opener=event?.currentTarget||searchButton;
     previousActive=currentSection();search.hidden=false;
     document.body.classList.add('site-mobile-search-open');
+    scheduleSearchViewportSync();
     [searchButton,desktop].forEach(button=>button.setAttribute('aria-expanded','true'));
     applyActive('search');syncTheme();shown=20;render(input.value);
     background=[...document.body.children].filter(element=>element!==search&&!element.inert);
     background.forEach(element=>element.inert=true);
-    requestAnimationFrame(()=>input.focus());
+    requestAnimationFrame(()=>{try{input.focus({preventScroll:true});}catch(_){input.focus();}});
   }
   function closeSearch(restore=true){
-    ++requestId;clearTimeout(timer);search.hidden=true;document.body.classList.remove('site-mobile-search-open');
+    ++requestId;clearTimeout(timer);input.blur();search.hidden=true;document.body.classList.remove('site-mobile-search-open');
+    if(viewportFrame)cancelAnimationFrame(viewportFrame);
+    viewportFrame=0;
+    search.classList.remove('site-mobile-search--visual-viewport','site-mobile-search--compact');
     background.forEach(element=>element.inert=false);background=[];
     [searchButton,desktop].forEach(button=>button.setAttribute('aria-expanded','false'));
     applyActive(previousActive);if(restore)opener?.focus();
