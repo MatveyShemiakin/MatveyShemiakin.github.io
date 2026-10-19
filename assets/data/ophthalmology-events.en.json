@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "language": "en",
-  "verifiedAt": "2026-10-15",
-  "generatedAt": "2026-10-15T08:33:17+03:00",
+  "verifiedAt": "2026-10-19",
+  "generatedAt": "2026-10-19T12:03:26+03:00",
   "events": [
     {
       "id": "fedorov-2026",
@@ -1701,14 +1701,43 @@
         "AI / management"
       ],
       "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
+      "submissionOpen": true,
       "official": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
       "program": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
-      "registration": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
-      "submit": null,
-      "verified": "2026-08-16",
+      "registration": "https://convention.jtbcom.co.jp/fujiretina/registration/index.html",
+      "submit": "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
+      "verified": "2026-10-19",
       "description": "International vitreoretinal meeting in Tokyo in association with the Japanese Retina and Vitreous Society; the official language is English.",
-      "deadlines": []
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Poster abstracts",
+          "date": "2026-12-15",
+          "timeKnown": false,
+          "zone": "Asia/Tokyo",
+          "url": "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
+          "note": ""
+        },
+        {
+          "kind": "grant",
+          "label": "Travel grant application with abstract",
+          "date": "2026-12-15",
+          "timeKnown": false,
+          "zone": "Asia/Tokyo",
+          "url": "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Early-bird registration",
+          "date": "2027-03-08",
+          "timeKnown": false,
+          "zone": "Asia/Tokyo",
+          "url": "https://convention.jtbcom.co.jp/fujiretina/registration/index.html",
+          "note": ""
+        }
+      ],
+      "submissionNote": "Posters only; English, up to 250 words. Ten $700 grants for non-Japanese overseas ophthalmologists; apply with the abstract, payment follows an in-person presentation. Registration is open."
     },
     {
       "id": "ascrs-2027",
@@ -1880,6 +1909,37 @@
       "deadlines": []
     },
     {
+      "id": "cno-2027",
+      "featured": false,
+      "level": "national",
+      "title": "Congreso Nacional de Oftalmología 2027",
+      "fullTitle": "Congreso Nacional de Oftalmología 2027 — CNO27",
+      "org": "Consejo Argentino de Oftalmología",
+      "start": "2027-04-14",
+      "end": "2027-04-16",
+      "city": "Buenos Aires",
+      "country": "Argentina",
+      "region": "Latin America",
+      "mode": "In person",
+      "venue": "Centro de Convenciones Buenos Aires",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "Accreditation: to be confirmed",
+      "submissionOpen": false,
+      "official": "https://cno.oftalmologos.org.ar/",
+      "program": "https://cno.oftalmologos.org.ar/",
+      "registration": "https://cno.oftalmologos.org.ar/",
+      "submit": null,
+      "verified": "2026-10-19",
+      "description": "Argentina’s national ophthalmology congress. Dates and venue confirmed by the organiser; submission and registration deadlines have not yet been announced.",
+      "deadlines": []
+    },
+    {
       "id": "apspos-capos-2027",
       "featured": true,
       "level": "specialty",
@@ -2037,43 +2097,34 @@
         "Cornea"
       ],
       "credits": "Continuing education: see official planner",
-      "submissionOpen": false,
+      "submissionOpen": true,
       "official": "https://www.arvo.org/annual-meeting",
       "program": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
       "registration": "https://www.arvo.org/annual-meeting",
       "submit": "https://www.arvo.org/annual-meeting/abstracts",
-      "verified": "2026-10-12",
+      "verified": "2026-10-19",
       "description": "ARVO 2027 Annual Meeting in San Diego. Generative AI used to create or edit abstract text or images must be disclosed with its name, version, model, source, and date of use; authors verify accuracy and originality.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Submission opens",
-          "date": "2026-10-16T09:00:00-04:00",
-          "timeKnown": true,
-          "zone": "America/New_York",
-          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
-          "note": ""
-        },
-        {
-          "kind": "abstract",
-          "label": "Deadline to begin a draft",
+          "label": "Abstract submission: main deadline",
           "date": "2026-12-04T17:00:00-05:00",
           "timeKnown": true,
-          "zone": "America/New_York",
-          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "zone": "EST",
+          "url": "https://www.arvo.org/annual-meeting/abstracts",
           "note": ""
         },
         {
-          "kind": "abstract",
-          "label": "Finalize and submit existing draft",
-          "date": "2026-12-06T23:59:00-05:00",
-          "timeKnown": true,
+          "kind": "grant",
+          "label": "Travel grants",
+          "date": "2026-12-04",
+          "timeKnown": false,
           "zone": "America/New_York",
-          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "url": "https://www.arvo.org/awards-and-grants/travel-grants",
           "note": ""
         }
       ],
-      "submissionNote": "ARVO membership paid through 31 December 2027 is required. Opens 16 October; begin a draft by 4 December and finalize by 6 December. Oral, poster and on-demand options."
+      "submissionNote": "Submission is open; main deadline: 4 December, 5pm EST. Detailed policies still mention 6 December for drafts; use 4 December given the discrepancy. 2027 membership required. Early-submission raffle: 16–31 October, 3 free registrations; 1–28 November, 50% discounts."
     },
     {
       "id": "wcpos-vi-2027",
@@ -2297,6 +2348,37 @@
         }
       ],
       "submissionNote": "SOE: oral papers and posters; ISOT: oral, video and ePoster presentations on ocular trauma. English abstracts, up to 2,000 characters. Accepted presenters must attend in person and register by 24 March."
+    },
+    {
+      "id": "cos-2027",
+      "featured": false,
+      "level": "national",
+      "title": "COS Annual Meeting 2027",
+      "fullTitle": "2027 COS Annual Meeting and Exhibition",
+      "org": "Canadian Ophthalmological Society",
+      "start": "2027-06-24",
+      "end": "2027-06-27",
+      "city": "Ottawa",
+      "country": "Canada",
+      "region": "North America",
+      "mode": "In person",
+      "venue": "Rogers Centre, Ottawa",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "Accreditation: to be confirmed",
+      "submissionOpen": true,
+      "official": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
+      "program": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
+      "registration": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
+      "submit": "https://www.cos-sco.ca/",
+      "verified": "2026-10-19",
+      "description": "COS annual congress with scientific papers, wet labs, workshops and an exhibition. COS has announced video submissions for the 2027 meeting; the exact deadline remains to be confirmed.",
+      "deadlines": []
     },
     {
       "id": "asrs-2027",

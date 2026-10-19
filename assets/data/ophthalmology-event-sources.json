@@ -895,6 +895,87 @@
       "watchTerms": [
         "6 Nov 2026"
       ]
+    },
+    {
+      "id": "arvo-2027-main-deadline",
+      "official": true,
+      "url": "https://www.arvo.org/annual-meeting/abstracts",
+      "eventIds": [
+        "arvo-2027"
+      ],
+      "watchTerms": [
+        "Dec. 4",
+        "5pm"
+      ]
+    },
+    {
+      "id": "arvo-2027-travel-grants",
+      "official": true,
+      "url": "https://www.arvo.org/awards-and-grants/travel-grants",
+      "eventIds": [
+        "arvo-2027"
+      ],
+      "watchTerms": [
+        "December 4, 2026"
+      ]
+    },
+    {
+      "id": "fuji-2027-posters",
+      "official": true,
+      "url": "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
+      "eventIds": [
+        "fuji-retina-2027"
+      ],
+      "watchTerms": [
+        "December 15, 2026",
+        "700 USD"
+      ]
+    },
+    {
+      "id": "fuji-2027-registration",
+      "official": true,
+      "url": "https://convention.jtbcom.co.jp/fujiretina/registration/index.html",
+      "eventIds": [
+        "fuji-retina-2027"
+      ],
+      "watchTerms": [
+        "March 8, 2027"
+      ]
+    },
+    {
+      "id": "cos-2027-official",
+      "official": true,
+      "url": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
+      "eventIds": [
+        "cos-2027"
+      ],
+      "watchTerms": [
+        "June 24-27, 2027",
+        "Rogers Centre"
+      ]
+    },
+    {
+      "id": "cos-2027-videos",
+      "official": true,
+      "url": "https://www.cos-sco.ca/",
+      "eventIds": [
+        "cos-2027"
+      ],
+      "watchTerms": [
+        "COS2027",
+        "Video Submissions"
+      ]
+    },
+    {
+      "id": "cno-2027-official",
+      "official": true,
+      "url": "https://cno.oftalmologos.org.ar/",
+      "eventIds": [
+        "cno-2027"
+      ],
+      "watchTerms": [
+        "14 al 16 de abril de 2027"
+      ]
     }
   ]
 }

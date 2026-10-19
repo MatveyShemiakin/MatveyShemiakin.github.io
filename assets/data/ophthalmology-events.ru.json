@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "language": "ru",
-  "verifiedAt": "2026-10-15",
-  "generatedAt": "2026-10-15T08:33:17+03:00",
+  "verifiedAt": "2026-10-19",
+  "generatedAt": "2026-10-19T12:03:26+03:00",
   "events": [
     {
       "id": "fedorov-2026",
@@ -1701,14 +1701,43 @@
         "AI / управление"
       ],
       "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
+      "submissionOpen": true,
       "official": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
       "program": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
-      "registration": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
-      "submit": null,
-      "verified": "2026-08-16",
+      "registration": "https://convention.jtbcom.co.jp/fujiretina/registration/index.html",
+      "submit": "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
+      "verified": "2026-10-19",
       "description": "Международная витреоретинальная встреча в Токио, ассоциированная с Japanese Retina and Vitreous Society; официальный язык — английский.",
-      "deadlines": []
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Постерные тезисы",
+          "date": "2026-12-15",
+          "timeKnown": false,
+          "zone": "Asia/Tokyo",
+          "url": "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
+          "note": ""
+        },
+        {
+          "kind": "grant",
+          "label": "Travel grant: заявка вместе с тезисами",
+          "date": "2026-12-15",
+          "timeKnown": false,
+          "zone": "Asia/Tokyo",
+          "url": "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Early-bird регистрация",
+          "date": "2027-03-08",
+          "timeKnown": false,
+          "zone": "Asia/Tokyo",
+          "url": "https://convention.jtbcom.co.jp/fujiretina/registration/index.html",
+          "note": ""
+        }
+      ],
+      "submissionNote": "Только постеры; английский язык, до 250 слов. Десять грантов по $700 для иностранных офтальмологов, проживающих за пределами Японии; заявка вместе с тезисами, выплата после очной презентации. Регистрация открыта."
     },
     {
       "id": "ascrs-2027",
@@ -1880,6 +1909,37 @@
       "deadlines": []
     },
     {
+      "id": "cno-2027",
+      "featured": false,
+      "level": "national",
+      "title": "Congreso Nacional de Oftalmología 2027",
+      "fullTitle": "Congreso Nacional de Oftalmología 2027 — CNO27",
+      "org": "Consejo Argentino de Oftalmología",
+      "start": "2027-04-14",
+      "end": "2027-04-16",
+      "city": "Буэнос-Айрес",
+      "country": "Аргентина",
+      "region": "Латинская Америка",
+      "mode": "Очно",
+      "venue": "Centro de Convenciones Buenos Aires",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Retina",
+        "Глаукома",
+        "Research"
+      ],
+      "credits": "Аккредитация: уточняется",
+      "submissionOpen": false,
+      "official": "https://cno.oftalmologos.org.ar/",
+      "program": "https://cno.oftalmologos.org.ar/",
+      "registration": "https://cno.oftalmologos.org.ar/",
+      "submit": null,
+      "verified": "2026-10-19",
+      "description": "Национальный офтальмологический конгресс Аргентины. Даты и место подтверждены организатором; сроки подачи и регистрации пока не объявлены.",
+      "deadlines": []
+    },
+    {
       "id": "apspos-capos-2027",
       "featured": true,
       "level": "specialty",
@@ -2037,43 +2097,34 @@
         "Роговица"
       ],
       "credits": "Continuing education: смотреть официальный planner",
-      "submissionOpen": false,
+      "submissionOpen": true,
       "official": "https://www.arvo.org/annual-meeting",
       "program": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
       "registration": "https://www.arvo.org/annual-meeting",
       "submit": "https://www.arvo.org/annual-meeting/abstracts",
-      "verified": "2026-10-12",
+      "verified": "2026-10-19",
       "description": "ARVO 2027 в Сан-Диего. Применение генеративного ИИ для создания или редактирования текста и изображений тезисов необходимо раскрывать с указанием названия, версии, модели, источника и даты использования; автор отвечает за достоверность и оригинальность.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Открытие подачи",
-          "date": "2026-10-16T09:00:00-04:00",
-          "timeKnown": true,
-          "zone": "America/New_York",
-          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
-          "note": ""
-        },
-        {
-          "kind": "abstract",
-          "label": "Создание черновика: крайний срок",
+          "label": "Подача тезисов: основной срок",
           "date": "2026-12-04T17:00:00-05:00",
           "timeKnown": true,
-          "zone": "America/New_York",
-          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "zone": "EST",
+          "url": "https://www.arvo.org/annual-meeting/abstracts",
           "note": ""
         },
         {
-          "kind": "abstract",
-          "label": "Финальная отправка черновика",
-          "date": "2026-12-06T23:59:00-05:00",
-          "timeKnown": true,
+          "kind": "grant",
+          "label": "Travel grants",
+          "date": "2026-12-04",
+          "timeKnown": false,
           "zone": "America/New_York",
-          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "url": "https://www.arvo.org/awards-and-grants/travel-grants",
           "note": ""
         }
       ],
-      "submissionNote": "Членство ARVO оплачено по 31 декабря 2027. Подача открывается 16 октября; создать черновик до 4 декабря, финализировать до 6 декабря. Oral, poster, on-demand."
+      "submissionNote": "Подача открыта. Основной срок — 4 декабря, 17:00 EST. Подробные правила ещё упоминают 6 декабря для черновиков; из-за расхождения ориентируйтесь на 4 декабря. Членство ARVO на 2027 год обязательно. Ранняя подача участвует в розыгрыше регистрации: 16–31 октября — 3 бесплатных места; 1–28 ноября — скидки 50%."
     },
     {
       "id": "wcpos-vi-2027",
@@ -2297,6 +2348,37 @@
         }
       ],
       "submissionNote": "SOE: oral papers и posters; ISOT: oral, video и ePoster по травме глаза. Английский язык, до 2000 знаков. Авторам принятых работ необходима очная презентация и регистрация до 24 марта."
+    },
+    {
+      "id": "cos-2027",
+      "featured": false,
+      "level": "national",
+      "title": "COS Annual Meeting 2027",
+      "fullTitle": "2027 COS Annual Meeting and Exhibition",
+      "org": "Canadian Ophthalmological Society",
+      "start": "2027-06-24",
+      "end": "2027-06-27",
+      "city": "Оттава",
+      "country": "Канада",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "Rogers Centre, Ottawa",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Retina",
+        "Глаукома",
+        "Research"
+      ],
+      "credits": "Аккредитация: уточняется",
+      "submissionOpen": true,
+      "official": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
+      "program": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
+      "registration": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
+      "submit": "https://www.cos-sco.ca/",
+      "verified": "2026-10-19",
+      "description": "Ежегодный конгресс COS: научные доклады, wet labs, практические занятия и выставка. COS объявило приём видео для встречи 2027; точный дедлайн требует уточнения.",
+      "deadlines": []
     },
     {
       "id": "asrs-2027",
