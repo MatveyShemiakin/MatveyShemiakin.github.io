@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "language": "en",
-  "verifiedAt": "2026-10-19",
-  "generatedAt": "2026-10-19T12:03:26+03:00",
+  "verifiedAt": "2026-10-22",
+  "generatedAt": "2026-10-22T12:00:00+03:00",
   "events": [
     {
       "id": "fedorov-2026",
@@ -1081,6 +1081,37 @@
       ]
     },
     {
+      "id": "pirogov-eye-forum-2026",
+      "featured": false,
+      "level": "national",
+      "title": "Pirogov Ophthalmology Forum 2026",
+      "fullTitle": "Pirogov Ophthalmology Forum 2026",
+      "org": "Pirogov National Medical and Surgical Center",
+      "start": "2026-11-27",
+      "end": "2026-11-27",
+      "city": "Moscow",
+      "country": "Russia",
+      "region": "Russia",
+      "mode": "In person",
+      "venue": "AZIMUT City Hotel Olympic",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "Accreditation: to be confirmed",
+      "submissionOpen": false,
+      "official": "https://pirogoveyeforum.ru/",
+      "program": "https://pirogoveyeforum.ru/",
+      "registration": "https://pirogoveyeforum.ru/",
+      "submit": null,
+      "verified": "2026-10-22",
+      "description": "Registration is open. Complicated cataract, retinal detachment, glaucoma, ocular trauma, live surgery and the New Era young scientists session.",
+      "deadlines": []
+    },
+    {
       "id": "coecsa-2026",
       "featured": true,
       "level": "regional",
@@ -1314,6 +1345,47 @@
       "verified": "2026-10-12",
       "description": "Dates published in the official RSO calendar; registration and submission details pending.",
       "deadlines": []
+    },
+    {
+      "id": "aioc-2027",
+      "featured": false,
+      "level": "national",
+      "title": "AIOC 2027",
+      "fullTitle": "85th Annual Conference of All India Ophthalmological Society",
+      "org": "All India Ophthalmological Society",
+      "start": "2027-02-18",
+      "end": "2027-02-21",
+      "city": "Gandhinagar",
+      "country": "India",
+      "region": "Asia–Pacific",
+      "mode": "In person",
+      "venue": "Mahatma Mandir Convention and Exhibition Centre",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "Accreditation: to be confirmed",
+      "submissionOpen": false,
+      "official": "https://www.aios.org/aioc2027.php",
+      "program": "https://www.aios.org/aioc2027.php",
+      "registration": "https://www.aios.org/aioc2027.php",
+      "submit": null,
+      "verified": "2026-10-22",
+      "description": "85th AIOS annual congress. Registration is open; the main abstract submission period has ended.",
+      "deadlines": [
+        {
+          "kind": "registration",
+          "label": "Early-bird registration",
+          "date": "2026-11-30",
+          "timeKnown": false,
+          "zone": "Asia/Kolkata",
+          "url": "https://www.aios.org/aioc2027.php",
+          "note": ""
+        }
+      ]
     },
     {
       "id": "euretina-sfm-2027",
@@ -1576,7 +1648,7 @@
       "program": "https://paao2027.com/landing/program/",
       "registration": "https://paao2027.com/landing/",
       "submit": "https://abstracts.paao2027.com/landing/",
-      "verified": "2026-10-12",
+      "verified": "2026-10-22",
       "description": "The flagship Pan-American ophthalmology congress in Lima, expected to bring together more than 5,000 delegates across all major subspecialties.",
       "deadlines": [
         {
@@ -1590,11 +1662,29 @@
         {
           "kind": "abstract",
           "label": "Scientific submissions",
-          "date": "2026-10-21T17:00:00-05:00",
+          "date": "2026-12-01T17:00:00-05:00",
           "timeKnown": true,
           "zone": "America/Lima",
           "url": "https://abstracts.paao2027.com/landing/",
-          "note": ""
+          "note": "Current deadline shown by the submission portal."
+        },
+        {
+          "kind": "grant",
+          "label": "Troutman–Véronneau Prize · $10,000",
+          "date": "2026-12-01",
+          "timeKnown": false,
+          "zone": "America/Lima",
+          "url": "https://paao.org/meetings/prizes-and-awards/",
+          "note": "Age 45 or younger; active PAAO membership and additional eligibility requirements. Confirm the current topic with the organiser."
+        },
+        {
+          "kind": "grant",
+          "label": "Alvaro Rodriguez Travel Award · $1,500",
+          "date": "2026-12-01",
+          "timeKnown": false,
+          "zone": "America/Lima",
+          "url": "https://paao.org/meetings/prizes-and-awards/",
+          "note": "Also includes free registration; under 45, from the Americas, Spain or Portugal; PAAO and national society membership required."
         }
       ],
       "submissionNote": "Free papers, posters and videos; single case reports must be posters."
@@ -2100,9 +2190,9 @@
       "submissionOpen": true,
       "official": "https://www.arvo.org/annual-meeting",
       "program": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
-      "registration": "https://www.arvo.org/annual-meeting",
+      "registration": "https://www.arvo.org/annual-meeting/registration",
       "submit": "https://www.arvo.org/annual-meeting/abstracts",
-      "verified": "2026-10-19",
+      "verified": "2026-10-22",
       "description": "ARVO 2027 Annual Meeting in San Diego. Generative AI used to create or edit abstract text or images must be disclosed with its name, version, model, source, and date of use; authors verify accuracy and originality.",
       "deadlines": [
         {
@@ -2121,6 +2211,24 @@
           "timeKnown": false,
           "zone": "America/New_York",
           "url": "https://www.arvo.org/awards-and-grants/travel-grants",
+          "note": ""
+        },
+        {
+          "kind": "grant",
+          "label": "Early Career Clinician-Scientist Research Award · $3,000",
+          "date": "2026-12-04",
+          "timeKnown": false,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/arvo-foundation/arvo-foundation-early-career-clinician-scientist-research-awards",
+          "note": "For eligible clinician-scientists; ARVO membership required."
+        },
+        {
+          "kind": "registration",
+          "label": "Early-bird registration",
+          "date": "2027-03-10",
+          "timeKnown": false,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/registration",
           "note": ""
         }
       ],
@@ -2153,6 +2261,37 @@
       "submit": "https://wspos.org/wcpos-vi/",
       "verified": "2026-08-16",
       "description": "The sixth WSPOS world congress in paediatric ophthalmology and strabismus.",
+      "deadlines": []
+    },
+    {
+      "id": "white-nights-2027",
+      "featured": false,
+      "level": "national",
+      "title": "White Nights 2027",
+      "fullTitle": "33rd International Ophthalmology Congress named after Professor Yu. S. Astakhov",
+      "org": "White Nights Congress organisers",
+      "start": "2027-05-24",
+      "end": "2027-05-28",
+      "city": "Saint Petersburg",
+      "country": "Russia",
+      "region": "Russia",
+      "mode": "In person",
+      "venue": "Saint Petersburg; venue to be confirmed",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "Accreditation: to be confirmed",
+      "submissionOpen": false,
+      "official": "https://ocwn.org/",
+      "program": "https://ocwn.org/",
+      "registration": "https://ocwn.org/",
+      "submit": null,
+      "verified": "2026-10-22",
+      "description": "Congress dates confirmed by the organisers. Scientific submission deadlines have not yet been published.",
       "deadlines": []
     },
     {
@@ -2402,10 +2541,57 @@
       "official": "https://www.asrs.org/annual-meeting/future-annual-meetings",
       "program": "https://www.asrs.org/annual-meeting/future-annual-meetings",
       "registration": "https://www.asrs.org/annual-meeting/future-annual-meetings",
-      "submit": null,
-      "verified": "2026-08-16",
+      "submit": "https://www.asrs.org/annual-meeting/abstracts/deadlines-and-notifications",
+      "verified": "2026-10-22",
       "description": "Future annual meeting of the American Society of Retina Specialists, a major international meeting for vitreoretinal specialists.",
-      "deadlines": []
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Papers · Posters · Cases · Films",
+          "date": "2027-01-28",
+          "timeKnown": false,
+          "zone": "America/Chicago",
+          "url": "https://www.asrs.org/annual-meeting/abstracts/deadlines-and-notifications",
+          "note": ""
+        },
+        {
+          "kind": "faculty",
+          "label": "Accept presentation invitation",
+          "date": "2027-04-22",
+          "timeKnown": false,
+          "zone": "America/Chicago",
+          "url": "https://www.asrs.org/annual-meeting/abstracts/deadlines-and-notifications",
+          "note": ""
+        },
+        {
+          "kind": "upload",
+          "label": "Film Festival video upload",
+          "date": "2027-05-16",
+          "timeKnown": false,
+          "zone": "America/Chicago",
+          "url": "https://www.asrs.org/annual-meeting/abstracts/deadlines-and-notifications",
+          "note": ""
+        },
+        {
+          "kind": "upload",
+          "label": "ePoster upload",
+          "date": "2027-06-10",
+          "timeKnown": false,
+          "zone": "America/Chicago",
+          "url": "https://www.asrs.org/annual-meeting/abstracts/deadlines-and-notifications",
+          "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "Late-breaking / WinR",
+          "date": "2027-06-16T23:59:00-05:00",
+          "timeKnown": true,
+          "zone": "CDT",
+          "url": "https://www.asrs.org/annual-meeting/abstracts/deadlines-and-notifications",
+          "note": ""
+        }
+      ],
+      "submissionNote": "Submission schedule published for papers, posters, cases and films. Exact cutoff time for the main deadline is not specified."
     },
     {
       "id": "euretina-2027",

@@ -744,7 +744,7 @@
         "paao-2027"
       ],
       "watchTerms": [
-        "21 de octubre de 2026"
+        "1 de diciembre de 2026"
       ]
     },
     {
@@ -975,6 +975,88 @@
       ],
       "watchTerms": [
         "14 al 16 de abril de 2027"
+      ]
+    },
+    {
+      "id": "paao-2027-awards",
+      "official": true,
+      "url": "https://paao.org/meetings/prizes-and-awards/",
+      "eventIds": [
+        "paao-2027"
+      ],
+      "watchTerms": [
+        "December 1",
+        "Troutman"
+      ]
+    },
+    {
+      "id": "asrs-2027-deadlines",
+      "official": true,
+      "url": "https://www.asrs.org/annual-meeting/abstracts/deadlines-and-notifications",
+      "eventIds": [
+        "asrs-2027"
+      ],
+      "watchTerms": [
+        "January 28, 2027",
+        "June 16, 2027"
+      ]
+    },
+    {
+      "id": "arvo-2027-clinician-award",
+      "official": true,
+      "url": "https://www.arvo.org/arvo-foundation/arvo-foundation-early-career-clinician-scientist-research-awards",
+      "eventIds": [
+        "arvo-2027"
+      ],
+      "watchTerms": [
+        "December 4, 2026",
+        "$3,000"
+      ]
+    },
+    {
+      "id": "arvo-2027-registration",
+      "official": true,
+      "url": "https://www.arvo.org/annual-meeting/registration",
+      "eventIds": [
+        "arvo-2027"
+      ],
+      "watchTerms": [
+        "March 10, 2027"
+      ]
+    },
+    {
+      "id": "aioc-2027-official",
+      "official": true,
+      "url": "https://www.aios.org/aioc2027.php",
+      "eventIds": [
+        "aioc-2027"
+      ],
+      "watchTerms": [
+        "November 30, 2026",
+        "2027"
+      ]
+    },
+    {
+      "id": "pirogov-2026-official",
+      "official": true,
+      "url": "https://pirogoveyeforum.ru/",
+      "eventIds": [
+        "pirogov-eye-forum-2026"
+      ],
+      "watchTerms": [
+        "27 ноября",
+        "Олимпик"
+      ]
+    },
+    {
+      "id": "white-nights-2027-official",
+      "official": true,
+      "url": "https://ocwn.org/",
+      "eventIds": [
+        "white-nights-2027"
+      ],
+      "watchTerms": [
+        "24 по 28 мая 2027"
       ]
     }
   ]
