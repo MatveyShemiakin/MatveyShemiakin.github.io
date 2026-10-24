@@ -2,7 +2,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-CSS_LINK = '<link rel="stylesheet" href="/site-mega-nav.css?v=20260816-2">'
+CSS_LINK = '<link rel="stylesheet" href="/site-mega-nav.css?v=20261024-3">'
 JS_SCRIPT = '<script defer src="/site-mega-nav.js?v=20260816-2"></script>'
 
 

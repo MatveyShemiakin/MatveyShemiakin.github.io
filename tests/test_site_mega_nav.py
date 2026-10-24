@@ -7,7 +7,7 @@ class SiteMegaNavInjectorTests(unittest.TestCase):
         source = '<!doctype html><html><head><title>X</title></head><body></body></html>'
         once = inject_assets(source)
         twice = inject_assets(once)
-        self.assertEqual(once.count('/site-mega-nav.css?v=20260816-2'), 1)
+        self.assertEqual(once.count('/site-mega-nav.css?v=20261024-3'), 1)
         self.assertEqual(once.count('/site-mega-nav.js?v=20260816-2'), 1)
         self.assertEqual(once, twice)
 
