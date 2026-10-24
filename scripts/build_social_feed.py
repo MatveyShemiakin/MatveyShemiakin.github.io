@@ -14,11 +14,12 @@ def render_cards(posts,lang):
   out.append(f'<article class="social-card"><div class="social-meta">Telegram · <time datetime="{date}">{date}</time></div>{covers}<p class="social-caption">{html.escape(text)}</p><a class="button ghost" href="{html.escape(url,quote=True)}" target="_blank" rel="noopener noreferrer">'+('Открыть в Telegram ↗' if lang=='ru' else 'View on Telegram ↗')+'</a></article>')
  return '\n'.join(out)
 def render_guide(lang):
- title='Здоровье в повседневной жизни' if lang=='ru' else 'Everyday health — a practical guide (Russian)'
- desc='Пять привычек из ролика: сон, движение, питание, хобби и психологическое здоровье. Фото, практические шаги и научные источники.' if lang=='ru' else 'Five habits from the video, practical steps and scientific sources. The guide is available in Russian.'
+ title='Здоровье в повседневной жизни' if lang=='ru' else 'Everyday health — a practical guide'
+ desc='Пять привычек из ролика: сон, движение, питание, хобби и психологическое здоровье. Фото, практические шаги и научные источники.' if lang=='ru' else 'Five habits from the video, practical steps and scientific sources.'
  label='Авторская памятка' if lang=='ru' else 'Author’s guide'
+ guide_url='/social/health/' if lang=='ru' else '/en/social/health/'
  button='Открыть памятку →' if lang=='ru' else 'Read the guide →'
- return f'<section class="section social-guide-section"><article class="social-card social-guide-card"><img src="/assets/portrait.jpg" alt="Матвей Шемякин" width="1200" height="1800" loading="lazy"><div><div class="eyebrow">{label}</div><h2>{title}</h2><p>{desc}</p><a class="button primary" href="/social/health/">{button}</a></div></article></section>'
+ return f'<section class="section social-guide-section"><article class="social-card social-guide-card"><img src="/assets/portrait.jpg" alt="Матвей Шемякин" width="1200" height="1800" loading="lazy"><div><div class="eyebrow">{label}</div><h2>{title}</h2><p>{desc}</p><a class="button primary" href="{guide_url}">{button}</a></div></article></section>'
 
 def build_pages(posts):
  for lang,prefix in [('ru',''),('en','/en')]:
