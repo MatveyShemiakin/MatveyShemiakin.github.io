@@ -74,8 +74,7 @@
           {label:'Образование',href:'/#education'},
           {label:'Наука',href:'/#science'},
           {label:'Контакты',href:'/#contacts'},
-          {label:'Публикации из соцсетей',href:'/social/'},
-          {label:'Публикации в СМИ',href:'/media/'}
+          {label:'Публикации из соцсетей',href:'/social/'}
         ]}
       ]}
     ]

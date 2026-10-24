@@ -32,5 +32,4 @@ https://matveyshemyakin.ru/en/patients/iol-dislocation/
 
 https://matveyshemyakin.ru/social/
 https://matveyshemyakin.ru/en/social/
-https://matveyshemyakin.ru/media/
-https://matveyshemyakin.ru/media/health/
+https://matveyshemyakin.ru/social/health/
