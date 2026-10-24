@@ -1,6 +1,6 @@
 :root{--mobile-nav-sans:var(--sans,Inter,"Segoe UI",Arial,sans-serif);--mobile-nav-serif:var(--serif,"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif)}
 .site-mobile-nav,.site-mobile-search{display:none}
-@media(max-width:760px){
+@media(max-width:1020px){
   body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
   .mobile-patients-link{display:none!important}
   .site-mobile-nav{--mn-bg:rgba(255,255,255,.985);--mn-border:rgba(6,24,47,.12);--mn-text:#647184;--mn-active:#06182f;--mn-active-text:#fff;--mn-shadow:0 18px 50px rgba(6,24,47,.2);position:fixed;z-index:10040;left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));min-height:84px;padding:7px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;border:1px solid var(--mn-border);border-radius:25px;background:var(--mn-bg);box-shadow:var(--mn-shadow);font-family:var(--mobile-nav-sans);isolation:isolate}
@@ -23,7 +23,7 @@
 @media(prefers-reduced-motion:reduce){.site-mobile-nav__item{transition:none}}
 
 /* MOBILE_NAV_HIT_AREA_FIX_V2 */
-@media(max-width:760px){
+@media(max-width:1020px){
   .patient-fab{pointer-events:none!important}
   .patient-fab__main,.patient-fab.is-open .patient-fab__menu,.patient-fab.is-open .patient-fab__action{pointer-events:auto!important}
 }

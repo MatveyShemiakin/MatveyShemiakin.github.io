@@ -144,14 +144,16 @@
   function mountToggle(){
     removeLegacyToggles();
 
-    toggle=document.createElement('button');
+    toggle=document.querySelector('header[data-site-header] [data-site-theme-toggle]')||document.createElement('button');
     toggle.type='button';
     toggle.className='site-theme-toggle';
     toggle.dataset.siteThemeToggle='';
     toggle.innerHTML=iconMarkup();
 
     var placement=findHost();
-    if(placement.after&&placement.after.parentElement===placement.host){
+    if(toggle.isConnected){
+      // The shared HTML already reserves its position before scripts load.
+    }else if(placement.after&&placement.after.parentElement===placement.host){
       placement.after.insertAdjacentElement('afterend',toggle);
     }else{
       placement.host.appendChild(toggle);

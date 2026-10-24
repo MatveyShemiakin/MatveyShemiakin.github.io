@@ -25,6 +25,16 @@ on:
       - 'patients/patients-updates.js'
       - 'patients/patients-updates.css'
       - 'patients/consultation-cta.css'
+      - 'site-header.css'
+      - 'shared/site-header.html'
+      - 'scripts/site_header.py'
+      - 'site-theme.js'
+      - 'site-theme-init.js'
+      - 'site-theme.css'
+      - 'site-language-switch.js'
+      - 'site-language-switch.css'
+      - 'mobile-nav.js'
+      - 'mobile-nav.css'
       - 'site-mega-nav.js'
       - 'site-mega-nav.css'
       - 'scripts/generate_doctors_updates.py'
@@ -78,7 +88,9 @@ jobs:
       - run: python -m unittest tests/test_content_analytics.py
       - run: python -m unittest tests/test_patient_updates_inject.py
       - run: python -m unittest tests/test_patient_consultation_cta.py
-      - run: python -m unittest tests/test_site_mega_nav.py
+      - run: python -m unittest tests/test_site_mega_nav.py tests/test_shared_site_header.py
+      - run: python scripts/site_header.py --check
+      - run: node --test tests/shared-header-menu.test.mjs tests/shared-header-language.test.mjs
       - run: python -m unittest tests/test_logbook_injection_isolation.py
       - run: node --check analytics.js
       - run: node tests/test_analytics_events.mjs

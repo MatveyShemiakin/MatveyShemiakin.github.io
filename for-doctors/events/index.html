@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/mobile-fix.css">
 <link rel="stylesheet" href="/assets/events/events.css?v=20260816-3">
-<link rel="stylesheet" href="/site-language-switch.css?v=20260729-2">
-<script src="/site-theme-init.js?v=20260806-1"></script>
-<link rel="stylesheet" href="/site-theme.css?v=20260806-1">
+
+
+
 <title>Календарь офтальмологических событий — Матвей Шемякин</title>
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Матвей Юрьевич Шемякин">
@@ -20,29 +20,17 @@
 <link rel="alternate" hreflang="ru" href="https://matveyshemyakin.ru/for-doctors/events/">
 <link rel="alternate" hreflang="en" href="https://matveyshemyakin.ru/en/for-doctors/events/">
 <link rel="alternate" hreflang="x-default" href="https://matveyshemyakin.ru/for-doctors/events/">
-<link rel="stylesheet" href="/site-mega-nav.css?v=20261024-3"><link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=20260825-1"><link rel="stylesheet" href="/mobile-nav.css?v=20261017-1"></head>
+<link rel="stylesheet" href="/for-doctors/doctor-retention.css?v=20260825-1"><script src="/site-theme-init.js?v=8664ad5e45d2"></script><link rel="stylesheet" href="/site-language-switch.css?v=965328392b71"><link rel="stylesheet" href="/site-theme.css?v=0996005a4ff8"><link rel="stylesheet" href="/site-mega-nav.css?v=7dd909f63f99"><link rel="stylesheet" href="/mobile-nav.css?v=32207f6b1419"><link rel="stylesheet" href="/site-header.css?v=0a30287b8ffc"></head>
 <body data-events-src="/assets/data/ophthalmology-events.ru.json">
 <a class="skip-link" href="#events-app">Перейти к календарю</a>
-<header class="site-header">
+<header class="site-header" data-site-header="shared">
   <div class="container nav">
-    <a class="monogram" href="/" aria-label="На главную">МШ</a>
+    <a class="monogram" href="/" aria-label="Главная">МШ</a>
     <div class="nav-right">
-      <nav aria-label="Основная навигация">
-        <a href="/patients/">Пациентам</a>
-        <a href="/for-doctors/">Для врачей</a>
-        <a href="/#about">О враче</a>
-        <a href="/#directions">Направления</a>
-        <a href="/#education">Образование</a>
-        <a href="/#science">Наука</a>
-        <a href="/#contacts">Контакты</a>
-      </nav>
-      <a class="mobile-patients-link" href="/patients/">Пациентам</a>
-      <a class="mobile-patients-link" href="/for-doctors/">Врачам</a>
-      <div class="language-switch" aria-label="Язык страницы" role="group">
-        <a class="language-button active" href="/for-doctors/events/" lang="ru" hreflang="ru" aria-current="page">RU</a>
-        <a class="language-button" href="/en/for-doctors/events/" lang="en" hreflang="en">EN</a>
-      </div>
-      <button class="site-theme-toggle" id="theme-toggle" type="button" aria-label="Переключить цветовую гамму" title="Тема">☾</button>
+      <nav class="nav-links" aria-label="Основная навигация"><a href="/patients/">Пациентам</a><a href="/for-doctors/">Для врачей</a><a href="/#about">О враче</a></nav>
+      <div class="site-language-switch" role="group" aria-label="Язык сайта"><a class="site-language-switch__link is-active" href="/for-doctors/events/" lang="ru" hreflang="ru" aria-current="page">RU</a><a class="site-language-switch__link" href="/en/for-doctors/events/" lang="en" hreflang="en">EN</a></div>
+      <button class="site-theme-toggle" data-site-theme-toggle type="button" aria-pressed="false" aria-label="Включить тёмную тему"><svg class="site-theme-toggle__icon site-theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg><svg class="site-theme-toggle__icon site-theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.5A8.2 8.2 0 0 1 8.5 3.8 8.3 8.3 0 1 0 20.2 15.5Z"></path></svg></button>
+      <button class="site-mobile-nav__item" data-site-search-open type="button" aria-haspopup="dialog" aria-controls="site-search-dialog" aria-expanded="false"><svg class="site-mobile-nav__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg><span>Поиск</span></button>
     </div>
   </div>
 </header>
@@ -62,5 +50,5 @@
 <dialog class="dialog" id="calendar-options-dialog"><div class="dialog-head"><div><span class="dialog-kicker">Добавить в календарь</span><h2 id="calendar-options-title">Событие</h2></div><button class="dialog-close" type="button" id="calendar-options-close" aria-label="Закрыть">×</button></div><div class="dialog-body"><div class="calendar-context" id="calendar-options-context"></div><div class="calendar-provider-grid"><button class="calendar-provider" type="button" data-calendar-provider="apple"><span class="calendar-provider-icon"></span><span><strong>Apple Calendar</strong><span>iPhone / iPad / Mac · файл .ics</span></span></button><a class="calendar-provider" id="calendar-google" href="#" target="_blank" rel="noopener noreferrer"><span class="calendar-provider-icon">G</span><span><strong>Google Calendar</strong><span>Открыть готовое событие</span></span></a><a class="calendar-provider" id="calendar-outlook" href="#" target="_blank" rel="noopener noreferrer"><span class="calendar-provider-icon">O</span><span><strong>Outlook</strong><span>Outlook.com / Microsoft 365</span></span></a><button class="calendar-provider" type="button" data-calendar-provider="ics"><span class="calendar-provider-icon">↓</span><span><strong>Скачать .ics</strong><span>Универсальный календарный файл</span></span></button></div><p class="mobile-calendar-hint">На мобильном устройстве выберите установленный календарь. Для iPhone/iPad используйте Apple Calendar (.ics), для Android — Google Calendar.</p><p class="calendar-sheet-note">Даты берутся из карточки официального мероприятия. Дедлайн без опубликованного времени добавляется как событие на весь день — без выдуманного времени закрытия.</p></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="/assets/events/events.js?v=20261017-1" defer></script>
-<script src="/legal.js?v=20260721-3"></script><script src="/doctors-legal.js?v=20260816-2"></script><script defer src="/site-mega-nav.js?v=20260816-2"></script><script defer src="/for-doctors/doctor-retention.js?v=20260825-1"></script><script src="/mobile-nav.js?v=20261017-1"></script></body>
+<script src="/legal.js?v=20260721-3"></script><script src="/doctors-legal.js?v=fed2888eca87"></script><script defer src="/for-doctors/doctor-retention.js?v=20260825-1"></script><script defer src="/site-language-switch.js?v=a1b11aa420f3"></script><script defer src="/site-theme.js?v=30d1c7191e77"></script><script defer src="/site-mega-nav.js?v=85aa0f2d10ba"></script><script defer src="/mobile-nav.js?v=f9e27c267646"></script></body>
 </html>

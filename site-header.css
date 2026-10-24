@@ -1,0 +1,31 @@
+/* One header geometry. Page styles must not format this component. */
+header.site-header[data-site-header="shared"]{position:sticky!important;inset:0 0 auto!important;z-index:900!important;width:100%!important;max-width:none!important;height:auto!important;min-height:98px!important;margin:0!important;padding:0!important;border:0!important;background:#041225!important;color:#fff!important;isolation:isolate;box-sizing:border-box;line-height:1.2!important}
+header.site-header[data-site-header-overlay]{position:absolute!important;background:rgba(4,18,37,.82)!important}
+header.site-header[data-site-header] *{box-sizing:border-box}
+header.site-header[data-site-header]>.container.nav{display:flex!important;align-items:center!important;justify-content:space-between!important;flex-wrap:nowrap!important;gap:24px!important;width:min(calc(100% - 48px),1240px)!important;max-width:1240px!important;height:98px!important;min-height:98px!important;margin:0 auto!important;padding:0!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.72)!important;overflow:visible!important}
+header.site-header[data-site-header] .monogram{display:block!important;flex:0 0 auto!important;width:auto!important;margin:0!important;padding:0!important;color:#fff!important;font:400 31px/1 "Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif!important;letter-spacing:.02em!important;text-decoration:none!important;white-space:nowrap!important}
+header.site-header[data-site-header] .nav-right{display:flex!important;align-items:center!important;justify-content:flex-end!important;flex-wrap:nowrap!important;gap:20px!important;min-width:0!important;width:auto!important;margin:0!important;padding:0!important}
+header.site-header[data-site-header] .nav-right>.nav-links{display:flex!important;gap:24px!important;color:#eef4fb!important;font:800 10px/1.2 Inter,"Segoe UI",Arial,sans-serif!important;letter-spacing:.12em!important;text-transform:uppercase}
+header.site-header[data-site-header] .nav-right>nav{flex:0 1 auto;min-width:0;margin:0!important}
+header.site-header[data-site-header] a{text-decoration:none!important}
+header.site-header[data-site-header] .site-language-switch{position:static!important;inset:auto!important;transform:none!important;display:flex!important;flex:0 0 auto!important;margin:0!important;align-items:center!important;gap:4px!important;padding:4px!important;border:1px solid rgba(202,214,230,.55)!important;border-radius:999px!important;background:rgba(4,18,37,.62)!important}
+header.site-header[data-site-header] .site-language-switch__link{display:flex!important;align-items:center!important;justify-content:center!important;width:39px!important;min-width:39px!important;height:31px!important;margin:0!important;padding:0!important;border:0!important;border-radius:999px!important;color:#c7d3e3!important;font:800 11px/1 Inter,"Segoe UI",Arial,sans-serif!important;letter-spacing:.08em!important}
+header.site-header[data-site-header] .site-language-switch__link[aria-current="page"]{background:#fff!important;color:#06182f!important}
+header.site-header[data-site-header] .site-theme-toggle{position:static!important;inset:auto!important;transform:none!important;display:inline-grid!important;flex:0 0 41px!important;place-items:center!important;width:41px!important;height:41px!important;min-width:41px!important;min-height:41px!important;margin:0!important;padding:0!important;border:1px solid rgba(202,214,230,.55)!important;border-radius:50%!important;background:rgba(4,18,37,.62)!important;color:#fff!important;cursor:pointer}
+header.site-header[data-site-header] .site-theme-toggle__icon{grid-area:1/1;width:20px!important;height:20px!important;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+header.site-header[data-site-header] [data-site-search-open]{position:static!important;display:inline-flex!important;flex:0 0 auto!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:7px!important;min-width:0!important;min-height:40px!important;margin:0!important;padding:8px 12px!important;border:1px solid rgba(202,214,230,.55)!important;border-radius:14px!important;background:transparent!important;color:#fff!important;font:700 12px/1.2 Inter,"Segoe UI",Arial,sans-serif!important;cursor:pointer}
+header.site-header[data-site-header] [data-site-search-open] svg{width:20px!important;height:20px!important;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+header.site-header[data-site-header] :is(a,button):focus-visible{outline:3px solid #87b5ff;outline-offset:3px}
+header.site-header[data-site-header] .site-mega-nav__panel{max-width:calc(100vw - 36px)}
+.sim-page section.site-head::before{top:0}
+@media(max-width:1120px){header.site-header[data-site-header] .nav-right{gap:12px!important}}
+@media(max-width:1020px){header.site-header[data-site-header]{min-height:76px!important}header.site-header[data-site-header]>.container.nav{height:76px!important;min-height:76px!important;width:calc(100% - 36px)!important}header.site-header[data-site-header] .nav-right{gap:14px!important}header.site-header[data-site-header] .nav-right>:is(.nav-links,.site-mega-nav),header.site-header[data-site-header] [data-site-search-open]{display:none!important}}
+@media(max-width:370px){header.site-header[data-site-header] .nav-right{gap:8px!important}}
+@media print{header.site-header[data-site-header]{display:none!important}}
+
+/* Existing section shortcuts and update bells stay with their page, below the header. */
+.container[data-site-header-context]{position:relative;z-index:80;display:flex;flex-wrap:wrap;align-items:center;gap:14px;width:min(calc(100% - 48px),1240px);max-width:1240px;margin:0 auto;padding:12px 18px;border-radius:0 0 16px 16px;background:#06182f;color:#fff}
+.container[data-site-header-context]>.nav-links{display:flex!important;flex-wrap:wrap;gap:12px 22px;min-width:0;font:700 12px/1.5 Inter,"Segoe UI",Arial,sans-serif;letter-spacing:0;text-transform:none}
+.container[data-site-header-context]>.nav-links a{color:#dceaff;text-decoration:none}
+.container[data-site-header-context]>:is(.patient-updates,.doctors-updates){margin-left:auto}
+@media(max-width:760px){.container[data-site-header-context]{width:calc(100% - 36px);padding:10px 14px}}

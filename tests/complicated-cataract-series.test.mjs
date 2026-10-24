@@ -44,7 +44,7 @@ test('article SEO exposes canonical language pairs, crawl directives and structu
 test('article pages retain standard site chrome, reading progress, TOC and personal CTA',()=>{
   for(const path of [paths.ruArticle,paths.enArticle]){
     const html=read(path);
-    assert.match(html,/<header class="site-header">/);
+    assert.match(html,/<header class="site-header" data-site-header="shared"/);
     assert.match(html,/<footer class="site-footer">/);
     assert.match(html,/class="reading-progress"/);
     assert.match(html,/class="article-toc"/);
@@ -52,8 +52,8 @@ test('article pages retain standard site chrome, reading progress, TOC and perso
     assert.match(html,/aria-controls="mobile-article-toc"/);
     assert.match(html,/id="mobile-article-toc"/);
     assert.match(html,/href="https:\/\/t\.me\/ShemMYu"/);
-    assert.match(html,/site-theme\.css\?v=20260806-1/);
-    assert.match(html,/site-mega-nav\.js\?v=20260816-2/);
+    assert.match(html,/site-theme\.css\?v=[a-f0-9]+/);
+    assert.match(html,/site-mega-nav\.js\?v=[a-f0-9]+/);
     assert.match(html,/complicated-cataract\.js\?v=20260930-1/);
   }
 });
@@ -63,7 +63,7 @@ test('series hubs are indexable collection pages and expose the first article',(
     const html=read(path);
     assert.match(html,/"@type":"CollectionPage"/);
     assert.match(html,new RegExp(`href="${article}"`));
-    assert.match(html,/<header class="site-header">/);
+    assert.match(html,/<header class="site-header" data-site-header="shared"/);
     assert.match(html,/<footer class="site-footer">/);
   }
 });
@@ -133,13 +133,13 @@ test('question-style section headings end with a question mark',()=>{
 test('series headers keep language and colour controls in one non-wrapping action row',()=>{
   for(const path of Object.values(paths)){
     const html=read(path);
-    assert.match(html,/<div class="header-actions" aria-label="[^"]+"><\/div>/);
+    assert.match(html,/data-site-header="shared"[\s\S]*class="nav-right"/);
   }
 
-  const css=read('for-doctors/simple-questions/series.css');
-  assert.match(css,/\.simple-questions-page \.header-actions\{[^}]*display:flex!important[^}]*flex-wrap:nowrap!important/s);
-  assert.match(css,/\.simple-questions-page \.header-actions>\.site-language-switch[^}]*margin:0!important/s);
-  assert.match(css,/\.simple-questions-page \.header-actions>\.site-theme-toggle[^}]*margin:0!important/s);
+  const css=read('site-header.css');
+  assert.match(css,/\.nav-right\{[^}]*display:flex!important[^}]*flex-wrap:nowrap!important/s);
+  assert.match(css,/\.site-language-switch\{[^}]*position:static!important/s);
+  assert.match(css,/\.site-theme-toggle\{[^}]*position:static!important/s);
 });
 
 test('article author cards use the standard portrait-led medical review pattern',()=>{

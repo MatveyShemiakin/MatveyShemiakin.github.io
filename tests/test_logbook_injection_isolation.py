@@ -16,6 +16,13 @@ class LogbookInjectionIsolationTest(unittest.TestCase):
             page = '<!doctype html><html><head></head><body><main>Private app</main></body></html>'
             (root / 'index.html').write_text(page)
             (root / 'logbook' / 'index.html').write_text(page)
+            import shutil
+            from scripts.site_header import CSS, SCRIPTS
+            (root/'shared').mkdir()
+            shutil.copyfile(SOURCE/'shared/site-header.html',root/'shared/site-header.html')
+            shutil.copyfile(SOURCE/'scripts/site_header.py',root/'scripts/site_header.py')
+            for asset in set(CSS+SCRIPTS+('site-theme-init.js','doctors-legal.js')):
+                shutil.copyfile(SOURCE/asset,root/asset)
             for name in ('inject_legal.py', 'inject_site_mega_nav.py'):
                 target = root / 'scripts' / name
                 target.write_bytes((SOURCE / 'scripts' / name).read_bytes())

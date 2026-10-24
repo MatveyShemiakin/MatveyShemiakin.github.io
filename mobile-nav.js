@@ -132,7 +132,7 @@
   };
   let records=null,loading=null,requestId=0,shown=20,opener=null;
   let background=[];
-  const desktop=document.createElement('button');
+  const desktop=document.querySelector('header[data-site-header] [data-site-search-open]')||document.createElement('button');
   desktop.className='site-mobile-nav__item';
   desktop.type='button';
   desktop.dataset.siteSearchOpen='';
@@ -141,7 +141,7 @@
   desktop.setAttribute('aria-controls',search.id);
   desktop.setAttribute('aria-expanded','false');
   const mount=['header .nav-right','header .header-actions','header .professional-updates-nav-actions','header .doctors-nav-actions','header .nav-actions','header .header-row','header .terms-nav-links','header .container.nav','header .header-inner','.site-head .container','.privacy-shell'].map(selector=>document.querySelector(selector)).find(Boolean);
-  if(mount){if(mount.matches('.privacy-shell'))mount.querySelector('.privacy-back')?.after(desktop);else mount.appendChild(desktop);}
+  if(mount&&!desktop.isConnected){if(mount.matches('.privacy-shell'))mount.querySelector('.privacy-back')?.after(desktop);else mount.appendChild(desktop);}
   searchButton.setAttribute('aria-controls',search.id);
   searchButton.setAttribute('aria-haspopup','dialog');
 

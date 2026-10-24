@@ -32,7 +32,7 @@ test('localized tile numbers parse identically for icon selection', () => {
 
 test('RU Arcade landing uses standard shell and contains no injected material tools or MVP label', () => {
   const html = fs.readFileSync(new URL('../for-doctors/ophtha-arcade/index.html', import.meta.url), 'utf8');
-  assert.match(html, /class="doctors-header"/);
+  assert.match(html, /class="site-header" data-site-header="shared"/);
   assert.match(html, /class="site-footer"/);
   assert.match(html, /Хрусталик/);
   assert.match(html, /Радужка/);
@@ -43,7 +43,7 @@ test('RU Arcade landing uses standard shell and contains no injected material to
 
 test('RU game exposes player level next to profile name', () => {
   const html = fs.readFileSync(new URL('../for-doctors/ophtha-arcade/ophtha-merge/index.html', import.meta.url), 'utf8');
-  assert.match(html, /class="doctors-header"/);
+  assert.match(html, /class="site-header" data-site-header="shared"/);
   assert.match(html, /class="site-footer"/);
   assert.match(html, /id="profile-level"/);
   assert.match(html, /\/en\/for-doctors\/ophtha-arcade\/ophtha-merge\//);
@@ -54,7 +54,7 @@ test('English Arcade and game pages exist with English shell and reciprocal lang
   const game = fs.readFileSync(new URL('../en/for-doctors/ophtha-arcade/ophtha-merge/index.html', import.meta.url), 'utf8');
   for (const html of [landing, game]) {
     assert.match(html, /<html lang="en">/);
-    assert.match(html, /class="doctors-header"/);
+    assert.match(html, /class="site-header" data-site-header="shared"/);
     assert.match(html, /class="site-footer"/);
     assert.match(html, /hreflang="ru"/);
     assert.match(html, /hreflang="en"/);

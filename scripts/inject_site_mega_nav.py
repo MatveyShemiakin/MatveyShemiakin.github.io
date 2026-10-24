@@ -26,18 +26,12 @@ def inject_assets(text: str) -> str:
 
 
 def main() -> None:
-    changed = 0
-    for path in ROOT.rglob('*.html'):
-        if '.git' in path.parts or path.relative_to(ROOT).parts[0] == 'logbook':
-            continue
-        original = path.read_text(encoding='utf-8')
-        updated = inject_assets(original)
-        if updated != original:
-            path.write_text(updated, encoding='utf-8')
-            changed += 1
-            print(path.relative_to(ROOT))
-    print(f'Updated HTML files: {changed}')
+    # Run last: templates, legal injection and feed generation may contain old copies.
+    from scripts.site_header import main as update_headers
+    update_headers()
 
 
 if __name__ == '__main__':
+    import sys
+    sys.path.insert(0,str(ROOT))
     main()

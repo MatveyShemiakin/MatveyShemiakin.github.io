@@ -1,0 +1,21 @@
+name: Shared site header
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python scripts/site_header.py --check
+      - run: python -m unittest tests/test_shared_site_header.py tests/test_site_mega_nav.py tests/test_logbook_injection_isolation.py
+      - run: node --test tests/shared-header-menu.test.mjs tests/shared-header-language.test.mjs tests/mobile-navbar.test.mjs tests/site-mega-nav.test.mjs

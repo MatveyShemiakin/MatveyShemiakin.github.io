@@ -87,6 +87,9 @@
     if(document.documentElement.dataset.siteLanguageSwitch==='ready')return;
     document.documentElement.dataset.siteLanguageSwitch='ready';
 
+    // These URLs were validated against real localized pages by the shared template.
+    if(document.querySelector('header[data-site-header] .site-language-switch'))return;
+
     const existing=[...document.querySelectorAll('.site-language-switch,.language-switch,.patient-language-switch,.topic-language-switch,.doctors-language')];
     const first=existing[0]||null;
     const parent=first&&first.parentElement;

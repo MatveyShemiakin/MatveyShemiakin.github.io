@@ -14,6 +14,7 @@ import sys
 from urllib.parse import quote
 
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
 VERSION='20261017-1'
 EXCLUDED={'logbook','tests','docs','scripts','.git','.github','sources','konspekty'}
 
@@ -112,6 +113,9 @@ def prepare(html):
         pattern=r'<link\b[^>]*href=[\"\']/mobile-nav\.css[^\"\']*[\"\'][^>]*>' if asset=='css' else r'<script\b[^>]*src=[\"\']/mobile-nav\.js[^\"\']*[\"\'][^>]*>\s*</script>'
         if re.search(pattern,html,re.I): html=re.sub(pattern,lambda _:tag,html,flags=re.I)
         else: html=html.replace('</head>' if asset=='css' else '</body>',tag+('</head>' if asset=='css' else '</body>'),1)
+    if 'data-site-header="shared"' in html:
+        from scripts.site_header import inject_assets
+        html=inject_assets(html)
     return html
 
 def dynamic_faq(root,lang):

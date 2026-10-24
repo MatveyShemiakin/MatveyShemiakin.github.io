@@ -60,7 +60,7 @@ test('production pages preserve shared doctor navigation and retention integrati
   const ru = await read('for-doctors/ophthasearch/index.html');
   const en = await read('en/for-doctors/ophthasearch/index.html');
   for (const html of [ru, en]) {
-    assert.match(html, /class="doctors-header"/);
+    assert.match(html, /class="site-header" data-site-header="shared"/);
     assert.match(html, /doctor-retention\.css/);
     assert.match(html, /doctor-retention\.js/);
     assert.match(html, /data-doctor-telegram/);

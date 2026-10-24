@@ -33,7 +33,7 @@ test('collaboration pages keep six semantic SVG card icons in both languages', (
     const html = read(path);
     assert.equal((html.match(/class="card-icon card-icon--/g) || []).length, 6, `${path}: expected six card icons`);
     assert.ok((html.match(/<svg/g) || []).length >= 11, `${path}: SVG icon system is incomplete`);
-    assert.ok(html.includes('class="theme-icon"'), `${path}: theme control must use an SVG icon`);
+    assert.ok(html.includes('class="site-theme-toggle__icon site-theme-toggle__icon--sun"'), `${path}: theme control must use an SVG icon`);
     assert.ok(!html.includes('>◐<'), `${path}: legacy text theme glyph must be removed`);
     assert.ok(html.includes('class="collaboration-back"'), `${path}: mobile/compact back route to the doctors section is missing`);
     assert.ok(html.includes('/collaboration/assets/design-refresh.css'), `${path}: refresh stylesheet is missing`);

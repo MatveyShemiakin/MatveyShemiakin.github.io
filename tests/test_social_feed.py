@@ -39,4 +39,5 @@ class FeedTests(unittest.TestCase):
      self.assertEqual(page.count('/'+asset+'?'),1,asset)
     self.assertIn('href="/social/" lang="ru"',page)
     self.assertIn('href="/en/social/" lang="en"',page)
-    self.assertIn('/site-mega-nav.css?v=20261024-3',page)
+    from scripts.site_header import asset_version
+    self.assertIn('/site-mega-nav.css?v='+asset_version('site-mega-nav.css'),page)

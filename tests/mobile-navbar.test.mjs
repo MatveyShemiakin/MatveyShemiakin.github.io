@@ -7,13 +7,13 @@ const sitemap=fs.readFileSync('sitemap.xml','utf8');
 const urls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>new URL(match[1]));
 const pagePath=url=>url.pathname==='/'?'index.html':url.pathname.endsWith('/')?url.pathname.slice(1)+'index.html':url.pathname.slice(1);
 
-assert.match(css,/@media\(max-width:760px\)/);
+assert.match(css,/@media\(max-width:1020px\)/);
 assert.match(css,/\.site-mobile-nav\{[^}]*position:fixed/);
 assert.match(css,/\.site-mobile-nav__icon\{width:29px;height:29px/);
 assert.match(css,/\.patient-fab\{bottom:calc\(var\(--fab-bottom-offset,20px\) \+ 96px/);
 assert.match(css,/\.cookie-banner\{bottom:calc\(104px/);
 
-assert.match(css,/@media\(max-width:760px\)[\s\S]*?\.patient-fab\{pointer-events:none!important\}/);
+assert.match(css,/@media\(max-width:1020px\)[\s\S]*?\.patient-fab\{pointer-events:none!important\}/);
 assert.match(css,/\.patient-fab__main,\.patient-fab\.is-open \.patient-fab__menu,\.patient-fab\.is-open \.patient-fab__action\{pointer-events:auto!important\}/);
 assert.match(js,/const path=cleanPath\?cleanPath\+'\/'\:'\/'/);
 assert.match(js,/patients:'\/patients\/'/);
@@ -34,8 +34,8 @@ for(const url of urls){
   const file=pagePath(url);
   assert.ok(fs.existsSync(file),`Missing sitemap page ${file}`);
   const html=fs.readFileSync(file,'utf8');
-  assert.equal((html.match(/\/mobile-nav\.css\?v=20261017-1/g)||[]).length,1,`CSS tag mismatch in ${file}`);
-  assert.equal((html.match(/\/mobile-nav\.js\?v=20261017-1/g)||[]).length,1,`JS tag mismatch in ${file}`);
+  assert.equal((html.match(/\/mobile-nav\.css\?v=[a-f0-9]+/g)||[]).length,1,`CSS tag mismatch in ${file}`);
+  assert.equal((html.match(/\/mobile-nav\.js\?v=[a-f0-9]+/g)||[]).length,1,`JS tag mismatch in ${file}`);
 }
 assert.doesNotMatch(fs.readFileSync('konspekt.html','utf8'),/\/mobile-nav\.(?:css|js)/);
 console.log(`Mobile navbar verified on ${urls.length} public pages.`);

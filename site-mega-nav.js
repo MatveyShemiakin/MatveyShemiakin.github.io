@@ -188,6 +188,15 @@
   }
 
   function bind(nav){
+    nav.querySelectorAll('.site-mega-nav__group').forEach(group=>{
+      group.addEventListener('pointerenter',event=>{
+        if(event.pointerType==='touch')return;
+        closeAll(nav,group);setOpen(group,true);
+      });
+      group.addEventListener('pointerleave',()=>{
+        if(!group.contains(document.activeElement))setOpen(group,false);
+      });
+    });
     nav.addEventListener('click',event=>{
       const toggle=event.target.closest('.site-mega-nav__toggle');
       if(!toggle)return;
@@ -197,6 +206,7 @@
       setOpen(group,next);
     });
     nav.addEventListener('focusin',event=>{
+      if(event.target.closest('.site-mega-nav__toggle'))return;
       const group=event.target.closest('.site-mega-nav__group');
       if(!group)return;
       closeAll(nav,group);

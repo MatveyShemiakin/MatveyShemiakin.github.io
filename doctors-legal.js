@@ -91,7 +91,7 @@
   }
 
   ensureStylesheet('/doctors-legal.css?v=20260805-1','doctors-legal');
-  ensureStylesheet('/clinical-header.css?v=20260726-7','clinical-header');
+  if(!document.querySelector('header[data-site-header]'))ensureStylesheet('/clinical-header.css?v=20260726-7','clinical-header');
 
   function themeIcon(theme){
     return theme==='dark'
@@ -173,7 +173,7 @@
   function normalizeClinicalHeader(){
     if(isLanding)return;
     const header=document.querySelector('body > header.site-header, body > header.clinical-header');
-    if(!header)return;
+    if(!header||header.hasAttribute('data-site-header'))return;
     header.classList.add('clinical-header');
     header.style.backgroundImage='none';
     if(isBacterial)document.body.classList.add('bacterial-clinical-page');
