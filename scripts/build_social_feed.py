@@ -19,7 +19,7 @@ def render_guide(lang):
  label='Авторская памятка' if lang=='ru' else 'Author’s guide'
  guide_url='/social/health/' if lang=='ru' else '/en/social/health/'
  button='Открыть памятку →' if lang=='ru' else 'Read the guide →'
- return f'<section class="section social-guide-section"><article class="social-card social-guide-card"><img src="/assets/health/reel-cover-{lang}.webp" alt="{title}" width="1080" height="1920" loading="lazy"><div><div class="eyebrow">{label}</div><h2>{title}</h2><p>{desc}</p><a class="button primary" href="{guide_url}">{button}</a></div></article></section>'
+ return f'<section class="section social-guide-section"><article class="social-card social-guide-card"><img src="/assets/health/reel-cover-{lang}-v2.webp" alt="{title}" width="1080" height="1920" loading="lazy"><div><div class="eyebrow">{label}</div><h2>{title}</h2><p>{desc}</p><a class="button primary" href="{guide_url}">{button}</a></div></article></section>'
 
 def build_pages(posts):
  for lang,prefix in [('ru',''),('en','/en')]:
