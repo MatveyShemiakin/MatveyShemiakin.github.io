@@ -32,19 +32,6 @@
   const status = document.querySelector('[data-form-status]');
   const mobileCta = document.querySelector('.mobile-cta');
 
-  const storedTheme = localStorage.getItem('ms-theme');
-  if (storedTheme) root.dataset.theme = storedTheme;
-
-  document.querySelectorAll('[data-theme-toggle]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const current = root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      const next = current === 'dark' ? 'light' : 'dark';
-      root.dataset.theme = next;
-      localStorage.setItem('ms-theme', next);
-      btn.setAttribute('aria-label', next === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
-    });
-  });
-
   function openModal(topic = '') {
     if (!modal) return;
     modal.classList.add('is-open');
