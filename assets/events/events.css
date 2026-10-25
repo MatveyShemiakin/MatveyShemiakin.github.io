@@ -100,9 +100,12 @@
 .globe-markers{position:absolute;inset:0;pointer-events:none}
 .globe-pin{position:absolute;left:var(--pin-x);top:var(--pin-y);transform:translate(-50%,-50%);width:30px;height:30px;border:2px solid #f5da91;border-radius:50%;background:#a46e19;color:#fff;box-shadow:0 0 0 5px #e9b94f20,0 2px 12px #0009;pointer-events:auto;cursor:pointer;font:700 11px system-ui}
 .globe-pin:hover,.globe-pin:focus-visible{z-index:5;background:#fff;color:#09243d;outline:3px solid #e6b94a}
-.globe-controls{position:absolute;right:12px;bottom:28px;display:flex;gap:6px}
+.globe-controls{position:absolute;right:12px;bottom:14px;display:flex;gap:6px}
 .globe-controls button{min-width:40px;min-height:40px;border:1px solid #5b748a;border-radius:10px;background:#102539;color:#fff;cursor:pointer;font-size:16px;padding:6px 12px}
-.globe-map-credit{position:absolute;bottom:8px;left:14px;color:#a0b4c5;font:10px system-ui}
+.globe-map-credit{position:static;margin:10px 0;color:var(--muted);font:11px/1.5 system-ui;overflow-wrap:anywhere}.globe-map-credit a{color:inherit;text-decoration:underline}
+.globe-map-mode{position:absolute;top:12px;left:12px;border-radius:8px;padding:6px 10px;background:#071728dd;color:#fff;font:12px system-ui;pointer-events:none}
+.globe-scale{position:absolute;bottom:16px;left:14px;width:80px;border:solid #fff;border-width:0 1px 2px;color:#fff;font:12px/1.8 system-ui;text-align:center;text-shadow:0 1px 3px #000;pointer-events:none}
+.globe-pin-name{position:absolute;left:50%;top:33px;transform:translateX(-50%);padding:3px 7px;border-radius:4px;background:#081c2de6;color:#fff;white-space:nowrap;font:12px system-ui;pointer-events:none}
 .globe-selection{min-width:0;max-height:480px;overflow-y:auto;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
 .globe-selection h3{font-family:var(--serif);font-size:30px;color:var(--brand);margin:0 0 12px}
 .globe-selection p,.globe-status{color:var(--muted);font-size:14px}
