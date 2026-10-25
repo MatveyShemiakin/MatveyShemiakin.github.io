@@ -10,7 +10,7 @@ function create(root,{en,onSelect}){
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const limitZoom=z=>Math.max(.75,Math.min(4096,z));
  const satellite=window.EventsSatellite.create(canvas,draw);
- function select(i){selected=groups[i];lat=selected.lat;lon=selected.lon;zoom=1024;renderList();draw()}
+ function select(i){selected=groups[i];lat=selected.lat;lon=selected.lon;zoom=1024;renderList();draw();stage.scrollIntoView({behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'})}
  function renderList(){list.innerHTML=groups.map((g,i)=>`<button type="button" class="globe-city${g===selected?' selected':''}" data-city="${i}"><span>${esc(g.city)}</span><small>${g.events.length} · ${esc(g.country)}</small></button>`).join('');const target=root.querySelector('.globe-selection');target.innerHTML=selected?`<h3>${esc(selected.city)}</h3>`+selected.events.map(e=>`<button type="button" class="globe-event" data-globe-event="${esc(e.id)}"><strong>${esc(e.title)}</strong><span>${esc(e.start)} — ${esc(e.end)}</span></button>`).join(''):`<p>${en?'Select a city to zoom in to its satellite map and see events.':'Выберите город, чтобы приблизить спутниковую карту и увидеть мероприятия.'}</p>`}
  function draw(){cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{
   const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h||!root.classList.contains('active'))return;

@@ -11,7 +11,7 @@ Tasks:
 - [x] Test LOD, date-line wrap, polar clamp, inverse projection, raster horizon, bounded concurrent requests and error retry suppression.
 - [x] Add lazy satellite raster tile loading, parent fallback, bounded cache and zoom-dependent labels.
 - [x] Retain touch rotation/pinch, keyboard, event filters/details; allow city-level zoom and reset.
-- [ ] Run required shared-header/calendar checks; publish and inspect live RU/EN desktop/mobile globe and city view.
+- [x] Run required shared-header/calendar checks; publish and inspect live RU/EN desktop/mobile globe and city view.
 
 Review focus: failed provider must not flood requests; in-flight loads cannot duplicate on repaint; date-line/poles must remain valid; city selection must retain events; mobile must retain zero horizontal overflow.
 
