@@ -4,3 +4,7 @@
 
 .social-guide-card{display:grid;grid-template-columns:200px minmax(0,1fr);gap:30px;align-items:center}.social-guide-card img{width:100%;height:auto;max-height:280px;object-fit:contain;margin:0}.social-guide-card h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3vw,40px);line-height:1.15;margin:16px 0}.social-guide-section{padding-bottom:0}@media(max-width:650px){.social-guide-card{grid-template-columns:1fr}.social-guide-card img{max-height:240px;width:auto;margin:auto}}
 @media(max-width:620px){html[lang="ru"] .nav-actions>a[href="/social/health/"],html[lang="en"] .nav-actions>a[href="/en/social/health/"]{display:none}}
+
+.hero-actions .button[href="https://www.instagram.com/dr.shemyakin/"]{background:#c13584;background:linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);border-color:transparent;color:#fff}
+.hero-actions .button[href="https://www.instagram.com/dr.shemyakin/"]:hover{border-color:rgba(255,255,255,.55)}
+.hero-actions .button[href="https://www.instagram.com/dr.shemyakin/"]:focus-visible{outline:3px solid #fff;outline-offset:3px}

@@ -33,8 +33,9 @@ def build_pages(posts):
   head=re.sub(r'<title>.*?</title>',f'<title>{title} — {name}</title>',head)
   head=head.replace('/en/collaboration/"','/en/social/"').replace('/collaboration/"','/social/"')
   head=re.sub(r'<meta name="description"[^>]*>',f'<meta name="description" content="{title} — {name}. Telegram.">',head)
-  head=head.replace('</head>','<link rel="stylesheet" href="/social-feed.css"></head>')
-  main=f'<main><section class="section hero"><div class="eyebrow">{name} · Telegram</div><h1>{title}</h1><p class="hero-copy">'+('Новые заметки, профессиональные события и материалы из моего Telegram-канала.' if lang=='ru' else 'New notes, professional events and posts from my Telegram channel.')+f'</p><a class="button primary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer">Telegram ↗</a></section>{render_guide(lang)}<section class="section social-grid">{render_cards(posts,lang)}</section></main>'
+  from scripts.site_header import asset_version
+  head=head.replace('</head>',f'<link rel="stylesheet" href="/social-feed.css?v={asset_version("social-feed.css")}"></head>')
+  main=f'<main><section class="section hero"><div class="eyebrow">{name} · Telegram</div><h1>{title}</h1><p class="hero-copy">'+('Новые заметки, профессиональные события и материалы из моего Telegram-канала.' if lang=='ru' else 'New notes, professional events and posts from my Telegram channel.')+f'</p><div class="hero-actions"><a class="button primary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer">Telegram ↗</a><a class="button" href="https://www.instagram.com/dr.shemyakin/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div></section>{render_guide(lang)}<section class="section social-grid">{render_cards(posts,lang)}</section></main>'
   tail=source[source.index('</main>')+len('</main>'):]
   tail=tail.replace('/en/collaboration/"','/en/social/"').replace('/collaboration/"','/social/"')
   tail=re.sub(r'<div class="mobile-cta".*?</div>', '<div class="mobile-cta"><a class="button primary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer">'+('Открыть Telegram ↗' if lang=='ru' else 'View Telegram ↗')+'</a></div>',tail)
