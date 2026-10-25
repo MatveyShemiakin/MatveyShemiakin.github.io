@@ -128,3 +128,8 @@
  .view-tabs{display:grid;width:100%}.view-tab{padding:8px 3px;font-size:12px;min-width:0}
  .filter-scroll{flex-wrap:wrap;overflow:visible}.app-shell>*{min-width:0;max-width:100%}
 }
+@media(max-width:760px){
+ /* Keep event modes beside the content, clear of the shared bottom navigation. */
+ .mobile-sticky{display:none}
+ .viewbar{position:sticky;top:76px;z-index:80;background:var(--bg);padding:6px 0}
+}

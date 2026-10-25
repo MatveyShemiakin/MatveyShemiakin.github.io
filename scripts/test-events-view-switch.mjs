@@ -5,7 +5,7 @@ const pages = [
 
 const cases = [
   { name: 'desktop', width: 1440, height: 1000, selector: '[data-view="deadlines"]', target: 'view-deadlines' },
-  { name: 'mobile', width: 390, height: 844, selector: '[data-mobile-view="calendar"]', target: 'view-calendar' }
+  { name: 'mobile', width: 390, height: 844, selector: '[data-view="calendar"]', target: 'view-calendar' }
 ];
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
