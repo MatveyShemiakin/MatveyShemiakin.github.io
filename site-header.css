@@ -31,3 +31,11 @@ header.site-header[data-site-header] :is(.patient-updates-toggle,.doctors-update
 .container[data-site-header-context]>.nav-links a{color:#dceaff;text-decoration:none}
 .container[data-site-header-context]>:is(.patient-updates,.doctors-updates){margin-left:auto}
 @media(max-width:760px){.container[data-site-header-context]{width:calc(100% - 36px);padding:10px 14px}}
+
+/* The patient hub uses the bottom mobile navigation, with no duplicate row
+   or space reserved for the former absolute header above the hero. */
+@media(max-width:1020px){
+ .container[data-site-header-context]:has(+main>.patient-hub-hero){display:none}
+ .patient-hub-hero{min-height:0}
+ .patient-hub-hero>.patient-hero-grid{min-height:0;padding-top:32px;align-items:start}
+}

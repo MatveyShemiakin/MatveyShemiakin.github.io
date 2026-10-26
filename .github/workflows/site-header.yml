@@ -19,3 +19,31 @@ jobs:
       - run: python scripts/site_header.py --check
       - run: python -m unittest tests/test_shared_site_header.py tests/test_site_mega_nav.py tests/test_logbook_injection_isolation.py
       - run: node --test tests/shared-header-menu.test.mjs tests/shared-header-language.test.mjs tests/mobile-navbar.test.mjs tests/site-mega-nav.test.mjs
+      - name: Render patient hub headers in RU EN and both themes
+        run: |
+          mkdir -p header-smoke
+          python3 -m http.server 8000 >/tmp/header-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME"
+          for lang in ru en; do
+            prefix=""
+            if [ "$lang" = en ]; then prefix="/en"; fi
+            for theme in light dark; do
+              theme_arg="--blink-settings=preferredColorScheme=light"
+              if [ "$theme" = dark ]; then theme_arg="--force-dark-mode"; fi
+              for width in 320 390 1020 1440; do
+                "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars \
+                  "$theme_arg" --virtual-time-budget=2500 --window-size="$width,844" \
+                  --screenshot="header-smoke/$lang-$theme-$width.png" \
+                  "http://127.0.0.1:8000$prefix/patients/"
+              done
+            done
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: patient-hub-header-smoke
+          path: header-smoke/*
+          if-no-files-found: error
