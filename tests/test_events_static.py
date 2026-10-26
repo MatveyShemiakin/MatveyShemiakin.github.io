@@ -54,7 +54,7 @@ class StaticEventsTests(unittest.TestCase):
             expected = [e for e in dataset['events'] if e['end'] >= '2026-10-26']
             self.assertEqual(len(cards), len(expected))
             self.assertEqual(module.render_page(text, dataset, lang, date(2026, 10, 26)), text)
-            self.assertIn('Матвея' if lang == 'ru' else 'Matvey', text[text.index('<main'):text.index('class="dashboard"')])
+            self.assertIn('Матвей' if lang == 'ru' else 'Matvey', text[text.index('<main'):text.index('class="dashboard"')])
 
     def test_empty_catalogue_shows_an_honest_message(self):
         module = self.renderer()

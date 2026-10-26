@@ -102,12 +102,12 @@ def render_page(text: str, dataset: dict, lang: str, as_of: date) -> str:
         for d in deadlines[:6]
     )
     text = inner(text, 'radar-list', radar or '<div class="empty-state"><strong>' + ('No upcoming deadlines' if en else 'Ближайших дедлайнов нет') + '</strong></div>')
-    author = '<p class="sync-status" data-events-author>' + (
-        'Ophthalmology events calendar on the website of Matvey Yuryevich Shemyakin. Dates and registration: official organiser sources.'
-        if en else 'Календарь офтальмологических событий на сайте Матвея Юрьевича Шемякина. Даты и регистрация — по официальным источникам организаторов.'
-    ) + '</p>'
+    author = '<p class="hero-lead" data-events-author><small>' + (
+        'Matvey Yuryevich Shemyakin · Calendar for ophthalmologists'
+        if en else 'Матвей Юрьевич Шемякин · Календарь для офтальмологов'
+    ) + '</small></p>'
     if 'data-events-author' in text:
-        text = re.sub(r'<p class="sync-status" data-events-author>.*?</p>', lambda _: author, text, count=1)
+        text = re.sub(r'<p class="(?:sync-status|hero-lead)" data-events-author>.*?</p>', lambda _: author, text, count=1)
     else:
         text = re.sub(r'(<p class="hero-lead">.*?</p>)', lambda m: m[0] + author, text, count=1)
     return text
