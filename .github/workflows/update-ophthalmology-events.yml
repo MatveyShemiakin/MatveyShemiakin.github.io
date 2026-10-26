@@ -79,8 +79,8 @@ jobs:
           CHROME_PID=$!
           trap 'kill $SERVER_PID $CHROME_PID || true' EXIT
           for i in $(seq 1 30); do curl -fsS http://127.0.0.1:19227/json/version >/dev/null && break; sleep 1; done
-          node scripts/test-events-view-switch.mjs
           node scripts/test-events-indexing.mjs
+          node scripts/test-events-view-switch.mjs
       - name: Browser smoke test RU EN desktop mobile
         if: github.event_name == 'pull_request'
         run: |

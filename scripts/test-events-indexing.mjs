@@ -13,8 +13,10 @@ async function connect() {
   await new Promise((resolve, reject) => { ws.addEventListener('open', resolve); ws.addEventListener('error', reject); });
   let id = 0;
   const pending = new Map();
+  const responses = [];
   ws.addEventListener('message', ({ data }) => {
     const message = JSON.parse(data), request = pending.get(message.id);
+    if (message.method === 'Network.responseReceived') responses.push(message.params);
     if (!request) return;
     pending.delete(message.id);
     message.error ? request.reject(new Error(JSON.stringify(message.error))) : request.resolve(message.result);
@@ -22,8 +24,8 @@ async function connect() {
   const send = (method, params = {}) => new Promise((resolve, reject) => {
     pending.set(++id, { resolve, reject }); ws.send(JSON.stringify({ id, method, params }));
   });
-  return { send, async value(expression) {
-    const result = await send('Runtime.evaluate', { expression, returnByValue: true });
+  return { send, responses, async value(expression) {
+    const result = await send('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true });
     assert.ok(!result.exceptionDetails, JSON.stringify(result.exceptionDetails));
     return result.result.value;
   }, async close() { ws.close(); await fetch(`${endpoint}/json/close/${target.id}`); } };
@@ -57,7 +59,15 @@ for (const lang of ['ru', 'en']) for (const width of [390, 1440]) for (const mod
     const today = await c.value("new Date().toLocaleDateString('en-CA')");
     const upcoming = data.events.filter(e => e.end >= today);
     const counts = await c.value("({cards:document.querySelectorAll('#events-grid .event-card').length,links:document.querySelectorAll('#events-grid a[href^=\"https://\"]').length,headers:document.querySelectorAll('[data-site-header=\"shared\"]').length})");
-    if (counts.cards !== upcoming.length) console.log('Catalogue count diagnostics:', { today, counts, expected: upcoming.map(e => e.title), actual: await c.value("({date:new Date().toString(),titles:[...document.querySelectorAll('#events-grid h3')].map(n=>n.textContent),meta:document.querySelector('#results-meta').textContent,stat:document.querySelector('#stat-events').textContent})") });
+    if (counts.cards !== upcoming.length) {
+      console.log('Catalogue count diagnostics:', { today, counts, body: await c.value("({src:document.body.dataset.eventsSrc,controller:navigator.serviceWorker?.controller?.scriptURL,fetch:fetch.toString(),scripts:[...document.scripts].map(s=>s.src)})") });
+      for (const response of c.responses.filter(r => /ophthalmology-events\..*\.json|\/events\.js/.test(r.response.url))) {
+        const body = await c.send('Network.getResponseBody', { requestId: response.requestId });
+        const bytes = body.base64Encoded ? Buffer.from(body.body, 'base64').toString() : body.body;
+        console.log('Browser response:', response.response.url, { fromServiceWorker: response.response.fromServiceWorker, fromDiskCache: response.response.fromDiskCache, length: bytes.length, catalogue: response.response.url.includes('.json') ? JSON.parse(bytes).events.length : undefined, matchesCheckout: response.response.url.includes('.json') ? JSON.stringify(JSON.parse(bytes)) === JSON.stringify(data) : bytes === fs.readFileSync('assets/events/events.js', 'utf8') });
+      }
+      console.log('Fresh browser fetch:', await c.value("fetch(document.body.dataset.eventsSrc,{cache:'reload'}).then(r=>r.json()).then(j=>({count:j.events.length,first:j.events[0]?.title}))"));
+    }
     assert.equal(counts.cards, upcoming.length, `${lang}/${width}/${mode}: cards duplicated or missing`);
     assert.ok(counts.links >= upcoming.length, `${lang}/${width}/${mode}: official links missing`);
     assert.equal(counts.headers, 1);
