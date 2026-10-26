@@ -1,10 +1,10 @@
 [
   {
     "id": "events",
-    "event_id": "events:6",
+    "event_id": "events:7",
     "published": "2026-08-16",
-    "updated": "2026-10-25",
-    "revision": 6,
+    "updated": "2026-10-26",
+    "revision": 7,
     "kind": "updated",
     "title": "Офтальмологические события",
     "title_en": "Ophthalmology events",
