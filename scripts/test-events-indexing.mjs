@@ -53,6 +53,7 @@ for (const lang of ['ru', 'en']) for (const width of [390, 1440]) for (const mod
     const today = await c.value("new Date().toLocaleDateString('en-CA')");
     const upcoming = data.events.filter(e => e.end >= today);
     const counts = await c.value("({cards:document.querySelectorAll('#events-grid .event-card').length,links:document.querySelectorAll('#events-grid a[href^=\"https://\"]').length,headers:document.querySelectorAll('[data-site-header=\"shared\"]').length})");
+    if (counts.cards !== upcoming.length) console.log('Catalogue count diagnostics:', { today, counts, expected: upcoming.map(e => e.title), actual: await c.value("({date:new Date().toString(),titles:[...document.querySelectorAll('#events-grid h3')].map(n=>n.textContent),meta:document.querySelector('#results-meta').textContent,stat:document.querySelector('#stat-events').textContent})") });
     assert.equal(counts.cards, upcoming.length, `${lang}/${width}/${mode}: cards duplicated or missing`);
     assert.ok(counts.links >= upcoming.length, `${lang}/${width}/${mode}: official links missing`);
     assert.equal(counts.headers, 1);
