@@ -123,8 +123,12 @@ def sync(root: Path, as_of: date, check: bool = False) -> list[str]:
         original = path.read_text()
         dataset = json.loads((root / f'assets/data/ophthalmology-events.{lang}.json').read_text())
         rendered = render_page(original, dataset, lang, as_of)
-        version = hashlib.sha256((root / 'assets/events/events.js').read_bytes()).hexdigest()[:12]
-        rendered = re.sub(r'(/assets/events/events\.js)(?:\?v=[^"\s]+)?', lambda m: m[1] + '?v=' + version, rendered)
+        for script in ('events', 'globe', 'satellite'):
+            asset = f'/assets/events/{script}.js'
+            version = hashlib.sha256((root / asset.lstrip('/')).read_bytes()).hexdigest()[:12]
+            rendered = re.sub('(' + re.escape(asset) + r')(?:\?v=[^"\s]+)?', lambda m: m[1] + '?v=' + version, rendered)
+        analytics_version = hashlib.sha256((root / 'analytics.js').read_bytes()).hexdigest()[:12]
+        rendered = re.sub(r'(/analytics\.js)(?:\?v=[^"\s]+)?', lambda m: m[1] + '?v=' + analytics_version, rendered)
         if rendered == original:
             continue
         changes.append(relative)

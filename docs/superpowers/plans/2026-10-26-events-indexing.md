@@ -10,3 +10,7 @@
 - [ ] Run required shared-header checks and event tests, browser-check RU/EN desktop/mobile and no-JS/network-failure behavior, publish and verify production HTML.
 
 Review focus: no duplicate cards after enhancement; no invented dates or source verification; empty/past-only catalogues; failed network preserves links; daily updates do not rewrite unrelated pages.
+
+Investigation: analytics.js contained a legacy global fetch override that changed the raw 74-event JSON into 88 events in the browser. Materialise its exact RU/EN output into the catalogue, register existing sources, and remove the unrelated fetch override. Preserve every event, field and deadline from the prior browser response; do not infer or newly verify dates. This makes the actual visitor catalogue the single source for both HTML and JavaScript.
+
+Geography: preserve existing city-centre coordinate aliases for migrated entries; add approximate city centres for Concepción, Santa Cruz de la Sierra, Miami, Antigua Guatemala and Jakarta from UNGEGN/GeoNames. Existing globe coverage regression now includes all 88 catalogue entries.

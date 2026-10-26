@@ -1,4 +1,5 @@
 from pathlib import Path
+import hashlib
 import re
 
 # Shared build step: keep privacy controls connected to every static HTML page,
@@ -6,7 +7,9 @@ import re
 # to every clinician-facing page.
 ROOT = Path(__file__).resolve().parents[1]
 ANALYTICS_SCRIPT = '<script src="/analytics.js?v=20260811-2"></script>'
-EVENTS_ANALYTICS_SCRIPT = '<script src="/analytics.js?v=20261008-1"></script>'
+def events_analytics_script():
+    version = hashlib.sha256((ROOT / 'analytics.js').read_bytes()).hexdigest()[:12]
+    return f'<script src="/analytics.js?v={version}"></script>'
 HOME_ANALYTICS_SCRIPT = '<script defer src="/analytics.js?v=20260811-2"></script>'
 LEGAL_SCRIPT = '<script src="/legal.js?v=20260721-3"></script>'
 HOME_LEGAL_SCRIPT = '<script src="/legal.js?v=20261004-1"></script>'
@@ -25,11 +28,10 @@ for path in ROOT.rglob('*.html'):
 
     text = path.read_text(encoding='utf-8')
     original = text
-    # Only homepages have been verified for deferred analytics. The events
-    # calendar still relies on the early fetch patch in the synchronous loader.
+    # Preserve existing loader timing; the event catalogue now lives in JSON.
     is_home = relative.as_posix() in {'index.html', 'en/index.html'}
     is_events = relative.as_posix() in {'for-doctors/events/index.html', 'en/for-doctors/events/index.html'}
-    analytics_script = HOME_ANALYTICS_SCRIPT if is_home else (EVENTS_ANALYTICS_SCRIPT if is_events else ANALYTICS_SCRIPT)
+    analytics_script = HOME_ANALYTICS_SCRIPT if is_home else (events_analytics_script() if is_events else ANALYTICS_SCRIPT)
     legal_script = HOME_LEGAL_SCRIPT if is_home else LEGAL_SCRIPT
 
     if '/analytics.js' in text:
