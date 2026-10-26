@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-const endpoint = 'http://127.0.0.1:9222';
+const origin = process.env.EVENTS_BASE_URL || 'http://127.0.0.1:8000';
+const endpoint = process.env.EVENTS_CDP_URL || 'http://127.0.0.1:9222';
 fs.mkdirSync('events-smoke', { recursive: true });
 
 async function connect() {
@@ -45,11 +46,14 @@ for (const lang of ['ru', 'en']) for (const width of [390, 1440]) for (const mod
     await c.send('Network.setBlockedURLs', { urls: ['https://*', ...(mode === 'offline-data' ? ['*ophthalmology-events.*.json*'] : [])] });
     await c.send('Page.addScriptToEvaluateOnNewDocument', { source: "localStorage.setItem('medical_professional_audience_v1','confirmed');localStorage.setItem('site_theme_v1','light');" });
     if (mode === 'no-js') await c.send('Emulation.setScriptExecutionDisabled', { value: true });
-    await c.send('Page.navigate', { url: `http://127.0.0.1:8000/${lang === 'en' ? 'en/' : ''}for-doctors/events/` });
-    await until(c, "document.readyState==='complete'");
-    if (mode === 'interactive') await until(c, "!!document.querySelector('#events-grid [data-details]')");
+    const path = `/${lang === 'en' ? 'en/' : ''}for-doctors/events/`;
+    await c.send('Page.navigate', { url: origin + path });
+    await until(c, `location.pathname===${JSON.stringify(path)}&&document.readyState==='complete'&&!!document.querySelector('#events-grid')`);
+    if (mode === 'interactive') await until(c, `document.querySelector('#results-meta')?.textContent.includes(${JSON.stringify(lang === 'en' ? 'device timezone' : 'часовой пояс устройства')})`);
     if (mode === 'offline-data') await until(c, `document.querySelector('#results-meta')?.textContent.includes(${JSON.stringify(lang === 'en' ? 'Refresh the page' : 'Обновите страницу')})`);
     const data = JSON.parse(fs.readFileSync(`assets/data/ophthalmology-events.${lang}.json`));
+    const served = await fetch(`${origin}/assets/data/ophthalmology-events.${lang}.json`, { cache: 'no-store' }).then(r => r.json());
+    assert.deepEqual(served, data, 'Browser test server must serve the checked-out catalogue');
     const today = await c.value("new Date().toLocaleDateString('en-CA')");
     const upcoming = data.events.filter(e => e.end >= today);
     const counts = await c.value("({cards:document.querySelectorAll('#events-grid .event-card').length,links:document.querySelectorAll('#events-grid a[href^=\"https://\"]').length,headers:document.querySelectorAll('[data-site-header=\"shared\"]').length})");

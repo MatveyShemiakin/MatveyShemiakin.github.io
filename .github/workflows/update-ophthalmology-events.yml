@@ -36,6 +36,10 @@ jobs:
           node-version: '22'
       - name: Validate event datasets
         run: python scripts/sync-ophthalmology-events.py --validate-only
+      - name: Generate searchable event pages
+        run: |
+          python scripts/render_events.py
+          python scripts/site_header.py
       - name: Check JavaScript syntax
         run: node --check assets/events/events.js
       - name: Validate page wiring
@@ -62,23 +66,26 @@ jobs:
           print('Page wiring: OK')
           PY
       - name: Interactive view-switch test RU EN desktop mobile
+        env:
+          EVENTS_BASE_URL: http://127.0.0.1:18307
+          EVENTS_CDP_URL: http://127.0.0.1:19227
         if: github.event_name == 'pull_request'
         run: |
-          python3 -m http.server 8000 >/tmp/events-interactive-http.log 2>&1 &
+          python3 -m http.server 18307 >/tmp/events-interactive-http.log 2>&1 &
           SERVER_PID=$!
           CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
           test -n "$CHROME"
-          "$CHROME" --headless --no-sandbox --disable-gpu --remote-debugging-port=9222 --user-data-dir=/tmp/events-view-switch about:blank >/tmp/events-chrome.log 2>&1 &
+          "$CHROME" --headless --no-sandbox --disable-gpu --remote-debugging-port=19227 --user-data-dir=/tmp/events-view-switch about:blank >/tmp/events-chrome.log 2>&1 &
           CHROME_PID=$!
           trap 'kill $SERVER_PID $CHROME_PID || true' EXIT
-          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:9222/json/version >/dev/null && break; sleep 1; done
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:19227/json/version >/dev/null && break; sleep 1; done
           node scripts/test-events-view-switch.mjs
           node scripts/test-events-indexing.mjs
       - name: Browser smoke test RU EN desktop mobile
         if: github.event_name == 'pull_request'
         run: |
           mkdir -p events-smoke
-          python3 -m http.server 8000 >/tmp/events-http.log 2>&1 &
+          python3 -m http.server 18307 >/tmp/events-http.log 2>&1 &
           SERVER_PID=$!
           trap 'kill $SERVER_PID || true' EXIT
           sleep 2
@@ -89,12 +96,12 @@ jobs:
             "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=6000 --window-size="$size" --screenshot="events-smoke/$name.png" "$url"
             test -s "events-smoke/$name.png"
           }
-          render ru-desktop 1440,1200 http://127.0.0.1:8000/for-doctors/events/
-          render ru-mobile 390,844 http://127.0.0.1:8000/for-doctors/events/
-          render en-desktop 1440,1200 http://127.0.0.1:8000/en/for-doctors/events/
-          render en-mobile 390,844 http://127.0.0.1:8000/en/for-doctors/events/
-          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:8000/for-doctors/events/ > events-smoke/ru-dom.html
-          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:8000/en/for-doctors/events/ > events-smoke/en-dom.html
+          render ru-desktop 1440,1200 http://127.0.0.1:18307/for-doctors/events/
+          render ru-mobile 390,844 http://127.0.0.1:18307/for-doctors/events/
+          render en-desktop 1440,1200 http://127.0.0.1:18307/en/for-doctors/events/
+          render en-mobile 390,844 http://127.0.0.1:18307/en/for-doctors/events/
+          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:18307/for-doctors/events/ > events-smoke/ru-dom.html
+          "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:18307/en/for-doctors/events/ > events-smoke/en-dom.html
           grep -q 'часовой пояс устройства' events-smoke/ru-dom.html
           grep -q 'device timezone' events-smoke/en-dom.html
       - name: Upload browser smoke screenshots
