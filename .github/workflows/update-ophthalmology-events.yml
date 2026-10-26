@@ -12,6 +12,7 @@ on:
       - 'sitemap.xml'
       - 'scripts/sync-ophthalmology-events.py'
       - 'scripts/test-events-view-switch.mjs'
+      - 'scripts/test-events-indexing.mjs'
       - '.github/workflows/update-ophthalmology-events.yml'
   schedule:
     - cron: '17 4 * * 1,4'
@@ -72,6 +73,7 @@ jobs:
           trap 'kill $SERVER_PID $CHROME_PID || true' EXIT
           for i in $(seq 1 30); do curl -fsS http://127.0.0.1:9222/json/version >/dev/null && break; sleep 1; done
           node scripts/test-events-view-switch.mjs
+          node scripts/test-events-indexing.mjs
       - name: Browser smoke test RU EN desktop mobile
         if: github.event_name == 'pull_request'
         run: |
@@ -93,10 +95,8 @@ jobs:
           render en-mobile 390,844 http://127.0.0.1:8000/en/for-doctors/events/
           "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:8000/for-doctors/events/ > events-smoke/ru-dom.html
           "$CHROME" --headless --no-sandbox --disable-gpu --virtual-time-budget=6000 --dump-dom http://127.0.0.1:8000/en/for-doctors/events/ > events-smoke/en-dom.html
-          grep -q 'APAO 2027 Singapore' events-smoke/ru-dom.html
-          grep -q 'Конгресс офтальмологов Казахстана 2026' events-smoke/ru-dom.html
-          grep -q 'APAO 2027 Singapore' events-smoke/en-dom.html
-          grep -q 'Kazakhstan Ophthalmology Congress 2026' events-smoke/en-dom.html
+          grep -q 'часовой пояс устройства' events-smoke/ru-dom.html
+          grep -q 'device timezone' events-smoke/en-dom.html
       - name: Upload browser smoke screenshots
         if: github.event_name == 'pull_request' && always()
         uses: actions/upload-artifact@v4
