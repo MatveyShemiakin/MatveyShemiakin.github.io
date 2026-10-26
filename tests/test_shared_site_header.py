@@ -65,3 +65,16 @@ class SharedHeaderTests(unittest.TestCase):
    source=subprocess.check_output(['git','show','HEAD:'+rel],text=True,cwd=ROOT)
    result=c.update_page(source,rel)
    for marker in markers:self.assertIn(marker,result,rel)
+
+ def test_update_bells_share_the_top_control_row_without_an_empty_context(self):
+  c=self.component()
+  for rel,widget in [('patients/index.html','patient-updates'),('for-doctors/index.html','doctors-updates'),('en/for-doctors/index.html','doctors-updates'),('for-doctors/ophthasearch/index.html','doctors-updates'),('en/for-doctors/ophthasearch/index.html','doctors-updates')]:
+   with self.subTest(page=rel):
+    source=(ROOT/rel).read_text();result=c.update_page(source,rel)
+    nodes=c.Elements(result).nodes
+    bell=next(n for n in nodes if n['attrs'].get('id')==widget)
+    self.assertIn('nav-right',bell['parent']['attrs'].get('class','').split())
+    self.assertEqual(result.count('id="'+widget+'"'),1)
+    self.assertEqual(result,c.update_page(result,rel))
+    self.assertNotRegex(result,r'<div[^>]*data-site-header-context[^>]*>\s*</div>')
+    if rel=='patients/index.html':self.assertIn('href="#conditions"',result)

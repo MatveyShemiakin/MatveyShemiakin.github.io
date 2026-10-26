@@ -17,13 +17,15 @@ header.site-header[data-site-header] [data-site-search-open]{position:static!imp
 header.site-header[data-site-header] [data-site-search-open] svg{width:20px!important;height:20px!important;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 header.site-header[data-site-header] :is(a,button):focus-visible{outline:3px solid #87b5ff;outline-offset:3px}
 header.site-header[data-site-header] .site-mega-nav__panel{max-width:calc(100vw - 36px)}
+header.site-header[data-site-header] .nav-right>:is(.patient-updates,.doctors-updates){flex:0 0 41px;margin:0;padding:0}
+header.site-header[data-site-header] :is(.patient-updates-toggle,.doctors-updates-toggle){width:41px;height:41px;min-width:41px;min-height:41px;margin:0;padding:0}
 .sim-page section.site-head::before{top:0}
 @media(max-width:1120px){header.site-header[data-site-header] .nav-right{gap:12px!important}}
-@media(max-width:1020px){header.site-header[data-site-header]{min-height:76px!important}header.site-header[data-site-header]>.container.nav{height:76px!important;min-height:76px!important;width:calc(100% - 36px)!important}header.site-header[data-site-header] .nav-right{gap:14px!important}header.site-header[data-site-header] .nav-right>:is(.nav-links,.site-mega-nav),header.site-header[data-site-header] [data-site-search-open]{display:none!important}}
+@media(max-width:1020px){header.site-header[data-site-header]{min-height:76px!important}header.site-header[data-site-header]>.container.nav{height:76px!important;min-height:76px!important;width:calc(100% - 36px)!important;gap:12px!important}header.site-header[data-site-header] .nav-right{gap:10px!important}header.site-header[data-site-header] .nav-right>:is(.nav-links,.site-mega-nav),header.site-header[data-site-header] [data-site-search-open]{display:none!important}header.site-header[data-site-header] :is(.patient-updates-panel,.doctors-updates-panel){position:fixed;top:76px;left:12px;right:12px;width:auto;max-height:calc(100dvh - 92px)}}
 @media(max-width:370px){header.site-header[data-site-header] .nav-right{gap:8px!important}}
 @media print{header.site-header[data-site-header]{display:none!important}}
 
-/* Existing section shortcuts and update bells stay with their page, below the header. */
+/* Page section shortcuts stay below the shared control row. */
 .container[data-site-header-context]{position:relative;z-index:80;display:flex;flex-wrap:wrap;align-items:center;gap:14px;width:min(calc(100% - 48px),1240px);max-width:1240px;margin:0 auto;padding:12px 18px;border-radius:0 0 16px 16px;background:#06182f;color:#fff}
 .container[data-site-header-context]>.nav-links{display:flex!important;flex-wrap:wrap;gap:12px 22px;min-width:0;font:700 12px/1.5 Inter,"Segoe UI",Arial,sans-serif;letter-spacing:0;text-transform:none}
 .container[data-site-header-context]>.nav-links a{color:#dceaff;text-decoration:none}

@@ -73,10 +73,28 @@ def _remaining_header(text,node):
  opening=text[node['start']:node['open_end']].replace('<header','<section',1)
  return context+opening+re.sub(r'(?m)^[ \t]+$','',inner)+'</section>'
 
+def _detach_updates(text):
+ # Preserve complete widgets and their generator markers when moving them.
+ widgets=[]
+ for node in sorted(Elements(text).nodes,key=lambda n:n['start'],reverse=True):
+  if node['attrs'].get('id') not in {'patient-updates','doctors-updates'}:continue
+  parent=node['parent'];in_navigation=False
+  while parent:
+   if 'data-site-header-context' in parent['attrs'] or parent['tag']=='header':in_navigation=True;break
+   parent=parent['parent']
+  if not in_navigation:continue
+  start,end=node['start'],node['end']
+  before='<!-- doctors-updates:start -->';after='<!-- doctors-updates:end -->'
+  if text[:start].endswith(before) and text[end:].startswith(after):start-=len(before);end+=len(after)
+  widgets.insert(0,text[start:end]);text=text[:start]+text[end:]
+ text=re.sub(r'<div\b[^>]*\bdata-site-header-context[^>]*>\s*</div>','',text)
+ return text,''.join(widgets)
+
 def content_without_navigation(text):
+ text,updates=_detach_updates(text)
  for node in reversed(_headers(text)):
   text=text[:node['start']]+_remaining_header(text,node)+text[node['end']:]
- return inject_assets(text)
+ return inject_assets(text)+updates
 
 def _url(relative):
  path='/'+relative
@@ -86,13 +104,14 @@ def _exists(url):
  target=ROOT/url.lstrip('/')
  return (target/'index.html').exists() if url.endswith('/') else target.exists()
 
-def render_header(relative):
+def render_header(relative,updates=''):
  en=relative.startswith('en/');base=relative.removeprefix('en/');ru=_url(base);eng='/en'+ru
  if not _exists(eng):
   eng='/en/for-doctors/ophthasearch/' if 'ophthasearch-v2/' in eng else '/en/patients/' if base.startswith('patients/') else '/en/for-doctors/' if base.startswith('for-doctors/') else '/en/'
  if not _exists(ru):ru='/patients/' if base.startswith('patients/') else '/for-doctors/' if base.startswith('for-doctors/') else '/'
  values=dict(overlay=' data-site-header-overlay' if relative in {'index.html','en/index.html'} else '',home='/en/' if en else '/',prefix='/en' if en else '',monogram='MS' if en else 'МШ',home_label='Home' if en else 'Главная',nav_label='Main navigation' if en else 'Основная навигация',patients='Patients' if en else 'Пациентам',doctors='For doctors' if en else 'Для врачей',about='About the doctor' if en else 'О враче',language_label='Website language' if en else 'Язык сайта',theme_label='Switch to dark theme' if en else 'Включить тёмную тему',search='Search' if en else 'Поиск',ru_url=ru,en_url=eng,ru_active='' if en else ' is-active',en_active=' is-active' if en else '',ru_current='' if en else ' aria-current="page"',en_current=' aria-current="page"' if en else '')
- return Template((ROOT/'shared/site-header.html').read_text()).substitute({k:html.escape(v,quote=True) if k not in {'overlay','ru_current','en_current'} else v for k,v in values.items()}).strip()
+ values['updates']=updates
+ return Template((ROOT/'shared/site-header.html').read_text()).substitute({k:html.escape(v,quote=True) if k not in {'overlay','ru_current','en_current','updates'} else v for k,v in values.items()}).strip()
 
 def inject_assets(text):
  assets=set(CSS+SCRIPTS+('site-theme-init.js',))
@@ -108,8 +127,9 @@ def inject_assets(text):
 
 def update_page(text,relative):
  if not is_public_page(relative) or '<html' not in text.lower():return text
+ text,updates=_detach_updates(text)
  headers=_headers(text);current=next((n for n in headers if n['attrs'].get('data-site-header')=='shared'),None)
- header=render_header(relative)
+ header=render_header(relative,updates)
  if current:
   text=text[:current['start']]+header+text[current['end']:]
   for node in reversed(_headers(text)):
