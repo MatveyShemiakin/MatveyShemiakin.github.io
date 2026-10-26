@@ -81,6 +81,8 @@ jobs:
       - run: python scripts/inject_patient_updates.py
       - run: python scripts/inject_patient_consultation_cta.py
       - run: python scripts/inject_site_mega_nav.py
+      - run: python scripts/render_events.py
+      - run: python scripts/site_header.py
       - run: python -m unittest tests/test_generate_doctors_updates.py
       - run: python -m unittest tests/test_doctors_updates_inject.py
       - run: python -m unittest tests/test_doctor_retention_inject.py

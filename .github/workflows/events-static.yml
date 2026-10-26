@@ -1,0 +1,81 @@
+name: Refresh searchable ophthalmology events
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/data/ophthalmology-events.*.json'
+      - 'assets/events/events.js'
+      - 'analytics.js'
+      - 'scripts/render_events.py'
+      - 'for-doctors/events/index.html'
+      - 'en/for-doctors/events/index.html'
+      - '.github/workflows/events-static.yml'
+  pull_request:
+    paths:
+      - 'assets/data/ophthalmology-events.*.json'
+      - 'assets/events/events.js'
+      - 'analytics.js'
+      - 'scripts/render_events.py'
+      - 'tests/test_events_static.py'
+      - 'tests/events-startup.test.mjs'
+      - 'for-doctors/events/**'
+      - 'en/for-doctors/events/**'
+      - '.github/workflows/events-static.yml'
+  schedule:
+    - cron: '35 3 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: events-static-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate catalogue
+        run: python scripts/sync-ophthalmology-events.py --validate-only
+      - name: Refresh visible catalogue from the existing JSON
+        run: |
+          python scripts/render_events.py
+          python scripts/site_header.py
+      - name: Validate generated pages and shared navigation
+        run: |
+          python scripts/render_events.py --check
+          python scripts/site_header.py --check
+          python -m unittest tests/test_events_static.py tests/test_shared_site_header.py tests/test_site_mega_nav.py
+          node --check assets/events/events.js
+          node --test tests/events-startup.test.mjs tests/events-source-parity.test.mjs tests/test_analytics_events.mjs tests/shared-header-menu.test.mjs tests/shared-header-language.test.mjs tests/mobile-navbar.test.mjs tests/site-mega-nav.test.mjs
+      - name: Persist changed pages
+        id: persist
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add for-doctors/events/index.html en/for-doctors/events/index.html sitemap.xml
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh searchable ophthalmology event catalogue'
+            git pull --rebase origin main
+            git push origin HEAD:main
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Request GitHub Pages build
+        if: steps.persist.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/${{ github.repository }}/pages/builds

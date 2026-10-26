@@ -1,6 +1,8 @@
+const origin = process.env.EVENTS_BASE_URL || 'http://127.0.0.1:8000';
+const cdpOrigin = process.env.EVENTS_CDP_URL || 'http://127.0.0.1:9222';
 const pages = [
-  ['ru', 'http://127.0.0.1:8000/for-doctors/events/'],
-  ['en', 'http://127.0.0.1:8000/en/for-doctors/events/']
+  ['ru', `${origin}/for-doctors/events/`],
+  ['en', `${origin}/en/for-doctors/events/`]
 ];
 
 const cases = [
@@ -44,7 +46,7 @@ let failures = [];
 
 for (const [lang, url] of pages) {
   for (const testCase of cases) {
-    const target = await fetch(`http://127.0.0.1:9222/json/new?${encodeURIComponent(url)}`, { method: 'PUT' }).then(r => r.json());
+    const target = await fetch(`${cdpOrigin}/json/new?${encodeURIComponent(url)}`, { method: 'PUT' }).then(r => r.json());
     const ws = await connect(target.webSocketDebuggerUrl);
     const cdp = await client(ws);
     await cdp.send('Page.enable');
@@ -82,7 +84,7 @@ for (const [lang, url] of pages) {
     if (!data.visible || data.top === null || data.top > 180) failures.push(`${lang} ${testCase.name}: ${testCase.target} was activated but not brought into view (top=${data.top}, scrollY=${data.scrollY})`);
 
     cdp.close();
-    await fetch(`http://127.0.0.1:9222/json/close/${target.id}`, { method: 'PUT' }).catch(() => {});
+    await fetch(`${cdpOrigin}/json/close/${target.id}`, { method: 'PUT' }).catch(() => {});
   }
 }
 

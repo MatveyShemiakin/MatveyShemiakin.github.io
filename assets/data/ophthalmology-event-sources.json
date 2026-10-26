@@ -6,7 +6,8 @@
       "official": true,
       "url": "https://apaophth.org/congress/calendar/",
       "eventIds": [
-        "aao-2027"
+        "aao-2027",
+        "aacgc-2027"
       ],
       "watchTerms": [
         "AAO 2027",
@@ -473,7 +474,11 @@
       "eventIds": [
         "oor-cataract-2026",
         "oor-inflammation-2026",
-        "fedorov-2026"
+        "fedorov-2026",
+        "oculoplastics-russia-2027",
+        "vitreoretinal-russia-2027",
+        "ophthalmology-360-2027",
+        "cataract-russia-2027"
       ],
       "watchTerms": [
         "Катаракта",
@@ -1058,6 +1063,87 @@
       "watchTerms": [
         "24 по 28 мая 2027"
       ]
+    },
+    {
+      "id": "catalogue-ciob-2026",
+      "official": true,
+      "url": "https://www.ciob.cl/",
+      "eventIds": [
+        "ciob-2026"
+      ],
+      "watchTerms": []
+    },
+    {
+      "id": "catalogue-bolivia-ophthalmology-2026",
+      "official": true,
+      "url": "https://cboftalmologia2026.com/",
+      "eventIds": [
+        "bolivia-ophthalmology-2026"
+      ],
+      "watchTerms": []
+    },
+    {
+      "id": "catalogue-alaccsa-2026",
+      "official": true,
+      "url": "https://alaccsa.com/",
+      "eventIds": [
+        "alaccsa-2026"
+      ],
+      "watchTerms": []
+    },
+    {
+      "id": "catalogue-sprv-gladaof-2026",
+      "official": true,
+      "url": "https://sprv2026.com/",
+      "eventIds": [
+        "sprv-gladaof-2026"
+      ],
+      "watchTerms": []
+    },
+    {
+      "id": "catalogue-bascom-palmer-curso-2026",
+      "official": true,
+      "url": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
+      "eventIds": [
+        "bascom-palmer-curso-2026"
+      ],
+      "watchTerms": []
+    },
+    {
+      "id": "catalogue-isa-2026",
+      "official": true,
+      "url": "https://isa2026.com.ar/",
+      "eventIds": [
+        "isa-2026"
+      ],
+      "watchTerms": []
+    },
+    {
+      "id": "catalogue-asia-cornea-2026",
+      "official": true,
+      "url": "https://www.asiacorneasociety.org/",
+      "eventIds": [
+        "asia-cornea-2026"
+      ],
+      "watchTerms": []
+    },
+    {
+      "id": "catalogue-argentina-ophthalmology-2027",
+      "official": true,
+      "url": "https://oftalmologos.org.ar/",
+      "eventIds": [
+        "argentina-ophthalmology-2027"
+      ],
+      "watchTerms": []
+    },
+    {
+      "id": "catalogue-colatoc-guatemala-2027",
+      "official": true,
+      "url": "https://aptooftalmico.com/",
+      "eventIds": [
+        "colatoc-guatemala-2027"
+      ],
+      "watchTerms": []
     }
   ]
 }
