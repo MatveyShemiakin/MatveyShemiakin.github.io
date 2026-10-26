@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "language": "ru",
-  "verifiedAt": "2026-10-08",
-  "generatedAt": "2026-10-08T08:33:00+03:00",
+  "verifiedAt": "2026-10-26",
+  "generatedAt": "2026-10-26T20:41:41+03:00",
   "events": [
     {
       "id": "fedorov-2026",
@@ -1606,14 +1606,33 @@
         "Роговица"
       ],
       "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://www.escrs.org/",
-      "program": "https://www.escrs.org/",
-      "registration": "https://www.escrs.org/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": [],
+      "submissionOpen": true,
+      "official": "https://wintermeeting.escrs.org/",
+      "program": "https://wintermeeting.escrs.org/",
+      "registration": "https://wintermeeting.escrs.org/registrations/",
+      "submit": "https://wintermeeting.escrs.org/coming-soon/",
+      "verified": "2026-10-26",
+      "description": "31-я зимняя встреча ESCRS в Каире. Открыт приём научных тезисов и хирургических видео Young Ophthalmologists Programme.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Тезисы: доклады, случаи по роговице, постеры",
+          "date": "2026-11-01T23:59:00+01:00",
+          "timeKnown": true,
+          "zone": "CET",
+          "url": "https://wintermeeting.escrs.org/abstracts/abstract-submissions/",
+          "note": "Уведомления — в декабре 2026."
+        },
+        {
+          "kind": "upload",
+          "label": "Хирургические видео YOP",
+          "date": "2026-11-01T23:59:00+01:00",
+          "timeKnown": true,
+          "zone": "CET",
+          "url": "https://wintermeeting.escrs.org/coming-soon/",
+          "note": "До 3 минут; нужен краткий тезис. Премия за лучшее образовательное видео: €750 и регистрация."
+        }
+      ],
       "submissionNote": "Free Papers, Cornea Case Presentations, Posters/ePosters; YOP: видео до 3 минут. Лучшее образовательное видео: €750 и регистрация. Поддержка отдельных trainee-членов ESCRS с принятыми работами."
     },
     {
@@ -1648,8 +1667,8 @@
       "official": "https://paao2027.com/",
       "program": "https://paao2027.com/",
       "registration": "https://paao2027.com/",
-      "submit": "https://abstracts.paao2027.com/",
-      "verified": "2026-10-08",
+      "submit": "https://abstracts.paao2027.com/en/landing/",
+      "verified": "2026-10-26",
       "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
       "deadlines": [
         {
@@ -1669,6 +1688,24 @@
           "zone": "America/Lima",
           "url": "https://paao.org/meetings/prizes-and-awards/alvaro-rodriguez-travel-award/",
           "note": "Для офтальмологов 45 лет и младше; retina или glaucoma; $1,500 и бесплатная регистрация на конгресс."
+        },
+        {
+          "kind": "abstract",
+          "label": "Устные доклады, постеры и видео",
+          "date": "2026-12-01T17:00:00-05:00",
+          "timeKnown": true,
+          "zone": "America/Lima",
+          "url": "https://abstracts.paao2027.com/en/landing/",
+          "note": "Окончание приёма: 17:00 по времени Лимы."
+        },
+        {
+          "kind": "grant",
+          "label": "Troutman–Véronneau Prize",
+          "date": "2026-12-01",
+          "timeKnown": false,
+          "zone": "America/Lima",
+          "url": "https://paao.org/meetings/troutman-veronneau-prize-application/",
+          "note": "Премия $10 000 за оригинальную неопубликованную работу по роговице. Первый автор — не старше 45 лет, действующий член PAAO; необходимы рукопись, CV и рекомендательное письмо. Точное время не опубликовано."
         }
       ],
       "submissionNote": "Free Papers, Posters и Videos; единичные клинические случаи — постер."
@@ -1939,35 +1976,35 @@
       "program": "https://www.wsopras2027.org/index.php?c=category&id=2",
       "registration": "https://www.wsopras2027.org/",
       "submit": "https://www.wsopras2027.org/index.php?c=category&id=3",
-      "verified": "2026-10-08",
+      "verified": "2026-10-26",
       "description": "WSOPRAS 2027 в Пекине: хирургия орбиты, слезоотводящих путей, век и эстетическая хирургия, научные доклады и live surgery.",
       "deadlines": [
         {
           "kind": "abstract",
           "label": "Подача E-Poster / E-Video",
-          "date": "2026-11-30",
+          "date": "2026-12-14",
           "timeKnown": false,
           "zone": "Asia/Shanghai",
-          "url": "https://www.wsopras2027.org/",
+          "url": "https://www.wsopras2027.org/index.php?c=category&id=3",
           "note": "Видео MP4 до 3 минут; письменный abstract обязателен."
         },
         {
           "kind": "faculty",
           "label": "Результаты отбора",
-          "date": "2027-01-04",
+          "date": "2027-01-18",
           "timeKnown": false,
           "zone": "Asia/Shanghai",
-          "url": "https://www.wsopras2027.org/",
-          "note": ""
+          "url": "https://www.wsopras2027.org/index.php?c=category&id=3",
+          "note": "Дата из раздела Important Dates; в шаблонном сообщении формы ещё указана прежняя дата 4 января."
         },
         {
           "kind": "registration",
-          "label": "Регистрация выступающего",
-          "date": "2027-01-25",
+          "label": "Регистрация докладчика / окончание early bird",
+          "date": "2027-02-08",
           "timeKnown": false,
           "zone": "Asia/Shanghai",
-          "url": "https://www.wsopras2027.org/",
-          "note": ""
+          "url": "https://www.wsopras2027.org/index.php?c=category&id=3",
+          "note": "Без регистрации до этого срока принятая работа исключается из программы."
         }
       ]
     },
@@ -2117,12 +2154,12 @@
         "Research"
       ],
       "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://worldglaucomacongress.org/",
       "program": "https://worldglaucomacongress.org/",
       "registration": "https://worldglaucomacongress.org/",
       "submit": "https://worldglaucomacongress.org/",
-      "verified": "2026-10-08",
+      "verified": "2026-10-26",
       "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
       "deadlines": [
         {
@@ -2136,11 +2173,11 @@
         },
         {
           "kind": "upload",
-          "label": "Подача в Film Festival",
+          "label": "WGA Movie Awards",
           "date": "2026-10-19T23:59:00+02:00",
           "timeKnown": true,
           "zone": "CEST",
-          "url": "https://worldglaucomacongress.org/",
+          "url": "https://worldglaucomacongress.org/film-festival-submissions/",
           "note": ""
         },
         {
@@ -2162,7 +2199,7 @@
           "note": ""
         }
       ],
-      "submissionNote": "Направления Surgery and Wound Healing и AI / Big Data; тезисы до 2500 знаков, на английском. WGA Movie Awards: видео до 6 минут. Фотовыставка: Me and My Mentor.",
+      "submissionNote": "Приём тезисов и WGA Movie Awards завершён 19 октября 2026. Регистрация: early bird до 18 января, стандартная до 15 марта 2027.",
       "level": "specialty"
     },
     {
@@ -2185,13 +2222,13 @@
         "Роговица"
       ],
       "credits": "CME доступно",
-      "submissionOpen": false,
+      "submissionOpen": true,
       "official": "https://www.arvo.org/annual-meeting/",
       "program": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
       "registration": "https://www.arvo.org/annual-meeting/",
-      "submit": "https://www.arvo.org/annual-meeting/",
-      "verified": "2026-10-08",
-      "description": "ARVO 2027 в Сан-Диего, только очный формат. Использование генеративного ИИ при создании или редактировании текста и изображений тезисов требует указать инструмент, модель, версию, источник и дату; автор отвечает за достоверность и оригинальность.",
+      "submit": "https://www.arvo.org/annual-meeting/abstracts",
+      "verified": "2026-10-26",
+      "description": "ARVO 2027 в Сан-Диего. Есть очные доклады/постеры и вариант On-Demand без живого выступления для тех, кто не сможет приехать. Использование генеративного ИИ в тезисах следует раскрыть по правилам организатора.",
       "deadlines": [
         {
           "kind": "abstract",
@@ -2199,8 +2236,8 @@
           "date": "2026-12-04T17:00:00-05:00",
           "timeKnown": true,
           "zone": "EST",
-          "url": "https://www.arvo.org/annual-meeting/",
-          "note": "Подача тезисов открывается 16 октября 2026."
+          "url": "https://www.arvo.org/annual-meeting/abstracts",
+          "note": "Подача открыта; требуется членство ARVO на 2027 год."
         },
         {
           "kind": "registration",
@@ -2226,11 +2263,11 @@
           "date": "2026-12-04T17:00:00-05:00",
           "timeKnown": true,
           "zone": "EST",
-          "url": "https://www.arvo.org/annual-meeting/",
-          "note": "Заявки открываются 16 октября 2026."
+          "url": "https://www.arvo.org/awards-and-grants/travel-grants",
+          "note": "Заявка входит в процесс подачи тезисов; грант включает регистрацию и частичную поддержку поездки."
         }
       ],
-      "submissionNote": "Подача тезисов откроется 16 октября 2026."
+      "submissionNote": "Тезисы и travel grants принимаются с 16 октября до 4 декабря 2026, 17:00 EST. Для тезисов необходимо членство ARVO на 2027 год."
     },
     {
       "id": "wcpos-vi-2027",
@@ -2523,10 +2560,38 @@
       "official": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
       "program": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
       "registration": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
-      "submit": "https://www.cos-sco.ca/",
-      "verified": "2026-10-19",
-      "description": "Ежегодный конгресс COS: научные доклады, wet labs, практические занятия и выставка. COS объявило приём видео для встречи 2027; точный дедлайн требует уточнения.",
-      "deadlines": []
+      "submit": "https://cos-sco.secure-platform.com/2027",
+      "verified": "2026-10-26",
+      "description": "Ежегодный конгресс COS в Оттаве: доклады, практические занятия и хирургический Film Festival. Тезисы уже не принимаются; приём хирургических видео продолжается до 3 ноября 2026.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Подача тезисов — завершена",
+          "date": "2026-10-03T15:59:00-04:00",
+          "timeKnown": true,
+          "zone": "America/Toronto",
+          "url": "https://cos-sco.secure-platform.com/2027",
+          "note": "Портал указывает ET; 3 октября действует EDT (UTC−4)."
+        },
+        {
+          "kind": "upload",
+          "label": "Хирургические видео COS Film Festival",
+          "date": "2026-11-03T15:59:00-05:00",
+          "timeKnown": true,
+          "zone": "America/Toronto",
+          "url": "https://cos-sco.secure-platform.com/2027",
+          "note": "Портал: 15:59 ET; 3 ноября действует EST (UTC−5)."
+        },
+        {
+          "kind": "faculty",
+          "label": "Подтверждение участия докладчика",
+          "date": "2027-01-23T15:59:00-05:00",
+          "timeKnown": true,
+          "zone": "America/Toronto",
+          "url": "https://cos-sco.secure-platform.com/2027",
+          "note": "Уведомления о результатах запланированы на 8–12 декабря 2026."
+        }
+      ]
     },
     {
       "id": "asrs-2027",
@@ -3242,6 +3307,66 @@
       "submit": null,
       "verified": "2026-10-08",
       "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
+      "deadlines": []
+    },
+    {
+      "id": "ever-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "EVER 2027",
+      "fullTitle": "Конгресс European Association for Vision and Eye Research 2027",
+      "org": "European Association for Vision and Eye Research",
+      "start": "2027-11-04",
+      "end": "2027-11-06",
+      "city": "Афины",
+      "country": "Греция",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Megaron Athens",
+      "categories": [
+        "Research",
+        "Роговица",
+        "Retina",
+        "Глаукома"
+      ],
+      "credits": "Аккредитация: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://soevision.org/event/ever-2027/",
+      "program": "https://soevision.org/event/ever-2027/",
+      "registration": "https://www.everassociation.org/",
+      "submit": null,
+      "verified": "2026-10-26",
+      "description": "Конгресс EVER: 4–6 ноября 2027, Megaron Athens. Даты и место опубликованы в официальном календаре SOE.",
+      "submissionNote": "Сроки подачи тезисов и регистрации ещё не опубликованы.",
+      "deadlines": []
+    },
+    {
+      "id": "wga-surgical-grand-rounds-8-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "8th WGA Surgical Grand Rounds",
+      "fullTitle": "8-й WGA Surgical Grand Rounds: глаукома после трансплантации роговицы и при синдроме Стерджа–Вебера",
+      "org": "World Glaucoma Association",
+      "start": "2026-11-12",
+      "end": "2026-11-12",
+      "city": "Онлайн",
+      "country": "Весь мир",
+      "region": "Международные онлайн",
+      "mode": "Онлайн",
+      "venue": "Международный вебинар WGA",
+      "categories": [
+        "Глаукома",
+        "Роговица"
+      ],
+      "credits": "Аккредитация: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://wga.one/surgical-grand-rounds/",
+      "program": "https://wga.one/surgical-grand-rounds/",
+      "registration": "https://wga.one/surgical-grand-rounds-registration/",
+      "submit": null,
+      "verified": "2026-10-26",
+      "description": "Разбор хирургии глаукомы после трансплантации роговицы: Ramesh Ayyala; эксперты Karl Mercieca и Keith Barton. Вторая тема — глаукома при синдроме Стерджа–Вебера. Регистрация открыта; точное время на странице программы не указано.",
+      "submissionNote": "Регистрация открыта. Приём тезисов не объявлен; время начала уточняйте у WGA.",
       "deadlines": []
     }
   ]

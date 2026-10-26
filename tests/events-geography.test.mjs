@@ -11,10 +11,14 @@ test('sphere projection places selected centre in front and antipode behind',()=
 });
 test('all catalogued cities resolve to coordinates without losing events',()=>{
  for(const lang of ['ru','en']){const events=JSON.parse(fs.readFileSync(`assets/data/ophthalmology-events.${lang}.json`)).events;
- const groups=group(events);assert.equal(groups.reduce((n,g)=>n+g.events.length,0),events.length);
+ const groups=group(events);assert.equal(groups.reduce((n,g)=>n+g.events.length,0),events.filter(e=>!['Online','Онлайн'].includes(e.mode)).length);
  assert.ok(groups.every(g=>Number.isFinite(g.lat)&&Number.isFinite(g.lon)));}
 });
 test('grouping merges multiple events in one city and accepts empty results',()=>{
  const events=JSON.parse(fs.readFileSync('assets/data/ophthalmology-events.en.json')).events.filter(e=>e.city==='Moscow');
  assert.equal(group(events).length,1);assert.equal(group([]).length,0);
+});
+test('online events never acquire a misleading physical city marker',()=>{
+ assert.equal(group([{id:'fedorov-2026',mode:'Online',city:'Online',country:'Worldwide'}]).length,0);
+ assert.equal(group([{id:'fedorov-2026',mode:'Онлайн',city:'Онлайн',country:'Весь мир'}]).length,0);
 });

@@ -744,12 +744,13 @@
     {
       "id": "paao-2027-deadline",
       "official": true,
-      "url": "https://abstracts.paao2027.com/landing/",
+      "url": "https://abstracts.paao2027.com/en/landing/",
       "eventIds": [
         "paao-2027"
       ],
       "watchTerms": [
-        "1 de diciembre de 2026"
+        "December 1, 2026",
+        "5:00 p.m."
       ]
     },
     {
@@ -962,13 +963,13 @@
     {
       "id": "cos-2027-videos",
       "official": true,
-      "url": "https://www.cos-sco.ca/",
+      "url": "https://cos-sco.secure-platform.com/2027",
       "eventIds": [
         "cos-2027"
       ],
       "watchTerms": [
-        "COS2027",
-        "Video Submissions"
+        "November 3rd, 2026",
+        "3:59pm ET"
       ]
     },
     {
@@ -1144,6 +1145,82 @@
         "colatoc-guatemala-2027"
       ],
       "watchTerms": []
+    },
+    {
+      "id": "escrs-winter-2027-submissions",
+      "official": true,
+      "url": "https://wintermeeting.escrs.org/coming-soon/",
+      "eventIds": [
+        "escrs-winter-2027"
+      ],
+      "watchTerms": [
+        "1 November 2026",
+        "23:59 CET",
+        "750"
+      ]
+    },
+    {
+      "id": "wsopras-2027-submissions",
+      "official": true,
+      "url": "https://www.wsopras2027.org/index.php?c=category&id=3",
+      "eventIds": [
+        "wsopras-2027"
+      ],
+      "watchTerms": [
+        "December 14, 2026",
+        "January 18, 2027",
+        "February 8, 2027"
+      ]
+    },
+    {
+      "id": "paao-2027-troutman",
+      "official": true,
+      "url": "https://paao.org/meetings/troutman-veronneau-prize-application/",
+      "eventIds": [
+        "paao-2027"
+      ],
+      "watchTerms": [
+        "1 December, 2026",
+        "10,000",
+        "cornea"
+      ]
+    },
+    {
+      "id": "cos-2027-open-call",
+      "official": true,
+      "url": "https://www.cosprc.ca/cos2027-abstract-video-submissions-are-now-open/",
+      "eventIds": [
+        "cos-2027"
+      ],
+      "watchTerms": [
+        "November 3, 2026",
+        "Video Submission Deadline"
+      ]
+    },
+    {
+      "id": "ever-2027-soe",
+      "official": true,
+      "url": "https://soevision.org/event/ever-2027/",
+      "eventIds": [
+        "ever-2027"
+      ],
+      "watchTerms": [
+        "November 4, 2027",
+        "November 6, 2027",
+        "Megaron Athens"
+      ]
+    },
+    {
+      "id": "wga-surgical-grand-rounds-8",
+      "official": true,
+      "url": "https://wga.one/surgical-grand-rounds/",
+      "eventIds": [
+        "wga-surgical-grand-rounds-8-2026"
+      ],
+      "watchTerms": [
+        "November 12, 2026",
+        "Glaucoma Following Corneal Transplant Surgery"
+      ]
     }
   ]
 }
