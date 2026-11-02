@@ -1520,9 +1520,13 @@
       "description": "Даты по информации организатора; актуальные условия уточняйте на официальном сайте.",
       "deadlines": [
         {
-          "type": "Early bird",
-          "date": "2026-11-14",
-          "url": "https://www.moorfields.ae/"
+          "kind": "early_bird",
+          "label": "Льготная регистрация",
+          "date": "2026-11-14T23:59:00",
+          "timeKnown": false,
+          "zone": "local",
+          "url": "https://www.moorfields.ae/",
+          "note": ""
         }
       ]
     },
@@ -2412,9 +2416,13 @@
       "description": "Даты по информации организатора; актуальные условия уточняйте на официальном сайте.",
       "deadlines": [
         {
-          "type": "Abstract submission",
-          "date": "2026-11-05",
-          "url": "https://convention.jtbcom.co.jp/131jos/en/index.html"
+          "kind": "abstract",
+          "label": "Подача тезисов",
+          "date": "2026-11-05T23:59:00",
+          "timeKnown": false,
+          "zone": "local",
+          "url": "https://convention.jtbcom.co.jp/131jos/en/index.html",
+          "note": ""
         }
       ]
     },
