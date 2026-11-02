@@ -33,3 +33,6 @@ test('every deadline keeps a dedicated official monitor with date-specific conte
   assert.ok(monitors.some(s=>s.watchTerms.some(t=>/\d/.test(t)&&!/^20\d{2}$/.test(t))),`${e.id}: no specific date context`);
  }
 });
+test('Russian event places do not retain untranslated country names',()=>{
+ for(const e of ru.events)assert.doesNotMatch(e.country,/[A-Za-z]/,`${e.id}: ${e.country}`);
+});

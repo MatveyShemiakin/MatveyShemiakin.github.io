@@ -150,6 +150,8 @@ The main branch had 90 records. This release adds 25 dated meetings and consolid
 
 All 178 distinct published URLs (official pages, programmes, registration, submissions, date sources and deadlines) were requested. 168 returned HTTP 200. Automated access to 10 URLs was limited by 403, 503, 521, timeout or redirect-loop responses across AAO, CCOS, Belarus conference, ISA, ISER, MNTK and COS. Their dates were cross-checked in indexed official organiser content or official society calendars; these are not reported as successfully tested external destinations.
 
-Node event/header regression tests: 33 passed. Python event/header tests: 14 passed. Real Chromium run 41414756272 passed all 16 language/viewport/theme cases, including satellite imagery; final layout changes are rechecked before merge. Physical Android/iOS/Safari validation is not available. One unrelated Patient ecosystem CI test fails on the pre-existing IOL HTML fingerprint; that file is identical to main and is untouched by this release.
+Node event/header regression tests: 34 passed. Python event/header tests: 14 passed. Real Chromium run 41414756272 passed all 16 language/viewport/theme cases, including satellite imagery; final layout changes are rechecked before merge. Physical Android/iOS/Safari validation is not available. One unrelated Patient ecosystem CI test fails on the pre-existing IOL HTML fingerprint; that file is identical to main and is untouched by this release.
 
 The tablet view now uses the primary four-mode view bar and avoids an overlapping legacy bottom bar. Filter chips wrap on desktop as well as mobile, avoiding internal horizontal scrolling.
+
+Final country-name localization removes 13 untranslated country fields from the Russian catalogue. Chromium run 41415181236 passed the final layout matrix (16/16), with filters and calendar checked for internal horizontal scroll as well as page overflow.
