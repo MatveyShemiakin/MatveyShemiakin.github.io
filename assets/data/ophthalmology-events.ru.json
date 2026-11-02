@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "language": "ru",
-  "verifiedAt": "2026-10-26",
-  "generatedAt": "2026-10-26T20:41:41+03:00",
+  "verifiedAt": "2026-11-02",
+  "generatedAt": "2026-11-02T11:43:40+03:00",
   "events": [
     {
       "id": "fedorov-2026",
       "featured": false,
       "title": "Федоровские чтения 2026",
       "fullTitle": "Федоровские чтения 2026",
-      "org": "НМИЦ «МНТК «Микрохирургия глаза»",
+      "org": "S. Fyodorov Eye Microsurgery Federal Center",
       "start": "2026-06-05",
       "end": "2026-06-05",
       "city": "Москва",
@@ -18,20 +18,25 @@
       "mode": "Очно",
       "venue": "Москва",
       "categories": [
-        "Research",
+        "Исследования",
         "Катаракта / ИОЛ",
-        "Retina",
+        "Сетчатка",
         "Роговица"
       ],
-      "credits": "НМО: 6 ЗЕТ (архивное событие)",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
-      "official": "https://oor.ru/events",
+      "official": "https://www.mntk.ru/specialists/Konferents/fed_cht/",
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Архивное событие включено только для демонстрации переключателя «Показывать прошедшие».",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://www.mntk.ru/specialists/Konferents/fed_cht/"
     },
     {
       "id": "apgc-2026",
@@ -41,25 +46,30 @@
       "org": "Asia-Pacific Glaucoma Society / Singapore National Eye Centre",
       "start": "2026-07-24",
       "end": "2026-07-26",
-      "city": "Singapore",
+      "city": "Сингапур",
       "country": "Сингапур",
       "region": "Азия–Тихоокеанский",
       "mode": "Очно",
       "venue": "Suntec Singapore Convention & Exhibition Centre",
       "categories": [
         "Глаукома",
-        "Research",
-        "AI / управление"
+        "Исследования",
+        "ИИ / управление"
       ],
-      "credits": "Архивное событие",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://apgcongress.org/",
       "program": "https://apgcongress.org/",
-      "registration": "https://apgcongress.org/registration-main/",
+      "registration": null,
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Совместная встреча 8th Asia-Pacific Glaucoma Congress и 35-летия Singapore National Eye Centre. Оставлена в архиве, чтобы Сингапур присутствовал и в истории мероприятий 2026 года.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        1.35,
+        103.82
+      ],
+      "dateSource": "https://apaophth.org/congress/calendar/"
     },
     {
       "id": "iser-2026",
@@ -76,20 +86,25 @@
       "mode": "Очно",
       "venue": "Валенсия, Испания",
       "categories": [
-        "Research",
-        "Retina",
+        "Исследования",
+        "Сетчатка",
         "Роговица",
         "Глаукома"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
-      "official": "https://iser.org/page/Events_Schedule",
+      "official": "https://iserbiennialmeeting2026.org/",
       "program": "https://iser.org/page/Events_Schedule",
       "registration": "https://iser.org/page/Events_Schedule",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Международная биеннале по экспериментальной и трансляционной офтальмологии и науке о зрении.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        39.47,
+        -0.38
+      ],
+      "dateSource": "https://iserbiennialmeeting2026.org/"
     },
     {
       "id": "apvrs-2026",
@@ -102,33 +117,38 @@
       "org": "Asia-Pacific Vitreo-retina Society",
       "start": "2026-08-28",
       "end": "2026-08-30",
-      "city": "Gold Coast",
+      "city": "Голд-Кост",
       "country": "Австралия",
       "region": "Азия–Тихоокеанский",
       "mode": "Очно",
       "venue": "Gold Coast, Australia",
       "categories": [
-        "Retina",
-        "Research",
+        "Сетчатка",
+        "Исследования",
         "Воспаление",
-        "AI / управление"
+        "ИИ / управление"
       ],
-      "credits": "CME: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://2026.apvrs.org/",
       "program": "https://2026.apvrs.org/program-schedule/",
       "registration": "https://2026.apvrs.org/registration/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "19-й конгресс APVRS — одна из ключевых витреоретинальных встреч Азиатско-Тихоокеанского региона. В программе медицинская и хирургическая retina, uveitis, ocular oncology, imaging, AI и междисциплинарные секции.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -28.02,
+        153.4
+      ],
+      "dateSource": "https://2026.apvrs.org/"
     },
     {
       "id": "oor-cataract-2026",
       "featured": true,
       "title": "#Катаракта2026",
       "fullTitle": "26-й Всероссийский научно-практический конгресс «Современные технологии катарактальной, рефракционной и роговичной хирургии»",
-      "org": "Общество офтальмологов России",
+      "org": "Russian Society of Ophthalmologists",
       "start": "2026-09-02",
       "end": "2026-09-04",
       "city": "Москва",
@@ -141,15 +161,20 @@
         "Рефракция",
         "Роговица"
       ],
-      "credits": "НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://oor.ru/events",
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Крупный российский конгресс с интерактивными разборами сложных клинических случаев, экспертными секциями, живой хирургией и выставкой оборудования.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://cataract-congress.ru/"
     },
     {
       "id": "pit-perdami-51-2026",
@@ -168,22 +193,27 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Детская офтальмология",
         "Окулопластика",
-        "Research",
-        "AI / управление"
+        "Исследования",
+        "ИИ / управление"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://pit51.perdami.or.id/",
       "program": "https://pit51.perdami.or.id/",
       "registration": "https://pit51.perdami.or.id/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Национальная встреча офтальмологов Индонезии с симпозиумами, didactic courses, wet-labs, конкурсами научных работ и фокусом на AI и общественном здоровье глаз.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -6.97,
+        110.42
+      ],
+      "dateSource": "https://pit51.perdami.or.id/"
     },
     {
       "id": "ccos-2026",
@@ -191,32 +221,37 @@
       "level": "national",
       "title": "CCOS 2026",
       "fullTitle": "30-й Китайский национальный конгресс по офтальмологии",
-      "org": "Китайская медицинская ассоциация · Китайское офтальмологическое общество",
+      "org": "Chinese Medical Association · Chinese Ophthalmological Society",
       "start": "2026-09-09",
       "end": "2026-09-12",
       "city": "Тяньцзинь",
       "country": "Китай",
-      "region": "Китай / Greater China",
+      "region": "Китай / Большой Китай",
       "mode": "Очно",
       "venue": "Национальный выставочный и конгресс-центр, Тяньцзинь",
       "categories": [
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research",
-        "AI / управление"
+        "Исследования",
+        "ИИ / управление"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://ccos2026.sciconf.cn/",
       "program": "https://ccos2026.sciconf.cn/",
       "registration": "https://ccos2026.sciconf.cn/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Крупнейший национальный офтальмологический конгресс Китая: более 10 000 участников, все ключевые субспециальности, междисциплинарные исследования, генетика и искусственный интеллект.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        39.14,
+        117.2
+      ],
+      "dateSource": "https://apaophth.org/congress/calendar/"
     },
     {
       "id": "escrs-2026",
@@ -226,7 +261,7 @@
       "org": "ESCRS",
       "start": "2026-09-11",
       "end": "2026-09-15",
-      "city": "London",
+      "city": "Лондон",
       "country": "Великобритания",
       "region": "Европа",
       "mode": "Очно",
@@ -236,25 +271,20 @@
         "Рефракция",
         "Роговица"
       ],
-      "credits": "EACCME accreditation submitted by organiser",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://congress.escrs.org/",
-      "program": "https://congress.escrs.org/programme/",
-      "registration": "https://congress.escrs.org/registrations/",
+      "program": null,
+      "registration": null,
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Главный европейский конгресс по катарактальной и рефракционной хирургии. Abstract submission закрыта; регулярная регистрация ещё доступна до указанного срока.",
-      "deadlines": [
-        {
-          "kind": "registration",
-          "label": "Regular registration",
-          "date": "2026-09-08T23:59:00+02:00",
-          "timeKnown": true,
-          "zone": "CEST",
-          "url": "https://congress.escrs.org/registrations/",
-          "note": "После срока действуют late/onsite fees."
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        51.51,
+        -0.13
+      ],
+      "dateSource": "https://soevision.org/event/escrs-2026-congress/"
     },
     {
       "id": "retina-society-2026",
@@ -271,26 +301,31 @@
       "mode": "Очно",
       "venue": "Fairmont Century Plaza, Los Angeles",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.retinasociety.org/page/2/annual-meeting",
       "program": "https://www.retinasociety.org/page/2/annual-meeting",
       "registration": "https://www.retinasociety.org/page/2/annual-meeting",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "59-я научная встреча Retina Society, посвящённая последним достижениям медицинской и хирургической ретины.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        34.05,
+        -118.24
+      ],
+      "dateSource": "https://www.retinasociety.org/page/2/annual-meeting"
     },
     {
       "id": "spanish-national-2026",
       "featured": false,
       "level": "national",
-      "title": "Spanish National Meeting 2026",
+      "title": "Национальный конгресс офтальмологов Испании 2026",
       "fullTitle": "102-й национальный конгресс Sociedad Española de Oftalmología",
-      "org": "Sociedad Española de Oftalmología",
+      "org": "Spanish Society of Ophthalmology",
       "start": "2026-09-23",
       "end": "2026-09-26",
       "city": "Пальма-де-Майорка",
@@ -301,19 +336,24 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://soevision.org/event/spanish-national-meeting/",
       "program": "https://soevision.org/event/spanish-national-meeting/",
       "registration": "https://www.oftalmo.com/seo",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Национальная встреча Испанского офтальмологического общества 2026 года.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        39.57,
+        2.65
+      ],
+      "dateSource": "https://soevision.org/event/spanish-national-meeting/"
     },
     {
       "id": "dog-2026",
@@ -321,39 +361,44 @@
       "level": "national",
       "title": "DOG 2026",
       "fullTitle": "Конгресс Deutsche Ophthalmologische Gesellschaft 2026",
-      "org": "DOG · Deutsche Ophthalmologische Gesellschaft",
+      "org": "DOG · German Ophthalmological Society",
       "start": "2026-09-24",
       "end": "2026-09-27",
       "city": "Берлин",
       "country": "Германия",
       "region": "Европа",
-      "mode": "Очно + online sessions",
+      "mode": "Гибрид",
       "venue": "Estrel Congress Center, Berlin",
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research",
-        "AI / управление"
+        "Исследования",
+        "ИИ / управление"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://dog-kongress.de/",
       "program": "https://dog-kongress.de/",
       "registration": "https://dog-kongress.de/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Главный ежегодный конгресс German Ophthalmological Society под темой «Офтальмология без границ», с клиническими, хирургическими и исследовательскими секциями.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        52.52,
+        13.4
+      ],
+      "dateSource": "https://dog.org/veranstaltungen/kongresse"
     },
     {
       "id": "latam-glaucoma-2026",
       "featured": false,
       "level": "specialty",
-      "title": "XIII Latin American Glaucoma Congress",
+      "title": "XIII Латиноамериканский конгресс по глаукоме",
       "fullTitle": "XIII Congreso Latinoamericano de Glaucoma",
-      "org": "Sociedad Latinoamericana de Glaucoma",
+      "org": "Latin American Glaucoma Society",
       "start": "2026-09-24",
       "end": "2026-09-26",
       "city": "Кито",
@@ -364,15 +409,20 @@
       "categories": [
         "Глаукома"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://paao.org/events/xiii-congreso-latinoamericano-de-glaucoma/",
       "program": "https://paao.org/events/xiii-congreso-latinoamericano-de-glaucoma/",
       "registration": "https://www.slaglaucoma.org/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Крупная специализированная латиноамериканская встреча по глаукоме.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -0.18,
+        -78.47
+      ],
+      "dateSource": "https://paao.org/events/xiii-congreso-latinoamericano-de-glaucoma/"
     },
     {
       "id": "aios-midterm-2026",
@@ -392,27 +442,31 @@
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": true,
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
       "official": "https://www.aios.org/midtermjharkhand.php",
       "program": "https://www.aios.org/midtermjharkhand.php",
       "registration": "https://www.aios.org/midtermjharkhand.php",
       "submit": "https://www.aios.org/midtermjharkhand.php",
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Крупная межсъездовская конференция Всеиндийского офтальмологического общества с научной программой и отдельным порталом подачи тезисов.",
       "deadlines": [],
-      "submissionNote": "На официальной странице доступен раздел Abstract Submission; точный текущий срок уточняйте в портале AIOS."
+      "coordinates": [
+        23.34,
+        85.31
+      ],
+      "dateSource": "https://www.aios.org/midtermjharkhand.php"
     },
     {
       "id": "kz-congress-2026",
       "featured": true,
       "title": "Конгресс офтальмологов Казахстана 2026",
       "fullTitle": "Конгресс офтальмологов Республики Казахстан + Катарактально-рефракционный форум «Достижения и будущее офтальмологии Республики Казахстан»",
-      "org": "Казахстанское общество офтальмологов",
+      "org": "Kazakhstan Society of Ophthalmologists",
       "start": "2026-09-25",
       "end": "2026-09-25",
       "city": "Алматы",
@@ -424,45 +478,31 @@
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research",
-        "AI / управление"
+        "Исследования",
+        "ИИ / управление"
       ],
-      "credits": "Аккредитация: проверять у организатора",
-      "submissionOpen": true,
-      "official": "https://koo.kz/conference-may/",
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://koo.kz/conference/",
       "program": "https://koo.kz/conference-may/",
       "registration": "https://koo.kz/conference-may/",
       "submit": "https://koo.kz/conference-may/",
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Научные секции охватывают катарактальную и рефракционную хирургию, роговицу, глаукому, витреоретинальную хирургию, детскую офтальмологию, онкоофтальмологию, ИИ и новые технологии.",
-      "deadlines": [
-        {
-          "kind": "abstract",
-          "label": "Устные доклады и e-posters",
-          "date": "2026-08-25",
-          "timeKnown": false,
-          "zone": "Asia/Almaty",
-          "url": "https://koo.kz/conference-may/",
-          "note": "Время закрытия организатором не указано."
-        },
-        {
-          "kind": "registration",
-          "label": "Регистрация слушателей и докладчиков",
-          "date": "2026-09-18",
-          "timeKnown": false,
-          "zone": "Asia/Almaty",
-          "url": "https://koo.kz/conference-may/",
-          "note": "Онлайн-регистрация: 18 августа — 18 сентября."
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        43.24,
+        76.89
+      ],
+      "dateSource": "https://koo.kz/"
     },
     {
       "id": "qatar-uveitis-2026",
       "featured": false,
       "level": "specialty",
-      "title": "Second Qatar Uveitis Conference",
+      "title": "Вторая конференция Катара по увеитам",
       "fullTitle": "Вторая Qatar Uveitis Conference",
       "org": "Qatar Society of Ophthalmology · Middle East Africa Uveitis Society",
       "start": "2026-09-25",
@@ -474,24 +514,29 @@
       "venue": "Rotana City Centre, Doha",
       "categories": [
         "Воспаление",
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://qataruveitiscare.com/",
       "program": "https://qataruveitiscare.com/",
       "registration": "https://qataruveitiscare.com/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Специализированная международная встреча по увеитам, глазной иммунологии и медицинской ретине с участием региональных и международных экспертов.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        25.29,
+        51.53
+      ],
+      "dateSource": "https://qataruveitiscare.com/"
     },
     {
       "id": "pao-annual-2026",
       "featured": false,
       "level": "national",
-      "title": "PAO Annual Convention 2026",
+      "title": "Ежегодный конгресс PAO 2026",
       "fullTitle": "Ежегодный конгресс Philippine Academy of Ophthalmology",
       "org": "Philippine Academy of Ophthalmology",
       "start": "2026-09-29",
@@ -504,26 +549,31 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Детская офтальмология",
         "Окулопластика"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://pao.org.ph/eye-doctors-home-event/philippine-academy-of-ophthalmology-pao-annual-convention/",
       "program": "https://pao.org.ph/eye-doctors-home-event/philippine-academy-of-ophthalmology-pao-annual-convention/",
       "registration": "https://pao.org.ph/eye-doctors-home-event/philippine-academy-of-ophthalmology-pao-annual-convention/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Главная ежегодная встреча Philippine Academy of Ophthalmology с мультиспециализированной программой и национальными конкурсами.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        14.6,
+        120.98
+      ],
+      "dateSource": "https://pao.org.ph/eye-doctors-home-event/philippine-academy-of-ophthalmology-pao-annual-convention/"
     },
     {
       "id": "czech-national-2026",
       "featured": false,
       "level": "national",
-      "title": "Czech Ophthalmology 2026",
+      "title": "Национальный конгресс офтальмологов Чехии 2026",
       "fullTitle": "Национальная встреча Czech Ophthalmology Society 2026",
       "org": "Czech ophthalmology community",
       "start": "2026-10-01",
@@ -536,18 +586,23 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
-      "official": "https://soevision.org/ophthagenda/category/national-society-meetings/list/",
+      "official": "https://soevision.org/event/czech-ophthalmology-national-society-meeting/",
       "program": "https://soevision.org/ophthagenda/category/national-society-meetings/list/",
       "registration": "https://soevision.org/ophthagenda/category/national-society-meetings/list/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Национальная офтальмологическая встреча Чехии 1–3 октября 2026 года в Остраве.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        49.82,
+        18.26
+      ],
+      "dateSource": "https://soevision.org/event/czech-ophthalmology-national-society-meeting/"
     },
     {
       "id": "euretina-2026",
@@ -557,43 +612,101 @@
       "org": "EURETINA",
       "start": "2026-10-01",
       "end": "2026-10-04",
-      "city": "Vienna",
+      "city": "Вена",
       "country": "Австрия",
       "region": "Европа",
-      "mode": "Очно + virtual access",
+      "mode": "Гибрид",
       "venue": "VIECON – Vienna Congress & Convention Center",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "24 ECMEC® / EACCME CME credits",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://euretina.org/vienna-2026/",
       "program": "https://euretina.org/vienna-2026/",
       "registration": "https://euretina.org/vienna-2026/registration/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Крупнейшая европейская витреоретинальная встреча. Конгресс аккредитован EACCME на максимум 24 европейских CME credits.",
-      "deadlines": [
-        {
-          "kind": "payment",
-          "label": "Bank transfer available until",
-          "date": "2026-09-20T23:59:00+02:00",
-          "timeKnown": true,
-          "zone": "CEST",
-          "url": "https://euretina.org/vienna-2026/registration/",
-          "note": "После этой даты банковский перевод недоступен."
-        },
-        {
-          "kind": "registration",
-          "label": "Late fee registration",
-          "date": "2026-09-30T23:59:00+02:00",
-          "timeKnown": true,
-          "zone": "CEST",
-          "url": "https://euretina.org/vienna-2026/registration/",
-          "note": "С 1 октября — onsite fee."
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        48.21,
+        16.37
+      ],
+      "dateSource": "https://euretina.org/vienna-2026/"
+    },
+    {
+      "id": "ciob-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "CIOB 2026",
+      "fullTitle": "Cumbre de Innovación Oftalmológica del Biobío 2026",
+      "org": "CIOB",
+      "start": "2026-10-02",
+      "end": "2026-10-03",
+      "city": "Консепсьон",
+      "country": "Чили",
+      "region": "Латинская Америка",
+      "mode": "Очно",
+      "venue": "Centro de Eventos Mitrinco, Concepción",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома",
+        "Исследования",
+        "ИИ / управление"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://www.ciob.cl/",
+      "program": "https://www.ciob.cl/",
+      "registration": "https://www.ciob.cl/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "CIOB 2026. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        -36.83,
+        -73.05
+      ],
+      "dateSource": "https://www.ciob.cl/"
+    },
+    {
+      "id": "ioc-uzbekistan-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "VI Международный офтальмологический конгресс Узбекистана 2026",
+      "fullTitle": "VI Международный офтальмологический конгресс Узбекистана 2026",
+      "org": "Uzbek Society of Cataract and Refractive Surgeons / Republican Eye Microsurgery Centre",
+      "start": "2026-10-02",
+      "end": "2026-10-03",
+      "city": "Ташкент",
+      "country": "Узбекистан",
+      "region": "СНГ",
+      "mode": "Очно",
+      "venue": "InterContinental Tashkent",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Рефракция",
+        "Роговица",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://uzscrs.uz/registratsiya-2026",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "VI Международный офтальмологический конгресс Узбекистана 2026. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        41.3,
+        69.24
+      ],
+      "dateSource": "https://uzscrs.uz/registratsiya-2026"
     },
     {
       "id": "aao-2026",
@@ -613,7 +726,7 @@
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Воспаление",
         "Детская офтальмология",
@@ -621,15 +734,20 @@
         "Нейроофтальмология",
         "Окулопластика"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.aao.org/annual-meeting",
       "program": "https://www.aao.org/annual-meeting",
       "registration": "https://www.aao.org/annual-meeting",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Ежегодная встреча American Academy of Ophthalmology — одна из крупнейших мультиспециализированных офтальмологических встреч мира.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        29.95,
+        -90.07
+      ],
+      "dateSource": "https://www.aao.org/Assets/6f5e4b18-cb0f-494f-9d0a-c8098b228d34/639124150856930000/may-2026-destination-aao-2026-pdf?inline=1"
     },
     {
       "id": "cornea-eye-banking-2026",
@@ -647,17 +765,22 @@
       "venue": "New Orleans, Louisiana",
       "categories": [
         "Роговица",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://corneasociety.org/cornea-and-eye-banking-forum",
       "program": "https://corneasociety.org/cornea-and-eye-banking-forum",
       "registration": "https://corneasociety.org/cornea-and-eye-banking-forum",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Ежегодный форум Cornea Society и eye banking community, проходящий непосредственно перед AAO.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        29.95,
+        -90.07
+      ],
+      "dateSource": "https://corneasociety.org/cornea-and-eye-banking-forum"
     },
     {
       "id": "eso-2026",
@@ -677,22 +800,27 @@
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Воспаление",
         "Детская офтальмология",
         "Окулопластика",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://eso-conferences.com/",
       "program": "https://eso-conferences.com/eso2026/",
       "registration": "https://eso-conferences.com/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Национальная платформа офтальмологов ОАЭ и одна из крупных встреч GCC: комплексная научная программа, хирургические техники, workshops и wet-labs.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        24.45,
+        54.38
+      ],
+      "dateSource": "https://eso-conferences.com/"
     },
     {
       "id": "ever-2026",
@@ -709,20 +837,25 @@
       "mode": "Очно",
       "venue": "Palazzo degli Affari, Florence",
       "categories": [
-        "Research",
-        "Retina",
+        "Исследования",
+        "Сетчатка",
         "Роговица",
         "Глаукома"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://soevision.org/event/ever-2026/",
       "program": "https://soevision.org/event/ever-2026/",
       "registration": "https://evercongress.org/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Европейский исследовательский конгресс по зрению и офтальмологии с фокусом на фундаментальную, трансляционную и клиническую науку.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        43.77,
+        11.25
+      ],
+      "dateSource": "https://soevision.org/event/ever-2026/"
     },
     {
       "id": "alaccsa-r-2026",
@@ -743,21 +876,64 @@
         "Рефракция",
         "Роговица"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://paao.org/events/alaccsa-2026/",
       "program": "https://paao.org/events/alaccsa-2026/",
       "registration": "https://alaccsa.com/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "26-й международный конгресс ALACCSA-R по катаракте, рефракционной хирургии и переднему сегменту.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -25.26,
+        -57.58
+      ],
+      "dateSource": "https://paao.org/events/alaccsa-2026/"
+    },
+    {
+      "id": "bolivia-ophthalmology-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "XXXI конгресс офтальмологов Боливии 2026",
+      "fullTitle": "XXXI Congreso Boliviano de Oftalmología “Dra. Rosario García”",
+      "org": "Sociedad Boliviana de Oftalmología",
+      "start": "2026-10-22",
+      "end": "2026-10-24",
+      "city": "Санта-Крус-де-ла-Сьерра",
+      "country": "Боливия",
+      "region": "Латинская Америка",
+      "mode": "Очно",
+      "venue": "Hotel Los Tajibos, Santa Cruz",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома",
+        "Детская офтальмология",
+        "Страбизм",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://cboftalmologia2026.com/",
+      "program": "https://cboftalmologia2026.com/",
+      "registration": "https://cboftalmologia2026.com/",
+      "submit": "https://cboftalmologia2026.com/trabajos.html",
+      "verified": "2026-11-02",
+      "description": "XXXI конгресс офтальмологов Боливии 2026. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        -17.79,
+        -63.18
+      ],
+      "dateSource": "https://cboftalmologia2026.com/"
     },
     {
       "id": "jco-80-2026",
       "featured": false,
       "level": "national",
-      "title": "80th Japan Clinical Ophthalmology Congress",
+      "title": "80-й Японский конгресс клинической офтальмологии",
       "fullTitle": "80-й ежегодный конгресс Japan Clinical Ophthalmology",
       "org": "Japanese ophthalmology community · Mie University",
       "start": "2026-10-29",
@@ -770,36 +946,32 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://convention.jtbcom.co.jp/80ringan/en/index.html",
       "program": "https://convention.jtbcom.co.jp/80ringan/en/index.html",
       "registration": "https://convention.jtbcom.co.jp/80ringan/en/registration/index.html",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "80-й юбилейный японский клинический офтальмологический конгресс с широкой научной и практической программой.",
-      "deadlines": [
-        {
-          "kind": "registration",
-          "label": "Окончание early-bird регистрации",
-          "date": "2026-09-25T12:00:00+09:00",
-          "timeKnown": true,
-          "zone": "JST / UTC+9",
-          "url": "https://convention.jtbcom.co.jp/80ringan/en/registration/index.html"
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        35.01,
+        135.77
+      ],
+      "dateSource": "https://convention.jtbcom.co.jp/80ringan/en/index.html"
     },
     {
       "id": "sprv-2026",
       "featured": true,
       "level": "specialty",
-      "title": "Pan-American Retina & Vitreous Congress 2026",
+      "title": "Панамериканский конгресс по сетчатке и стекловидному телу 2026",
       "fullTitle": "11-й конгресс Pan-American Retina & Vitreous Society + 20-й GLADAOF Forum",
-      "org": "Sociedad Panamericana de Retina y Vítreo · GLADAOF",
+      "org": "Pan-American Retina & Vitreous Society · GLADAOF",
       "start": "2026-10-29",
       "end": "2026-11-01",
       "city": "Сан-Паулу",
@@ -808,18 +980,23 @@
       "mode": "Очно",
       "venue": "Grand Hyatt, São Paulo",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://paao.org/events/sprv-2026/",
       "program": "https://paao.org/events/sprv-2026/",
       "registration": "https://sprv2026.com/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Панамериканская специализированная встреча по заболеваниям сетчатки и витреоретинальной хирургии.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -23.55,
+        -46.63
+      ],
+      "dateSource": "https://paao.org/events/sprv-2026/"
     },
     {
       "id": "kos-apois-2026",
@@ -838,41 +1015,70 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Детская офтальмология",
         "Страбизм",
         "Нейроофтальмология",
         "Окулопластика",
-        "Research",
-        "AI / управление"
+        "Исследования",
+        "ИИ / управление"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html",
       "program": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html",
       "registration": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Большой осенний конгресс KOS, объединённый с APOIS и трёхсторонней встречей Корея–Китай–Япония; особый акцент на imaging, AI, новых терапиях и инновациях.",
-      "deadlines": [
-        {
-          "kind": "upload",
-          "label": "Финальная загрузка файлов презентаций",
-          "date": "2026-09-30",
-          "timeKnown": false,
-          "zone": "Asia/Seoul",
-          "url": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html"
-        },
-        {
-          "kind": "registration",
-          "label": "Закрытие предварительной регистрации",
-          "date": "2026-10-16",
-          "timeKnown": false,
-          "zone": "Asia/Seoul",
-          "url": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html"
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        37.57,
+        126.98
+      ],
+      "dateSource": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html"
+    },
+    {
+      "id": "bascom-palmer-curso-2026",
+      "featured": true,
+      "level": "specialty",
+      "title": "Bascom Palmer CURSO 2026",
+      "fullTitle": "XLVIII Bascom Palmer InterAmerican Course in Clinical Ophthalmology 2026",
+      "org": "Bascom Palmer Eye Institute",
+      "start": "2026-11-01",
+      "end": "2026-11-04",
+      "city": "Майами",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "Hyatt Regency Miami Downtown",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Рефракция",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома",
+        "Воспаление",
+        "Детская офтальмология",
+        "Страбизм",
+        "Нейроофтальмология",
+        "Окулопластика"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
+      "program": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
+      "registration": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Bascom Palmer CURSO 2026. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        25.77,
+        -80.19
+      ],
+      "dateSource": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology"
     },
     {
       "id": "sos-2026",
@@ -892,24 +1098,39 @@
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Воспаление",
         "Детская офтальмология",
         "Окулопластика",
-        "Research",
-        "AI / управление"
+        "Исследования",
+        "ИИ / управление"
       ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": true,
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
       "official": "https://sos-conferences.com/",
       "program": "https://sos-conferences.com/",
       "registration": "https://sos-conferences.com/",
       "submit": "https://sos-conferences.com/abstract-2026/",
-      "verified": "2026-08-16",
-      "description": "Крупный национальный конгресс Саудовской Аравии: pre-conference по роговице и молодым офтальмологам 4 ноября, основной мультиспециализированный конгресс 5–7 ноября.",
-      "deadlines": [],
-      "submissionNote": "Подача тезисов доступна на официальном сайте; дата закрытия на проверенной странице не указана."
+      "verified": "2026-11-02",
+      "description": "Saudi Ophthalmology: предконгрессный день 4 ноября, основной конгресс 5–7 ноября. Приём тезисов закрыт.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Приём тезисов (закрыт)",
+          "date": "2026-08-06",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://sos-conferences.com/abstract-2026/",
+          "note": ""
+        }
+      ],
+      "submissionNote": "Приём научных материалов закрыт; условия участия и регистрации смотрите у организатора.",
+      "coordinates": [
+        26.22,
+        50.2
+      ],
+      "dateSource": "https://sos-conferences.com/"
     },
     {
       "id": "ranzco-2026",
@@ -928,27 +1149,32 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Воспаление",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://ranzco.edu/congress/",
       "program": "https://ranzco.edu/congress/",
       "registration": "https://ranzco.edu/congress/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Главный ежегодный научный конгресс RANZCO с мультиспециализированной программой по клинической и хирургической офтальмологии.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -36.85,
+        174.76
+      ],
+      "dateSource": "https://ranzco.edu/congress/"
     },
     {
       "id": "oor-inflammation-2026",
       "featured": false,
       "title": "Воспаление глаза 2026",
       "fullTitle": "VI Всероссийская конференция с международным участием «Воспаление глаза»",
-      "org": "Общество офтальмологов России",
+      "org": "Russian Society of Ophthalmologists",
       "start": "2026-11-07",
       "end": "2026-11-07",
       "city": "Москва",
@@ -959,18 +1185,91 @@
       "categories": [
         "Воспаление",
         "Роговица",
-        "Research"
+        "Исследования"
       ],
-      "credits": "НМО: уточняется организатором",
-      "submissionOpen": true,
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
       "official": "https://vospalenie.oor.ru/",
       "program": "https://vospalenie.oor.ru/",
       "registration": "https://vospalenie.oor.ru/",
       "submit": "https://vospalenie.oor.ru/",
-      "verified": "2026-08-16",
-      "description": "Официальная страница указывает, что приём материалов доступен, однако актуальная дата закрытия подачи на 2026 год на проверенной странице не опубликована.",
+      "verified": "2026-11-02",
+      "description": "VI Всероссийская конференция «Воспаление глаза», Москва, 7 ноября 2026 года. Информация о регистрации — на сайте организатора.",
       "deadlines": [],
-      "submissionNote": "Приём материалов: открыт/доступен на официальной странице; точный дедлайн 2026 не подтверждён."
+      "submissionNote": "Условия подачи научных материалов уточняйте у организатора.",
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://vospalenie.oor.ru/"
+    },
+    {
+      "id": "silk-road-almaty-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "Silk Road Eye Congress — Алматы 2026",
+      "fullTitle": "Silk Road Eye Congress — Алматы 2026",
+      "org": "Al-Farabi Kazakh National University / International Centre for Eye Health",
+      "start": "2026-11-07",
+      "end": "2026-11-07",
+      "city": "Алматы",
+      "country": "Казахстан",
+      "region": "СНГ",
+      "mode": "Очно",
+      "venue": "Al-Farabi Kazakh National University library, Room 409",
+      "categories": [
+        "Исследования",
+        "Катаракта / ИОЛ",
+        "Сетчатка"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://mcoz.kz/specialist",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Silk Road Eye Congress — Алматы 2026. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        43.24,
+        76.89
+      ],
+      "dateSource": "https://mcoz.kz/specialist"
+    },
+    {
+      "id": "isa-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "XVI конгресс ISA",
+      "fullTitle": "XVI International Strabismological Association Meeting",
+      "org": "International Strabismological Association",
+      "start": "2026-11-11",
+      "end": "2026-11-14",
+      "city": "Буэнос-Айрес",
+      "country": "Аргентина",
+      "region": "Латинская Америка",
+      "mode": "Очно",
+      "venue": "Auditorios UCA – Edificio San José",
+      "categories": [
+        "Страбизм",
+        "Детская офтальмология",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://isa2026.com.ar/",
+      "program": "https://isa2026.com.ar/",
+      "registration": "https://isa2026.com.ar/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "XVI конгресс ISA. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        -34.6,
+        -58.38
+      ],
+      "dateSource": "https://isa2026.com.ar/"
     },
     {
       "id": "trends-retina-2026",
@@ -987,34 +1286,58 @@
       "mode": "Очно",
       "venue": "Convention Center of IMO Grupo Miranza Barcelona",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://miranza.es/en/tir-2026/",
       "program": "https://miranza.es/en/tir-2026/",
       "registration": "https://miranza.es/en/tir-2026/",
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": [
-        {
-          "kind": "registration",
-          "label": "Ранняя регистрация",
-          "date": "2026-09-15",
-          "timeKnown": false,
-          "zone": "Europe/Madrid",
-          "url": "https://miranza.es/en/tir-2026/",
-          "note": ""
-        }
-      ]
+      "verified": "2026-11-02",
+      "description": "Trends in Retina 2026. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        41.39,
+        2.17
+      ],
+      "dateSource": "https://miranza.es/en/tir-2026/"
+    },
+    {
+      "id": "wga-surgical-grand-rounds-8-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "8-й WGA Surgical Grand Rounds",
+      "fullTitle": "8-й WGA Surgical Grand Rounds: глаукома после трансплантации роговицы и при синдроме Стерджа–Вебера",
+      "org": "World Glaucoma Association",
+      "start": "2026-11-12",
+      "end": "2026-11-12",
+      "city": "Онлайн",
+      "country": "Весь мир",
+      "region": "Международные онлайн",
+      "mode": "Онлайн",
+      "venue": "Международный вебинар WGA",
+      "categories": [
+        "Глаукома",
+        "Роговица"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://wga.one/surgical-grand-rounds/",
+      "program": "https://wga.one/surgical-grand-rounds/",
+      "registration": "https://wga.one/surgical-grand-rounds-registration/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Разбор хирургии глаукомы после трансплантации роговицы: Ramesh Ayyala; эксперты Karl Mercieca и Keith Barton. Вторая тема — глаукома при синдроме Стерджа–Вебера. Регистрация открыта; точное время на странице программы не указано.",
+      "deadlines": [],
+      "dateSource": "https://wga.one/surgical-grand-rounds/"
     },
     {
       "id": "joscrs-2026",
       "featured": false,
       "level": "specialty",
-      "title": "2nd JOSCRS International Meeting",
+      "title": "2-я международная встреча JOSCRS",
       "fullTitle": "2-я международная встреча Jordanian Ophthalmological Society Cataract & Refractive Surgery",
       "org": "Jordanian Ophthalmological Society",
       "start": "2026-11-18",
@@ -1029,66 +1352,99 @@
         "Рефракция",
         "Роговица",
         "Глаукома",
-        "AI / управление"
+        "ИИ / управление"
       ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": true,
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
       "official": "https://www.jordan-valley.com/jos2026",
       "program": "https://www.jordan-valley.com/jos2026",
-      "registration": "https://www.jordan-valley.com/jos2026",
-      "submit": "https://www.jordan-valley.com/jos2026",
-      "verified": "2026-08-16",
+      "registration": "https://www.jordan-valley.com/events/jos26/registration",
+      "submit": "https://www.jordan-valley.com/events/jos26/abstracts",
+      "verified": "2026-11-02",
       "description": "Международная встреча по катаракте, переднему сегменту, роговице, рефракционной хирургии и глаукоме с wet-labs и секцией AI.",
-      "deadlines": [
-        {
-          "kind": "abstract",
-          "label": "Закрытие подачи тезисов",
-          "date": "2026-09-15",
-          "timeKnown": false,
-          "zone": "Asia/Amman",
-          "url": "https://www.jordan-valley.com/jos2026"
-        }
-      ]
+      "deadlines": [],
+      "submissionNote": "Приём научных материалов закрыт; условия участия и регистрации смотрите у организатора.",
+      "coordinates": [
+        31.95,
+        35.91
+      ],
+      "dateSource": "https://www.jordan-valley.com/jos2026"
     },
     {
-      "id": "acs-2026",
+      "id": "ukiscrs-50-2026",
       "featured": false,
+      "title": "50-й ежегодный конгресс UKISCRS",
+      "fullTitle": "UKISCRS 50th Annual Congress",
+      "org": "UK and Ireland Society of Cataract and Refractive Surgeons",
+      "start": "2026-11-19",
+      "end": "2026-11-20",
+      "city": "Лондон",
+      "country": "Великобритания",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "County Hall, London",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Рефракция",
+        "Роговица"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://www.ukiscrs.org.uk/",
+      "program": "https://www.ukiscrs.org.uk/big50",
+      "registration": "https://www.ukiscrs.org.uk/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Даты по информации организатора; актуальные условия уточняйте на официальном сайте.",
+      "deadlines": [],
+      "coordinates": [
+        51.51,
+        -0.13
+      ],
+      "dateSource": "https://www.ukiscrs.org.uk/"
+    },
+    {
+      "id": "asia-cornea-2026",
+      "featured": false,
+      "level": "specialty",
       "title": "Asia Cornea Society 2026",
-      "logo": "https://www.acshk26.com/web/images/event-slider.jpg",
-      "logoAlt": "Asia Cornea Society 2026 — официальный visual",
-      "logoType": "banner",
-      "fullTitle": "10th Biennial Scientific Meeting of the Asia Cornea Society",
+      "fullTitle": "10th Asia Cornea Society Biennial Scientific Meeting",
       "org": "Asia Cornea Society",
       "start": "2026-11-27",
       "end": "2026-11-29",
-      "city": "Hong Kong",
+      "city": "Гонконг",
       "country": "Гонконг",
-      "region": "Китай / Greater China",
+      "region": "Китай / Большой Китай",
       "mode": "Очно",
-      "venue": "The Fullerton Ocean Park Hotel Hong Kong",
+      "venue": "Hong Kong",
       "categories": [
         "Роговица",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.acshk26.com/web/",
       "program": "https://www.acshk26.com/web/subpage.php?mid=123",
       "registration": "https://www.acshk26.com/web/",
       "submit": null,
-      "verified": "2026-10-12",
-      "description": "Биеннале Asia Cornea Society с wet-lab, DMEK/DSAEK/DALK, кератоконусом, инфекциями роговицы, ocular surface disease, eye banking и современной кератопластикой.",
+      "verified": "2026-11-02",
+      "description": "Asia Cornea Society 2026. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
       "deadlines": [
         {
           "kind": "registration",
-          "label": "Advance registration deadline",
+          "label": "Предварительная регистрация",
           "date": "2026-11-26",
           "timeKnown": false,
           "zone": "Asia/Hong_Kong",
           "url": "https://www.acshk26.com/web/",
-          "note": "После этого — onsite registration 27–29 ноября."
+          "note": ""
         }
-      ]
+      ],
+      "coordinates": [
+        22.32,
+        114.17
+      ],
+      "dateSource": "https://www.acshk26.com/web/"
     },
     {
       "id": "pirogov-eye-forum-2026",
@@ -1096,7 +1452,7 @@
       "level": "national",
       "title": "Пироговский офтальмологический форум 2026",
       "fullTitle": "Пироговский офтальмологический форум 2026",
-      "org": "НМХЦ им. Н.И. Пирогова",
+      "org": "Pirogov National Medical and Surgical Center",
       "start": "2026-11-27",
       "end": "2026-11-27",
       "city": "Москва",
@@ -1107,19 +1463,24 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "Аккредитация: уточняется",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://pirogoveyeforum.ru/",
       "program": "https://pirogoveyeforum.ru/",
       "registration": "https://pirogoveyeforum.ru/",
       "submit": null,
-      "verified": "2026-10-22",
+      "verified": "2026-11-02",
       "description": "Регистрация открыта. Осложнённая катаракта, отслойка сетчатки, глаукома, травма глаза, живая хирургия и секция молодых учёных New Era.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://pirogoveyeforum.ru/"
     },
     {
       "id": "coecsa-2026",
@@ -1138,19 +1499,34 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.coecsa-congress.org/",
       "program": "https://www.coecsa-congress.org/",
       "registration": "https://www.coecsa-congress.org/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "13-й научный конгресс COECSA по офтальмологии Восточной, Центральной и Южной Африки. Официально перенесён на 2–4 декабря 2026 года.",
-      "deadlines": []
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Приём тезисов (закрыт)",
+          "date": "2026-09-30",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://www.coecsa-congress.org/abstracts-copy/",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        0.35,
+        32.58
+      ],
+      "dateSource": "https://www.coecsa-congress.org/"
     },
     {
       "id": "epomec-2026",
@@ -1170,41 +1546,36 @@
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Воспаление",
         "Детская офтальмология",
         "Окулопластика"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.epomec.ae/",
-      "program": "https://www.epomec.ae/",
-      "registration": "https://www.epomec.ae/",
+      "program": "https://epomec.ae/program-at-a-glance-2026/",
+      "registration": "https://epomec.ae/registration/",
       "submit": "https://www.epomec.ae/abstract-submission/",
-      "verified": "2026-10-08",
+      "verified": "2026-11-02",
       "description": "13-я MENA-конференция по современной офтальмологической практике в Дубае; организаторы ожидают более 3000 участников и экспонентов.",
       "deadlines": [
         {
-          "kind": "faculty",
-          "label": "Решение научного комитета",
-          "date": "2026-10-16T23:59:00+04:00",
-          "timeKnown": true,
-          "zone": "GST",
-          "url": "https://www.epomec.ae/abstract-submission/",
-          "note": ""
-        },
-        {
           "kind": "abstract",
-          "label": "Финальный дедлайн тезисов (закрыт)",
+          "label": "Окончательный приём тезисов (закрыт)",
           "date": "2026-09-25T18:00:00+04:00",
           "timeKnown": true,
-          "zone": "GST",
+          "zone": "Asia/Dubai",
           "url": "https://www.epomec.ae/abstract-submission/",
-          "note": "Подача oral, ePoster и video завершена; решение комитета ожидается 16 октября 2026."
+          "note": ""
         }
       ],
-      "submissionNote": "Даты 3–5 декабря сохранены; в официальных материалах также встречаются 4–6 декабря. Перед бронированием уточните у организатора."
+      "coordinates": [
+        25.2,
+        55.27
+      ],
+      "dateSource": "https://epomec.ae/welcome-message/"
     },
     {
       "id": "mioc-2026",
@@ -1224,44 +1595,122 @@
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": true,
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
       "official": "https://mioc.org.om/",
       "program": "https://mioc.org.om/",
-      "registration": "https://mioc.org.om/important-dates",
+      "registration": "https://mioc.org.om/online-registration",
       "submit": "https://mioc.org.om/abstract-submission",
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Международная офтальмологическая конференция в Маскате с free papers, clinical cases, posters, videos, wet-labs и образовательными курсами.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Закрытие подачи тезисов",
-          "date": "2026-09-01",
+          "label": "Приём тезисов (закрыт)",
+          "date": "2026-09-25",
           "timeKnown": false,
-          "zone": "Asia/Muscat",
-          "url": "https://mioc.org.om/abstract-submission"
+          "zone": "",
+          "url": "https://mioc.org.om/important-dates",
+          "note": ""
         },
         {
           "kind": "registration",
-          "label": "Early-bird регистрация",
-          "date": "2026-10-15",
+          "label": "Ранняя регистрация",
+          "date": "2026-11-15",
           "timeKnown": false,
           "zone": "Asia/Muscat",
-          "url": "https://mioc.org.om/important-dates"
-        },
-        {
-          "kind": "registration",
-          "label": "Standard registration",
-          "date": "2026-11-20",
-          "timeKnown": false,
-          "zone": "Asia/Muscat",
-          "url": "https://mioc.org.om/important-dates"
+          "url": "https://mioc.org.om/online-registration",
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Приём тезисов закрыт. На страницах организатора расходятся сроки стандартной регистрации: 20 и 25 ноября. Уточните срок перед оплатой.",
+      "coordinates": [
+        23.59,
+        58.41
+      ],
+      "dateSource": "https://mioc.org.om/important-dates"
+    },
+    {
+      "id": "japan-retina-2026",
+      "featured": false,
+      "title": "65-й конгресс JRVS / 6-й Asia Retina Congress",
+      "fullTitle": "Japanese Retina and Vitreous Society Annual Meeting",
+      "org": "Japan Retina and Vitreous Society",
+      "start": "2026-12-04",
+      "end": "2026-12-06",
+      "city": "Токио",
+      "country": "Япония",
+      "region": "Азия–Тихоокеанский",
+      "mode": "Очно",
+      "venue": "Tokyo International Forum",
+      "categories": [
+        "Сетчатка",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://convention.jtbcom.co.jp/65moumaku/summary/index.html",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "65-й конгресс JRVS / 6-й Asia Retina Congress. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        35.68,
+        139.69
+      ],
+      "dateSource": "https://convention.jtbcom.co.jp/65moumaku/summary/index.html"
+    },
+    {
+      "id": "belarus-ophthalmology-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "Актуальные вопросы офтальмологии 2026",
+      "fullTitle": "Актуальные вопросы офтальмологии 2026",
+      "org": "Belarusian State Medical University",
+      "start": "2026-12-10",
+      "end": "2026-12-11",
+      "city": "Минск",
+      "country": "Беларусь",
+      "region": "СНГ",
+      "mode": "Очно",
+      "venue": "Institute of Advanced Training, BSMU, P. Brovki Street 3",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://eyecongress.by/ru-RU/congressinfo",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Актуальные вопросы офтальмологии 2026. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Доклады и публикации (приём закрыт)",
+          "date": "2026-10-05",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://eyecongress.by/ru-RU/congressinfo",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        53.9,
+        27.56
+      ],
+      "dateSource": "https://eyecongress.by/ru-RU/congressinfo"
     },
     {
       "id": "asmhk-2026",
@@ -1274,38 +1723,173 @@
       "end": "2026-12-13",
       "city": "Гонконг",
       "country": "Китай · Гонконг",
-      "region": "Китай / Greater China",
+      "region": "Китай / Большой Китай",
       "mode": "Очно",
       "venue": "Hong Kong Convention and Exhibition Centre",
       "categories": [
-        "Retina",
-        "Research",
-        "AI / управление"
+        "Сетчатка",
+        "Исследования",
+        "ИИ / управление"
       ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": true,
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
       "official": "https://asmhk2026.com/",
       "program": "https://asmhk2026.com/",
       "registration": "https://asmhk2026.com/",
       "submit": "https://asmhk2026.com/abstract-submission/",
-      "verified": "2026-08-16",
-      "description": "Флагманская встреча офтальмологов Гонконга. Тема 2026 года — Artificial Intelligence and Retinal Disease; предусмотрены оригинальные исследования, клинические обновления и хирургические дискуссии.",
+      "verified": "2026-11-02",
+      "description": "Ежегодная научная встреча в Гонконге; приём тезисов завершён 11 сентября 2026 года.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Закрытие подачи тезисов",
+          "label": "Приём тезисов (закрыт)",
           "date": "2026-09-11",
           "timeKnown": false,
-          "zone": "Asia/Hong_Kong",
-          "url": "https://asmhk2026.com/abstract-submission/"
+          "zone": "",
+          "url": "https://asmhk2026.com/abstract-submission/",
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Приём научных материалов закрыт; условия участия и регистрации смотрите у организатора.",
+      "coordinates": [
+        22.32,
+        114.17
+      ],
+      "dateSource": "https://asmhk2026.com/"
+    },
+    {
+      "id": "moorf-uae-2027",
+      "featured": false,
+      "title": "9-я конференция Moorfields UAE: A Year in Focus",
+      "fullTitle": "9th Moorfields UAE: A Year in Focus",
+      "org": "Moorfields Eye Hospitals UAE",
+      "start": "2027-01-09",
+      "end": "2027-01-10",
+      "city": "Дубай",
+      "country": "ОАЭ",
+      "region": "Ближний Восток",
+      "mode": "Гибрид",
+      "venue": "Conrad Dubai — 9 января; онлайн — 10 января",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома",
+        "Нейроофтальмология",
+        "Окулопластика",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://events.moorfields.ae/",
+      "program": "https://events.moorfields.ae/",
+      "registration": "https://events.moorfields.ae/registration",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "9-я конференция Moorfields UAE: 9 января 2027 года очно в Дубае, 10 января — онлайн.",
+      "deadlines": [
+        {
+          "kind": "registration",
+          "label": "Ранняя регистрация",
+          "date": "2026-11-14",
+          "timeKnown": false,
+          "zone": "Asia/Dubai",
+          "url": "https://events.moorfields.ae/registration",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        25.2,
+        55.27
+      ],
+      "dateSource": "https://events.moorfields.ae/"
+    },
+    {
+      "id": "smo-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "40-й конгресс Марокканского общества офтальмологов",
+      "fullTitle": "40-й конгресс Марокканского общества офтальмологов",
+      "org": "Société Marocaine d’Ophtalmologie",
+      "start": "2027-01-20",
+      "end": "2027-01-23",
+      "city": "Рабат",
+      "country": "Марокко",
+      "region": "Африка",
+      "mode": "Очно",
+      "venue": "Four Seasons Hotel Rabat",
+      "categories": [
+        "Воспаление",
+        "Детская офтальмология",
+        "Окулопластика",
+        "Роговица",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://smo.ma/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "40-й конгресс Марокканского общества офтальмологов. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        34.02,
+        -6.84
+      ],
+      "dateSource": "https://smo.ma/"
+    },
+    {
+      "id": "japan-ophthalmic-surgery-2027",
+      "featured": false,
+      "title": "50-й конгресс Японского общества офтальмохирургии",
+      "fullTitle": "Japanese Society of Ophthalmic Surgery Annual Meeting",
+      "org": "Japanese Society of Ophthalmic Surgery",
+      "start": "2027-01-29",
+      "end": "2027-01-31",
+      "city": "Токио",
+      "country": "Япония",
+      "region": "Азия–Тихоокеанский",
+      "mode": "Очно",
+      "venue": "Tokyo International Forum",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://50.jsos.jp/",
+      "program": "https://50.jsos.jp/",
+      "registration": "https://50.jsos.jp/registration",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "50-й конгресс Японского общества офтальмохирургии. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [
+        {
+          "kind": "registration",
+          "label": "Предварительная регистрация",
+          "date": "2026-11-12",
+          "timeKnown": false,
+          "zone": "Asia/Tokyo",
+          "url": "https://50.jsos.jp/registration",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        35.68,
+        139.69
+      ],
+      "dateSource": "https://50.jsos.jp/"
     },
     {
       "id": "sopla-2027",
       "featured": false,
       "level": "specialty",
-      "title": "III SOPLA International Congress",
+      "title": "III международный конгресс SOPLA",
       "fullTitle": "III Международный конгресс SOPLA по детской офтальмологии",
       "org": "SOPLA · Sociedad de Oftalmo Pediatría LatinoAmericana",
       "start": "2027-02-05",
@@ -1319,20 +1903,57 @@
         "Детская офтальмология",
         "Страбизм"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
       "program": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
       "registration": "https://www.sopla.org/Congreso/Congreso2026",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Международный латиноамериканский конгресс по детской офтальмологии и страбизмологии.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        6.24,
+        -75.58
+      ],
+      "dateSource": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/"
+    },
+    {
+      "id": "japan-cornea-2027",
+      "featured": false,
+      "title": "Японская конференция по роговице 2027",
+      "fullTitle": "Japan Cornea Conference",
+      "org": "Japan Cornea Society / Keratoplasty Society of Japan",
+      "start": "2027-02-11",
+      "end": "2027-02-13",
+      "city": "Гинован, Окинава",
+      "country": "Япония",
+      "region": "Азия–Тихоокеанский",
+      "mode": "Очно",
+      "venue": "Окинавский конгресс-центр, Гинован",
+      "categories": [
+        "Роговица",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://www.okinawa-congre.co.jp/cornea2027/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Японская конференция по роговице 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        26.28,
+        127.75
+      ],
+      "dateSource": "https://www.okinawa-congre.co.jp/cornea2027/outline/index.html"
     },
     {
       "id": "glaucoma-vector-2027",
       "featured": false,
-      "title": "Glaucoma: Innovative Vector 2027",
+      "title": "Лечение глаукомы: инновационный вектор 2027",
       "fullTitle": "VII All-Russian Conference with International Participation “Glaucoma Treatment: Innovative Vector”",
       "org": "Russian Ophthalmological Society",
       "start": "2027-02-12",
@@ -1340,22 +1961,27 @@
       "city": "Москва",
       "country": "Россия",
       "region": "Россия",
-      "mode": "Гибрид",
+      "mode": "Очно",
       "venue": "Moscow, Russia",
       "categories": [
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://oor.ru/events",
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
+      "verified": "2026-11-02",
+      "description": "Лечение глаукомы: инновационный вектор 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
       "deadlines": [],
-      "level": "specialty"
+      "level": "specialty",
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://oor.ru/events"
     },
     {
       "id": "aioc-2027",
@@ -1374,29 +2000,43 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "Аккредитация: уточняется",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.aios.org/aioc2027.php",
       "program": "https://www.aios.org/aioc2027.php",
       "registration": "https://www.aios.org/aioc2027.php",
       "submit": null,
-      "verified": "2026-10-22",
+      "verified": "2026-11-02",
       "description": "85-й национальный конгресс AIOS. Регистрация открыта; основная подача тезисов завершена.",
       "deadlines": [
         {
           "kind": "registration",
-          "label": "Early-bird регистрация",
+          "label": "Ранняя регистрация",
           "date": "2026-11-30",
           "timeKnown": false,
           "zone": "Asia/Kolkata",
           "url": "https://www.aios.org/aioc2027.php",
           "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Предварительная регистрация",
+          "date": "2027-01-15",
+          "timeKnown": false,
+          "zone": "Asia/Kolkata",
+          "url": "https://www.aios.org/aioc2027.php",
+          "note": ""
         }
-      ]
+      ],
+      "coordinates": [
+        23.22,
+        72.65
+      ],
+      "dateSource": "https://www.aios.org/aioc2027.php"
     },
     {
       "id": "euretina-sfm-2027",
@@ -1413,25 +2053,30 @@
       "mode": "Очно",
       "venue": "Ljubljana, Slovenia",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "Аккредитация: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://euretina.org/sfm-2027/",
       "program": "https://euretina.org/sfm-2027/",
       "registration": "https://euretina.org/sfm-2027/",
       "submit": null,
-      "verified": "2026-10-15",
+      "verified": "2026-11-02",
       "description": "Встреча по наследственным заболеваниям сетчатки: генотипирование, визуализация, новые методы лечения и клинические случаи. Подробности регистрации ожидаются.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        46.06,
+        14.51
+      ],
+      "dateSource": "https://euretina.org/sfm-2027/"
     },
     {
       "id": "oculoplastics-2027",
       "featured": false,
       "title": "Окулопластика 2027",
       "fullTitle": "Окулопластика 2027",
-      "org": "Общество офтальмологов России / МНТК",
+      "org": "Russian Society of Ophthalmologists / MNTK",
       "start": "2027-02-26",
       "end": "2027-02-26",
       "city": "Москва",
@@ -1442,15 +2087,20 @@
       "categories": [
         "Окулопластика"
       ],
-      "credits": "НМО: уточняется",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://oor.ru/events",
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-10-12",
+      "verified": "2026-11-02",
       "description": "Даты опубликованы в официальном календаре ООР; условия регистрации и подачи уточняются.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://oor.ru/events"
     },
     {
       "id": "ags-2027",
@@ -1468,17 +2118,22 @@
       "venue": "JW Marriott Starr Pass, Tucson, Arizona",
       "categories": [
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar",
       "program": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar",
       "registration": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Ежегодная специализированная встреча American Glaucoma Society по диагностике, хирургии и исследованиям глаукомы.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        32.22,
+        -110.97
+      ],
+      "dateSource": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar"
     },
     {
       "id": "ossa-2027",
@@ -1498,38 +2153,45 @@
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Окулопластика",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": true,
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
       "official": "https://ossacongress.co.za/",
       "program": "https://ossacongress.co.za/programme/",
       "registration": "https://ossacongress.co.za/attendance/",
       "submit": "https://ossacongress.co.za/programme/",
-      "verified": "2026-10-15",
-      "description": "Национальный офтальмологический конгресс ЮАР: masterclasses 10 марта и основная научная программа 11–13 марта.",
+      "verified": "2026-11-02",
+      "description": "Конгресс офтальмологов Южной Африки в Кейптауне, включая предконгрессный день 10 марта. Приём тезисов закрыт.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Закрытие подачи тезисов",
+          "label": "Приём тезисов (закрыт)",
           "date": "2026-08-28",
           "timeKnown": false,
-          "zone": "Africa/Johannesburg",
-          "url": "https://ossacongress.co.za/introduction/"
+          "zone": "",
+          "url": "https://ossacongress.co.za/introduction/",
+          "note": ""
         },
         {
           "kind": "registration",
-          "label": "Early bird: регистрация и оплата",
+          "label": "Ранняя регистрация и оплата",
           "date": "2026-11-06",
           "timeKnown": false,
           "zone": "Africa/Johannesburg",
-          "url": "https://ossacongress.co.za/attendance/",
-          "note": "Тарифная таблица: по 6 ноября; стандартный тариф с 7 ноября. Точное время не указано."
+          "url": "https://ossacongress.co.za/introduction/",
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Приём научных материалов закрыт; условия участия и регистрации смотрите у организатора.",
+      "coordinates": [
+        -33.92,
+        18.42
+      ],
+      "dateSource": "https://ossacongress.co.za/"
     },
     {
       "id": "aapos-2027",
@@ -1548,43 +2210,50 @@
       "categories": [
         "Детская офтальмология",
         "Страбизм",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
-      "official": "https://www.aapos.org/education-and-events/annual-meeting2026368",
-      "program": "https://www.aapos.org/education-and-events/annual-meeting2026368",
-      "registration": "https://www.aapos.org/education-and-events/annual-meeting2026368",
-      "submit": "https://www.aapos.org/education-and-events/annual-meeting2026368",
-      "verified": "2026-08-16",
+      "official": "https://www.aapos.org/education-and-events/annual-meeting2027",
+      "program": "https://www.aapos.org/education-and-events/annual-meeting2027",
+      "registration": "https://www.aapos.org/education-and-events/annual-meeting2027",
+      "submit": "https://www.aapos.org/education-and-events/annual-meeting2027/annual-meeting-abstracts2026561",
+      "verified": "2026-11-02",
       "description": "52-я ежегодная специализированная встреча AAPOS по детской офтальмологии и страбизмологии.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Закрытие подачи тезисов",
+          "label": "Приём тезисов (закрыт)",
           "date": "2026-09-22",
           "timeKnown": false,
-          "zone": "America/New_York",
-          "url": "https://www.aapos.org/education-and-events/annual-meeting2026368",
-          "note": "Подача открывается 17 августа 2026 года."
+          "zone": "",
+          "url": "https://www.aapos.org/education-and-events/annual-meeting2027/annual-meeting-abstracts2026561",
+          "note": ""
         },
         {
           "kind": "faculty",
-          "label": "Регистрация докладчиков",
+          "label": "Регистрация докладчика",
           "date": "2026-12-15",
           "timeKnown": false,
           "zone": "America/New_York",
-          "url": "https://www.aapos.org/education-and-events/annual-meeting2026368"
+          "url": "https://www.aapos.org/education-and-events/annual-meeting2027",
+          "note": ""
         },
         {
           "kind": "registration",
-          "label": "Early registration",
+          "label": "Ранняя регистрация",
           "date": "2027-01-14",
           "timeKnown": false,
           "zone": "America/New_York",
-          "url": "https://www.aapos.org/education-and-events/annual-meeting2026368"
+          "url": "https://www.aapos.org/education-and-events/annual-meeting2027",
+          "note": ""
         }
-      ]
+      ],
+      "coordinates": [
+        38.91,
+        -77.04
+      ],
+      "dateSource": "https://www.aapos.org/education-and-events/annual-meeting2027"
     },
     {
       "id": "escrs-winter-2027",
@@ -1605,35 +2274,40 @@
         "Рефракция",
         "Роговица"
       ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": true,
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
       "official": "https://wintermeeting.escrs.org/",
       "program": "https://wintermeeting.escrs.org/",
       "registration": "https://wintermeeting.escrs.org/registrations/",
       "submit": "https://wintermeeting.escrs.org/coming-soon/",
-      "verified": "2026-10-26",
-      "description": "31-я зимняя встреча ESCRS в Каире. Открыт приём научных тезисов и хирургических видео Young Ophthalmologists Programme.",
+      "verified": "2026-11-02",
+      "description": "31-я зимняя встреча ESCRS в Каире. Приём научных тезисов и хирургических видео YOP завершён 1 ноября 2026 года.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Тезисы: доклады, случаи по роговице, постеры",
+          "label": "Приём тезисов (закрыт)",
           "date": "2026-11-01T23:59:00+01:00",
           "timeKnown": true,
-          "zone": "CET",
+          "zone": "Europe/Paris",
           "url": "https://wintermeeting.escrs.org/abstracts/abstract-submissions/",
-          "note": "Уведомления — в декабре 2026."
+          "note": ""
         },
         {
-          "kind": "upload",
-          "label": "Хирургические видео YOP",
+          "kind": "abstract",
+          "label": "Тезисы и видео YOP (приём закрыт)",
           "date": "2026-11-01T23:59:00+01:00",
           "timeKnown": true,
-          "zone": "CET",
+          "zone": "Europe/Paris",
           "url": "https://wintermeeting.escrs.org/coming-soon/",
-          "note": "До 3 минут; нужен краткий тезис. Премия за лучшее образовательное видео: €750 и регистрация."
+          "note": ""
         }
       ],
-      "submissionNote": "Free Papers, Cornea Case Presentations, Posters/ePosters; YOP: видео до 3 минут. Лучшее образовательное видео: €750 и регистрация. Поддержка отдельных trainee-членов ESCRS с принятыми работами."
+      "submissionNote": "Приём научных материалов закрыт; условия участия и регистрации смотрите у организатора.",
+      "coordinates": [
+        30.04,
+        31.24
+      ],
+      "dateSource": "https://wintermeeting.escrs.org/"
     },
     {
       "id": "paao-2027",
@@ -1653,62 +2327,57 @@
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Воспаление",
         "Детская офтальмология",
         "Страбизм",
         "Нейроофтальмология",
         "Окулопластика",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": true,
       "official": "https://paao2027.com/",
       "program": "https://paao2027.com/",
       "registration": "https://paao2027.com/",
       "submit": "https://abstracts.paao2027.com/en/landing/",
-      "verified": "2026-10-26",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
+      "verified": "2026-11-02",
+      "description": "PAAO 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
       "deadlines": [
         {
-          "kind": "registration",
-          "label": "Early-bird регистрация",
-          "date": "2026-10-15",
+          "kind": "grant",
+          "label": "Грант на поездку Alvaro Rodriguez",
+          "date": "2026-12-01",
           "timeKnown": false,
-          "zone": "America/Lima",
-          "url": "https://paao2027.com/",
-          "note": "Early-bird тарифы: член PAAO — $400; офтальмолог не-член — $650; speaker/resident/fellow — $250."
+          "zone": "",
+          "url": "https://paao.org/meetings/prizes-and-awards/alvaro-rodriguez-travel-award/",
+          "note": ""
         },
         {
           "kind": "grant",
-          "label": "Alvaro Rodriguez Travel Award",
+          "label": "Премия Troutman–Véronneau",
           "date": "2026-12-01",
           "timeKnown": false,
-          "zone": "America/Lima",
-          "url": "https://paao.org/meetings/prizes-and-awards/alvaro-rodriguez-travel-award/",
-          "note": "Для офтальмологов 45 лет и младше; retina или glaucoma; $1,500 и бесплатная регистрация на конгресс."
+          "zone": "",
+          "url": "https://paao.org/meetings/troutman-veronneau-prize-application/",
+          "note": ""
         },
         {
           "kind": "abstract",
-          "label": "Устные доклады, постеры и видео",
+          "label": "Доклады, постеры и видео",
           "date": "2026-12-01T17:00:00-05:00",
           "timeKnown": true,
           "zone": "America/Lima",
           "url": "https://abstracts.paao2027.com/en/landing/",
-          "note": "Окончание приёма: 17:00 по времени Лимы."
-        },
-        {
-          "kind": "grant",
-          "label": "Troutman–Véronneau Prize",
-          "date": "2026-12-01",
-          "timeKnown": false,
-          "zone": "America/Lima",
-          "url": "https://paao.org/meetings/troutman-veronneau-prize-application/",
-          "note": "Премия $10 000 за оригинальную неопубликованную работу по роговице. Первый автор — не старше 45 лет, действующий член PAAO; необходимы рукопись, CV и рекомендательное письмо. Точное время не опубликовано."
+          "note": ""
         }
       ],
-      "submissionNote": "Free Papers, Posters и Videos; единичные клинические случаи — постер."
+      "coordinates": [
+        -12.05,
+        -77.04
+      ],
+      "dateSource": "https://paao2027.com/"
     },
     {
       "id": "apao-2027",
@@ -1721,7 +2390,7 @@
       "org": "Asia-Pacific Academy of Ophthalmology",
       "start": "2027-03-18",
       "end": "2027-03-21",
-      "city": "Singapore",
+      "city": "Сингапур",
       "country": "Сингапур",
       "region": "Азия–Тихоокеанский",
       "mode": "Очно",
@@ -1730,85 +2399,77 @@
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research",
-        "AI / управление"
+        "Исследования",
+        "ИИ / управление"
       ],
-      "credits": "CME: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://2027.apaophth.org/",
       "program": "https://2027.apaophth.org/program-overview/",
       "registration": "https://2027.apaophth.org/registration/",
       "submit": "https://congress.2027.apaophth.org/",
-      "verified": "2026-10-08",
+      "verified": "2026-11-02",
       "description": "42-й конгресс APAO в Сингапуре. Ожидается более 7 000 офтальмологов, более 800 международных спикеров и 19 субспециальностей; отдельный акцент — AI в офтальмологии, wet-lab и практические курсы.",
       "deadlines": [
         {
-          "kind": "registration",
-          "label": "Early Bird Registration closes",
-          "date": "2026-10-12",
-          "timeKnown": false,
-          "zone": "SGT / GMT+8",
-          "url": "https://2027.apaophth.org/important-dates/",
-          "note": "Официальный список important dates."
-        },
-        {
-          "kind": "registration",
-          "label": "Advance Registration closes",
-          "date": "2027-02-25",
-          "timeKnown": false,
-          "zone": "SGT / GMT+8",
-          "url": "https://2027.apaophth.org/important-dates/",
-          "note": "После — onsite registration."
-        },
-        {
-          "kind": "faculty",
-          "label": "Подтверждение участия автора",
-          "date": "2026-10-30",
-          "timeKnown": false,
-          "zone": "Asia/Singapore",
-          "url": "https://2027.apaophth.org/apao-2027-faqs/",
-          "note": "Ответ по ссылке из письма о принятии; регистрация и оплата обязательны."
-        },
-        {
           "kind": "abstract",
-          "label": "Финальный дедлайн подачи тезисов",
+          "label": "Окончательный приём тезисов (закрыт)",
           "date": "2026-09-23T23:59:00+08:00",
           "timeKnown": true,
-          "zone": "GMT+8",
+          "zone": "Asia/Singapore",
           "url": "https://2027.apaophth.org/latest-news/",
-          "note": "Приём тезисов завершён; результаты ожидаются до 10 октября 2026."
-        },
-        {
-          "kind": "grant",
-          "label": "Travel grants",
-          "date": "2026-09-30T23:59:00+08:00",
-          "timeKnown": true,
-          "zone": "GMT+8",
-          "url": "https://2027.apaophth.org/travel-grants/",
-          "note": "Приём заявок завершён."
-        },
-        {
-          "kind": "registration",
-          "label": "Early-bird регистрация",
-          "date": "2026-10-12",
-          "timeKnown": false,
-          "zone": "GMT+8",
-          "url": "https://2027.apaophth.org/",
           "note": ""
         },
         {
-          "kind": "confirmation",
-          "label": "Подтверждение участия автора",
-          "date": "2026-10-30",
+          "kind": "registration",
+          "label": "Предварительная регистрация",
+          "date": "2027-02-25",
           "timeKnown": false,
-          "zone": "GMT+8",
-          "url": "https://2027.apaophth.org/",
+          "zone": "Asia/Singapore",
+          "url": "https://2027.apaophth.org/important-dates/",
           "note": ""
         }
       ],
-      "submissionNote": "Подача закрыта 23 сентября 2026 после продления первоначального срока 7 сентября."
+      "submissionNote": "Приём тезисов закрыт. Авторам принятых работ следует сверять срок подтверждения участия с личным письмом и научным порталом.",
+      "coordinates": [
+        1.35,
+        103.82
+      ],
+      "dateSource": "https://2027.apaophth.org/"
+    },
+    {
+      "id": "nanos-2027",
+      "featured": false,
+      "title": "Ежегодный конгресс NANOS 2027",
+      "fullTitle": "NANOS Annual Meeting 2027",
+      "org": "North American Neuro-Ophthalmology Society",
+      "start": "2027-03-19",
+      "end": "2027-03-23",
+      "city": "Сан-Диего",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "Sheraton San Diego Resort",
+      "categories": [
+        "Нейроофтальмология",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://www.nanosweb.org/nanos-2027-san-diego/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Даты по информации организатора; актуальные условия уточняйте на официальном сайте.",
+      "deadlines": [],
+      "coordinates": [
+        32.72,
+        -117.16
+      ],
+      "dateSource": "https://www.nanosweb.org/nanos-2027-san-diego/"
     },
     {
       "id": "fuji-retina-2027",
@@ -1825,22 +2486,22 @@
       "mode": "Очно",
       "venue": "Toranomon Hills Forum, Tokyo",
       "categories": [
-        "Retina",
-        "Research",
-        "AI / управление"
+        "Сетчатка",
+        "Исследования",
+        "ИИ / управление"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": true,
       "official": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
       "program": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
       "registration": "https://convention.jtbcom.co.jp/fujiretina/registration/index.html",
       "submit": "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
-      "verified": "2026-10-19",
+      "verified": "2026-11-02",
       "description": "Международная витреоретинальная встреча в Токио, ассоциированная с Japanese Retina and Vitreous Society; официальный язык — английский.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Постерные тезисы",
+          "label": "Тезисы постеров",
           "date": "2026-12-15",
           "timeKnown": false,
           "zone": "Asia/Tokyo",
@@ -1849,7 +2510,7 @@
         },
         {
           "kind": "grant",
-          "label": "Travel grant: заявка вместе с тезисами",
+          "label": "Грант на поездку вместе с тезисами",
           "date": "2026-12-15",
           "timeKnown": false,
           "zone": "Asia/Tokyo",
@@ -1858,7 +2519,7 @@
         },
         {
           "kind": "registration",
-          "label": "Early-bird регистрация",
+          "label": "Ранняя регистрация",
           "date": "2027-03-08",
           "timeKnown": false,
           "zone": "Asia/Tokyo",
@@ -1866,7 +2527,11 @@
           "note": ""
         }
       ],
-      "submissionNote": "Только постеры; английский язык, до 250 слов. Десять грантов по $700 для иностранных офтальмологов, проживающих за пределами Японии; заявка вместе с тезисами, выплата после очной презентации. Регистрация открыта."
+      "coordinates": [
+        35.68,
+        139.69
+      ],
+      "dateSource": "https://convention.jtbcom.co.jp/fujiretina/information/index.html"
     },
     {
       "id": "ascrs-2027",
@@ -1876,7 +2541,7 @@
       "org": "American Society of Cataract and Refractive Surgery",
       "start": "2027-04-02",
       "end": "2027-04-05",
-      "city": "San Diego, CA",
+      "city": "Сан-Диего",
       "country": "США",
       "region": "Северная Америка",
       "mode": "Очно",
@@ -1887,50 +2552,65 @@
         "Роговица",
         "Глаукома"
       ],
-      "credits": "До 31 AMA PRA Category 1 Credits™",
-      "submissionOpen": true,
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
       "official": "https://annualmeeting.ascrs.org/",
       "program": "https://annualmeeting.ascrs.org/",
       "registration": "https://annualmeeting.ascrs.org/",
       "submit": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
-      "verified": "2026-08-16",
-      "description": "Открыт Call for Submissions: scientific papers, electronic posters, instructional courses и scientific films.",
+      "verified": "2026-11-02",
+      "description": "Ежегодный конгресс ASCRS в Сан-Диего. Приём новых научных материалов закрыт; загрузка фильмов и постеров имеет отдельные сроки.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Papers · Posters · Courses · Films",
-          "date": "2026-09-07T23:59:00-07:00",
-          "timeKnown": true,
-          "zone": "PT",
+          "label": "Приём тезисов (закрыт)",
+          "date": "2026-09-18",
+          "timeKnown": false,
+          "zone": "",
           "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
-          "note": "11:59 PM Pacific Time."
+          "note": ""
         },
         {
           "kind": "upload",
-          "label": "Загрузка принятых e-posters",
+          "label": "Загрузка фильмов и постеров для оценки",
           "date": "2027-01-25",
           "timeKnown": false,
-          "zone": "America/Los_Angeles",
+          "zone": "",
           "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
-          "note": "Для принятых работ."
+          "note": ""
+        },
+        {
+          "kind": "upload",
+          "label": "Окончательная загрузка постеров и материалов курсов",
+          "date": "2027-02-25",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+          "note": ""
         },
         {
           "kind": "faculty",
-          "label": "Регистрация докладчиков",
+          "label": "Регистрация докладчиков и авторов",
           "date": "2027-03-02",
           "timeKnown": false,
-          "zone": "America/Los_Angeles",
+          "zone": "",
           "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
-          "note": "Speaker registration deadline."
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Приём научных материалов закрыт; условия участия и регистрации смотрите у организатора.",
+      "coordinates": [
+        32.72,
+        -117.16
+      ],
+      "dateSource": "https://annualmeeting.ascrs.org/"
     },
     {
       "id": "vitreoretinal-technologies-2027",
       "featured": false,
       "title": "Современные технологии лечения витреоретинальной патологии 2027",
       "fullTitle": "Современные технологии лечения витреоретинальной патологии 2027",
-      "org": "Общество офтальмологов России / МНТК",
+      "org": "Russian Society of Ophthalmologists / MNTK",
       "start": "2027-04-02",
       "end": "2027-04-03",
       "city": "Уфа",
@@ -1939,18 +2619,56 @@
       "mode": "Очно",
       "venue": "Уфа",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "НМО: уточняется",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://oor.ru/events",
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-10-12",
+      "verified": "2026-11-02",
       "description": "Даты опубликованы в официальном календаре ООР; условия регистрации и подачи уточняются.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        54.74,
+        55.97
+      ],
+      "dateSource": "https://oor.ru/events"
+    },
+    {
+      "id": "aao-midyear-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "AAO Mid-Year Forum 2027",
+      "fullTitle": "AAO Mid-Year Forum 2027",
+      "org": "American Academy of Ophthalmology",
+      "start": "2027-04-07",
+      "end": "2027-04-10",
+      "city": "Вашингтон, округ Колумбия",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "Washington, DC",
+      "categories": [
+        "ИИ / управление",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://aao.org/mid-year-forum/overview",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "AAO Mid-Year Forum 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        38.91,
+        -77.04
+      ],
+      "dateSource": "https://apaophth.org/congress/calendar/"
     },
     {
       "id": "wsopras-2027",
@@ -1963,50 +2681,92 @@
       "end": "2027-04-10",
       "city": "Пекин",
       "country": "Китай",
-      "region": "Китай / Greater China",
+      "region": "Китай / Большой Китай",
       "mode": "Очно",
       "venue": "Beijing Kerry Hotel",
       "categories": [
         "Окулопластика",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": true,
       "official": "https://www.wsopras2027.org/",
       "program": "https://www.wsopras2027.org/index.php?c=category&id=2",
       "registration": "https://www.wsopras2027.org/",
       "submit": "https://www.wsopras2027.org/index.php?c=category&id=3",
-      "verified": "2026-10-26",
+      "verified": "2026-11-02",
       "description": "WSOPRAS 2027 в Пекине: хирургия орбиты, слезоотводящих путей, век и эстетическая хирургия, научные доклады и live surgery.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Подача E-Poster / E-Video",
-          "date": "2026-12-14",
+          "label": "Отправка видеофайла",
+          "date": "2026-11-30",
           "timeKnown": false,
-          "zone": "Asia/Shanghai",
+          "zone": "",
           "url": "https://www.wsopras2027.org/index.php?c=category&id=3",
-          "note": "Видео MP4 до 3 минут; письменный abstract обязателен."
+          "note": "Срок отправки видеофайла раньше срока подачи тезисов."
         },
         {
-          "kind": "faculty",
-          "label": "Результаты отбора",
-          "date": "2027-01-18",
+          "kind": "abstract",
+          "label": "Подача тезисов",
+          "date": "2026-12-14",
           "timeKnown": false,
-          "zone": "Asia/Shanghai",
+          "zone": "",
           "url": "https://www.wsopras2027.org/index.php?c=category&id=3",
-          "note": "Дата из раздела Important Dates; в шаблонном сообщении формы ещё указана прежняя дата 4 января."
+          "note": ""
         },
         {
           "kind": "registration",
-          "label": "Регистрация докладчика / окончание early bird",
+          "label": "Регистрация докладчика и ранняя регистрация",
           "date": "2027-02-08",
           "timeKnown": false,
-          "zone": "Asia/Shanghai",
+          "zone": "",
           "url": "https://www.wsopras2027.org/index.php?c=category&id=3",
-          "note": "Без регистрации до этого срока принятая работа исключается из программы."
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Организатор указывает 14 декабря для тезисов и 30 ноября для видеофайлов; видео отправляйте к более раннему сроку.",
+      "coordinates": [
+        39.9,
+        116.4
+      ],
+      "dateSource": "https://www.wsopras2027.org/"
+    },
+    {
+      "id": "dos-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "77-я конференция Делийского общества офтальмологов",
+      "fullTitle": "77-я конференция Делийского общества офтальмологов",
+      "org": "Delhi Ophthalmological Society",
+      "start": "2027-04-09",
+      "end": "2027-04-11",
+      "city": "Нью-Дели",
+      "country": "Индия",
+      "region": "Азия–Тихоокеанский",
+      "mode": "Очно",
+      "venue": "Ashok Hotel, Chanakyapuri",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://www.aios.org/aios-events1.php/Nill",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "77-я конференция Делийского общества офтальмологов. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        28.61,
+        77.21
+      ],
+      "dateSource": "https://www.aios.org/aios-events1.php/Nill"
     },
     {
       "id": "euretinai-2027",
@@ -2023,26 +2783,64 @@
       "mode": "Гибрид",
       "venue": "London, United Kingdom",
       "categories": [
-        "Retina",
-        "AI / управление",
-        "Research"
+        "Сетчатка",
+        "ИИ / управление",
+        "Исследования"
       ],
-      "credits": "Аккредитация: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://euretina.org/euretinai-2027/",
       "program": "https://euretina.org/euretinai-2027/",
       "registration": "https://euretina.org/euretinai-2027/",
       "submit": null,
-      "verified": "2026-10-15",
+      "verified": "2026-11-02",
       "description": "ИИ в диагностике и лечении заболеваний сетчатки, исследованиях и клинической практике. Предусмотрена онлайн-трансляция; детали регистрации ожидаются.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        51.51,
+        -0.13
+      ],
+      "dateSource": "https://euretina.org/euretinai-2027/"
     },
     {
-      "id": "cno-2027",
+      "id": "ukiscrs-cornea-day-2027",
       "featured": false,
-      "level": "national",
-      "title": "Congreso Nacional de Oftalmología 2027",
-      "fullTitle": "Congreso Nacional de Oftalmología 2027 — CNO27",
+      "level": "specialty",
+      "title": "День роговицы и катаракты UKISCRS 2027",
+      "fullTitle": "День роговицы и катаракты UKISCRS 2027",
+      "org": "UKISCRS",
+      "start": "2027-04-12",
+      "end": "2027-04-12",
+      "city": "Бристоль",
+      "country": "Великобритания",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Bristol",
+      "categories": [
+        "Роговица",
+        "Катаракта / ИОЛ"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://www.ukiscrs.org.uk/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "День роговицы и катаракты UKISCRS 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        51.45,
+        -2.59
+      ],
+      "dateSource": "https://www.ukiscrs.org.uk/"
+    },
+    {
+      "id": "argentina-ophthalmology-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "Национальный конгресс офтальмологов Аргентины 2027",
+      "fullTitle": "Congreso Nacional de Oftalmología 2027",
       "org": "Consejo Argentino de Oftalmología",
       "start": "2027-04-14",
       "end": "2027-04-16",
@@ -2054,19 +2852,24 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "Аккредитация: уточняется",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
-      "official": "https://cno.oftalmologos.org.ar/",
-      "program": "https://cno.oftalmologos.org.ar/",
-      "registration": "https://cno.oftalmologos.org.ar/",
+      "official": "https://oftalmologos.org.ar/",
+      "program": "https://oftalmologos.org.ar/",
+      "registration": "https://oftalmologos.org.ar/",
       "submit": null,
-      "verified": "2026-10-19",
-      "description": "Национальный офтальмологический конгресс Аргентины. Даты и место подтверждены организатором; сроки подачи и регистрации пока не объявлены.",
-      "deadlines": []
+      "verified": "2026-11-02",
+      "description": "Национальный конгресс офтальмологов Аргентины 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        -34.6,
+        -58.38
+      ],
+      "dateSource": "https://paao.org/events/argentina-2027/"
     },
     {
       "id": "apspos-capos-2027",
@@ -2077,42 +2880,79 @@
       "org": "APSPOS / CAPOS",
       "start": "2027-04-15",
       "end": "2027-04-17",
-      "city": "Tianjin",
+      "city": "Тяньцзинь",
       "country": "Китай",
-      "region": "Китай / Greater China",
+      "region": "Китай / Большой Китай",
       "mode": "Очно",
       "venue": "Shangri-La Tianjin",
       "categories": [
         "Детская офтальмология",
         "Страбизм",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": true,
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
       "official": "https://apaophth.org/congress/calendar/",
       "program": "https://apaophth.org/congress/calendar/",
       "registration": "https://apaophth.org/congress/calendar/",
       "submit": "https://apaophth.org/congress/calendar/",
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
+      "verified": "2026-11-02",
+      "description": "APSPOS/CAPOS 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "submissionNote": "Подтверждённый срок подачи материалов в проверенном источнике не опубликован.",
+      "coordinates": [
+        39.14,
+        117.2
+      ],
+      "dateSource": "https://apaophth.org/congress/calendar/"
+    },
+    {
+      "id": "jos-131-2027",
+      "featured": false,
+      "title": "131-й конгресс Японского офтальмологического общества",
+      "fullTitle": "131st Japanese Ophthalmological Society Meeting",
+      "org": "131st",
+      "start": "2027-04-15",
+      "end": "2027-04-18",
+      "city": "Саппоро",
+      "country": "Япония",
+      "region": "Азия–Тихоокеанский",
+      "mode": "Очно",
+      "venue": "Sapporo",
+      "categories": [
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": true,
+      "official": "https://convention.jtbcom.co.jp/131jos/en/index.html",
+      "program": "https://convention.jtbcom.co.jp/131jos/en/index.html",
+      "registration": "https://convention.jtbcom.co.jp/131jos/en/join/index.html",
+      "submit": "https://convention.jtbcom.co.jp/131jos/en/abstract/index.html",
+      "verified": "2026-11-02",
+      "description": "Даты по информации организатора; актуальные условия уточняйте на официальном сайте.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Подача тезисов",
-          "date": "2026-12-01T23:59:00+08:00",
+          "label": "Тезисы и гранты для международных участников",
+          "date": "2026-11-05T13:00:00+09:00",
           "timeKnown": true,
-          "zone": "UTC+8",
-          "url": "https://apaophth.org/congress/calendar/",
+          "zone": "Asia/Tokyo",
+          "url": "https://convention.jtbcom.co.jp/131jos/en/abstract/index.html",
           "note": ""
         }
-      ]
+      ],
+      "coordinates": [
+        43.06,
+        141.35
+      ],
+      "dateSource": "https://convention.jtbcom.co.jp/131jos/en/summary/index.html"
     },
     {
       "id": "oph360-2027",
       "featured": false,
       "title": "Офтальмология 360 · 2027",
       "fullTitle": "V Юбилейная конференция «Офтальмология 360: здравоохранение, маркетинг, цифровизация, право»",
-      "org": "Общество офтальмологов России / организаторы «Офтальмология 360»",
+      "org": "Russian Society of Ophthalmologists / Ophthalmology 360 organisers",
       "start": "2027-04-16",
       "end": "2027-04-16",
       "city": "Москва",
@@ -2121,17 +2961,22 @@
       "mode": "Очно",
       "venue": "Центр событий РБК",
       "categories": [
-        "AI / управление"
+        "ИИ / управление"
       ],
-      "credits": "Аккредитация: уточняется",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://360.oor.ru/",
       "program": "https://360.oor.ru/",
       "registration": "https://360.oor.ru/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Площадка по организации здравоохранения, цифровизации, медицинскому праву, маркетингу и развитию профессиональных проектов в офтальмологии.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://360.oor.ru/"
     },
     {
       "id": "wgc-2027",
@@ -2151,56 +2996,147 @@
       "venue": "Kyoto International Conference Center",
       "categories": [
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://worldglaucomacongress.org/",
       "program": "https://worldglaucomacongress.org/",
       "registration": "https://worldglaucomacongress.org/",
       "submit": "https://worldglaucomacongress.org/",
-      "verified": "2026-10-26",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
+      "verified": "2026-11-02",
+      "description": "World Glaucoma Congress 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Подача тезисов",
-          "date": "2026-10-19T23:59:00+02:00",
-          "timeKnown": true,
-          "zone": "CEST",
+          "label": "Приём тезисов (закрыт)",
+          "date": "2026-10-19",
+          "timeKnown": false,
+          "zone": "",
           "url": "https://worldglaucomacongress.org/",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Ранняя регистрация",
+          "date": "2027-01-18",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://worldglaucomacongress.org/",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Стандартная регистрация",
+          "date": "2027-03-15",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://worldglaucomacongress.org/film-festival-submissions/",
+          "note": ""
+        }
+      ],
+      "level": "specialty",
+      "coordinates": [
+        35.01,
+        135.77
+      ],
+      "dateSource": "https://worldglaucomacongress.org/"
+    },
+    {
+      "id": "sfo-2027",
+      "featured": false,
+      "title": "133-й конгресс Французского общества офтальмологов",
+      "fullTitle": "SFO Annual Congress 2027",
+      "org": "SFO Annual Congress 2027",
+      "start": "2027-04-23",
+      "end": "2027-04-26",
+      "city": "Париж",
+      "country": "Франция",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Paris",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": true,
+      "official": "https://www.sfo-online.fr/",
+      "program": "https://www.sfo-online.fr/",
+      "registration": "https://www.sfo-online.fr/",
+      "submit": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+      "verified": "2026-11-02",
+      "description": "133-й конгресс Французского общества офтальмологов. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Тезисы докладов и постеров",
+          "date": "2026-12-21T12:00:00+01:00",
+          "timeKnown": true,
+          "zone": "Europe/Paris",
+          "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+          "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "Название фильма",
+          "date": "2027-01-18",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
           "note": ""
         },
         {
           "kind": "upload",
-          "label": "WGA Movie Awards",
-          "date": "2026-10-19T23:59:00+02:00",
-          "timeKnown": true,
-          "zone": "CEST",
-          "url": "https://worldglaucomacongress.org/film-festival-submissions/",
-          "note": ""
-        },
-        {
-          "kind": "registration",
-          "label": "Early-bird регистрация",
-          "date": "2027-01-18",
+          "label": "Загрузка окончательного фильма",
+          "date": "2027-03-08",
           "timeKnown": false,
-          "zone": "Europe/Amsterdam",
-          "url": "https://worldglaucomacongress.org/",
-          "note": "Член аффилированного глаукомного общества — $650; non-member — $750; research scientist — $390."
-        },
-        {
-          "kind": "registration",
-          "label": "Обычная регистрация",
-          "date": "2027-03-15",
-          "timeKnown": false,
-          "zone": "Europe/Amsterdam",
-          "url": "https://worldglaucomacongress.org/",
+          "zone": "",
+          "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
           "note": ""
         }
       ],
-      "submissionNote": "Приём тезисов и WGA Movie Awards завершён 19 октября 2026. Регистрация: early bird до 18 января, стандартная до 15 марта 2027.",
-      "level": "specialty"
+      "coordinates": [
+        48.86,
+        2.35
+      ],
+      "dateSource": "https://www.sfo-online.fr/"
+    },
+    {
+      "id": "oculoplastica-mexico-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "Международный конгресс по окулопластике 2027",
+      "fullTitle": "Международный конгресс по окулопластике 2027",
+      "org": "Congreso Internacional de Oculoplástica",
+      "start": "2027-05-01",
+      "end": "2027-05-05",
+      "city": "Пуэрто-Вальярта",
+      "country": "Мексика",
+      "region": "Латинская Америка",
+      "mode": "Очно",
+      "venue": "Puerto Vallarta",
+      "categories": [
+        "Окулопластика",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://paao.org/events/congreso-internacional-de-oculoplastica-2027/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Международный конгресс по окулопластике 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        20.65,
+        -105.23
+      ],
+      "dateSource": "https://paao.org/events/congreso-internacional-de-oculoplastica-2027/"
     },
     {
       "id": "arvo-2027",
@@ -2216,36 +3152,45 @@
       "mode": "Очно",
       "venue": "San Diego Convention Center",
       "categories": [
-        "Research",
-        "Retina",
+        "Исследования",
+        "Сетчатка",
         "Глаукома",
         "Роговица"
       ],
-      "credits": "CME доступно",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": true,
       "official": "https://www.arvo.org/annual-meeting/",
       "program": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
-      "registration": "https://www.arvo.org/annual-meeting/",
+      "registration": "https://www.arvo.org/annual-meeting/registration",
       "submit": "https://www.arvo.org/annual-meeting/abstracts",
-      "verified": "2026-10-26",
+      "verified": "2026-11-02",
       "description": "ARVO 2027 в Сан-Диего. Есть очные доклады/постеры и вариант On-Demand без живого выступления для тех, кто не сможет приехать. Использование генеративного ИИ в тезисах следует раскрыть по правилам организатора.",
       "deadlines": [
         {
+          "kind": "grant",
+          "label": "Гранты на поездку",
+          "date": "2026-12-04",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://www.arvo.org/awards-and-grants/travel-grants",
+          "note": ""
+        },
+        {
           "kind": "abstract",
-          "label": "Дедлайн подачи тезисов",
+          "label": "Подача тезисов",
           "date": "2026-12-04T17:00:00-05:00",
           "timeKnown": true,
-          "zone": "EST",
+          "zone": "America/New_York",
           "url": "https://www.arvo.org/annual-meeting/abstracts",
-          "note": "Подача открыта; требуется членство ARVO на 2027 год."
+          "note": ""
         },
         {
           "kind": "registration",
           "label": "Ранняя регистрация",
           "date": "2027-03-10",
           "timeKnown": false,
-          "zone": "America/Los_Angeles",
-          "url": "https://www.arvo.org/annual-meeting/",
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/registration",
           "note": ""
         },
         {
@@ -2253,21 +3198,16 @@
           "label": "Стандартная регистрация",
           "date": "2027-04-23",
           "timeKnown": false,
-          "zone": "America/Los_Angeles",
-          "url": "https://www.arvo.org/annual-meeting/",
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/registration",
           "note": ""
-        },
-        {
-          "kind": "grant",
-          "label": "Travel grants",
-          "date": "2026-12-04T17:00:00-05:00",
-          "timeKnown": true,
-          "zone": "EST",
-          "url": "https://www.arvo.org/awards-and-grants/travel-grants",
-          "note": "Заявка входит в процесс подачи тезисов; грант включает регистрацию и частичную поддержку поездки."
         }
       ],
-      "submissionNote": "Тезисы и travel grants принимаются с 16 октября до 4 декабря 2026, 17:00 EST. Для тезисов необходимо членство ARVO на 2027 год."
+      "coordinates": [
+        32.72,
+        -117.16
+      ],
+      "dateSource": "https://www.arvo.org/annual-meeting/"
     },
     {
       "id": "wcpos-vi-2027",
@@ -2286,17 +3226,111 @@
       "categories": [
         "Детская офтальмология",
         "Страбизм",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://wspos.org/wcpos-vi/",
       "program": "https://wspos.org/wcpos-vi/",
       "registration": "https://wspos.org/wcpos-vi/",
       "submit": "https://wspos.org/wcpos-vi/",
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Шестой всемирный конгресс WSPOS по детской офтальмологии и страбизмологии.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        21.16,
+        -86.85
+      ],
+      "dateSource": "https://wspos.org/wcpos-vi/"
+    },
+    {
+      "id": "eucornea-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "EuCornea 2027",
+      "fullTitle": "EuCornea 2027",
+      "org": "European Society of Cornea and Ocular Surface Disease Specialists",
+      "start": "2027-05-14",
+      "end": "2027-05-16",
+      "city": "Будапешт",
+      "country": "Венгрия",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Crowne Plaza Budapest",
+      "categories": [
+        "Роговица",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": true,
+      "official": "https://eucornea.org/budapest-2027-general-information/",
+      "program": null,
+      "registration": null,
+      "submit": "https://eucornea.org/instructional-course-submission-budapest-2027/",
+      "verified": "2026-11-02",
+      "description": "EuCornea 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Предложения учебных курсов",
+          "date": "2026-11-15T23:59:00+01:00",
+          "timeKnown": true,
+          "zone": "Europe/Paris",
+          "url": "https://eucornea.org/instructional-course-submission-budapest-2027/",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        47.5,
+        19.04
+      ],
+      "submissionNote": "Открыта подача предложений учебных курсов. Приём тезисов и регистрация пока не открыты.",
+      "dateSource": "https://eucornea.org/budapest-2027-general-information/"
+    },
+    {
+      "id": "rcophth-2027",
+      "featured": false,
+      "title": "Ежегодный конгресс RCOphth 2027",
+      "fullTitle": "RCOphth Annual Congress 2027",
+      "org": "The Royal College of Ophthalmologists",
+      "start": "2027-05-24",
+      "end": "2027-05-27",
+      "city": "Бирмингем",
+      "country": "Великобритания",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "The ICC, Birmingham",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": true,
+      "official": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Ежегодный конгресс RCOphth 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Тезисы постеров и коротких докладов",
+          "date": "2026-12-01",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        52.49,
+        -1.9
+      ],
+      "dateSource": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/"
     },
     {
       "id": "white-nights-2027",
@@ -2304,7 +3338,7 @@
       "level": "national",
       "title": "Белые ночи 2027",
       "fullTitle": "XXXIII Международный офтальмологический конгресс имени профессора Ю.С. Астахова",
-      "org": "Организаторы конгресса «Белые ночи»",
+      "org": "White Nights Congress organisers",
       "start": "2027-05-24",
       "end": "2027-05-28",
       "city": "Санкт-Петербург",
@@ -2315,19 +3349,24 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "Аккредитация: уточняется",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://ocwn.org/",
       "program": "https://ocwn.org/",
       "registration": "https://ocwn.org/",
       "submit": null,
-      "verified": "2026-10-22",
+      "verified": "2026-11-02",
       "description": "Даты конгресса подтверждены организаторами. Дедлайны подачи научных материалов пока не опубликованы.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        59.93,
+        30.34
+      ],
+      "dateSource": "https://ocwn.org/"
     },
     {
       "id": "amman-retina-2027",
@@ -2344,28 +3383,33 @@
       "mode": "Очно",
       "venue": "Fairmont Hotel Amman",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.ammanretinameeting.com/",
       "program": "https://www.ammanretinameeting.com/",
       "registration": "https://www.ammanretinameeting.com/registration",
       "submit": "https://www.ammanretinameeting.com/abstract-submission",
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Специализированный международный конгресс по медицинской и хирургической ретине с международным faculty и практическими курсами.",
       "deadlines": [
         {
           "kind": "registration",
-          "label": "Early-bird регистрация",
+          "label": "Ранняя регистрация",
           "date": "2027-01-30",
           "timeKnown": false,
-          "zone": "Asia/Amman",
-          "url": "https://www.ammanretinameeting.com/registration"
+          "zone": "",
+          "url": "https://www.ammanretinameeting.com/registration",
+          "note": ""
         }
       ],
-      "submissionNote": "Раздел подачи тезисов опубликован как Coming Soon."
+      "coordinates": [
+        31.95,
+        35.91
+      ],
+      "dateSource": "https://www.ammanretinameeting.com/"
     },
     {
       "id": "apacrs-2027",
@@ -2378,7 +3422,7 @@
       "org": "Asia-Pacific Association of Cataract & Refractive Surgeons",
       "start": "2027-06-03",
       "end": "2027-06-05",
-      "city": "Bali",
+      "city": "Бали",
       "country": "Индонезия",
       "region": "Азия–Тихоокеанский",
       "mode": "Очно",
@@ -2388,20 +3432,25 @@
         "Рефракция",
         "Роговица"
       ],
-      "credits": "CME: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.apacrs.org/",
       "program": "https://www.apacrs.org/",
       "registration": "https://www.apacrs.org/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "39th APACRS Annual Meeting — азиатско-тихоокеанская встреча по катарактальной и рефракционной хирургии.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -8.65,
+        115.22
+      ],
+      "dateSource": "https://www.apacrs.org/"
     },
     {
       "id": "fedorov-readings-2027",
       "featured": false,
-      "title": "Fyodorov Readings 2027",
+      "title": "Федоровские чтения 2027 — молодые учёные",
       "fullTitle": "All-Russian Conference of Young Scientists “Fyodorov Readings 2027”",
       "org": "Russian Ophthalmological Society / Fyodorov Eye Microsurgery",
       "start": "2027-06-04",
@@ -2409,27 +3458,65 @@
       "city": "Москва",
       "country": "Россия",
       "region": "Россия",
-      "mode": "Гибрид",
+      "mode": "Очно",
       "venue": "Moscow, Russia",
       "categories": [
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://oor.ru/events",
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
+      "verified": "2026-11-02",
+      "description": "Федоровские чтения 2027 — молодые учёные. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
       "deadlines": [],
-      "level": "specialty"
+      "level": "specialty",
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://oor.ru/events"
+    },
+    {
+      "id": "colatoc-guatemala-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "COLATOC 2027 — Гватемала",
+      "fullTitle": "IV Pan-American Ocular Trauma Congress + XIX National Congress of Guatemala",
+      "org": "Pan-American Ocular Trauma Association / Guatemalan Ophthalmology Association",
+      "start": "2027-06-09",
+      "end": "2027-06-11",
+      "city": "Антигуа-Гватемала",
+      "country": "Гватемала",
+      "region": "Латинская Америка",
+      "mode": "Очно",
+      "venue": "Antigua Guatemala, Guatemala",
+      "categories": [
+        "Офтальмотравма",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://aptooftalmico.com/",
+      "program": "https://aptooftalmico.com/",
+      "registration": "https://aptooftalmico.com/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "COLATOC 2027 — Гватемала. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        14.54,
+        -90.73
+      ],
+      "dateSource": "https://paao.org/es/events/colatoc-2027/"
     },
     {
       "id": "macula-society-2027",
       "featured": true,
       "level": "specialty",
-      "title": "Macula Society 50th Annual Meeting",
+      "title": "50-я юбилейная встреча Macula Society",
       "fullTitle": "50th Anniversary Annual Meeting of The Macula Society",
       "org": "The Macula Society",
       "start": "2027-06-09",
@@ -2440,27 +3527,91 @@
       "mode": "Очно",
       "venue": "Carlton Cannes, Cannes",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.maculasociety.org/50th-anniversary/",
       "program": "https://www.maculasociety.org/50th-anniversary/",
       "registration": "https://www.maculasociety.org/50th-anniversary/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Юбилейная 50-я научная встреча Macula Society в Каннах, посвящённая заболеваниям макулы и ретинальной науке.",
-      "deadlines": [
-        {
-          "kind": "registration",
-          "label": "Открытие регистрации",
-          "date": "2026-09-14",
-          "timeKnown": false,
-          "zone": "Europe/Paris",
-          "url": "https://www.maculasociety.org/49th-annual-meeting/"
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        43.55,
+        7.02
+      ],
+      "dateSource": "https://www.maculasociety.org/50th-anniversary/"
+    },
+    {
+      "id": "doc-2027",
+      "featured": false,
+      "title": "39-й конгресс офтальмохирургов Германии DOC",
+      "fullTitle": "DOC Congress 2027",
+      "org": "DOC – International Congress of German Ophthalmic Surgery",
+      "start": "2027-06-10",
+      "end": "2027-06-12",
+      "city": "Нюрнберг",
+      "country": "Германия",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Nuremberg",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Рефракция",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://www.doc-nuernberg.de/",
+      "program": "https://www.doc-nuernberg.de/",
+      "registration": "https://www.doc-nuernberg.de/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "39-й конгресс офтальмохирургов Германии DOC. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        49.45,
+        11.08
+      ],
+      "dateSource": "https://www.doc-nuernberg.de/"
+    },
+    {
+      "id": "ebaa-2027",
+      "featured": false,
+      "title": "Ежегодная встреча EBAA 2027",
+      "fullTitle": "Eye Bank Association of America Annual Meeting",
+      "org": "Eye Bank Association of America",
+      "start": "2027-06-10",
+      "end": "2027-06-12",
+      "city": "Остин",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "Hyatt Regency Austin",
+      "categories": [
+        "Роговица",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://restoresight.org/ebaa-annual-meeting/",
+      "program": "https://restoresight.org/ebaa-annual-meeting/schedule-of-events/",
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Даты по информации организатора; актуальные условия уточняйте на официальном сайте.",
+      "deadlines": [],
+      "coordinates": [
+        30.27,
+        -97.74
+      ],
+      "dateSource": "https://restoresight.org/ebaa-annual-meeting/"
     },
     {
       "id": "soe-2027",
@@ -2479,60 +3630,46 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Детская офтальмология",
         "Нейроофтальмология",
         "Окулопластика",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": true,
-      "official": "https://soevision.org/",
-      "program": "https://soevision.org/",
-      "registration": "https://soevision.org/",
-      "submit": "https://soevision.org/",
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
+      "official": "https://soe2027.soevision.org/",
+      "program": "https://soe2027.soevision.org/scientific-programme-2/",
+      "registration": "https://soe2027.soevision.org/registration/",
+      "submit": "https://soe2027.soevision.org/abstract-submission/",
+      "verified": "2026-11-02",
+      "description": "SOE 2027 · ISOT. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Подача тезисов SOE",
+          "label": "Тезисы SOE",
           "date": "2027-01-19T23:59:00+00:00",
           "timeKnown": true,
           "zone": "GMT",
-          "url": "https://soevision.org/",
-          "note": "Устные доклады и постеры."
-        },
-        {
-          "kind": "abstract",
-          "label": "Подача материалов ISOT по офтальмотравме",
-          "date": "2027-01-19T23:59:00+00:00",
-          "timeKnown": true,
-          "zone": "GMT",
-          "url": "https://soevision.org/",
-          "note": "Устные доклады, видео и ePoster."
-        },
-        {
-          "kind": "registration",
-          "label": "Регистрация presenting author",
-          "date": "2027-03-24",
-          "timeKnown": false,
-          "zone": "Europe/Athens",
-          "url": "https://soevision.org/",
+          "url": "https://soe2027.soevision.org/abstract-submission/",
           "note": ""
         },
         {
-          "kind": "grant",
-          "label": "SOE Educational Grants 2027",
-          "date": "2026-09-30",
-          "timeKnown": false,
-          "zone": "Europe/Athens",
-          "url": "https://soevision.org/",
-          "note": "Приём заявок завершён."
+          "kind": "abstract",
+          "label": "Материалы ISOT по офтальмотравме",
+          "date": "2027-01-19T23:59:00+00:00",
+          "timeKnown": true,
+          "zone": "GMT",
+          "url": "https://soe2027.soevision.org/isot-abstract-submission/",
+          "note": ""
         }
       ],
-      "submissionNote": "SOE: oral papers и posters; ISOT: oral, video и ePoster по травме глаза. Английский язык, до 2000 знаков. Авторам принятых работ необходима очная презентация и регистрация до 24 марта."
+      "coordinates": [
+        37.98,
+        23.73
+      ],
+      "dateSource": "https://soe2027.soevision.org/"
     },
     {
       "id": "cos-2027",
@@ -2551,36 +3688,36 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "Аккредитация: уточняется",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": true,
       "official": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
       "program": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
       "registration": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
       "submit": "https://cos-sco.secure-platform.com/2027",
-      "verified": "2026-10-26",
+      "verified": "2026-11-02",
       "description": "Ежегодный конгресс COS в Оттаве: доклады, практические занятия и хирургический Film Festival. Тезисы уже не принимаются; приём хирургических видео продолжается до 3 ноября 2026.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Подача тезисов — завершена",
+          "label": "Приём тезисов (закрыт)",
           "date": "2026-10-03T15:59:00-04:00",
           "timeKnown": true,
           "zone": "America/Toronto",
           "url": "https://cos-sco.secure-platform.com/2027",
-          "note": "Портал указывает ET; 3 октября действует EDT (UTC−4)."
+          "note": ""
         },
         {
-          "kind": "upload",
+          "kind": "abstract",
           "label": "Хирургические видео COS Film Festival",
           "date": "2026-11-03T15:59:00-05:00",
           "timeKnown": true,
           "zone": "America/Toronto",
           "url": "https://cos-sco.secure-platform.com/2027",
-          "note": "Портал: 15:59 ET; 3 ноября действует EST (UTC−5)."
+          "note": ""
         },
         {
           "kind": "faculty",
@@ -2589,9 +3726,14 @@
           "timeKnown": true,
           "zone": "America/Toronto",
           "url": "https://cos-sco.secure-platform.com/2027",
-          "note": "Уведомления о результатах запланированы на 8–12 декабря 2026."
+          "note": ""
         }
-      ]
+      ],
+      "coordinates": [
+        45.42,
+        -75.7
+      ],
+      "dateSource": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/"
     },
     {
       "id": "asrs-2027",
@@ -2608,29 +3750,66 @@
       "mode": "Очно",
       "venue": "San Francisco, California",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.asrs.org/annual-meeting",
       "program": "https://www.asrs.org/annual-meeting",
       "registration": "https://www.asrs.org/annual-meeting",
       "submit": "https://www.asrs.org/annual-meeting",
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
+      "verified": "2026-11-02",
+      "description": "ASRS Annual Meeting 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Дедлайн подачи тезисов",
+          "label": "Подача тезисов",
           "date": "2027-01-28",
           "timeKnown": false,
-          "zone": "America/Los_Angeles",
+          "zone": "",
           "url": "https://www.asrs.org/annual-meeting",
-          "note": "Подача открывается 3 декабря 2026."
+          "note": ""
         }
       ],
-      "submissionNote": "Подача тезисов откроется 3 декабря 2026."
+      "submissionOpens": "2026-12-03",
+      "coordinates": [
+        37.77,
+        -122.42
+      ],
+      "dateSource": "https://www.asrs.org/annual-meeting"
+    },
+    {
+      "id": "world-keratoconus-2027",
+      "featured": false,
+      "title": "IV Всемирный конгресс по кератоконусу",
+      "fullTitle": "World Keratoconus Congress 2027",
+      "org": "International Keratoconus Society",
+      "start": "2027-08-26",
+      "end": "2027-08-28",
+      "city": "Буэнос-Айрес",
+      "country": "Аргентина",
+      "region": "Латинская Америка",
+      "mode": "Очно",
+      "venue": "Buenos Aires",
+      "categories": [
+        "Роговица",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://ikc-society.org/events/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "IV Всемирный конгресс по кератоконусу. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        -34.6,
+        -58.38
+      ],
+      "dateSource": "https://ikc-society.org/events/"
     },
     {
       "id": "euretina-2027",
@@ -2647,29 +3826,33 @@
       "mode": "Гибрид",
       "venue": "Bella Center, Copenhagen",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "Аккредитация: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": true,
       "official": "https://euretina.org/copenhagen-27/",
       "program": "https://euretina.org/copenhagen-27/",
       "registration": "https://euretina.org/copenhagen-27/",
       "submit": "https://euretina.org/copenhagen-27/session-submission-terms/",
-      "verified": "2026-10-15",
+      "verified": "2026-11-02",
       "description": "27-й конгресс EURETINA. Euretina Innovation Spotlight пройдёт 15 сентября в Bella Center перед основным конгрессом. Возможен онлайн-доступ.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Курсы и симпозиумы: предложения",
+          "label": "Предложения курсов и симпозиумов",
           "date": "2026-11-18T23:59:00+01:00",
           "timeKnown": true,
-          "zone": "CET",
+          "zone": "Europe/Paris",
           "url": "https://euretina.org/copenhagen-27/session-submission-terms/",
-          "note": "Для подачи необходимо членство Euretina."
+          "note": ""
         }
       ],
-      "submissionNote": "Открыты предложения сессий; дедлайн обычных научных тезисов 2027 пока не подтверждён."
+      "coordinates": [
+        55.68,
+        12.57
+      ],
+      "dateSource": "https://euretina.org/copenhagen-27/"
     },
     {
       "id": "dog-2027",
@@ -2688,57 +3871,91 @@
       "categories": [
         "Катаракта / ИОЛ",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
-        "Research"
+        "Исследования"
       ],
-      "credits": "Аккредитация: уточняется организатором",
-      "submissionOpen": true,
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
       "official": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
       "program": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
       "registration": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
       "submit": "https://dog-kongress.de/",
-      "verified": "2026-10-15",
+      "verified": "2026-11-02",
       "description": "Ежегодный конгресс DOG. Объявлены даты и приём предложений научных сессий.",
-      "deadlines": [
-        {
-          "kind": "abstract",
-          "label": "Предложения научных сессий",
-          "date": "2026-10-31",
-          "timeKnown": false,
-          "zone": "Europe/Berlin",
-          "url": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
-          "note": "Точное время не опубликовано; срок относится к предложениям сессий."
-        }
-      ]
+      "deadlines": [],
+      "submissionNote": "Приём научных материалов закрыт; условия участия и регистрации смотрите у организатора.",
+      "coordinates": [
+        52.52,
+        13.4
+      ],
+      "dateSource": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027"
     },
     {
       "id": "cataract-refractive-cornea-2027",
       "featured": false,
       "title": "Современные технологии катарактальной, рефракционной и роговичной хирургии 2027",
       "fullTitle": "Современные технологии катарактальной, рефракционной и роговичной хирургии 2027",
-      "org": "Общество офтальмологов России / МНТК",
+      "org": "Russian Society of Ophthalmologists / MNTK",
       "start": "2027-10-07",
       "end": "2027-10-09",
       "city": "Москва",
       "country": "Россия",
       "region": "Россия",
-      "mode": "Очно",
+      "mode": "Гибрид",
       "venue": "Москва",
       "categories": [
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица"
       ],
-      "credits": "НМО: уточняется",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://oor.ru/events",
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-10-12",
+      "verified": "2026-11-02",
       "description": "Даты опубликованы в официальном календаре ООР; условия регистрации и подачи уточняются.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://oor.ru/events"
+    },
+    {
+      "id": "aacgc-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "AACGC 2027 · Indonesian National Glaucoma Meeting",
+      "fullTitle": "18th Asian Angle-Closure Glaucoma Club Meeting in Conjunction With the 11th Indonesian National Glaucoma Meeting",
+      "org": "Asian Angle-Closure Glaucoma Club / Indonesian National Glaucoma Meeting",
+      "start": "2027-10-15",
+      "end": "2027-10-16",
+      "city": "Джакарта",
+      "country": "Индонезия",
+      "region": "Азия–Тихоокеанский",
+      "mode": "Очно",
+      "venue": "Jakarta, Indonesia",
+      "categories": [
+        "Глаукома",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://apaophth.org/congress/calendar/",
+      "program": "https://apaophth.org/congress/calendar/",
+      "registration": "https://apaophth.org/congress/calendar/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "AACGC 2027 · Indonesian National Glaucoma Meeting. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        -6.21,
+        106.85
+      ],
+      "dateSource": "https://apaophth.org/congress/calendar/"
     },
     {
       "id": "escrs-2027",
@@ -2759,15 +3976,20 @@
         "Рефракция",
         "Роговица"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
-      "official": "https://www.escrs.org/",
-      "program": "https://www.escrs.org/",
-      "registration": "https://www.escrs.org/",
+      "official": "https://congress.escrs.org/",
+      "program": "https://congress.escrs.org/",
+      "registration": null,
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
+      "verified": "2026-11-02",
+      "description": "ESCRS 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        40.42,
+        -3.7
+      ],
+      "dateSource": "https://congress.escrs.org/"
     },
     {
       "id": "retina-society-2027",
@@ -2784,18 +4006,93 @@
       "mode": "Очно",
       "venue": "OMNI Boston at the Seaport",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.retinasociety.org/page/17/future-annual-meetings",
       "program": "https://www.retinasociety.org/page/17/future-annual-meetings",
       "registration": "https://www.retinasociety.org/page/17/future-annual-meetings",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "60-я юбилейная ежегодная встреча Retina Society в Бостоне.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        42.36,
+        -71.06
+      ],
+      "dateSource": "https://www.retinasociety.org/page/17/future-annual-meetings"
+    },
+    {
+      "id": "ever-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "EVER 2027",
+      "fullTitle": "Конгресс European Association for Vision and Eye Research 2027",
+      "org": "European Association for Vision and Eye Research",
+      "start": "2027-11-04",
+      "end": "2027-11-06",
+      "city": "Афины",
+      "country": "Греция",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Megaron Athens",
+      "categories": [
+        "Исследования",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://soevision.org/event/ever-2027/",
+      "program": "https://soevision.org/event/ever-2027/",
+      "registration": "https://www.everassociation.org/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Конгресс EVER: 4–6 ноября 2027, Megaron Athens. Даты и место опубликованы в официальном календаре SOE.",
+      "deadlines": [],
+      "coordinates": [
+        37.98,
+        23.73
+      ],
+      "dateSource": "https://soevision.org/event/ever-2027/"
+    },
+    {
+      "id": "ranzco-58-2027",
+      "featured": false,
+      "title": "58-й научный конгресс RANZCO",
+      "fullTitle": "RANZCO 58th Annual Scientific Congress",
+      "org": "Royal Australian and New Zealand College of Ophthalmologists",
+      "start": "2027-11-04",
+      "end": "2027-11-07",
+      "city": "Голд-Кост",
+      "country": "Австралия",
+      "region": "Азия–Тихоокеанский",
+      "mode": "Очно",
+      "venue": "Gold Coast",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Роговица",
+        "Сетчатка",
+        "Глаукома",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://ranzco.edu/events/ranzco-58th-congress/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Даты по информации организатора; актуальные условия уточняйте на официальном сайте.",
+      "deadlines": [],
+      "coordinates": [
+        -28.02,
+        153.4
+      ],
+      "dateSource": "https://ranzco.edu/events/ranzco-58th-congress/"
     },
     {
       "id": "aao-2027",
@@ -2815,34 +4112,98 @@
         "Катаракта / ИОЛ",
         "Рефракция",
         "Роговица",
-        "Retina",
+        "Сетчатка",
         "Глаукома",
         "Воспаление",
         "Детская офтальмология",
         "Страбизм",
         "Нейроофтальмология",
         "Окулопластика",
-        "Research"
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.aao.org/annual-meeting",
       "program": "https://www.aao.org/annual-meeting",
       "registration": "https://www.aao.org/annual-meeting",
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": [
-        {
-          "kind": "abstract",
-          "label": "Дедлайн подачи материалов",
-          "date": "2027-01-12",
-          "timeKnown": false,
-          "zone": "America/Los_Angeles",
-          "url": "https://www.aao.org/annual-meeting",
-          "note": ""
-        }
-      ]
+      "verified": "2026-11-02",
+      "description": "Ежегодный конгресс AAO в Лас-Вегасе, включая Subspecialty Day 12–13 ноября. Условия подачи и регистрации публикует AAO.",
+      "deadlines": [],
+      "submissionNote": "Подтверждённый срок подачи материалов в проверенном источнике не опубликован.",
+      "coordinates": [
+        36.17,
+        -115.14
+      ],
+      "dateSource": "https://www.aao.org/eyenet/academy-live/detail/rate-aao-2026-sessions-help-shape-aao-2027"
+    },
+    {
+      "id": "ukiscrs-51-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "51-й ежегодный конгресс UKISCRS",
+      "fullTitle": "51-й ежегодный конгресс UKISCRS",
+      "org": "UKISCRS",
+      "start": "2027-11-17",
+      "end": "2027-11-19",
+      "city": "Лондон",
+      "country": "Великобритания",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "London",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Рефракция",
+        "Роговица"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://www.ukiscrs.org.uk/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "51-й ежегодный конгресс UKISCRS. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        51.51,
+        -0.13
+      ],
+      "dateSource": "https://www.ukiscrs.org.uk/"
+    },
+    {
+      "id": "clade-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "XXV конгресс CLADE 2027",
+      "fullTitle": "XXV конгресс CLADE 2027",
+      "org": "Consejo Latinoamericano de Estrabismo",
+      "start": "2027-12-01",
+      "end": "2027-12-03",
+      "city": "Пуэрто-Варас",
+      "country": "Чили",
+      "region": "Латинская Америка",
+      "mode": "Очно",
+      "venue": "Puerto Varas",
+      "categories": [
+        "Страбизм",
+        "Детская офтальмология",
+        "Исследования"
+      ],
+      "credits": "CME/НМО: уточняйте у организатора",
+      "submissionOpen": false,
+      "official": "https://www.consejoclade.com/congreso/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "XXV конгресс CLADE 2027. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        -41.32,
+        -72.98
+      ],
+      "dateSource": "https://www.consejoclade.com/congreso/"
     },
     {
       "id": "apvrs-2027",
@@ -2859,515 +4220,56 @@
       "mode": "Очно",
       "venue": "Куала-Лумпур, Малайзия",
       "categories": [
-        "Retina",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://apvrs.org/congresses/",
       "program": "https://apvrs.org/congresses/",
       "registration": "https://apvrs.org/congresses/",
       "submit": null,
-      "verified": "2026-10-08",
+      "verified": "2026-11-02",
       "description": "APVRS подтверждает 20-й конгресс 3–5 декабря 2027 года в Куала-Лумпуре; дедлайны тезисов и регистрации пока не опубликованы.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        3.14,
+        101.69
+      ],
+      "dateSource": "https://apvrs.org/congresses/"
     },
     {
-      "id": "ciob-2026",
+      "id": "jrvs-66-2027",
       "featured": false,
       "level": "specialty",
-      "title": "CIOB 2026",
-      "fullTitle": "Cumbre de Innovación Oftalmológica del Biobío 2026",
-      "org": "CIOB",
-      "start": "2026-10-02",
-      "end": "2026-10-03",
-      "city": "Concepción",
-      "country": "Чили",
-      "region": "Латинская Америка",
-      "mode": "Очно",
-      "venue": "Centro de Eventos Mitrinco, Concepción",
-      "categories": [
-        "Катаракта / ИОЛ",
-        "Роговица",
-        "Retina",
-        "Глаукома",
-        "Research",
-        "AI / управление"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://www.ciob.cl/",
-      "program": "https://www.ciob.cl/",
-      "registration": "https://www.ciob.cl/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "bolivia-ophthalmology-2026",
-      "featured": false,
-      "level": "specialty",
-      "title": "XXXI Bolivian Congress of Ophthalmology 2026",
-      "fullTitle": "XXXI Congreso Boliviano de Oftalmología “Dra. Rosario García”",
-      "org": "Sociedad Boliviana de Oftalmología",
-      "start": "2026-10-22",
-      "end": "2026-10-24",
-      "city": "Санта-Крус-де-ла-Сьерра",
-      "country": "Боливия",
-      "region": "Латинская Америка",
-      "mode": "Очно",
-      "venue": "Hotel Los Tajibos, Santa Cruz",
-      "categories": [
-        "Катаракта / ИОЛ",
-        "Роговица",
-        "Retina",
-        "Глаукома",
-        "Детская офтальмология",
-        "Страбизм",
-        "Research"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://cboftalmologia2026.com/",
-      "program": "https://cboftalmologia2026.com/",
-      "registration": "https://cboftalmologia2026.com/",
-      "submit": "https://cboftalmologia2026.com/trabajos.html",
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": [
-        {
-          "kind": "abstract",
-          "label": "Подача научных работ",
-          "date": "2026-08-30T23:00:00-04:00",
-          "timeKnown": true,
-          "zone": "BOT",
-          "url": "https://cboftalmologia2026.com/trabajos.html",
-          "note": ""
-        }
-      ]
-    },
-    {
-      "id": "alaccsa-2026",
-      "featured": false,
-      "level": "specialty",
-      "title": "XXVI ALACCSA-R International Congress 2026",
-      "fullTitle": "XXVI Congreso Internacional ALACCSA-R 2026",
-      "org": "ALACCSA-R",
-      "start": "2026-10-22",
-      "end": "2026-10-24",
-      "city": "Asunción",
-      "country": "Парагвай",
-      "region": "Латинская Америка",
-      "mode": "Очно",
-      "venue": "Hotel Sheraton, Asunción",
-      "categories": [
-        "Катаракта / ИОЛ",
-        "Рефракция",
-        "Роговица",
-        "Research"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://alaccsa.com/",
-      "program": "https://alaccsa.com/",
-      "registration": "https://alaccsa.com/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "sprv-gladaof-2026",
-      "featured": true,
-      "level": "specialty",
-      "title": "SPRV 2026 · GLADAOF",
-      "fullTitle": "11th Congress of the Pan-American Society of Retina and Vitreous & 20th GLADAOF Forum",
-      "org": "Pan-American Society of Retina and Vitreous / GLADAOF",
-      "start": "2026-10-29",
-      "end": "2026-11-01",
-      "city": "São Paulo",
-      "country": "Бразилия",
-      "region": "Латинская Америка",
-      "mode": "Очно",
-      "venue": "Grand Hyatt, São Paulo",
-      "categories": [
-        "Retina",
-        "Research"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://sprv2026.com/",
-      "program": "https://sprv2026.com/",
-      "registration": "https://sprv2026.com/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "bascom-palmer-curso-2026",
-      "featured": true,
-      "level": "specialty",
-      "title": "Bascom Palmer CURSO 2026",
-      "fullTitle": "XLVIII Bascom Palmer InterAmerican Course in Clinical Ophthalmology 2026",
-      "org": "Bascom Palmer Eye Institute",
-      "start": "2026-11-01",
-      "end": "2026-11-04",
-      "city": "Майами",
-      "country": "США",
-      "region": "Северная Америка",
-      "mode": "Очно",
-      "venue": "Hyatt Regency Miami Downtown",
-      "categories": [
-        "Катаракта / ИОЛ",
-        "Рефракция",
-        "Роговица",
-        "Retina",
-        "Глаукома",
-        "Воспаление",
-        "Детская офтальмология",
-        "Страбизм",
-        "Нейроофтальмология",
-        "Окулопластика"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
-      "program": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
-      "registration": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "isa-2026",
-      "featured": false,
-      "level": "specialty",
-      "title": "XVI ISA Meeting",
-      "fullTitle": "XVI International Strabismological Association Meeting",
-      "org": "International Strabismological Association",
-      "start": "2026-11-11",
-      "end": "2026-11-14",
-      "city": "Буэнос-Айрес",
-      "country": "Аргентина",
-      "region": "Латинская Америка",
-      "mode": "Очно",
-      "venue": "Auditorios UCA – Edificio San José",
-      "categories": [
-        "Страбизм",
-        "Детская офтальмология",
-        "Research"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://isa2026.com.ar/",
-      "program": "https://isa2026.com.ar/",
-      "registration": "https://isa2026.com.ar/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "asia-cornea-2026",
-      "featured": false,
-      "level": "specialty",
-      "title": "Asia Cornea Society 2026",
-      "fullTitle": "10th Asia Cornea Society Biennial Scientific Meeting",
-      "org": "Asia Cornea Society",
-      "start": "2026-11-27",
-      "end": "2026-11-29",
-      "city": "Hong Kong",
-      "country": "Китай",
-      "region": "Китай / Greater China",
-      "mode": "Очно",
-      "venue": "Hong Kong",
-      "categories": [
-        "Роговица",
-        "Research"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://www.asiacorneasociety.org/",
-      "program": "https://www.asiacorneasociety.org/",
-      "registration": "https://www.asiacorneasociety.org/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": [
-        {
-          "kind": "registration",
-          "label": "Предварительная регистрация",
-          "date": "2026-11-26",
-          "timeKnown": false,
-          "zone": "Asia/Hong_Kong",
-          "url": "https://www.asiacorneasociety.org/",
-          "note": ""
-        }
-      ]
-    },
-    {
-      "id": "oculoplastics-russia-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "Oculoplastics 2027",
-      "fullTitle": "Scientific and Practical Conference “Oculoplastics”",
-      "org": "Russian Ophthalmological Society",
-      "start": "2027-02-26",
-      "end": "2027-02-26",
-      "city": "Москва",
-      "country": "Россия",
-      "region": "Россия",
-      "mode": "Гибрид",
-      "venue": "Moscow, Russia",
-      "categories": [
-        "Окулопластика",
-        "Research"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://oor.ru/events",
-      "program": "https://oor.ru/events",
-      "registration": "https://oor.ru/events",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "vitreoretinal-russia-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "Vitreoretinal Pathology 2027",
-      "fullTitle": "24th All-Russian Conference with International Participation “Modern Technologies for Treatment of Vitreoretinal Pathology”",
-      "org": "Russian Ophthalmological Society",
-      "start": "2027-04-02",
-      "end": "2027-04-03",
-      "city": "Уфа",
-      "country": "Россия",
-      "region": "Россия",
-      "mode": "Гибрид",
-      "venue": "Ufa, Russia",
-      "categories": [
-        "Retina",
-        "Research"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://oor.ru/events",
-      "program": "https://oor.ru/events",
-      "registration": "https://oor.ru/events",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "argentina-ophthalmology-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "Argentina National Ophthalmology Congress 2027",
-      "fullTitle": "Congreso Nacional de Oftalmología 2027",
-      "org": "Consejo Argentino de Oftalmología",
-      "start": "2027-04-14",
-      "end": "2027-04-16",
-      "city": "Буэнос-Айрес",
-      "country": "Аргентина",
-      "region": "Латинская Америка",
-      "mode": "Очно",
-      "venue": "Centro de Convenciones Buenos Aires",
-      "categories": [
-        "Катаракта / ИОЛ",
-        "Роговица",
-        "Retina",
-        "Глаукома",
-        "Research"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://oftalmologos.org.ar/",
-      "program": "https://oftalmologos.org.ar/",
-      "registration": "https://oftalmologos.org.ar/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "ophthalmology-360-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "Ophthalmology 360° 2027",
-      "fullTitle": "V Anniversary Conference “Ophthalmology 360°”",
-      "org": "Russian Ophthalmological Society / Fyodorov Eye Microsurgery",
-      "start": "2027-04-16",
-      "end": "2027-04-16",
-      "city": "Москва",
-      "country": "Россия",
-      "region": "Россия",
-      "mode": "Гибрид",
-      "venue": "RBC Event Center, Moscow",
-      "categories": [
-        "Research",
-        "AI / управление"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://oor.ru/events",
-      "program": "https://oor.ru/events",
-      "registration": "https://oor.ru/events",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "colatoc-guatemala-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "COLATOC 2027 · Guatemala",
-      "fullTitle": "IV Pan-American Ocular Trauma Congress + XIX National Congress of Guatemala",
-      "org": "Pan-American Ocular Trauma Association / Guatemalan Ophthalmology Association",
-      "start": "2027-06-09",
-      "end": "2027-06-11",
-      "city": "Антигуа-Гватемала",
-      "country": "Гватемала",
-      "region": "Латинская Америка",
-      "mode": "Очно",
-      "venue": "Antigua Guatemala, Guatemala",
-      "categories": [
-        "Офтальмотравма",
-        "Research"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://aptooftalmico.com/",
-      "program": "https://aptooftalmico.com/",
-      "registration": "https://aptooftalmico.com/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "cataract-russia-2027",
-      "featured": true,
-      "level": "specialty",
-      "title": "#Cataract2027",
-      "fullTitle": "27th All-Russian Congress with International Participation “Modern Technologies of Cataract, Refractive and Corneal Surgery”",
-      "org": "Russian Ophthalmological Society",
-      "start": "2027-10-07",
-      "end": "2027-10-09",
-      "city": "Москва",
-      "country": "Россия",
-      "region": "Россия",
-      "mode": "Гибрид",
-      "venue": "Moscow, Russia",
-      "categories": [
-        "Катаракта / ИОЛ",
-        "Рефракция",
-        "Роговица",
-        "Research"
-      ],
-      "credits": "CME/НМО: уточняется организатором",
-      "submissionOpen": false,
-      "official": "https://oor.ru/events",
-      "program": "https://oor.ru/events",
-      "registration": "https://oor.ru/events",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "aacgc-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "AACGC 2027 · Indonesian National Glaucoma Meeting",
-      "fullTitle": "18th Asian Angle-Closure Glaucoma Club Meeting in Conjunction With the 11th Indonesian National Glaucoma Meeting",
-      "org": "Asian Angle-Closure Glaucoma Club / Indonesian National Glaucoma Meeting",
-      "start": "2027-10-15",
-      "end": "2027-10-16",
-      "city": "Джакарта",
-      "country": "Индонезия",
+      "title": "66-й конгресс Японского общества сетчатки и стекловидного тела",
+      "fullTitle": "66-й конгресс Японского общества сетчатки и стекловидного тела",
+      "org": "Japan Retina and Vitreous Society",
+      "start": "2027-12-10",
+      "end": "2027-12-12",
+      "city": "Осака",
+      "country": "Япония",
       "region": "Азия–Тихоокеанский",
       "mode": "Очно",
-      "venue": "Jakarta, Indonesia",
+      "venue": "Osaka International Convention Center",
       "categories": [
-        "Глаукома",
-        "Research"
+        "Сетчатка",
+        "Исследования"
       ],
-      "credits": "CME/НМО: уточняется организатором",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
-      "official": "https://apaophth.org/congress/calendar/",
-      "program": "https://apaophth.org/congress/calendar/",
-      "registration": "https://apaophth.org/congress/calendar/",
+      "official": "https://www.jrvs.jp/en/meeting.html",
+      "program": null,
+      "registration": null,
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Офтальмологическое мероприятие, проверенное по сайту организатора или официальному календарю общества.",
-      "deadlines": []
-    },
-    {
-      "id": "ever-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "EVER 2027",
-      "fullTitle": "Конгресс European Association for Vision and Eye Research 2027",
-      "org": "European Association for Vision and Eye Research",
-      "start": "2027-11-04",
-      "end": "2027-11-06",
-      "city": "Афины",
-      "country": "Греция",
-      "region": "Европа",
-      "mode": "Очно",
-      "venue": "Megaron Athens",
-      "categories": [
-        "Research",
-        "Роговица",
-        "Retina",
-        "Глаукома"
+      "verified": "2026-11-02",
+      "description": "66-й конгресс Японского общества сетчатки и стекловидного тела. Даты и место опубликованы организатором; условия участия уточняйте на официальной странице.",
+      "deadlines": [],
+      "coordinates": [
+        34.69,
+        135.5
       ],
-      "credits": "Аккредитация: уточняйте у организатора",
-      "submissionOpen": false,
-      "official": "https://soevision.org/event/ever-2027/",
-      "program": "https://soevision.org/event/ever-2027/",
-      "registration": "https://www.everassociation.org/",
-      "submit": null,
-      "verified": "2026-10-26",
-      "description": "Конгресс EVER: 4–6 ноября 2027, Megaron Athens. Даты и место опубликованы в официальном календаре SOE.",
-      "submissionNote": "Сроки подачи тезисов и регистрации ещё не опубликованы.",
-      "deadlines": []
-    },
-    {
-      "id": "wga-surgical-grand-rounds-8-2026",
-      "featured": false,
-      "level": "specialty",
-      "title": "8th WGA Surgical Grand Rounds",
-      "fullTitle": "8-й WGA Surgical Grand Rounds: глаукома после трансплантации роговицы и при синдроме Стерджа–Вебера",
-      "org": "World Glaucoma Association",
-      "start": "2026-11-12",
-      "end": "2026-11-12",
-      "city": "Онлайн",
-      "country": "Весь мир",
-      "region": "Международные онлайн",
-      "mode": "Онлайн",
-      "venue": "Международный вебинар WGA",
-      "categories": [
-        "Глаукома",
-        "Роговица"
-      ],
-      "credits": "Аккредитация: уточняйте у организатора",
-      "submissionOpen": false,
-      "official": "https://wga.one/surgical-grand-rounds/",
-      "program": "https://wga.one/surgical-grand-rounds/",
-      "registration": "https://wga.one/surgical-grand-rounds-registration/",
-      "submit": null,
-      "verified": "2026-10-26",
-      "description": "Разбор хирургии глаукомы после трансплантации роговицы: Ramesh Ayyala; эксперты Karl Mercieca и Keith Barton. Вторая тема — глаукома при синдроме Стерджа–Вебера. Регистрация открыта; точное время на странице программы не указано.",
-      "submissionNote": "Регистрация открыта. Приём тезисов не объявлен; время начала уточняйте у WGA.",
-      "deadlines": []
+      "dateSource": "https://www.jrvs.jp/en/meeting.html"
     }
   ]
 }

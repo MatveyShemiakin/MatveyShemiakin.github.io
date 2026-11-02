@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "language": "en",
-  "verifiedAt": "2026-10-26",
-  "generatedAt": "2026-10-26T20:41:41+03:00",
+  "verifiedAt": "2026-11-02",
+  "generatedAt": "2026-11-02T11:43:40+03:00",
   "events": [
     {
       "id": "fedorov-2026",
@@ -25,13 +25,18 @@
       ],
       "credits": "6 CME/NMO credits (archived event)",
       "submissionOpen": false,
-      "official": "https://oor.ru/events",
+      "official": "https://www.mntk.ru/specialists/Konferents/fed_cht/",
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Archived event retained to support the “Show past events” view.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://www.mntk.ru/specialists/Konferents/fed_cht/"
     },
     {
       "id": "apgc-2026",
@@ -43,7 +48,7 @@
       "end": "2026-07-26",
       "city": "Singapore",
       "country": "Singapore",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Suntec Singapore Convention & Exhibition Centre",
       "categories": [
@@ -55,11 +60,16 @@
       "submissionOpen": false,
       "official": "https://apgcongress.org/",
       "program": "https://apgcongress.org/",
-      "registration": "https://apgcongress.org/registration-main/",
+      "registration": null,
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Joint meeting of the 8th Asia-Pacific Glaucoma Congress and the Singapore National Eye Centre 35th Anniversary International Meeting. Kept in the archive for 2026 event history.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        1.35,
+        103.82
+      ],
+      "dateSource": "https://apaophth.org/congress/calendar/"
     },
     {
       "id": "iser-2026",
@@ -83,13 +93,18 @@
       ],
       "credits": "CME/CPD: check with organiser",
       "submissionOpen": false,
-      "official": "https://iser.org/page/Events_Schedule",
+      "official": "https://iserbiennialmeeting2026.org/",
       "program": "https://iser.org/page/Events_Schedule",
       "registration": "https://iser.org/page/Events_Schedule",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "International biennial meeting focused on experimental and translational eye and vision research.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        39.47,
+        -0.38
+      ],
+      "dateSource": "https://iserbiennialmeeting2026.org/"
     },
     {
       "id": "apvrs-2026",
@@ -104,7 +119,7 @@
       "end": "2026-08-30",
       "city": "Gold Coast",
       "country": "Australia",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Gold Coast, Australia",
       "categories": [
@@ -119,9 +134,14 @@
       "program": "https://2026.apvrs.org/program-schedule/",
       "registration": "https://2026.apvrs.org/registration/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The 19th APVRS Congress is a key Asia-Pacific vitreoretinal meeting, covering medical and surgical retina, uveitis, ocular oncology, imaging, AI and interdisciplinary topics.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -28.02,
+        153.4
+      ],
+      "dateSource": "https://2026.apvrs.org/"
     },
     {
       "id": "oor-cataract-2026",
@@ -147,9 +167,14 @@
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Major Russian congress with interactive complex-case discussions, expert sessions, live surgery and an industry exhibition.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://cataract-congress.ru/"
     },
     {
       "id": "pit-perdami-51-2026",
@@ -162,7 +187,7 @@
       "end": "2026-09-05",
       "city": "Semarang",
       "country": "Indonesia",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Muladi Dome, Universitas Diponegoro",
       "categories": [
@@ -170,7 +195,7 @@
         "Cornea",
         "Retina",
         "Glaucoma",
-        "Pediatric ophthalmology",
+        "Paediatric ophthalmology",
         "Oculoplastics",
         "Research",
         "AI / management"
@@ -181,9 +206,14 @@
       "program": "https://pit51.perdami.or.id/",
       "registration": "https://pit51.perdami.or.id/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Indonesia’s national ophthalmology meeting with symposia, didactic courses, wet labs, research competitions and a focus on AI and community eye health.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -6.97,
+        110.42
+      ],
+      "dateSource": "https://pit51.perdami.or.id/"
     },
     {
       "id": "ccos-2026",
@@ -214,9 +244,14 @@
       "program": "https://ccos2026.sciconf.cn/",
       "registration": "https://ccos2026.sciconf.cn/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "China’s major national ophthalmology congress with more than 10,000 delegates expected, covering all major subspecialties, interdisciplinary research, genetics and AI.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        39.14,
+        117.2
+      ],
+      "dateSource": "https://apaophth.org/congress/calendar/"
     },
     {
       "id": "escrs-2026",
@@ -239,22 +274,17 @@
       "credits": "EACCME accreditation submitted by organiser",
       "submissionOpen": false,
       "official": "https://congress.escrs.org/",
-      "program": "https://congress.escrs.org/programme/",
-      "registration": "https://congress.escrs.org/registrations/",
+      "program": null,
+      "registration": null,
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Major European congress for cataract and refractive surgery. Abstract submission is closed; regular registration remains available until the published deadline.",
-      "deadlines": [
-        {
-          "kind": "registration",
-          "label": "Regular registration",
-          "date": "2026-09-08T23:59:00+02:00",
-          "timeKnown": true,
-          "zone": "CEST",
-          "url": "https://congress.escrs.org/registrations/",
-          "note": "Late/onsite fees apply after this deadline."
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        51.51,
+        -0.13
+      ],
+      "dateSource": "https://soevision.org/event/escrs-2026-congress/"
     },
     {
       "id": "retina-society-2026",
@@ -280,9 +310,14 @@
       "program": "https://www.retinasociety.org/page/2/annual-meeting",
       "registration": "https://www.retinasociety.org/page/2/annual-meeting",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The Retina Society’s 59th scientific meeting, focused on advances in medical and surgical retina.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        34.05,
+        -118.24
+      ],
+      "dateSource": "https://www.retinasociety.org/page/2/annual-meeting"
     },
     {
       "id": "spanish-national-2026",
@@ -311,9 +346,14 @@
       "program": "https://soevision.org/event/spanish-national-meeting/",
       "registration": "https://www.oftalmo.com/seo",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The 2026 national meeting of the Spanish Society of Ophthalmology.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        39.57,
+        2.65
+      ],
+      "dateSource": "https://soevision.org/event/spanish-national-meeting/"
     },
     {
       "id": "dog-2026",
@@ -327,7 +367,7 @@
       "city": "Berlin",
       "country": "Germany",
       "region": "Europe",
-      "mode": "In person + online sessions",
+      "mode": "Hybrid",
       "venue": "Estrel Congress Center, Berlin",
       "categories": [
         "Cataract / IOL",
@@ -343,9 +383,14 @@
       "program": "https://dog-kongress.de/",
       "registration": "https://dog-kongress.de/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The German Ophthalmological Society’s main annual congress, themed “Ophthalmology without borders,” with clinical, surgical and research tracks.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        52.52,
+        13.4
+      ],
+      "dateSource": "https://dog.org/veranstaltungen/kongresse"
     },
     {
       "id": "latam-glaucoma-2026",
@@ -370,9 +415,14 @@
       "program": "https://paao.org/events/xiii-congreso-latinoamericano-de-glaucoma/",
       "registration": "https://www.slaglaucoma.org/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Major Latin American specialist meeting focused on glaucoma.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -0.18,
+        -78.47
+      ],
+      "dateSource": "https://paao.org/events/xiii-congreso-latinoamericano-de-glaucoma/"
     },
     {
       "id": "aios-midterm-2026",
@@ -385,7 +435,7 @@
       "end": "2026-09-27",
       "city": "Ranchi",
       "country": "India",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Hotel Chanakya BNR, Ranchi",
       "categories": [
@@ -397,15 +447,19 @@
         "Research"
       ],
       "credits": "CME/CPD: check with organiser",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://www.aios.org/midtermjharkhand.php",
       "program": "https://www.aios.org/midtermjharkhand.php",
       "registration": "https://www.aios.org/midtermjharkhand.php",
       "submit": "https://www.aios.org/midtermjharkhand.php",
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Major mid-term meeting of the All India Ophthalmological Society with a scientific programme and a dedicated abstract submission portal.",
       "deadlines": [],
-      "submissionNote": "The official page provides an Abstract Submission portal; verify the current closing date in the AIOS portal."
+      "coordinates": [
+        23.34,
+        85.31
+      ],
+      "dateSource": "https://www.aios.org/midtermjharkhand.php"
     },
     {
       "id": "kz-congress-2026",
@@ -430,33 +484,19 @@
         "AI / management"
       ],
       "credits": "Accreditation: check with organiser",
-      "submissionOpen": true,
-      "official": "https://koo.kz/conference-may/",
+      "submissionOpen": false,
+      "official": "https://koo.kz/conference/",
       "program": "https://koo.kz/conference-may/",
       "registration": "https://koo.kz/conference-may/",
       "submit": "https://koo.kz/conference-may/",
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Scientific sessions cover cataract and refractive surgery, cornea, glaucoma, vitreoretinal surgery, paediatric ophthalmology, ocular oncology, AI and emerging technologies.",
-      "deadlines": [
-        {
-          "kind": "abstract",
-          "label": "Oral presentations and e-posters",
-          "date": "2026-08-25",
-          "timeKnown": false,
-          "zone": "Asia/Almaty",
-          "url": "https://koo.kz/conference-may/",
-          "note": "The organiser does not specify a closing time."
-        },
-        {
-          "kind": "registration",
-          "label": "Registration for attendees and speakers",
-          "date": "2026-09-18",
-          "timeKnown": false,
-          "zone": "Asia/Almaty",
-          "url": "https://koo.kz/conference-may/",
-          "note": "Online registration: 18 August–18 September."
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        43.24,
+        76.89
+      ],
+      "dateSource": "https://koo.kz/"
     },
     {
       "id": "qatar-uveitis-2026",
@@ -483,9 +523,14 @@
       "program": "https://qataruveitiscare.com/",
       "registration": "https://qataruveitiscare.com/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Specialist international meeting on uveitis, ocular immunology and medical retina with regional and international faculty.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        25.29,
+        51.53
+      ],
+      "dateSource": "https://qataruveitiscare.com/"
     },
     {
       "id": "pao-annual-2026",
@@ -498,7 +543,7 @@
       "end": "2026-10-02",
       "city": "Manila",
       "country": "Philippines",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "SMX Convention Center, Manila",
       "categories": [
@@ -506,7 +551,7 @@
         "Cornea",
         "Retina",
         "Glaucoma",
-        "Pediatric ophthalmology",
+        "Paediatric ophthalmology",
         "Oculoplastics"
       ],
       "credits": "CME/CPD: check with organiser",
@@ -515,9 +560,14 @@
       "program": "https://pao.org.ph/eye-doctors-home-event/philippine-academy-of-ophthalmology-pao-annual-convention/",
       "registration": "https://pao.org.ph/eye-doctors-home-event/philippine-academy-of-ophthalmology-pao-annual-convention/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The Philippine Academy of Ophthalmology’s main annual meeting, with a multispecialty programme and national scientific contests.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        14.6,
+        120.98
+      ],
+      "dateSource": "https://pao.org.ph/eye-doctors-home-event/philippine-academy-of-ophthalmology-pao-annual-convention/"
     },
     {
       "id": "czech-national-2026",
@@ -541,13 +591,18 @@
       ],
       "credits": "CME/CPD: check with organiser",
       "submissionOpen": false,
-      "official": "https://soevision.org/ophthagenda/category/national-society-meetings/list/",
+      "official": "https://soevision.org/event/czech-ophthalmology-national-society-meeting/",
       "program": "https://soevision.org/ophthagenda/category/national-society-meetings/list/",
       "registration": "https://soevision.org/ophthagenda/category/national-society-meetings/list/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Czech national ophthalmology meeting in Ostrava, Oct 1–3, 2026.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        49.82,
+        18.26
+      ],
+      "dateSource": "https://soevision.org/event/czech-ophthalmology-national-society-meeting/"
     },
     {
       "id": "euretina-2026",
@@ -560,7 +615,7 @@
       "city": "Vienna",
       "country": "Austria",
       "region": "Europe",
-      "mode": "In person + virtual access",
+      "mode": "Hybrid",
       "venue": "VIECON – Vienna Congress & Convention Center",
       "categories": [
         "Retina",
@@ -572,28 +627,86 @@
       "program": "https://euretina.org/vienna-2026/",
       "registration": "https://euretina.org/vienna-2026/registration/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Europe’s major vitreoretinal meeting. The congress is accredited by EACCME for up to 24 European CME credits.",
-      "deadlines": [
-        {
-          "kind": "payment",
-          "label": "Bank transfer available until",
-          "date": "2026-09-20T23:59:00+02:00",
-          "timeKnown": true,
-          "zone": "CEST",
-          "url": "https://euretina.org/vienna-2026/registration/",
-          "note": "Bank transfer is unavailable after this date."
-        },
-        {
-          "kind": "registration",
-          "label": "Late fee registration",
-          "date": "2026-09-30T23:59:00+02:00",
-          "timeKnown": true,
-          "zone": "CEST",
-          "url": "https://euretina.org/vienna-2026/registration/",
-          "note": "Onsite fee applies from 1 October."
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        48.21,
+        16.37
+      ],
+      "dateSource": "https://euretina.org/vienna-2026/"
+    },
+    {
+      "id": "ciob-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "CIOB 2026",
+      "fullTitle": "Cumbre de Innovación Oftalmológica del Biobío 2026",
+      "org": "CIOB",
+      "start": "2026-10-02",
+      "end": "2026-10-03",
+      "city": "Concepción",
+      "country": "Chile",
+      "region": "Latin America",
+      "mode": "In person",
+      "venue": "Centro de Eventos Mitrinco, Concepción",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research",
+        "AI / management"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://www.ciob.cl/",
+      "program": "https://www.ciob.cl/",
+      "registration": "https://www.ciob.cl/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Cumbre de Innovación Oftalmológica del Biobío 2026. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        -36.83,
+        -73.05
+      ],
+      "dateSource": "https://www.ciob.cl/"
+    },
+    {
+      "id": "ioc-uzbekistan-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "IOC VI Uzbekistan 2026",
+      "fullTitle": "Sixth International Ophthalmology Congress IOC Uzbekistan 2026",
+      "org": "Uzbek Society of Cataract and Refractive Surgeons / Republican Eye Microsurgery Centre",
+      "start": "2026-10-02",
+      "end": "2026-10-03",
+      "city": "Tashkent",
+      "country": "Uzbekistan",
+      "region": "CIS",
+      "mode": "In person",
+      "venue": "InterContinental Tashkent",
+      "categories": [
+        "Cataract / IOL",
+        "Refractive",
+        "Cornea",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://uzscrs.uz/registratsiya-2026",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Sixth International Ophthalmology Congress IOC Uzbekistan 2026.",
+      "deadlines": [],
+      "coordinates": [
+        41.3,
+        69.24
+      ],
+      "dateSource": "https://uzscrs.uz/registratsiya-2026"
     },
     {
       "id": "aao-2026",
@@ -616,7 +729,7 @@
         "Retina",
         "Glaucoma",
         "Inflammation",
-        "Pediatric ophthalmology",
+        "Paediatric ophthalmology",
         "Strabismus",
         "Neuro-ophthalmology",
         "Oculoplastics"
@@ -627,9 +740,14 @@
       "program": "https://www.aao.org/annual-meeting",
       "registration": "https://www.aao.org/annual-meeting",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The American Academy of Ophthalmology Annual Meeting, one of the world’s largest multispecialty ophthalmology meetings.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        29.95,
+        -90.07
+      ],
+      "dateSource": "https://www.aao.org/Assets/6f5e4b18-cb0f-494f-9d0a-c8098b228d34/639124150856930000/may-2026-destination-aao-2026-pdf?inline=1"
     },
     {
       "id": "cornea-eye-banking-2026",
@@ -655,9 +773,14 @@
       "program": "https://corneasociety.org/cornea-and-eye-banking-forum",
       "registration": "https://corneasociety.org/cornea-and-eye-banking-forum",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Annual Cornea Society and eye-banking forum held immediately before the AAO meeting.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        29.95,
+        -90.07
+      ],
+      "dateSource": "https://corneasociety.org/cornea-and-eye-banking-forum"
     },
     {
       "id": "eso-2026",
@@ -680,7 +803,7 @@
         "Retina",
         "Glaucoma",
         "Inflammation",
-        "Pediatric ophthalmology",
+        "Paediatric ophthalmology",
         "Oculoplastics",
         "Research"
       ],
@@ -690,9 +813,14 @@
       "program": "https://eso-conferences.com/eso2026/",
       "registration": "https://eso-conferences.com/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The UAE’s national ophthalmology platform and a major GCC meeting, featuring a comprehensive scientific programme, surgical techniques, workshops and wet labs.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        24.45,
+        54.38
+      ],
+      "dateSource": "https://eso-conferences.com/"
     },
     {
       "id": "ever-2026",
@@ -720,9 +848,14 @@
       "program": "https://soevision.org/event/ever-2026/",
       "registration": "https://evercongress.org/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "European eye and vision research congress focused on basic, translational and clinical science.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        43.77,
+        11.25
+      ],
+      "dateSource": "https://soevision.org/event/ever-2026/"
     },
     {
       "id": "alaccsa-r-2026",
@@ -749,9 +882,52 @@
       "program": "https://paao.org/events/alaccsa-2026/",
       "registration": "https://alaccsa.com/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "26th ALACCSA-R International Congress focused on cataract, refractive surgery and anterior segment.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -25.26,
+        -57.58
+      ],
+      "dateSource": "https://paao.org/events/alaccsa-2026/"
+    },
+    {
+      "id": "bolivia-ophthalmology-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "XXXI Bolivian Congress of Ophthalmology 2026",
+      "fullTitle": "XXXI Congreso Boliviano de Oftalmología “Dra. Rosario García”",
+      "org": "Sociedad Boliviana de Oftalmología",
+      "start": "2026-10-22",
+      "end": "2026-10-24",
+      "city": "Santa Cruz de la Sierra",
+      "country": "Bolivia",
+      "region": "Latin America",
+      "mode": "In person",
+      "venue": "Hotel Los Tajibos, Santa Cruz",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Paediatric ophthalmology",
+        "Strabismus",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://cboftalmologia2026.com/",
+      "program": "https://cboftalmologia2026.com/",
+      "registration": "https://cboftalmologia2026.com/",
+      "submit": "https://cboftalmologia2026.com/trabajos.html",
+      "verified": "2026-11-02",
+      "description": "XXXI Congreso Boliviano de Oftalmología “Dra. Rosario García”. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        -17.79,
+        -63.18
+      ],
+      "dateSource": "https://cboftalmologia2026.com/"
     },
     {
       "id": "jco-80-2026",
@@ -764,7 +940,7 @@
       "end": "2026-11-01",
       "city": "Kyoto",
       "country": "Japan",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Kyoto International Conference Center + The Prince Kyoto Takaragaike",
       "categories": [
@@ -780,18 +956,14 @@
       "program": "https://convention.jtbcom.co.jp/80ringan/en/index.html",
       "registration": "https://convention.jtbcom.co.jp/80ringan/en/registration/index.html",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The 80th anniversary Japanese clinical ophthalmology congress with a broad scientific and clinical programme.",
-      "deadlines": [
-        {
-          "kind": "registration",
-          "label": "Early-bird registration closes",
-          "date": "2026-09-25T12:00:00+09:00",
-          "timeKnown": true,
-          "zone": "JST / UTC+9",
-          "url": "https://convention.jtbcom.co.jp/80ringan/en/registration/index.html"
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        35.01,
+        135.77
+      ],
+      "dateSource": "https://convention.jtbcom.co.jp/80ringan/en/index.html"
     },
     {
       "id": "sprv-2026",
@@ -817,9 +989,14 @@
       "program": "https://paao.org/events/sprv-2026/",
       "registration": "https://sprv2026.com/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Pan-American specialist meeting on retinal disease and vitreoretinal surgery.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -23.55,
+        -46.63
+      ],
+      "dateSource": "https://paao.org/events/sprv-2026/"
     },
     {
       "id": "kos-apois-2026",
@@ -832,7 +1009,7 @@
       "end": "2026-11-01",
       "city": "Seoul",
       "country": "Republic of Korea",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Grand Walkerhill Seoul",
       "categories": [
@@ -840,7 +1017,7 @@
         "Cornea",
         "Retina",
         "Glaucoma",
-        "Pediatric ophthalmology",
+        "Paediatric ophthalmology",
         "Strabismus",
         "Neuro-ophthalmology",
         "Oculoplastics",
@@ -853,26 +1030,55 @@
       "program": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html",
       "registration": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Major KOS autumn congress combined with APOIS and the Korea-China-Japan joint meeting, with emphasis on imaging, AI, new therapeutics and innovation.",
-      "deadlines": [
-        {
-          "kind": "upload",
-          "label": "Presentation file upload closes",
-          "date": "2026-09-30",
-          "timeKnown": false,
-          "zone": "Asia/Seoul",
-          "url": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html"
-        },
-        {
-          "kind": "registration",
-          "label": "Pre-registration closes",
-          "date": "2026-10-16",
-          "timeKnown": false,
-          "zone": "Asia/Seoul",
-          "url": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html"
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        37.57,
+        126.98
+      ],
+      "dateSource": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html"
+    },
+    {
+      "id": "bascom-palmer-curso-2026",
+      "featured": true,
+      "level": "specialty",
+      "title": "Bascom Palmer CURSO 2026",
+      "fullTitle": "XLVIII Bascom Palmer InterAmerican Course in Clinical Ophthalmology 2026",
+      "org": "Bascom Palmer Eye Institute",
+      "start": "2026-11-01",
+      "end": "2026-11-04",
+      "city": "Miami",
+      "country": "USA",
+      "region": "North America",
+      "mode": "In person",
+      "venue": "Hyatt Regency Miami Downtown",
+      "categories": [
+        "Cataract / IOL",
+        "Refractive",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Inflammation",
+        "Paediatric ophthalmology",
+        "Strabismus",
+        "Neuro-ophthalmology",
+        "Oculoplastics"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
+      "program": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
+      "registration": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "XLVIII Bascom Palmer InterAmerican Course in Clinical Ophthalmology 2026. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        25.77,
+        -80.19
+      ],
+      "dateSource": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology"
     },
     {
       "id": "sos-2026",
@@ -895,21 +1101,36 @@
         "Retina",
         "Glaucoma",
         "Inflammation",
-        "Pediatric ophthalmology",
+        "Paediatric ophthalmology",
         "Oculoplastics",
         "Research",
         "AI / management"
       ],
       "credits": "CME/CPD: check with organiser",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://sos-conferences.com/",
       "program": "https://sos-conferences.com/",
       "registration": "https://sos-conferences.com/",
       "submit": "https://sos-conferences.com/abstract-2026/",
-      "verified": "2026-08-16",
-      "description": "Saudi Arabia’s major national congress: cornea and young-ophthalmologist pre-conference on Nov 4, followed by a multispecialty main congress Nov 5–7.",
-      "deadlines": [],
-      "submissionNote": "Abstract submission is available on the official site; the checked page does not publish a closing date."
+      "verified": "2026-11-02",
+      "description": "Saudi Ophthalmology Congress: pre-conference on 4 November, main congress on 5–7 November. Abstract submission is closed.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Abstract submission (closed)",
+          "date": "2026-08-06",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://sos-conferences.com/abstract-2026/",
+          "note": ""
+        }
+      ],
+      "submissionNote": "Scientific submission is closed; see the organiser for participation and registration details.",
+      "coordinates": [
+        26.22,
+        50.2
+      ],
+      "dateSource": "https://sos-conferences.com/"
     },
     {
       "id": "ranzco-2026",
@@ -922,7 +1143,7 @@
       "end": "2026-11-09",
       "city": "Auckland",
       "country": "New Zealand",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "New Zealand International Convention Centre",
       "categories": [
@@ -939,9 +1160,14 @@
       "program": "https://ranzco.edu/congress/",
       "registration": "https://ranzco.edu/congress/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "RANZCO’s main annual scientific congress, covering clinical and surgical ophthalmology across subspecialties.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -36.85,
+        174.76
+      ],
+      "dateSource": "https://ranzco.edu/congress/"
     },
     {
       "id": "oor-inflammation-2026",
@@ -962,15 +1188,88 @@
         "Research"
       ],
       "credits": "CME/NMO accreditation: check with organiser",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://vospalenie.oor.ru/",
       "program": "https://vospalenie.oor.ru/",
       "registration": "https://vospalenie.oor.ru/",
       "submit": "https://vospalenie.oor.ru/",
-      "verified": "2026-08-16",
-      "description": "The official page indicates that submissions are available, but the 2026 closing date was not published on the checked page.",
+      "verified": "2026-11-02",
+      "description": "Sixth All-Russian conference on ocular inflammation, Moscow, 7 November 2026. Registration information is on the organiser website.",
       "deadlines": [],
-      "submissionNote": "Submissions are open/available on the official page; the exact 2026 deadline has not been confirmed."
+      "submissionNote": "Check scientific submission arrangements with the organiser.",
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://vospalenie.oor.ru/"
+    },
+    {
+      "id": "silk-road-almaty-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "Silk Road Eye Congress Almaty 2026",
+      "fullTitle": "First China–Central Asia Ophthalmology Congress",
+      "org": "Al-Farabi Kazakh National University / International Centre for Eye Health",
+      "start": "2026-11-07",
+      "end": "2026-11-07",
+      "city": "Almaty",
+      "country": "Kazakhstan",
+      "region": "CIS",
+      "mode": "In person",
+      "venue": "Al-Farabi Kazakh National University library, Room 409",
+      "categories": [
+        "Research",
+        "Cataract / IOL",
+        "Retina"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://mcoz.kz/specialist",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "First China–Central Asia Ophthalmology Congress.",
+      "deadlines": [],
+      "coordinates": [
+        43.24,
+        76.89
+      ],
+      "dateSource": "https://mcoz.kz/specialist"
+    },
+    {
+      "id": "isa-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "XVI ISA Meeting",
+      "fullTitle": "XVI International Strabismological Association Meeting",
+      "org": "International Strabismological Association",
+      "start": "2026-11-11",
+      "end": "2026-11-14",
+      "city": "Buenos Aires",
+      "country": "Argentina",
+      "region": "Latin America",
+      "mode": "In person",
+      "venue": "Auditorios UCA – Edificio San José",
+      "categories": [
+        "Strabismus",
+        "Paediatric ophthalmology",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://isa2026.com.ar/",
+      "program": "https://isa2026.com.ar/",
+      "registration": "https://isa2026.com.ar/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "XVI International Strabismological Association Meeting. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        -34.6,
+        -58.38
+      ],
+      "dateSource": "https://isa2026.com.ar/"
     },
     {
       "id": "trends-retina-2026",
@@ -996,19 +1295,43 @@
       "program": "https://miranza.es/en/tir-2026/",
       "registration": "https://miranza.es/en/tir-2026/",
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": [
-        {
-          "kind": "registration",
-          "label": "Early registration",
-          "date": "2026-09-15",
-          "timeKnown": false,
-          "zone": "Europe/Madrid",
-          "url": "https://miranza.es/en/tir-2026/",
-          "note": ""
-        }
-      ]
+      "verified": "2026-11-02",
+      "description": "6th Trends in Retina 2026. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        41.39,
+        2.17
+      ],
+      "dateSource": "https://miranza.es/en/tir-2026/"
+    },
+    {
+      "id": "wga-surgical-grand-rounds-8-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "8th WGA Surgical Grand Rounds",
+      "fullTitle": "8th WGA Surgical Grand Rounds: glaucoma after corneal transplantation and in Sturge–Weber syndrome",
+      "org": "World Glaucoma Association",
+      "start": "2026-11-12",
+      "end": "2026-11-12",
+      "city": "Online",
+      "country": "Worldwide",
+      "region": "Online / worldwide",
+      "mode": "Online",
+      "venue": "WGA online webinar",
+      "categories": [
+        "Glaucoma",
+        "Cornea"
+      ],
+      "credits": "Accreditation: check with organiser",
+      "submissionOpen": false,
+      "official": "https://wga.one/surgical-grand-rounds/",
+      "program": "https://wga.one/surgical-grand-rounds/",
+      "registration": "https://wga.one/surgical-grand-rounds-registration/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Case discussion of glaucoma after corneal transplantation by Ramesh Ayyala, with Karl Mercieca and Keith Barton. A second case covers glaucoma in Sturge–Weber syndrome. Registration is open; the programme page does not specify the start time.",
+      "deadlines": [],
+      "dateSource": "https://wga.one/surgical-grand-rounds/"
     },
     {
       "id": "joscrs-2026",
@@ -1032,32 +1355,60 @@
         "AI / management"
       ],
       "credits": "CME/CPD: check with organiser",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://www.jordan-valley.com/jos2026",
       "program": "https://www.jordan-valley.com/jos2026",
-      "registration": "https://www.jordan-valley.com/jos2026",
-      "submit": "https://www.jordan-valley.com/jos2026",
-      "verified": "2026-08-16",
+      "registration": "https://www.jordan-valley.com/events/jos26/registration",
+      "submit": "https://www.jordan-valley.com/events/jos26/abstracts",
+      "verified": "2026-11-02",
       "description": "International meeting on cataract, anterior segment, cornea, refractive surgery and glaucoma, with wet labs and an AI track.",
-      "deadlines": [
-        {
-          "kind": "abstract",
-          "label": "Abstract submission closes",
-          "date": "2026-09-15",
-          "timeKnown": false,
-          "zone": "Asia/Amman",
-          "url": "https://www.jordan-valley.com/jos2026"
-        }
-      ]
+      "deadlines": [],
+      "submissionNote": "Scientific submission is closed; see the organiser for participation and registration details.",
+      "coordinates": [
+        31.95,
+        35.91
+      ],
+      "dateSource": "https://www.jordan-valley.com/jos2026"
     },
     {
-      "id": "acs-2026",
+      "id": "ukiscrs-50-2026",
       "featured": false,
+      "title": "UKISCRS 50th Annual Congress",
+      "fullTitle": "UKISCRS 50th Annual Congress",
+      "org": "UK and Ireland Society of Cataract and Refractive Surgeons",
+      "start": "2026-11-19",
+      "end": "2026-11-20",
+      "city": "London",
+      "country": "United Kingdom",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "County Hall, London",
+      "categories": [
+        "Cataract / IOL",
+        "Refractive",
+        "Cornea"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.ukiscrs.org.uk/",
+      "program": "https://www.ukiscrs.org.uk/big50",
+      "registration": "https://www.ukiscrs.org.uk/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "UKISCRS 50th Annual Congress. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        51.51,
+        -0.13
+      ],
+      "dateSource": "https://www.ukiscrs.org.uk/"
+    },
+    {
+      "id": "asia-cornea-2026",
+      "featured": false,
+      "level": "specialty",
       "title": "Asia Cornea Society 2026",
-      "logo": "https://www.acshk26.com/web/images/event-slider.jpg",
-      "logoAlt": "Asia Cornea Society 2026 — official event artwork",
-      "logoType": "banner",
-      "fullTitle": "10th Biennial Scientific Meeting of the Asia Cornea Society",
+      "fullTitle": "10th Asia Cornea Society Biennial Scientific Meeting",
       "org": "Asia Cornea Society",
       "start": "2026-11-27",
       "end": "2026-11-29",
@@ -1070,25 +1421,30 @@
         "Cornea",
         "Research"
       ],
-      "credits": "CME: check with organiser",
+      "credits": "CME/CPD: check with organiser",
       "submissionOpen": false,
       "official": "https://www.acshk26.com/web/",
       "program": "https://www.acshk26.com/web/subpage.php?mid=123",
       "registration": "https://www.acshk26.com/web/",
       "submit": null,
-      "verified": "2026-10-12",
-      "description": "Asia Cornea Society biennial meeting featuring wet labs, DMEK/DSAEK/DALK, keratoconus, corneal infection, ocular surface disease, eye banking and modern keratoplasty.",
+      "verified": "2026-11-02",
+      "description": "10th Asia Cornea Society Biennial Scientific Meeting. Dates and location are listed by the organiser; further details are available at the official source.",
       "deadlines": [
         {
           "kind": "registration",
-          "label": "Advance registration deadline",
+          "label": "Advance registration",
           "date": "2026-11-26",
           "timeKnown": false,
           "zone": "Asia/Hong_Kong",
           "url": "https://www.acshk26.com/web/",
-          "note": "Onsite registration follows on 27–29 November."
+          "note": ""
         }
-      ]
+      ],
+      "coordinates": [
+        22.32,
+        114.17
+      ],
+      "dateSource": "https://www.acshk26.com/web/"
     },
     {
       "id": "pirogov-eye-forum-2026",
@@ -1117,9 +1473,14 @@
       "program": "https://pirogoveyeforum.ru/",
       "registration": "https://pirogoveyeforum.ru/",
       "submit": null,
-      "verified": "2026-10-22",
+      "verified": "2026-11-02",
       "description": "Registration is open. Complicated cataract, retinal detachment, glaucoma, ocular trauma, live surgery and the New Era young scientists session.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://pirogoveyeforum.ru/"
     },
     {
       "id": "coecsa-2026",
@@ -1148,9 +1509,24 @@
       "program": "https://www.coecsa-congress.org/",
       "registration": "https://www.coecsa-congress.org/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The 13th COECSA scientific congress for Eastern, Central and Southern Africa. Officially rescheduled to Dec 2–4, 2026.",
-      "deadlines": []
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Abstract submission (closed)",
+          "date": "2026-09-30",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://www.coecsa-congress.org/abstracts-copy/",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        0.35,
+        32.58
+      ],
+      "dateSource": "https://www.coecsa-congress.org/"
     },
     {
       "id": "epomec-2026",
@@ -1173,38 +1549,33 @@
         "Retina",
         "Glaucoma",
         "Inflammation",
-        "Pediatric ophthalmology",
+        "Paediatric ophthalmology",
         "Oculoplastics"
       ],
       "credits": "CME/CPD: check with organiser",
       "submissionOpen": false,
       "official": "https://www.epomec.ae/",
-      "program": "https://www.epomec.ae/",
-      "registration": "https://www.epomec.ae/",
+      "program": "https://epomec.ae/program-at-a-glance-2026/",
+      "registration": "https://epomec.ae/registration/",
       "submit": "https://www.epomec.ae/abstract-submission/",
-      "verified": "2026-10-08",
+      "verified": "2026-11-02",
       "description": "The 13th MENA meeting on evolving ophthalmic practice in Dubai; organisers expect more than 3,000 delegates and exhibitors.",
       "deadlines": [
         {
-          "kind": "faculty",
-          "label": "Scientific committee feedback",
-          "date": "2026-10-16T23:59:00+04:00",
-          "timeKnown": true,
-          "zone": "GST",
-          "url": "https://www.epomec.ae/abstract-submission/",
-          "note": ""
-        },
-        {
           "kind": "abstract",
-          "label": "Final abstract deadline (closed)",
+          "label": "Final abstract submission (closed)",
           "date": "2026-09-25T18:00:00+04:00",
           "timeKnown": true,
-          "zone": "GST",
+          "zone": "Asia/Dubai",
           "url": "https://www.epomec.ae/abstract-submission/",
-          "note": "Oral, ePoster and video submissions closed; committee feedback expected 16 October 2026."
+          "note": ""
         }
       ],
-      "submissionNote": "3–5 December retained; official materials also display 4–6 December. Confirm dates with the organiser before booking."
+      "coordinates": [
+        25.2,
+        55.27
+      ],
+      "dateSource": "https://epomec.ae/welcome-message/"
     },
     {
       "id": "mioc-2026",
@@ -1229,39 +1600,117 @@
         "Research"
       ],
       "credits": "CME/CPD: check with organiser",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://mioc.org.om/",
       "program": "https://mioc.org.om/",
-      "registration": "https://mioc.org.om/important-dates",
+      "registration": "https://mioc.org.om/online-registration",
       "submit": "https://mioc.org.om/abstract-submission",
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "International ophthalmology meeting in Muscat with free papers, clinical cases, posters, videos, wet labs and educational courses.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Abstract submission deadline",
-          "date": "2026-09-01",
+          "label": "Abstract submission (closed)",
+          "date": "2026-09-25",
           "timeKnown": false,
-          "zone": "Asia/Muscat",
-          "url": "https://mioc.org.om/abstract-submission"
+          "zone": "",
+          "url": "https://mioc.org.om/important-dates",
+          "note": ""
         },
         {
           "kind": "registration",
-          "label": "Early-bird registration closes",
-          "date": "2026-10-15",
+          "label": "Early-bird registration",
+          "date": "2026-11-15",
           "timeKnown": false,
           "zone": "Asia/Muscat",
-          "url": "https://mioc.org.om/important-dates"
-        },
-        {
-          "kind": "registration",
-          "label": "Standard registration deadline",
-          "date": "2026-11-20",
-          "timeKnown": false,
-          "zone": "Asia/Muscat",
-          "url": "https://mioc.org.om/important-dates"
+          "url": "https://mioc.org.om/online-registration",
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Abstract submission is closed. Standard registration dates conflict between organiser pages (20 / 25 November); confirm directly.",
+      "coordinates": [
+        23.59,
+        58.41
+      ],
+      "dateSource": "https://mioc.org.om/important-dates"
+    },
+    {
+      "id": "japan-retina-2026",
+      "featured": false,
+      "title": "65th JRVS Annual Meeting / 6th Asia Retina Congress",
+      "fullTitle": "65th Annual Meeting of the Japan Retina and Vitreous Society, joint with the 6th Asia Retina Congress",
+      "org": "Japan Retina and Vitreous Society",
+      "start": "2026-12-04",
+      "end": "2026-12-06",
+      "city": "Tokyo",
+      "country": "Japan",
+      "region": "Asia-Pacific",
+      "mode": "In person",
+      "venue": "Tokyo International Forum",
+      "categories": [
+        "Retina",
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://convention.jtbcom.co.jp/65moumaku/summary/index.html",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "65th Annual Meeting of the Japan Retina and Vitreous Society, joint with the 6th Asia Retina Congress. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        35.68,
+        139.69
+      ],
+      "dateSource": "https://convention.jtbcom.co.jp/65moumaku/summary/index.html"
+    },
+    {
+      "id": "belarus-ophthalmology-2026",
+      "featured": false,
+      "level": "specialty",
+      "title": "Current Issues in Ophthalmology 2026",
+      "fullTitle": "19th Republican Conference with International Participation: Current Issues in Ophthalmology",
+      "org": "Belarusian State Medical University",
+      "start": "2026-12-10",
+      "end": "2026-12-11",
+      "city": "Minsk",
+      "country": "Belarus",
+      "region": "CIS",
+      "mode": "In person",
+      "venue": "Institute of Advanced Training, BSMU, P. Brovki Street 3",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://eyecongress.by/ru-RU/congressinfo",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "19th Republican Conference with International Participation: Current Issues in Ophthalmology.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Talk and publication submissions (closed)",
+          "date": "2026-10-05",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://eyecongress.by/ru-RU/congressinfo",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        53.9,
+        27.56
+      ],
+      "dateSource": "https://eyecongress.by/ru-RU/congressinfo"
     },
     {
       "id": "asmhk-2026",
@@ -1283,23 +1732,158 @@
         "AI / management"
       ],
       "credits": "CME/CPD: check with organiser",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://asmhk2026.com/",
       "program": "https://asmhk2026.com/",
       "registration": "https://asmhk2026.com/",
       "submit": "https://asmhk2026.com/abstract-submission/",
-      "verified": "2026-08-16",
-      "description": "Hong Kong’s flagship ophthalmology meeting. The 2026 theme is Artificial Intelligence and Retinal Disease, with original research, clinical updates and surgical discussions.",
+      "verified": "2026-11-02",
+      "description": "Annual scientific meeting in Hong Kong; abstract submission closed on 11 September 2026.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Abstract submission closes",
+          "label": "Abstract submission (closed)",
           "date": "2026-09-11",
           "timeKnown": false,
-          "zone": "Asia/Hong_Kong",
-          "url": "https://asmhk2026.com/abstract-submission/"
+          "zone": "",
+          "url": "https://asmhk2026.com/abstract-submission/",
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Scientific submission is closed; see the organiser for participation and registration details.",
+      "coordinates": [
+        22.32,
+        114.17
+      ],
+      "dateSource": "https://asmhk2026.com/"
+    },
+    {
+      "id": "moorf-uae-2027",
+      "featured": false,
+      "title": "9th Moorfields UAE: A Year in Focus",
+      "fullTitle": "9th Moorfields UAE: A Year in Focus",
+      "org": "Moorfields Eye Hospitals UAE",
+      "start": "2027-01-09",
+      "end": "2027-01-10",
+      "city": "Dubai",
+      "country": "UAE",
+      "region": "Middle East",
+      "mode": "Hybrid",
+      "venue": "Conrad Dubai (9 January); online (10 January)",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Neuro-ophthalmology",
+        "Oculoplastics",
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://events.moorfields.ae/",
+      "program": "https://events.moorfields.ae/",
+      "registration": "https://events.moorfields.ae/registration",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "The ninth Moorfields UAE conference: in-person sessions in Dubai on 9 January and online sessions on 10 January 2027.",
+      "deadlines": [
+        {
+          "kind": "registration",
+          "label": "Early-bird registration",
+          "date": "2026-11-14",
+          "timeKnown": false,
+          "zone": "Asia/Dubai",
+          "url": "https://events.moorfields.ae/registration",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        25.2,
+        55.27
+      ],
+      "dateSource": "https://events.moorfields.ae/"
+    },
+    {
+      "id": "smo-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "40th Moroccan Ophthalmology Congress",
+      "fullTitle": "40th National Congress of the Moroccan Society of Ophthalmology",
+      "org": "Société Marocaine d’Ophtalmologie",
+      "start": "2027-01-20",
+      "end": "2027-01-23",
+      "city": "Rabat",
+      "country": "Morocco",
+      "region": "Africa",
+      "mode": "In person",
+      "venue": "Four Seasons Hotel Rabat",
+      "categories": [
+        "Inflammation",
+        "Paediatric ophthalmology",
+        "Oculoplastics",
+        "Cornea",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://smo.ma/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "40th National Congress of the Moroccan Society of Ophthalmology.",
+      "deadlines": [],
+      "coordinates": [
+        34.02,
+        -6.84
+      ],
+      "dateSource": "https://smo.ma/"
+    },
+    {
+      "id": "japan-ophthalmic-surgery-2027",
+      "featured": false,
+      "title": "50th JSOS Annual Meeting",
+      "fullTitle": "50th Annual Meeting of the Japanese Society of Ophthalmic Surgery",
+      "org": "Japanese Society of Ophthalmic Surgery",
+      "start": "2027-01-29",
+      "end": "2027-01-31",
+      "city": "Tokyo",
+      "country": "Japan",
+      "region": "Asia-Pacific",
+      "mode": "In person",
+      "venue": "Tokyo International Forum",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://50.jsos.jp/",
+      "program": "https://50.jsos.jp/",
+      "registration": "https://50.jsos.jp/registration",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "50th Annual Meeting of the Japanese Society of Ophthalmic Surgery. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [
+        {
+          "kind": "registration",
+          "label": "Advance registration",
+          "date": "2026-11-12",
+          "timeKnown": false,
+          "zone": "Asia/Tokyo",
+          "url": "https://50.jsos.jp/registration",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        35.68,
+        139.69
+      ],
+      "dateSource": "https://50.jsos.jp/"
     },
     {
       "id": "sopla-2027",
@@ -1316,7 +1900,7 @@
       "mode": "In person",
       "venue": "Hotel Intercontinental Movich Medellin",
       "categories": [
-        "Pediatric ophthalmology",
+        "Paediatric ophthalmology",
         "Strabismus"
       ],
       "credits": "CME/CPD: check with organiser",
@@ -1325,9 +1909,46 @@
       "program": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
       "registration": "https://www.sopla.org/Congreso/Congreso2026",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "International Latin American congress focused on paediatric ophthalmology and strabismus.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        6.24,
+        -75.58
+      ],
+      "dateSource": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/"
+    },
+    {
+      "id": "japan-cornea-2027",
+      "featured": false,
+      "title": "Japan Cornea Conference 2027",
+      "fullTitle": "51st Japan Cornea Society / 43rd Keratoplasty Society of Japan Joint Meeting",
+      "org": "Japan Cornea Society / Keratoplasty Society of Japan",
+      "start": "2027-02-11",
+      "end": "2027-02-13",
+      "city": "Ginowan, Okinawa",
+      "country": "Japan",
+      "region": "Asia-Pacific",
+      "mode": "In person",
+      "venue": "Okinawa Convention Center",
+      "categories": [
+        "Cornea",
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.okinawa-congre.co.jp/cornea2027/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "51st Japan Cornea Society / 43rd Keratoplasty Society of Japan Joint Meeting. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        26.28,
+        127.75
+      ],
+      "dateSource": "https://www.okinawa-congre.co.jp/cornea2027/outline/index.html"
     },
     {
       "id": "glaucoma-vector-2027",
@@ -1352,10 +1973,15 @@
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
+      "verified": "2026-11-02",
+      "description": "VII All-Russian Conference with International Participation “Glaucoma Treatment: Innovative Vector”. Dates and location are listed by the organiser; further details are available at the official source.",
       "deadlines": [],
-      "level": "specialty"
+      "level": "specialty",
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://oor.ru/events"
     },
     {
       "id": "aioc-2027",
@@ -1368,7 +1994,7 @@
       "end": "2027-02-21",
       "city": "Gandhinagar",
       "country": "India",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Mahatma Mandir Convention and Exhibition Centre",
       "categories": [
@@ -1384,7 +2010,7 @@
       "program": "https://www.aios.org/aioc2027.php",
       "registration": "https://www.aios.org/aioc2027.php",
       "submit": null,
-      "verified": "2026-10-22",
+      "verified": "2026-11-02",
       "description": "85th AIOS annual congress. Registration is open; the main abstract submission period has ended.",
       "deadlines": [
         {
@@ -1395,8 +2021,22 @@
           "zone": "Asia/Kolkata",
           "url": "https://www.aios.org/aioc2027.php",
           "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Advance registration",
+          "date": "2027-01-15",
+          "timeKnown": false,
+          "zone": "Asia/Kolkata",
+          "url": "https://www.aios.org/aioc2027.php",
+          "note": ""
         }
-      ]
+      ],
+      "coordinates": [
+        23.22,
+        72.65
+      ],
+      "dateSource": "https://www.aios.org/aioc2027.php"
     },
     {
       "id": "euretina-sfm-2027",
@@ -1422,9 +2062,14 @@
       "program": "https://euretina.org/sfm-2027/",
       "registration": "https://euretina.org/sfm-2027/",
       "submit": null,
-      "verified": "2026-10-15",
+      "verified": "2026-11-02",
       "description": "Meeting on inherited retinal diseases, covering genotyping, imaging, emerging treatments and clinical cases. Registration details are forthcoming.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        46.06,
+        14.51
+      ],
+      "dateSource": "https://euretina.org/sfm-2027/"
     },
     {
       "id": "oculoplastics-2027",
@@ -1448,9 +2093,14 @@
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-10-12",
+      "verified": "2026-11-02",
       "description": "Dates published in the official RSO calendar; registration and submission details pending.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://oor.ru/events"
     },
     {
       "id": "ags-2027",
@@ -1476,9 +2126,14 @@
       "program": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar",
       "registration": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "American Glaucoma Society annual specialist meeting covering glaucoma diagnosis, surgery and research.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        32.22,
+        -110.97
+      ],
+      "dateSource": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar"
     },
     {
       "id": "ossa-2027",
@@ -1504,32 +2159,39 @@
         "Research"
       ],
       "credits": "CME/CPD: check with organiser",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://ossacongress.co.za/",
       "program": "https://ossacongress.co.za/programme/",
       "registration": "https://ossacongress.co.za/attendance/",
       "submit": "https://ossacongress.co.za/programme/",
-      "verified": "2026-10-15",
-      "description": "South Africa’s national ophthalmology congress, with masterclasses on Mar 10 and the main scientific programme Mar 11–13.",
+      "verified": "2026-11-02",
+      "description": "South African ophthalmology congress in Cape Town, including the pre-congress day on 10 March. Abstract submission is closed.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Abstract submission deadline",
+          "label": "Abstract submission (closed)",
           "date": "2026-08-28",
           "timeKnown": false,
-          "zone": "Africa/Johannesburg",
-          "url": "https://ossacongress.co.za/introduction/"
+          "zone": "",
+          "url": "https://ossacongress.co.za/introduction/",
+          "note": ""
         },
         {
           "kind": "registration",
-          "label": "Early bird: register and pay",
+          "label": "Early-bird registration and payment",
           "date": "2026-11-06",
           "timeKnown": false,
           "zone": "Africa/Johannesburg",
-          "url": "https://ossacongress.co.za/attendance/",
-          "note": "Fee table: until 6 November; standard fees from 7 November. Exact cutoff time is not specified."
+          "url": "https://ossacongress.co.za/introduction/",
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Scientific submission is closed; see the organiser for participation and registration details.",
+      "coordinates": [
+        -33.92,
+        18.42
+      ],
+      "dateSource": "https://ossacongress.co.za/"
     },
     {
       "id": "aapos-2027",
@@ -1546,45 +2208,52 @@
       "mode": "In person",
       "venue": "Washington, DC",
       "categories": [
-        "Pediatric ophthalmology",
+        "Paediatric ophthalmology",
         "Strabismus",
         "Research"
       ],
       "credits": "CME/CPD: check with organiser",
       "submissionOpen": false,
-      "official": "https://www.aapos.org/education-and-events/annual-meeting2026368",
-      "program": "https://www.aapos.org/education-and-events/annual-meeting2026368",
-      "registration": "https://www.aapos.org/education-and-events/annual-meeting2026368",
-      "submit": "https://www.aapos.org/education-and-events/annual-meeting2026368",
-      "verified": "2026-08-16",
+      "official": "https://www.aapos.org/education-and-events/annual-meeting2027",
+      "program": "https://www.aapos.org/education-and-events/annual-meeting2027",
+      "registration": "https://www.aapos.org/education-and-events/annual-meeting2027",
+      "submit": "https://www.aapos.org/education-and-events/annual-meeting2027/annual-meeting-abstracts2026561",
+      "verified": "2026-11-02",
       "description": "The 52nd AAPOS specialist annual meeting in paediatric ophthalmology and strabismus.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Abstract submission deadline",
+          "label": "Abstract submission (closed)",
           "date": "2026-09-22",
           "timeKnown": false,
-          "zone": "America/New_York",
-          "url": "https://www.aapos.org/education-and-events/annual-meeting2026368",
-          "note": "Submission opens Aug 17, 2026."
+          "zone": "",
+          "url": "https://www.aapos.org/education-and-events/annual-meeting2027/annual-meeting-abstracts2026561",
+          "note": ""
         },
         {
           "kind": "faculty",
-          "label": "Presenter registration deadline",
+          "label": "Presenting author registration",
           "date": "2026-12-15",
           "timeKnown": false,
           "zone": "America/New_York",
-          "url": "https://www.aapos.org/education-and-events/annual-meeting2026368"
+          "url": "https://www.aapos.org/education-and-events/annual-meeting2027",
+          "note": ""
         },
         {
           "kind": "registration",
-          "label": "Early registration deadline",
+          "label": "Early registration",
           "date": "2027-01-14",
           "timeKnown": false,
           "zone": "America/New_York",
-          "url": "https://www.aapos.org/education-and-events/annual-meeting2026368"
+          "url": "https://www.aapos.org/education-and-events/annual-meeting2027",
+          "note": ""
         }
-      ]
+      ],
+      "coordinates": [
+        38.91,
+        -77.04
+      ],
+      "dateSource": "https://www.aapos.org/education-and-events/annual-meeting2027"
     },
     {
       "id": "escrs-winter-2027",
@@ -1606,34 +2275,39 @@
         "Cornea"
       ],
       "credits": "CME/CPD: check with organiser",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://wintermeeting.escrs.org/",
       "program": "https://wintermeeting.escrs.org/",
       "registration": "https://wintermeeting.escrs.org/registrations/",
       "submit": "https://wintermeeting.escrs.org/coming-soon/",
-      "verified": "2026-10-26",
-      "description": "31st ESCRS Winter Meeting in Cairo. Abstracts and Young Ophthalmologists Programme surgical videos are being accepted.",
+      "verified": "2026-11-02",
+      "description": "31st ESCRS Winter Meeting in Cairo. Scientific abstracts and YOP surgical video submissions closed on 1 November 2026.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Abstracts: free papers, cornea cases, posters",
+          "label": "Abstract submission (closed)",
           "date": "2026-11-01T23:59:00+01:00",
           "timeKnown": true,
-          "zone": "CET",
+          "zone": "Europe/Paris",
           "url": "https://wintermeeting.escrs.org/abstracts/abstract-submissions/",
-          "note": "Notifications in December 2026."
+          "note": ""
         },
         {
-          "kind": "upload",
-          "label": "YOP surgical video submission",
+          "kind": "abstract",
+          "label": "YOP abstract and video submission (closed)",
           "date": "2026-11-01T23:59:00+01:00",
           "timeKnown": true,
-          "zone": "CET",
+          "zone": "Europe/Paris",
           "url": "https://wintermeeting.escrs.org/coming-soon/",
-          "note": "Up to 3 minutes with a short abstract. Best educational video: €750 and meeting registration."
+          "note": ""
         }
       ],
-      "submissionNote": "Free papers, cornea cases, posters/ePosters; YOP surgical videos up to 3 minutes. Best educational video: €750 and registration. Selected ESCRS trainee members with accepted work may receive registration support."
+      "submissionNote": "Scientific submission is closed; see the organiser for participation and registration details.",
+      "coordinates": [
+        30.04,
+        31.24
+      ],
+      "dateSource": "https://wintermeeting.escrs.org/"
     },
     {
       "id": "paao-2027",
@@ -1668,26 +2342,26 @@
       "program": "https://paao2027.com/",
       "registration": "https://paao2027.com/",
       "submit": "https://abstracts.paao2027.com/en/landing/",
-      "verified": "2026-10-26",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
+      "verified": "2026-11-02",
+      "description": "XXXVII Pan-American Congress of Ophthalmology. Dates and location are listed by the organiser; further details are available at the official source.",
       "deadlines": [
-        {
-          "kind": "registration",
-          "label": "Early-bird registration",
-          "date": "2026-10-15",
-          "timeKnown": false,
-          "zone": "America/Lima",
-          "url": "https://paao2027.com/",
-          "note": "Early-bird rates: PAAO member $400; non-member ophthalmologist $650; speaker/resident/fellow $250."
-        },
         {
           "kind": "grant",
           "label": "Alvaro Rodriguez Travel Award",
           "date": "2026-12-01",
           "timeKnown": false,
-          "zone": "America/Lima",
+          "zone": "",
           "url": "https://paao.org/meetings/prizes-and-awards/alvaro-rodriguez-travel-award/",
-          "note": "For ophthalmologists 45 or younger; retina or glaucoma; $1,500 and free congress registration."
+          "note": ""
+        },
+        {
+          "kind": "grant",
+          "label": "Troutman–Véronneau Prize",
+          "date": "2026-12-01",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://paao.org/meetings/troutman-veronneau-prize-application/",
+          "note": ""
         },
         {
           "kind": "abstract",
@@ -1696,19 +2370,14 @@
           "timeKnown": true,
           "zone": "America/Lima",
           "url": "https://abstracts.paao2027.com/en/landing/",
-          "note": "Submission closes at 17:00 Lima time."
-        },
-        {
-          "kind": "grant",
-          "label": "Troutman–Véronneau Prize",
-          "date": "2026-12-01",
-          "timeKnown": false,
-          "zone": "America/Lima",
-          "url": "https://paao.org/meetings/troutman-veronneau-prize-application/",
-          "note": "US$10,000 for original unpublished cornea research. First author aged 45 or younger; active PAAO membership, manuscript, CV and reference required. Closing time not published."
+          "note": ""
         }
       ],
-      "submissionNote": "Free papers, posters and videos; single case reports must be posters."
+      "coordinates": [
+        -12.05,
+        -77.04
+      ],
+      "dateSource": "https://paao2027.com/"
     },
     {
       "id": "apao-2027",
@@ -1723,7 +2392,7 @@
       "end": "2027-03-21",
       "city": "Singapore",
       "country": "Singapore",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Suntec Singapore Convention & Exhibition Centre",
       "categories": [
@@ -1741,74 +2410,66 @@
       "program": "https://2027.apaophth.org/program-overview/",
       "registration": "https://2027.apaophth.org/registration/",
       "submit": "https://congress.2027.apaophth.org/",
-      "verified": "2026-10-08",
+      "verified": "2026-11-02",
       "description": "The 42nd APAO Congress in Singapore, expected to host more than 7,000 ophthalmologists and over 800 international speakers across 19 subspecialties, with dedicated AI, wet-lab and practical-course content.",
       "deadlines": [
         {
-          "kind": "registration",
-          "label": "Early Bird Registration closes",
-          "date": "2026-10-12",
-          "timeKnown": false,
-          "zone": "SGT / GMT+8",
-          "url": "https://2027.apaophth.org/important-dates/",
-          "note": "Official important-dates list."
-        },
-        {
-          "kind": "registration",
-          "label": "Advance Registration closes",
-          "date": "2027-02-25",
-          "timeKnown": false,
-          "zone": "SGT / GMT+8",
-          "url": "https://2027.apaophth.org/important-dates/",
-          "note": "Onsite registration follows."
-        },
-        {
-          "kind": "faculty",
-          "label": "Accepted author attendance confirmation",
-          "date": "2026-10-30",
-          "timeKnown": false,
-          "zone": "Asia/Singapore",
-          "url": "https://2027.apaophth.org/apao-2027-faqs/",
-          "note": "Respond using the acceptance email link; registration and payment are required."
-        },
-        {
           "kind": "abstract",
-          "label": "Final abstract submission deadline",
+          "label": "Final abstract submission (closed)",
           "date": "2026-09-23T23:59:00+08:00",
           "timeKnown": true,
-          "zone": "GMT+8",
+          "zone": "Asia/Singapore",
           "url": "https://2027.apaophth.org/latest-news/",
-          "note": "Submission closed; abstract results expected by 10 October 2026."
-        },
-        {
-          "kind": "grant",
-          "label": "Travel grants",
-          "date": "2026-09-30T23:59:00+08:00",
-          "timeKnown": true,
-          "zone": "GMT+8",
-          "url": "https://2027.apaophth.org/travel-grants/",
-          "note": "Applications closed."
-        },
-        {
-          "kind": "registration",
-          "label": "Early-bird registration",
-          "date": "2026-10-12",
-          "timeKnown": false,
-          "zone": "GMT+8",
-          "url": "https://2027.apaophth.org/",
           "note": ""
         },
         {
-          "kind": "confirmation",
-          "label": "Author participation confirmation",
-          "date": "2026-10-30",
+          "kind": "registration",
+          "label": "Advance registration",
+          "date": "2027-02-25",
           "timeKnown": false,
-          "zone": "GMT+8",
-          "url": "https://2027.apaophth.org/",
+          "zone": "Asia/Singapore",
+          "url": "https://2027.apaophth.org/important-dates/",
           "note": ""
         }
       ],
-      "submissionNote": "Submission closed on 23 September 2026, extended from 7 September."
+      "submissionNote": "Abstract submission is closed. Accepted authors must follow the individual confirmation date in the acceptance email or scientific portal.",
+      "coordinates": [
+        1.35,
+        103.82
+      ],
+      "dateSource": "https://2027.apaophth.org/"
+    },
+    {
+      "id": "nanos-2027",
+      "featured": false,
+      "title": "NANOS Annual Meeting 2027",
+      "fullTitle": "NANOS Annual Meeting 2027",
+      "org": "North American Neuro-Ophthalmology Society",
+      "start": "2027-03-19",
+      "end": "2027-03-23",
+      "city": "San Diego",
+      "country": "USA",
+      "region": "North America",
+      "mode": "In person",
+      "venue": "Sheraton San Diego Resort",
+      "categories": [
+        "Neuro-ophthalmology",
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.nanosweb.org/nanos-2027-san-diego/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "NANOS Annual Meeting 2027. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        32.72,
+        -117.16
+      ],
+      "dateSource": "https://www.nanosweb.org/nanos-2027-san-diego/"
     },
     {
       "id": "fuji-retina-2027",
@@ -1821,7 +2482,7 @@
       "end": "2027-03-28",
       "city": "Tokyo",
       "country": "Japan",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Toranomon Hills Forum, Tokyo",
       "categories": [
@@ -1835,12 +2496,12 @@
       "program": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
       "registration": "https://convention.jtbcom.co.jp/fujiretina/registration/index.html",
       "submit": "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
-      "verified": "2026-10-19",
+      "verified": "2026-11-02",
       "description": "International vitreoretinal meeting in Tokyo in association with the Japanese Retina and Vitreous Society; the official language is English.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Poster abstracts",
+          "label": "Poster abstract submission",
           "date": "2026-12-15",
           "timeKnown": false,
           "zone": "Asia/Tokyo",
@@ -1849,7 +2510,7 @@
         },
         {
           "kind": "grant",
-          "label": "Travel grant application with abstract",
+          "label": "Travel grant with abstract",
           "date": "2026-12-15",
           "timeKnown": false,
           "zone": "Asia/Tokyo",
@@ -1866,7 +2527,11 @@
           "note": ""
         }
       ],
-      "submissionNote": "Posters only; English, up to 250 words. Ten $700 grants for non-Japanese overseas ophthalmologists; apply with the abstract, payment follows an in-person presentation. Registration is open."
+      "coordinates": [
+        35.68,
+        139.69
+      ],
+      "dateSource": "https://convention.jtbcom.co.jp/fujiretina/information/index.html"
     },
     {
       "id": "ascrs-2027",
@@ -1888,42 +2553,57 @@
         "Glaucoma"
       ],
       "credits": "Up to 31 AMA PRA Category 1 Credits™",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://annualmeeting.ascrs.org/",
       "program": "https://annualmeeting.ascrs.org/",
       "registration": "https://annualmeeting.ascrs.org/",
       "submit": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
-      "verified": "2026-08-16",
-      "description": "Call for Submissions is open for scientific papers, electronic posters, instructional courses and scientific films.",
+      "verified": "2026-11-02",
+      "description": "ASCRS annual meeting in San Diego. New scientific submissions are closed; film and poster uploads have separate deadlines.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Papers · Posters · Courses · Films",
-          "date": "2026-09-07T23:59:00-07:00",
-          "timeKnown": true,
-          "zone": "PT",
+          "label": "Abstract submission (closed)",
+          "date": "2026-09-18",
+          "timeKnown": false,
+          "zone": "",
           "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
-          "note": "11:59 PM Pacific Time."
+          "note": ""
         },
         {
           "kind": "upload",
-          "label": "Accepted e-poster upload",
+          "label": "Film upload / e-posters for judging",
           "date": "2027-01-25",
           "timeKnown": false,
-          "zone": "America/Los_Angeles",
+          "zone": "",
           "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
-          "note": "For accepted submissions."
+          "note": ""
+        },
+        {
+          "kind": "upload",
+          "label": "Final electronic poster and course material upload",
+          "date": "2027-02-25",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+          "note": ""
         },
         {
           "kind": "faculty",
-          "label": "Speaker registration",
+          "label": "Faculty and presenting author registration",
           "date": "2027-03-02",
           "timeKnown": false,
-          "zone": "America/Los_Angeles",
+          "zone": "",
           "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
-          "note": "Speaker registration deadline."
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "Scientific submission is closed; see the organiser for participation and registration details.",
+      "coordinates": [
+        32.72,
+        -117.16
+      ],
+      "dateSource": "https://annualmeeting.ascrs.org/"
     },
     {
       "id": "vitreoretinal-technologies-2027",
@@ -1948,9 +2628,47 @@
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-10-12",
+      "verified": "2026-11-02",
       "description": "Dates published in the official RSO calendar; registration and submission details pending.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        54.74,
+        55.97
+      ],
+      "dateSource": "https://oor.ru/events"
+    },
+    {
+      "id": "aao-midyear-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "AAO Mid-Year Forum 2027",
+      "fullTitle": "American Academy of Ophthalmology Mid-Year Forum 2027",
+      "org": "American Academy of Ophthalmology",
+      "start": "2027-04-07",
+      "end": "2027-04-10",
+      "city": "Washington, DC",
+      "country": "USA",
+      "region": "North America",
+      "mode": "In person",
+      "venue": "Washington, DC",
+      "categories": [
+        "AI / management",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://aao.org/mid-year-forum/overview",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "American Academy of Ophthalmology Mid-Year Forum 2027.",
+      "deadlines": [],
+      "coordinates": [
+        38.91,
+        -77.04
+      ],
+      "dateSource": "https://apaophth.org/congress/calendar/"
     },
     {
       "id": "wsopras-2027",
@@ -1963,7 +2681,7 @@
       "end": "2027-04-10",
       "city": "Beijing",
       "country": "China",
-      "region": "Greater China",
+      "region": "China / Greater China",
       "mode": "In person",
       "venue": "Beijing Kerry Hotel",
       "categories": [
@@ -1976,37 +2694,79 @@
       "program": "https://www.wsopras2027.org/index.php?c=category&id=2",
       "registration": "https://www.wsopras2027.org/",
       "submit": "https://www.wsopras2027.org/index.php?c=category&id=3",
-      "verified": "2026-10-26",
+      "verified": "2026-11-02",
       "description": "WSOPRAS 2027 in Beijing: orbital, lacrimal, eyelid and aesthetic surgery, scientific presentations and live surgery.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "E-Poster / E-Video submission",
-          "date": "2026-12-14",
+          "label": "Video file submission",
+          "date": "2026-11-30",
           "timeKnown": false,
-          "zone": "Asia/Shanghai",
+          "zone": "",
           "url": "https://www.wsopras2027.org/index.php?c=category&id=3",
-          "note": "Video MP4 up to 3 minutes; written abstract required."
+          "note": "The video-file cutoff is earlier than the abstract cutoff."
         },
         {
-          "kind": "faculty",
-          "label": "Acceptance notification",
-          "date": "2027-01-18",
+          "kind": "abstract",
+          "label": "Abstract submission",
+          "date": "2026-12-14",
           "timeKnown": false,
-          "zone": "Asia/Shanghai",
+          "zone": "",
           "url": "https://www.wsopras2027.org/index.php?c=category&id=3",
-          "note": "Date from Important Dates; the form’s generic success message still shows the old 4 January date."
+          "note": ""
         },
         {
           "kind": "registration",
           "label": "Presenter registration / early-bird deadline",
           "date": "2027-02-08",
           "timeKnown": false,
-          "zone": "Asia/Shanghai",
+          "zone": "",
           "url": "https://www.wsopras2027.org/index.php?c=category&id=3",
-          "note": "Accepted work is withdrawn if its presenting author is not registered by this date."
+          "note": ""
         }
-      ]
+      ],
+      "submissionNote": "The organiser lists 14 December for abstracts but 30 November for video files; submit videos by the earlier cutoff.",
+      "coordinates": [
+        39.9,
+        116.4
+      ],
+      "dateSource": "https://www.wsopras2027.org/"
+    },
+    {
+      "id": "dos-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "DOS Annual Conference 2027",
+      "fullTitle": "77th Annual Conference of the Delhi Ophthalmological Society",
+      "org": "Delhi Ophthalmological Society",
+      "start": "2027-04-09",
+      "end": "2027-04-11",
+      "city": "New Delhi",
+      "country": "India",
+      "region": "Asia-Pacific",
+      "mode": "In person",
+      "venue": "Ashok Hotel, Chanakyapuri",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://www.aios.org/aios-events1.php/Nill",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "77th Annual Conference of the Delhi Ophthalmological Society.",
+      "deadlines": [],
+      "coordinates": [
+        28.61,
+        77.21
+      ],
+      "dateSource": "https://www.aios.org/aios-events1.php/Nill"
     },
     {
       "id": "euretinai-2027",
@@ -2033,16 +2793,54 @@
       "program": "https://euretina.org/euretinai-2027/",
       "registration": "https://euretina.org/euretinai-2027/",
       "submit": null,
-      "verified": "2026-10-15",
+      "verified": "2026-11-02",
       "description": "Artificial intelligence in retinal care, research and clinical practice. A live stream is planned; registration details are forthcoming.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        51.51,
+        -0.13
+      ],
+      "dateSource": "https://euretina.org/euretinai-2027/"
     },
     {
-      "id": "cno-2027",
+      "id": "ukiscrs-cornea-day-2027",
       "featured": false,
-      "level": "national",
-      "title": "Congreso Nacional de Oftalmología 2027",
-      "fullTitle": "Congreso Nacional de Oftalmología 2027 — CNO27",
+      "level": "specialty",
+      "title": "UKISCRS Cornea & Cataract Day 2027",
+      "fullTitle": "UKISCRS Cornea and Cataract Day 2027",
+      "org": "UKISCRS",
+      "start": "2027-04-12",
+      "end": "2027-04-12",
+      "city": "Bristol",
+      "country": "United Kingdom",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "Bristol",
+      "categories": [
+        "Cornea",
+        "Cataract / IOL"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://www.ukiscrs.org.uk/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "UKISCRS Cornea and Cataract Day 2027.",
+      "deadlines": [],
+      "coordinates": [
+        51.45,
+        -2.59
+      ],
+      "dateSource": "https://www.ukiscrs.org.uk/"
+    },
+    {
+      "id": "argentina-ophthalmology-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "Argentina National Ophthalmology Congress 2027",
+      "fullTitle": "Congreso Nacional de Oftalmología 2027",
       "org": "Consejo Argentino de Oftalmología",
       "start": "2027-04-14",
       "end": "2027-04-16",
@@ -2058,15 +2856,20 @@
         "Glaucoma",
         "Research"
       ],
-      "credits": "Accreditation: to be confirmed",
+      "credits": "CME/CPD: check with organiser",
       "submissionOpen": false,
-      "official": "https://cno.oftalmologos.org.ar/",
-      "program": "https://cno.oftalmologos.org.ar/",
-      "registration": "https://cno.oftalmologos.org.ar/",
+      "official": "https://oftalmologos.org.ar/",
+      "program": "https://oftalmologos.org.ar/",
+      "registration": "https://oftalmologos.org.ar/",
       "submit": null,
-      "verified": "2026-10-19",
-      "description": "Argentina’s national ophthalmology congress. Dates and venue confirmed by the organiser; submission and registration deadlines have not yet been announced.",
-      "deadlines": []
+      "verified": "2026-11-02",
+      "description": "Congreso Nacional de Oftalmología 2027. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        -34.6,
+        -58.38
+      ],
+      "dateSource": "https://paao.org/events/argentina-2027/"
     },
     {
       "id": "apspos-capos-2027",
@@ -2079,7 +2882,7 @@
       "end": "2027-04-17",
       "city": "Tianjin",
       "country": "China",
-      "region": "Greater China",
+      "region": "China / Greater China",
       "mode": "In person",
       "venue": "Shangri-La Tianjin",
       "categories": [
@@ -2088,24 +2891,61 @@
         "Research"
       ],
       "credits": "CME/CPD: check with organiser",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://apaophth.org/congress/calendar/",
       "program": "https://apaophth.org/congress/calendar/",
       "registration": "https://apaophth.org/congress/calendar/",
       "submit": "https://apaophth.org/congress/calendar/",
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
+      "verified": "2026-11-02",
+      "description": "4th Asia-Pacific Strabismus and Paediatric Ophthalmology Society Congress with CAPOS. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "submissionNote": "No verified submission deadline is published in the checked source.",
+      "coordinates": [
+        39.14,
+        117.2
+      ],
+      "dateSource": "https://apaophth.org/congress/calendar/"
+    },
+    {
+      "id": "jos-131-2027",
+      "featured": false,
+      "title": "131st Japanese Ophthalmological Society Meeting",
+      "fullTitle": "131st Japanese Ophthalmological Society Meeting",
+      "org": "131st",
+      "start": "2027-04-15",
+      "end": "2027-04-18",
+      "city": "Sapporo",
+      "country": "Japan",
+      "region": "Asia-Pacific",
+      "mode": "In person",
+      "venue": "Sapporo",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": true,
+      "official": "https://convention.jtbcom.co.jp/131jos/en/index.html",
+      "program": "https://convention.jtbcom.co.jp/131jos/en/index.html",
+      "registration": "https://convention.jtbcom.co.jp/131jos/en/join/index.html",
+      "submit": "https://convention.jtbcom.co.jp/131jos/en/abstract/index.html",
+      "verified": "2026-11-02",
+      "description": "131st Japanese Ophthalmological Society Meeting. Dates and location are listed by the organiser; further details are available at the official source.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Abstract submission",
-          "date": "2026-12-01T23:59:00+08:00",
+          "label": "International abstract / travel grant submission",
+          "date": "2026-11-05T13:00:00+09:00",
           "timeKnown": true,
-          "zone": "UTC+8",
-          "url": "https://apaophth.org/congress/calendar/",
+          "zone": "Asia/Tokyo",
+          "url": "https://convention.jtbcom.co.jp/131jos/en/abstract/index.html",
           "note": ""
         }
-      ]
+      ],
+      "coordinates": [
+        43.06,
+        141.35
+      ],
+      "dateSource": "https://convention.jtbcom.co.jp/131jos/en/summary/index.html"
     },
     {
       "id": "oph360-2027",
@@ -2129,9 +2969,14 @@
       "program": "https://360.oor.ru/",
       "registration": "https://360.oor.ru/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "A professional forum focused on healthcare organisation, digitalisation, medical law, marketing and development of ophthalmology projects.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://360.oor.ru/"
     },
     {
       "id": "wgc-2027",
@@ -2146,7 +2991,7 @@
       "end": "2027-04-23",
       "city": "Kyoto",
       "country": "Japan",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Kyoto International Conference Center",
       "categories": [
@@ -2159,25 +3004,16 @@
       "program": "https://worldglaucomacongress.org/",
       "registration": "https://worldglaucomacongress.org/",
       "submit": "https://worldglaucomacongress.org/",
-      "verified": "2026-10-26",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
+      "verified": "2026-11-02",
+      "description": "12th World Glaucoma Congress. Dates and location are listed by the organiser; further details are available at the official source.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Abstract submission",
-          "date": "2026-10-19T23:59:00+02:00",
-          "timeKnown": true,
-          "zone": "CEST",
+          "label": "Abstract submission (closed)",
+          "date": "2026-10-19",
+          "timeKnown": false,
+          "zone": "",
           "url": "https://worldglaucomacongress.org/",
-          "note": ""
-        },
-        {
-          "kind": "upload",
-          "label": "WGA Movie Awards",
-          "date": "2026-10-19T23:59:00+02:00",
-          "timeKnown": true,
-          "zone": "CEST",
-          "url": "https://worldglaucomacongress.org/film-festival-submissions/",
           "note": ""
         },
         {
@@ -2185,22 +3021,122 @@
           "label": "Early-bird registration",
           "date": "2027-01-18",
           "timeKnown": false,
-          "zone": "Europe/Amsterdam",
+          "zone": "",
           "url": "https://worldglaucomacongress.org/",
-          "note": "Affiliated glaucoma society member $650; non-member $750; research scientist $390."
+          "note": ""
         },
         {
           "kind": "registration",
           "label": "Regular registration",
           "date": "2027-03-15",
           "timeKnown": false,
-          "zone": "Europe/Amsterdam",
-          "url": "https://worldglaucomacongress.org/",
+          "zone": "",
+          "url": "https://worldglaucomacongress.org/film-festival-submissions/",
           "note": ""
         }
       ],
-      "submissionNote": "Abstract and WGA Movie Awards submissions closed on 19 October 2026. Early-bird registration until 18 January; regular registration until 15 March 2027.",
-      "level": "specialty"
+      "level": "specialty",
+      "coordinates": [
+        35.01,
+        135.77
+      ],
+      "dateSource": "https://worldglaucomacongress.org/"
+    },
+    {
+      "id": "sfo-2027",
+      "featured": false,
+      "title": "SFO Annual Congress 2027",
+      "fullTitle": "SFO Annual Congress 2027",
+      "org": "SFO Annual Congress 2027",
+      "start": "2027-04-23",
+      "end": "2027-04-26",
+      "city": "Paris",
+      "country": "France",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "Paris",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": true,
+      "official": "https://www.sfo-online.fr/",
+      "program": "https://www.sfo-online.fr/",
+      "registration": "https://www.sfo-online.fr/",
+      "submit": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+      "verified": "2026-11-02",
+      "description": "SFO Annual Congress 2027. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Oral and poster abstracts",
+          "date": "2026-12-21T12:00:00+01:00",
+          "timeKnown": true,
+          "zone": "Europe/Paris",
+          "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+          "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "Film title submission",
+          "date": "2027-01-18",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+          "note": ""
+        },
+        {
+          "kind": "upload",
+          "label": "Final film upload",
+          "date": "2027-03-08",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        48.86,
+        2.35
+      ],
+      "dateSource": "https://www.sfo-online.fr/"
+    },
+    {
+      "id": "oculoplastica-mexico-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "International Oculoplastics Congress 2027",
+      "fullTitle": "Congreso Internacional de Oculoplástica 2027",
+      "org": "Congreso Internacional de Oculoplástica",
+      "start": "2027-05-01",
+      "end": "2027-05-05",
+      "city": "Puerto Vallarta",
+      "country": "Mexico",
+      "region": "Latin America",
+      "mode": "In person",
+      "venue": "Puerto Vallarta",
+      "categories": [
+        "Oculoplastics",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://paao.org/events/congreso-internacional-de-oculoplastica-2027/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Congreso Internacional de Oculoplástica 2027.",
+      "deadlines": [],
+      "coordinates": [
+        20.65,
+        -105.23
+      ],
+      "dateSource": "https://paao.org/events/congreso-internacional-de-oculoplastica-2027/"
     },
     {
       "id": "arvo-2027",
@@ -2225,27 +3161,36 @@
       "submissionOpen": true,
       "official": "https://www.arvo.org/annual-meeting/",
       "program": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
-      "registration": "https://www.arvo.org/annual-meeting/",
+      "registration": "https://www.arvo.org/annual-meeting/registration",
       "submit": "https://www.arvo.org/annual-meeting/abstracts",
-      "verified": "2026-10-26",
+      "verified": "2026-11-02",
       "description": "ARVO 2027 in San Diego offers in-person papers/posters and an On-Demand upload-only option for authors unable to attend. Generative AI use in abstracts must be disclosed under the organiser’s policy.",
       "deadlines": [
         {
+          "kind": "grant",
+          "label": "Travel grants",
+          "date": "2026-12-04",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://www.arvo.org/awards-and-grants/travel-grants",
+          "note": ""
+        },
+        {
           "kind": "abstract",
-          "label": "Abstract submission deadline",
+          "label": "Abstract submission",
           "date": "2026-12-04T17:00:00-05:00",
           "timeKnown": true,
-          "zone": "EST",
+          "zone": "America/New_York",
           "url": "https://www.arvo.org/annual-meeting/abstracts",
-          "note": "Submissions open; ARVO membership for 2027 required."
+          "note": ""
         },
         {
           "kind": "registration",
           "label": "Early registration",
           "date": "2027-03-10",
           "timeKnown": false,
-          "zone": "America/Los_Angeles",
-          "url": "https://www.arvo.org/annual-meeting/",
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/registration",
           "note": ""
         },
         {
@@ -2253,21 +3198,16 @@
           "label": "Standard registration",
           "date": "2027-04-23",
           "timeKnown": false,
-          "zone": "America/Los_Angeles",
-          "url": "https://www.arvo.org/annual-meeting/",
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/registration",
           "note": ""
-        },
-        {
-          "kind": "grant",
-          "label": "Travel grants",
-          "date": "2026-12-04T17:00:00-05:00",
-          "timeKnown": true,
-          "zone": "EST",
-          "url": "https://www.arvo.org/awards-and-grants/travel-grants",
-          "note": "Apply with the abstract; support covers meeting registration and a partial travel stipend."
         }
       ],
-      "submissionNote": "Abstracts and travel grants accepted 16 October–4 December 2026, 17:00 EST. ARVO membership for 2027 is required for abstract submission."
+      "coordinates": [
+        32.72,
+        -117.16
+      ],
+      "dateSource": "https://www.arvo.org/annual-meeting/"
     },
     {
       "id": "wcpos-vi-2027",
@@ -2284,7 +3224,7 @@
       "mode": "In person",
       "venue": "Cancun, Mexico",
       "categories": [
-        "Pediatric ophthalmology",
+        "Paediatric ophthalmology",
         "Strabismus",
         "Research"
       ],
@@ -2294,9 +3234,103 @@
       "program": "https://wspos.org/wcpos-vi/",
       "registration": "https://wspos.org/wcpos-vi/",
       "submit": "https://wspos.org/wcpos-vi/",
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The sixth WSPOS world congress in paediatric ophthalmology and strabismus.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        21.16,
+        -86.85
+      ],
+      "dateSource": "https://wspos.org/wcpos-vi/"
+    },
+    {
+      "id": "eucornea-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "EuCornea 2027",
+      "fullTitle": "18th EuCornea Annual Congress",
+      "org": "European Society of Cornea and Ocular Surface Disease Specialists",
+      "start": "2027-05-14",
+      "end": "2027-05-16",
+      "city": "Budapest",
+      "country": "Hungary",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "Crowne Plaza Budapest",
+      "categories": [
+        "Cornea",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": true,
+      "official": "https://eucornea.org/budapest-2027-general-information/",
+      "program": null,
+      "registration": null,
+      "submit": "https://eucornea.org/instructional-course-submission-budapest-2027/",
+      "verified": "2026-11-02",
+      "description": "18th EuCornea Annual Congress.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Instructional course proposals",
+          "date": "2026-11-15T23:59:00+01:00",
+          "timeKnown": true,
+          "zone": "Europe/Paris",
+          "url": "https://eucornea.org/instructional-course-submission-budapest-2027/",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        47.5,
+        19.04
+      ],
+      "submissionNote": "Instructional course proposals are open. Abstract submission and registration are not yet open.",
+      "dateSource": "https://eucornea.org/budapest-2027-general-information/"
+    },
+    {
+      "id": "rcophth-2027",
+      "featured": false,
+      "title": "RCOphth Annual Congress 2027",
+      "fullTitle": "RCOphth Annual Congress 2027",
+      "org": "The Royal College of Ophthalmologists",
+      "start": "2027-05-24",
+      "end": "2027-05-27",
+      "city": "Birmingham",
+      "country": "United Kingdom",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "The ICC, Birmingham",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": true,
+      "official": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "RCOphth Annual Congress 2027. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Poster and short oral abstracts",
+          "date": "2026-12-01",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/",
+          "note": ""
+        }
+      ],
+      "coordinates": [
+        52.49,
+        -1.9
+      ],
+      "dateSource": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/"
     },
     {
       "id": "white-nights-2027",
@@ -2325,9 +3359,14 @@
       "program": "https://ocwn.org/",
       "registration": "https://ocwn.org/",
       "submit": null,
-      "verified": "2026-10-22",
+      "verified": "2026-11-02",
       "description": "Congress dates confirmed by the organisers. Scientific submission deadlines have not yet been published.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        59.93,
+        30.34
+      ],
+      "dateSource": "https://ocwn.org/"
     },
     {
       "id": "amman-retina-2027",
@@ -2353,19 +3392,24 @@
       "program": "https://www.ammanretinameeting.com/",
       "registration": "https://www.ammanretinameeting.com/registration",
       "submit": "https://www.ammanretinameeting.com/abstract-submission",
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "Specialist international congress on medical and surgical retina with international faculty and practical courses.",
       "deadlines": [
         {
           "kind": "registration",
-          "label": "Early-bird registration deadline",
+          "label": "Early-bird registration",
           "date": "2027-01-30",
           "timeKnown": false,
-          "zone": "Asia/Amman",
-          "url": "https://www.ammanretinameeting.com/registration"
+          "zone": "",
+          "url": "https://www.ammanretinameeting.com/registration",
+          "note": ""
         }
       ],
-      "submissionNote": "The abstract submission page is currently marked Coming Soon."
+      "coordinates": [
+        31.95,
+        35.91
+      ],
+      "dateSource": "https://www.ammanretinameeting.com/"
     },
     {
       "id": "apacrs-2027",
@@ -2380,7 +3424,7 @@
       "end": "2027-06-05",
       "city": "Bali",
       "country": "Indonesia",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Bali, Indonesia",
       "categories": [
@@ -2394,9 +3438,14 @@
       "program": "https://www.apacrs.org/",
       "registration": "https://www.apacrs.org/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "39th APACRS Annual Meeting, a major Asia-Pacific cataract and refractive surgery meeting.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        -8.65,
+        115.22
+      ],
+      "dateSource": "https://www.apacrs.org/"
     },
     {
       "id": "fedorov-readings-2027",
@@ -2420,10 +3469,48 @@
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
+      "verified": "2026-11-02",
+      "description": "All-Russian Conference of Young Scientists “Fyodorov Readings 2027”. Dates and location are listed by the organiser; further details are available at the official source.",
       "deadlines": [],
-      "level": "specialty"
+      "level": "specialty",
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://oor.ru/events"
+    },
+    {
+      "id": "colatoc-guatemala-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "COLATOC 2027 · Guatemala",
+      "fullTitle": "IV Pan-American Ocular Trauma Congress + XIX National Congress of Guatemala",
+      "org": "Pan-American Ocular Trauma Association / Guatemalan Ophthalmology Association",
+      "start": "2027-06-09",
+      "end": "2027-06-11",
+      "city": "Antigua Guatemala",
+      "country": "Guatemala",
+      "region": "Latin America",
+      "mode": "In person",
+      "venue": "Antigua Guatemala, Guatemala",
+      "categories": [
+        "Ocular trauma",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://aptooftalmico.com/",
+      "program": "https://aptooftalmico.com/",
+      "registration": "https://aptooftalmico.com/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "IV Pan-American Ocular Trauma Congress + XIX National Congress of Guatemala. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        14.54,
+        -90.73
+      ],
+      "dateSource": "https://paao.org/es/events/colatoc-2027/"
     },
     {
       "id": "macula-society-2027",
@@ -2449,18 +3536,82 @@
       "program": "https://www.maculasociety.org/50th-anniversary/",
       "registration": "https://www.maculasociety.org/50th-anniversary/",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The Macula Society’s 50th anniversary scientific meeting in Cannes, focused on macular disease and retinal research.",
-      "deadlines": [
-        {
-          "kind": "registration",
-          "label": "Registration opens",
-          "date": "2026-09-14",
-          "timeKnown": false,
-          "zone": "Europe/Paris",
-          "url": "https://www.maculasociety.org/49th-annual-meeting/"
-        }
-      ]
+      "deadlines": [],
+      "coordinates": [
+        43.55,
+        7.02
+      ],
+      "dateSource": "https://www.maculasociety.org/50th-anniversary/"
+    },
+    {
+      "id": "doc-2027",
+      "featured": false,
+      "title": "DOC Congress 2027",
+      "fullTitle": "DOC Congress 2027",
+      "org": "DOC – International Congress of German Ophthalmic Surgery",
+      "start": "2027-06-10",
+      "end": "2027-06-12",
+      "city": "Nuremberg",
+      "country": "Germany",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "Nuremberg",
+      "categories": [
+        "Cataract / IOL",
+        "Refractive",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.doc-nuernberg.de/",
+      "program": "https://www.doc-nuernberg.de/",
+      "registration": "https://www.doc-nuernberg.de/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "DOC Congress 2027. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        49.45,
+        11.08
+      ],
+      "dateSource": "https://www.doc-nuernberg.de/"
+    },
+    {
+      "id": "ebaa-2027",
+      "featured": false,
+      "title": "EBAA Annual Meeting 2027",
+      "fullTitle": "Eye Bank Association of America Annual Meeting 2027",
+      "org": "Eye Bank Association of America",
+      "start": "2027-06-10",
+      "end": "2027-06-12",
+      "city": "Austin",
+      "country": "USA",
+      "region": "North America",
+      "mode": "In person",
+      "venue": "Hyatt Regency Austin",
+      "categories": [
+        "Cornea",
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://restoresight.org/ebaa-annual-meeting/",
+      "program": "https://restoresight.org/ebaa-annual-meeting/schedule-of-events/",
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Eye Bank Association of America Annual Meeting 2027. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        30.27,
+        -97.74
+      ],
+      "dateSource": "https://restoresight.org/ebaa-annual-meeting/"
     },
     {
       "id": "soe-2027",
@@ -2488,12 +3639,12 @@
       ],
       "credits": "CME/CPD: check with organiser",
       "submissionOpen": true,
-      "official": "https://soevision.org/",
-      "program": "https://soevision.org/",
-      "registration": "https://soevision.org/",
-      "submit": "https://soevision.org/",
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
+      "official": "https://soe2027.soevision.org/",
+      "program": "https://soe2027.soevision.org/scientific-programme-2/",
+      "registration": "https://soe2027.soevision.org/registration/",
+      "submit": "https://soe2027.soevision.org/abstract-submission/",
+      "verified": "2026-11-02",
+      "description": "European Society of Ophthalmology Congress 2027 with International Society of Ocular Trauma. Dates and location are listed by the organiser; further details are available at the official source.",
       "deadlines": [
         {
           "kind": "abstract",
@@ -2501,8 +3652,8 @@
           "date": "2027-01-19T23:59:00+00:00",
           "timeKnown": true,
           "zone": "GMT",
-          "url": "https://soevision.org/",
-          "note": "Oral and poster presentations."
+          "url": "https://soe2027.soevision.org/abstract-submission/",
+          "note": ""
         },
         {
           "kind": "abstract",
@@ -2510,29 +3661,15 @@
           "date": "2027-01-19T23:59:00+00:00",
           "timeKnown": true,
           "zone": "GMT",
-          "url": "https://soevision.org/",
-          "note": "Oral, video and ePoster submissions."
-        },
-        {
-          "kind": "registration",
-          "label": "Presenting author registration",
-          "date": "2027-03-24",
-          "timeKnown": false,
-          "zone": "Europe/Athens",
-          "url": "https://soevision.org/",
+          "url": "https://soe2027.soevision.org/isot-abstract-submission/",
           "note": ""
-        },
-        {
-          "kind": "grant",
-          "label": "SOE Educational Grants 2027",
-          "date": "2026-09-30",
-          "timeKnown": false,
-          "zone": "Europe/Athens",
-          "url": "https://soevision.org/",
-          "note": "Applications closed."
         }
       ],
-      "submissionNote": "SOE: oral papers and posters; ISOT: oral, video and ePoster presentations on ocular trauma. English abstracts, up to 2,000 characters. Accepted presenters must attend in person and register by 24 March."
+      "coordinates": [
+        37.98,
+        23.73
+      ],
+      "dateSource": "https://soe2027.soevision.org/"
     },
     {
       "id": "cos-2027",
@@ -2561,26 +3698,26 @@
       "program": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
       "registration": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
       "submit": "https://cos-sco.secure-platform.com/2027",
-      "verified": "2026-10-26",
+      "verified": "2026-11-02",
       "description": "COS annual meeting in Ottawa includes scientific sessions, practical workshops and a surgical Film Festival. Abstract submission is closed; surgical video submission remains open until 3 November 2026.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Abstract submission — closed",
+          "label": "Abstract submission (closed)",
           "date": "2026-10-03T15:59:00-04:00",
           "timeKnown": true,
           "zone": "America/Toronto",
           "url": "https://cos-sco.secure-platform.com/2027",
-          "note": "Portal specifies ET; 3 October is EDT (UTC−4)."
+          "note": ""
         },
         {
-          "kind": "upload",
+          "kind": "abstract",
           "label": "COS Film Festival surgical videos",
           "date": "2026-11-03T15:59:00-05:00",
           "timeKnown": true,
           "zone": "America/Toronto",
           "url": "https://cos-sco.secure-platform.com/2027",
-          "note": "Portal: 15:59 ET; 3 November is EST (UTC−5)."
+          "note": ""
         },
         {
           "kind": "faculty",
@@ -2589,9 +3726,14 @@
           "timeKnown": true,
           "zone": "America/Toronto",
           "url": "https://cos-sco.secure-platform.com/2027",
-          "note": "Decision notifications scheduled for 8–12 December 2026."
+          "note": ""
         }
-      ]
+      ],
+      "coordinates": [
+        45.42,
+        -75.7
+      ],
+      "dateSource": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/"
     },
     {
       "id": "asrs-2027",
@@ -2617,20 +3759,57 @@
       "program": "https://www.asrs.org/annual-meeting",
       "registration": "https://www.asrs.org/annual-meeting",
       "submit": "https://www.asrs.org/annual-meeting",
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
+      "verified": "2026-11-02",
+      "description": "45th ASRS Annual Scientific Meeting. Dates and location are listed by the organiser; further details are available at the official source.",
       "deadlines": [
         {
           "kind": "abstract",
-          "label": "Abstract submission deadline",
+          "label": "Abstract submission",
           "date": "2027-01-28",
           "timeKnown": false,
-          "zone": "America/Los_Angeles",
+          "zone": "",
           "url": "https://www.asrs.org/annual-meeting",
-          "note": "Submission opens 3 December 2026."
+          "note": ""
         }
       ],
-      "submissionNote": "Abstract submission opens 3 December 2026."
+      "submissionOpens": "2026-12-03",
+      "coordinates": [
+        37.77,
+        -122.42
+      ],
+      "dateSource": "https://www.asrs.org/annual-meeting"
+    },
+    {
+      "id": "world-keratoconus-2027",
+      "featured": false,
+      "title": "World Keratoconus Congress 2027",
+      "fullTitle": "World Keratoconus Congress 2027",
+      "org": "International Keratoconus Society",
+      "start": "2027-08-26",
+      "end": "2027-08-28",
+      "city": "Buenos Aires",
+      "country": "Argentina",
+      "region": "Latin America",
+      "mode": "In person",
+      "venue": "Buenos Aires; venue to be announced",
+      "categories": [
+        "Cornea",
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://ikc-society.org/events/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "World Keratoconus Congress 2027. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        -34.6,
+        -58.38
+      ],
+      "dateSource": "https://ikc-society.org/events/"
     },
     {
       "id": "euretina-2027",
@@ -2656,7 +3835,7 @@
       "program": "https://euretina.org/copenhagen-27/",
       "registration": "https://euretina.org/copenhagen-27/",
       "submit": "https://euretina.org/copenhagen-27/session-submission-terms/",
-      "verified": "2026-10-15",
+      "verified": "2026-11-02",
       "description": "27th Euretina Congress. Euretina Innovation Spotlight takes place on 15 September at the Bella Center before the main congress. Online attendance is also possible.",
       "deadlines": [
         {
@@ -2664,12 +3843,16 @@
           "label": "Instructional course and symposium proposals",
           "date": "2026-11-18T23:59:00+01:00",
           "timeKnown": true,
-          "zone": "CET",
+          "zone": "Europe/Paris",
           "url": "https://euretina.org/copenhagen-27/session-submission-terms/",
-          "note": "Euretina membership is required to submit."
+          "note": ""
         }
       ],
-      "submissionNote": "Session proposals are open; the 2027 research abstract deadline has not yet been confirmed."
+      "coordinates": [
+        55.68,
+        12.57
+      ],
+      "dateSource": "https://euretina.org/copenhagen-27/"
     },
     {
       "id": "dog-2027",
@@ -2693,24 +3876,20 @@
         "Research"
       ],
       "credits": "Accreditation: check with organiser",
-      "submissionOpen": true,
+      "submissionOpen": false,
       "official": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
       "program": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
       "registration": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
       "submit": "https://dog-kongress.de/",
-      "verified": "2026-10-15",
+      "verified": "2026-11-02",
       "description": "Annual DOG congress. Dates and the call for scientific session proposals have been announced.",
-      "deadlines": [
-        {
-          "kind": "abstract",
-          "label": "Scientific session proposals",
-          "date": "2026-10-31",
-          "timeKnown": false,
-          "zone": "Europe/Berlin",
-          "url": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
-          "note": "Exact cutoff time not published; deadline applies to session proposals."
-        }
-      ]
+      "deadlines": [],
+      "submissionNote": "Scientific submission is closed; see the organiser for participation and registration details.",
+      "coordinates": [
+        52.52,
+        13.4
+      ],
+      "dateSource": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027"
     },
     {
       "id": "cataract-refractive-cornea-2027",
@@ -2723,7 +3902,7 @@
       "city": "Moscow",
       "country": "Russia",
       "region": "Russia",
-      "mode": "In person",
+      "mode": "Hybrid",
       "venue": "Moscow",
       "categories": [
         "Cataract / IOL",
@@ -2736,9 +3915,47 @@
       "program": "https://oor.ru/events",
       "registration": "https://oor.ru/events",
       "submit": null,
-      "verified": "2026-10-12",
+      "verified": "2026-11-02",
       "description": "Dates published in the official RSO calendar; registration and submission details pending.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        55.76,
+        37.62
+      ],
+      "dateSource": "https://oor.ru/events"
+    },
+    {
+      "id": "aacgc-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "AACGC 2027 · Indonesian National Glaucoma Meeting",
+      "fullTitle": "18th Asian Angle-Closure Glaucoma Club Meeting in Conjunction With the 11th Indonesian National Glaucoma Meeting",
+      "org": "Asian Angle-Closure Glaucoma Club / Indonesian National Glaucoma Meeting",
+      "start": "2027-10-15",
+      "end": "2027-10-16",
+      "city": "Jakarta",
+      "country": "Indonesia",
+      "region": "Asia-Pacific",
+      "mode": "In person",
+      "venue": "Jakarta, Indonesia",
+      "categories": [
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://apaophth.org/congress/calendar/",
+      "program": "https://apaophth.org/congress/calendar/",
+      "registration": "https://apaophth.org/congress/calendar/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "18th Asian Angle-Closure Glaucoma Club Meeting in Conjunction With the 11th Indonesian National Glaucoma Meeting. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        -6.21,
+        106.85
+      ],
+      "dateSource": "https://apaophth.org/congress/calendar/"
     },
     {
       "id": "escrs-2027",
@@ -2761,13 +3978,18 @@
       ],
       "credits": "CME/CPD: check with organiser",
       "submissionOpen": false,
-      "official": "https://www.escrs.org/",
-      "program": "https://www.escrs.org/",
-      "registration": "https://www.escrs.org/",
+      "official": "https://congress.escrs.org/",
+      "program": "https://congress.escrs.org/",
+      "registration": null,
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
+      "verified": "2026-11-02",
+      "description": "45th Congress of the European Society of Cataract and Refractive Surgeons. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        40.42,
+        -3.7
+      ],
+      "dateSource": "https://congress.escrs.org/"
     },
     {
       "id": "retina-society-2027",
@@ -2793,9 +4015,84 @@
       "program": "https://www.retinasociety.org/page/17/future-annual-meetings",
       "registration": "https://www.retinasociety.org/page/17/future-annual-meetings",
       "submit": null,
-      "verified": "2026-08-16",
+      "verified": "2026-11-02",
       "description": "The Retina Society’s 60th annual meeting in Boston.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        42.36,
+        -71.06
+      ],
+      "dateSource": "https://www.retinasociety.org/page/17/future-annual-meetings"
+    },
+    {
+      "id": "ever-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "EVER 2027",
+      "fullTitle": "European Association for Vision and Eye Research Congress 2027",
+      "org": "European Association for Vision and Eye Research",
+      "start": "2027-11-04",
+      "end": "2027-11-06",
+      "city": "Athens",
+      "country": "Greece",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "Megaron Athens",
+      "categories": [
+        "Research",
+        "Cornea",
+        "Retina",
+        "Glaucoma"
+      ],
+      "credits": "Accreditation: check with organiser",
+      "submissionOpen": false,
+      "official": "https://soevision.org/event/ever-2027/",
+      "program": "https://soevision.org/event/ever-2027/",
+      "registration": "https://www.everassociation.org/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "EVER congress on 4–6 November 2027 at Megaron Athens, as announced in the official SOE calendar.",
+      "deadlines": [],
+      "coordinates": [
+        37.98,
+        23.73
+      ],
+      "dateSource": "https://soevision.org/event/ever-2027/"
+    },
+    {
+      "id": "ranzco-58-2027",
+      "featured": false,
+      "title": "RANZCO 58th Annual Scientific Congress",
+      "fullTitle": "RANZCO 58th Annual Scientific Congress",
+      "org": "Royal Australian and New Zealand College of Ophthalmologists",
+      "start": "2027-11-04",
+      "end": "2027-11-07",
+      "city": "Gold Coast",
+      "country": "Australia",
+      "region": "Asia-Pacific",
+      "mode": "In person",
+      "venue": "Gold Coast",
+      "categories": [
+        "Cataract / IOL",
+        "Cornea",
+        "Retina",
+        "Glaucoma",
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://ranzco.edu/events/ranzco-58th-congress/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "RANZCO 58th Annual Scientific Congress. Dates and location are listed by the organiser; further details are available at the official source.",
+      "deadlines": [],
+      "coordinates": [
+        -28.02,
+        153.4
+      ],
+      "dateSource": "https://ranzco.edu/events/ranzco-58th-congress/"
     },
     {
       "id": "aao-2027",
@@ -2830,19 +4127,83 @@
       "program": "https://www.aao.org/annual-meeting",
       "registration": "https://www.aao.org/annual-meeting",
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": [
-        {
-          "kind": "abstract",
-          "label": "Submission deadline",
-          "date": "2027-01-12",
-          "timeKnown": false,
-          "zone": "America/Los_Angeles",
-          "url": "https://www.aao.org/annual-meeting",
-          "note": ""
-        }
-      ]
+      "verified": "2026-11-02",
+      "description": "AAO annual meeting in Las Vegas, including Subspecialty Day on 12–13 November. Submission and registration details will be announced by AAO.",
+      "deadlines": [],
+      "submissionNote": "No verified submission deadline is published in the checked source.",
+      "coordinates": [
+        36.17,
+        -115.14
+      ],
+      "dateSource": "https://www.aao.org/eyenet/academy-live/detail/rate-aao-2026-sessions-help-shape-aao-2027"
+    },
+    {
+      "id": "ukiscrs-51-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "UKISCRS 51st Annual Congress",
+      "fullTitle": "51st Annual Congress of UKISCRS",
+      "org": "UKISCRS",
+      "start": "2027-11-17",
+      "end": "2027-11-19",
+      "city": "London",
+      "country": "United Kingdom",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "London",
+      "categories": [
+        "Cataract / IOL",
+        "Refractive",
+        "Cornea"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://www.ukiscrs.org.uk/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "51st Annual Congress of UKISCRS.",
+      "deadlines": [],
+      "coordinates": [
+        51.51,
+        -0.13
+      ],
+      "dateSource": "https://www.ukiscrs.org.uk/"
+    },
+    {
+      "id": "clade-2027",
+      "featured": false,
+      "level": "specialty",
+      "title": "XXV CLADE Congress 2027",
+      "fullTitle": "25th Congress of the Latin American Council of Strabismus",
+      "org": "Consejo Latinoamericano de Estrabismo",
+      "start": "2027-12-01",
+      "end": "2027-12-03",
+      "city": "Puerto Varas",
+      "country": "Chile",
+      "region": "Latin America",
+      "mode": "In person",
+      "venue": "Puerto Varas",
+      "categories": [
+        "Strabismus",
+        "Paediatric ophthalmology",
+        "Research"
+      ],
+      "credits": "CME/CPD: check with organiser",
+      "submissionOpen": false,
+      "official": "https://www.consejoclade.com/congreso/",
+      "program": null,
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "25th Congress of the Latin American Council of Strabismus.",
+      "deadlines": [],
+      "coordinates": [
+        -41.32,
+        -72.98
+      ],
+      "dateSource": "https://www.consejoclade.com/congreso/"
     },
     {
       "id": "apvrs-2027",
@@ -2855,7 +4216,7 @@
       "end": "2027-12-05",
       "city": "Kuala Lumpur",
       "country": "Malaysia",
-      "region": "Asia–Pacific",
+      "region": "Asia-Pacific",
       "mode": "In person",
       "venue": "Kuala Lumpur, Malaysia",
       "categories": [
@@ -2868,506 +4229,47 @@
       "program": "https://apvrs.org/congresses/",
       "registration": "https://apvrs.org/congresses/",
       "submit": null,
-      "verified": "2026-10-08",
+      "verified": "2026-11-02",
       "description": "APVRS confirms the 20th congress for 3–5 December 2027 in Kuala Lumpur; abstract and registration deadlines have not yet been announced.",
-      "deadlines": []
+      "deadlines": [],
+      "coordinates": [
+        3.14,
+        101.69
+      ],
+      "dateSource": "https://apvrs.org/congresses/"
     },
     {
-      "id": "ciob-2026",
+      "id": "jrvs-66-2027",
       "featured": false,
       "level": "specialty",
-      "title": "CIOB 2026",
-      "fullTitle": "Cumbre de Innovación Oftalmológica del Biobío 2026",
-      "org": "CIOB",
-      "start": "2026-10-02",
-      "end": "2026-10-03",
-      "city": "Concepción",
-      "country": "Chile",
-      "region": "Latin America",
+      "title": "66th JRVS Annual Meeting",
+      "fullTitle": "66th Annual Meeting of the Japan Retina and Vitreous Society",
+      "org": "Japan Retina and Vitreous Society",
+      "start": "2027-12-10",
+      "end": "2027-12-12",
+      "city": "Osaka",
+      "country": "Japan",
+      "region": "Asia-Pacific",
       "mode": "In person",
-      "venue": "Centro de Eventos Mitrinco, Concepción",
-      "categories": [
-        "Cataract / IOL",
-        "Cornea",
-        "Retina",
-        "Glaucoma",
-        "Research",
-        "AI / management"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://www.ciob.cl/",
-      "program": "https://www.ciob.cl/",
-      "registration": "https://www.ciob.cl/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "bolivia-ophthalmology-2026",
-      "featured": false,
-      "level": "specialty",
-      "title": "XXXI Bolivian Congress of Ophthalmology 2026",
-      "fullTitle": "XXXI Congreso Boliviano de Oftalmología “Dra. Rosario García”",
-      "org": "Sociedad Boliviana de Oftalmología",
-      "start": "2026-10-22",
-      "end": "2026-10-24",
-      "city": "Santa Cruz de la Sierra",
-      "country": "Bolivia",
-      "region": "Latin America",
-      "mode": "In person",
-      "venue": "Hotel Los Tajibos, Santa Cruz",
-      "categories": [
-        "Cataract / IOL",
-        "Cornea",
-        "Retina",
-        "Glaucoma",
-        "Paediatric ophthalmology",
-        "Strabismus",
-        "Research"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://cboftalmologia2026.com/",
-      "program": "https://cboftalmologia2026.com/",
-      "registration": "https://cboftalmologia2026.com/",
-      "submit": "https://cboftalmologia2026.com/trabajos.html",
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": [
-        {
-          "kind": "abstract",
-          "label": "Scientific work submission",
-          "date": "2026-08-30T23:00:00-04:00",
-          "timeKnown": true,
-          "zone": "BOT",
-          "url": "https://cboftalmologia2026.com/trabajos.html",
-          "note": ""
-        }
-      ]
-    },
-    {
-      "id": "alaccsa-2026",
-      "featured": false,
-      "level": "specialty",
-      "title": "XXVI ALACCSA-R International Congress 2026",
-      "fullTitle": "XXVI Congreso Internacional ALACCSA-R 2026",
-      "org": "ALACCSA-R",
-      "start": "2026-10-22",
-      "end": "2026-10-24",
-      "city": "Asunción",
-      "country": "Paraguay",
-      "region": "Latin America",
-      "mode": "In person",
-      "venue": "Hotel Sheraton, Asunción",
-      "categories": [
-        "Cataract / IOL",
-        "Refractive",
-        "Cornea",
-        "Research"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://alaccsa.com/",
-      "program": "https://alaccsa.com/",
-      "registration": "https://alaccsa.com/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "sprv-gladaof-2026",
-      "featured": true,
-      "level": "specialty",
-      "title": "SPRV 2026 · GLADAOF",
-      "fullTitle": "11th Congress of the Pan-American Society of Retina and Vitreous & 20th GLADAOF Forum",
-      "org": "Pan-American Society of Retina and Vitreous / GLADAOF",
-      "start": "2026-10-29",
-      "end": "2026-11-01",
-      "city": "São Paulo",
-      "country": "Brazil",
-      "region": "Latin America",
-      "mode": "In person",
-      "venue": "Grand Hyatt, São Paulo",
+      "venue": "Osaka International Convention Center",
       "categories": [
         "Retina",
         "Research"
       ],
       "credits": "CME/CPD: check with organiser",
       "submissionOpen": false,
-      "official": "https://sprv2026.com/",
-      "program": "https://sprv2026.com/",
-      "registration": "https://sprv2026.com/",
+      "official": "https://www.jrvs.jp/en/meeting.html",
+      "program": null,
+      "registration": null,
       "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "bascom-palmer-curso-2026",
-      "featured": true,
-      "level": "specialty",
-      "title": "Bascom Palmer CURSO 2026",
-      "fullTitle": "XLVIII Bascom Palmer InterAmerican Course in Clinical Ophthalmology 2026",
-      "org": "Bascom Palmer Eye Institute",
-      "start": "2026-11-01",
-      "end": "2026-11-04",
-      "city": "Miami",
-      "country": "USA",
-      "region": "North America",
-      "mode": "In person",
-      "venue": "Hyatt Regency Miami Downtown",
-      "categories": [
-        "Cataract / IOL",
-        "Refractive",
-        "Cornea",
-        "Retina",
-        "Glaucoma",
-        "Inflammation",
-        "Paediatric ophthalmology",
-        "Strabismus",
-        "Neuro-ophthalmology",
-        "Oculoplastics"
+      "verified": "2026-11-02",
+      "description": "66th Annual Meeting of the Japan Retina and Vitreous Society.",
+      "deadlines": [],
+      "coordinates": [
+        34.69,
+        135.5
       ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
-      "program": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
-      "registration": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "isa-2026",
-      "featured": false,
-      "level": "specialty",
-      "title": "XVI ISA Meeting",
-      "fullTitle": "XVI International Strabismological Association Meeting",
-      "org": "International Strabismological Association",
-      "start": "2026-11-11",
-      "end": "2026-11-14",
-      "city": "Buenos Aires",
-      "country": "Argentina",
-      "region": "Latin America",
-      "mode": "In person",
-      "venue": "Auditorios UCA – Edificio San José",
-      "categories": [
-        "Strabismus",
-        "Paediatric ophthalmology",
-        "Research"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://isa2026.com.ar/",
-      "program": "https://isa2026.com.ar/",
-      "registration": "https://isa2026.com.ar/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "asia-cornea-2026",
-      "featured": false,
-      "level": "specialty",
-      "title": "Asia Cornea Society 2026",
-      "fullTitle": "10th Asia Cornea Society Biennial Scientific Meeting",
-      "org": "Asia Cornea Society",
-      "start": "2026-11-27",
-      "end": "2026-11-29",
-      "city": "Hong Kong",
-      "country": "China",
-      "region": "Greater China",
-      "mode": "In person",
-      "venue": "Hong Kong",
-      "categories": [
-        "Cornea",
-        "Research"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://www.asiacorneasociety.org/",
-      "program": "https://www.asiacorneasociety.org/",
-      "registration": "https://www.asiacorneasociety.org/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": [
-        {
-          "kind": "registration",
-          "label": "Advance registration",
-          "date": "2026-11-26",
-          "timeKnown": false,
-          "zone": "Asia/Hong_Kong",
-          "url": "https://www.asiacorneasociety.org/",
-          "note": ""
-        }
-      ]
-    },
-    {
-      "id": "oculoplastics-russia-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "Oculoplastics 2027",
-      "fullTitle": "Scientific and Practical Conference “Oculoplastics”",
-      "org": "Russian Ophthalmological Society",
-      "start": "2027-02-26",
-      "end": "2027-02-26",
-      "city": "Moscow",
-      "country": "Russia",
-      "region": "Russia",
-      "mode": "In person",
-      "venue": "Moscow, Russia",
-      "categories": [
-        "Oculoplastics",
-        "Research"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://oor.ru/events",
-      "program": "https://oor.ru/events",
-      "registration": "https://oor.ru/events",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "vitreoretinal-russia-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "Vitreoretinal Pathology 2027",
-      "fullTitle": "24th All-Russian Conference with International Participation “Modern Technologies for Treatment of Vitreoretinal Pathology”",
-      "org": "Russian Ophthalmological Society",
-      "start": "2027-04-02",
-      "end": "2027-04-03",
-      "city": "Ufa",
-      "country": "Russia",
-      "region": "Russia",
-      "mode": "In person",
-      "venue": "Ufa, Russia",
-      "categories": [
-        "Retina",
-        "Research"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://oor.ru/events",
-      "program": "https://oor.ru/events",
-      "registration": "https://oor.ru/events",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "argentina-ophthalmology-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "Argentina National Ophthalmology Congress 2027",
-      "fullTitle": "Congreso Nacional de Oftalmología 2027",
-      "org": "Consejo Argentino de Oftalmología",
-      "start": "2027-04-14",
-      "end": "2027-04-16",
-      "city": "Buenos Aires",
-      "country": "Argentina",
-      "region": "Latin America",
-      "mode": "In person",
-      "venue": "Centro de Convenciones Buenos Aires",
-      "categories": [
-        "Cataract / IOL",
-        "Cornea",
-        "Retina",
-        "Glaucoma",
-        "Research"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://oftalmologos.org.ar/",
-      "program": "https://oftalmologos.org.ar/",
-      "registration": "https://oftalmologos.org.ar/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "ophthalmology-360-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "Ophthalmology 360° 2027",
-      "fullTitle": "V Anniversary Conference “Ophthalmology 360°”",
-      "org": "Russian Ophthalmological Society / Fyodorov Eye Microsurgery",
-      "start": "2027-04-16",
-      "end": "2027-04-16",
-      "city": "Moscow",
-      "country": "Russia",
-      "region": "Russia",
-      "mode": "In person",
-      "venue": "RBC Event Center, Moscow",
-      "categories": [
-        "Research",
-        "AI / management"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://oor.ru/events",
-      "program": "https://oor.ru/events",
-      "registration": "https://oor.ru/events",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "colatoc-guatemala-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "COLATOC 2027 · Guatemala",
-      "fullTitle": "IV Pan-American Ocular Trauma Congress + XIX National Congress of Guatemala",
-      "org": "Pan-American Ocular Trauma Association / Guatemalan Ophthalmology Association",
-      "start": "2027-06-09",
-      "end": "2027-06-11",
-      "city": "Antigua Guatemala",
-      "country": "Guatemala",
-      "region": "Latin America",
-      "mode": "In person",
-      "venue": "Antigua Guatemala, Guatemala",
-      "categories": [
-        "Ocular trauma",
-        "Research"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://aptooftalmico.com/",
-      "program": "https://aptooftalmico.com/",
-      "registration": "https://aptooftalmico.com/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "cataract-russia-2027",
-      "featured": true,
-      "level": "specialty",
-      "title": "#Cataract2027",
-      "fullTitle": "27th All-Russian Congress with International Participation “Modern Technologies of Cataract, Refractive and Corneal Surgery”",
-      "org": "Russian Ophthalmological Society",
-      "start": "2027-10-07",
-      "end": "2027-10-09",
-      "city": "Moscow",
-      "country": "Russia",
-      "region": "Russia",
-      "mode": "In person",
-      "venue": "Moscow, Russia",
-      "categories": [
-        "Cataract / IOL",
-        "Refractive",
-        "Cornea",
-        "Research"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://oor.ru/events",
-      "program": "https://oor.ru/events",
-      "registration": "https://oor.ru/events",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "aacgc-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "AACGC 2027 · Indonesian National Glaucoma Meeting",
-      "fullTitle": "18th Asian Angle-Closure Glaucoma Club Meeting in Conjunction With the 11th Indonesian National Glaucoma Meeting",
-      "org": "Asian Angle-Closure Glaucoma Club / Indonesian National Glaucoma Meeting",
-      "start": "2027-10-15",
-      "end": "2027-10-16",
-      "city": "Jakarta",
-      "country": "Indonesia",
-      "region": "Asia–Pacific",
-      "mode": "In person",
-      "venue": "Jakarta, Indonesia",
-      "categories": [
-        "Glaucoma",
-        "Research"
-      ],
-      "credits": "CME/CPD: check with organiser",
-      "submissionOpen": false,
-      "official": "https://apaophth.org/congress/calendar/",
-      "program": "https://apaophth.org/congress/calendar/",
-      "registration": "https://apaophth.org/congress/calendar/",
-      "submit": null,
-      "verified": "2026-10-08",
-      "description": "Ophthalmology meeting verified against the organiser or official society calendar.",
-      "deadlines": []
-    },
-    {
-      "id": "ever-2027",
-      "featured": false,
-      "level": "specialty",
-      "title": "EVER 2027",
-      "fullTitle": "European Association for Vision and Eye Research Congress 2027",
-      "org": "European Association for Vision and Eye Research",
-      "start": "2027-11-04",
-      "end": "2027-11-06",
-      "city": "Athens",
-      "country": "Greece",
-      "region": "Europe",
-      "mode": "In person",
-      "venue": "Megaron Athens",
-      "categories": [
-        "Research",
-        "Cornea",
-        "Retina",
-        "Glaucoma"
-      ],
-      "credits": "Accreditation: check with organiser",
-      "submissionOpen": false,
-      "official": "https://soevision.org/event/ever-2027/",
-      "program": "https://soevision.org/event/ever-2027/",
-      "registration": "https://www.everassociation.org/",
-      "submit": null,
-      "verified": "2026-10-26",
-      "description": "EVER congress on 4–6 November 2027 at Megaron Athens, as announced in the official SOE calendar.",
-      "submissionNote": "Abstract and registration deadlines have not yet been announced.",
-      "deadlines": []
-    },
-    {
-      "id": "wga-surgical-grand-rounds-8-2026",
-      "featured": false,
-      "level": "specialty",
-      "title": "8th WGA Surgical Grand Rounds",
-      "fullTitle": "8th WGA Surgical Grand Rounds: glaucoma after corneal transplantation and in Sturge–Weber syndrome",
-      "org": "World Glaucoma Association",
-      "start": "2026-11-12",
-      "end": "2026-11-12",
-      "city": "Online",
-      "country": "Worldwide",
-      "region": "Online / worldwide",
-      "mode": "Online",
-      "venue": "WGA online webinar",
-      "categories": [
-        "Glaucoma",
-        "Cornea"
-      ],
-      "credits": "Accreditation: check with organiser",
-      "submissionOpen": false,
-      "official": "https://wga.one/surgical-grand-rounds/",
-      "program": "https://wga.one/surgical-grand-rounds/",
-      "registration": "https://wga.one/surgical-grand-rounds-registration/",
-      "submit": null,
-      "verified": "2026-10-26",
-      "description": "Case discussion of glaucoma after corneal transplantation by Ramesh Ayyala, with Karl Mercieca and Keith Barton. A second case covers glaucoma in Sturge–Weber syndrome. Registration is open; the programme page does not specify the start time.",
-      "submissionNote": "Registration is open. No abstract call announced; check the start time with WGA.",
-      "deadlines": []
+      "dateSource": "https://www.jrvs.jp/en/meeting.html"
     }
   ]
 }
