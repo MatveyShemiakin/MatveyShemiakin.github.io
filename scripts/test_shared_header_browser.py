@@ -4,6 +4,9 @@ import argparse
 import functools
 import http.server
 import json
+import hashlib
+import time
+import urllib.request
 import threading
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -34,6 +37,16 @@ def main():
   server=http.server.ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT)))
   threading.Thread(target=server.serve_forever,daemon=True).start()
   base=f'http://127.0.0.1:{server.server_port}'
+ if args.base_url:
+  assets=['site-header.css','for-doctors/simple-questions/series.css']
+  versions={asset:hashlib.sha256((ROOT/asset).read_bytes()).hexdigest()[:12] for asset in assets}
+  for attempt in range(40):
+   try:
+    published=all(hashlib.sha256(urllib.request.urlopen(base+'/'+asset+'?v='+version,timeout=15).read()).hexdigest()[:12]==version for asset,version in versions.items())
+    if published:break
+   except Exception:pass
+   time.sleep(3)
+  else:raise AssertionError('Production has not served the approved header styles yet')
  rows=[]
  with sync_playwright() as p:
   browser=p.chromium.launch()
@@ -75,8 +88,12 @@ def main():
         assert page.locator('#assessment').count()==1
        if width>1020:
         toggle=page.locator('.site-mega-nav__toggle').first
-        toggle.click();assert toggle.get_attribute('aria-expanded')=='true'
+        toggle.focus();toggle.press('Enter')
+        assert toggle.get_attribute('aria-expanded')=='true','Enter must open the dropdown'
         page.keyboard.press('Escape');assert toggle.get_attribute('aria-expanded')=='false'
+        toggle.hover();assert toggle.get_attribute('aria-expanded')=='true','Hover must open the dropdown'
+        page.keyboard.press('Escape');assert toggle.get_attribute('aria-expanded')=='false'
+        page.mouse.move(0,200)
        theme_button=page.locator('[data-site-theme-toggle]')
        theme_button.click()
        assert page.locator('html').get_attribute('data-site-theme')!=theme
