@@ -11,6 +11,7 @@ from string import Template
 ROOT=Path(__file__).resolve().parents[1]
 CSS=('site-language-switch.css','site-theme.css','site-mega-nav.css','mobile-nav.css','site-header.css')
 SCRIPTS=('site-language-switch.js','site-theme.js','site-mega-nav.js','mobile-nav.js')
+PAGE_ASSETS=('for-doctors/simple-questions/series.css',)
 VOID={'area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'}
 
 class Elements(HTMLParser):
@@ -94,7 +95,21 @@ def content_without_navigation(text):
  text,updates=_detach_updates(text)
  for node in reversed(_headers(text)):
   text=text[:node['start']]+_remaining_header(text,node)+text[node['end']:]
- return inject_assets(text)+updates
+ return inject_assets(_without_duplicate_article_shortcuts(text))+updates
+
+def _without_duplicate_article_shortcuts(text):
+ # An article's existing desktop/mobile TOC already provides these anchors.
+ nodes=Elements(text).nodes
+ toc=next((n for n in nodes if 'article-toc' in n['attrs'].get('class','').split()),None)
+ if not toc:return text
+ def links(node):return {n['attrs'].get('href') for n in nodes if n['tag']=='a' and node['open_end']<=n['start'] and n['end']<=node['close_start']}
+ targets=links(toc)
+ for node in sorted(nodes,key=lambda n:n['start'],reverse=True):
+  if 'data-site-header-context' not in node['attrs']:continue
+  children=[n for n in nodes if n['parent'] is node]
+  if len(children)==1 and children[0]['tag']=='nav' and links(node) and links(node)<=targets:
+   text=text[:node['start']]+text[node['end']:]
+ return text
 
 def _url(relative):
  path='/'+relative
@@ -123,6 +138,8 @@ def inject_assets(text):
  text=text.replace('</body>',''.join(asset_tag(a) for a in SCRIPTS)+'</body>',1)
  # Keep the existing professional notices, but invalidate their legacy header rewriter.
  text=re.sub(r'(/doctors-legal\.js)(?:\?v=[^"\']*)?',lambda m:m.group(1)+'?v='+asset_version('doctors-legal.js'),text)
+ for asset in PAGE_ASSETS:
+  text=re.sub(r'(/'+re.escape(asset)+r')(?:\?v=[^"\']*)?',lambda m:m.group(1)+'?v='+asset_version(asset),text)
  return text
 
 def update_page(text,relative):
@@ -139,7 +156,7 @@ def update_page(text,relative):
   for node in reversed(headers):text=text[:node['start']]+_remaining_header(text,node)+text[node['end']:]
   if first and first['parent'] and first['parent']['tag']=='body':text=text[:first['start']]+header+text[first['start']:]
   else:text=re.sub(r'(<body\b[^>]*>)',lambda m:m.group(1)+header,text,count=1,flags=re.I)
- return inject_assets(text)
+ return inject_assets(_without_duplicate_article_shortcuts(text))
 
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true');args=parser.parse_args();changed=[]
