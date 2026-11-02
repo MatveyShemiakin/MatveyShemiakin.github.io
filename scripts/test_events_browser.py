@@ -34,8 +34,8 @@ def main():
     for theme in ['light','dark']:
      name=f'{lang}-{width}-{theme}';row={'case':name,'checks':[],'errors':[]};rows.append(row)
      ctx=browser.new_context(viewport={'width':width,'height':height},is_mobile=width<768,has_touch=width<768,color_scheme=theme,reduced_motion='reduce',timezone_id='Europe/Moscow',accept_downloads=True)
-     ctx.add_init_script(f"localStorage.setItem('site_theme_v1','{theme}')")
-     page=ctx.new_page();page.on('pageerror',lambda err,row=row:row['errors'].append(str(err)))
+     ctx.add_init_script(f"localStorage.setItem('site_theme_v1','{theme}');localStorage.setItem('medical_professional_audience_v1','confirmed');localStorage.setItem('site_cookie_choice','essential');")
+     page=ctx.new_page();page.set_default_timeout(10000);page.on('pageerror',lambda err,row=row:row['errors'].append(str(err)))
      try:
       page.goto(base+path,wait_until='domcontentloaded',timeout=60000)
       page.wait_for_selector('#events-grid [data-details]',timeout=30000)
@@ -47,6 +47,7 @@ def main():
        assert max(sizes['doc'],sizes['body'])<=sizes['viewport']+1,f'{label}: horizontal overflow {sizes}'
        row['checks'].append(label)
       fits('initial layout')
+      if width>=1021:assert page.locator('.hero').bounding_box()['height']<650,'homepage hero minimum height leaked into calendar'
       page.screenshot(path=str(out/(name+'-events.png')),full_page=False)
       page.locator('#event-search').fill('APAO')
       assert page.locator('#events-grid .event-card').count()==1,'APAO search'
@@ -64,14 +65,13 @@ def main():
       regions=page.locator('#region-filters [data-region]').evaluate_all('(nodes)=>nodes.map(n=>n.dataset.region)')
       for region in regions:
        if region=='all':continue
-       page.locator('#region-filters [data-region]').filter(has=page.locator('span.__never')).count() if False else None
        page.locator('#region-filters [data-region]').evaluate_all('(nodes,r)=>nodes.find(n=>n.dataset.region===r).click()',region)
        expected_region=sum(e['region']==region and e['end']>=today for e in datasets[lang]['events'])
        assert page.locator('#events-grid .event-card').count()==expected_region,f'region {region}'
       page.locator('#clear-filters').click();row['checks'].append('all region filters')
       spec=page.locator('#specialty-filters [data-specialty]').nth(1).get_attribute('data-specialty');page.locator('#specialty-filters [data-specialty]').nth(1).click()
       assert page.locator('#events-grid .event-card').count()==sum(e['end']>=today and spec in e['categories'] for e in datasets[lang]['events']),'specialty filter'
-      page.locator('#clear-filters').click();page.locator('#toggle-deadlines').check();assert page.locator('#events-grid .event-card').count()>0;page.locator('#clear-filters').click()
+      page.locator('#clear-filters').click();page.locator('#toggle-open').check();assert page.locator('#events-grid .event-card').count()>0;page.locator('#clear-filters').click();page.locator('#toggle-deadlines').check();assert page.locator('#events-grid .event-card').count()>0;page.locator('#clear-filters').click()
       page.locator('#events-grid [data-favorite]').first.click();page.locator('#toggle-favorites').check();assert page.locator('#events-grid .event-card').count()==1;page.locator('#clear-filters').click()
       page.locator('#toggle-past').check();assert page.locator('#events-grid .event-card').count()==len(datasets[lang]['events']);page.locator('#clear-filters').click()
       page.locator('#event-search').fill('no-such-event-73938');assert page.locator('#events-grid .empty-state').count()==1;page.locator('#clear-filters').click();row['checks'].append('specialty, deadline, favourite, past, empty filters')
@@ -97,6 +97,13 @@ def main():
   ctx=browser.new_context(java_script_enabled=False);page=ctx.new_page()
   for lang in ['ru','en']:
    page.goto(base+('/en' if lang=='en' else '')+'/for-doctors/events/');assert page.locator('#events-grid .event-card').count()>0
+  ctx.close()
+  ctx=browser.new_context();page=ctx.new_page()
+  page.route('**/assets/data/ophthalmology-events.*.json*',lambda route:route.abort())
+  for lang in ['ru','en']:
+   page.goto(base+('/en' if lang=='en' else '')+'/for-doctors/events/')
+   page.wait_for_function("document.querySelector('#results-meta').textContent.includes('Refresh the page') || document.querySelector('#results-meta').textContent.includes('Обновите страницу')")
+   assert page.locator('#events-grid .event-card').count()>0
   ctx.close();browser.close()
  (out/'results.json').write_text(json.dumps({'base':base,'cases':rows,'failures':failures},ensure_ascii=False,indent=2))
  if failures:raise SystemExit('\n'.join(failures))

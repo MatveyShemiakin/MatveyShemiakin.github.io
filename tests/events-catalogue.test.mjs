@@ -25,3 +25,11 @@ test('duplicate Russian congresses and unsupported deadlines are consolidated',(
  assert.deepEqual(en.events.find(e=>e.id==='aao-2027').deadlines,[]);
  assert.ok(!en.events.find(e=>e.id==='apao-2027').deadlines.some(d=>d.kind==='faculty'));
 });
+test('every deadline keeps a dedicated official monitor with date-specific context',()=>{
+ const registry=JSON.parse(fs.readFileSync('assets/data/ophthalmology-event-sources.json')).sources;
+ for(const e of en.events)for(const d of e.deadlines){
+  const monitors=registry.filter(s=>s.url===d.url&&s.eventIds.includes(e.id));
+  assert.ok(monitors.length,`${e.id}: unmonitored ${d.url}`);
+  assert.ok(monitors.some(s=>s.watchTerms.some(t=>/\d/.test(t)&&!/^20\d{2}$/.test(t))),`${e.id}: no specific date context`);
+ }
+});

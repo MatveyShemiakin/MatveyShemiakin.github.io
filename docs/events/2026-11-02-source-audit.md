@@ -137,3 +137,7 @@ Every retained deadline has its own official URL in both JSON catalogues. Date-o
 - EURETINA/SOE/EPOMEC pages contain stale template text; only clearly labelled current-year fields were retained.
 - AAO main website and COS pages return 403 to direct automated fetches; official indexed content and society calendars confirm dates. CCOS origin returned 521.
 - Cloud browser fails initialization; local Chromium cannot create its process socket in this environment. Browser checks must run in CI. Physical Android/iOS/Safari testing is not available here.
+
+## Monitoring and interface review
+
+All 40 retained deadline URLs have dedicated source monitoring with current date context; prior valid contextual terms are retained. A calendar-day opening date is never converted to an invented noon cutoff. Catalogue coordinates feed the globe directly, so adding a meeting no longer requires an ID-specific JS coordinate change. The desktop events hero clears the homepage minimum height.
