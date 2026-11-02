@@ -1457,6 +1457,32 @@
       ]
     },
     {
+      "id": "japan-retina-2026",
+      "featured": false,
+      "title": "Japanese Retina and Vitreous Society Annual Meeting",
+      "fullTitle": "Japanese Retina and Vitreous Society Annual Meeting",
+      "org": "Japanese Retina and Vitreous Society Annual Meeting",
+      "start": "2026-12-04",
+      "end": "2026-12-06",
+      "city": "Tokyo",
+      "country": "Japan",
+      "region": "Asia-Pacific",
+      "mode": "In person",
+      "venue": "Tokyo",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.jrvs.jp/",
+      "program": "https://www.jrvs.jp/",
+      "registration": "https://www.jrvs.jp/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Provisional listing: verify dates and details with the organiser.",
+      "deadlines": []
+    },
+    {
       "id": "asmhk-2026",
       "featured": false,
       "level": "national",
@@ -1531,6 +1557,32 @@
       ]
     },
     {
+      "id": "japan-ophthalmic-surgery-2027",
+      "featured": false,
+      "title": "Japanese Society of Ophthalmic Surgery Annual Meeting",
+      "fullTitle": "Japanese Society of Ophthalmic Surgery Annual Meeting",
+      "org": "Japanese Society of Ophthalmic Surgery Annual Meeting",
+      "start": "2027-01-29",
+      "end": "2027-01-31",
+      "city": "Tokyo",
+      "country": "Japan",
+      "region": "Asia-Pacific",
+      "mode": "In person",
+      "venue": "Tokyo",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.jsos.jp/",
+      "program": "https://www.jsos.jp/",
+      "registration": "https://www.jsos.jp/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Provisional listing: verify dates and details with the organiser.",
+      "deadlines": []
+    },
+    {
       "id": "sopla-2027",
       "featured": false,
       "level": "specialty",
@@ -1556,6 +1608,32 @@
       "submit": null,
       "verified": "2026-08-16",
       "description": "International Latin American congress focused on paediatric ophthalmology and strabismus.",
+      "deadlines": []
+    },
+    {
+      "id": "japan-cornea-2027",
+      "featured": false,
+      "title": "Japan Cornea Conference",
+      "fullTitle": "Japan Cornea Conference",
+      "org": "Japan Cornea Conference",
+      "start": "2027-02-11",
+      "end": "2027-02-13",
+      "city": "Okinawa",
+      "country": "Japan",
+      "region": "Asia-Pacific",
+      "mode": "In person",
+      "venue": "Okinawa",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://cornea.gr.jp/",
+      "program": "https://cornea.gr.jp/",
+      "registration": "https://cornea.gr.jp/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Provisional listing: verify dates and details with the organiser.",
       "deadlines": []
     },
     {
@@ -2550,6 +2628,32 @@
       "level": "specialty"
     },
     {
+      "id": "sfo-2027",
+      "featured": false,
+      "title": "SFO Annual Congress 2027",
+      "fullTitle": "SFO Annual Congress 2027",
+      "org": "SFO Annual Congress 2027",
+      "start": "2027-04-23",
+      "end": "2027-04-26",
+      "city": "Paris",
+      "country": "France",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "Paris",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.sfo-online.fr/",
+      "program": "https://www.sfo-online.fr/",
+      "registration": "https://www.sfo-online.fr/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Provisional listing: verify dates and details with the organiser.",
+      "deadlines": []
+    },
+    {
       "id": "arvo-2027",
       "featured": false,
       "title": "ARVO 2027",
@@ -2674,6 +2778,32 @@
       "submit": null,
       "verified": "2026-10-22",
       "description": "Congress dates confirmed by the organisers. Scientific submission deadlines have not yet been published.",
+      "deadlines": []
+    },
+    {
+      "id": "rcophth-2027",
+      "featured": false,
+      "title": "RCOphth Annual Congress 2027",
+      "fullTitle": "RCOphth Annual Congress 2027",
+      "org": "RCOphth Annual Congress 2027",
+      "start": "2027-05-24",
+      "end": "2027-05-27",
+      "city": "Birmingham",
+      "country": "United Kingdom",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "Birmingham",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.rcophth.ac.uk/",
+      "program": "https://www.rcophth.ac.uk/",
+      "registration": "https://www.rcophth.ac.uk/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Provisional listing: verify dates and details with the organiser.",
       "deadlines": []
     },
     {
@@ -2864,6 +2994,32 @@
       "deadlines": []
     },
     {
+      "id": "doc-2027",
+      "featured": false,
+      "title": "DOC Congress 2027",
+      "fullTitle": "DOC Congress 2027",
+      "org": "DOC Congress 2027",
+      "start": "2027-06-10",
+      "end": "2027-06-12",
+      "city": "Nuremberg",
+      "country": "Germany",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "Nuremberg",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.doc-nuernberg.de/",
+      "program": "https://www.doc-nuernberg.de/",
+      "registration": "https://www.doc-nuernberg.de/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Provisional listing: verify dates and details with the organiser.",
+      "deadlines": []
+    },
+    {
       "id": "soe-2027",
       "featured": false,
       "level": "specialty",
@@ -3032,6 +3188,32 @@
         }
       ],
       "submissionNote": "Abstract submission opens 3 December 2026."
+    },
+    {
+      "id": "world-keratoconus-2027",
+      "featured": false,
+      "title": "World Keratoconus Congress 2027",
+      "fullTitle": "World Keratoconus Congress 2027",
+      "org": "World Keratoconus Congress 2027",
+      "start": "2027-08-26",
+      "end": "2027-08-28",
+      "city": "Buenos Aires",
+      "country": "Argentina",
+      "region": "Latin America",
+      "mode": "In person",
+      "venue": "Buenos Aires",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.worldkeratoconuscongress.com/",
+      "program": "https://www.worldkeratoconuscongress.com/",
+      "registration": "https://www.worldkeratoconuscongress.com/",
+      "submit": null,
+      "verified": "2026-11-02",
+      "description": "Provisional listing: verify dates and details with the organiser.",
+      "deadlines": []
     },
     {
       "id": "euretina-2027",
