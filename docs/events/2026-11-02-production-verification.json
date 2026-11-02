@@ -1,0 +1,110 @@
+[
+  {
+    "path": "assets/data/ophthalmology-events.ru.json",
+    "url": "https://matveyshemyakin.ru/assets/data/ophthalmology-events.ru.json",
+    "status": 200,
+    "sha256": "32d8ece9926ec420136f40fac9b03347b8efe69f360f04a110ca42efa8407687",
+    "expectedSha256": "32d8ece9926ec420136f40fac9b03347b8efe69f360f04a110ca42efa8407687",
+    "matches": true,
+    "events": 107
+  },
+  {
+    "path": "assets/data/ophthalmology-events.en.json",
+    "url": "https://matveyshemyakin.ru/assets/data/ophthalmology-events.en.json",
+    "status": 200,
+    "sha256": "67a6c1d6b1373ca8dd162e8ffa29756f430d351c93857d59c463fd54c2dcfbf1",
+    "expectedSha256": "67a6c1d6b1373ca8dd162e8ffa29756f430d351c93857d59c463fd54c2dcfbf1",
+    "matches": true,
+    "events": 107
+  },
+  {
+    "path": "assets/data/ophthalmology-event-sources.json",
+    "url": "https://matveyshemyakin.ru/assets/data/ophthalmology-event-sources.json",
+    "status": 200,
+    "sha256": "97572822ced41dc92419964054931d2b10db85822660f125f334474d3bdef3ed",
+    "expectedSha256": "97572822ced41dc92419964054931d2b10db85822660f125f334474d3bdef3ed",
+    "matches": true
+  },
+  {
+    "path": "assets/events/events.js",
+    "url": "https://matveyshemyakin.ru/assets/events/events.js",
+    "status": 200,
+    "sha256": "9d196440dc8e284bff495b955b21a9423b0a6ab163ba9d32e38b05594735f8b7",
+    "expectedSha256": "9d196440dc8e284bff495b955b21a9423b0a6ab163ba9d32e38b05594735f8b7",
+    "matches": true
+  },
+  {
+    "path": "assets/events/globe.js",
+    "url": "https://matveyshemyakin.ru/assets/events/globe.js",
+    "status": 200,
+    "sha256": "17647f8e34779ad00528f02dcc8245a12ef039ca4bfe2215424e614b69e966bc",
+    "expectedSha256": "17647f8e34779ad00528f02dcc8245a12ef039ca4bfe2215424e614b69e966bc",
+    "matches": true
+  },
+  {
+    "path": "assets/events/satellite.js",
+    "url": "https://matveyshemyakin.ru/assets/events/satellite.js",
+    "status": 200,
+    "sha256": "cfb7d7291c53513bff646f10cab1048a2006b8e56012e928e379a2b9bdd9e873",
+    "expectedSha256": "cfb7d7291c53513bff646f10cab1048a2006b8e56012e928e379a2b9bdd9e873",
+    "matches": true
+  },
+  {
+    "path": "assets/events/events.css",
+    "url": "https://matveyshemyakin.ru/assets/events/events.css",
+    "status": 200,
+    "sha256": "3ba18c21c8257b592391cf5b8a65f05b1ffb936236d1d87d6c6d381283b72b3a",
+    "expectedSha256": "3ba18c21c8257b592391cf5b8a65f05b1ffb936236d1d87d6c6d381283b72b3a",
+    "matches": true
+  },
+  {
+    "path": "assets/events/events-core.css",
+    "url": "https://matveyshemyakin.ru/assets/events/events-core.css",
+    "status": 200,
+    "sha256": "b9f54357c088fdd6d8ec4896fef4475c9ba019005b86cff2eb882aacd04332d5",
+    "expectedSha256": "b9f54357c088fdd6d8ec4896fef4475c9ba019005b86cff2eb882aacd04332d5",
+    "matches": true
+  },
+  {
+    "path": "assets/events/events-components.css",
+    "url": "https://matveyshemyakin.ru/assets/events/events-components.css",
+    "status": 200,
+    "sha256": "7b431179097a17dd94ec9251d6f453e0ccc1513639c5365f173278f66b26f660",
+    "expectedSha256": "7b431179097a17dd94ec9251d6f453e0ccc1513639c5365f173278f66b26f660",
+    "matches": true
+  },
+  {
+    "path": "for-doctors/events/index.html",
+    "url": "https://matveyshemyakin.ru/for-doctors/events/index.html",
+    "status": 200,
+    "sha256": "a2d9895c7ab2634dfd4017f749cb7f04a307ee92e4ba02e8062fda50c32517a5",
+    "expectedSha256": "a2d9895c7ab2634dfd4017f749cb7f04a307ee92e4ba02e8062fda50c32517a5",
+    "matches": true,
+    "staticCards": 78,
+    "sharedHeaders": 1,
+    "inlineStyles": false,
+    "versionedEventAssets": [
+      "/assets/events/events.css?v=3ba18c21c825",
+      "/assets/events/satellite.js?v=cfb7d7291c53",
+      "/assets/events/globe.js?v=17647f8e3477",
+      "/assets/events/events.js?v=9d196440dc8e"
+    ]
+  },
+  {
+    "path": "en/for-doctors/events/index.html",
+    "url": "https://matveyshemyakin.ru/en/for-doctors/events/index.html",
+    "status": 200,
+    "sha256": "5c2845ea1f1514cb7fdc7bc15d0593c6c8dcd09f8d88f06562840152a8d0bd2e",
+    "expectedSha256": "5c2845ea1f1514cb7fdc7bc15d0593c6c8dcd09f8d88f06562840152a8d0bd2e",
+    "matches": true,
+    "staticCards": 78,
+    "sharedHeaders": 1,
+    "inlineStyles": false,
+    "versionedEventAssets": [
+      "/assets/events/events.css?v=3ba18c21c825",
+      "/assets/events/satellite.js?v=cfb7d7291c53",
+      "/assets/events/globe.js?v=17647f8e3477",
+      "/assets/events/events.js?v=9d196440dc8e"
+    ]
+  }
+]

@@ -20,7 +20,7 @@
 ## Tasks
 - [x] 1. Audit every existing event's official source and search society calendars across all represented regions; record evidence and exclusions. Correct/deduplicate both JSON datasets and normalize translations. Test locale parity, evidence coverage and duplicate identity.
 - [x] 2. Reproduce interface regressions using existing tests and local browser integration checks. Add failing regression coverage, repair minimal causes, regenerate HTML using scripts/render_events.py and scripts/site_header.py.
-- [ ] 3. Run event/header tests plus RU/EN mobile/desktop light/dark browser matrix including search, filters, calendar, globe, dialogs, links and overflow. Review final diff independently, commit, push and merge PR #80 using expected head SHA. Verify live assets and rerun production browser checks.
+- [x] 3. Run event/header tests plus RU/EN mobile/desktop light/dark browser matrix including search, filters, calendar, globe, dialogs, links and overflow. Review final diff independently, commit, push and merge PR #80 using expected head SHA. Verify live assets and rerun production browser checks.
 
 ## Progress / decisions
 - Initial HEAD: 96c9b79c403e7b010fd4b1a6402aab61a2e20dca.
@@ -31,3 +31,5 @@
 - Review fixes: all 40 retained deadline URLs are monitored with date-specific context; date-only call opening compares calendar days. Regression tests were observed failing, then passing (32 Node tests).
 - Visual review of CI screenshots found the homepage hero min-height leaked into the events page on desktop; events CSS now clears that minimum.
 - Unrelated baseline failure: Patient ecosystem checks expects an old IOL page SHA1; current IOL HTML is identical to main and untouched by this PR. Do not alter unrelated patient content or weaken that test.
+
+- Task 3 complete: PR #80 merged as 9bbfbe547e1d86171d07a7b429dbe1957a3dad79. Production run 41416654091 passed 16/16 cases with imagery and zero JS errors; 11/11 public resources match main c183b21. Report: docs/events/2026-11-02-release-report.md.
