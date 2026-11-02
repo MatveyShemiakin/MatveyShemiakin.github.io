@@ -3,6 +3,7 @@ on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
@@ -50,4 +51,25 @@ jobs:
         with:
           name: patient-hub-header-smoke
           path: header-smoke/*
+          if-no-files-found: error
+  author-header-layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.56.0
+      - run: python -m playwright install --with-deps chromium
+      - name: Compare article and series headers with the homepage
+        run: python scripts/test_shared_header_browser.py --output artifacts/header-local
+      - name: Verify the published headers
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: python scripts/test_shared_header_browser.py --base-url https://matveyshemyakin.ru --output artifacts/header-production
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: author-header-layout-${{ github.sha }}
+          path: artifacts/
           if-no-files-found: error
