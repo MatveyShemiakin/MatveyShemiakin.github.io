@@ -1,13 +1,5 @@
-@import url("/assets/events/events-core.css");
-@import url("/assets/events/events-components.css");
-
-/* Events pages use the shared mega navigation as their single desktop navigation. */
-.site-header.site-mega-nav-mounted .nav-right > nav:not(.site-mega-nav),
-.site-header .nav-right:has(> .site-mega-nav) > nav:not(.site-mega-nav){display:none!important}
-@media(min-width:1021px){
-  .site-header.site-mega-nav-mounted .nav-right{min-width:0;flex:1 1 auto}
-  .site-header.site-mega-nav-mounted .nav{gap:20px}
-}
+@import url("/assets/events/events-core.css?v=6721e76b64c9");
+@import url("/assets/events/events-components.css?v=949688fa4102");
 
 /* Mobile containment: long event names, regions and provider labels must never widen the page. */
 @media(max-width:640px){

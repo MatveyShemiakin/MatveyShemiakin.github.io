@@ -22,3 +22,7 @@ test('online events never acquire a misleading physical city marker',()=>{
  assert.equal(group([{id:'fedorov-2026',mode:'Online',city:'Online',country:'Worldwide'}]).length,0);
  assert.equal(group([{id:'fedorov-2026',mode:'Онлайн',city:'Онлайн',country:'Весь мир'}]).length,0);
 });
+test('new and renamed meetings use catalogue coordinates without an ID-specific code change',()=>{
+ const es=[{id:'new-meeting',city:'Budapest',country:'Hungary',mode:'In person',coordinates:[47.5,19.04]}];
+ const result=group(es);assert.equal(result.length,1);assert.equal(result[0].lat,47.5);assert.equal(result[0].events[0].id,'new-meeting');
+});

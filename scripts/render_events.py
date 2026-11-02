@@ -79,8 +79,24 @@ def card(event: dict, lang: str, as_of: date) -> str:
     )
 
 
+def submissions_open(event: dict, as_of: date) -> bool:
+    if day(event['end']) < as_of:
+        return False
+    opens = event.get('submissionOpens')
+    if opens and day(opens) > as_of:
+        return False
+    calls = [d for d in event['deadlines'] if d['kind'] == 'abstract']
+    return bool(event['submissionOpen'] or opens) and (not calls or any(day(d['date']) >= as_of for d in calls))
+
+
 def render_page(text: str, dataset: dict, lang: str, as_of: date) -> str:
     en = lang == 'en'
+    regions = list(dict.fromkeys(e['region'] for e in dataset['events'] if e.get('region')))
+    categories = list(dict.fromkeys(c for e in dataset['events'] for c in e.get('categories', [])))
+    for element_id, attribute, values in (('region-filters', 'region', regions), ('specialty-filters', 'specialty', categories)):
+        buttons = '<button class="filter-chip active" type="button" data-' + attribute + '="all">' + ('All' if en else 'Все') + '</button>'
+        buttons += ''.join('<button class="filter-chip" type="button" data-' + attribute + '="' + escape(v, quote=True) + '">' + escape(v) + '</button>' for v in values)
+        text = inner(text, element_id, buttons)
     upcoming = sorted((e for e in dataset['events'] if day(e['end']) >= as_of), key=lambda e: e['start'])
     deadlines = sorted((d | {'event': e} for e in upcoming for d in e['deadlines'] if day(d['date']) >= as_of), key=lambda d: d['date'])
     cards = '\n'.join(card(e, lang, as_of) for e in upcoming)
@@ -90,7 +106,7 @@ def render_page(text: str, dataset: dict, lang: str, as_of: date) -> str:
         text = text.replace('id="events-grid"', 'id="events-grid" data-events-prerendered="true"', 1)
     for field, count in (
         ('stat-events', len(upcoming)),
-        ('stat-open', sum(bool(e['submissionOpen']) for e in upcoming)),
+        ('stat-open', sum(submissions_open(e, as_of) for e in upcoming)),
         ('stat-deadlines', sum((day(d['date']) - as_of).days <= 30 for d in deadlines)),
     ):
         text = inner(text, field, str(count))
@@ -115,6 +131,17 @@ def render_page(text: str, dataset: dict, lang: str, as_of: date) -> str:
 
 def sync(root: Path, as_of: date, check: bool = False) -> list[str]:
     changes = []
+    css_path = root / 'assets/events/events.css'
+    css = css_path.read_text()
+    for name in ('events-core', 'events-components'):
+        asset = f'/assets/events/{name}.css'
+        version = hashlib.sha256((root / asset.lstrip('/')).read_bytes()).hexdigest()[:12]
+        css = re.sub('(' + re.escape(asset) + r')(?:\?v=[^"\s]+)?', lambda m: m[1] + '?v=' + version, css)
+    if css != css_path.read_text():
+        changes.append('assets/events/events.css')
+        if not check:
+            css_path.write_text(css)
+    css_version = hashlib.sha256(css.encode()).hexdigest()[:12]
     sitemap_path = root / 'sitemap.xml'
     sitemap = sitemap_path.read_text()
     for lang, prefix in (('ru', ''), ('en', 'en/')):
@@ -127,6 +154,7 @@ def sync(root: Path, as_of: date, check: bool = False) -> list[str]:
             asset = f'/assets/events/{script}.js'
             version = hashlib.sha256((root / asset.lstrip('/')).read_bytes()).hexdigest()[:12]
             rendered = re.sub('(' + re.escape(asset) + r')(?:\?v=[^"\s]+)?', lambda m: m[1] + '?v=' + version, rendered)
+        rendered = re.sub(r'(/assets/events/events\.css)(?:\?v=[^"\s]+)?', lambda m: m[1] + '?v=' + css_version, rendered)
         analytics_version = hashlib.sha256((root / 'analytics.js').read_bytes()).hexdigest()[:12]
         rendered = re.sub(r'(/analytics\.js)(?:\?v=[^"\s]+)?', lambda m: m[1] + '?v=' + analytics_version, rendered)
         if rendered == original:

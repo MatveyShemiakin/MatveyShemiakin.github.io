@@ -1,0 +1,31 @@
+name: Events browser release checks
+on:
+  pull_request:
+    paths: ['assets/events/**', 'assets/data/ophthalmology-event*.json', 'for-doctors/events/**', 'en/for-doctors/events/**', 'scripts/test_events_browser.py', '.github/workflows/events-browser.yml']
+  push:
+    branches: [main]
+    paths: ['assets/events/**', 'assets/data/ophthalmology-event*.json', 'for-doctors/events/**', 'en/for-doctors/events/**', 'scripts/test_events_browser.py', '.github/workflows/events-browser.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.56.0
+      - run: python -m playwright install --with-deps chromium
+      - name: Local RU/EN device and theme matrix
+        run: python scripts/test_events_browser.py --output artifacts/events-local
+      - name: Verify published release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: python scripts/test_events_browser.py --base-url https://matveyshemyakin.ru --wait-for-release --output artifacts/events-production
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: events-browser-${{ github.sha }}
+          path: artifacts/
