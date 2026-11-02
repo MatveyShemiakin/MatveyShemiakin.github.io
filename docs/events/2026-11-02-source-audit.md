@@ -141,3 +141,5 @@ Every retained deadline has its own official URL in both JSON catalogues. Date-o
 ## Monitoring and interface review
 
 All 40 retained deadline URLs have dedicated source monitoring with current date context; prior valid contextual terms are retained. A calendar-day opening date is never converted to an invented noon cutoff. Catalogue coordinates feed the globe directly, so adding a meeting no longer requires an ID-specific JS coordinate change. The desktop events hero clears the homepage minimum height.
+
+Real browser interaction also reproduced an inherited mobile CSS rule hiding Reset filters; it was removed. Aliases preserve favourites and shared event links for the eight IDs consolidated/renamed since main.

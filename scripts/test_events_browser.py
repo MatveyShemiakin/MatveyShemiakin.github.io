@@ -47,6 +47,7 @@ def main():
        assert max(sizes['doc'],sizes['body'])<=sizes['viewport']+1,f'{label}: horizontal overflow {sizes}'
        row['checks'].append(label)
       fits('initial layout')
+      assert page.locator('#clear-filters').is_visible(),'reset filters control must remain visible on mobile'
       if width>=1021:assert page.locator('.hero').bounding_box()['height']<650,'homepage hero minimum height leaked into calendar'
       page.screenshot(path=str(out/(name+'-events.png')),full_page=False)
       page.locator('#event-search').fill('APAO')
@@ -91,6 +92,7 @@ def main():
       assert not row['errors'],'JavaScript exceptions: '+str(row['errors']);row['passed']=True
      except Exception as exc:
       row['passed']=False;row['failure']=str(exc);failures.append(name+': '+str(exc));page.screenshot(path=str(out/(name+'-failure.png')),full_page=False)
+      (out/'results.json').write_text(json.dumps({'base':base,'cases':rows,'failures':failures},ensure_ascii=False,indent=2));print(json.dumps(row,ensure_ascii=False),flush=True);raise SystemExit(failures[-1])
      finally:ctx.close()
      print(json.dumps(row,ensure_ascii=False),flush=True)
   # Network failure must retain the usable HTML, and must not claim JS controls work.

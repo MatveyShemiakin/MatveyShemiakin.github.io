@@ -1,5 +1,5 @@
 @import url("/assets/events/events-core.css?v=99ed38e59e42");
-@import url("/assets/events/events-components.css?v=949688fa4102");
+@import url("/assets/events/events-components.css?v=7b431179097a");
 
 /* Mobile containment: long event names, regions and provider labels must never widen the page. */
 @media(max-width:640px){

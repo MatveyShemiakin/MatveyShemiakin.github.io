@@ -16,3 +16,8 @@ test('date-only call opening is active from the start of its published calendar 
  const e={end:'2027-07-31',submissionOpen:false,submissionOpens:'2026-12-03',deadlines:[{kind:'abstract',date:'2027-01-28',timeKnown:false}]};
  const before=process.env.TZ;process.env.TZ='UTC';try{assert.equal(api('2026-12-03T00:01:00Z').checkSubmission(e),true)}finally{if(before===undefined)delete process.env.TZ;else process.env.TZ=before}
 });
+test('retired duplicate IDs keep existing saved events and shared links usable',()=>{
+ const source=fs.readFileSync('assets/events/events.js','utf8').replace('init();\n})();','window.savedIds=[...state.favs];window.canonical=canonicalId;\n})();');
+ const window={addEventListener(){}};vm.runInNewContext(source,{window,document:{addEventListener(){},documentElement:{lang:'en'},body:{dataset:{}}},localStorage:{getItem(){return '["acs-2026","cno-2027","ophthalmology-360-2027"]'}},Date});
+ assert.deepEqual(Array.from(window.savedIds),['asia-cornea-2026','argentina-ophthalmology-2027','oph360-2027']);assert.equal(window.canonical('vitreoretinal-russia-2027'),'vitreoretinal-technologies-2027');
+});
