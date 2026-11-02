@@ -143,3 +143,13 @@ Every retained deadline has its own official URL in both JSON catalogues. Date-o
 All 40 retained deadline URLs have dedicated source monitoring with current date context; prior valid contextual terms are retained. A calendar-day opening date is never converted to an invented noon cutoff. Catalogue coordinates feed the globe directly, so adding a meeting no longer requires an ID-specific JS coordinate change. The desktop events hero clears the homepage minimum height.
 
 Real browser interaction also reproduced an inherited mobile CSS rule hiding Reset filters; it was removed. Aliases preserve favourites and shared event links for the eight IDs consolidated/renamed since main.
+
+## Main-branch comparison and link checks
+
+The main branch had 90 records. This release adds 25 dated meetings and consolidates 8 duplicate/alias records, leaving 107 unique meetings (78 ongoing/upcoming on 2 November). The 8 old IDs remain valid for saved events and event links.
+
+All 178 distinct published URLs (official pages, programmes, registration, submissions, date sources and deadlines) were requested. 168 returned HTTP 200. Automated access to 10 URLs was limited by 403, 503, 521, timeout or redirect-loop responses across AAO, CCOS, Belarus conference, ISA, ISER, MNTK and COS. Their dates were cross-checked in indexed official organiser content or official society calendars; these are not reported as successfully tested external destinations.
+
+Node event/header regression tests: 33 passed. Python event/header tests: 14 passed. Real Chromium run 41414756272 passed all 16 language/viewport/theme cases, including satellite imagery; final layout changes are rechecked before merge. Physical Android/iOS/Safari validation is not available. One unrelated Patient ecosystem CI test fails on the pre-existing IOL HTML fingerprint; that file is identical to main and is untouched by this release.
+
+The tablet view now uses the primary four-mode view bar and avoids an overlapping legacy bottom bar. Filter chips wrap on desktop as well as mobile, avoiding internal horizontal scrolling.

@@ -45,6 +45,9 @@ def main():
       def fits(label):
        sizes=page.evaluate('({viewport:innerWidth,doc:document.documentElement.scrollWidth,body:document.body.scrollWidth})')
        assert max(sizes['doc'],sizes['body'])<=sizes['viewport']+1,f'{label}: horizontal overflow {sizes}'
+       for selector in ['#region-filters','#specialty-filters','.calendar-shell']:
+        for box in page.locator(selector).all():
+         if box.is_visible():assert box.evaluate('(e)=>e.scrollWidth<=e.clientWidth+1'),label+': internal horizontal scroll '+selector
        row['checks'].append(label)
       fits('initial layout')
       assert page.locator('#clear-filters').is_visible(),'reset filters control must remain visible on mobile'

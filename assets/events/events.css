@@ -1,4 +1,4 @@
-@import url("/assets/events/events-core.css?v=99ed38e59e42");
+@import url("/assets/events/events-core.css?v=b9f54357c088");
 @import url("/assets/events/events-components.css?v=7b431179097a");
 
 /* Mobile containment: long event names, regions and provider labels must never widen the page. */
@@ -125,7 +125,7 @@
  .view-tabs{display:grid;width:100%}.view-tab{padding:8px 3px;font-size:12px;min-width:0}
  .filter-scroll{flex-wrap:wrap;overflow:visible}.app-shell>*{min-width:0;max-width:100%}
 }
-@media(max-width:760px){
+@media(max-width:1020px){
  /* Keep event modes beside the content, clear of the shared bottom navigation. */
  .mobile-sticky{display:none}
  .viewbar{position:sticky;top:76px;z-index:80;background:var(--bg);padding:6px 0}
