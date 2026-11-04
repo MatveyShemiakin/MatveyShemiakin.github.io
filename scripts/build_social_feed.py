@@ -22,7 +22,7 @@ def render_instagram_article(lang):
  url='/social/instagram-account-blocking/' if lang=='ru' else '/en/social/instagram-account-blocking/'
  button='Читать разбор →' if lang=='ru' else 'Read the article →'
  alt='Скриншот официальной страницы Meta о пробных Reels' if lang=='ru' else 'Screenshot of Meta’s official trial Reels page'
- return f'<section class="section social-guide-section"><article class="social-card social-guide-card social-article-card"><div><div class="eyebrow">{label}</div><h2>{title}</h2><p>{desc}</p><a class="button primary" href="{url}">{button}</a></div><a href="{url}" tabindex="-1" aria-hidden="true"><img src="/social/instagram-account-blocking/meta-trial-reels.jpg" alt="{alt}" width="1010" height="280" loading="lazy"></a></article></section>'
+ return f'<section class="section social-guide-section"><article class="social-card social-guide-card social-article-card"><a class="social-article-media" href="{url}" tabindex="-1" aria-hidden="true"><img src="/social/instagram-account-blocking/meta-trial-reels.jpg" alt="{alt}" width="1010" height="280" loading="lazy"></a><div class="social-article-copy"><div class="eyebrow">{label}</div><h2>{title}</h2><p>{desc}</p><a class="button primary" href="{url}">{button}</a></div></article></section>'
 
 def render_guide(lang):
  title='Здоровье и зрение: 5 привычек' if lang=='ru' else 'Health and vision: 5 habits'
