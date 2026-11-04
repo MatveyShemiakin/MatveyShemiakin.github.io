@@ -1,0 +1,35 @@
+{
+  "captured_at": "2026-11-04",
+  "capture_type": "browser screenshots, heading crops",
+  "images": [
+    {
+      "file": "meta-trial-reels.jpg",
+      "source_url": "https://about.fb.com/news/2024/12/trial-reels-try-content-non-followers-first-see-what-perfoms-best/",
+      "source_number": 2
+    },
+    {
+      "file": "meta-security.jpg",
+      "source_url": "https://about.fb.com/news/2021/07/keeping-instagram-safe-and-secure/",
+      "source_number": 5
+    },
+    {
+      "file": "meta-moderation.jpg",
+      "source_url": "https://about.fb.com/news/2025/01/meta-more-speech-fewer-mistakes/",
+      "source_number": 8
+    },
+    {
+      "file": "meta-rights.jpg",
+      "source_url": "https://about.fb.com/news/2023/01/helping-creators-and-publishers-manage-intellectual-property/",
+      "source_number": 10
+    },
+    {
+      "file": "meta-recommendations.jpg",
+      "source_url": "https://about.fb.com/news/2020/08/recommendation-guidelines/",
+      "source_number": 11
+    }
+  ],
+  "unavailable_screenshots": {
+    "reddit": "Site-served network security block",
+    "substack": "Site Unavailable"
+  }
+}
