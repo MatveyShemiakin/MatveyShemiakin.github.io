@@ -27,7 +27,8 @@
       const image=card?.querySelector('img'),copy=card?.querySelector('h2')?.parentElement;
       require(Boolean(card&&image&&copy),'Article card missing');
       if(!card||!image||!copy)return;
-      try{await image.decode()}catch(error){}
+      image.loading='eager';
+      await Promise.race([image.decode().catch(()=>{}),new Promise(resolve=>setTimeout(resolve,1000))]);
       const a=card.getBoundingClientRect(),b=image.getBoundingClientRect(),c=copy.getBoundingClientRect();
       row.cardRight=a.right;row.imageRight=b.right;row.viewport=win.innerWidth;
       require(image.naturalWidth>0,'Article image failed to load');
@@ -49,12 +50,16 @@
     const kind=params.get('page')==='patients'?'patients':'social';
     const path=(params.get('lang')==='en'?'/en':'')+'/'+kind+'/';
     const [doc,win]=await load(path,Number(params.get('width'))||390,params.get('theme')==='dark'?'dark':'light');
-    if(kind==='social')doc?.querySelector('.social-article-card')?.scrollIntoView();
-    else doc?.querySelector('.patient-hero .hero-actions')?.scrollIntoView();
+    const target=doc?.querySelector(kind==='social'?'.social-article-card':'.patient-hero .hero-actions');
+    const headerHeight=doc?.querySelector('header[data-site-header]')?.getBoundingClientRect().height||0;
+    if(target)win.scrollTo({top:win.scrollY+target.getBoundingClientRect().top-headerHeight-16,behavior:'instant'});
     document.body.dataset.auditStatus='passed';
     return;
   }
-  for(const theme of ['light','dark'])for(const width of [320,390,768,1440])for(const path of ['/social/','/en/social/','/patients/','/en/patients/'])await check(path,width,theme);
+  for(const theme of ['light','dark'])for(const width of [320,390,768,1440])for(const path of ['/social/','/en/social/','/patients/','/en/patients/']){
+    await check(path,width,theme);
+    report.textContent=JSON.stringify({checked:rows.length,failures,rows},null,2);
+  }
   document.body.dataset.auditStatus=failures.length?'failed':'passed';
   report.textContent=JSON.stringify({checked:rows.length,failures,rows},null,2);
 })().catch(error=>{document.body.dataset.auditStatus='failed';document.getElementById('report').textContent=String(error.stack||error)});
