@@ -1,11 +1,11 @@
 [
   {
     "id": "free-learning",
-    "event_id": "free-learning:1",
+    "event_id": "free-learning:2",
     "published": "2026-11-02",
-    "updated": "2026-11-02",
-    "revision": 1,
-    "kind": "new",
+    "updated": "2026-11-04",
+    "revision": 2,
+    "kind": "updated",
     "title": "Учитесь у лучших офтальмологов мира",
     "title_en": "Learn from leading ophthalmologists worldwide",
     "description": "21 проверенный образовательный ресурс для офтальмологов: операции, курсы, клинические случаи и научные статьи. Бесплатные материалы, прямые ссылки и фильтры.",
