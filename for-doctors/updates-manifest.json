@@ -16,18 +16,25 @@
       "kind": "updated"
     },
     "events": {
-      "fingerprint": "28a183ca21c918a124561a9387ccfaaee9bb100870155f0c8e7e719c23dfd48b",
+      "fingerprint": "fcd1a9058008b4fbdf32d738a7c9e693fdcb9bfab61df1b29bc4b1df5908f5f7",
       "published": "2026-08-16",
-      "updated": "2026-11-04",
-      "revision": 12,
+      "updated": "2026-11-06",
+      "revision": 13,
       "kind": "updated"
     },
     "free-learning": {
-      "fingerprint": "d2d9da9a9d833b6fc3a551c25ea8d0193cc0206d94bba2d21fab7284a32f259a",
+      "fingerprint": "73daab1922f3d2a8fd8e09aa2a4132eb5050083a4a43b31856b8acdfa00c872d",
       "published": "2026-11-02",
-      "updated": "2026-11-04",
-      "revision": 2,
+      "updated": "2026-11-06",
+      "revision": 3,
       "kind": "updated"
+    },
+    "iol-calculation": {
+      "fingerprint": "5ca24dd0bfae7023f007c22db714233a7a58810d33ef6008af7fda3d89624c59",
+      "published": "2026-11-06",
+      "updated": "2026-11-06",
+      "revision": 1,
+      "kind": "new"
     },
     "iol-dislocation": {
       "fingerprint": "7ecf06dd8171b9da9ada9d4eaa23edb6158acce008c6102da13c8d043994f5a9",
