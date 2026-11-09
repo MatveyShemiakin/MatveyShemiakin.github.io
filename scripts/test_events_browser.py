@@ -25,7 +25,12 @@ def main():
    except Exception:pass
    time.sleep(5)
   else:raise AssertionError('Production has not served the expected release data')
- failures=[];rows=[];today=datetime.now(ZoneInfo('Europe/Moscow')).date().isoformat()
+ failures=[];rows=[];now=datetime.now(ZoneInfo('Europe/Moscow'));today=now.date().isoformat()
+ def future(d):
+  return datetime.fromisoformat(d['date'].replace('Z','+00:00'))>=now if d.get('timeKnown') else d['date'][:10]>=today
+ def open_call(e):
+  calls=[d for d in e['deadlines'] if d['kind']=='abstract']
+  return e['end']>=today and bool(e.get('submissionOpen') or e.get('submissionOpens')) and (not e.get('submissionOpens') or e['submissionOpens'][:10]<=today) and (not calls or any(future(d) for d in calls))
  with sync_playwright() as p:
   browser=p.chromium.launch()
   for lang in ['ru','en']:
@@ -50,6 +55,19 @@ def main():
          if box.is_visible():assert box.evaluate('(e)=>e.scrollWidth<=e.clientWidth+1'),label+': internal horizontal scroll '+selector
        row['checks'].append(label)
       fits('initial layout')
+      assert page.locator('header[data-site-header]').count()==1,'single shared header'
+      controls=['header .monogram','header .site-language-switch','header [data-site-theme-toggle]']
+      boxes=[page.locator(s).bounding_box() for s in controls]
+      assert all(b and b['x']>=-1 and b['y']>=-1 and b['x']+b['width']<=width+1 for b in boxes),'header controls fit viewport'
+      for i,a in enumerate(boxes):
+       for b in boxes[i+1:]:assert min(a['x']+a['width'],b['x']+b['width'])<=max(a['x'],b['x'])+1 or min(a['y']+a['height'],b['y']+b['height'])<=max(a['y'],b['y'])+1,'header controls overlap'
+      other='ru' if lang=='en' else 'en';counterpart=('/en' if other=='en' else '')+'/for-doctors/events/'
+      assert page.locator(f'header .site-language-switch a[lang="{other}"]').get_attribute('href')==counterpart,'correct language counterpart'
+      page.locator('header [data-site-theme-toggle]').click();changed='dark' if theme=='light' else 'light'
+      page.wait_for_function('document.documentElement.dataset.theme === "'+changed+'"')
+      assert page.locator('header [data-site-theme-toggle]').get_attribute('aria-pressed')==str(changed=='dark').lower(),'theme control state'
+      page.locator('header [data-site-theme-toggle]').click();page.wait_for_function('document.documentElement.dataset.theme === "'+theme+'"')
+      row['checks'].append('shared header geometry, language counterpart, theme switching')
       assert page.locator('#clear-filters').is_visible(),'reset filters control must remain visible on mobile'
       if width>=1021:assert page.locator('.hero').bounding_box()['height']<650,'homepage hero minimum height leaked into calendar'
       page.screenshot(path=str(out/(name+'-events.png')),full_page=False)
@@ -73,12 +91,18 @@ def main():
        expected_region=sum(e['region']==region and e['end']>=today for e in datasets[lang]['events'])
        assert page.locator('#events-grid .event-card').count()==expected_region,f'region {region}'
       page.locator('#clear-filters').click();row['checks'].append('all region filters')
-      spec=page.locator('#specialty-filters [data-specialty]').nth(1).get_attribute('data-specialty');page.locator('#specialty-filters [data-specialty]').nth(1).click()
-      assert page.locator('#events-grid .event-card').count()==sum(e['end']>=today and spec in e['categories'] for e in datasets[lang]['events']),'specialty filter'
-      page.locator('#clear-filters').click();page.locator('#toggle-open').check();assert page.locator('#events-grid .event-card').count()>0;page.locator('#clear-filters').click();page.locator('#toggle-deadlines').check();assert page.locator('#events-grid .event-card').count()>0;page.locator('#clear-filters').click()
-      page.locator('#events-grid [data-favorite]').first.click();page.locator('#toggle-favorites').check();assert page.locator('#events-grid .event-card').count()==1;page.locator('#clear-filters').click()
+      specialties=page.locator('#specialty-filters [data-specialty]').evaluate_all('(nodes)=>nodes.map(n=>n.dataset.specialty).filter(s=>s!=="all")')
+      for spec in specialties:
+       page.locator('#specialty-filters [data-specialty]').filter(has_text=spec).first.click()
+       assert page.locator('#events-grid .event-card').count()==sum(e['end']>=today and spec in e['categories'] for e in datasets[lang]['events']),f'specialty filter {spec}'
+       page.locator('#clear-filters').click()
+      def ids():return set(page.locator('#events-grid [data-details]').evaluate_all('(nodes)=>nodes.map(n=>n.dataset.details)'))
+      page.locator('#toggle-open').check();assert ids()=={e['id'] for e in datasets[lang]['events'] if open_call(e)},'exact open-submission results';page.locator('#clear-filters').click()
+      page.locator('#toggle-deadlines').check();assert ids()=={e['id'] for e in datasets[lang]['events'] if e['end']>=today and any(future(d) for d in e['deadlines'])},'exact future-deadline results';page.locator('#clear-filters').click()
+      saved=page.locator('#events-grid [data-favorite]').first.get_attribute('data-favorite');page.locator('#events-grid [data-favorite]').first.click();page.locator('#toggle-favorites').check();assert ids()=={saved}
+      page.reload(wait_until='domcontentloaded');page.wait_for_selector('#events-grid [data-details]');page.locator('#toggle-favorites').check();assert ids()=={saved},'favourite survives reload';page.locator('#clear-filters').click()
       page.locator('#toggle-past').check();assert page.locator('#events-grid .event-card').count()==len(datasets[lang]['events']);page.locator('#clear-filters').click()
-      page.locator('#event-search').fill('no-such-event-73938');assert page.locator('#events-grid .empty-state').count()==1;page.locator('#clear-filters').click();row['checks'].append('specialty, deadline, favourite, past, empty filters')
+      page.locator('#event-search').fill('no-such-event-73938');assert page.locator('#events-grid .empty-state').count()==1;page.locator('#clear-filters').click();row['checks'].append('all specialties, exact status filters, persistent favourite, past, empty results')
       page.locator('[data-view="calendar"]').click();page.wait_for_selector('#view-calendar.active');fits('calendar layout');assert page.locator('#calendar-grid .calendar-cell').count()==42
       before=page.locator('#calendar-title').inner_text();page.locator('#calendar-next').click();assert page.locator('#calendar-title').inner_text()!=before;page.locator('#calendar-prev').click()
       page.locator('#calendar-grid [data-calendar-day]').nth(15).click();assert page.locator('#day-agenda h3').inner_text();page.screenshot(path=str(out/(name+'-calendar.png')),full_page=False)

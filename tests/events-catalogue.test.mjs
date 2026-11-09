@@ -22,7 +22,9 @@ test('every event has a date source; physical city coordinates and confirmed dat
 test('duplicate Russian congresses and unsupported deadlines are consolidated',()=>{
  for(const id of ['vitreoretinal-russia-2027','ophthalmology-360-2027','cataract-russia-2027'])assert.ok(!en.events.some(e=>e.id===id));
  const jos=en.events.find(e=>e.id==='jos-131-2027');assert.equal(jos.deadlines[0].date,'2026-11-05T13:00:00+09:00');
- assert.deepEqual(en.events.find(e=>e.id==='aao-2027').deadlines,[]);
+ const aao=en.events.find(e=>e.id==='aao-2027');
+ assert.equal(aao.submissionOpens,'2026-12-10');
+ assert.deepEqual(aao.deadlines.map(d=>[d.date,d.url]),[['2027-01-12','https://www.aao.org/annual-meeting/lasvegas']]);
  assert.ok(!en.events.find(e=>e.id==='apao-2027').deadlines.some(d=>d.kind==='faculty'));
 });
 test('every deadline keeps a dedicated official monitor with date-specific context',()=>{

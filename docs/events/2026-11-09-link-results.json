@@ -1,0 +1,1773 @@
+{
+  "checkedAt": "2026-11-09",
+  "method": "GET requests to every distinct published official/date/program/registration/submission/deadline URL. HTTP success is reachability only, not evidence of event facts. Official page content separately reviewed in source audit.",
+  "total": 224,
+  "http200": 217,
+  "limited": 7,
+  "urls": [
+    {
+      "url": "https://2026.apvrs.org/",
+      "status": 200,
+      "finalUrl": "https://2026.apvrs.org/",
+      "bytes": 107391,
+      "sha256": "ee10822b0f9d5b0b0f74f90d32ff6245d18e5fad5e78851eb439874df84c49d8",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://2026.apvrs.org/program-schedule/",
+      "status": 200,
+      "finalUrl": "https://2026.apvrs.org/program-schedule/",
+      "bytes": 114255,
+      "sha256": "2f58e5a9f4112aa20357b8324cf9396eac6cfed835a10af215a1f65d290b6197",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://2026.apvrs.org/registration/",
+      "status": 200,
+      "finalUrl": "https://2026.apvrs.org/registration/",
+      "bytes": 122899,
+      "sha256": "680508b567c224fb737ebe5386b9de6e9d2597b4f78d55a919f2f6b7d6625865",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://2027.apaophth.org/",
+      "status": 200,
+      "finalUrl": "https://2027.apaophth.org/",
+      "bytes": 79044,
+      "sha256": "f9188e89d3c26b8abd144d87c2709acaaed05d3c5b1d242ea2dc7c3094cd4468",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://2027.apaophth.org/important-dates/",
+      "status": 200,
+      "finalUrl": "https://2027.apaophth.org/important-dates/",
+      "bytes": 66634,
+      "sha256": "e5cc720b9b88223ae390c9fbbbc45c0428d620ee3bca60d2e6566ca062476c57",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://2027.apaophth.org/latest-news/",
+      "status": 200,
+      "finalUrl": "https://2027.apaophth.org/latest-news/",
+      "bytes": 93838,
+      "sha256": "7ecf806352d2524226df28d94260cc66f8ff7ec0c2a512f8ec89158ada6a0a92",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://2027.apaophth.org/program-overview/",
+      "status": 200,
+      "finalUrl": "https://2027.apaophth.org/program-overview/",
+      "bytes": 66030,
+      "sha256": "681810283f713ee12db7555d39a97d8f0b4996c2cefb4c060f4d1b6701e27e52",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://2027.apaophth.org/registration/",
+      "status": 200,
+      "finalUrl": "https://2027.apaophth.org/registration/",
+      "bytes": 96191,
+      "sha256": "b3bf8c71bfcbdd3531549ec8b4b67d0fa0c48811c5d0dcaa028336a2db79403d",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://360.oor.ru/",
+      "status": 200,
+      "finalUrl": "https://360.oor.ru/",
+      "bytes": 801931,
+      "sha256": "9fdb9b92fc2a5ed667af46b4495abf6f2f14af456898e339e940408241b51967",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://50.jsos.jp/",
+      "status": 200,
+      "finalUrl": "https://50.jsos.jp/",
+      "bytes": 14468,
+      "sha256": "e4401c1ee5b78e1fa6c0f7fddb774e998551d3719cf98ad823c14ee930f15c1f",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://50.jsos.jp/abstract",
+      "status": 200,
+      "finalUrl": "https://50.jsos.jp/abstract",
+      "bytes": 20363,
+      "sha256": "b3e7a7298544a81f7e86fc88b514ca83aa611650b8be0b746f5e913f97fec91f",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://50.jsos.jp/registration",
+      "status": 200,
+      "finalUrl": "https://50.jsos.jp/registration",
+      "bytes": 19433,
+      "sha256": "39b45222c6f0232e6edb997ffedcf2d22b67e9313650ccef45b3020cafc87276",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://aao.org/mid-year-forum/overview",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://abstracts.paao2027.com/en/landing/",
+      "status": 200,
+      "finalUrl": "https://abstracts.paao2027.com/en/landing/",
+      "bytes": 129676,
+      "sha256": "24d353e4641f471fa521d086ae4fa869f9fe0a6cf3f2998bcd5ccf8ef4a6b58d",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://alaccsa.com/",
+      "status": 200,
+      "finalUrl": "https://alaccsa.com/",
+      "bytes": 114835,
+      "sha256": "9ec1224da2284ab5ccbf7722ccad3758f550c1afc91bc7733db54ca910122ee7",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://annualmeeting.ascrs.org/",
+      "status": 200,
+      "finalUrl": "https://annualmeeting.ascrs.org/",
+      "bytes": 313082,
+      "sha256": "75584346fa5bdb12c50964b4f50462ab485e4f921ffbdc979c17b467642fec08",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://anzgsconference.com/",
+      "status": 200,
+      "finalUrl": "https://anzgsconference.com/",
+      "bytes": 197267,
+      "sha256": "37e75593fb4ed80894d183f02be8fc01330f2617103a70c1d818b18a09f00b4a",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://anzgsconference.com/abstracts/",
+      "status": 200,
+      "finalUrl": "https://anzgsconference.com/abstracts/",
+      "bytes": 155822,
+      "sha256": "0d467a6dbe74aaa2a93c87eb1dc67ac81dc0b5d42f4b4949d11272c542e5148e",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://anzgsconference.com/program/",
+      "status": 200,
+      "finalUrl": "https://anzgsconference.com/program/",
+      "bytes": 167342,
+      "sha256": "4ed1686f9bb3e81701194d1e291266d2d1c2869078c1b71d2890963783fa2e40",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://anzgsconference.com/registration/",
+      "status": 200,
+      "finalUrl": "https://anzgsconference.com/registration/",
+      "bytes": 163509,
+      "sha256": "ad3a566722c4b1647c23cae326a3d9f4709f17a8782f8ff7b5feaa5696b10d12",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://aocafrica.org/aoc-2026-congress/",
+      "status": 200,
+      "finalUrl": "https://aocafrica.org/aoc-2026-congress/",
+      "bytes": 622022,
+      "sha256": "dc5c4d0eadb79686971ed9eb0c4362494c7d77fc983c24204e1db0f70d27130e",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://apaophth.org/congress/calendar/",
+      "status": 200,
+      "finalUrl": "https://apaophth.org/congress/calendar/",
+      "bytes": 45093,
+      "sha256": "798c8e2474a8058062bd801a57fa980adc998e2b39edd84012fe501fb65d5bd9",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://apspos-capos2027.sciconf.cn/",
+      "error": "HTTP Error 521: Unknown"
+    },
+    {
+      "url": "https://apspos.org/apspos-congress-2027/",
+      "status": 200,
+      "finalUrl": "https://apspos.org/apspos-congress-2027/",
+      "bytes": 35497,
+      "sha256": "40e61dce259a5a4066c17fec237c64ac76bae71880b0e756e7d166d672ae91f7",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://aptooftalmico.com/",
+      "status": 200,
+      "finalUrl": "https://aptooftalmico.com/",
+      "bytes": 34497,
+      "sha256": "173da5c6f8c27a5234ff22cf6c0f515d3c65be6c3afc4f08561b4bc40417579c",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://apvrs.org/congresses/",
+      "status": 200,
+      "finalUrl": "https://apvrs.org/congresses/",
+      "bytes": 95785,
+      "sha256": "6bfc06e2ef4be44324299348d8355d41ca28f182cebeaeb9265ad630e77aeaad",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+      "status": 200,
+      "finalUrl": "https://studio.m-anage.com/ascrs/27am/cfp.cgi",
+      "bytes": 29297,
+      "sha256": "11c265a7b6d5b4487472815ba3a374a057e8620d005c014960ee67262c27bd7c",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://asmhk2026.com/",
+      "status": 200,
+      "finalUrl": "https://asmhk2026.com/",
+      "bytes": 134311,
+      "sha256": "21bc5336f7ea279123cbcf210999597fdc8bbab46096aa29a905c4d30f2b881e",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://asmhk2026.com/abstract-submission/",
+      "status": 200,
+      "finalUrl": "https://asmhk2026.com/abstract-submission/",
+      "bytes": 124688,
+      "sha256": "fdc87f23794278392c1bc8f1e2b7a8b164a362a3d7b7798c88978a0929142549",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://asmhk2026.com/registration/",
+      "status": 200,
+      "finalUrl": "https://asmhk2026.com/registration/",
+      "bytes": 138375,
+      "sha256": "fd906db740472a59b5208d29e0614a4e8f2c693b15b1c07561e515fdb2b1fa09",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://beavrs.org/",
+      "status": 200,
+      "finalUrl": "https://beavrs.org/",
+      "bytes": 154371,
+      "sha256": "92fb5d10c6b781b7a7807d86e3284cc20d81bd50803ee7711df6f90a1a1dd990",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://brascrs.iweventos.com.br/brascrs2027",
+      "status": 200,
+      "finalUrl": "https://brascrs.iweventos.com.br/brascrs2027",
+      "bytes": 100488,
+      "sha256": "c3dfbe1ed4886674454139c883987e6f9349fa5640d45d0fe864d24e4fa5cc58",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://brascrs.iweventos.com.br/site/brascrs2027/inscricoes",
+      "status": 200,
+      "finalUrl": "https://brascrs.iweventos.com.br/site/brascrs2027/inscricoes",
+      "bytes": 64611,
+      "sha256": "c1bcb385852694676763735c412aed625fd88802b898a74cb99eab40a9e2a2a0",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://brascrs.iweventos.com.br/site/brascrs2027/programacao",
+      "status": 200,
+      "finalUrl": "https://brascrs.iweventos.com.br/site/brascrs2027/programacao",
+      "bytes": 50054,
+      "sha256": "0cfe20fe4ae17cda0f212d079ba201b74f8f07aa514fc3f3e0031cf1949f724b",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://brascrs.iweventos.com.br/site/brascrs2027/trabalhos",
+      "status": 200,
+      "finalUrl": "https://brascrs.iweventos.com.br/site/brascrs2027/trabalhos",
+      "bytes": 50038,
+      "sha256": "5b3efdaa033b4194abbccd8a4ea69a4ae3fc8aac8ca33709ca5f37eb46f906ff",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://cataract-congress.ru/",
+      "status": 200,
+      "finalUrl": "https://cataract-congress.ru/",
+      "bytes": 659918,
+      "sha256": "22512646e75413c96445a5e1546cd43217e0067079aa7013e8a3d7f93066c81a",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://cataract-congress.ru/tpost/2tn75yufb1-katarakta2026-pochemu-etot-kongress-nelz",
+      "status": 200,
+      "finalUrl": "https://cataract-congress.ru/tpost/2tn75yufb1-katarakta2026-pochemu-etot-kongress-nelz",
+      "bytes": 42920,
+      "sha256": "22ec9df13ac83922dc815fdcbbc9e023d5babe5016b88dcbb74be848c6ff527d",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://cboftalmologia2026.com/",
+      "status": 200,
+      "finalUrl": "https://cboftalmologia2026.com/",
+      "bytes": 22634,
+      "sha256": "db0b0a55097fea0d91ac111e16784533ab631436fbf46930ec15b836433392b8",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://cboftalmologia2026.com/trabajos.html",
+      "status": 200,
+      "finalUrl": "https://cboftalmologia2026.com/trabajos.html",
+      "bytes": 17986,
+      "sha256": "094f76f2a7e563e5bed313a2dc0368028a3e3b4bb87f09e1aeedbf47b41b686d",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://ccos2026.sciconf.cn/",
+      "error": "HTTP Error 521: Unknown"
+    },
+    {
+      "url": "https://community.nanosweb.org/events/event-description?CalendarEventKey=de230df2-9ae2-4615-9dde-01a15f8150b4&Home=%2Fevents%2Fcalendar&hlmlt=ED",
+      "status": 200,
+      "finalUrl": "https://community.nanosweb.org/events/event-description?CalendarEventKey=de230df2-9ae2-4615-9dde-01a15f8150b4&Home=%2Fevents%2Fcalendar&hlmlt=ED",
+      "bytes": 85633,
+      "sha256": "8498095d409c06630fef6a3f15390f1904250aa559520096e835b43b3bc686c7",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://congress.2027.apaophth.org/",
+      "status": 200,
+      "finalUrl": "https://congress.2027.apaophth.org/",
+      "bytes": 7004,
+      "sha256": "22d3654a4a6a401a4bfffa8dacd40f6624b9ac67daea28b0285f033e5f046aaa",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://congress.escrs.org/",
+      "status": 200,
+      "finalUrl": "https://congress.escrs.org/",
+      "bytes": 159494,
+      "sha256": "d060d95b2c0040b380f7fcb49b311c166e891575fd19dc3024b0aa2e7cb193ce",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/131jos/en/abstract/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/131jos/en/abstract/index.html",
+      "bytes": 34609,
+      "sha256": "22c6cc13680838ebfec32cb41739fd7d66461d297360f4607cd5c63a7c1459e6",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/131jos/en/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/131jos/en/index.html",
+      "bytes": 13064,
+      "sha256": "bc1c157b36aef9a96198c8b62e4dccf5fc7930633026ec9fa400c959e70d256f",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/131jos/en/join/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/131jos/en/join/index.html",
+      "bytes": 16589,
+      "sha256": "f4e0a7bb0f9add6e92e27d12ab44df8945307c990d120d33bd049fd1d6d5872a",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/131jos/en/summary/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/131jos/en/summary/index.html",
+      "bytes": 8360,
+      "sha256": "3a697b7e27d24097d569cd7bd468dd8ad006efc2e8724ff18f3b7f88fff3715e",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/65moumaku/abstract/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/65moumaku/abstract/index.html",
+      "bytes": 42912,
+      "sha256": "9f14f0f757e16523584133117ad953f05b6096e3c5ff643d06b77b14a9b8d244",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/65moumaku/join/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/65moumaku/join/index.html",
+      "bytes": 28322,
+      "sha256": "056e8fb2c550dcc2170db0e1b3a764c0fcb826507809f5dd1d366c7b6a7e552e",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/65moumaku/program/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/65moumaku/program/index.html",
+      "bytes": 31545,
+      "sha256": "f4cb2614523bad051d07184fc04fe4ee0e1dcdd5f5b9319b27dbb4af00c1ff91",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/65moumaku/summary/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/65moumaku/summary/index.html",
+      "bytes": 6166,
+      "sha256": "74049e4fdfa769f9664be906d38a741264cf2a7ab7bb8c2ffd99750c5dc3f0f5",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/80ringan/en/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/80ringan/en/index.html",
+      "bytes": 6087,
+      "sha256": "6393ffa9040825b34ae3e9f991f2dc72d9e9adb9b2513486406dbe7e1f1eaeb1",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/80ringan/en/registration/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/80ringan/en/registration/index.html",
+      "bytes": 12199,
+      "sha256": "be25da2ca5918eb24389773a59ee2fe4597a130c8c1658da6c0b0b00d4a420f3",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/80ringan/en/summary/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/80ringan/en/summary/index.html",
+      "bytes": 5467,
+      "sha256": "b213ab59462182a9a2c937c161109ce99f7571ce1730985f0cf08d642b0c9f5e",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
+      "bytes": 19511,
+      "sha256": "a6ba33bff706ed22bb3980efce48f0d15b19c5f9f3dab5800a24e1c19bf3909a",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
+      "bytes": 61481,
+      "sha256": "2cc37ffd61180e6edda4360ed07da48dd8ad29bb06a541b8719e49f023d25459",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://convention.jtbcom.co.jp/fujiretina/registration/index.html",
+      "status": 200,
+      "finalUrl": "https://convention.jtbcom.co.jp/fujiretina/registration/index.html",
+      "bytes": 15932,
+      "sha256": "160165e66f4c833bd0bc8b66ef5bc4c282d0c18dee4413edd7e2a56a04822e1c",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://corneasociety.org/cornea-and-eye-banking-forum",
+      "status": 200,
+      "finalUrl": "https://corneasociety.org/cornea-and-eye-banking-forum",
+      "bytes": 28036,
+      "sha256": "8447874475745be5d8744a5e90ddab78ccb7f8b59b2d1b56f38f40bea2c31514",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://cos-sco.secure-platform.com/2027",
+      "status": 200,
+      "finalUrl": "https://cos-sco.secure-platform.com/2027",
+      "bytes": 55669,
+      "sha256": "4b67922374cc3def867d352f672666c6f4489eb1c12e24a532acefc84d43afc4",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://cousp.com.br/",
+      "status": 200,
+      "finalUrl": "https://cousp.com.br/",
+      "bytes": 18731,
+      "sha256": "7ae03186efc0ce00eed392613d7df5c890c13f53c4705d119e114fe0a354e74e",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://cousp.com.br/informacoes-gerais.html",
+      "status": 200,
+      "finalUrl": "https://cousp.com.br/informacoes-gerais.html",
+      "bytes": 19808,
+      "sha256": "cd3d6d0b731478f87d903194936ba887031ef59a94d9f13b71c580a6fcc8b461",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://dog-kongress.de/",
+      "status": 200,
+      "finalUrl": "https://dog-kongress.de/",
+      "bytes": 70456,
+      "sha256": "67be99139d3f8568364485ffd17473828651f97bc3215bbd54c802bcbe9fb044",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
+      "status": 200,
+      "finalUrl": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
+      "bytes": 101933,
+      "sha256": "a9befdd8cdab39c70e5672edc96e19f5b1fa5e0e697f86e4db948272a5745244",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://dog.org/veranstaltungen/kongresse",
+      "status": 200,
+      "finalUrl": "https://dog.org/veranstaltungen/kongresse",
+      "bytes": 113997,
+      "sha256": "5f6df28cc157bd0b6b785e5ac798aee1836f1d88351126e70f05d408ffb66734",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://egsmembersmeeting.org/",
+      "status": 200,
+      "finalUrl": "https://egsmembersmeeting.org/",
+      "bytes": 301537,
+      "sha256": "afe5c1e1f6394347a7f9477c2d239c233c2bf7b53502ad7cf16db71f4a35ff85",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://epomec.ae/program-at-a-glance-2026/",
+      "status": 200,
+      "finalUrl": "https://epomec.ae/program-at-a-glance-2026/",
+      "bytes": 27704,
+      "sha256": "33d3052746980cf90d565436e04f67e6eaf02dbe9672064c6fe07986dc530363",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://epomec.ae/registration/",
+      "status": 200,
+      "finalUrl": "https://epomec.ae/registration/",
+      "bytes": 42395,
+      "sha256": "c8ce094166e990c94ed68a789d4e50f27ed77e7bd0e7a39760a5b93dda7b6bb1",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://epomec.ae/welcome-message/",
+      "status": 200,
+      "finalUrl": "https://epomec.ae/welcome-message/",
+      "bytes": 28837,
+      "sha256": "7970373960f463dfcc035dfa65f9d4d9edc3c4e47dd65353745b8265b89801a7",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://eso-conferences.com/eso2026/",
+      "status": 200,
+      "finalUrl": "https://eso-conferences.com/eso2026/",
+      "bytes": 2727952,
+      "sha256": "4f60257df40123725e264a505291bb6fe16764466600b845557321e269887a95",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://eucornea.org/budapest-2027-general-information/",
+      "status": 200,
+      "finalUrl": "https://eucornea.org/budapest-2027-general-information/",
+      "bytes": 495669,
+      "sha256": "d46d69ddb3df1735d6077bafd8e98d800a3a580f306df67d87a1531cccae287e",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://eucornea.org/instructional-course-submission-budapest-2027/",
+      "status": 200,
+      "finalUrl": "https://eucornea.org/instructional-course-submission-budapest-2027/",
+      "bytes": 479952,
+      "sha256": "144b191746f59232513036cc3d06d42906c19a0a31c4e389c2f4bea1e857a93f",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://euretina.org/copenhagen-27/",
+      "status": 200,
+      "finalUrl": "https://euretina.org/copenhagen-27/",
+      "bytes": 209504,
+      "sha256": "605418ed2879c90502db450516da3e7b39415aa61ef10ab2b96191cd52cfe1f5",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://euretina.org/copenhagen-27/session-submission-terms/",
+      "status": 200,
+      "finalUrl": "https://euretina.org/copenhagen-27/session-submission-terms/",
+      "bytes": 229058,
+      "sha256": "e54cad464b09e36433dc67a20b9803eafa6a280865407f12e65dce9e3283c4f6",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://euretina.org/euretinai-2027/",
+      "status": 200,
+      "finalUrl": "https://euretina.org/euretinai-2027/",
+      "bytes": 210751,
+      "sha256": "a91fd9c2ba03573bd6b5978e167496949830f35ec29a4278690673f6ab608349",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://euretina.org/sfm-2027/",
+      "status": 200,
+      "finalUrl": "https://euretina.org/sfm-2027/",
+      "bytes": 211977,
+      "sha256": "c13a3d6067e4cee0193773652c38c0fad6d753a063812fbc41f2b5fffa776934",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://euretina.org/sfm-2027/programme/",
+      "status": 200,
+      "finalUrl": "https://euretina.org/sfm-2027/programme/",
+      "bytes": 223640,
+      "sha256": "0d8b5cf2e23d385eb89cf0e6d8d7ebd4269b1e08ee1db8e4baf30504c1fb8098",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://euretina.org/vienna-2026/",
+      "status": 200,
+      "finalUrl": "https://euretina.org/vienna-2026/",
+      "bytes": 218733,
+      "sha256": "9057c9bcb725e77f69540eada02856bb41078f73fd83201c6a2685ec12ca33a7",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://euretina.org/vienna-2026/registration/",
+      "status": 200,
+      "finalUrl": "https://euretina.org/vienna-2026/registration/",
+      "bytes": 258996,
+      "sha256": "2616dabdaf518ef9f6f21fba86aa1fd632022a222def70c5e63c3eced78a2e59",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://events.moorfields.ae/",
+      "status": 200,
+      "finalUrl": "https://events.moorfields.ae/",
+      "bytes": 134351,
+      "sha256": "222b08ef93e88873f66cb8c61fceb298aceae9cdec079fca1a6d5f1beadd5f4b",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://events.moorfields.ae/competitions",
+      "status": 200,
+      "finalUrl": "https://events.moorfields.ae/competitions",
+      "bytes": 52457,
+      "sha256": "d0aeb3f526e3eccd61b7f29a9f3347f14fdb7d15303090a3768449cba731574d",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://events.moorfields.ae/conference-agenda",
+      "status": 200,
+      "finalUrl": "https://events.moorfields.ae/conference-agenda",
+      "bytes": 105205,
+      "sha256": "b6df8dee9743b121ec8083fe8ebfb98fe901a1b189c7da89525a839d0318fbee",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://events.moorfields.ae/registration",
+      "status": 200,
+      "finalUrl": "https://events.moorfields.ae/registration",
+      "bytes": 40571,
+      "sha256": "a219bf0c8be37b57112dd190216aa1a058f39a5bea389ecf591192d676290fb5",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://evercongress.org/",
+      "status": 200,
+      "finalUrl": "https://evercongress.org/",
+      "bytes": 135812,
+      "sha256": "f5ae7156302a041c81c63e9568055ea69d70b30756a55404e484f370d0a63eca",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://eyecongress.by/ru-RU/congressinfo",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "url": "https://fedorovskie.oor.ru/",
+      "status": 200,
+      "finalUrl": "https://fedorovskie.oor.ru/",
+      "bytes": 1644775,
+      "sha256": "09628e84199c6b9d283a34791292d6e4f78748c3847f388c85894871e84d5826",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://ikc-society.org/events/",
+      "status": 200,
+      "finalUrl": "https://ikc-society.org/events/",
+      "bytes": 147161,
+      "sha256": "1cbd3d7b0abad860765479dacb7bd0951af83af7226246d99b25722de3b41e8a",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://isa2026.com.ar/",
+      "status": 200,
+      "finalUrl": "https://isa2026.com.ar/",
+      "bytes": 227564,
+      "sha256": "48a23c3ed419a2f43d9cc70e6c3248e1b80e5df03bc097de71a167a191bc004d",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://iserbiennialmeeting2026.org/",
+      "status": 200,
+      "finalUrl": "https://iserbiennialmeeting2026.org/",
+      "bytes": 294909,
+      "sha256": "010f7a3e7dc2863fd659dea87602c882c9b3997f65d263d79cadeb79e5d05fc7",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://jordan-valley.com/events/yoms26",
+      "status": 200,
+      "finalUrl": "https://jordan-valley.com/events/yoms26",
+      "bytes": 170731,
+      "sha256": "9eddad0cb5e8e9f2094b3ac7a0adc24cd4119946a6f583538da47f78f98e001f",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://jordan-valley.com/events/yoms26/abstracts",
+      "status": 200,
+      "finalUrl": "https://jordan-valley.com/events/yoms26/abstracts",
+      "bytes": 138979,
+      "sha256": "5ee7c8001b4e4df43d4a6ba5f3e9029dea0f548d46b54bbf3c85080e15cbd9a6",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://jordan-valley.com/events/yoms26/registration",
+      "status": 200,
+      "finalUrl": "https://jordan-valley.com/events/yoms26/registration",
+      "bytes": 181279,
+      "sha256": "5426ac41c5e8ad8131757dfca489e2d0df88d4286d0eaff9f5335ddd0561262f",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://koo.kz/",
+      "status": 200,
+      "finalUrl": "https://koo.kz/",
+      "bytes": 301947,
+      "sha256": "34697a87a6b957f7b3f01de4e0c90bf7f7ef5e057787266de0f5219db37100df",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://koo.kz/conference/",
+      "status": 200,
+      "finalUrl": "https://koo.kz/conference/",
+      "bytes": 287800,
+      "sha256": "20b3ae1a477c9192211df5cafe8b01aa5658d6466079541257292f08f0605cd2",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mcoz.kz/specialist",
+      "status": 200,
+      "finalUrl": "https://mcoz.kz/specialist",
+      "bytes": 364163,
+      "sha256": "a36c9fda83a4c2310d50e8f1bb8e61bad4eaa1f8642ad1a7727ddadfcfa5ca59",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mioc.org.om/",
+      "status": 200,
+      "finalUrl": "https://mioc.org.om/",
+      "bytes": 971,
+      "sha256": "0944d4194c00f8fac3026c8178b228bdc6c88df00a3ffca9a5e71b7ff2b4182c",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mioc.org.om/abstract-submission",
+      "status": 200,
+      "finalUrl": "https://mioc.org.om/abstract-submission",
+      "bytes": 971,
+      "sha256": "0944d4194c00f8fac3026c8178b228bdc6c88df00a3ffca9a5e71b7ff2b4182c",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mioc.org.om/important-dates",
+      "status": 200,
+      "finalUrl": "https://mioc.org.om/important-dates",
+      "bytes": 971,
+      "sha256": "0944d4194c00f8fac3026c8178b228bdc6c88df00a3ffca9a5e71b7ff2b4182c",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mioc.org.om/online-registration",
+      "status": 200,
+      "finalUrl": "https://mioc.org.om/online-registration",
+      "bytes": 971,
+      "sha256": "0944d4194c00f8fac3026c8178b228bdc6c88df00a3ffca9a5e71b7ff2b4182c",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://miranza.es/en/tir-2026/",
+      "status": 200,
+      "finalUrl": "https://miranza.es/en/tir-2026/",
+      "bytes": 104001,
+      "sha256": "97c785687f1f2a4b569f7dde9305a1f639caff2b7b9ff2be8d310eaddb2b71eb",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://ocwn.org/",
+      "status": 200,
+      "finalUrl": "https://ocwn.org/",
+      "bytes": 7819,
+      "sha256": "b834931c64d4e49c581dfb87c081692cbe211808537076c1d3de7a3a7cc97eb5",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://oftalmologos.org.ar/",
+      "status": 200,
+      "finalUrl": "https://oftalmologos.org.ar/",
+      "bytes": 121487,
+      "sha256": "0385b7c729939cb0d77ecd8e22e6df14bab9e2dae8db1ec0957b95d8b49298c2",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://oor.ru/events",
+      "status": 200,
+      "finalUrl": "https://oor.ru/events",
+      "bytes": 221158,
+      "sha256": "14681a494a3f4bf3ab80434791bf1c956b14100c56f75a64abee0c5f7c1104e6",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://ossacongress.co.za/",
+      "status": 200,
+      "finalUrl": "https://ossacongress.co.za/",
+      "bytes": 115842,
+      "sha256": "4878dfe6862c1fc8b9d356da4673cb82d661fccdebfd57f094a45520f6c34d0d",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://ossacongress.co.za/attendance/",
+      "status": 200,
+      "finalUrl": "https://ossacongress.co.za/attendance/",
+      "bytes": 146760,
+      "sha256": "8d1b28614d61a7478473c6ae82042e1abba5af4dab0f155a9aa55f1cd6d17266",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://ossacongress.co.za/introduction/",
+      "status": 200,
+      "finalUrl": "https://ossacongress.co.za/introduction/",
+      "bytes": 124145,
+      "sha256": "5180cd59c85680b3a2d96310f11d86a84529f5809cb78ef8cc6a3e88e0a5ae79",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://ossacongress.co.za/programme/",
+      "status": 200,
+      "finalUrl": "https://ossacongress.co.za/programme/",
+      "bytes": 161618,
+      "sha256": "c108bf3ceadbb8fd98093b5ff878e9236b3796f5340d874f0f468ccec8ff76de",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://paao.org/es/events/colatoc-2027/",
+      "status": 200,
+      "finalUrl": "https://paao.org/es/events/colatoc-2027/",
+      "bytes": 110690,
+      "sha256": "735bf201481434aa2b76b7389c7fb3f4deffd9740e26f7b7ef268a202ae6fa8a",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://paao.org/events/alaccsa-2026/",
+      "status": 200,
+      "finalUrl": "https://paao.org/events/alaccsa-2026/",
+      "bytes": 119157,
+      "sha256": "52c1eebb9915b90bbb6be574580258992af412af8e001e04363ce4b2b5a8b176",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://paao.org/events/argentina-2027/",
+      "status": 200,
+      "finalUrl": "https://paao.org/events/argentina-2027/",
+      "bytes": 118278,
+      "sha256": "28d914681040b9f5b265d4a6dbdaff6272816ae674ada001f21951f257b47751",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://paao.org/events/congreso-internacional-de-oculoplastica-2027/",
+      "status": 200,
+      "finalUrl": "https://paao.org/events/congreso-internacional-de-oculoplastica-2027/",
+      "bytes": 120358,
+      "sha256": "98e2370c62bf5b5499db46debd9273380d5298e6b7364fd05dadbf7de50af9e8",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://paao.org/events/sprv-2026/",
+      "status": 200,
+      "finalUrl": "https://paao.org/events/sprv-2026/",
+      "bytes": 118837,
+      "sha256": "8e1605943ce1d329af660b1f7030387c620ef6a19ff83669640e5291985c206e",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://paao.org/events/xiii-congreso-latinoamericano-de-glaucoma/",
+      "status": 200,
+      "finalUrl": "https://paao.org/events/xiii-congreso-latinoamericano-de-glaucoma/",
+      "bytes": 120669,
+      "sha256": "551fb0807fa88cae72f3362e9c5816d7ca1091f93a268d30b0b54cf40669f5f5",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://paao.org/meetings/prizes-and-awards/alvaro-rodriguez-travel-award/",
+      "status": 200,
+      "finalUrl": "https://paao.org/meetings/prizes-and-awards/alvaro-rodriguez-travel-award/",
+      "bytes": 298472,
+      "sha256": "604499041f6095e5e0e311c017bb8be18299c436de4b0262d32f6a7f490b2c0b",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://paao.org/meetings/troutman-veronneau-prize-application/",
+      "status": 200,
+      "finalUrl": "https://paao.org/meetings/troutman-veronneau-prize-application/",
+      "bytes": 308728,
+      "sha256": "fef537e707830bc12db3d39c8366237acc1fd8e68ce492a919e26f13de6a3de2",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://paao2027.com/",
+      "status": 200,
+      "finalUrl": "https://paao2027.com/landing",
+      "bytes": 643074,
+      "sha256": "5bea0ca0f5d82619f8b6077eecddfadee9ea2e0563cab369cb3edb2f9ace4dd9",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://pao.org.ph/eye-doctors-home-event/philippine-academy-of-ophthalmology-pao-annual-convention/",
+      "status": 200,
+      "finalUrl": "https://pao.org.ph/eye-doctors-home-event/philippine-academy-of-ophthalmology-pao-annual-convention/",
+      "bytes": 184952,
+      "sha256": "1bd220ff1a83df643314ca87350621fbaa2c79eb2a3376a5db5cb5f58c5e5335",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://pirogoveyeforum.ru/",
+      "status": 200,
+      "finalUrl": "https://pirogoveyeforum.ru/",
+      "bytes": 42314,
+      "sha256": "4b30fca077a94afb681dea136e8a08c18cc1033ce815e2f3580f9843f62552b9",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://pit51.perdami.or.id/",
+      "status": 200,
+      "finalUrl": "https://pit51.perdami.or.id/",
+      "bytes": 20737,
+      "sha256": "8a4526a813523518fe7c5c3000612976dca609bbe3668b325a8151d180e14b34",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://qataruveitiscare.com/",
+      "status": 200,
+      "finalUrl": "https://qataruveitiscare.com/",
+      "bytes": 276425,
+      "sha256": "f2c4e84cfff96f23e8bd0f7cbee77a798a80d9950b390a64c27f8e4b5cb6863f",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://ranzco.edu/congress/",
+      "status": 200,
+      "finalUrl": "https://ranzco.edu/congress/",
+      "bytes": 258097,
+      "sha256": "f46ec304e080107f1c97b7b804327738327f69919a27c09c8fb779c98138410e",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://ranzco.edu/events/2027-nz-branch-asm/",
+      "status": 200,
+      "finalUrl": "https://ranzco.edu/events/2027-nz-branch-asm/",
+      "bytes": 283943,
+      "sha256": "28e8a063cab680e788303b620e1deee0c7d998471dd356d0afb0f02037a9423c",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://ranzco.edu/events/anzpos-2027/",
+      "status": 200,
+      "finalUrl": "https://ranzco.edu/events/anzpos-2027/",
+      "bytes": 280864,
+      "sha256": "684ef4ff231fff765a668411a86caaace331cb5807e602d047585d679253cb41",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://ranzco.edu/events/ranzco-58th-congress/",
+      "status": 200,
+      "finalUrl": "https://ranzco.edu/events/ranzco-58th-congress/",
+      "bytes": 284304,
+      "sha256": "3e874999fe02f23d9494adaa2f02af0d39107f10c7b150c46d232541de30299f",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://reg.vrsi.in/126/vrsi26",
+      "status": 200,
+      "finalUrl": "https://reg.vrsi.in/126/vrsi26",
+      "bytes": 43589,
+      "sha256": "b3ddb9c5db80be4946a7518dcf8bef843f76c5f94f51a6bd18ce2b4499ce30c6",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://restoresight.org/ebaa-annual-meeting/",
+      "status": 200,
+      "finalUrl": "https://restoresight.org/ebaa-annual-meeting/",
+      "bytes": 139848,
+      "sha256": "b7930098d87a3ff72d59df79adec036135344a8b967c24065ec41d2f6d133b34",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://restoresight.org/ebaa-annual-meeting/schedule-of-events/",
+      "status": 200,
+      "finalUrl": "https://restoresight.org/ebaa-annual-meeting/schedule-of-events/",
+      "bytes": 90183,
+      "sha256": "2fad57cf5f7b08a6edcafaddff0bcd82c3a9606bb49cbbb2b09a445726ffe9ab",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://saudicrsa.org/",
+      "status": 200,
+      "finalUrl": "https://saudicrsa.org/",
+      "bytes": 205664,
+      "sha256": "b5a3bfba3eb459f3b2b2e877da27a83f74d6d371ceabe0d246b3b999eda05b82",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://smo.ma/",
+      "status": 200,
+      "finalUrl": "https://smo.ma/",
+      "bytes": 164458,
+      "sha256": "f72272e991c4123a6c4fb90e67d9b193d3a00070ecb852155e80e8e2f0af55ad",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://soe2027.soevision.org/",
+      "status": 200,
+      "finalUrl": "https://soe2027.soevision.org/",
+      "bytes": 80046,
+      "sha256": "d60d104a9942106f1efa0e10e577c4dfc0c470e9052e3c4a3221e23875b7b957",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://soe2027.soevision.org/abstract-submission/",
+      "status": 200,
+      "finalUrl": "https://soe2027.soevision.org/abstract-submission/",
+      "bytes": 67761,
+      "sha256": "228235c7ca607e321f1a9236251a7ec619923b68a610a88c237b4089b255f6c7",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://soe2027.soevision.org/isot-abstract-submission/",
+      "status": 200,
+      "finalUrl": "https://soe2027.soevision.org/isot-abstract-submission/",
+      "bytes": 66670,
+      "sha256": "2fc92f0d9fc728a6a4d431d12d9b1ced43594355d7e1260f53ab4f30b0d8602e",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://soe2027.soevision.org/registration/",
+      "status": 200,
+      "finalUrl": "https://soe2027.soevision.org/registration/",
+      "bytes": 72934,
+      "sha256": "0db0a4a6c1d8a402963389272655280bba4851197e4e10cb22b824cae97db15c",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://soe2027.soevision.org/scientific-programme-2/",
+      "status": 200,
+      "finalUrl": "https://soe2027.soevision.org/scientific-programme-2/",
+      "bytes": 61537,
+      "sha256": "d42685a34433e9841039c9950064d8111281b58db46ff943b7da6e500ad36ea2",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://soevision.org/event/czech-ophthalmology-national-society-meeting/",
+      "status": 200,
+      "finalUrl": "https://soevision.org/event/czech-ophthalmology-national-society-meeting/",
+      "bytes": 81024,
+      "sha256": "780fb27376094bca11d2a27e06794eedbe2e9d16888e1b8f90ca442bbd18ef8c",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://soevision.org/event/escrs-2026-congress/",
+      "status": 200,
+      "finalUrl": "https://soevision.org/event/escrs-2026-congress/",
+      "bytes": 81659,
+      "sha256": "efedf3a3645eee62ec874e6f807713c4defda1b867fe3f7293d9e418ec473d84",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://soevision.org/event/ever-2027/",
+      "status": 200,
+      "finalUrl": "https://soevision.org/event/ever-2027/",
+      "bytes": 80335,
+      "sha256": "2387a67b2038ed757b2e636506264f37a1eb06373828af4a615712ab9ef0daef",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://sos-conferences.com/",
+      "status": 200,
+      "finalUrl": "https://sos-conferences.com/",
+      "bytes": 218368,
+      "sha256": "a5468c2633e3f688647f85e3b3cb619ddb610bd523d6b16d794c15275d70c461",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://sos-conferences.com/abstract-2026/",
+      "status": 200,
+      "finalUrl": "https://sos-conferences.com/abstract-2026/",
+      "bytes": 129386,
+      "sha256": "4bedc6bb904ee8c8f76784656df855c492f3119c5f261ea8ffdd24367c9be083",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://sprv2026.com/",
+      "status": 200,
+      "finalUrl": "https://sprv2026.com/",
+      "bytes": 104428,
+      "sha256": "353bec6dd0d6ec83b5fe8b2c0c6483f86d3104798bcd32a3c24961b0c0b2aed2",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
+      "status": 200,
+      "finalUrl": "https://umiamihealth.org/en/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology",
+      "bytes": 202105,
+      "sha256": "15608d70dabe9abdb54470575fa66004f0f997467d1c6b7c359fb66b18a222f0",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://uzscrs.uz/registratsiya-2026",
+      "status": 200,
+      "finalUrl": "https://uzscrs.uz/registratsiya-2026",
+      "bytes": 414477,
+      "sha256": "54f5a5224a4cc928d026f4fa36e489e1839c6a224854beda0f54fd33f5fcef50",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://vision2027.com/",
+      "status": 200,
+      "finalUrl": "https://vision2027.com/",
+      "bytes": 451895,
+      "sha256": "12edaa2335c9dae0179eb22b7f4fcb1d45bbf342653057ccc5ce6053688742c9",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://vision2027.com/registration/",
+      "status": 200,
+      "finalUrl": "https://vision2027.com/registration/",
+      "bytes": 479169,
+      "sha256": "26db09de5e3e56a9ec9b072a00af092ecde4f746340ac080ad107f2b90b6ffd8",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://vospalenie.oor.ru/",
+      "status": 200,
+      "finalUrl": "https://vospalenie.oor.ru/",
+      "bytes": 1171765,
+      "sha256": "a275e4a8bcc550815a28eeb3cb87f5f86e9811a0e3337fb284598bc6ff6d2cc0",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://vrsi.in/vrsi-2026-chandigarh/",
+      "status": 200,
+      "finalUrl": "https://vrsi.in/vrsi-2026-chandigarh/",
+      "bytes": 112474,
+      "sha256": "c9bb2d376ef934ebaa82c6a47b3020d259d2c918fb064cbc1acc3c7e86b95196",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://wga.one/surgical-grand-rounds-registration/",
+      "status": 200,
+      "finalUrl": "https://wga.one/surgical-grand-rounds-registration/",
+      "bytes": 194024,
+      "sha256": "c453dc21f456f040196e1851097b9e3c3892f51c7e3eb7d5deb4f4a04de5234e",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://wga.one/surgical-grand-rounds/",
+      "status": 200,
+      "finalUrl": "https://wga.one/surgical-grand-rounds/",
+      "bytes": 171599,
+      "sha256": "006f0cdd10b3a33edfc205a65e180db7b9b6413cb38782e73677edcfc7650b30",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://wintermeeting.escrs.org/",
+      "status": 200,
+      "finalUrl": "https://wintermeeting.escrs.org/",
+      "bytes": 188863,
+      "sha256": "1e93972a9f82e7fbcdca90eefe316657eb6bb21b175e2f8c15de780c3f5db085",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://wintermeeting.escrs.org/abstracts/abstract-submissions/",
+      "status": 200,
+      "finalUrl": "https://wintermeeting.escrs.org/abstracts/abstract-submissions/",
+      "bytes": 178688,
+      "sha256": "1d5374d40d62dd35cf5d8645f970f58c1839870df58267f61f10c94671e0a1d7",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://wintermeeting.escrs.org/coming-soon/",
+      "status": 200,
+      "finalUrl": "https://wintermeeting.escrs.org/coming-soon/",
+      "bytes": 134056,
+      "sha256": "f61d51fda95f61233da11e8b7f4bb96d77ca85323b057ba455c26e996e55ed19",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://wintermeeting.escrs.org/registrations/",
+      "status": 200,
+      "finalUrl": "https://wintermeeting.escrs.org/registrations/",
+      "bytes": 171012,
+      "sha256": "e1d2f016f6e80d5e68be2ce21b8485d2cfd57b1a7a5c7826bd1704afb34c0a1e",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://worldglaucomacongress.org/",
+      "status": 200,
+      "finalUrl": "https://worldglaucomacongress.org/",
+      "bytes": 215287,
+      "sha256": "39c764508b9db55383ed8227da92c5804069f57aa897b0b3d3b1a674e58f488a",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://worldglaucomacongress.org/abstracts/",
+      "status": 200,
+      "finalUrl": "https://worldglaucomacongress.org/abstracts/",
+      "bytes": 172157,
+      "sha256": "771ee4557cddfb246ab943215ac6c45e35bde945c7a2e5517c6ec675756d76e0",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://worldglaucomacongress.org/registration/",
+      "status": 200,
+      "finalUrl": "https://worldglaucomacongress.org/registration/",
+      "bytes": 175949,
+      "sha256": "d0cc10f722234aca71225296a94669a4356bd78f645ed8311175786ea10d9939",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://wspos.org/wcpos-vi/",
+      "status": 200,
+      "finalUrl": "https://wspos.org/wcpos-vi/",
+      "bytes": 364624,
+      "sha256": "2c5fa4eb76cb0d323426e217e775b4dbf302314f03647bb80e3e30302180b22d",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.aao.org/Assets/6f5e4b18-cb0f-494f-9d0a-c8098b228d34/639124150856930000/may-2026-destination-aao-2026-pdf?inline=1",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.aao.org/annual-meeting",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.aao.org/annual-meeting/lasvegas",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "url": "https://www.aapos.org/education-and-events/annual-meeting2027",
+      "status": 200,
+      "finalUrl": "https://www.aapos.org/education-and-events/annual-meeting2027",
+      "bytes": 79680,
+      "sha256": "1fd129404b52945390235b178414ffc8a8eb34507ce5aca5660cccad7bc4e86e",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.aapos.org/education-and-events/annual-meeting2027/annual-meeting-abstracts2026561",
+      "status": 200,
+      "finalUrl": "https://www.aapos.org/education-and-events/annual-meeting2027/annual-meeting-abstracts2026561",
+      "bytes": 84699,
+      "sha256": "91c49fb0f03356d24edc246502d36d8eb1deb1f33cf1a5f84189d36d6bd13201",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.acshk26.com/web/",
+      "status": 200,
+      "finalUrl": "https://www.acshk26.com/web/",
+      "bytes": 78626,
+      "sha256": "73f080f91d148c6405a18311e9c5e1c6add94570ddcc057aba68c48bbc5f3e64",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.acshk26.com/web/subpage.php?mid=123",
+      "status": 200,
+      "finalUrl": "https://www.acshk26.com/web/subpage.php?mid=123",
+      "bytes": 235299,
+      "sha256": "4cd95032921b6a205d8515a76b2179ef35c18ca0580feddeabf06c542515e8f4",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.aios.org/aioc2027.php",
+      "status": 200,
+      "finalUrl": "https://www.aios.org/aioc2027.php",
+      "bytes": 46137,
+      "sha256": "95fde07ec8dda4b4d48f60242027c8cabc072ab713039485d0e8eee83152da8b",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.aios.org/aios-events1.php/Nill",
+      "status": 200,
+      "finalUrl": "https://www.aios.org/aios-events1.php/Nill",
+      "bytes": 57086,
+      "sha256": "27d5cf3488d94c87f85ac9b82fd1eb2df0ce1f779db9efe55a52d469212f3cee",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.aios.org/midtermjharkhand.php",
+      "status": 200,
+      "finalUrl": "https://www.aios.org/midtermjharkhand.php",
+      "bytes": 50639,
+      "sha256": "9d9ca61c1ea50d8b1ed7881b3278a7a3e03965a193559ca226f37671291a8a8b",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar",
+      "status": 200,
+      "finalUrl": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar",
+      "bytes": 80235,
+      "sha256": "cc0da7a1077f81d66adda81695a136a6f73387b700f55c2eb86aad6fa7043d8e",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.ammanretinameeting.com/",
+      "status": 200,
+      "finalUrl": "https://www.ammanretinameeting.com/",
+      "bytes": 738152,
+      "sha256": "43b75753b583e030e8201cbb64a7998e534de50ef747f04b9604df50ab2bee1c",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.ammanretinameeting.com/abstract-submission",
+      "status": 200,
+      "finalUrl": "https://www.ammanretinameeting.com/abstract-submission",
+      "bytes": 616454,
+      "sha256": "ec1f3eeb10a10b707760c519830368fb9d61dafd56fe817b8a8293d914ae5b7e",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.ammanretinameeting.com/registration",
+      "status": 200,
+      "finalUrl": "https://www.ammanretinameeting.com/registration",
+      "bytes": 539488,
+      "sha256": "d1dd7d4e016d59d06a6992917180898621e352d55bcbe89f36a67f59f6a635fc",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.apacrs.org/",
+      "status": 200,
+      "finalUrl": "https://www.apacrs.org/",
+      "bytes": 55125,
+      "sha256": "0eac7ed84527fd6cbc9962c14ae9b96e7ac898db6890a00d57439a32ba41a6f7",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.arvo.org/annual-meeting/",
+      "status": 200,
+      "finalUrl": "https://www.arvo.org/annual-meeting",
+      "bytes": 204274,
+      "sha256": "d819c14ba8420dc9783c8cefae85d0b6586f75334ef5078ac8066cf77c448d42",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.arvo.org/annual-meeting/abstracts",
+      "status": 200,
+      "finalUrl": "https://www.arvo.org/annual-meeting/abstracts",
+      "bytes": 217558,
+      "sha256": "7168c58a4ff8b9ed0864fa84aa835b8f74eb8b80d56fc275f4d3c859783656db",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+      "status": 200,
+      "finalUrl": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+      "bytes": 207686,
+      "sha256": "30c141062d3b8c5ea0526732aa8c60c667f3906e0904fdfc75a415f884477d88",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.arvo.org/annual-meeting/program-schedule",
+      "status": 200,
+      "finalUrl": "https://www.arvo.org/annual-meeting/program-schedule",
+      "bytes": 176989,
+      "sha256": "923c8e4a1fda99cf59f71653e9d729ef228d442c41ad0081869d0ab9727da0c2",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.arvo.org/annual-meeting/registration",
+      "status": 200,
+      "finalUrl": "https://www.arvo.org/annual-meeting/registration",
+      "bytes": 179449,
+      "sha256": "821d7f89575c98e199995ebb8f679d0430f72af03f3c8f281dc8a0da6deeda8b",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.arvo.org/awards-and-grants/travel-grants",
+      "status": 200,
+      "finalUrl": "https://www.arvo.org/awards-and-grants/travel-grants",
+      "bytes": 397290,
+      "sha256": "11f7a49014c90c2177a11a2953bff2eef2de6915ee80e9786e97aee2f2d6caff",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.asoprs.org/future-and-past-symposia",
+      "status": 200,
+      "finalUrl": "https://www.asoprs.org/future-and-past-symposia",
+      "bytes": 28426,
+      "sha256": "44b0ac6b133d28dab0ee16598174b8fa12fb032af123880450a3b7aec2a78a37",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.asoprs.org/members-only-spring-symposium",
+      "status": 200,
+      "finalUrl": "https://www.asoprs.org/members-only-spring-symposium",
+      "bytes": 28824,
+      "sha256": "eb7b315aa9b398d3ce469bbb453a036be585778a96d827173c7f6363c6dc657c",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.asrs.org/annual-meeting",
+      "status": 200,
+      "finalUrl": "https://www.asrs.org/annual-meeting",
+      "bytes": 31392,
+      "sha256": "e3804ee39d10ebd84a0007f15d0034ad133cb70087dcf91be8270211c0c752a7",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.asrs.org/education/2027-business-of-retina-meeting",
+      "status": 200,
+      "finalUrl": "https://www.asrs.org/education/2027-business-of-retina-meeting",
+      "bytes": 31313,
+      "sha256": "00b31f7079e331b210d03435012b398e333951046a0fd3ef6d648c766f4e18d4",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.bopss.co.uk/meetings/bopss-2027-newcastle/",
+      "status": 200,
+      "finalUrl": "https://www.bopss.co.uk/meetings/bopss-2027-newcastle/",
+      "bytes": 146745,
+      "sha256": "b4cf3626f63d18918147f8beefb68a8d623bcdcf26b19dd5bb1c1ab3bac4a482",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.ciob.cl/",
+      "status": 200,
+      "finalUrl": "https://www.ciob.cl/",
+      "bytes": 215809,
+      "sha256": "db4f58d5ba16b6d2c16d8debfbf6763d294c7fe3f7a7b71c309324af7118b827",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.coecsa-congress.org/",
+      "status": 200,
+      "finalUrl": "https://www.coecsa-congress.org/",
+      "bytes": 335217,
+      "sha256": "9d6888ce08fe27c8ea354bd3c3a209dd148ce66d619900e76f6130c508bda1cf",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.coecsa-congress.org/abstracts-copy/",
+      "status": 200,
+      "finalUrl": "https://www.coecsa-congress.org/abstracts-copy/",
+      "bytes": 299944,
+      "sha256": "cd77039cf935a0076187a668f41f56f1ecc1d20660859d41cb0ca6ce41081670",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.consejoclade.com/congreso/",
+      "status": 200,
+      "finalUrl": "https://www.consejoclade.com/congreso/",
+      "bytes": 93051,
+      "sha256": "71f48a5f51aec7a8384088e487f7323f862b3cfc387f6a72d99cbdb58e801b16",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
+      "status": 200,
+      "finalUrl": "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
+      "bytes": 142855,
+      "sha256": "072661ff5084957c4f4a1b775430094a8a98aba7e116355fef5a88e93c5b2dc5",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.doc-nuernberg.de/",
+      "status": 200,
+      "finalUrl": "https://www.doc-nuernberg.de/",
+      "bytes": 55893,
+      "sha256": "f2e66fe3e8f20ca11656bf7208123b71008e2567581d29a69ebe8bde5144d946",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.doc-nuernberg.de/abstracteinreichung.php",
+      "status": 200,
+      "finalUrl": "https://www.doc-nuernberg.de/abstracteinreichung.php",
+      "bytes": 25475,
+      "sha256": "3dfcddf23e2ffc3db458ab248da28f77fb4925f94776ef9db4b1c9c7f3654fcd",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.doc-nuernberg.de/allgemeine-hinweise.php#termine",
+      "status": 200,
+      "finalUrl": "https://www.doc-nuernberg.de/allgemeine-hinweise.php#termine",
+      "bytes": 52472,
+      "sha256": "41cc53934d667671e4b6e0ddc08249f49dbec6d1ddf09ad7126da88af4f71b3c",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.doc-nuernberg.de/anmeldeinformationen.php",
+      "status": 200,
+      "finalUrl": "https://www.doc-nuernberg.de/anmeldeinformationen.php",
+      "bytes": 16092,
+      "sha256": "63a1e9eb1ceab9a9ff8eff28cd0ff896f9cf3b386b376153058971bf0636f92f",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.doc-nuernberg.de/programm.php",
+      "status": 200,
+      "finalUrl": "https://www.doc-nuernberg.de/programm.php",
+      "bytes": 12848,
+      "sha256": "af066b5a34b84041ed69e09136b627893cb741dfb0ace4329655baf9689d01d0",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.epomec.ae/",
+      "status": 200,
+      "finalUrl": "https://epomec.ae/",
+      "bytes": 402454,
+      "sha256": "828a837abee527af2e21643cf35ad7c8fe4d37d48411bf59dd3cd40575c46cd4",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.epomec.ae/abstract-submission/",
+      "status": 200,
+      "finalUrl": "https://epomec.ae/abstract-submission/",
+      "bytes": 33470,
+      "sha256": "424dab7ebbab95084dc5abf2fc3776548376f960ec063cb6da15f9cf8e1c782b",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.esoprs.eu/esoprs-meetings/esoprs-meeting-2027/",
+      "status": 200,
+      "finalUrl": "https://www.esoprs.eu/esoprs-meetings/esoprs-meeting-2027/",
+      "bytes": 80498,
+      "sha256": "84a94e1a45f782222b3fed751ea0a24d278e10f29b3732cf9f10dae0a50aa3f6",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.everassociation.org/",
+      "status": 200,
+      "finalUrl": "https://www.everassociation.org/",
+      "bytes": 28542,
+      "sha256": "2afa9cf97b149f428a2bb356975645cb6771e86324fdcbec71ed1c2671148f5f",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.jordan-valley.com/events/jos26/abstracts",
+      "status": 200,
+      "finalUrl": "https://jordan-valley.com/events/jos26/abstracts",
+      "bytes": 140364,
+      "sha256": "3bd9099508837d03f46f3f0842326b0b9e076e4f40337b9dce58385930fa310b",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.jordan-valley.com/events/jos26/registration",
+      "status": 200,
+      "finalUrl": "https://jordan-valley.com/events/jos26/registration",
+      "bytes": 181262,
+      "sha256": "e6dcfff5ee6d57564af47ed4e324e9643314f2620fac41a4ff1fa2c334c6fbf3",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.jordan-valley.com/jos2026",
+      "status": 200,
+      "finalUrl": "https://jordan-valley.com/events/jos26",
+      "bytes": 177419,
+      "sha256": "4ff7a49a7c7e04342b5dbac28707311414cf8045defa64849cdbd70b97896736",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.jrvs.jp/en/meeting.html",
+      "status": 200,
+      "finalUrl": "https://www.jrvs.jp/en/meeting.html",
+      "bytes": 21944,
+      "sha256": "61fea4e8b4598fd59c2b92771e4daef7374e44da72a05b5ef10f9bd608469c1c",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html",
+      "status": 200,
+      "finalUrl": "https://www.kosmeeting.org/abstract/2026_136/eng/main.html",
+      "bytes": 18192,
+      "sha256": "f3bb6d7cb0e23b5fc7cf79810e62df04b656b761bf4f6130b64de95731c42050",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.maculasociety.org/2026/10/14/50th-anniversary-macula-society-meeting-abstract-case-submissions/",
+      "status": 200,
+      "finalUrl": "https://www.maculasociety.org/2026/10/14/50th-anniversary-macula-society-meeting-abstract-case-submissions/",
+      "bytes": 188745,
+      "sha256": "cfb89cebb234b3c9c75e4ca0269d5e9bf4d5ca8b3e4f81abf2983809c8eb6cc2",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.maculasociety.org/50th-anniversary/",
+      "status": 200,
+      "finalUrl": "https://www.maculasociety.org/50th-anniversary/",
+      "bytes": 160636,
+      "sha256": "67f7ebf766db9d719ff28996cab491dbd989c341543aa9e24626760177e2ed9b",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.oftalmoseo.com/102-congreso-seo/",
+      "status": 200,
+      "finalUrl": "https://www.oftalmoseo.com/102-congreso-seo/",
+      "bytes": 263346,
+      "sha256": "3d92e5aa2ae48abe502e1855b69e1e0e584f194003293ac0591745b13d6e1725",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.oftalmoseo.com/home-no-socios/",
+      "status": 200,
+      "finalUrl": "https://www.oftalmoseo.com/home-no-socios/",
+      "bytes": 478347,
+      "sha256": "1cdb068f7f6e0e3f1a51c3a55aa667a9c4dea9bab54b5dfc54ef38ac3ba18c2a",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.okinawa-congre.co.jp/cornea2027/",
+      "status": 200,
+      "finalUrl": "https://www.okinawa-congre.co.jp/cornea2027/",
+      "bytes": 10585,
+      "sha256": "18da05e6454ad8de16b9d71ae39050eb8b1274b570d9924179a454d95344cbd4",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.okinawa-congre.co.jp/cornea2027/cfa/index.html",
+      "status": 200,
+      "finalUrl": "https://www.okinawa-congre.co.jp/cornea2027/cfa/index.html",
+      "bytes": 25104,
+      "sha256": "b790dab227969ec184c35ee0ae7731d2a39bfa548a5a115ee79c2c5515b108d5",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.okinawa-congre.co.jp/cornea2027/outline/index.html",
+      "status": 200,
+      "finalUrl": "https://www.okinawa-congre.co.jp/cornea2027/outline/index.html",
+      "bytes": 10579,
+      "sha256": "a19cf3b71f2faf2dd40b2751f77c68315d0c43b4d6353f4786c16e8308da9d1f",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.okinawa-congre.co.jp/cornea2027/registration/index.html",
+      "status": 200,
+      "finalUrl": "https://www.okinawa-congre.co.jp/cornea2027/registration/index.html",
+      "bytes": 15861,
+      "sha256": "149921ec4fa3fad5fe6b4edbfc12296af989f57e901cce5f953e9c206cdec51a",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/",
+      "status": 200,
+      "finalUrl": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/",
+      "bytes": 238377,
+      "sha256": "c0765826deba87ecaa12b078225f194c6ffbcc0a62935bdfd79bdc935293b8f9",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/winter-meeting-2026/",
+      "status": 200,
+      "finalUrl": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/winter-meeting-2026/",
+      "bytes": 197902,
+      "sha256": "7637704ced835132926e6425a1cdb7cbafc1d1d5943297b70bbc52aadd861c2b",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.retinasociety.org/page/17/future-annual-meetings",
+      "status": 200,
+      "finalUrl": "https://www.retinasociety.org/page/17/future-annual-meetings",
+      "bytes": 13463,
+      "sha256": "6f217002cd8206a4152194c6b5a80d8897aaa1d2fad5e03df66b2fcc84498149",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.retinasociety.org/page/2/annual-meeting",
+      "status": 200,
+      "finalUrl": "https://www.retinasociety.org/page/2/annual-meeting",
+      "bytes": 13277,
+      "sha256": "52f793bce2a2575ee6a6677166bbe0ed822d26e08329c12aa8ee6af5b0385f91",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.sfo-online.fr/",
+      "status": 200,
+      "finalUrl": "https://www.sfo-online.fr/",
+      "bytes": 71011,
+      "sha256": "822da841ec4baec83bfe30e46b933cccf61459de44e91cb8f96284b22f2b5632",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+      "status": 200,
+      "finalUrl": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+      "bytes": 36467,
+      "sha256": "ad5fd0e259bc545df4e1820bd46569882d762703a8d1db83fbc5f78230d60d8b",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.slaglaucoma.org/",
+      "status": 200,
+      "finalUrl": "https://www.slaglaucoma.org/",
+      "bytes": 1465551,
+      "sha256": "7f0d9e3758dc80f9a63fe2fdd011e4f17953ddd9e221df2d0f1517dde4cab5b2",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.snec.com.sg/news/announcements/snec-hosts-its-largest-international-ophthalmology-conference-at",
+      "status": 200,
+      "finalUrl": "https://www.snec.com.sg/news/announcements/snec-hosts-its-largest-international-ophthalmology-conference-at",
+      "bytes": 452639,
+      "sha256": "a515bc0b0aea22817e3f50731bb84c262276aad7b3156f9971a4513a060b8e7e",
+      "contentType": "text/html;charset=utf-8"
+    },
+    {
+      "url": "https://www.ukiscrs.org.uk/",
+      "status": 200,
+      "finalUrl": "https://www.ukiscrs.org.uk/",
+      "bytes": 1628265,
+      "sha256": "dec307c87c9125df1d4e19c7021bd8de69b6e1f9dd6f8b531a2e7fe80f9b3c62",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.ukiscrs.org.uk/big50",
+      "status": 200,
+      "finalUrl": "https://www.ukiscrs.org.uk/big50",
+      "bytes": 1511539,
+      "sha256": "b5b80e06cda26b6752ab599c0f5aafa03127132aec1ea02bac3c54b644e8cea7",
+      "contentType": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://www.wcpos2027.org/abstracts",
+      "status": 200,
+      "finalUrl": "https://www.wcpos2027.org/abstracts",
+      "bytes": 7070,
+      "sha256": "231e9293b5ef98b0136f75faf127e04e9fbc54866b76c3ccb512873fa072077c",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.wcpos2027.org/fees",
+      "status": 200,
+      "finalUrl": "https://www.wcpos2027.org/fees",
+      "bytes": 7070,
+      "sha256": "231e9293b5ef98b0136f75faf127e04e9fbc54866b76c3ccb512873fa072077c",
+      "contentType": "text/html"
+    },
+    {
+      "url": "https://www.wsopras2027.org/",
+      "status": 200,
+      "finalUrl": "https://www.wsopras2027.org/",
+      "bytes": 38349,
+      "sha256": "8f88ce761cb43acbdd29f722f3bcb998dc80d6b2cc2b5f6b4ff99597d15c150f",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.wsopras2027.org/index.php?c=category&id=2",
+      "status": 200,
+      "finalUrl": "https://www.wsopras2027.org/index.php?c=category&id=2",
+      "bytes": 31857,
+      "sha256": "bd7ea7b6ca100068682370f85d4a5359b125df3ed2291e4435e20b8a4c415a26",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.wsopras2027.org/index.php?c=category&id=3",
+      "status": 200,
+      "finalUrl": "https://www.wsopras2027.org/index.php?c=category&id=3",
+      "bytes": 54703,
+      "sha256": "38fe36702c57ec996b9a06f6f8272dfd2b7b66017ef6d3498046308e829a1143",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://www.xcdsystem.com/maculasociety/store/registration.cfm?ID=L485pjD",
+      "status": 200,
+      "finalUrl": "https://www.xcdsystem.com/maculasociety/store/index.cfm?ID=L485pjD",
+      "bytes": 27197,
+      "sha256": "b6e1276bcb7ca111c743cbea74ac15dd97b0462132b7b7f4ab04c10f7bf0f803",
+      "contentType": "text/html;charset=UTF-8"
+    }
+  ]
+}
