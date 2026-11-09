@@ -73,6 +73,8 @@ def extract(html,url):
         if node.tag in {'script','style','nav','header','footer','form','button','svg','template','noscript'}: return
         # The homepage replaces this whole subtree from science-section-data.js.
         if node.attrs.get('id')=='science': return
+        # Event JSON already supplies canonical #event-ID results, including past meetings.
+        if url.rstrip('/') in {'/for-doctors/events','/en/for-doctors/events'} and node.attrs.get('id') in {'events-grid','radar-list'}: return
         if node.tag in {'h1','h2','h3','h4','summary'}:
             heading=clean(node.text())
             if heading:

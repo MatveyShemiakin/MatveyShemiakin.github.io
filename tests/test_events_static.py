@@ -65,6 +65,16 @@ class StaticEventsTests(unittest.TestCase):
             self.assertIn('id="stat-events">0</strong>', text)
             self.assertNotIn('Загрузка…', text)
 
+    def test_calendar_and_search_generators_preserve_each_others_output(self):
+        from build_site_search import prepare
+        module = self.renderer()
+        for lang in ('ru', 'en'):
+            dataset = json.loads((ROOT / f'assets/data/ophthalmology-events.{lang}.json').read_text())
+            page = ROOT / ('en/' if lang == 'en' else '') / 'for-doctors/events/index.html'
+            rendered = module.render_page(page.read_text(), dataset, lang, date(2026, 11, 9))
+            self.assertEqual(prepare(rendered), rendered, 'Search must not rewrite freshly generated cards')
+            self.assertEqual(module.render_page(prepare(rendered), dataset, lang, date(2026, 11, 9)), rendered)
+
     def test_catalogue_text_cannot_inject_html(self):
         module = self.renderer()
         dataset = json.loads((ROOT / 'assets/data/ophthalmology-events.ru.json').read_text())

@@ -126,7 +126,8 @@ def render_page(text: str, dataset: dict, lang: str, as_of: date) -> str:
         text = re.sub(r'<p class="(?:sync-status|hero-lead)" data-events-author>.*?</p>', lambda _: author, text, count=1)
     else:
         text = re.sub(r'(<p class="hero-lead">.*?</p>)', lambda m: m[0] + author, text, count=1)
-    return text
+    from build_site_search import prepare
+    return prepare(text)
 
 
 def sync(root: Path, as_of: date, check: bool = False) -> list[str]:
