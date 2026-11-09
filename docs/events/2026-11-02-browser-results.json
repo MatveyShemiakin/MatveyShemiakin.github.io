@@ -1,0 +1,619 @@
+{
+  "testedHead": "0637e91d66a8571b717dfc58bb63de6d8e2ff9d6",
+  "mergeCommit": "9bbfbe547e1d86171d07a7b429dbe1957a3dad79",
+  "productionMain": "c183b21e024e706b86dd8df2f4c9bfc379a0ef21",
+  "premergeRun": "https://github.com/MatveyShemiakin/MatveyShemiakin.github.io/actions/runs/41415655364",
+  "productionRun": "https://github.com/MatveyShemiakin/MatveyShemiakin.github.io/actions/runs/41416654091",
+  "premerge": [
+    {
+      "case": "ru-320-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "2",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-320-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "7",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-390-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "2",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-390-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-768-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-768-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "2",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-1440-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-1440-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-320-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "7",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-320-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "7",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-390-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "2",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-390-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-768-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "2",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-768-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-1440-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-1440-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "2",
+      "tileErrors": "0",
+      "passed": true
+    }
+  ],
+  "production": [
+    {
+      "case": "ru-320-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "13",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-320-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "11",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-390-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "4",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-390-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "2",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-768-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-768-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-1440-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "2",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "ru-1440-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "4",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-320-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "12",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-320-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "14",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-390-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-390-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "2",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-768-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-768-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-1440-light",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "1",
+      "tileErrors": "0",
+      "passed": true
+    },
+    {
+      "case": "en-1440-dark",
+      "checks": [
+        "initial layout",
+        "event dialog",
+        "calendar provider dialog",
+        "search, details, registration, Google/ICS export",
+        "all region filters",
+        "specialty, deadline, favourite, past, empty filters",
+        "calendar layout",
+        "deadlines layout",
+        "globe layout",
+        "globe after navigation"
+      ],
+      "errors": [],
+      "imageryLoaded": "4",
+      "tileErrors": "0",
+      "passed": true
+    }
+  ]
+}

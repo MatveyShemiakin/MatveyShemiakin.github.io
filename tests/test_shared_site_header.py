@@ -42,8 +42,17 @@ class SharedHeaderTests(unittest.TestCase):
  def test_asset_versions_match_file_content(self):
   c=self.component();rel='for-doctors/simple-questions/index.html'
   result=c.update_page((ROOT/rel).read_text(),rel)
-  for asset in ['site-header.css','site-mega-nav.js','site-theme.js','mobile-nav.js','doctors-legal.js']:
+  for asset in ['site-header.css','site-mega-nav.js','site-theme.js','mobile-nav.js','doctors-legal.js','for-doctors/simple-questions/series.css']:
    self.assertEqual(len(re.findall('/'+re.escape(asset)+r'\?v='+c.asset_version(asset),result)),1,asset)
+
+ def test_article_header_does_not_duplicate_its_existing_contents(self):
+  c=self.component()
+  for rel in ['for-doctors/complicated-cataract/index.html','en/for-doctors/complicated-cataract/index.html']:
+   with self.subTest(page=rel):
+    source=(ROOT/rel).read_text();result=c.update_page(source,rel)
+    self.assertFalse('data-site-header-context' in result)
+    self.assertEqual(re.search(r'<main\b.*?</main>',source,re.S).group(),re.search(r'<main\b.*?</main>',result,re.S).group())
+    self.assertEqual(result,c.update_page(result,rel))
 
  def test_excluded_tools_and_media_are_not_migrated(self):
   c=self.component()

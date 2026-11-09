@@ -4,7 +4,7 @@ ROOT=Path(__file__).resolve().parents[1]
 import sys
 sys.path.insert(0,str(ROOT))
 def render_cards(posts,lang):
- if not posts:return '<p class="social-empty">'+('Публикации ещё не поступили. Пока можно читать канал в Telegram.' if lang=='ru' else 'Posts have not arrived yet. You can read the channel on Telegram.')+'</p>'
+ if not posts:return '<p class="social-empty">'+('Публикации из Telegram пока не поступили в ленту. Канал можно открыть по ссылке выше.' if lang=='ru' else 'Posts from Telegram have not arrived in this feed yet. You can open the channel using the link above.')+'</p>'
  groups={}
  for p in sorted(posts,key=lambda x:x.get('date',0),reverse=True):groups.setdefault(p.get('album') or p['id'],[]).append(p)
  out=[]
@@ -15,13 +15,22 @@ def render_cards(posts,lang):
   covers=''.join('<img loading="lazy" src="'+html.escape(x['cover'],quote=True)+'" alt="" width="800" height="600">' for x in group if x.get('cover','').startswith('/social/media/'))
   out.append(f'<article class="social-card"><div class="social-meta">Telegram · <time datetime="{date}">{date}</time></div>{covers}<p class="social-caption">{html.escape(text)}</p><a class="button ghost" href="{html.escape(url,quote=True)}" target="_blank" rel="noopener noreferrer">'+('Открыть в Telegram ↗' if lang=='ru' else 'View on Telegram ↗')+'</a></article>')
  return '\n'.join(out)
+def render_instagram_article(lang):
+ title='Почему блокируют Instagram: мой опыт и реальные истории' if lang=='ru' else 'Why Instagram accounts get suspended: real user stories'
+ desc='Мой аккаунт восстановили. Разбираю шесть историй пользователей, возможные причины блокировок и способы защиты аккаунта — со ссылками и скриншотами источников.' if lang=='ru' else 'My account was restored. Six first-hand stories, possible suspension causes and account security steps, with source links and screenshots.'
+ label='Личный опыт · 4 ноября 2026' if lang=='ru' else 'Personal experience · 4 November 2026'
+ url='/social/instagram-account-blocking/' if lang=='ru' else '/en/social/instagram-account-blocking/'
+ button='Читать разбор →' if lang=='ru' else 'Read the article →'
+ alt='Скриншот официальной страницы Meta о пробных Reels' if lang=='ru' else 'Screenshot of Meta’s official trial Reels page'
+ return f'<section class="section social-guide-section"><article class="social-card social-guide-card social-article-card"><a class="social-article-media" href="{url}" tabindex="-1" aria-hidden="true"><img src="/social/instagram-account-blocking/meta-trial-reels.jpg" alt="{alt}" width="1010" height="280" loading="lazy"></a><div class="social-article-copy"><div class="eyebrow">{label}</div><h2>{title}</h2><p>{desc}</p><a class="button primary" href="{url}">{button}</a></div></article></section>'
+
 def render_guide(lang):
  title='Здоровье и зрение: 5 привычек' if lang=='ru' else 'Health and vision: 5 habits'
  desc='Как сон, движение, питание, хобби и стресс связаны с глазами. Конкретные примеры для пациентов и научные источники.' if lang=='ru' else 'How sleep, movement, diet, hobbies and stress relate to your eyes. Practical examples and scientific sources.'
  label='Авторская памятка' if lang=='ru' else 'Author’s guide'
  guide_url='/social/health/' if lang=='ru' else '/en/social/health/'
  button='Открыть памятку →' if lang=='ru' else 'Read the guide →'
- return f'<section class="section social-guide-section"><article class="social-card social-guide-card"><img src="/assets/health/reel-cover-{lang}-v2.webp" alt="{title}" width="1080" height="1920" loading="lazy"><div><div class="eyebrow">{label}</div><h2>{title}</h2><p>{desc}</p><a class="button primary" href="{guide_url}">{button}</a></div></article></section>'
+ return render_instagram_article(lang)+f'<section class="section social-guide-section"><article class="social-card social-guide-card"><img src="/assets/health/reel-cover-{lang}-v2.webp" alt="{title}" width="1080" height="1920" loading="lazy"><div><div class="eyebrow">{label}</div><h2>{title}</h2><p>{desc}</p><a class="button primary" href="{guide_url}">{button}</a></div></article></section>'
 
 def build_pages(posts):
  for lang,prefix in [('ru',''),('en','/en')]:

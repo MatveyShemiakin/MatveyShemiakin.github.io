@@ -155,3 +155,7 @@ Node event/header regression tests: 34 passed. Python event/header tests: 14 pas
 The tablet view now uses the primary four-mode view bar and avoids an overlapping legacy bottom bar. Filter chips wrap on desktop as well as mobile, avoiding internal horizontal scrolling.
 
 Final country-name localization removes 13 untranslated country fields from the Russian catalogue. Chromium run 41415181236 passed the final layout matrix (16/16), with filters and calendar checked for internal horizontal scroll as well as page overflow.
+
+## Publication outcome
+
+PR #80 merged into main as 9bbfbe5. Final production Chromium run 41416654091 passed 16/16 cases (all satellite loads, zero JS exceptions). All 11 checked public resources match main after its normal search-index refresh. See [release report](2026-11-02-release-report.md) for commits, exact checks and limitations.

@@ -1,0 +1,50 @@
+name: Social card and patient link layout
+on:
+  pull_request:
+    paths: ['social-feed.css', 'social/index.html', 'en/social/index.html', 'scripts/build_social_feed.py', 'patients/index.html', 'en/patients/index.html', 'tests/social-layout-audit.*', '.github/workflows/social-layout.yml']
+  push:
+    branches: [main]
+    paths: ['social-feed.css', 'scripts/build_social_feed.py', 'tests/social-layout-audit.*', '.github/workflows/social-layout.yml']
+permissions:
+  contents: read
+jobs:
+  responsive-layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Render and verify RU EN, light dark, phone tablet desktop
+        run: |
+          mkdir -p layout-results
+          python3 -m http.server 8000 >/tmp/social-layout-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" || true' EXIT
+          chrome_bin="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          "$chrome_bin" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=480000 --window-size=1500,1000 --dump-dom http://127.0.0.1:8000/tests/social-layout-audit.html >layout-results/audit.html 2>layout-results/chromium.log
+          for lang in ru en; do
+            for theme in light dark; do
+              for page in social patients; do
+                "$chrome_bin" --headless --no-sandbox --disable-gpu --hide-scrollbars --run-all-compositor-stages-before-draw --virtual-time-budget=5000 --window-size=430,900 --screenshot="layout-results/$lang-$theme-$page-mobile.png" "http://127.0.0.1:8000/tests/social-layout-audit.html?capture=1&lang=$lang&theme=$theme&page=$page&width=390" >/dev/null 2>&1
+              done
+            done
+          done
+          python3 - <<'PY'
+          from pathlib import Path
+          from html import unescape
+          import json,re
+          source=Path('layout-results/audit.html').read_text()
+          match=re.search(r'<pre id="report">(.*?)</pre>',source,re.S)
+          report=json.loads(unescape(match.group(1)))
+          Path('layout-results/report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          assert report['checked']==32,report
+          assert not report['failures'],report['failures']
+          print('Passed 32 responsive cases: RU/EN, light/dark, widths 320/390/768/1440')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: social-patient-responsive-layout
+          path: layout-results/

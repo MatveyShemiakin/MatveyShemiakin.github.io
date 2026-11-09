@@ -1784,6 +1784,19 @@
         "December 10",
         "December 12"
       ]
+    },
+    {
+      "id": "arvo-2027-final-abstract-deadline",
+      "official": true,
+      "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+      "eventIds": [
+        "arvo-2027"
+      ],
+      "watchTerms": [
+        "December 6, 2026",
+        "11:59 pm",
+        "draft abstract"
+      ]
     }
   ]
 }
