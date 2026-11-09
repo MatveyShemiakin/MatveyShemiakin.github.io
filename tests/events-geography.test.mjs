@@ -26,3 +26,13 @@ test('new and renamed meetings use catalogue coordinates without an ID-specific 
  const es=[{id:'new-meeting',city:'Budapest',country:'Hungary',mode:'In person',coordinates:[47.5,19.04]}];
  const result=group(es);assert.equal(result.length,1);assert.equal(result[0].lat,47.5);assert.equal(result[0].events[0].id,'new-meeting');
 });
+test('new meetings share the existing Amman and Melbourne city markers',()=>{
+ for(const lang of ['ru','en']){
+  const events=JSON.parse(fs.readFileSync(`assets/data/ophthalmology-events.${lang}.json`)).events;
+  for(const ids of [['joscrs-2026','amman-retina-2027','yoms-2026'],['anzgs-2027','vision-2027']]){
+   const cities=group(events.filter(e=>ids.includes(e.id)));
+   assert.equal(cities.length,1,`${lang}: ${ids.join(', ')} must share one city marker`);
+   assert.equal(cities[0].events.length,ids.length,'all meetings remain selectable');
+  }
+ }
+});
