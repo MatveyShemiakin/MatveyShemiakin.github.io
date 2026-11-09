@@ -16,10 +16,10 @@
       "kind": "updated"
     },
     "events": {
-      "fingerprint": "fcd1a9058008b4fbdf32d738a7c9e693fdcb9bfab61df1b29bc4b1df5908f5f7",
+      "fingerprint": "b4cb028347eb03a784a5884506c8d491992584c08bff75a55d5ea8849b94e0bb",
       "published": "2026-08-16",
-      "updated": "2026-11-06",
-      "revision": 13,
+      "updated": "2026-11-09",
+      "revision": 14,
       "kind": "updated"
     },
     "free-learning": {
@@ -30,11 +30,11 @@
       "kind": "updated"
     },
     "iol-calculation": {
-      "fingerprint": "5ca24dd0bfae7023f007c22db714233a7a58810d33ef6008af7fda3d89624c59",
+      "fingerprint": "c27179a23f2e248140c5c269ac3a9b61c46aa302d13cf589080e443a6171ea4a",
       "published": "2026-11-06",
-      "updated": "2026-11-06",
-      "revision": 1,
-      "kind": "new"
+      "updated": "2026-11-09",
+      "revision": 2,
+      "kind": "updated"
     },
     "iol-dislocation": {
       "fingerprint": "7ecf06dd8171b9da9ada9d4eaa23edb6158acce008c6102da13c8d043994f5a9",
