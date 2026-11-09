@@ -1,0 +1,2975 @@
+{
+  "checkedAt": "2026-11-09",
+  "summary": {
+    "reviewedOriginal": 107,
+    "published": 125,
+    "added": 19,
+    "excluded": [
+      "sopla-2027"
+    ],
+    "auditClassifications": {
+      "correction_needed": 41,
+      "confirmed": 61,
+      "limited": 5
+    },
+    "regionCounts": {
+      "Russia": 11,
+      "Asia-Pacific": 27,
+      "Africa": 5,
+      "Europe": 29,
+      "China / Greater China": 5,
+      "North America": 18,
+      "Latin America": 15,
+      "CIS": 4,
+      "Middle East": 10,
+      "Online / worldwide": 1
+    }
+  },
+  "originalRecords": [
+    {
+      "id": "fedorov-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://fedorovskie.oor.ru/"
+      ],
+      "findings": "Date and Moscow event confirmed in official 2026 archive. Original MNTK path loops; event also had online participants, so hybrid. Six NMO points explicitly supported.",
+      "changes": {
+        "mode": {
+          "before": "In person",
+          "after": "Hybrid"
+        },
+        "credits": {
+          "before": "6 CME/NMO credits (archived event)",
+          "after": "6 NMO credits (archived event)"
+        },
+        "official": {
+          "before": "https://www.mntk.ru/specialists/Konferents/fed_cht/",
+          "after": "https://fedorovskie.oor.ru/"
+        },
+        "program": {
+          "before": "https://oor.ru/events",
+          "after": "https://fedorovskie.oor.ru/"
+        },
+        "registration": {
+          "before": "https://oor.ru/events",
+          "after": null
+        },
+        "dateSource": {
+          "before": "https://www.mntk.ru/specialists/Konferents/fed_cht/",
+          "after": "https://fedorovskie.oor.ru/"
+        }
+      }
+    },
+    {
+      "id": "apgc-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.snec.com.sg/news/announcements/snec-hosts-its-largest-international-ophthalmology-conference-at"
+      ],
+      "findings": "SNEC dated report 24 July confirms joint 8th APGC/SNEC35 at Suntec Singapore. apgcongress.org now advertises 2028 Gold Coast.",
+      "changes": {
+        "official": {
+          "before": "https://apgcongress.org/",
+          "after": "https://www.snec.com.sg/news/announcements/snec-hosts-its-largest-international-ophthalmology-conference-at"
+        },
+        "program": {
+          "before": "https://apgcongress.org/",
+          "after": null
+        },
+        "dateSource": {
+          "before": "https://apaophth.org/congress/calendar/",
+          "after": "https://www.snec.com.sg/news/announcements/snec-hosts-its-largest-international-ophthalmology-conference-at"
+        }
+      }
+    },
+    {
+      "id": "iser-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://iserbiennialmeeting2026.org/"
+      ],
+      "findings": "XXVII meeting and Valencia confirmed. Current program and registration URLs return403, replace with accessible organiser landing page; venue can be made precise.",
+      "changes": {
+        "venue": {
+          "before": "Valencia, Spain",
+          "after": "Palacio de Congresos de Valencia"
+        },
+        "program": {
+          "before": "https://iser.org/page/Events_Schedule",
+          "after": "https://iserbiennialmeeting2026.org/"
+        },
+        "registration": {
+          "before": "https://iser.org/page/Events_Schedule",
+          "after": null
+        }
+      }
+    },
+    {
+      "id": "apvrs-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://2026.apvrs.org/"
+      ],
+      "findings": "19th APVRS dates, city, title confirmed. Program and registration pages contain event-specific content. All submission deadlines historical; submission closed.",
+      "changes": {}
+    },
+    {
+      "id": "oor-cataract-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://cataract-congress.ru/tpost/2tn75yufb1-katarakta2026-pochemu-etot-kongress-nelz"
+      ],
+      "findings": "Official historical congress post confirms dates and WTC venue. OOR generic calendar now2027; use historical specific post for date evidence and congress site.",
+      "changes": {
+        "venue": {
+          "before": "Moscow",
+          "after": "World Trade Center, Moscow"
+        },
+        "official": {
+          "before": "https://oor.ru/events",
+          "after": "https://cataract-congress.ru/"
+        },
+        "program": {
+          "before": "https://oor.ru/events",
+          "after": null
+        },
+        "registration": {
+          "before": "https://oor.ru/events",
+          "after": null
+        },
+        "dateSource": {
+          "before": "https://cataract-congress.ru/",
+          "after": "https://cataract-congress.ru/tpost/2tn75yufb1-katarakta2026-pochemu-etot-kongress-nelz"
+        }
+      }
+    },
+    {
+      "id": "pit-perdami-51-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://pit51.perdami.or.id/"
+      ],
+      "findings": "Title, dates and venue confirmed by organiser home. Page still includes old2025 registration pricing dates; do not reuse those as2026 deadlines.",
+      "changes": {}
+    },
+    {
+      "id": "ccos-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "limited",
+      "published": true,
+      "officialSources": [
+        "https://ccos2026.sciconf.cn/"
+      ],
+      "findings": "CCOS30 dates, Tianjin venue and organiser confirmed via indexed official page; direct site521. APAO calendar independently confirms dates/city. Retain official but disclose access limitation.",
+      "changes": {}
+    },
+    {
+      "id": "escrs-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://soevision.org/event/escrs-2026-congress/"
+      ],
+      "findings": "SOE confirms dates and Excel London. Congress root has rolled to2027; current description falsely implies regular registration remains available.",
+      "changes": {
+        "credits": {
+          "before": "EACCME accreditation submitted by organiser",
+          "after": "Archived event; check organiser for accreditation records"
+        },
+        "official": {
+          "before": "https://congress.escrs.org/",
+          "after": "https://soevision.org/event/escrs-2026-congress/"
+        },
+        "description": {
+          "before": "Major European congress for cataract and refractive surgery. Abstract submission is closed; regular registration remains available until the published deadline.",
+          "after": "Archived 44th ESCRS Congress, held at ExCeL London on 11–15 September 2026."
+        }
+      }
+    },
+    {
+      "id": "retina-society-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.retinasociety.org/page/2/annual-meeting",
+        "https://www.retinasociety.org/content/documents/Program-in-brief-MO.pdf"
+      ],
+      "findings": "Dates,59th title and LosAngeles confirmed. Official program-in-brief PDF confirms FairmontCenturyPlaza location; final scientific program linked on landing page.",
+      "changes": {}
+    },
+    {
+      "id": "spanish-national-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.oftalmoseo.com/home-no-socios/",
+        "https://www.oftalmoseo.com/102-congreso-seo/seo-2026-ghho-boletn-comunicaciones-libres/"
+      ],
+      "findings": "Organiser explicitly says23–25, overriding stale SOE/PAAO23–26. Existing oftalmo.com/seo is empty untitled placeholder. Primary congress page confirms Palau venue.",
+      "changes": {
+        "end": {
+          "before": "2026-09-26",
+          "after": "2026-09-25"
+        },
+        "venue": {
+          "before": "Palma de Mallorca, Spain",
+          "after": "Palau de Congressos de Palma de Mallorca"
+        },
+        "official": {
+          "before": "https://soevision.org/event/spanish-national-meeting/",
+          "after": "https://www.oftalmoseo.com/102-congreso-seo/"
+        },
+        "program": {
+          "before": "https://soevision.org/event/spanish-national-meeting/",
+          "after": "https://www.oftalmoseo.com/102-congreso-seo/"
+        },
+        "registration": {
+          "before": "https://www.oftalmo.com/seo",
+          "after": null
+        },
+        "dateSource": {
+          "before": "https://soevision.org/event/spanish-national-meeting/",
+          "after": "https://www.oftalmoseo.com/home-no-socios/"
+        }
+      }
+    },
+    {
+      "id": "dog-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://dog-kongress.de/teilnahme/"
+      ],
+      "findings": "Dates and Estrel Berlin correct; mode must be in person. DOG onlive ancillary online meetings do not make congress hybrid.",
+      "changes": {
+        "mode": {
+          "before": "Hybrid",
+          "after": "In person"
+        }
+      }
+    },
+    {
+      "id": "latam-glaucoma-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://paao.org/events/xiii-congreso-latinoamericano-de-glaucoma/"
+      ],
+      "findings": "Title, Quito/JW Marriott and24–26Sept confirmed in official PAAO calendar. SLAG home retains relevant society content.",
+      "changes": {}
+    },
+    {
+      "id": "aios-midterm-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.aios.org/midtermjharkhand.php"
+      ],
+      "findings": "Fifth mid-term title, dates and venue confirmed. Archived event, submissionOpenfalse correct. Page contains registration and abstract routes.",
+      "changes": {}
+    },
+    {
+      "id": "kz-congress-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://koo.kz/",
+        "https://koo.kz/conference-may/"
+      ],
+      "findings": "KOO2026 schedule and event heading confirm date. /conference-may is unrelated31May2025 pediatric meeting, not this congress; remove action links. Specific page contains conflicting2025 body typo, corroborated2026 by homepage.",
+      "changes": {
+        "program": {
+          "before": "https://koo.kz/conference-may/",
+          "after": "https://koo.kz/conference/"
+        },
+        "registration": {
+          "before": "https://koo.kz/conference-may/",
+          "after": null
+        },
+        "submit": {
+          "before": "https://koo.kz/conference-may/",
+          "after": null
+        }
+      }
+    },
+    {
+      "id": "qatar-uveitis-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://qataruveitiscare.com/"
+      ],
+      "findings": "Dates, venue, second conference title and joint QSO/MEAUS organiser confirmed. Home includes program.",
+      "changes": {}
+    },
+    {
+      "id": "pao-annual-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://pao.org.ph/eye-doctors-home-event/philippine-academy-of-ophthalmology-pao-annual-convention/"
+      ],
+      "findings": "Official PAO calendar supports dates/venue and points to paocongress.com/2026. No competing dates identified.",
+      "changes": {}
+    },
+    {
+      "id": "czech-national-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://soevision.org/event/czech-ophthalmology-national-society-meeting/"
+      ],
+      "findings": "SOE official national-society calendar confirms dates/city. program and registration currently generic list, not event-specific; remove those misleading action links.",
+      "changes": {
+        "program": {
+          "before": "https://soevision.org/ophthagenda/category/national-society-meetings/list/",
+          "after": null
+        },
+        "registration": {
+          "before": "https://soevision.org/ophthagenda/category/national-society-meetings/list/",
+          "after": null
+        }
+      }
+    },
+    {
+      "id": "euretina-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://euretina.org/vienna-2026/",
+        "https://euretina.org/vienna-2026/general/",
+        "https://euretina.org/vienna-2026/faqs/"
+      ],
+      "findings": "Dates1–4Oct and hybrid supported. Venue should use current organiser name. General page says24CME, FAQ says25; avoid exact disputed credit total.",
+      "changes": {
+        "credits": {
+          "before": "24 ECMEC® / EACCME CME credits",
+          "after": "EACCME accreditation; confirm the applicable CME total with the organiser."
+        },
+        "description": {
+          "before": "Europe’s major vitreoretinal meeting. The congress is accredited by EACCME for up to 24 European CME credits.",
+          "after": "Archived 26th Euretina Congress in Vienna, with in-person and digital participation."
+        }
+      }
+    },
+    {
+      "id": "ciob-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.ciob.cl/"
+      ],
+      "findings": "Official CIOB welcome confirms Concepción/Mitrinco, dates, title. Event-specific program and registration on home; no current abstract call.",
+      "changes": {}
+    },
+    {
+      "id": "ioc-uzbekistan-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://uzscrs.uz/registratsiya-2026"
+      ],
+      "findings": "VI IOC Uzbekistan official page confirms date/place/title; has scientific program, schedule and historical deadline1June2026. Program can use event page.",
+      "changes": {
+        "program": {
+          "before": null,
+          "after": "https://uzscrs.uz/registratsiya-2026"
+        }
+      }
+    },
+    {
+      "id": "aao-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.aao.org/Assets/6f5e4b18-cb0f-494f-9d0a-c8098b228d34/639124150856930000/may-2026-destination-aao-2026-pdf?inline=1",
+        "https://www.aao.org/annual-meeting"
+      ],
+      "findings": "Official AAO PDF confirms9–12Oct including subspecialty9–10Oct and NewOrleans Ernest Morial Convention Center. Hybrid correct; direct AAO403 but official indexed PDF accessible via search.",
+      "changes": {
+        "mode": {
+          "before": "In person",
+          "after": "Hybrid"
+        },
+        "venue": {
+          "before": "New Orleans, Louisiana",
+          "after": "Ernest N. Morial Convention Center, New Orleans"
+        }
+      }
+    },
+    {
+      "id": "cornea-eye-banking-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://corneasociety.org/cornea-and-eye-banking-forum"
+      ],
+      "findings": "Cornea Society confirms exact date and city. Official landing page has further information link, no contradictory factual issues.",
+      "changes": {}
+    },
+    {
+      "id": "eso-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://eso-conferences.com/eso2026/"
+      ],
+      "findings": "Specific2026 page confirms23rd meeting, AbuDhabi and dates. Root now showcases ESO-GO2027, use2026 archive for official/date/registration.",
+      "changes": {
+        "official": {
+          "before": "https://eso-conferences.com/",
+          "after": "https://eso-conferences.com/eso2026/"
+        },
+        "registration": {
+          "before": "https://eso-conferences.com/",
+          "after": null
+        },
+        "dateSource": {
+          "before": "https://eso-conferences.com/",
+          "after": "https://eso-conferences.com/eso2026/"
+        }
+      }
+    },
+    {
+      "id": "ever-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://evercongress.org/"
+      ],
+      "findings": "Organiser landing confirms date/venue/title, preferable to society calendar landing.",
+      "changes": {
+        "official": {
+          "before": "https://soevision.org/event/ever-2026/",
+          "after": "https://evercongress.org/"
+        },
+        "program": {
+          "before": "https://soevision.org/event/ever-2026/",
+          "after": "https://evercongress.org/"
+        },
+        "registration": {
+          "before": "https://evercongress.org/",
+          "after": null
+        },
+        "dateSource": {
+          "before": "https://soevision.org/event/ever-2026/",
+          "after": "https://evercongress.org/"
+        }
+      }
+    },
+    {
+      "id": "alaccsa-r-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://paao.org/events/alaccsa-2026/"
+      ],
+      "findings": "Official PAAO calendar confirms XXVI title and Asunción city. ALACCSA home relevant, registration status historical/closed.",
+      "changes": {}
+    },
+    {
+      "id": "bolivia-ophthalmology-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://cboftalmologia2026.com/"
+      ],
+      "findings": "Official page confirms XXXI title, SantaCruz, HotelLosTajibos. Submission guidelines remain available, but event is past and submissionOpenfalse correct.",
+      "changes": {}
+    },
+    {
+      "id": "jco-80-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://convention.jtbcom.co.jp/80ringan/en/summary/index.html"
+      ],
+      "findings": "Congress information confirms dates, both Kyoto venues and80th title. Home text dates are image-only, official information page supplies accessible textual date evidence.",
+      "changes": {
+        "dateSource": {
+          "before": "https://convention.jtbcom.co.jp/80ringan/en/index.html",
+          "after": "https://convention.jtbcom.co.jp/80ringan/en/summary/index.html"
+        }
+      }
+    },
+    {
+      "id": "sprv-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://paao.org/events/sprv-2026/"
+      ],
+      "findings": "PAAO and dedicated SPRV site confirm11thSPRV+20thGLADAOF, dates and GrandHyatt SãoPaulo. No correction identified.",
+      "changes": {}
+    },
+    {
+      "id": "kos-apois-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "limited",
+      "published": true,
+      "officialSources": [
+        "https://kosmeeting.org/abstract/2026_136/apois/main.html"
+      ],
+      "findings": "Official APOIS page confirms dates/city,136thKOS and renamed Asia-Pacific Ophthalmic Innovation Society; newsletter confirms GrandWalkerhill. Landing main page links abstract/register/program. Exact6thAPOIS/19thKCJ ordinal not independently shown in text; retain with limited detail.",
+      "changes": {}
+    },
+    {
+      "id": "bascom-palmer-curso-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "limited",
+      "published": true,
+      "officialSources": [
+        "https://umiamihealth.org/bascom-palmer-eye-institute/healthcare-professionals/continuing-medical-education/xlviii-inter-american-course-in-clinical-ophthalmology"
+      ],
+      "findings": "University official CURSO page confirms XLVIII title/date/city; registration/program links present. Exact Hyatt venue not in retrieved text; limited venue verification.",
+      "changes": {}
+    },
+    {
+      "id": "sos-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://sos-conferences.com/abstract-2026/"
+      ],
+      "findings": "Date4–7Nov matches official including precon4Nov/main5–7Nov,GrandHyattAlKhobar. Abstract deadline6Aug confirmed; closed as of9Nov. No change needed.",
+      "changes": {}
+    },
+    {
+      "id": "ranzco-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://ranzco.edu/congress/",
+        "https://ranzco.edu/events/57th-ranzco-annual-scientific-congress/"
+      ],
+      "findings": "RANZCO official individual event confirms57th title,6–9November dates,Auckland,NZICC and inperson only. On-demand access after congress does not make it hybrid.",
+      "changes": {}
+    },
+    {
+      "id": "oor-inflammation-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://vospalenie.oor.ru/"
+      ],
+      "findings": "Date,VI title, hybrid attendance and6NMO points confirmed. Archived registration/submission wording should reflect past event.",
+      "changes": {
+        "credits": {
+          "before": "CME/NMO accreditation: check with organiser",
+          "after": "6 NMO credits (archived event)"
+        },
+        "submit": {
+          "before": "https://vospalenie.oor.ru/",
+          "after": null
+        },
+        "description": {
+          "before": "Sixth All-Russian conference on ocular inflammation, Moscow, 7 November 2026. Registration information is on the organiser website.",
+          "after": "Archived sixth All-Russian conference on ocular inflammation, held in Moscow and online on 7 November 2026."
+        },
+        "submissionNote": {
+          "before": "Check scientific submission arrangements with the organiser.",
+          "after": "Scientific submission is closed."
+        }
+      }
+    },
+    {
+      "id": "silk-road-almaty-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://mcoz.kz/specialist"
+      ],
+      "findings": "Official clinic congress page confirms exact date, Al-FarabiUniversity libraryRoom409, title. Private8Nov roundtable is separate invitation-only; retain7Nov public congress dates. Program present so add link.",
+      "changes": {
+        "program": {
+          "before": null,
+          "after": "https://mcoz.kz/specialist"
+        }
+      }
+    },
+    {
+      "id": "isa-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://isa2026.com.ar/"
+      ],
+      "findings": "Official ISA landing confirmsXVI title, dates/city and upcoming status. No current published abstract deadline in catalogue to correct.",
+      "changes": {}
+    },
+    {
+      "id": "trends-retina-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://miranza.es/en/tir-2026/"
+      ],
+      "findings": "Organiser confirms6thTIR dates,venue, inperson sessions and programme. Registration is linked; no explicit abstract call.",
+      "changes": {}
+    },
+    {
+      "id": "wga-surgical-grand-rounds-8-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://wga.one/surgical-grand-rounds/"
+      ],
+      "findings": "Date, online format and named cases verified.",
+      "changes": {},
+      "limitations": [
+        "Embedded registration form not rendered in text; no published start time located."
+      ]
+    },
+    {
+      "id": "joscrs-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.jordan-valley.com/jos2026",
+        "https://www.jordan-valley.com/events/jos26/abstracts"
+      ],
+      "findings": "Dates, venue and explicit closed abstract status verified.",
+      "changes": {}
+    },
+    {
+      "id": "ukiscrs-50-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.ukiscrs.org.uk/",
+        "https://www.ukiscrs.org.uk/big50"
+      ],
+      "findings": "Congress dates and County Hall verified; November 18 has ancillary symposia.",
+      "changes": {}
+    },
+    {
+      "id": "asia-cornea-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.acshk26.com/web/",
+        "https://www.acshk26.com/web/subpage.php?mid=123",
+        "https://www.acshk26.com/web/subpage.php?mid=120"
+      ],
+      "findings": "Dates, title, advanced registration cutoff and closed abstracts verified. Missing closed abstract deadline.",
+      "changes": {
+        "deadlines": {
+          "before": [
+            {
+              "kind": "registration",
+              "label": "Advance registration",
+              "date": "2026-11-26",
+              "timeKnown": false,
+              "zone": "Asia/Hong_Kong",
+              "url": "https://www.acshk26.com/web/",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "registration",
+              "label": "Advance registration",
+              "date": "2026-11-26",
+              "timeKnown": false,
+              "zone": "Asia/Hong_Kong",
+              "url": "https://www.acshk26.com/web/",
+              "note": ""
+            },
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-07-14",
+              "timeKnown": false,
+              "zone": "Asia/Hong_Kong",
+              "url": "https://www.acshk26.com/web/",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "pirogov-eye-forum-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://pirogoveyeforum.ru/"
+      ],
+      "findings": "Date and venue verified from official Russian page.",
+      "changes": {}
+    },
+    {
+      "id": "coecsa-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.coecsa-congress.org/",
+        "https://www.coecsa-congress.org/abstracts-copy/"
+      ],
+      "findings": "Rescheduled dates and closed abstract cutoff verified.",
+      "changes": {}
+    },
+    {
+      "id": "epomec-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://epomec.ae/welcome-message/",
+        "https://www.epomec.ae/abstract-submission/",
+        "https://epomec.ae/registration/"
+      ],
+      "findings": "Dates and abstract cutoff verified; registration page consistent with December 3–5.",
+      "changes": {},
+      "limitations": [
+        "Programme page renders only navigation; no schedule text. Homepage has stale prior-edition date references; welcome message and wet labs agree."
+      ]
+    },
+    {
+      "id": "mioc-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://mioc.org.om/important-dates",
+        "https://mioc.org.om/online-registration",
+        "https://mioc.org.om/abstract-submission"
+      ],
+      "findings": "Indexed official pages confirm dates, venue and cutoffs; standard registration conflict remains.",
+      "changes": {},
+      "limitations": [
+        "Direct HTTP pages are 11-character JS shells. Verified via official indexed search results turn10search0, turn12search0–3; standard cutoff differs across sources."
+      ]
+    },
+    {
+      "id": "japan-retina-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://convention.jtbcom.co.jp/65moumaku/summary/index.html",
+        "https://convention.jtbcom.co.jp/65moumaku/join/index.html",
+        "https://convention.jtbcom.co.jp/arc2026/"
+      ],
+      "findings": "Dates and joint Congress verified; useful official programme and registration links were omitted.",
+      "changes": {
+        "program": {
+          "before": null,
+          "after": "https://convention.jtbcom.co.jp/65moumaku/program/index.html"
+        },
+        "registration": {
+          "before": null,
+          "after": "https://convention.jtbcom.co.jp/65moumaku/join/index.html"
+        },
+        "submit": {
+          "before": null,
+          "after": "https://convention.jtbcom.co.jp/65moumaku/abstract/index.html"
+        },
+        "deadlines": {
+          "before": [],
+          "after": [
+            {
+              "kind": "registration",
+              "label": "Final online registration",
+              "date": "2026-12-06",
+              "timeKnown": false,
+              "zone": "Asia/Tokyo",
+              "url": "https://convention.jtbcom.co.jp/65moumaku/join/index.html",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "belarus-ophthalmology-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://eyecongress.by/ru-RU/congressinfo"
+      ],
+      "findings": "Dates and extended submissions cutoff verified in indexed official page.",
+      "changes": {},
+      "limitations": [
+        "Direct request returned 503. Official search result turn10search1 verified current 2026 text; street address not independently rechecked."
+      ]
+    },
+    {
+      "id": "asmhk-2026",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://asmhk2026.com/",
+        "https://asmhk2026.com/abstract-submission/",
+        "https://asmhk2026.com/registration/"
+      ],
+      "findings": "Dates, venue and abstract cutoff correct. Add direct programme/registration links and available registration cutoffs.",
+      "changes": {
+        "registration": {
+          "before": "https://asmhk2026.com/",
+          "after": "https://asmhk2026.com/registration/"
+        },
+        "deadlines": {
+          "before": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-09-11",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://asmhk2026.com/abstract-submission/",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-09-11",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://asmhk2026.com/abstract-submission/",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Early-bird registration",
+              "date": "2026-11-30",
+              "timeKnown": false,
+              "zone": "Asia/Hong_Kong",
+              "url": "https://asmhk2026.com/registration/",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Advance registration",
+              "date": "2026-12-11",
+              "timeKnown": false,
+              "zone": "Asia/Hong_Kong",
+              "url": "https://asmhk2026.com/registration/",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "moorf-uae-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://events.moorfields.ae/",
+        "https://events.moorfields.ae/registration",
+        "https://events.moorfields.ae/competitions"
+      ],
+      "findings": "Conference and early-bird facts correct; competition submissions are open, missing deadline.",
+      "changes": {
+        "program": {
+          "before": "https://events.moorfields.ae/",
+          "after": "https://events.moorfields.ae/conference-agenda"
+        },
+        "submit": {
+          "before": null,
+          "after": "https://events.moorfields.ae/competitions"
+        },
+        "submissionOpen": {
+          "before": false,
+          "after": true
+        },
+        "submissionNote": {
+          "before": null,
+          "after": "Poster, surgical-video and ophthalmic-imaging competitions are open until 1 December 2026."
+        },
+        "deadlines": {
+          "before": [
+            {
+              "kind": "registration",
+              "label": "Early-bird registration",
+              "date": "2026-11-14",
+              "timeKnown": false,
+              "zone": "Asia/Dubai",
+              "url": "https://events.moorfields.ae/registration",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "registration",
+              "label": "Early-bird registration",
+              "date": "2026-11-14",
+              "timeKnown": false,
+              "zone": "Asia/Dubai",
+              "url": "https://events.moorfields.ae/registration",
+              "note": ""
+            },
+            {
+              "kind": "abstract",
+              "label": "Poster, video and imaging competition submission",
+              "date": "2026-12-01",
+              "timeKnown": false,
+              "zone": "Asia/Dubai",
+              "url": "https://events.moorfields.ae/competitions",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "smo-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://smo.ma/"
+      ],
+      "findings": "Title, dates and venue verified.",
+      "changes": {},
+      "limitations": [
+        "No dated call for congress abstracts found; generic resume submission navigation may concern other meetings."
+      ]
+    },
+    {
+      "id": "japan-ophthalmic-surgery-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://50.jsos.jp/",
+        "https://50.jsos.jp/registration",
+        "https://50.jsos.jp/abstract"
+      ],
+      "findings": "Date and advance registration cutoff verified. Add closed abstracts source.",
+      "changes": {
+        "submit": {
+          "before": null,
+          "after": "https://50.jsos.jp/abstract"
+        },
+        "deadlines": {
+          "before": [
+            {
+              "kind": "registration",
+              "label": "Advance registration",
+              "date": "2026-11-12",
+              "timeKnown": false,
+              "zone": "Asia/Tokyo",
+              "url": "https://50.jsos.jp/registration",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "registration",
+              "label": "Advance registration",
+              "date": "2026-11-12",
+              "timeKnown": false,
+              "zone": "Asia/Tokyo",
+              "url": "https://50.jsos.jp/registration",
+              "note": ""
+            },
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-08-31",
+              "timeKnown": false,
+              "zone": "Asia/Tokyo",
+              "url": "https://50.jsos.jp/abstract",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "sopla-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "limited",
+      "published": false,
+      "officialSources": [
+        "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
+        "https://www.sopla.org/Congreso/Congreso2026"
+      ],
+      "findings": "Conflicting official years prevent confirmation as a 2027 event.",
+      "changes": {},
+      "limitations": [
+        "No publication timestamps establish which source supersedes the other. Registration link points to explicit 2026 event."
+      ],
+      "exclusionReason": "Official society calendar lists 2027, but the linked organiser page explicitly says 2026. No unambiguous 2027 announcement found."
+    },
+    {
+      "id": "japan-cornea-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.okinawa-congre.co.jp/cornea2027/outline/index.html",
+        "https://www.okinawa-congre.co.jp/cornea2027/cfa/index.html",
+        "https://www.congre.co.jp/cornea2027/registration/index.html"
+      ],
+      "findings": "Dates correct; current official call extended to November 10 and is still open on November 9.",
+      "changes": {
+        "registration": {
+          "before": null,
+          "after": "https://www.okinawa-congre.co.jp/cornea2027/registration/index.html"
+        },
+        "submit": {
+          "before": null,
+          "after": "https://www.okinawa-congre.co.jp/cornea2027/cfa/index.html"
+        },
+        "submissionOpen": {
+          "before": false,
+          "after": true
+        },
+        "submissionNote": {
+          "before": null,
+          "after": "Abstracts extended to 10 November 2026, 17:00 Japan time; first author society membership required."
+        },
+        "deadlines": {
+          "before": [],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Extended abstract submission",
+              "date": "2026-11-10T17:00:00+09:00",
+              "timeKnown": true,
+              "zone": "Asia/Tokyo",
+              "url": "https://www.okinawa-congre.co.jp/cornea2027/cfa/index.html",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Early registration",
+              "date": "2027-01-14",
+              "timeKnown": false,
+              "zone": "Asia/Tokyo",
+              "url": "https://www.okinawa-congre.co.jp/cornea2027/registration/index.html",
+              "note": ""
+            }
+          ]
+        }
+      },
+      "limitations": [
+        "Alternate congre.co.jp mirror still has older November 4 cutoff; updated okinawa-congre page and homepage extension announcement take precedence."
+      ]
+    },
+    {
+      "id": "glaucoma-vector-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://oor.ru/events"
+      ],
+      "findings": "Official RSO calendar confirms title, dates and Moscow.",
+      "changes": {},
+      "limitations": [
+        "No conference-specific registration or submission details published in inspected calendar."
+      ]
+    },
+    {
+      "id": "aioc-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.aios.org/aioc2027.php"
+      ],
+      "findings": "Title, dates, venue and registration deadlines match organizer.",
+      "changes": {},
+      "limitations": [
+        "Main abstract closure is not explicit on inspected registration page; no active call found there."
+      ]
+    },
+    {
+      "id": "euretina-sfm-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://euretina.org/sfm-2027/",
+        "https://euretina.org/sfm-2027/programme/",
+        "https://euretina.org/sfm-2027/registration/"
+      ],
+      "findings": "Dates, city and theme verified; direct current programme available. Registration page contains stale London2026 content.",
+      "changes": {
+        "program": {
+          "before": "https://euretina.org/sfm-2027/",
+          "after": "https://euretina.org/sfm-2027/programme/"
+        }
+      },
+      "limitations": [
+        "Retain landing page for registration pending correction of organizer registration subpage; do not copy stale sold-out/on-demand statements."
+      ]
+    },
+    {
+      "id": "oculoplastics-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://oor.ru/events"
+      ],
+      "findings": "RSO calendar confirms date, title and city.",
+      "changes": {},
+      "limitations": [
+        "No conference-specific registration or submission details published in inspected calendar."
+      ]
+    },
+    {
+      "id": "ags-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar"
+      ],
+      "findings": "Official AGS event page verifies all basic event facts.",
+      "changes": {}
+    },
+    {
+      "id": "ossa-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://ossacongress.co.za/",
+        "https://ossacongress.co.za/introduction/",
+        "https://ossacongress.co.za/attendance/",
+        "https://ossacongress.co.za/programme/"
+      ],
+      "findings": "Dates, closed abstracts and early-bird cutoff confirmed; replace generic city venue with actual congress centre.",
+      "changes": {
+        "venue": {
+          "before": "Cape Town, South Africa",
+          "after": "Cape Town International Convention Centre (CTICC)"
+        },
+        "deadlines": {
+          "before": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-08-28",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://ossacongress.co.za/introduction/",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Early-bird registration and payment",
+              "date": "2026-11-06",
+              "timeKnown": false,
+              "zone": "Africa/Johannesburg",
+              "url": "https://ossacongress.co.za/introduction/",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-08-28",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://ossacongress.co.za/introduction/",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Early-bird registration and payment",
+              "date": "2026-11-06",
+              "timeKnown": false,
+              "zone": "Africa/Johannesburg",
+              "url": "https://ossacongress.co.za/introduction/",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Standard registration before late rates",
+              "date": "2027-01-28",
+              "timeKnown": false,
+              "zone": "Africa/Johannesburg",
+              "url": "https://ossacongress.co.za/attendance/",
+              "note": "Late rates apply from 29 January."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "aapos-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.aapos.org/education-and-events/annual-meeting2027",
+        "https://www.aapos.org/education-and-events/annual-meeting2027/annual-meeting-abstracts2026561"
+      ],
+      "findings": "Core facts and current cutoffs correct; closed fellow extension and later registration deadlines omitted.",
+      "changes": {
+        "deadlines": {
+          "before": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-09-22",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://www.aapos.org/education-and-events/annual-meeting2027/annual-meeting-abstracts2026561",
+              "note": ""
+            },
+            {
+              "kind": "faculty",
+              "label": "Presenting author registration",
+              "date": "2026-12-15",
+              "timeKnown": false,
+              "zone": "America/New_York",
+              "url": "https://www.aapos.org/education-and-events/annual-meeting2027",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Early registration",
+              "date": "2027-01-14",
+              "timeKnown": false,
+              "zone": "America/New_York",
+              "url": "https://www.aapos.org/education-and-events/annual-meeting2027",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-09-22",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://www.aapos.org/education-and-events/annual-meeting2027/annual-meeting-abstracts2026561",
+              "note": ""
+            },
+            {
+              "kind": "faculty",
+              "label": "Presenting author registration",
+              "date": "2026-12-15",
+              "timeKnown": false,
+              "zone": "America/New_York",
+              "url": "https://www.aapos.org/education-and-events/annual-meeting2027",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Early registration",
+              "date": "2027-01-14",
+              "timeKnown": false,
+              "zone": "America/New_York",
+              "url": "https://www.aapos.org/education-and-events/annual-meeting2027",
+              "note": ""
+            },
+            {
+              "kind": "abstract",
+              "label": "Fellows-only final abstract (closed)",
+              "date": "2026-10-29T10:00:00-05:00",
+              "timeKnown": true,
+              "zone": "America/Chicago",
+              "url": "https://www.aapos.org/education-and-events/annual-meeting2027/annual-meeting-abstracts2026561",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Regular registration",
+              "date": "2027-02-15",
+              "timeKnown": false,
+              "zone": "America/New_York",
+              "url": "https://www.aapos.org/education-and-events/annual-meeting2027",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "escrs-winter-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://wintermeeting.escrs.org/",
+        "https://wintermeeting.escrs.org/abstracts/abstract-submissions/",
+        "https://wintermeeting.escrs.org/coming-soon/",
+        "https://wintermeeting.escrs.org/registrations/"
+      ],
+      "findings": "Dates and both scientific cutoffs verified; registration opens December 2026.",
+      "changes": {}
+    },
+    {
+      "id": "paao-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://paao2027.com/",
+        "https://abstracts.paao2027.com/en/landing/",
+        "https://paao.org/meetings/prizes-and-awards/alvaro-rodriguez-travel-award/",
+        "https://paao.org/meetings/troutman-veronneau-prize-application/"
+      ],
+      "findings": "Dates, venue, awards and extended abstract cutoff verified.",
+      "changes": {}
+    },
+    {
+      "id": "apao-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://2027.apaophth.org/",
+        "https://2027.apaophth.org/latest-news/",
+        "https://2027.apaophth.org/registration/"
+      ],
+      "findings": "Dates, venue, closed submission status and advance registration match official pages.",
+      "changes": {},
+      "limitations": [
+        "Scientific portal is a loading shell; official news independently confirms closure."
+      ]
+    },
+    {
+      "id": "nanos-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.nanosweb.org/nanos-2027-san-diego/",
+        "https://community.nanosweb.org/events/event-description?CalendarEventKey=de230df2-9ae2-4615-9dde-01a15f8150b4&Home=%2Fevents%2Fcalendar&hlmlt=ED"
+      ],
+      "findings": "Dates and hotel confirmed on current official community page; replace ineffective old URL.",
+      "changes": {
+        "official": {
+          "before": "https://www.nanosweb.org/nanos-2027-san-diego/",
+          "after": "https://community.nanosweb.org/events/event-description?CalendarEventKey=de230df2-9ae2-4615-9dde-01a15f8150b4&Home=%2Fevents%2Fcalendar&hlmlt=ED"
+        },
+        "registration": {
+          "before": null,
+          "after": "https://community.nanosweb.org/events/event-description?CalendarEventKey=de230df2-9ae2-4615-9dde-01a15f8150b4&Home=%2Fevents%2Fcalendar&hlmlt=ED"
+        },
+        "dateSource": {
+          "before": "https://www.nanosweb.org/nanos-2027-san-diego/",
+          "after": "https://community.nanosweb.org/events/event-description?CalendarEventKey=de230df2-9ae2-4615-9dde-01a15f8150b4&Home=%2Fevents%2Fcalendar&hlmlt=ED"
+        },
+        "deadlines": {
+          "before": [],
+          "after": [
+            {
+              "kind": "registration",
+              "label": "Conference hotel block",
+              "date": "2027-02-22",
+              "timeKnown": false,
+              "zone": "America/Los_Angeles",
+              "url": "https://community.nanosweb.org/events/event-description?CalendarEventKey=de230df2-9ae2-4615-9dde-01a15f8150b4&Home=%2Fevents%2Fcalendar&hlmlt=ED",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "fuji-retina-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
+        "https://convention.jtbcom.co.jp/fujiretina/abstracts/index.html",
+        "https://convention.jtbcom.co.jp/fujiretina/registration/index.html"
+      ],
+      "findings": "Dates, venue, poster call, travel grant and early registration verified.",
+      "changes": {}
+    },
+    {
+      "id": "ascrs-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://annualmeeting.ascrs.org/",
+        "https://ascrs.confex.com/ascrs/27am/cfp.cgi"
+      ],
+      "findings": "Meeting facts correct; scientific-film program currently accepts new submissions until November 30 despite stale generic September cutoff.",
+      "changes": {
+        "description": {
+          "before": "ASCRS annual meeting in San Diego. New scientific submissions are closed; film and poster uploads have separate deadlines.",
+          "after": "ASCRS Annual Meeting in San Diego. Papers, posters and courses are closed; scientific-film submissions remain open until 30 November 2026."
+        },
+        "submissionOpen": {
+          "before": false,
+          "after": true
+        },
+        "submissionNote": {
+          "before": "Scientific submission is closed; see the organiser for participation and registration details.",
+          "after": "Scientific-film submissions remain open until 30 November 2026, 23:59 Pacific. Papers, posters and instructional courses are closed."
+        },
+        "deadlines": {
+          "before": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-09-18",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+              "note": ""
+            },
+            {
+              "kind": "upload",
+              "label": "Film upload / e-posters for judging",
+              "date": "2027-01-25",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+              "note": ""
+            },
+            {
+              "kind": "upload",
+              "label": "Final electronic poster and course material upload",
+              "date": "2027-02-25",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+              "note": ""
+            },
+            {
+              "kind": "faculty",
+              "label": "Faculty and presenting author registration",
+              "date": "2027-03-02",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-09-18",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+              "note": ""
+            },
+            {
+              "kind": "upload",
+              "label": "Film upload / e-posters for judging",
+              "date": "2027-01-25",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+              "note": ""
+            },
+            {
+              "kind": "upload",
+              "label": "Final electronic poster and course material upload",
+              "date": "2027-02-25",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+              "note": ""
+            },
+            {
+              "kind": "faculty",
+              "label": "Faculty and presenting author registration",
+              "date": "2027-03-02",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+              "note": ""
+            },
+            {
+              "kind": "abstract",
+              "label": "Scientific film submission",
+              "date": "2026-11-30T23:59:00-08:00",
+              "timeKnown": true,
+              "zone": "America/Los_Angeles",
+              "url": "https://ascrs.confex.com/ascrs/27am/cfp.cgi",
+              "note": "Film-specific program deadline supersedes the generic September abstract date; organizer retains both on the page."
+            }
+          ]
+        }
+      },
+      "limitations": [
+        "Same call page retains September 18 film title/synopsis date, creating an internal inconsistency; show qualifier rather than claiming all categories open."
+      ]
+    },
+    {
+      "id": "vitreoretinal-technologies-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://oor.ru/events"
+      ],
+      "findings": "RSO calendar confirms meeting dates and Ufa.",
+      "changes": {},
+      "limitations": [
+        "Specific venue and registration/submission details not published on inspected calendar."
+      ]
+    },
+    {
+      "id": "aao-midyear-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://apaophth.org/congress/calendar/"
+      ],
+      "findings": "Official ophthalmology society calendar confirms event dates and city.",
+      "changes": {},
+      "limitations": [
+        "AAO host page returned 403; dates corroborated by APAO official calendar, not directly host-verified."
+      ]
+    },
+    {
+      "id": "wsopras-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.wsopras2027.org/",
+        "https://www.wsopras2027.org/index.php?c=category&id=3"
+      ],
+      "findings": "Dates, hotel, abstracts/video cutoffs and presenter registration confirmed.",
+      "changes": {}
+    },
+    {
+      "id": "dos-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.aios.org/aios-events1.php/Nill"
+      ],
+      "findings": "Official linked AIOS calendar has different dates from dataset.",
+      "changes": {
+        "start": {
+          "before": "2027-04-09",
+          "after": "2027-04-16"
+        },
+        "end": {
+          "before": "2027-04-11",
+          "after": "2027-04-18"
+        }
+      },
+      "limitations": [
+        "Host DOS conference announcement not found; official AIOS calendar is stated source, and date source now differs from stored date."
+      ]
+    },
+    {
+      "id": "euretinai-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://euretina.org/euretinai-2027/"
+      ],
+      "findings": "Date, London location and live stream verified.",
+      "changes": {}
+    },
+    {
+      "id": "ukiscrs-cornea-day-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.ukiscrs.org.uk/"
+      ],
+      "findings": "Official UKISCRS homepage verifies one-day meeting.",
+      "changes": {}
+    },
+    {
+      "id": "argentina-ophthalmology-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://paao.org/events/argentina-2027/",
+        "https://oftalmologos.org.ar/",
+        "https://cno.oftalmologos.org.ar/"
+      ],
+      "findings": "PAAO official calendar verifies dates and venue; host links dedicated congress site.",
+      "changes": {},
+      "limitations": [
+        "Dedicated site currently presents CNO26 closing material with explicit CNO27 save-the-date; no active2027 submissions verified."
+      ]
+    },
+    {
+      "id": "apspos-capos-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://apaophth.org/congress/calendar/",
+        "https://apspos.org/apspos-congress-2027/",
+        "https://mm.sciconf.cn/en/web/index/35830_3124922"
+      ],
+      "findings": "APAO calendar confirms April 15–17, Tianjin. APSPOS organizer publishes December 1 abstract deadline; submission is open.",
+      "changes": {
+        "official": {
+          "before": "https://apaophth.org/congress/calendar/",
+          "after": "https://apspos.org/apspos-congress-2027/"
+        },
+        "registration": {
+          "before": "https://apaophth.org/congress/calendar/",
+          "after": "https://apspos-capos2027.sciconf.cn/"
+        },
+        "submit": {
+          "before": "https://apaophth.org/congress/calendar/",
+          "after": "https://apspos-capos2027.sciconf.cn/"
+        },
+        "submissionOpen": {
+          "before": false,
+          "after": true
+        },
+        "submissionNote": {
+          "before": "No verified submission deadline is published in the checked source.",
+          "after": "Abstract submission is open until 1 December 2026, 23:59 UTC+8. Early registration deadline is not announced."
+        },
+        "deadlines": {
+          "before": [],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission",
+              "date": "2026-12-01T23:59:00+08:00",
+              "timeKnown": true,
+              "zone": "Asia/Shanghai",
+              "url": "https://apspos.org/apspos-congress-2027/",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "jos-131-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://convention.jtbcom.co.jp/131jos/en/index.html",
+        "https://convention.jtbcom.co.jp/131jos/en/summary/index.html",
+        "https://convention.jtbcom.co.jp/131jos/en/join/index.html",
+        "https://convention.jtbcom.co.jp/131jos/en/abstract/index.html"
+      ],
+      "findings": "Summary confirms April 15–18, Sapporo. Abstract page explicitly closed November 5. Early registration payment ends February 12.",
+      "changes": {
+        "org": {
+          "before": "131st",
+          "after": "Japanese Ophthalmological Society"
+        },
+        "venue": {
+          "before": "Sapporo",
+          "after": "Grand Mercure Sapporo Odori Park; Sapporo Prince Hotel International Convention Center “Pamir”; Sapporo Education and Culture Hall"
+        },
+        "submissionOpen": {
+          "before": true,
+          "after": false
+        },
+        "deadlines": {
+          "before": [
+            {
+              "kind": "abstract",
+              "label": "International abstract / travel grant submission",
+              "date": "2026-11-05T13:00:00+09:00",
+              "timeKnown": true,
+              "zone": "Asia/Tokyo",
+              "url": "https://convention.jtbcom.co.jp/131jos/en/abstract/index.html",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "International abstract / travel grant submission",
+              "date": "2026-11-05T13:00:00+09:00",
+              "timeKnown": true,
+              "zone": "Asia/Tokyo",
+              "url": "https://convention.jtbcom.co.jp/131jos/en/abstract/index.html",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Early registration and payment",
+              "date": "2027-02-12",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://convention.jtbcom.co.jp/131jos/en/join/index.html",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "oph360-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://360.oor.ru/"
+      ],
+      "findings": "Official Russian page confirms fifth conference, April 16, 2027, Moscow RBC Event Center; no scientific call or deadline displayed.",
+      "changes": {}
+    },
+    {
+      "id": "wgc-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://worldglaucomacongress.org/",
+        "https://worldglaucomacongress.org/film-festival-submissions/",
+        "https://worldglaucomacongress.org/abstracts/",
+        "https://worldglaucomacongress.org/registration/"
+      ],
+      "findings": "Organizer confirms April 20–23 Kyoto; abstracts closed October 19; registration tiers end January 18 and March 15.",
+      "changes": {
+        "registration": {
+          "before": "https://worldglaucomacongress.org/",
+          "after": "https://worldglaucomacongress.org/registration/"
+        },
+        "submit": {
+          "before": "https://worldglaucomacongress.org/",
+          "after": "https://worldglaucomacongress.org/abstracts/"
+        },
+        "deadlines": {
+          "before": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-10-19",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://worldglaucomacongress.org/",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Early-bird registration",
+              "date": "2027-01-18",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://worldglaucomacongress.org/",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Regular registration",
+              "date": "2027-03-15",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://worldglaucomacongress.org/film-festival-submissions/",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission (closed)",
+              "date": "2026-10-19",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://worldglaucomacongress.org/abstracts/",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Early-bird registration",
+              "date": "2027-01-18",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://worldglaucomacongress.org/registration/",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Regular registration",
+              "date": "2027-03-15",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://worldglaucomacongress.org/registration/",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "sfo-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.sfo-online.fr/",
+        "https://www.sfo-online.fr/soumission-resumes-133e-congres"
+      ],
+      "findings": "Official SFO pages confirm April 23–26, Paris; oral/poster detailed instructions say December 21 noon, despite midnight elsewhere.",
+      "changes": {
+        "fullTitle": {
+          "before": "SFO Annual Congress 2027",
+          "after": "133rd Congress of the French Society of Ophthalmology"
+        },
+        "org": {
+          "before": "SFO Annual Congress 2027",
+          "after": "Société Française d’Ophtalmologie"
+        },
+        "venue": {
+          "before": "Paris",
+          "after": "Palais des Congrès de Paris (Porte Maillot)"
+        },
+        "deadlines": {
+          "before": [
+            {
+              "kind": "abstract",
+              "label": "Oral and poster abstracts",
+              "date": "2026-12-21T12:00:00+01:00",
+              "timeKnown": true,
+              "zone": "Europe/Paris",
+              "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+              "note": ""
+            },
+            {
+              "kind": "abstract",
+              "label": "Film title submission",
+              "date": "2027-01-18",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+              "note": ""
+            },
+            {
+              "kind": "upload",
+              "label": "Final film upload",
+              "date": "2027-03-08",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Oral and poster abstracts",
+              "date": "2026-12-21T12:00:00+01:00",
+              "timeKnown": true,
+              "zone": "Europe/Paris",
+              "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+              "note": "Detailed submission rules specify noon; another section says midnight. Use the earlier noon cutoff and check organiser updates."
+            },
+            {
+              "kind": "abstract",
+              "label": "Film title submission",
+              "date": "2027-01-18",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+              "note": ""
+            },
+            {
+              "kind": "upload",
+              "label": "Final film upload",
+              "date": "2027-03-08",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://www.sfo-online.fr/soumission-resumes-133e-congres",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "oculoplastica-mexico-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://paao.org/events/congreso-internacional-de-oculoplastica-2027/",
+        "https://oculoplastica2027.org"
+      ],
+      "findings": "PAAO official calendar confirms May 1–5, Puerto Vallarta. Linked congress site is JavaScript-only; no deadline confirmed.",
+      "changes": {
+        "submissionNote": {
+          "before": null,
+          "after": "No verified submission deadline is published in accessible official information."
+        }
+      }
+    },
+    {
+      "id": "arvo-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.arvo.org/annual-meeting/",
+        "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+        "https://www.arvo.org/annual-meeting/registration",
+        "https://www.arvo.org/annual-meeting/abstracts",
+        "https://www.arvo.org/awards-and-grants/travel-grants"
+      ],
+      "findings": "Organizer confirms May 2–6 San Diego. December 4 starts drafts; December 6 finalizes them; registration dates unchanged.",
+      "changes": {
+        "program": {
+          "before": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "after": "https://www.arvo.org/annual-meeting/program-schedule"
+        },
+        "deadlines": {
+          "before": [
+            {
+              "kind": "grant",
+              "label": "Travel grants",
+              "date": "2026-12-04",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://www.arvo.org/awards-and-grants/travel-grants",
+              "note": ""
+            },
+            {
+              "kind": "abstract",
+              "label": "Abstract submission",
+              "date": "2026-12-04T17:00:00-05:00",
+              "timeKnown": true,
+              "zone": "America/New_York",
+              "url": "https://www.arvo.org/annual-meeting/abstracts",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Early registration",
+              "date": "2027-03-10",
+              "timeKnown": false,
+              "zone": "America/New_York",
+              "url": "https://www.arvo.org/annual-meeting/registration",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Standard registration",
+              "date": "2027-04-23",
+              "timeKnown": false,
+              "zone": "America/New_York",
+              "url": "https://www.arvo.org/annual-meeting/registration",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "grant",
+              "label": "Travel grants",
+              "date": "2026-12-04",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://www.arvo.org/awards-and-grants/travel-grants",
+              "note": ""
+            },
+            {
+              "kind": "abstract",
+              "label": "Begin abstract draft",
+              "date": "2026-12-04T17:00:00-05:00",
+              "timeKnown": true,
+              "zone": "America/New_York",
+              "url": "https://www.arvo.org/annual-meeting/abstracts",
+              "note": ""
+            },
+            {
+              "kind": "abstract",
+              "label": "Final abstract submission and editing",
+              "date": "2026-12-06T23:59:00-05:00",
+              "timeKnown": true,
+              "zone": "America/New_York",
+              "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+              "note": "Only for drafts started by Dec 4, 5 pm EST."
+            },
+            {
+              "kind": "registration",
+              "label": "Early registration",
+              "date": "2027-03-10",
+              "timeKnown": false,
+              "zone": "America/New_York",
+              "url": "https://www.arvo.org/annual-meeting/registration",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Standard registration",
+              "date": "2027-04-23",
+              "timeKnown": false,
+              "zone": "America/New_York",
+              "url": "https://www.arvo.org/annual-meeting/registration",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "wcpos-vi-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "limited",
+      "published": true,
+      "officialSources": [
+        "https://wspos.org/wcpos-vi/",
+        "https://www.wcpos2027.org/abstracts",
+        "https://jp.linkedin.com/company/wspos/",
+        "https://www.linkedin.com/posts/wspos_wcposvi-paediatricophthalmology-strabismus-activity-7488784519760740352-1arq"
+      ],
+      "findings": "WSPOS confirms May 13–15 Cancún. Exact organizer social post confirms abstracts open; dedicated policy pages are JavaScript-only.",
+      "changes": {
+        "registration": {
+          "before": "https://wspos.org/wcpos-vi/",
+          "after": "https://www.wcpos2027.org/fees"
+        },
+        "submit": {
+          "before": "https://wspos.org/wcpos-vi/",
+          "after": "https://www.wcpos2027.org/abstracts"
+        },
+        "submissionOpen": {
+          "before": false,
+          "after": true
+        },
+        "submissionNote": {
+          "before": null,
+          "after": "Abstract submission is open according to the organiser. Detailed deadline policy could not be read from the JavaScript-only congress site."
+        }
+      }
+    },
+    {
+      "id": "eucornea-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://eucornea.org/budapest-2027-general-information/",
+        "https://eucornea.org/instructional-course-submission-budapest-2027/"
+      ],
+      "findings": "EuCornea confirms Budapest May 14–16; instructional courses close November 15 at 23:59 CET. Registration and abstracts show opening soon.",
+      "changes": {}
+    },
+    {
+      "id": "rcophth-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/"
+      ],
+      "findings": "College page confirms Birmingham ICC May 24–27; poster and short-oral submission open, deadline December 1, 2026.",
+      "changes": {
+        "submit": {
+          "before": null,
+          "after": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/"
+        }
+      }
+    },
+    {
+      "id": "white-nights-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://ocwn.org/"
+      ],
+      "findings": "Organizer confirms 33rd Astakhov congress May 24–28, 2027; no scientific deadline or detailed venue on checked page.",
+      "changes": {}
+    },
+    {
+      "id": "amman-retina-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.ammanretinameeting.com/",
+        "https://www.ammanretinameeting.com/registration",
+        "https://www.ammanretinameeting.com/abstract-submission"
+      ],
+      "findings": "Organizer confirms Fairmont Amman May 26–28; early registration January 30. Abstract page explicitly says coming soon.",
+      "changes": {}
+    },
+    {
+      "id": "apacrs-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.apacrs.org/",
+        "https://2027.apacrs.org/"
+      ],
+      "findings": "APACRS homepage confirms 39th meeting June 3–5, Bali. Dedicated 2027 site returned 503; no deadline independently confirmed.",
+      "changes": {}
+    },
+    {
+      "id": "fedorov-readings-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://oor.ru/events"
+      ],
+      "findings": "Russian Society calendar confirms young-scientist Fyodorov Readings June 4, Moscow; no submission details listed.",
+      "changes": {}
+    },
+    {
+      "id": "colatoc-guatemala-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://aptooftalmico.com/",
+        "https://paao.org/es/events/colatoc-2027/"
+      ],
+      "findings": "PAAO calendar confirms IV ocular-trauma congress plus XIX Guatemala congress, Antigua Guatemala, June 9–11. Association homepage has no deadlines.",
+      "changes": {}
+    },
+    {
+      "id": "macula-society-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.maculasociety.org/50th-anniversary/",
+        "https://www.maculasociety.org/2026/10/14/50th-anniversary-macula-society-meeting-abstract-case-submissions/"
+      ],
+      "findings": "Society confirms June 9–12 Carlton Cannes. Specific October 14 notice opens members-only abstracts until January 15 at 17:00 EST.",
+      "changes": {
+        "registration": {
+          "before": "https://www.maculasociety.org/50th-anniversary/",
+          "after": "https://www.xcdsystem.com/maculasociety/store/registration.cfm?ID=L485pjD"
+        },
+        "submit": {
+          "before": null,
+          "after": "https://www.maculasociety.org/2026/10/14/50th-anniversary-macula-society-meeting-abstract-case-submissions/"
+        },
+        "submissionOpen": {
+          "before": false,
+          "after": true
+        },
+        "submissionNote": {
+          "before": null,
+          "after": "Abstract and case submissions are open to Macula Society members only."
+        },
+        "deadlines": {
+          "before": [],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Member abstract and case submissions",
+              "date": "2027-01-15T17:00:00-05:00",
+              "timeKnown": true,
+              "zone": "America/New_York",
+              "url": "https://www.maculasociety.org/2026/10/14/50th-anniversary-macula-society-meeting-abstract-case-submissions/",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "doc-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.doc-nuernberg.de/",
+        "https://www.doc-nuernberg.de/abstracteinreichung.php",
+        "https://www.doc-nuernberg.de/anmeldeinformationen.php",
+        "https://www.doc-nuernberg.de/allgemeine-hinweise.php#termine"
+      ],
+      "findings": "DOC confirms June 10–12 Nuremberg NCC Ost; abstracts accepted until March 31. Early fees end April 27; registration expected January.",
+      "changes": {
+        "fullTitle": {
+          "before": "DOC Congress 2027",
+          "after": "39th International Congress of German Ophthalmic Surgery"
+        },
+        "venue": {
+          "before": "Nuremberg",
+          "after": "NürnbergConvention Center (NCC Ost / Hall 7A)"
+        },
+        "program": {
+          "before": "https://www.doc-nuernberg.de/",
+          "after": "https://www.doc-nuernberg.de/programm.php"
+        },
+        "registration": {
+          "before": "https://www.doc-nuernberg.de/",
+          "after": "https://www.doc-nuernberg.de/anmeldeinformationen.php"
+        },
+        "submit": {
+          "before": null,
+          "after": "https://www.doc-nuernberg.de/abstracteinreichung.php"
+        },
+        "submissionOpen": {
+          "before": false,
+          "after": true
+        },
+        "submissionNote": {
+          "before": null,
+          "after": "Abstract submission is open; registration is expected to open in January 2027."
+        },
+        "deadlines": {
+          "before": [],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission",
+              "date": "2027-03-31",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://www.doc-nuernberg.de/abstracteinreichung.php",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Early registration",
+              "date": "2027-04-27",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://www.doc-nuernberg.de/allgemeine-hinweise.php#termine",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ebaa-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://restoresight.org/ebaa-annual-meeting/",
+        "https://restoresight.org/ebaa-annual-meeting/schedule-of-events/"
+      ],
+      "findings": "EBAA confirms June 10–12 Hyatt Regency Austin; schedule preliminary, speaker details due early 2027. No submission deadline found.",
+      "changes": {}
+    },
+    {
+      "id": "soe-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://soe2027.soevision.org/",
+        "https://soe2027.soevision.org/scientific-programme-2/",
+        "https://soe2027.soevision.org/registration/",
+        "https://soe2027.soevision.org/abstract-submission/",
+        "https://soe2027.soevision.org/isot-abstract-submission/"
+      ],
+      "findings": "SOE confirms June 18–20 Athens. SOE and ISOT abstracts both close January 19 at 23:59 GMT; presenter registration March 24.",
+      "changes": {
+        "deadlines": {
+          "before": [
+            {
+              "kind": "abstract",
+              "label": "SOE abstract submission",
+              "date": "2027-01-19T23:59:00+00:00",
+              "timeKnown": true,
+              "zone": "GMT",
+              "url": "https://soe2027.soevision.org/abstract-submission/",
+              "note": ""
+            },
+            {
+              "kind": "abstract",
+              "label": "ISOT trauma submission",
+              "date": "2027-01-19T23:59:00+00:00",
+              "timeKnown": true,
+              "zone": "GMT",
+              "url": "https://soe2027.soevision.org/isot-abstract-submission/",
+              "note": ""
+            }
+          ],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "SOE abstract submission",
+              "date": "2027-01-19T23:59:00+00:00",
+              "timeKnown": true,
+              "zone": "GMT",
+              "url": "https://soe2027.soevision.org/abstract-submission/",
+              "note": ""
+            },
+            {
+              "kind": "abstract",
+              "label": "ISOT trauma submission",
+              "date": "2027-01-19T23:59:00+00:00",
+              "timeKnown": true,
+              "zone": "GMT",
+              "url": "https://soe2027.soevision.org/isot-abstract-submission/",
+              "note": ""
+            },
+            {
+              "kind": "registration",
+              "label": "Presenting author registration",
+              "date": "2027-03-24",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://soe2027.soevision.org/abstract-submission/",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "cos-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.cos-sco.ca/education-and-resources/annual-meetings-and-exhibitions/",
+        "https://cos-sco.secure-platform.com/2027"
+      ],
+      "findings": "COS confirms June 24–27 Ottawa. Submission portal dates are October 3 abstracts and November 3 videos; both deadlines have passed.",
+      "changes": {
+        "description": {
+          "before": "COS annual meeting in Ottawa includes scientific sessions, practical workshops and a surgical Film Festival. Abstract submission is closed; surgical video submission remains open until 3 November 2026.",
+          "after": "COS annual meeting in Ottawa includes scientific sessions, practical workshops and a surgical Film Festival. Abstract and video submissions are closed."
+        },
+        "submissionOpen": {
+          "before": true,
+          "after": false
+        },
+        "submissionNote": {
+          "before": null,
+          "after": "Abstract and film submissions are closed; attendance confirmation for accepted presenters is due 23 January 2027."
+        }
+      }
+    },
+    {
+      "id": "asrs-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.asrs.org/annual-meeting"
+      ],
+      "findings": "ASRS confirms 45th meeting July 28–31 San Francisco; abstract submission opens December 3 and closes January 28.",
+      "changes": {}
+    },
+    {
+      "id": "world-keratoconus-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://ikc-society.org/events/"
+      ],
+      "findings": "International Keratoconus Society confirms fourth World Keratoconus Congress, Buenos Aires, August 26–28; no venue or deadline listed.",
+      "changes": {
+        "fullTitle": {
+          "before": "World Keratoconus Congress 2027",
+          "after": "4th World Keratoconus Congress"
+        }
+      }
+    },
+    {
+      "id": "euretina-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://euretina.org/copenhagen-27/",
+        "https://euretina.org/copenhagen-27/session-submission-terms/"
+      ],
+      "findings": "Euretina confirms Bella Center September 16–19; online participation; EIS September 15. Session proposals close November 18 at 23:59 CET.",
+      "changes": {}
+    },
+    {
+      "id": "dog-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
+        "https://dog-kongress.de/"
+      ],
+      "findings": "DOG organizer notice updated November 9 confirms September 30–October 3 Estrel Berlin and abstract period February 1–April 4, 2027.",
+      "changes": {
+        "description": {
+          "before": "Annual DOG congress. Dates and the call for scientific session proposals have been announced.",
+          "after": "Annual DOG congress in Berlin. Abstract submission is scheduled for 1 February–4 April 2027."
+        },
+        "submissionOpens": {
+          "before": null,
+          "after": "2027-02-01"
+        },
+        "submissionNote": {
+          "before": "Scientific submission is closed; see the organiser for participation and registration details.",
+          "after": "Abstract submission opens 1 February 2027 and closes 4 April 2027."
+        },
+        "deadlines": {
+          "before": [],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Abstract submission",
+              "date": "2027-04-04",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://dog.org/veranstaltungen/dog-kongress/dog-2027-vom-30-september-bis-zum-3-oktober-2027",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "cataract-refractive-cornea-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://oor.ru/events"
+      ],
+      "findings": "Russian Society calendar confirms October 7–9 Moscow; full title includes XXVII congress within centenary Fyodorov Readings. Hybrid mode not independently stated.",
+      "changes": {
+        "fullTitle": {
+          "before": "Modern Technologies in Cataract, Refractive and Corneal Surgery 2027",
+          "after": "Fyodorov Readings 2027: 27th All-Russian Scientific and Practical Congress with International Participation “Modern Technologies in Cataract, Refractive and Corneal Surgery”"
+        }
+      }
+    },
+    {
+      "id": "aacgc-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://apaophth.org/congress/calendar/"
+      ],
+      "findings": "APAO calendar confirms 18th AACGC with 11th Indonesian National Glaucoma Meeting October 15–16, Jakarta; no abstract or registration call.",
+      "changes": {}
+    },
+    {
+      "id": "escrs-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://congress.escrs.org/",
+        "https://www.escrs.org/meetings-and-events"
+      ],
+      "findings": "ESCRS confirms Madrid IFEMA October 15–19. Current congress landing retains closed instructional-course deadline October 26, 2026, 23:59 CET.",
+      "changes": {
+        "submissionNote": {
+          "before": null,
+          "after": "Instructional course submission closed 26 October 2026; further scientific submission deadlines are not yet announced."
+        },
+        "deadlines": {
+          "before": [],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Instructional course submission (closed)",
+              "date": "2026-10-26T23:59:00+01:00",
+              "timeKnown": true,
+              "zone": "Europe/Paris",
+              "url": "https://congress.escrs.org/",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "retina-society-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.retinasociety.org/page/17/future-annual-meetings"
+      ],
+      "findings": "Retina Society confirms 60th annual meeting October 20–23 at OMNI Boston Seaport; no 2027 submission call displayed.",
+      "changes": {}
+    },
+    {
+      "id": "ever-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://soevision.org/event/ever-2027/",
+        "https://www.everassociation.org/"
+      ],
+      "findings": "SOE official calendar explicitly confirms EVER November 4–6, Megaron Athens; EVER homepage still shows 2026, no 2027 deadline.",
+      "changes": {}
+    },
+    {
+      "id": "ranzco-58-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://ranzco.edu/events/ranzco-58th-congress/"
+      ],
+      "findings": "RANZCO confirms Gold Coast November 4–7; November 4 is workshops and committees; scientific programme November 5–7.",
+      "changes": {}
+    },
+    {
+      "id": "aao-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.aao.org/annual-meeting",
+        "https://www.aao.org/eyenet/academy-live/detail/rate-aao-2026-sessions-help-shape-aao-2027",
+        "https://www.aao.org/annual-meeting/lasvegas",
+        "https://aao.org/annual-meeting/past-and-future-meetings"
+      ],
+      "findings": "AAO official Las Vegas page confirms November 12–15 and new instruction-course/skills submission December 10–January 12; no hour given.",
+      "changes": {
+        "official": {
+          "before": "https://www.aao.org/annual-meeting",
+          "after": "https://www.aao.org/annual-meeting/lasvegas"
+        },
+        "submit": {
+          "before": null,
+          "after": "https://www.aao.org/annual-meeting/lasvegas"
+        },
+        "dateSource": {
+          "before": "https://www.aao.org/eyenet/academy-live/detail/rate-aao-2026-sessions-help-shape-aao-2027",
+          "after": "https://www.aao.org/annual-meeting/lasvegas"
+        },
+        "description": {
+          "before": "AAO annual meeting in Las Vegas, including Subspecialty Day on 12–13 November. Submission and registration details will be announced by AAO.",
+          "after": "AAO annual meeting in Las Vegas, including Subspecialty Day on 12–13 November. Instruction-course and new skills-transfer proposals open 10 December 2026."
+        },
+        "submissionOpens": {
+          "before": null,
+          "after": "2026-12-10"
+        },
+        "submissionNote": {
+          "before": "No verified submission deadline is published in the checked source.",
+          "after": "Instruction-course and new skills-transfer proposals open 10 December 2026 and close 12 January 2027."
+        },
+        "deadlines": {
+          "before": [],
+          "after": [
+            {
+              "kind": "abstract",
+              "label": "Instruction courses and new skills transfer labs/lectures",
+              "date": "2027-01-12",
+              "timeKnown": false,
+              "zone": "",
+              "url": "https://www.aao.org/annual-meeting/lasvegas",
+              "note": ""
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ukiscrs-51-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.ukiscrs.org.uk/"
+      ],
+      "findings": "UKISCRS homepage explicitly announces 51st annual congress London November 17–19, 2027. Existing registration and abstract navigation relates to 2026.",
+      "changes": {}
+    },
+    {
+      "id": "clade-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "correction_needed",
+      "published": true,
+      "officialSources": [
+        "https://www.consejoclade.com/congreso/"
+      ],
+      "findings": "CLADE confirms December 1–3 Puerto Varas and first Ibero-American Strabismus Congress. Registration announced open; scientific program forthcoming.",
+      "changes": {
+        "fullTitle": {
+          "before": "25th Congress of the Latin American Council of Strabismus",
+          "after": "25th CLADE Congress and 1st Ibero-American Strabismus Congress"
+        },
+        "registration": {
+          "before": null,
+          "after": "https://www.consejoclade.com/congreso/"
+        }
+      }
+    },
+    {
+      "id": "apvrs-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://apvrs.org/congresses/"
+      ],
+      "findings": "APVRS organizer confirms 20th congress December 3–5, 2027 Kuala Lumpur. No 2027 deadlines shown in congress calendar.",
+      "changes": {}
+    },
+    {
+      "id": "jrvs-66-2027",
+      "reviewedAt": "2026-11-09",
+      "auditResult": "confirmed",
+      "published": true,
+      "officialSources": [
+        "https://www.jrvs.jp/en/meeting.html"
+      ],
+      "findings": "JRVS organizer confirms 66th meeting December 10–12, 2027, Osaka International Convention Center. No 2027 submission information published.",
+      "changes": {}
+    }
+  ],
+  "addedEvents": [
+    {
+      "id": "aoc-2026",
+      "title": "AOC Congress 2026",
+      "start": "2026-07-31",
+      "end": "2026-08-02",
+      "city": "Cape Town",
+      "country": "South Africa",
+      "dateSource": "https://aocafrica.org/aoc-2026-congress/",
+      "official": "https://aocafrica.org/aoc-2026-congress/",
+      "deadlines": []
+    },
+    {
+      "id": "beavrs-2026",
+      "title": "BEAVRS Annual Meeting 2026",
+      "start": "2026-11-05",
+      "end": "2026-11-06",
+      "city": "Oxford",
+      "country": "United Kingdom",
+      "dateSource": "https://beavrs.org/",
+      "official": "https://beavrs.org/",
+      "deadlines": []
+    },
+    {
+      "id": "cousp-2026",
+      "title": "CoUSP 2026",
+      "start": "2026-12-01",
+      "end": "2026-12-05",
+      "city": "São Paulo",
+      "country": "Brazil",
+      "dateSource": "https://cousp.com.br/",
+      "official": "https://cousp.com.br/",
+      "deadlines": []
+    },
+    {
+      "id": "vrsi-2026",
+      "title": "VRSI 2026",
+      "start": "2026-12-04",
+      "end": "2026-12-06",
+      "city": "Mohali (Chandigarh)",
+      "country": "India",
+      "dateSource": "https://vrsi.in/vrsi-2026-chandigarh/",
+      "official": "https://vrsi.in/vrsi-2026-chandigarh/",
+      "deadlines": [
+        {
+          "kind": "registration",
+          "label": "Advance registration before spot rates",
+          "date": "2026-11-15",
+          "timeKnown": false,
+          "zone": "Asia/Kolkata",
+          "url": "https://reg.vrsi.in/126/vrsi26",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "rcophth-winter-2026",
+      "title": "RCOphth Winter Meeting 2026",
+      "start": "2026-12-07",
+      "end": "2026-12-08",
+      "city": "Edinburgh",
+      "country": "United Kingdom",
+      "dateSource": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/winter-meeting-2026/",
+      "official": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/winter-meeting-2026/",
+      "deadlines": []
+    },
+    {
+      "id": "yoms-2026",
+      "title": "YOMS 2026",
+      "start": "2026-12-11",
+      "end": "2026-12-11",
+      "city": "Amman",
+      "country": "Jordan",
+      "dateSource": "https://jordan-valley.com/events/yoms26",
+      "official": "https://jordan-valley.com/events/yoms26",
+      "deadlines": []
+    },
+    {
+      "id": "cornex-2027",
+      "title": "CORNEX 2027",
+      "start": "2027-02-04",
+      "end": "2027-02-06",
+      "city": "Madinah",
+      "country": "Saudi Arabia",
+      "dateSource": "https://saudicrsa.org/",
+      "official": "https://saudicrsa.org/",
+      "deadlines": []
+    },
+    {
+      "id": "anzgs-2027",
+      "title": "ANZGS 2027",
+      "start": "2027-02-19",
+      "end": "2027-02-21",
+      "city": "Melbourne",
+      "country": "Australia",
+      "dateSource": "https://anzgsconference.com/",
+      "official": "https://anzgsconference.com/",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Abstract submission",
+          "date": "2026-11-13",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://anzgsconference.com/abstracts/",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Early-bird registration",
+          "date": "2026-12-18",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://anzgsconference.com/registration/",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Registration deadline",
+          "date": "2027-02-16",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://anzgsconference.com/registration/",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "asrs-business-retina-2027",
+      "title": "ASRS Business of Retina Meeting 2027",
+      "start": "2027-03-12",
+      "end": "2027-03-14",
+      "city": "Arlington, TX",
+      "country": "USA",
+      "dateSource": "https://www.asrs.org/education/2027-business-of-retina-meeting",
+      "official": "https://www.asrs.org/education/2027-business-of-retina-meeting",
+      "deadlines": [
+        {
+          "kind": "grant",
+          "label": "Fellows’ Seminar travel grant application",
+          "date": "2027-01-19",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://www.asrs.org/education/2027-business-of-retina-meeting",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "ranzco-nz-branch-2027",
+      "title": "RANZCO NZ Branch ASM 2027",
+      "start": "2027-05-14",
+      "end": "2027-05-15",
+      "city": "Wellington",
+      "country": "New Zealand",
+      "dateSource": "https://ranzco.edu/events/2027-nz-branch-asm/",
+      "official": "https://ranzco.edu/events/2027-nz-branch-asm/",
+      "deadlines": []
+    },
+    {
+      "id": "brascrs-2027",
+      "title": "BRASCRS 2027",
+      "start": "2027-05-19",
+      "end": "2027-05-22",
+      "city": "Salvador",
+      "country": "Brazil",
+      "dateSource": "https://brascrs.iweventos.com.br/brascrs2027",
+      "official": "https://brascrs.iweventos.com.br/brascrs2027",
+      "deadlines": [
+        {
+          "kind": "registration",
+          "label": "Current registration fee tier",
+          "date": "2026-12-08",
+          "timeKnown": false,
+          "zone": "America/Bahia",
+          "url": "https://brascrs.iweventos.com.br/site/brascrs2027/inscricoes",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Next registration fee tier",
+          "date": "2027-02-16",
+          "timeKnown": false,
+          "zone": "America/Bahia",
+          "url": "https://brascrs.iweventos.com.br/site/brascrs2027/inscricoes",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Advance registration fee tier",
+          "date": "2027-04-13",
+          "timeKnown": false,
+          "zone": "America/Bahia",
+          "url": "https://brascrs.iweventos.com.br/site/brascrs2027/inscricoes",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "asoprs-spring-2027",
+      "title": "ASOPRS Spring Scientific Symposium 2027",
+      "start": "2027-05-20",
+      "end": "2027-05-23",
+      "city": "Hilton Head Island, SC",
+      "country": "USA",
+      "dateSource": "https://www.asoprs.org/members-only-spring-symposium",
+      "official": "https://www.asoprs.org/members-only-spring-symposium",
+      "deadlines": []
+    },
+    {
+      "id": "egs-ags-members-2027",
+      "title": "EGS / AGS Joint Members’ Meeting 2027",
+      "start": "2027-06-04",
+      "end": "2027-06-05",
+      "city": "Paris",
+      "country": "France",
+      "dateSource": "https://egsmembersmeeting.org/",
+      "official": "https://egsmembersmeeting.org/",
+      "deadlines": []
+    },
+    {
+      "id": "bopss-2027",
+      "title": "BOPSS Annual Meeting 2027",
+      "start": "2027-06-16",
+      "end": "2027-06-18",
+      "city": "Newcastle upon Tyne",
+      "country": "United Kingdom",
+      "dateSource": "https://www.bopss.co.uk/meetings/bopss-2027-newcastle/",
+      "official": "https://www.bopss.co.uk/meetings/bopss-2027-newcastle/",
+      "deadlines": []
+    },
+    {
+      "id": "anzpos-2027",
+      "title": "ANZPOS 2027",
+      "start": "2027-07-22",
+      "end": "2027-07-24",
+      "city": "Noosa",
+      "country": "Australia",
+      "dateSource": "https://ranzco.edu/events/anzpos-2027/",
+      "official": "https://ranzco.edu/events/anzpos-2027/",
+      "deadlines": []
+    },
+    {
+      "id": "esoprs-2027",
+      "title": "45th ESOPRS Annual Meeting",
+      "start": "2027-09-09",
+      "end": "2027-09-11",
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "dateSource": "https://www.esoprs.eu/esoprs-meetings/esoprs-meeting-2027/",
+      "official": "https://www.esoprs.eu/esoprs-meetings/esoprs-meeting-2027/",
+      "deadlines": []
+    },
+    {
+      "id": "vision-2027",
+      "title": "VISION 2027",
+      "start": "2027-09-14",
+      "end": "2027-09-16",
+      "city": "Melbourne",
+      "country": "Australia",
+      "dateSource": "https://vision2027.com/",
+      "official": "https://vision2027.com/",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Abstract submission",
+          "date": "2027-02-05",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://vision2027.com/",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Early-bird registration",
+          "date": "2027-05-26",
+          "timeKnown": false,
+          "zone": "",
+          "url": "https://vision2027.com/",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "id": "beavrs-2027",
+      "title": "BEAVRS Annual Meeting 2027",
+      "start": "2027-11-04",
+      "end": "2027-11-05",
+      "city": "Sheffield",
+      "country": "United Kingdom",
+      "dateSource": "https://beavrs.org/",
+      "official": "https://beavrs.org/",
+      "deadlines": []
+    },
+    {
+      "id": "asoprs-fall-2027",
+      "title": "58th ASOPRS Fall Scientific Symposium",
+      "start": "2027-11-11",
+      "end": "2027-11-12",
+      "city": "Las Vegas",
+      "country": "USA",
+      "dateSource": "https://www.asoprs.org/future-and-past-symposia",
+      "official": "https://www.asoprs.org/future-and-past-symposia",
+      "deadlines": []
+    }
+  ]
+}

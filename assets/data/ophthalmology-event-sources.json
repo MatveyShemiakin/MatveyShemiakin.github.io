@@ -2,54 +2,24 @@
   "schemaVersion": 1,
   "sources": [
     {
-      "id": "fedorov-2026-source-1",
-      "official": true,
-      "url": "https://www.mntk.ru/specialists/Konferents/fed_cht/",
-      "eventIds": [
-        "fedorov-2026"
-      ],
-      "watchTerms": [
-        "June 5, 2026"
-      ]
-    },
-    {
       "id": "apgc-2026-source-2",
       "official": true,
       "url": "https://apaophth.org/congress/calendar/",
       "eventIds": [
-        "apgc-2026",
         "ccos-2026",
         "aao-midyear-2027",
         "apspos-capos-2027",
         "aacgc-2027"
       ],
       "watchTerms": [
-        "AAO 2027",
-        "November 12-15, 2027",
-        "AAO 2026",
-        "New Orleans",
-        "July 24",
-        "July 26, 2026",
-        "September 9",
-        "September 12, 2026",
-        "April 7",
-        "April 10",
-        "April 15",
-        "April 17, 2027",
-        "October 15",
-        "October 16, 2027"
-      ]
-    },
-    {
-      "id": "apgc-2026-source-3",
-      "official": true,
-      "url": "https://apgcongress.org/",
-      "eventIds": [
-        "apgc-2026"
-      ],
-      "watchTerms": [
-        "Asia-Pacific Glaucoma Congress",
-        "Singapore"
+        "CCOS 2026 Tianjin, China Date: September 9–12 , 2026",
+        "AAO Mid-Year Forum Washington, D.C. April 7-10, 2027",
+        "Tianjin, China April 15-17, 2027",
+        "Jakarta, Indonesia October 15 – 16, 2027",
+        "September 9–12 , 2026",
+        "April 7-10, 2027",
+        "April 15-17, 2027",
+        "October 15 – 16, 2027"
       ]
     },
     {
@@ -72,10 +42,8 @@
         "apvrs-2026"
       ],
       "watchTerms": [
-        "19th APVRS",
-        "Gold Coast",
-        "August 28, 2026",
-        "30 August 2026"
+        "19 th APVRS",
+        "Gold Coast, Australia , from 28–30 August 2026"
       ]
     },
     {
@@ -86,8 +54,7 @@
         "oor-cataract-2026"
       ],
       "watchTerms": [
-        "2 сентября 2026",
-        "September 4, 2026"
+        "2 сентября 2026 года"
       ]
     },
     {
@@ -95,7 +62,6 @@
       "official": true,
       "url": "https://oor.ru/events",
       "eventIds": [
-        "oor-cataract-2026",
         "glaucoma-vector-2027",
         "oculoplastics-2027",
         "vitreoretinal-technologies-2027",
@@ -103,18 +69,20 @@
         "cataract-refractive-cornea-2027"
       ],
       "watchTerms": [
-        "Катаракта",
-        "Воспаление глаза",
-        "Федоровские чтения",
-        "2027",
-        "February 12, 2027",
-        "13 февраля 2027",
+        "Лечение глаукомы: инновационный вектор — 2027",
+        "12 – 13 февраля 2027, Москва",
+        "Окулопластика",
+        "26 февраля 2027, Москва",
+        "2 – 3 апреля 2027, Уфа",
+        "4 июня 2027, Москва",
+        "7 – 9 октября 2027, Москва",
+        "12 – 13 февраля 2027",
         "26 февраля 2027",
-        "April 2, 2027",
-        "3 апреля 2027",
+        "2 – 3 апреля 2027",
+        "16 апреля 2027",
         "4 июня 2027",
-        "October 7, 2027",
-        "9 октября 2027"
+        "7 – 9 октября 2027",
+        "Федоровские чтения — 2027"
       ]
     },
     {
@@ -125,9 +93,8 @@
         "pit-perdami-51-2026"
       ],
       "watchTerms": [
-        "September 3",
-        "Semarang",
-        "September 5, 2026"
+        "Dates: September 3–5, 2026",
+        "Venue: Muladi Dome, Universitas Diponegoro — Semarang"
       ]
     },
     {
@@ -158,13 +125,11 @@
       "official": true,
       "url": "https://congress.escrs.org/",
       "eventIds": [
-        "escrs-2026",
         "escrs-2027"
       ],
       "watchTerms": [
         "15 – 19 October 2027",
-        "October 15, 2027",
-        "19 October 2027"
+        "26 October 2026, 23:59 CET"
       ]
     },
     {
@@ -175,23 +140,7 @@
         "retina-society-2026"
       ],
       "watchTerms": [
-        "September 23-26, 2026",
-        "Los Angeles",
-        "September 23",
-        "September 26, 2026"
-      ]
-    },
-    {
-      "id": "spanish-national-2026-source-13",
-      "official": true,
-      "url": "https://soevision.org/event/spanish-national-meeting/",
-      "eventIds": [
-        "spanish-national-2026"
-      ],
-      "watchTerms": [
-        "September 23",
-        "Palma de Mallorca",
-        "September 26"
+        "59th Annual Scientific Meeting September 23-26, 2026 - Los Angeles, California"
       ]
     },
     {
@@ -202,8 +151,7 @@
         "dog-2026"
       ],
       "watchTerms": [
-        "September 24, 2026",
-        "September 27, 2026"
+        "DOG 2026 vom 24. bis zum 27. September 2026"
       ]
     },
     {
@@ -239,9 +187,8 @@
         "aios-midterm-2026"
       ],
       "watchTerms": [
-        "September 25",
-        "Ranchi",
-        "September 27, 2026"
+        "September 25 - 27, 2026",
+        "Hotel Chanakya BNR Ranchi"
       ]
     },
     {
@@ -274,10 +221,7 @@
         "qatar-uveitis-2026"
       ],
       "watchTerms": [
-        "25th",
-        "September, 2026",
-        "September 25, 2026",
-        "September 26, 2026"
+        "25th – 26th September, 2026 | Rotana City Center Doha, Qatar"
       ]
     },
     {
@@ -313,10 +257,7 @@
         "euretina-2026"
       ],
       "watchTerms": [
-        "1-4 October",
-        "registration",
-        "October 1, 2026",
-        "4 October 2026"
+        "Vienna, Austria from 1-4 October 2026"
       ]
     },
     {
@@ -327,8 +268,8 @@
         "ciob-2026"
       ],
       "watchTerms": [
-        "October 2, 2026",
-        "October 3, 2026"
+        "2 y 3 de octubre de 2026",
+        "Centro de Eventos Mitrinco"
       ]
     },
     {
@@ -339,8 +280,7 @@
         "ioc-uzbekistan-2026"
       ],
       "watchTerms": [
-        "October 2, 2026",
-        "3 октября 2026"
+        "2–3 октября 2026 года в гостинице «InterContinental Tashkent»"
       ]
     },
     {
@@ -381,33 +321,6 @@
       ]
     },
     {
-      "id": "eso-2026-source-29",
-      "official": true,
-      "url": "https://eso-conferences.com/",
-      "eventIds": [
-        "eso-2026"
-      ],
-      "watchTerms": [
-        "15–17 October, 2026",
-        "Abu Dhabi",
-        "15 October 2026",
-        "17 October 2026"
-      ]
-    },
-    {
-      "id": "ever-2026-source-30",
-      "official": true,
-      "url": "https://soevision.org/event/ever-2026/",
-      "eventIds": [
-        "ever-2026"
-      ],
-      "watchTerms": [
-        "October 15",
-        "Florence",
-        "17 Oct"
-      ]
-    },
-    {
       "id": "alaccsa-r-2026-source-31",
       "official": true,
       "url": "https://paao.org/events/alaccsa-2026/",
@@ -428,20 +341,8 @@
         "bolivia-ophthalmology-2026"
       ],
       "watchTerms": [
-        "October 22, 2026",
-        "October 24, 2026"
-      ]
-    },
-    {
-      "id": "jco-80-2026-source-33",
-      "official": true,
-      "url": "https://convention.jtbcom.co.jp/80ringan/en/index.html",
-      "eventIds": [
-        "jco-80-2026"
-      ],
-      "watchTerms": [
-        "October 29, 2026",
-        "November 1, 2026"
+        "22 al 24 de octubre del 2026",
+        "Los Tajibos Hotel"
       ]
     },
     {
@@ -479,8 +380,8 @@
         "bascom-palmer-curso-2026"
       ],
       "watchTerms": [
-        "November 1",
-        "November 4, 2026"
+        "November 1-4, 2026",
+        "XLVIII Inter-American Course in Clinical Ophthalmology"
       ]
     },
     {
@@ -516,10 +417,7 @@
         "ranzco-2026"
       ],
       "watchTerms": [
-        "6-9 November 2026",
-        "Auckland",
-        "November 6, 2026",
-        "9 November 2026"
+        "Auckland, New Zealand | 6-9 November 2026"
       ]
     },
     {
@@ -552,8 +450,7 @@
         "isa-2026"
       ],
       "watchTerms": [
-        "November 11, 2026",
-        "November 14, 2026"
+        "Buenos Aires, Argentina November 11 to 14, 2026"
       ]
     },
     {
@@ -588,8 +485,9 @@
         "joscrs-2026"
       ],
       "watchTerms": [
-        "November 18, 2026",
-        "20 November 2026"
+        "2nd JOSCRS International Meeting",
+        "18 – 20 November 2026",
+        "St. Regis Hotel, Amman, Jordan"
       ]
     },
     {
@@ -602,11 +500,12 @@
         "ukiscrs-51-2027"
       ],
       "watchTerms": [
-        "19 Nov",
-        "20 Nov",
-        "12 April 2027",
-        "November 17, 2027",
-        "19 November 2027"
+        "50th Annual Congress 19-20 November",
+        "51st Annual Congress London, 17-19 November 2027",
+        "Cornea & Cataract Day 2027: Bristol, MONDAY, 12 April 2027",
+        "19-20 November",
+        "17-19 November 2027",
+        "12 April 2027"
       ]
     },
     {
@@ -617,11 +516,9 @@
         "asia-cornea-2026"
       ],
       "watchTerms": [
-        "Asia Cornea Society",
-        "Advance Registration",
-        "November 27, 2026",
-        "29 November 2026",
-        "26 Nov"
+        "27–29 November 2026",
+        "Abstract Submission Deadline 14 July 2026",
+        "Advance Registration Deadline 26 Nov 2026"
       ]
     },
     {
@@ -632,9 +529,8 @@
         "pirogov-eye-forum-2026"
       ],
       "watchTerms": [
-        "27 ноября",
-        "Олимпик",
-        "November 27, 2026"
+        "Пироговский офтальмологический форум 27 ноября 2026",
+        "AZIMUT Сити Отель Олимпик"
       ]
     },
     {
@@ -659,7 +555,8 @@
         "coecsa-2026"
       ],
       "watchTerms": [
-        "September 30, 2026"
+        "Deadline: 30th September, 2026",
+        "2-4th December 2026"
       ]
     },
     {
@@ -670,8 +567,7 @@
         "epomec-2026"
       ],
       "watchTerms": [
-        "December 3, 2026",
-        "5 December 2026"
+        "Dubai World Trade Centre on 3-5 December 2026"
       ]
     },
     {
@@ -682,7 +578,8 @@
         "epomec-2026"
       ],
       "watchTerms": [
-        "2026"
+        "EPOMEC 2026",
+        "Abstract Submission Deadline 25th September 2026, 18:00 (GST)"
       ]
     },
     {
@@ -693,7 +590,7 @@
         "epomec-2026"
       ],
       "watchTerms": [
-        "September 25, 2026"
+        "Abstract Submission Deadline Extended: 25th September 2026, 18:00 (GST)"
       ]
     },
     {
@@ -739,8 +636,8 @@
         "japan-retina-2026"
       ],
       "watchTerms": [
-        "2026年12月4日",
-        "December 6, 2026"
+        "第65回日本網膜硝子体学会総会 会期 2026年12月4日（金）～6日（日）",
+        "会場 東京国際フォーラム"
       ]
     },
     {
@@ -812,8 +709,9 @@
         "smo-2027"
       ],
       "watchTerms": [
-        "January 20, 2027",
-        "23 Jan"
+        "40e Congrès national",
+        "20 au 23 janvier 2027",
+        "Hôtel Four Seasons Rabat"
       ]
     },
     {
@@ -824,8 +722,8 @@
         "japan-ophthalmic-surgery-2027"
       ],
       "watchTerms": [
-        "2027年1月29日",
-        "January 31, 2027"
+        "2027年1月29日（金）〜31日（日）",
+        "会場 / VENUE 東京国際フォーラム"
       ]
     },
     {
@@ -836,20 +734,7 @@
         "japan-ophthalmic-surgery-2027"
       ],
       "watchTerms": [
-        "November 12, 2026"
-      ]
-    },
-    {
-      "id": "sopla-2027-source-66",
-      "official": true,
-      "url": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
-      "eventIds": [
-        "sopla-2027"
-      ],
-      "watchTerms": [
-        "5 February 2027",
-        "Medellín",
-        "7 February 2027"
+        "事前通常登録 2026年8月21日（金）〜11月12日（木）"
       ]
     },
     {
@@ -860,8 +745,8 @@
         "japan-cornea-2027"
       ],
       "watchTerms": [
-        "February 11, 2027",
-        "February 13, 2027"
+        "会期 2027 年 2月 11日（木）～ 2月 13日（土）",
+        "会場 沖縄コンベンション センター"
       ]
     },
     {
@@ -883,11 +768,9 @@
         "aioc-2027"
       ],
       "watchTerms": [
-        "November 30, 2026",
-        "2027",
-        "February 18, 2027",
-        "February 21, 2027",
-        "January 15"
+        "February, 18 - 21, 2027",
+        "Early Bird (August 1 to November 30, 2026)",
+        "Advance (December 01 2026 - January 15 2027)"
       ]
     },
     {
@@ -898,10 +781,7 @@
         "euretina-sfm-2027"
       ],
       "watchTerms": [
-        "26–27 February 2027",
-        "Ljubljana",
-        "February 26, 2027",
-        "27 February 2027"
+        "Ljubljana, Slovenia, on 26–27 February 2027"
       ]
     },
     {
@@ -949,10 +829,10 @@
         "aapos-2027"
       ],
       "watchTerms": [
-        "Mar 17",
-        "March 21, 2027",
-        "Dec 15",
-        "Jan 14"
+        "Mar 17-21: AAPOS 52nd Annual Meeting",
+        "2027 Jan 14: Last day for Early Registration",
+        "Dec 15: Deadline for Presenters to Register",
+        "Feb 15: Last Day for Regular Registration Pricing"
       ]
     },
     {
@@ -963,7 +843,8 @@
         "aapos-2027"
       ],
       "watchTerms": [
-        "September 22"
+        "Submission Deadline: September 22",
+        "10:00 AM CDST October 29"
       ]
     },
     {
@@ -986,7 +867,7 @@
         "escrs-winter-2027"
       ],
       "watchTerms": [
-        "1 November 2026"
+        "Abstract Submission Deadline: 1 November 2026, 23:59 CET"
       ]
     },
     {
@@ -997,9 +878,7 @@
         "escrs-winter-2027"
       ],
       "watchTerms": [
-        "1 November 2026",
-        "23:59 CET",
-        "750"
+        "Abstract and Video Submission Deadline: 1 November 2026, 23:59 CET"
       ]
     },
     {
@@ -1010,8 +889,8 @@
         "paao-2027"
       ],
       "watchTerms": [
-        "March 17",
-        "March 20, 2027"
+        "March 17th to 20th - 2027",
+        "Lima Convention Center"
       ]
     },
     {
@@ -1059,8 +938,8 @@
         "apao-2027"
       ],
       "watchTerms": [
-        "March 18",
-        "March 21, 2027"
+        "March 18–21, 2027",
+        "Suntec Singapore Convention & Exhibition Centre"
       ]
     },
     {
@@ -1089,18 +968,6 @@
       ]
     },
     {
-      "id": "nanos-2027-source-86",
-      "official": true,
-      "url": "https://www.nanosweb.org/nanos-2027-san-diego/",
-      "eventIds": [
-        "nanos-2027"
-      ],
-      "watchTerms": [
-        "March 19",
-        "March 23, 2027"
-      ]
-    },
-    {
       "id": "fuji-retina-2027-source-87",
       "official": true,
       "url": "https://convention.jtbcom.co.jp/fujiretina/information/index.html",
@@ -1108,9 +975,8 @@
         "fuji-retina-2027"
       ],
       "watchTerms": [
-        "March 26",
-        "2027",
-        "March 28, 2027"
+        "Date: March 26(Fri.) – 28(Sun.), 2027",
+        "Venue: Toranomon Hills Forum"
       ]
     },
     {
@@ -1144,9 +1010,9 @@
         "ascrs-2027"
       ],
       "watchTerms": [
-        "2027",
-        "April 2",
-        "April 5, 2027"
+        "Apr 02-05, 2027",
+        "San Diego, CA",
+        "Registration opens Monday, November 16."
       ]
     },
     {
@@ -1157,10 +1023,10 @@
         "ascrs-2027"
       ],
       "watchTerms": [
-        "September 18, 2026",
-        "January 25, 2027",
-        "February 25, 2027",
-        "March 2, 2027"
+        "ASCRS SCIENTIFIC FILMS (ON-DEMAND) Deadline for New Submissions: Monday, November 30, 2026 at 11:59 PM PT",
+        "January 25, 2027 Deadline to upload films",
+        "February 25, 2027 Deadline to update TBD abstract results",
+        "March 2, 2027 Deadline for all ASCRS faculty and presenting authors/producers to register"
       ]
     },
     {
@@ -1210,8 +1076,8 @@
         "dos-2027"
       ],
       "watchTerms": [
-        "April 9, 2027",
-        "April 11, 2027"
+        "DOS Annual Conference 2027 from 16-04-2027 - 18-04-2027",
+        "Venue: Ashok Hotel, Chanakyapuri, New Delhi"
       ]
     },
     {
@@ -1223,9 +1089,7 @@
       ],
       "watchTerms": [
         "9–10 April 2027",
-        "London",
-        "April 9, 2027",
-        "10 April 2027"
+        "London with EuretinaAI: AI in Retina"
       ]
     },
     {
@@ -1271,7 +1135,8 @@
         "jos-131-2027"
       ],
       "watchTerms": [
-        "2027"
+        "2026.11.05",
+        "Abstract submission has closed."
       ]
     },
     {
@@ -1314,18 +1179,6 @@
       ]
     },
     {
-      "id": "wgc-2027-source-104",
-      "official": true,
-      "url": "https://worldglaucomacongress.org/film-festival-submissions/",
-      "eventIds": [
-        "wgc-2027"
-      ],
-      "watchTerms": [
-        "October 19, 2026",
-        "March 15, 2027"
-      ]
-    },
-    {
       "id": "sfo-2027-source-105",
       "official": true,
       "url": "https://www.sfo-online.fr/",
@@ -1333,8 +1186,8 @@
         "sfo-2027"
       ],
       "watchTerms": [
-        "April 23, 2027",
-        "April 26, 2027"
+        "Congrès AVRIL 2027",
+        "En 2027, c'est en Avril du 23 au 26"
       ]
     },
     {
@@ -1370,8 +1223,8 @@
         "arvo-2027"
       ],
       "watchTerms": [
-        "May 2",
-        "May 6, 2027"
+        "ARVO 2027 Annual Meeting",
+        "San Diego, Calif. | May 2 - 6"
       ]
     },
     {
@@ -1430,8 +1283,9 @@
         "eucornea-2027"
       ],
       "watchTerms": [
-        "May 14, 2027",
-        "16 May"
+        "18th EuCornea Annual Congress",
+        "Friday 14– Sunday 16 May",
+        "Sunday 15 November"
       ]
     },
     {
@@ -1453,9 +1307,9 @@
         "rcophth-2027"
       ],
       "watchTerms": [
-        "May 24, 2027",
-        "27 May",
-        "1 December 2026"
+        "Annual Congress 2027",
+        "Monday 24 to Thursday 27 May",
+        "Deadline 1 December 2026"
       ]
     },
     {
@@ -1466,9 +1320,7 @@
         "white-nights-2027"
       ],
       "watchTerms": [
-        "24 по 28 мая 2027",
-        "May 24, 2027",
-        "28 мая 2027"
+        "24 по 28 мая 2027"
       ]
     },
     {
@@ -1480,9 +1332,7 @@
       ],
       "watchTerms": [
         "26-28 May 2027",
-        "Amman",
-        "May 26, 2027",
-        "28 May 2027"
+        "Fairmont Hotel Amman"
       ]
     },
     {
@@ -1539,9 +1389,8 @@
         "macula-society-2027"
       ],
       "watchTerms": [
-        "June 9",
-        "12, 2027",
-        "June 12, 2027"
+        "June 9 – 12, 2027",
+        "Carlton Hotel in Cannes"
       ]
     },
     {
@@ -1552,8 +1401,8 @@
         "doc-2027"
       ],
       "watchTerms": [
-        "June 10, 2027",
-        "June 12, 2027"
+        "10. – 12. Juni 2027",
+        "NürnbergConvention Center, NCC Ost"
       ]
     },
     {
@@ -1564,8 +1413,9 @@
         "ebaa-2027"
       ],
       "watchTerms": [
-        "June 10",
-        "June 12, 2027"
+        "June 10 – 12",
+        "What’s New in 2027",
+        "Hyatt Regency Austin"
       ]
     },
     {
@@ -1613,8 +1463,8 @@
         "cos-2027"
       ],
       "watchTerms": [
-        "June 24, 2027",
-        "June 27, 2027"
+        "June 24-27, 2027",
+        "Rogers Centre"
       ]
     },
     {
@@ -1639,8 +1489,9 @@
         "asrs-2027"
       ],
       "watchTerms": [
-        "July 28",
-        "July 31, 2027",
+        "45th ASRS Annual Scientific Meeting",
+        "July 28-31",
+        "December 3, 2026",
         "January 28, 2027"
       ]
     },
@@ -1666,8 +1517,7 @@
       "watchTerms": [
         "16-19 September 2027",
         "15 September 2027",
-        "September 16, 2027",
-        "19 September 2027"
+        "Bella Center"
       ]
     },
     {
@@ -1678,8 +1528,7 @@
         "euretina-2027"
       ],
       "watchTerms": [
-        "18th November 2026",
-        "November 18, 2026"
+        "18th November 2026 at 23:59 CET"
       ]
     },
     {
@@ -1690,10 +1539,9 @@
         "dog-2027"
       ],
       "watchTerms": [
-        "31. Oktober 2026",
+        "30. September bis zum 3. Oktober 2027",
         "Estrel Berlin",
-        "September 30, 2027",
-        "October 3, 2027"
+        "01. Februar bis 4. April 2027"
       ]
     },
     {
@@ -1705,9 +1553,7 @@
       ],
       "watchTerms": [
         "October 20-23, 2027",
-        "Boston",
-        "October 20",
-        "October 23, 2027"
+        "OMNI Boston at the Seaport"
       ]
     },
     {
@@ -1736,18 +1582,6 @@
       ]
     },
     {
-      "id": "aao-2027-source-138",
-      "official": true,
-      "url": "https://www.aao.org/eyenet/academy-live/detail/rate-aao-2026-sessions-help-shape-aao-2027",
-      "eventIds": [
-        "aao-2027"
-      ],
-      "watchTerms": [
-        "November 12, 2027",
-        "November 15, 2027"
-      ]
-    },
-    {
       "id": "clade-2027-source-139",
       "official": true,
       "url": "https://www.consejoclade.com/congreso/",
@@ -1755,8 +1589,9 @@
         "clade-2027"
       ],
       "watchTerms": [
-        "December 1, 2027",
-        "December 3, 2027"
+        "1 al 3 de diciembre 2027",
+        "Puerto Varas",
+        "Inscripciones abiertas"
       ]
     },
     {
@@ -1768,9 +1603,8 @@
       ],
       "watchTerms": [
         "20th APVRS Congress",
-        "Kuala Lumpur",
-        "December 3",
-        "December 5, 2027"
+        "December 3 – 5, 2027",
+        "Kuala Lumpur, Malaysia"
       ]
     },
     {
@@ -1796,6 +1630,532 @@
         "December 6, 2026",
         "11:59 pm",
         "draft abstract"
+      ]
+    },
+    {
+      "id": "fedorov-2026-audit-134",
+      "official": true,
+      "url": "https://fedorovskie.oor.ru/",
+      "eventIds": [
+        "fedorov-2026"
+      ],
+      "watchTerms": [
+        "5 июня 2026"
+      ]
+    },
+    {
+      "id": "apgc-2026-audit-135",
+      "official": true,
+      "url": "https://www.snec.com.sg/news/announcements/snec-hosts-its-largest-international-ophthalmology-conference-at",
+      "eventIds": [
+        "apgc-2026"
+      ],
+      "watchTerms": [
+        "24 July 2026",
+        "26 July 2026"
+      ]
+    },
+    {
+      "id": "aoc-2026-audit-136",
+      "official": true,
+      "url": "https://aocafrica.org/aoc-2026-congress/",
+      "eventIds": [
+        "aoc-2026"
+      ],
+      "watchTerms": [
+        "31 July",
+        "2 Aug 2026"
+      ]
+    },
+    {
+      "id": "oor-cataract-2026-audit-137",
+      "official": true,
+      "url": "https://cataract-congress.ru/tpost/2tn75yufb1-katarakta2026-pochemu-etot-kongress-nelz",
+      "eventIds": [
+        "oor-cataract-2026"
+      ],
+      "watchTerms": [
+        "2−4 сентября 2026"
+      ]
+    },
+    {
+      "id": "spanish-national-2026-audit-138",
+      "official": true,
+      "url": "https://www.oftalmoseo.com/home-no-socios/",
+      "eventIds": [
+        "spanish-national-2026"
+      ],
+      "watchTerms": [
+        "23-25 DE SEPTIEMBRE 2026"
+      ]
+    },
+    {
+      "id": "eso-2026-audit-139",
+      "official": true,
+      "url": "https://eso-conferences.com/eso2026/",
+      "eventIds": [
+        "eso-2026"
+      ],
+      "watchTerms": [
+        "15–17 October 2026"
+      ]
+    },
+    {
+      "id": "ever-2026-audit-140",
+      "official": true,
+      "url": "https://evercongress.org/",
+      "eventIds": [
+        "ever-2026"
+      ],
+      "watchTerms": [
+        "15-17 October 2026"
+      ]
+    },
+    {
+      "id": "jco-80-2026-audit-141",
+      "official": true,
+      "url": "https://convention.jtbcom.co.jp/80ringan/en/summary/index.html",
+      "eventIds": [
+        "jco-80-2026"
+      ],
+      "watchTerms": [
+        "October 29(Thu.) - November 1(Sun.), 2026"
+      ]
+    },
+    {
+      "id": "beavrs-2026-audit-142",
+      "official": true,
+      "url": "https://beavrs.org/",
+      "eventIds": [
+        "beavrs-2026"
+      ],
+      "watchTerms": [
+        "5th & Friday 6th November 2026"
+      ]
+    },
+    {
+      "id": "cousp-2026-audit-143",
+      "official": true,
+      "url": "https://cousp.com.br/",
+      "eventIds": [
+        "cousp-2026"
+      ],
+      "watchTerms": [
+        "01 a 05 de dezembro de 2026"
+      ]
+    },
+    {
+      "id": "japan-retina-2026-audit-144",
+      "official": true,
+      "url": "https://convention.jtbcom.co.jp/65moumaku/join/index.html",
+      "eventIds": [
+        "japan-retina-2026"
+      ],
+      "watchTerms": [
+        "12月6日"
+      ]
+    },
+    {
+      "id": "vrsi-2026-audit-145",
+      "official": true,
+      "url": "https://vrsi.in/vrsi-2026-chandigarh/",
+      "eventIds": [
+        "vrsi-2026"
+      ],
+      "watchTerms": [
+        "4th - 6th Dec 2026"
+      ]
+    },
+    {
+      "id": "vrsi-2026-audit-146",
+      "official": true,
+      "url": "https://reg.vrsi.in/126/vrsi26",
+      "eventIds": [
+        "vrsi-2026"
+      ],
+      "watchTerms": [
+        "November 15,2026"
+      ]
+    },
+    {
+      "id": "rcophth-winter-2026-audit-147",
+      "official": true,
+      "url": "https://www.rcophth.ac.uk/training-careers/courses-events-calendar/annual-congress/winter-meeting-2026/",
+      "eventIds": [
+        "rcophth-winter-2026"
+      ],
+      "watchTerms": [
+        "Monday 7 and Tuesday 8 December"
+      ]
+    },
+    {
+      "id": "yoms-2026-audit-148",
+      "official": true,
+      "url": "https://jordan-valley.com/events/yoms26",
+      "eventIds": [
+        "yoms-2026"
+      ],
+      "watchTerms": [
+        "11 December 2026"
+      ]
+    },
+    {
+      "id": "asmhk-2026-audit-149",
+      "official": true,
+      "url": "https://asmhk2026.com/registration/",
+      "eventIds": [
+        "asmhk-2026"
+      ],
+      "watchTerms": [
+        "November 30, 2026",
+        "December 11, 2026"
+      ]
+    },
+    {
+      "id": "moorf-uae-2027-audit-150",
+      "official": true,
+      "url": "https://events.moorfields.ae/competitions",
+      "eventIds": [
+        "moorf-uae-2027"
+      ],
+      "watchTerms": [
+        "1 December 2026"
+      ]
+    },
+    {
+      "id": "japan-ophthalmic-surgery-2027-audit-151",
+      "official": true,
+      "url": "https://50.jsos.jp/abstract",
+      "eventIds": [
+        "japan-ophthalmic-surgery-2027"
+      ],
+      "watchTerms": [
+        "8月31日"
+      ]
+    },
+    {
+      "id": "cornex-2027-audit-152",
+      "official": true,
+      "url": "https://saudicrsa.org/",
+      "eventIds": [
+        "cornex-2027"
+      ],
+      "watchTerms": [
+        "CORNEX 2027",
+        "Madinah"
+      ]
+    },
+    {
+      "id": "japan-cornea-2027-audit-153",
+      "official": true,
+      "url": "https://www.okinawa-congre.co.jp/cornea2027/cfa/index.html",
+      "eventIds": [
+        "japan-cornea-2027"
+      ],
+      "watchTerms": [
+        "11月10日",
+        "17:00"
+      ]
+    },
+    {
+      "id": "japan-cornea-2027-audit-154",
+      "official": true,
+      "url": "https://www.okinawa-congre.co.jp/cornea2027/registration/index.html",
+      "eventIds": [
+        "japan-cornea-2027"
+      ],
+      "watchTerms": [
+        "2027年1月14日"
+      ]
+    },
+    {
+      "id": "anzgs-2027-audit-155",
+      "official": true,
+      "url": "https://anzgsconference.com/",
+      "eventIds": [
+        "anzgs-2027"
+      ],
+      "watchTerms": [
+        "19–21 February 2027"
+      ]
+    },
+    {
+      "id": "anzgs-2027-audit-156",
+      "official": true,
+      "url": "https://anzgsconference.com/abstracts/",
+      "eventIds": [
+        "anzgs-2027"
+      ],
+      "watchTerms": [
+        "13 November 2026"
+      ]
+    },
+    {
+      "id": "anzgs-2027-audit-157",
+      "official": true,
+      "url": "https://anzgsconference.com/registration/",
+      "eventIds": [
+        "anzgs-2027"
+      ],
+      "watchTerms": [
+        "18 December 2026",
+        "16 February 2027"
+      ]
+    },
+    {
+      "id": "ossa-2027-audit-158",
+      "official": true,
+      "url": "https://ossacongress.co.za/attendance/",
+      "eventIds": [
+        "ossa-2027"
+      ],
+      "watchTerms": [
+        "29 Jan 2027"
+      ]
+    },
+    {
+      "id": "asrs-business-retina-2027-audit-159",
+      "official": true,
+      "url": "https://www.asrs.org/education/2027-business-of-retina-meeting",
+      "eventIds": [
+        "asrs-business-retina-2027"
+      ],
+      "watchTerms": [
+        "March 12-14",
+        "January 19, 2027"
+      ]
+    },
+    {
+      "id": "nanos-2027-audit-160",
+      "official": true,
+      "url": "https://community.nanosweb.org/events/event-description?CalendarEventKey=de230df2-9ae2-4615-9dde-01a15f8150b4&Home=%2Fevents%2Fcalendar&hlmlt=ED",
+      "eventIds": [
+        "nanos-2027"
+      ],
+      "watchTerms": [
+        "Mar 19, 2027",
+        "Mar 23, 2027",
+        "February 22, 2027"
+      ]
+    },
+    {
+      "id": "apspos-capos-2027-audit-161",
+      "official": true,
+      "url": "https://apspos.org/apspos-congress-2027/",
+      "eventIds": [
+        "apspos-capos-2027"
+      ],
+      "watchTerms": [
+        "December 1, 2026",
+        "11:59 PM (UTC+8)"
+      ]
+    },
+    {
+      "id": "jos-131-2027-audit-162",
+      "official": true,
+      "url": "https://convention.jtbcom.co.jp/131jos/en/join/index.html",
+      "eventIds": [
+        "jos-131-2027"
+      ],
+      "watchTerms": [
+        "February 12, 2027"
+      ]
+    },
+    {
+      "id": "wgc-2027-audit-163",
+      "official": true,
+      "url": "https://worldglaucomacongress.org/abstracts/",
+      "eventIds": [
+        "wgc-2027"
+      ],
+      "watchTerms": [
+        "October 19, 2026"
+      ]
+    },
+    {
+      "id": "wgc-2027-audit-164",
+      "official": true,
+      "url": "https://worldglaucomacongress.org/registration/",
+      "eventIds": [
+        "wgc-2027"
+      ],
+      "watchTerms": [
+        "18 January 2027",
+        "15 March 2027"
+      ]
+    },
+    {
+      "id": "ranzco-nz-branch-2027-audit-165",
+      "official": true,
+      "url": "https://ranzco.edu/events/2027-nz-branch-asm/",
+      "eventIds": [
+        "ranzco-nz-branch-2027"
+      ],
+      "watchTerms": [
+        "14/05/2027",
+        "15/05/2027"
+      ]
+    },
+    {
+      "id": "brascrs-2027-audit-166",
+      "official": true,
+      "url": "https://brascrs.iweventos.com.br/brascrs2027",
+      "eventIds": [
+        "brascrs-2027"
+      ],
+      "watchTerms": [
+        "19 a 22 de maio de 2027"
+      ]
+    },
+    {
+      "id": "brascrs-2027-audit-167",
+      "official": true,
+      "url": "https://brascrs.iweventos.com.br/site/brascrs2027/inscricoes",
+      "eventIds": [
+        "brascrs-2027"
+      ],
+      "watchTerms": [
+        "08/12/2026",
+        "16/02/2027",
+        "13/04/2027"
+      ]
+    },
+    {
+      "id": "asoprs-spring-2027-audit-168",
+      "official": true,
+      "url": "https://www.asoprs.org/members-only-spring-symposium",
+      "eventIds": [
+        "asoprs-spring-2027"
+      ],
+      "watchTerms": [
+        "2027 Spring Scientific Symposium",
+        "May 20-23"
+      ]
+    },
+    {
+      "id": "egs-ags-members-2027-audit-169",
+      "official": true,
+      "url": "https://egsmembersmeeting.org/",
+      "eventIds": [
+        "egs-ags-members-2027"
+      ],
+      "watchTerms": [
+        "4–5 June 2027"
+      ]
+    },
+    {
+      "id": "macula-society-2027-audit-170",
+      "official": true,
+      "url": "https://www.maculasociety.org/2026/10/14/50th-anniversary-macula-society-meeting-abstract-case-submissions/",
+      "eventIds": [
+        "macula-society-2027"
+      ],
+      "watchTerms": [
+        "5:00 PM EST on January 15, 2027"
+      ]
+    },
+    {
+      "id": "doc-2027-audit-171",
+      "official": true,
+      "url": "https://www.doc-nuernberg.de/abstracteinreichung.php",
+      "eventIds": [
+        "doc-2027"
+      ],
+      "watchTerms": [
+        "31. März 2027"
+      ]
+    },
+    {
+      "id": "doc-2027-audit-172",
+      "official": true,
+      "url": "https://www.doc-nuernberg.de/allgemeine-hinweise.php#termine",
+      "eventIds": [
+        "doc-2027"
+      ],
+      "watchTerms": [
+        "27. April 2027"
+      ]
+    },
+    {
+      "id": "bopss-2027-audit-173",
+      "official": true,
+      "url": "https://www.bopss.co.uk/meetings/bopss-2027-newcastle/",
+      "eventIds": [
+        "bopss-2027"
+      ],
+      "watchTerms": [
+        "16th – 18th June 2027"
+      ]
+    },
+    {
+      "id": "anzpos-2027-audit-174",
+      "official": true,
+      "url": "https://ranzco.edu/events/anzpos-2027/",
+      "eventIds": [
+        "anzpos-2027"
+      ],
+      "watchTerms": [
+        "22/07/2027",
+        "24/07/2027"
+      ]
+    },
+    {
+      "id": "esoprs-2027-audit-175",
+      "official": true,
+      "url": "https://www.esoprs.eu/esoprs-meetings/esoprs-meeting-2027/",
+      "eventIds": [
+        "esoprs-2027"
+      ],
+      "watchTerms": [
+        "September 9-11, 2027"
+      ]
+    },
+    {
+      "id": "vision-2027-audit-176",
+      "official": true,
+      "url": "https://vision2027.com/",
+      "eventIds": [
+        "vision-2027"
+      ],
+      "watchTerms": [
+        "14 – 16 September 2027",
+        "5 February 2027",
+        "26 May 2027"
+      ]
+    },
+    {
+      "id": "beavrs-2027-audit-177",
+      "official": true,
+      "url": "https://beavrs.org/",
+      "eventIds": [
+        "beavrs-2027"
+      ],
+      "watchTerms": [
+        "4th & Friday 5th November 2027"
+      ]
+    },
+    {
+      "id": "asoprs-fall-2027-audit-178",
+      "official": true,
+      "url": "https://www.asoprs.org/future-and-past-symposia",
+      "eventIds": [
+        "asoprs-fall-2027"
+      ],
+      "watchTerms": [
+        "November 11-12, 2027"
+      ]
+    },
+    {
+      "id": "aao-2027-audit-179",
+      "official": true,
+      "url": "https://www.aao.org/annual-meeting/lasvegas",
+      "eventIds": [
+        "aao-2027"
+      ],
+      "watchTerms": [
+        "Dec. 10",
+        "Jan. 12",
+        "2027"
       ]
     }
   ]
