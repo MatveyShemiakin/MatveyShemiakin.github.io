@@ -2280,7 +2280,7 @@
       "program": "https://wintermeeting.escrs.org/",
       "registration": "https://wintermeeting.escrs.org/registrations/",
       "submit": "https://wintermeeting.escrs.org/coming-soon/",
-      "verified": "2026-11-02",
+      "verified": "2026-11-09",
       "description": "31-я зимняя встреча ESCRS в Каире. Приём научных тезисов и хирургических видео YOP завершён 1 ноября 2026 года.",
       "deadlines": [
         {
@@ -3163,7 +3163,7 @@
       "program": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
       "registration": "https://www.arvo.org/annual-meeting/registration",
       "submit": "https://www.arvo.org/annual-meeting/abstracts",
-      "verified": "2026-11-02",
+      "verified": "2026-11-09",
       "description": "ARVO 2027 в Сан-Диего. Есть очные доклады/постеры и вариант On-Demand без живого выступления для тех, кто не сможет приехать. Использование генеративного ИИ в тезисах следует раскрыть по правилам организатора.",
       "deadlines": [
         {
@@ -3183,6 +3183,15 @@
           "zone": "America/New_York",
           "url": "https://www.arvo.org/annual-meeting/abstracts",
           "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "Окончательная отправка и редактирование тезисов",
+          "date": "2026-12-06T23:59:00-05:00",
+          "timeKnown": true,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/abstracts/policies-and-procedures",
+          "note": "Только для заявок, созданных до 4 декабря, 17:00 EST."
         },
         {
           "kind": "registration",
