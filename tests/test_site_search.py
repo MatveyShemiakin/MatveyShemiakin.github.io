@@ -35,4 +35,10 @@ class SearchIndexTests(unittest.TestCase):
         self.assertIn(script,output)
         self.assertIn('<h2 id="search-',output)
 
+    def test_calendar_cards_do_not_duplicate_canonical_dynamic_event_results(self):
+        html='<html lang="en"><main><h1>Events</h1><div id="radar-list"><h3>ANZGS deadline</h3></div><div id="events-grid"><h3 id="search-old">ANZGS 2027</h3><p>Glaucoma meeting</p></div><section id="geo"><h2>Geography</h2><p>Worldwide</p></section></main></html>'
+        records=self.builder.extract(html,'/en/for-doctors/events/')
+        self.assertFalse(any('ANZGS' in r['title'] or 'ANZGS' in r['text'] for r in records))
+        self.assertTrue(any(r['url']=='/en/for-doctors/events/#geo' for r in records))
+
 if __name__=='__main__': unittest.main()

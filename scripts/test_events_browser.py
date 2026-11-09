@@ -44,6 +44,7 @@ def main():
      try:
       page.goto(base+path,wait_until='domcontentloaded',timeout=60000)
       page.wait_for_selector('#events-grid [data-details]',timeout=30000)
+      page.wait_for_function('document.querySelector("#results-meta").textContent.includes("timezone") || document.querySelector("#results-meta").textContent.includes("часовой пояс")')
       page.wait_for_function("document.documentElement.dataset.theme === '"+theme+"'")
       expected=sum(e['end']>=today for e in datasets[lang]['events'])
       assert page.locator('#events-grid .event-card').count()==expected,'initial catalogue count'
@@ -116,6 +117,12 @@ def main():
       try:page.wait_for_function('Number(document.querySelector("#view-globe canvas").dataset.imageryLoaded)>0',timeout=15000)
       except Exception:row['satelliteUnavailable']=True
       row['imageryLoaded']=canvas.get_attribute('data-imagery-loaded');row['tileErrors']=canvas.get_attribute('data-tile-errors');fits('globe after navigation');page.screenshot(path=str(out/(name+'-globe.png')),full_page=False)
+      search_button=page.locator('header [data-site-search-open]') if width>=1021 else page.locator('.site-mobile-nav [data-mobile-nav="search"]')
+      search_button.click();page.locator('#site-search-dialog .site-mobile-search__input').fill('ANZGS')
+      hit=page.locator(f'#site-search-dialog a[href="{path}#event-anzgs-2027"]')
+      hit.wait_for(state='visible');assert hit.count()==1,'one canonical event search result per locale'
+      hit.click();page.wait_for_selector('#event-dialog[open]');assert 'ANZGS' in page.locator('#dialog-title').inner_text()
+      fits('global search result dialog');row['checks'].append('header/mobile website search opens canonical event details')
       assert not row['errors'],'JavaScript exceptions: '+str(row['errors']);row['passed']=True
      except Exception as exc:
       row['passed']=False;row['failure']=str(exc);failures.append(name+': '+str(exc));page.screenshot(path=str(out/(name+'-failure.png')),full_page=False)
