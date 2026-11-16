@@ -2043,7 +2043,7 @@
       "program": "https://events.moorfields.ae/conference-agenda",
       "registration": "https://events.moorfields.ae/registration",
       "submit": "https://events.moorfields.ae/competitions",
-      "verified": "2026-11-09",
+      "verified": "2026-11-16",
       "description": "9-я конференция Moorfields UAE: 9 января 2027 года очно в Дубае, 10 января — онлайн.",
       "deadlines": [
         {
@@ -2107,6 +2107,32 @@
         -6.84
       ],
       "dateSource": "https://smo.ma/"
+    },
+    {
+      "id": "panhellenic-vr-2027",
+      "featured": false,
+      "title": "22-й Панэллинский витреоретинальный конгресс",
+      "fullTitle": "22-й Панэллинский витреоретинальный конгресс",
+      "org": "22-й Панэллинский витреоретинальный конгресс",
+      "start": "2027-01-28",
+      "end": "2027-01-30",
+      "city": "Афины",
+      "country": "Греция",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Megaron Athens International Conference Centre",
+      "categories": [
+        "Retina"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.hsioirs.org/en/calendar-of-events/",
+      "program": "https://www.hsioirs.org/en/calendar-of-events/",
+      "registration": "https://www.hsioirs.org/en/calendar-of-events/",
+      "submit": null,
+      "verified": "2026-11-16",
+      "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
+      "deadlines": []
     },
     {
       "id": "japan-ophthalmic-surgery-2027",
@@ -2196,6 +2222,33 @@
       "description": "Конференция CORNEX по роговичной и рефракционной хирургии состоится 4–6 февраля 2027 года в Медине.",
       "featured": false,
       "level": "specialty"
+    },
+    {
+      "id": "sopla-2027",
+      "featured": false,
+      "title": "III международный конгресс SOPLA по детской офтальмологии",
+      "fullTitle": "III международный конгресс SOPLA по детской офтальмологии",
+      "org": "III международный конгресс SOPLA по детской офтальмологии",
+      "start": "2027-02-05",
+      "end": "2027-02-07",
+      "city": "Медельин",
+      "country": "Колумбия",
+      "region": "Латинская Америка",
+      "mode": "Очно",
+      "venue": "Hotel Intercontinental Movich Medellin",
+      "categories": [
+        "Paediatric ophthalmology",
+        "Strabismus"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
+      "program": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
+      "registration": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
+      "submit": null,
+      "verified": "2026-11-16",
+      "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
+      "deadlines": []
     },
     {
       "id": "japan-cornea-2027",
@@ -2398,6 +2451,53 @@
       ]
     },
     {
+      "id": "simasp-2027",
+      "featured": false,
+      "title": "49-й конгресс SIMASP",
+      "fullTitle": "49-й конгресс SIMASP",
+      "org": "49-й конгресс SIMASP",
+      "start": "2027-02-24",
+      "end": "2027-02-27",
+      "city": "Сан-Паулу",
+      "country": "Бразилия",
+      "region": "Латинская Америка",
+      "mode": "Очно",
+      "venue": "Centro de Convenções Frei Caneca",
+      "categories": [
+        "Research",
+        "Cataract / IOL",
+        "Retina"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://simasp.com.br/",
+      "program": "https://simasp.com.br/",
+      "registration": "https://simasp.com.br/inscricoes/",
+      "submit": null,
+      "verified": "2026-11-16",
+      "description": "Предконгресс 22–24 февраля; основная программа 24–27 февраля. Тарифы врачей: R$ 1090 до 22 ноября, R$ 1190 с 1 декабря до 15 февраля; отдельные практические курсы оплачиваются дополнительно.",
+      "deadlines": [
+        {
+          "kind": "registration",
+          "label": "Окончание текущего тарифа",
+          "date": "2026-11-22",
+          "timeKnown": false,
+          "zone": "America/Sao_Paulo",
+          "url": "https://simasp.com.br/inscricoes/",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Окончание следующего тарифа",
+          "date": "2027-02-15",
+          "timeKnown": false,
+          "zone": "America/Sao_Paulo",
+          "url": "https://simasp.com.br/inscricoes/",
+          "note": ""
+        }
+      ]
+    },
+    {
       "id": "euretina-sfm-2027",
       "featured": true,
       "level": "specialty",
@@ -2495,6 +2595,59 @@
       "dateSource": "https://www.americanglaucomasociety.net/events/event-description?CalendarEventKey=64f2cced-b152-4572-abfa-019b70385b30&Home=%2Fevents%2Fcalendar"
     },
     {
+      "id": "hsioirs-2027",
+      "featured": false,
+      "title": "41-й международный конгресс HSIOIRS",
+      "fullTitle": "41-й международный конгресс HSIOIRS",
+      "org": "41-й международный конгресс HSIOIRS",
+      "start": "2027-03-04",
+      "end": "2027-03-06",
+      "city": "Афины",
+      "country": "Греция",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Megaron Athens International Conference Centre",
+      "categories": [
+        "Cataract / IOL",
+        "Refractive"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.hsioirs.org/en/calendar-of-events/",
+      "program": "https://www.hsioirs.org/en/calendar-of-events/",
+      "registration": "https://www.hsioirs.org/en/calendar-of-events/",
+      "submit": null,
+      "verified": "2026-11-16",
+      "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
+      "deadlines": []
+    },
+    {
+      "id": "ucla-orbital-2027",
+      "featured": false,
+      "title": "UCLA Orbital Masters: семинар и практикум",
+      "fullTitle": "UCLA Orbital Masters: семинар и практикум",
+      "org": "UCLA Orbital Masters: семинар и практикум",
+      "start": "2027-03-05",
+      "end": "2027-03-06",
+      "city": "Лос-Анджелес",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "UCLA Stein Eye Institute",
+      "categories": [
+        "Oculoplastics"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://paao.org/events/the-ucla-orbital-masters-seminar-workshop/",
+      "program": "https://paao.org/events/the-ucla-orbital-masters-seminar-workshop/",
+      "registration": "https://paao.org/events/the-ucla-orbital-masters-seminar-workshop/",
+      "submit": null,
+      "verified": "2026-11-16",
+      "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
+      "deadlines": []
+    },
+    {
       "id": "ossa-2027",
       "featured": true,
       "level": "national",
@@ -2523,8 +2676,8 @@
       "program": "https://ossacongress.co.za/programme/",
       "registration": "https://ossacongress.co.za/attendance/",
       "submit": "https://ossacongress.co.za/programme/",
-      "verified": "2026-11-09",
-      "description": "Конгресс офтальмологов Южной Африки в Кейптауне, включая предконгрессный день 10 марта. Приём тезисов закрыт.",
+      "verified": "2026-11-16",
+      "description": "Конгресс офтальмологов Южной Африки в Кейптауне, включая предконгрессный день 10 марта. Приём тезисов закрыт. Мастер-классы 10 марта; основная программа 11–13 марта.",
       "deadlines": [
         {
           "kind": "abstract",
@@ -3606,6 +3759,60 @@
       ],
       "dateSource": "https://paao.org/events/congreso-internacional-de-oculoplastica-2027/",
       "submissionNote": "Подтверждённый срок подачи материалов в доступных официальных источниках не опубликован."
+    },
+    {
+      "id": "arvo-imaging-2027",
+      "featured": false,
+      "title": "ARVO Imaging in the Eye 2027",
+      "fullTitle": "ARVO Imaging in the Eye 2027",
+      "org": "ARVO Imaging in the Eye 2027",
+      "start": "2027-05-01",
+      "end": "2027-05-01",
+      "city": "Сан-Диего",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "San Diego Convention Center",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+      "program": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+      "registration": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+      "submit": null,
+      "verified": "2026-11-16",
+      "description": "Специализированная сессия All-Access Saturday, связанная с ARVO 2027; отдельная подача тезисов.",
+      "deadlines": [
+        {
+          "kind": "abstract",
+          "label": "Открытие подачи тезисов",
+          "date": "2027-01-04",
+          "timeKnown": false,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+          "note": ""
+        },
+        {
+          "kind": "abstract",
+          "label": "Окончание подачи тезисов",
+          "date": "2027-02-05T17:00:00-05:00",
+          "timeKnown": true,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+          "note": ""
+        },
+        {
+          "kind": "registration",
+          "label": "Ранняя регистрация",
+          "date": "2027-03-10",
+          "timeKnown": false,
+          "zone": "America/New_York",
+          "url": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+          "note": ""
+        }
+      ]
     },
     {
       "id": "arvo-2027",
@@ -5207,6 +5414,110 @@
         135.5
       ],
       "dateSource": "https://www.jrvs.jp/en/meeting.html"
+    },
+    {
+      "id": "apao-2028",
+      "featured": false,
+      "title": "APAO 2028",
+      "fullTitle": "APAO 2028",
+      "org": "APAO 2028",
+      "start": "2028-03-16",
+      "end": "2028-03-19",
+      "city": "Манила",
+      "country": "Филиппины",
+      "region": "Азия–Тихоокеанский",
+      "mode": "Очно",
+      "venue": "Manila",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://apaophth.org/congress/calendar/",
+      "program": "https://apaophth.org/congress/calendar/",
+      "registration": "https://apaophth.org/congress/calendar/",
+      "submit": null,
+      "verified": "2026-11-16",
+      "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
+      "deadlines": []
+    },
+    {
+      "id": "arvo-2028",
+      "featured": false,
+      "title": "ARVO 2028",
+      "fullTitle": "ARVO 2028",
+      "org": "ARVO 2028",
+      "start": "2028-04-30",
+      "end": "2028-05-04",
+      "city": "Торонто",
+      "country": "Канада",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "Toronto",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://apaophth.org/congress/calendar/",
+      "program": "https://apaophth.org/congress/calendar/",
+      "registration": "https://apaophth.org/congress/calendar/",
+      "submit": null,
+      "verified": "2026-11-16",
+      "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
+      "deadlines": []
+    },
+    {
+      "id": "apgc-2028",
+      "featured": false,
+      "title": "APGC 2028",
+      "fullTitle": "APGC 2028",
+      "org": "APGC 2028",
+      "start": "2028-07-20",
+      "end": "2028-07-23",
+      "city": "Голд-Кост",
+      "country": "Австралия",
+      "region": "Азия–Тихоокеанский",
+      "mode": "Очно",
+      "venue": "Gold Coast",
+      "categories": [
+        "Glaucoma"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://apaophth.org/congress/calendar/",
+      "program": "https://apaophth.org/congress/calendar/",
+      "registration": "https://apaophth.org/congress/calendar/",
+      "submit": null,
+      "verified": "2026-11-16",
+      "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
+      "deadlines": []
+    },
+    {
+      "id": "aao-2028",
+      "featured": false,
+      "title": "AAO 2028",
+      "fullTitle": "AAO 2028",
+      "org": "AAO 2028",
+      "start": "2028-10-14",
+      "end": "2028-10-17",
+      "city": "Чикаго",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "Chicago",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://apaophth.org/congress/calendar/",
+      "program": "https://apaophth.org/congress/calendar/",
+      "registration": "https://apaophth.org/congress/calendar/",
+      "submit": null,
+      "verified": "2026-11-16",
+      "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
+      "deadlines": []
     }
   ]
 }
