@@ -71,7 +71,7 @@ def main():
       assert page.locator('#clear-filters').is_visible(),'reset filters control must remain visible on mobile'
       if width>=1021:assert page.locator('.hero').bounding_box()['height']<650,'homepage hero minimum height leaked into calendar'
       page.screenshot(path=str(out/(name+'-events.png')),full_page=False)
-      page.locator('#event-search').fill('APAO')
+      page.locator('#event-search').fill('APAO 2027')
       assert page.locator('#events-grid .event-card').count()==1,'APAO search'
       page.locator('#events-grid [data-details]').click();page.wait_for_selector('#event-dialog[open]')
       assert '2027' in page.locator('#dialog-title').inner_text()

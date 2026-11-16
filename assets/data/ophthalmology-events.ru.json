@@ -2122,9 +2122,9 @@
       "mode": "Очно",
       "venue": "Megaron Athens International Conference Centre",
       "categories": [
-        "Retina"
+        "Сетчатка"
       ],
-      "credits": "",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.hsioirs.org/en/calendar-of-events/",
       "program": "https://www.hsioirs.org/en/calendar-of-events/",
@@ -2132,7 +2132,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://www.hsioirs.org/en/calendar-of-events/",
+      "coordinates": [
+        37.98,
+        23.73
+      ]
     },
     {
       "id": "japan-ophthalmic-surgery-2027",
@@ -2237,10 +2242,10 @@
       "mode": "Очно",
       "venue": "Hotel Intercontinental Movich Medellin",
       "categories": [
-        "Paediatric ophthalmology",
-        "Strabismus"
+        "Детская офтальмология",
+        "Страбизм"
       ],
-      "credits": "",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
       "program": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
@@ -2248,7 +2253,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
+      "coordinates": [
+        6.24,
+        -75.58
+      ]
     },
     {
       "id": "japan-cornea-2027",
@@ -2464,23 +2474,23 @@
       "mode": "Очно",
       "venue": "Centro de Convenções Frei Caneca",
       "categories": [
-        "Research",
-        "Cataract / IOL",
-        "Retina"
+        "Исследования",
+        "Катаракта / ИОЛ",
+        "Сетчатка"
       ],
-      "credits": "",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://simasp.com.br/",
       "program": "https://simasp.com.br/",
       "registration": "https://simasp.com.br/inscricoes/",
       "submit": null,
       "verified": "2026-11-16",
-      "description": "Предконгресс 22–24 февраля; основная программа 24–27 февраля. Тарифы врачей: R$ 1090 до 22 ноября, R$ 1190 с 1 декабря до 15 февраля; отдельные практические курсы оплачиваются дополнительно.",
+      "description": "Предконгресс 22–24 февраля; основная программа 24–27 февраля. Тарифы врачей: R$ 1090 до 30 ноября, R$ 1190 с 1 декабря до 15 февраля; отдельные практические курсы оплачиваются дополнительно.",
       "deadlines": [
         {
           "kind": "registration",
           "label": "Окончание текущего тарифа",
-          "date": "2026-11-22",
+          "date": "2026-11-30",
           "timeKnown": false,
           "zone": "America/Sao_Paulo",
           "url": "https://simasp.com.br/inscricoes/",
@@ -2495,6 +2505,11 @@
           "url": "https://simasp.com.br/inscricoes/",
           "note": ""
         }
+      ],
+      "dateSource": "https://simasp.com.br/",
+      "coordinates": [
+        -23.55,
+        -46.63
       ]
     },
     {
@@ -2608,10 +2623,10 @@
       "mode": "Очно",
       "venue": "Megaron Athens International Conference Centre",
       "categories": [
-        "Cataract / IOL",
-        "Refractive"
+        "Катаракта / ИОЛ",
+        "Рефракция"
       ],
-      "credits": "",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.hsioirs.org/en/calendar-of-events/",
       "program": "https://www.hsioirs.org/en/calendar-of-events/",
@@ -2619,7 +2634,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://www.hsioirs.org/en/calendar-of-events/",
+      "coordinates": [
+        37.98,
+        23.73
+      ]
     },
     {
       "id": "ucla-orbital-2027",
@@ -2635,9 +2655,9 @@
       "mode": "Очно",
       "venue": "UCLA Stein Eye Institute",
       "categories": [
-        "Oculoplastics"
+        "Окулопластика"
       ],
-      "credits": "",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://paao.org/events/the-ucla-orbital-masters-seminar-workshop/",
       "program": "https://paao.org/events/the-ucla-orbital-masters-seminar-workshop/",
@@ -2645,7 +2665,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://paao.org/events/the-ucla-orbital-masters-seminar-workshop/",
+      "coordinates": [
+        34.05,
+        -118.24
+      ]
     },
     {
       "id": "ossa-2027",
@@ -3774,9 +3799,9 @@
       "mode": "Очно",
       "venue": "San Diego Convention Center",
       "categories": [
-        "Research"
+        "Исследования"
       ],
-      "credits": "",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
       "program": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
@@ -3812,7 +3837,13 @@
           "url": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
           "note": ""
         }
-      ]
+      ],
+      "dateSource": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+      "coordinates": [
+        32.72,
+        -117.16
+      ],
+      "submissionOpens": "2027-01-04"
     },
     {
       "id": "arvo-2027",
@@ -5429,9 +5460,9 @@
       "mode": "Очно",
       "venue": "Manila",
       "categories": [
-        "Research"
+        "Исследования"
       ],
-      "credits": "",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://apaophth.org/congress/calendar/",
       "program": "https://apaophth.org/congress/calendar/",
@@ -5439,7 +5470,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://apaophth.org/congress/calendar/",
+      "coordinates": [
+        14.6,
+        120.98
+      ]
     },
     {
       "id": "arvo-2028",
@@ -5455,9 +5491,9 @@
       "mode": "Очно",
       "venue": "Toronto",
       "categories": [
-        "Research"
+        "Исследования"
       ],
-      "credits": "",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://apaophth.org/congress/calendar/",
       "program": "https://apaophth.org/congress/calendar/",
@@ -5465,7 +5501,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://apaophth.org/congress/calendar/",
+      "coordinates": [
+        43.65,
+        -79.38
+      ]
     },
     {
       "id": "apgc-2028",
@@ -5481,9 +5522,9 @@
       "mode": "Очно",
       "venue": "Gold Coast",
       "categories": [
-        "Glaucoma"
+        "Глаукома"
       ],
-      "credits": "",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://apaophth.org/congress/calendar/",
       "program": "https://apaophth.org/congress/calendar/",
@@ -5491,7 +5532,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://apaophth.org/congress/calendar/",
+      "coordinates": [
+        -28.02,
+        153.4
+      ]
     },
     {
       "id": "isoo-athens-2028",
@@ -5507,9 +5553,9 @@
       "mode": "Очно",
       "venue": "Афины, площадка уточняется",
       "categories": [
-        "Research"
+        "Исследования"
       ],
-      "credits": "",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://www.isoo.org/isoo-meetings",
       "program": "https://www.isoo.org/isoo-meetings",
@@ -5517,7 +5563,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Официально объявленный конгресс ISOO в Афинах. Площадка, регистрация и дедлайны ещё не опубликованы.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://www.isoo.org/isoo-meetings",
+      "coordinates": [
+        37.98,
+        23.73
+      ]
     },
     {
       "id": "aao-2028",
@@ -5533,9 +5584,9 @@
       "mode": "Очно",
       "venue": "Chicago",
       "categories": [
-        "Research"
+        "Исследования"
       ],
-      "credits": "",
+      "credits": "CME/НМО: уточняйте у организатора",
       "submissionOpen": false,
       "official": "https://apaophth.org/congress/calendar/",
       "program": "https://apaophth.org/congress/calendar/",
@@ -5543,7 +5594,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Даты и место подтверждены официальным календарём; стоимость и дедлайны не опубликованы в проверенном источнике.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://apaophth.org/congress/calendar/",
+      "coordinates": [
+        41.88,
+        -87.63
+      ]
     }
   ]
 }
