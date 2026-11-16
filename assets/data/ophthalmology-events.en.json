@@ -5489,6 +5489,32 @@
       "deadlines": []
     },
     {
+      "id": "isoo-athens-2028",
+      "featured": false,
+      "title": "ISOO Athens 2028 — International Ocular Oncology Congress",
+      "fullTitle": "ISOO Athens 2028",
+      "org": "International Society of Ocular Oncology",
+      "start": "2028-09-05",
+      "end": "2028-09-09",
+      "city": "Athens",
+      "country": "Greece",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "Athens, venue to be announced",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.isoo.org/isoo-meetings",
+      "program": "https://www.isoo.org/isoo-meetings",
+      "registration": "https://www.isoo.org/isoo-meetings",
+      "submit": null,
+      "verified": "2026-11-16",
+      "description": "ISOO congress announced for Athens. Venue, registration and submission deadlines not yet published.",
+      "deadlines": []
+    },
+    {
       "id": "aao-2028",
       "featured": false,
       "title": "AAO 2028",
