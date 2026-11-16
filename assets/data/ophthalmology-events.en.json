@@ -2121,7 +2121,7 @@
       "categories": [
         "Retina"
       ],
-      "credits": "",
+      "credits": "Accreditation: check with organiser",
       "submissionOpen": false,
       "official": "https://www.hsioirs.org/en/calendar-of-events/",
       "program": "https://www.hsioirs.org/en/calendar-of-events/",
@@ -2129,7 +2129,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Dates and location confirmed by official calendar; fees and deadlines not established from the checked source.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://www.hsioirs.org/en/calendar-of-events/",
+      "coordinates": [
+        37.98,
+        23.73
+      ]
     },
     {
       "id": "japan-ophthalmic-surgery-2027",
@@ -2236,7 +2241,7 @@
         "Paediatric ophthalmology",
         "Strabismus"
       ],
-      "credits": "",
+      "credits": "Accreditation: check with organiser",
       "submissionOpen": false,
       "official": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
       "program": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
@@ -2244,7 +2249,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Dates and location confirmed by official calendar; fees and deadlines not established from the checked source.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
+      "coordinates": [
+        6.24,
+        -75.58
+      ]
     },
     {
       "id": "japan-cornea-2027",
@@ -2464,19 +2474,19 @@
         "Cataract / IOL",
         "Retina"
       ],
-      "credits": "",
+      "credits": "Accreditation: check with organiser",
       "submissionOpen": false,
       "official": "https://simasp.com.br/",
       "program": "https://simasp.com.br/",
       "registration": "https://simasp.com.br/inscricoes/",
       "submit": null,
       "verified": "2026-11-16",
-      "description": "Pre-congress 22–24 February; main meeting 24–27 February. Physician rates: R$1090 until Nov 22, R$1190 Dec 1–Feb 15; hands-on courses cost extra.",
+      "description": "Pre-congress 22–24 February; main meeting 24–27 February. Physician rates: R$1090 until Nov 30, R$1190 Dec 1–Feb 15; hands-on courses cost extra.",
       "deadlines": [
         {
           "kind": "registration",
           "label": "Current registration tier ends",
-          "date": "2026-11-22",
+          "date": "2026-11-30",
           "timeKnown": false,
           "zone": "America/Sao_Paulo",
           "url": "https://simasp.com.br/inscricoes/",
@@ -2491,6 +2501,11 @@
           "url": "https://simasp.com.br/inscricoes/",
           "note": ""
         }
+      ],
+      "dateSource": "https://simasp.com.br/",
+      "coordinates": [
+        -23.55,
+        -46.63
       ]
     },
     {
@@ -2607,7 +2622,7 @@
         "Cataract / IOL",
         "Refractive"
       ],
-      "credits": "",
+      "credits": "Accreditation: check with organiser",
       "submissionOpen": false,
       "official": "https://www.hsioirs.org/en/calendar-of-events/",
       "program": "https://www.hsioirs.org/en/calendar-of-events/",
@@ -2615,7 +2630,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Dates and location confirmed by official calendar; fees and deadlines not established from the checked source.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://www.hsioirs.org/en/calendar-of-events/",
+      "coordinates": [
+        37.98,
+        23.73
+      ]
     },
     {
       "id": "ucla-orbital-2027",
@@ -2633,7 +2653,7 @@
       "categories": [
         "Oculoplastics"
       ],
-      "credits": "",
+      "credits": "Accreditation: check with organiser",
       "submissionOpen": false,
       "official": "https://paao.org/events/the-ucla-orbital-masters-seminar-workshop/",
       "program": "https://paao.org/events/the-ucla-orbital-masters-seminar-workshop/",
@@ -2641,7 +2661,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Dates and location confirmed by official calendar; fees and deadlines not established from the checked source.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://paao.org/events/the-ucla-orbital-masters-seminar-workshop/",
+      "coordinates": [
+        34.05,
+        -118.24
+      ]
     },
     {
       "id": "ossa-2027",
@@ -3772,7 +3797,7 @@
       "categories": [
         "Research"
       ],
-      "credits": "",
+      "credits": "Accreditation: check with organiser",
       "submissionOpen": false,
       "official": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
       "program": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
@@ -3808,7 +3833,13 @@
           "url": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
           "note": ""
         }
-      ]
+      ],
+      "dateSource": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+      "coordinates": [
+        32.72,
+        -117.16
+      ],
+      "submissionOpens": "2027-01-04"
     },
     {
       "id": "arvo-2027",
@@ -5426,7 +5457,7 @@
       "categories": [
         "Research"
       ],
-      "credits": "",
+      "credits": "Accreditation: check with organiser",
       "submissionOpen": false,
       "official": "https://apaophth.org/congress/calendar/",
       "program": "https://apaophth.org/congress/calendar/",
@@ -5434,7 +5465,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Dates and location confirmed by official calendar; fees and deadlines not established from the checked source.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://apaophth.org/congress/calendar/",
+      "coordinates": [
+        14.6,
+        120.98
+      ]
     },
     {
       "id": "arvo-2028",
@@ -5452,7 +5488,7 @@
       "categories": [
         "Research"
       ],
-      "credits": "",
+      "credits": "Accreditation: check with organiser",
       "submissionOpen": false,
       "official": "https://apaophth.org/congress/calendar/",
       "program": "https://apaophth.org/congress/calendar/",
@@ -5460,7 +5496,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Dates and location confirmed by official calendar; fees and deadlines not established from the checked source.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://apaophth.org/congress/calendar/",
+      "coordinates": [
+        43.65,
+        -79.38
+      ]
     },
     {
       "id": "apgc-2028",
@@ -5478,7 +5519,7 @@
       "categories": [
         "Glaucoma"
       ],
-      "credits": "",
+      "credits": "Accreditation: check with organiser",
       "submissionOpen": false,
       "official": "https://apaophth.org/congress/calendar/",
       "program": "https://apaophth.org/congress/calendar/",
@@ -5486,7 +5527,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Dates and location confirmed by official calendar; fees and deadlines not established from the checked source.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://apaophth.org/congress/calendar/",
+      "coordinates": [
+        -28.02,
+        153.4
+      ]
     },
     {
       "id": "isoo-athens-2028",
@@ -5504,7 +5550,7 @@
       "categories": [
         "Research"
       ],
-      "credits": "",
+      "credits": "Accreditation: check with organiser",
       "submissionOpen": false,
       "official": "https://www.isoo.org/isoo-meetings",
       "program": "https://www.isoo.org/isoo-meetings",
@@ -5512,7 +5558,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "ISOO congress announced for Athens. Venue, registration and submission deadlines not yet published.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://www.isoo.org/isoo-meetings",
+      "coordinates": [
+        37.98,
+        23.73
+      ]
     },
     {
       "id": "aao-2028",
@@ -5530,7 +5581,7 @@
       "categories": [
         "Research"
       ],
-      "credits": "",
+      "credits": "Accreditation: check with organiser",
       "submissionOpen": false,
       "official": "https://apaophth.org/congress/calendar/",
       "program": "https://apaophth.org/congress/calendar/",
@@ -5538,7 +5589,12 @@
       "submit": null,
       "verified": "2026-11-16",
       "description": "Dates and location confirmed by official calendar; fees and deadlines not established from the checked source.",
-      "deadlines": []
+      "deadlines": [],
+      "dateSource": "https://apaophth.org/congress/calendar/",
+      "coordinates": [
+        41.88,
+        -87.63
+      ]
     }
   ]
 }

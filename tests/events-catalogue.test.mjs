@@ -38,3 +38,8 @@ test('every deadline keeps a dedicated official monitor with date-specific conte
 test('Russian event places do not retain untranslated country names',()=>{
  for(const e of ru.events)assert.doesNotMatch(e.country,/[A-Za-z]/,`${e.id}: ${e.country}`);
 });
+
+test('specialties use matching locale labels so filters include newly added meetings',()=>{
+ const labels={'Research':'Исследования','Retina':'Сетчатка','Glaucoma':'Глаукома','Cataract / IOL':'Катаракта / ИОЛ','Refractive':'Рефракция','Paediatric ophthalmology':'Детская офтальмология','Strabismus':'Страбизм','Oculoplastics':'Окулопластика'};
+ for(const event of en.events){const translated=ru.events.find(e=>e.id===event.id);for(const c of event.categories)if(labels[c])assert.ok(translated.categories.includes(labels[c]),event.id+': '+c);}
+});

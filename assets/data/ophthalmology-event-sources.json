@@ -2157,6 +2157,186 @@
         "Jan. 12",
         "2027"
       ]
+    },
+    {
+      "id": "panhellenic-vr-2027-dates",
+      "official": true,
+      "url": "https://www.hsioirs.org/en/calendar-of-events/",
+      "eventIds": [
+        "panhellenic-vr-2027"
+      ],
+      "watchTerms": [
+        "28-30/1"
+      ]
+    },
+    {
+      "id": "sopla-2027-dates",
+      "official": true,
+      "url": "https://paao.org/events/iii-sopla-international-congress-of-pediatric-ophthalmology/",
+      "eventIds": [
+        "sopla-2027"
+      ],
+      "watchTerms": [
+        "5 February 2027",
+        "7 February 2027"
+      ]
+    },
+    {
+      "id": "simasp-2027-dates",
+      "official": true,
+      "url": "https://simasp.com.br/",
+      "eventIds": [
+        "simasp-2027"
+      ],
+      "watchTerms": [
+        "24 a 27 de fevereiro"
+      ]
+    },
+    {
+      "id": "simasp-2027-deadline-0",
+      "official": true,
+      "url": "https://simasp.com.br/inscricoes/",
+      "eventIds": [
+        "simasp-2027"
+      ],
+      "watchTerms": [
+        "30/11/2026"
+      ]
+    },
+    {
+      "id": "simasp-2027-deadline-1",
+      "official": true,
+      "url": "https://simasp.com.br/inscricoes/",
+      "eventIds": [
+        "simasp-2027"
+      ],
+      "watchTerms": [
+        "15/02/2027"
+      ]
+    },
+    {
+      "id": "hsioirs-2027-dates",
+      "official": true,
+      "url": "https://www.hsioirs.org/en/calendar-of-events/",
+      "eventIds": [
+        "hsioirs-2027"
+      ],
+      "watchTerms": [
+        "4-6/3"
+      ]
+    },
+    {
+      "id": "ucla-orbital-2027-dates",
+      "official": true,
+      "url": "https://paao.org/events/the-ucla-orbital-masters-seminar-workshop/",
+      "eventIds": [
+        "ucla-orbital-2027"
+      ],
+      "watchTerms": [
+        "5 March 2027",
+        "6 March 2027"
+      ]
+    },
+    {
+      "id": "arvo-imaging-2027-dates",
+      "official": true,
+      "url": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+      "eventIds": [
+        "arvo-imaging-2027"
+      ],
+      "watchTerms": [
+        "May 1, 2027"
+      ]
+    },
+    {
+      "id": "arvo-imaging-2027-deadline-0",
+      "official": true,
+      "url": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+      "eventIds": [
+        "arvo-imaging-2027"
+      ],
+      "watchTerms": [
+        "Jan. 4"
+      ]
+    },
+    {
+      "id": "arvo-imaging-2027-deadline-1",
+      "official": true,
+      "url": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+      "eventIds": [
+        "arvo-imaging-2027"
+      ],
+      "watchTerms": [
+        "Feb. 5"
+      ]
+    },
+    {
+      "id": "arvo-imaging-2027-deadline-2",
+      "official": true,
+      "url": "https://www.arvo.org/annual-meeting/program-schedule/all-access-saturday/imaging-in-the-eye",
+      "eventIds": [
+        "arvo-imaging-2027"
+      ],
+      "watchTerms": [
+        "March 10"
+      ]
+    },
+    {
+      "id": "apao-2028-dates",
+      "official": true,
+      "url": "https://apaophth.org/congress/calendar/",
+      "eventIds": [
+        "apao-2028"
+      ],
+      "watchTerms": [
+        "March 16-19, 2028"
+      ]
+    },
+    {
+      "id": "arvo-2028-dates",
+      "official": true,
+      "url": "https://apaophth.org/congress/calendar/",
+      "eventIds": [
+        "arvo-2028"
+      ],
+      "watchTerms": [
+        "April 30",
+        "May 4, 2028"
+      ]
+    },
+    {
+      "id": "apgc-2028-dates",
+      "official": true,
+      "url": "https://apaophth.org/congress/calendar/",
+      "eventIds": [
+        "apgc-2028"
+      ],
+      "watchTerms": [
+        "July 20-23, 2028"
+      ]
+    },
+    {
+      "id": "isoo-athens-2028-dates",
+      "official": true,
+      "url": "https://www.isoo.org/isoo-meetings",
+      "eventIds": [
+        "isoo-athens-2028"
+      ],
+      "watchTerms": [
+        "Sep 5, 2028",
+        "Sep 9, 2028"
+      ]
+    },
+    {
+      "id": "aao-2028-dates",
+      "official": true,
+      "url": "https://apaophth.org/congress/calendar/",
+      "eventIds": [
+        "aao-2028"
+      ],
+      "watchTerms": [
+        "October 14-17, 2028"
+      ]
     }
   ]
 }
