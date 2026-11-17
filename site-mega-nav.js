@@ -22,6 +22,7 @@
           {label:'Follow-up after penetrating keratoplasty',href:'/en/for-doctors/penetrating-keratoplasty/'}
         ]},
         {title:'Tools',items:[
+          {label:'Ophthalmologist’s Desk',href:'/en/for-doctors/cabinet/'},
           {label:'Ophthalmology events',href:'/en/for-doctors/events/'}
         ]},
         {title:'Collaboration',items:[
@@ -61,6 +62,7 @@
           {label:'Ведение после сквозной кератопластики',href:'/for-doctors/penetrating-keratoplasty/'}
         ]},
         {title:'Инструменты',items:[
+          {label:'Кабинет офтальмолога',href:'/for-doctors/cabinet/'},
           {label:'Офтальмологические события',href:'/for-doctors/events/'}
         ]},
         {title:'Сотрудничество',items:[

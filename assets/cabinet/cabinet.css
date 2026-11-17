@@ -1,0 +1,4 @@
+/* The desk shares the learning directory design. */
+[data-cabinet] .learn-note a{color:var(--site-theme-accent,#3567ad);text-decoration:underline;text-underline-offset:4px}
+[data-cabinet] .learn-bookmark{min-width:44px;min-height:44px}
+[data-cabinet] .learn-card .learn-reviewed{margin:0 0 14px}
