@@ -21,7 +21,7 @@ class LogbookInjectionIsolationTest(unittest.TestCase):
             (root/'shared').mkdir()
             shutil.copyfile(SOURCE/'shared/site-header.html',root/'shared/site-header.html')
             shutil.copyfile(SOURCE/'scripts/site_header.py',root/'scripts/site_header.py')
-            for asset in set(CSS+SCRIPTS+('site-theme-init.js','doctors-legal.js')):
+            for asset in set(CSS+SCRIPTS+('site-theme-init.js','doctors-legal.js','legal.js')):
                 shutil.copyfile(SOURCE/asset,root/asset)
             for name in ('inject_legal.py', 'inject_site_mega_nav.py'):
                 target = root / 'scripts' / name
