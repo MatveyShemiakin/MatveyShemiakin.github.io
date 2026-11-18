@@ -10,7 +10,7 @@
     cookie:'Сайт использует необходимые cookie и локальное хранилище. Необязательная веб-аналитика может быть включена только с вашего согласия. Вы можете разрешить аналитику или продолжить только с необходимыми технологиями.',accept:'Разрешить аналитику',reject:'Только необходимые'
   };
   const privacyUrl=lang==='en'?'/en/privacy.html':'/privacy.html';
-  if(!document.querySelector('link[href^="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=20260805-1';document.head.appendChild(l)}
+  if(!document.querySelector('link[href^="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=20261118-support-1';document.head.appendChild(l)}
   if(!isDoctorsSection&&!document.querySelector('link[href^="/prodoctorov-widget.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/prodoctorov-widget.css?v=20260723-2';document.head.appendChild(l)}
 
   function initProDoctorovWidget(){
@@ -47,13 +47,53 @@
   }
   initProDoctorovWidget();
 
+  // Support belongs to the educational project, separate from reviews and appointments.
+  const supportUrl='https://tips.tips/000492830';
+  const supportCopy=lang==='en'?{
+    title:'Support my educational materials',
+    text:'Your contribution helps me create new reviews, videos and guides about eye health.',
+    button:'Support the project'
+  }:{
+    title:'Поддержать мои образовательные материалы',
+    text:'Ваш вклад помогает создавать новые разборы, видео и памятки о здоровье глаз.',
+    button:'Поддержать проект'
+  };
+  function supportLink(className){
+    const a=document.createElement('a');
+    a.className=className;a.href=supportUrl;a.target='_blank';a.rel='noopener noreferrer';
+    a.textContent=supportCopy.button;
+    return a;
+  }
+  function supportCard(placement){
+    const card=document.createElement('section');
+    card.className='privacy-card';card.dataset.siteSupport=placement;
+    card.setAttribute('aria-label',supportCopy.title);
+    const title=document.createElement('h2');title.textContent=supportCopy.title;
+    const text=document.createElement('p');text.textContent=supportCopy.text;
+    card.append(title,text,supportLink('button secondary'));
+    return card;
+  }
+  const widget=document.querySelector('.hero-actions .prodoctorov-widget-card');
+  if(widget&&!document.querySelector('[data-site-support="widget"]')){
+    widget.after(supportCard('widget'));
+  }
+  const isEducationalPage=/^\/(?:en\/)?(?:patients|social)(?:\/|$)/.test(path)||
+    /^\/(?:en\/)?for-doctors\/(?:simple-questions|bacterial-keratitis|complicated-cataract|iol-dislocation|penetrating-keratoplasty|iol-calculation|free-learning)(?:\/|$)/.test(path);
+  const main=document.querySelector('main');
+  if(isEducationalPage&&main&&!document.querySelector('[data-site-support="materials"]')){
+    const wrap=document.createElement('div');wrap.className='container';
+    wrap.dataset.siteSupportWrap='';wrap.append(supportCard('materials'));
+    const finalNotice=main.querySelector('.references-section,.sources');
+    if(finalNotice)finalNotice.before(wrap);else main.append(wrap);
+  }
+
   const footer=document.querySelector('footer .footer-row')||document.querySelector('footer');
   if(footer&&!footer.querySelector('.legal-footer-link')){
     const wrap=document.createElement('span');wrap.className='legal-footer-wrap';
     const a=document.createElement('a');a.className='legal-footer-link';a.href=privacyUrl;a.textContent=T.privacy;
     const sep=document.createElement('span');sep.className='legal-footer-separator';sep.setAttribute('aria-hidden','true');sep.textContent='·';
     const b=document.createElement('button');b.type='button';b.className='legal-cookie-settings';b.textContent=T.cookies;b.addEventListener('click',()=>{localStorage.removeItem('site_cookie_choice');showBanner()});
-    wrap.append(a,sep,b);footer.appendChild(wrap);
+    wrap.append(supportLink('legal-footer-link'),a,sep,b);footer.appendChild(wrap);
   }
   document.querySelectorAll('a[href*="t.me/ShemMYu"]').forEach(a=>{
     const container=a.closest('.hero-actions,.contact-actions,.author-links')||a.parentElement;
