@@ -39,3 +39,10 @@ header.site-header[data-site-header] :is(.patient-updates-toggle,.doctors-update
  .patient-hub-hero{min-height:0}
  .patient-hub-hero>.patient-hero-grid{min-height:0;padding-top:32px;align-items:start}
 }
+
+/* Shared hierarchical breadcrumbs inherit the surrounding page palette. */
+.site-breadcrumbs[data-site-breadcrumbs="shared"]{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;max-width:100%;min-width:0;margin:0 0 20px;padding:0;font:500 .875rem/1.5 var(--sans,"Segoe UI",Arial,sans-serif);letter-spacing:0;text-transform:none;color:inherit}
+.site-breadcrumbs[data-site-breadcrumbs="shared"] a{color:inherit;font:inherit;letter-spacing:0;text-transform:none;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.site-breadcrumbs[data-site-breadcrumbs="shared"] .site-breadcrumbs__current{color:inherit;opacity:.8;overflow-wrap:anywhere}
+.site-breadcrumbs[data-site-breadcrumbs="shared"] .site-breadcrumbs__separator{color:inherit;opacity:.5}
+.site-breadcrumbs[data-site-breadcrumbs="shared"] a:focus-visible{outline:2px solid currentColor;outline-offset:4px}

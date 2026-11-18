@@ -58,10 +58,8 @@ def _remaining_header(text,node):
  nav=next((n for n in sorted(nodes,key=lambda n:n['start']) if n['parent'] is not None and n['parent']['start']==node['start'] and containers.intersection(n['attrs'].get('class','').split())),None)
  context=''
  if nav:
-  # Section anchors and notifications are page tools, not copies of the global header.
+  # Keep notification widgets; article anchors belong in the page's own content.
   descendants=[n for n in sorted(nodes,key=lambda n:n['start']) if nav['open_end']<=n['start'] and n['end']<=nav['close_start']]
-  links=[text[n['start']:n['end']] for n in descendants if n['tag']=='a' and n['attrs'].get('href','').startswith('#') and n['attrs'].get('href') not in {'#top','#about','#directions','#education','#science','#contacts'}]
-  if links:context='<nav class="nav-links" aria-label="'+html.escape(next((n['attrs'].get('aria-label','') for n in descendants if n['tag']=='nav'),'') or 'Navigation',quote=True)+'">'+''.join(links)+'</nav>'
   for n in descendants:
    if n['attrs'].get('id') in {'patient-updates','doctors-updates'}:
     widget=text[n['start']:n['end']]
@@ -95,23 +93,70 @@ def content_without_navigation(text):
  text,updates=_detach_updates(text)
  for node in reversed(_headers(text)):
   text=text[:node['start']]+_remaining_header(text,node)+text[node['end']:]
- return inject_assets(_without_duplicate_article_shortcuts(text))+updates
+ return inject_assets(_without_generated_breadcrumbs(_without_duplicate_article_shortcuts(text)))+updates
 
 def _without_duplicate_article_shortcuts(text):
- # Articles use their own TOC; the patient hub uses its content cards and search.
- # Do not keep their legacy shortcut row below the shared header.
+ # Legacy header anchor rows are not breadcrumbs. Keep real article TOCs intact.
  nodes=Elements(text).nodes
- toc=next((n for n in nodes if 'article-toc' in n['attrs'].get('class','').split()),None)
- patient_hub=any('patient-hub-hero' in n['attrs'].get('class','').split() for n in nodes)
- if not toc and not patient_hub:return text
- def links(node):return {n['attrs'].get('href') for n in nodes if n['tag']=='a' and node['open_end']<=n['start'] and n['end']<=node['close_start']}
- targets=links(toc) if toc else {'#conditions','#paths','#faq','#author'}
  for node in sorted(nodes,key=lambda n:n['start'],reverse=True):
   if 'data-site-header-context' not in node['attrs']:continue
   children=[n for n in nodes if n['parent'] is node]
-  if len(children)==1 and children[0]['tag']=='nav' and links(node) and links(node)<=targets:
+  links=[n['attrs'].get('href','') for n in nodes if n['tag']=='a' and node['open_end']<=n['start'] and n['end']<=node['close_start']]
+  if children and all(n['tag']=='nav' for n in children) and all(href.startswith('#') for href in links):
    text=text[:node['start']]+text[node['end']:]
  return text
+
+BREADCRUMB_TITLES={
+ 'patients':('Пациентам','Patients'),
+ 'social':('Публикации из соцсетей','Social media posts'),
+ 'collaboration':('Профессиональное сотрудничество','Professional collaboration'),
+ 'privacy.html':('Политика конфиденциальности','Privacy policy'),
+ 'for-doctors':('Для врачей','For doctors'),
+ 'bacterial-keratitis':('Бактериальный кератит','Bacterial keratitis'),
+ 'complicated-cataract':('Осложнённая катаракта','Complicated cataract'),
+ 'iol-dislocation':('Дислокация ИОЛ','IOL dislocation'),
+ 'iol-calculation':('Расчёт ИОЛ','IOL power calculation'),
+ 'simple-questions':('Простые вопросы — сложные решения','Simple questions — complex decisions'),
+ 'updates':('Обновления','Updates'),
+ 'professional-use.html':('Условия профессионального использования','Professional use terms'),
+ 'ophthasearch':('OphthaSearch','OphthaSearch'),
+ 'ophthasearch-v2':('OphthaSearch','OphthaSearch'),
+ 'ophtha-arcade':('Ophtha Arcade','Ophtha Arcade'),
+ 'ophtha-merge':('Ophtha Merge','Ophtha Merge'),
+}
+
+def _without_generated_breadcrumbs(text):
+ for node in sorted(Elements(text).nodes,key=lambda n:n['start'],reverse=True):
+  if node['attrs'].get('data-site-breadcrumbs')=='shared':text=text[:node['start']]+text[node['end']:]
+ return text
+
+def _with_breadcrumbs(text,relative):
+ if relative in {'index.html','en/index.html'}:return text
+ nodes=Elements(text).nodes
+ # Preserve existing breadcrumbs, including their page-specific layout.
+ if any(n['tag'] in {'nav','p','ol','div'} and (any('crumb' in c.lower() for c in n['attrs'].get('class','').split()) or re.search(r'breadcrumb|хлебн',n['attrs'].get('aria-label',''),re.I)) for n in nodes):return text
+ heading=next((n for n in nodes if n['tag']=='h1'),None)
+ if not heading or not heading['parent']:return text
+ en=relative.startswith('en/');lang=1 if en else 0;prefix='/en' if en else ''
+ parts=list(Path(relative.removeprefix('en/')).parts)
+ if parts[-1]=='index.html':parts.pop()
+ current=parts[-1]
+ label=BREADCRUMB_TITLES.get(current)
+ title=label[lang] if label else html.unescape(re.sub(r'<[^>]+>',' ',text[heading['open_end']:heading['close_start']])).strip()
+ items=[('Home' if en else 'Главная',prefix+'/')]
+ if parts[0]=='for-doctors' and len(parts)>1:
+  items.append((BREADCRUMB_TITLES['for-doctors'][lang],prefix+'/for-doctors/'))
+  if current=='complicated-cataract':items.append((BREADCRUMB_TITLES['simple-questions'][lang],prefix+'/for-doctors/simple-questions/'))
+  if current=='ophtha-merge':items.append(('Ophtha Arcade',prefix+'/for-doctors/ophtha-arcade/'))
+ if current=='collaboration':items.append((BREADCRUMB_TITLES['for-doctors'][lang],prefix+'/for-doctors/'))
+ content=[]
+ for name,url in items:
+  content.append('<a href="'+html.escape(url,quote=True)+'">'+html.escape(name)+'</a>')
+  content.append('<span class="site-breadcrumbs__separator" aria-hidden="true">/</span>')
+ content.append('<span class="site-breadcrumbs__current" aria-current="page">'+html.escape(title)+'</span>')
+ nav='<nav class="site-breadcrumbs" data-site-breadcrumbs="shared" aria-label="'+('Breadcrumb' if en else 'Хлебные крошки')+'">'+''.join(content)+'</nav>'
+ position=heading['parent']['open_end']
+ return text[:position]+nav+text[position:]
 
 def _url(relative):
  path='/'+relative
@@ -158,7 +203,7 @@ def update_page(text,relative):
   for node in reversed(headers):text=text[:node['start']]+_remaining_header(text,node)+text[node['end']:]
   if first and first['parent'] and first['parent']['tag']=='body':text=text[:first['start']]+header+text[first['start']:]
   else:text=re.sub(r'(<body\b[^>]*>)',lambda m:m.group(1)+header,text,count=1,flags=re.I)
- return inject_assets(_without_duplicate_article_shortcuts(text))
+ return _with_breadcrumbs(inject_assets(_without_duplicate_article_shortcuts(text)),relative)
 
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true');args=parser.parse_args();changed=[]

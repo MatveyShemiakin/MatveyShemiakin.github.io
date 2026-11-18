@@ -18,6 +18,7 @@ class SharedHeaderTests(unittest.TestCase):
     self.assertEqual(c.content_without_navigation(source),c.content_without_navigation(result))
     self.assertEqual(result,c.update_page(result,rel))
     self.assertEqual(result.count('data-site-header="shared"'),1)
+    self.assertNotIn('data-site-header-context',result)
     header=re.search(r'<header\b.*?</header>',result,re.S).group()
     self.assertEqual(header.count('data-site-theme-toggle'),1)
     self.assertEqual(header.count('data-site-search-open'),1)
@@ -70,7 +71,7 @@ class SharedHeaderTests(unittest.TestCase):
  def test_updates_and_local_page_navigation_survive_migration(self):
   c=self.component()
   import subprocess
-  for rel,markers in [('patients/index.html',['id="patient-updates"','id="patient-updates-list"','id="conditions"']),('for-doctors/index.html',['id="doctors-updates"','<!-- doctors-updates:start -->']),('patients/cataract-postop-plan/index.html',['href="#journal"','href="#urgent"'])]:
+  for rel,markers in [('patients/index.html',['id="patient-updates"','id="patient-updates-list"','id="conditions"']),('for-doctors/index.html',['id="doctors-updates"','<!-- doctors-updates:start -->']),('patients/cataract-postop-plan/index.html',['id="journal"','id="urgent"'])]:
    source=subprocess.check_output(['git','show','HEAD:'+rel],text=True,cwd=ROOT)
    result=c.update_page(source,rel)
    for marker in markers:self.assertIn(marker,result,rel)
