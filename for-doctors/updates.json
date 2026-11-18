@@ -1,10 +1,10 @@
 [
   {
     "id": "events",
-    "event_id": "events:15",
+    "event_id": "events:16",
     "published": "2026-08-16",
-    "updated": "2026-11-16",
-    "revision": 15,
+    "updated": "2026-11-18",
+    "revision": 16,
     "kind": "updated",
     "title": "Офтальмологические события",
     "title_en": "Ophthalmology events",
@@ -15,6 +15,21 @@
     "topics": [
       "events"
     ]
+  },
+  {
+    "id": "cabinet",
+    "event_id": "cabinet:1",
+    "published": "2026-11-17",
+    "updated": "2026-11-17",
+    "revision": 1,
+    "kind": "new",
+    "title": "Кабинет офтальмолога",
+    "title_en": "Ophthalmologist’s Desk",
+    "description": "Рабочие ресурсы офтальмолога по задачам приёма: ОКТ, атласы, гониоскопия, рекомендации, расчёт ИОЛ и материалы для пациентов.",
+    "description_en": "Practical ophthalmology resources by clinical task: OCT, image atlases, gonioscopy, guidelines, IOL calculation and patient information.",
+    "url": "/for-doctors/cabinet/",
+    "url_en": "/en/for-doctors/cabinet/",
+    "topics": []
   },
   {
     "id": "iol-calculation",

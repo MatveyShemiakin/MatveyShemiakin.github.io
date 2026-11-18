@@ -8,6 +8,13 @@
       "revision": 3,
       "kind": "updated"
     },
+    "cabinet": {
+      "fingerprint": "d1018fc2d73415f934961c70156911dbdd2c4ea2da30be949b7017ce7cc29230",
+      "published": "2026-11-17",
+      "updated": "2026-11-17",
+      "revision": 1,
+      "kind": "new"
+    },
     "complicated-cataract": {
       "fingerprint": "ac7c5f5f2d0a5ce3ee15bf4e18b523f7a3f1ad482dc28320679a4e10b31dfe32",
       "published": "2026-09-30",
@@ -16,10 +23,10 @@
       "kind": "updated"
     },
     "events": {
-      "fingerprint": "f5f161388fd2ddacd6194e313a6a38c055dac24fddc0a09adf5722aab64329c7",
+      "fingerprint": "caffdfc4c61aba4b9d9ad08bd9b10776bcd3fd89a877b4a904e48f3ac62f7a64",
       "published": "2026-08-16",
-      "updated": "2026-11-16",
-      "revision": 15,
+      "updated": "2026-11-18",
+      "revision": 16,
       "kind": "updated"
     },
     "free-learning": {
