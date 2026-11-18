@@ -11,7 +11,7 @@ from string import Template
 ROOT=Path(__file__).resolve().parents[1]
 CSS=('site-language-switch.css','site-theme.css','site-mega-nav.css','mobile-nav.css','site-header.css')
 SCRIPTS=('site-language-switch.js','site-theme.js','site-mega-nav.js','mobile-nav.js')
-PAGE_ASSETS=('for-doctors/simple-questions/series.css','legal.js')
+PAGE_ASSETS=('for-doctors/simple-questions/series.css','legal.js','for-doctors/collaboration-entry.css')
 VOID={'area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'}
 
 class Elements(HTMLParser):
