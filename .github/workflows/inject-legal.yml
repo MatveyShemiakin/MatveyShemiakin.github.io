@@ -92,7 +92,7 @@ jobs:
       - run: python -m unittest tests/test_patient_consultation_cta.py
       - run: python -m unittest tests/test_site_mega_nav.py tests/test_shared_site_header.py
       - run: python scripts/site_header.py --check
-      - run: node --test tests/shared-header-menu.test.mjs tests/shared-header-language.test.mjs
+      - run: node --test tests/shared-header-menu.test.mjs tests/shared-header-language.test.mjs tests/site-breadcrumbs.test.mjs
       - run: python -m unittest tests/test_logbook_injection_isolation.py
       - run: node --check analytics.js
       - run: node tests/test_analytics_events.mjs

@@ -125,16 +125,40 @@ BREADCRUMB_TITLES={
  'ophtha-merge':('Ophtha Merge','Ophtha Merge'),
 }
 
+BREADCRUMB_CLASSES={'site-breadcrumbs','clinical-breadcrumbs','breadcrumbs','crumbs','crumb','learn-breadcrumbs','article-crumb'}
+BREADCRUMB_TITLES.update({
+ 'events':('Офтальмологические мероприятия','Ophthalmology events'),
+ 'free-learning':('Бесплатное обучение','Free learning'),
+ 'cabinet':('Кабинет офтальмолога','Ophthalmologist workspace'),
+ 'penetrating-keratoplasty':('Ведение после сквозной кератопластики','Follow-up after penetrating keratoplasty'),
+ 'cataract':('Катаракта','Cataract'),
+ 'cataract-postop-plan':('Послеоперационный план','Postoperative plan'),
+ 'before-surgery':('До операции','Before surgery'),
+ 'surgery-day':('День операции','Surgery day'),
+ 'recovery':('Первые дни после операции','Early recovery'),
+ 'daily-life':('Повседневная жизнь','Daily life'),
+ 'eye-drops':('Глазные капли','Eye drops'),
+ 'glasses':('Очки и зрение','Glasses and vision'),
+ 'glaucoma':('Глаукома','Glaucoma'),
+ 'health':('Здоровье в повседневной жизни','Everyday health'),
+ 'instagram-account-blocking':('Блокировка Instagram','Instagram account blocking'),
+})
+
+def breadcrumb_nodes(text):
+ nodes=Elements(text).nodes
+ candidates=[n for n in nodes if n['tag'] in {'nav','p','ol','div'} and (BREADCRUMB_CLASSES.intersection(n['attrs'].get('class','').split()) or re.search(r'breadcrumb|хлебн|навигационная цепочка',n['attrs'].get('aria-label',''),re.I))]
+ return [n for n in candidates if not any(p['start']<n['start'] and n['end']<=p['end'] for p in candidates)]
+
 def _without_generated_breadcrumbs(text):
- for node in sorted(Elements(text).nodes,key=lambda n:n['start'],reverse=True):
-  if node['attrs'].get('data-site-breadcrumbs')=='shared':text=text[:node['start']]+text[node['end']:]
- return text
+ # Normalize every legacy variant, not just the latest shared fragment.
+ for node in sorted(breadcrumb_nodes(text),key=lambda n:n['start'],reverse=True):
+  text=text[:node['start']]+text[node['end']:]
+ return re.sub(r'(?m)^[ \t]+$','',text)
 
 def _with_breadcrumbs(text,relative):
+ text=_without_generated_breadcrumbs(text)
  if relative in {'index.html','en/index.html'}:return text
  nodes=Elements(text).nodes
- # Preserve existing breadcrumbs, including their page-specific layout.
- if any(n['tag'] in {'nav','p','ol','div'} and (any('crumb' in c.lower() for c in n['attrs'].get('class','').split()) or re.search(r'breadcrumb|хлебн',n['attrs'].get('aria-label',''),re.I)) for n in nodes):return text
  heading=next((n for n in nodes if n['tag']=='h1'),None)
  if not heading or not heading['parent']:return text
  en=relative.startswith('en/');lang=1 if en else 0;prefix='/en' if en else ''
@@ -148,9 +172,16 @@ def _with_breadcrumbs(text,relative):
   items.append((BREADCRUMB_TITLES['for-doctors'][lang],prefix+'/for-doctors/'))
   if current=='complicated-cataract':items.append((BREADCRUMB_TITLES['simple-questions'][lang],prefix+'/for-doctors/simple-questions/'))
   if current=='ophtha-merge':items.append(('Ophtha Arcade',prefix+'/for-doctors/ophtha-arcade/'))
+ if parts[0]=='patients' and len(parts)>1:
+  items.append((BREADCRUMB_TITLES['patients'][lang],prefix+'/patients/'))
+  if current in {'before-surgery','surgery-day','recovery','daily-life','eye-drops','glasses','cataract-postop-plan'}:
+   items.append((BREADCRUMB_TITLES['cataract'][lang],prefix+'/patients/cataract/'))
+  if current=='iol-dislocation':title=('Смещение искусственного хрусталика','Intraocular lens dislocation')[lang]
+ if parts[0]=='social' and len(parts)>1:items.append((BREADCRUMB_TITLES['social'][lang],prefix+'/social/'))
  if current=='collaboration':items.append((BREADCRUMB_TITLES['for-doctors'][lang],prefix+'/for-doctors/'))
  content=[]
  for name,url in items:
+  if not _exists(url):raise ValueError('Breadcrumb target does not exist: '+url)
   content.append('<a href="'+html.escape(url,quote=True)+'">'+html.escape(name)+'</a>')
   content.append('<span class="site-breadcrumbs__separator" aria-hidden="true">/</span>')
  content.append('<span class="site-breadcrumbs__current" aria-current="page">'+html.escape(title)+'</span>')

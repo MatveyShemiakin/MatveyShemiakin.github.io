@@ -90,3 +90,31 @@ class SharedHeaderTests(unittest.TestCase):
     if rel=='patients/index.html':
      self.assertIn('id="conditions"',result)
      self.assertNotIn('data-site-header-context',result)
+
+ def test_one_shared_breadcrumb_per_inner_page_with_working_parent_links(self):
+  c=self.component()
+  for rel in c.public_pages():
+   with self.subTest(page=rel):
+    text=(ROOT/rel).read_text();nodes=c.breadcrumb_nodes(text)
+    self.assertEqual(len(nodes),0 if rel in {'index.html','en/index.html'} else 1)
+    if not nodes:continue
+    nav=nodes[0]
+    self.assertEqual(nav['tag'],'nav')
+    self.assertEqual(nav['attrs'].get('data-site-breadcrumbs'),'shared')
+    self.assertEqual(nav['attrs'].get('class'),'site-breadcrumbs')
+    descendants=[n for n in c.Elements(text).nodes if nav['open_end']<=n['start']<nav['close_start']]
+    links=[n['attrs']['href'] for n in descendants if n['tag']=='a']
+    self.assertEqual(links[0],'/en/' if rel.startswith('en/') else '/')
+    self.assertEqual(len(links),len(set(links)))
+    for href in links:self.assertTrue(c._exists(href),href)
+    self.assertEqual(sum(n['attrs'].get('aria-current')=='page' for n in descendants),1)
+
+ def test_mixed_legacy_and_shared_breadcrumbs_are_replaced_once(self):
+  c=self.component();rel='for-doctors/bacterial-keratitis/index.html'
+  source=(ROOT/rel).read_text()
+  source=source.replace('<h1>','<nav class="clinical-breadcrumbs"><a href="/">Old home</a></nav><h1>',1)
+  result=c.update_page(source,rel)
+  self.assertEqual(len(c.breadcrumb_nodes(result)),1)
+  self.assertNotIn('class="clinical-breadcrumbs"',result)
+  self.assertEqual(c.content_without_navigation(source),c.content_without_navigation(result))
+  self.assertEqual(result,c.update_page(result,rel))
