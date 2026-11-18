@@ -70,7 +70,7 @@ class SharedHeaderTests(unittest.TestCase):
  def test_updates_and_local_page_navigation_survive_migration(self):
   c=self.component()
   import subprocess
-  for rel,markers in [('patients/index.html',['id="patient-updates"','id="patient-updates-list"','href="#conditions"']),('for-doctors/index.html',['id="doctors-updates"','<!-- doctors-updates:start -->']),('patients/cataract-postop-plan/index.html',['href="#journal"','href="#urgent"'])]:
+  for rel,markers in [('patients/index.html',['id="patient-updates"','id="patient-updates-list"','id="conditions"']),('for-doctors/index.html',['id="doctors-updates"','<!-- doctors-updates:start -->']),('patients/cataract-postop-plan/index.html',['href="#journal"','href="#urgent"'])]:
    source=subprocess.check_output(['git','show','HEAD:'+rel],text=True,cwd=ROOT)
    result=c.update_page(source,rel)
    for marker in markers:self.assertIn(marker,result,rel)
@@ -86,4 +86,6 @@ class SharedHeaderTests(unittest.TestCase):
     self.assertEqual(result.count('id="'+widget+'"'),1)
     self.assertEqual(result,c.update_page(result,rel))
     self.assertNotRegex(result,r'<div[^>]*data-site-header-context[^>]*>\s*</div>')
-    if rel=='patients/index.html':self.assertIn('href="#conditions"',result)
+    if rel=='patients/index.html':
+     self.assertIn('id="conditions"',result)
+     self.assertNotIn('data-site-header-context',result)

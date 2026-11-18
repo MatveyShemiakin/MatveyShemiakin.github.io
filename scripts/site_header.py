@@ -98,12 +98,14 @@ def content_without_navigation(text):
  return inject_assets(_without_duplicate_article_shortcuts(text))+updates
 
 def _without_duplicate_article_shortcuts(text):
- # An article's existing desktop/mobile TOC already provides these anchors.
+ # Articles use their own TOC; the patient hub uses its content cards and search.
+ # Do not keep their legacy shortcut row below the shared header.
  nodes=Elements(text).nodes
  toc=next((n for n in nodes if 'article-toc' in n['attrs'].get('class','').split()),None)
- if not toc:return text
+ patient_hub=any('patient-hub-hero' in n['attrs'].get('class','').split() for n in nodes)
+ if not toc and not patient_hub:return text
  def links(node):return {n['attrs'].get('href') for n in nodes if n['tag']=='a' and node['open_end']<=n['start'] and n['end']<=node['close_start']}
- targets=links(toc)
+ targets=links(toc) if toc else {'#conditions','#paths','#faq','#author'}
  for node in sorted(nodes,key=lambda n:n['start'],reverse=True):
   if 'data-site-header-context' not in node['attrs']:continue
   children=[n for n in nodes if n['parent'] is node]
