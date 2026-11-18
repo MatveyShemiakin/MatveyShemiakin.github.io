@@ -2,80 +2,80 @@
   "version": 1,
   "materials": {
     "bacterial-keratitis": {
-      "fingerprint": "2251a87e7693a7099d2438ea5b18ef3dd8056882e8eb71e9ab461794157c2551",
+      "fingerprint": "1b366f99728a4a01fc77a1107e1a34748b0ca327d896176bc95fe5b8dc751b9f",
       "published": "2026-07-20",
-      "updated": "2026-10-17",
-      "revision": 3,
-      "kind": "updated"
-    },
-    "cabinet": {
-      "fingerprint": "d1018fc2d73415f934961c70156911dbdd2c4ea2da30be949b7017ce7cc29230",
-      "published": "2026-11-17",
-      "updated": "2026-11-17",
-      "revision": 1,
-      "kind": "new"
-    },
-    "complicated-cataract": {
-      "fingerprint": "ac7c5f5f2d0a5ce3ee15bf4e18b523f7a3f1ad482dc28320679a4e10b31dfe32",
-      "published": "2026-09-30",
-      "updated": "2026-10-17",
-      "revision": 6,
-      "kind": "updated"
-    },
-    "events": {
-      "fingerprint": "caffdfc4c61aba4b9d9ad08bd9b10776bcd3fd89a877b4a904e48f3ac62f7a64",
-      "published": "2026-08-16",
       "updated": "2026-11-18",
-      "revision": 16,
-      "kind": "updated"
-    },
-    "free-learning": {
-      "fingerprint": "73daab1922f3d2a8fd8e09aa2a4132eb5050083a4a43b31856b8acdfa00c872d",
-      "published": "2026-11-02",
-      "updated": "2026-11-06",
-      "revision": 3,
-      "kind": "updated"
-    },
-    "iol-calculation": {
-      "fingerprint": "c27179a23f2e248140c5c269ac3a9b61c46aa302d13cf589080e443a6171ea4a",
-      "published": "2026-11-06",
-      "updated": "2026-11-09",
-      "revision": 2,
-      "kind": "updated"
-    },
-    "iol-dislocation": {
-      "fingerprint": "7ecf06dd8171b9da9ada9d4eaa23edb6158acce008c6102da13c8d043994f5a9",
-      "published": "2026-08-25",
-      "updated": "2026-10-17",
-      "revision": 5,
-      "kind": "updated"
-    },
-    "ophtha-arcade": {
-      "fingerprint": "f5bc7324055af5030235bbc09cd2a339030fedc15416d22d7e159cce5ac8bd10",
-      "published": "2026-08-30",
-      "updated": "2026-10-17",
       "revision": 4,
       "kind": "updated"
     },
-    "ophthasearch": {
-      "fingerprint": "9b2797c54960b59711f692a00dfddfaefddf7b9d5d5ca8535b69893c5b821d3f",
+    "cabinet": {
+      "fingerprint": "c3d372c12f72ab67029395db6ca35a171830274f181211a1fd53afef4286d1d7",
+      "published": "2026-11-17",
+      "updated": "2026-11-18",
+      "revision": 2,
+      "kind": "updated"
+    },
+    "complicated-cataract": {
+      "fingerprint": "219e82f41930d4be924293345f8b235d3846638cfe1aeff8399a28fcc342a5cf",
+      "published": "2026-09-30",
+      "updated": "2026-11-18",
+      "revision": 7,
+      "kind": "updated"
+    },
+    "events": {
+      "fingerprint": "67df83a2dfc475d800c0c14ff4cb604e3e7980b3e30131ca6280d18554643d34",
       "published": "2026-08-16",
-      "updated": "2026-08-30",
+      "updated": "2026-11-18",
+      "revision": 17,
+      "kind": "updated"
+    },
+    "free-learning": {
+      "fingerprint": "18c759bf96ed70f6a6848e07f9fd2cb3a7982f68106ac5804efd918276f6d550",
+      "published": "2026-11-02",
+      "updated": "2026-11-18",
+      "revision": 4,
+      "kind": "updated"
+    },
+    "iol-calculation": {
+      "fingerprint": "6b445ab3f2456edd9866c2473f869652e44d482b8c125a3eedf154e366ce5b61",
+      "published": "2026-11-06",
+      "updated": "2026-11-18",
+      "revision": 3,
+      "kind": "updated"
+    },
+    "iol-dislocation": {
+      "fingerprint": "3d933366b389296fb45d9b632af4e5c207177a87bab9a15d3dd821a1e7c33d3b",
+      "published": "2026-08-25",
+      "updated": "2026-11-18",
       "revision": 6,
       "kind": "updated"
     },
+    "ophtha-arcade": {
+      "fingerprint": "0eb59246bbb2f66006eecce6fcdc7b6b50726e7f79fe5d2275265ac749013ac1",
+      "published": "2026-08-30",
+      "updated": "2026-11-18",
+      "revision": 5,
+      "kind": "updated"
+    },
+    "ophthasearch": {
+      "fingerprint": "ec5b437bb88ad7be2587aef8a93bd2ba842824c93609c2d844a126e0fd5f2cba",
+      "published": "2026-08-16",
+      "updated": "2026-11-18",
+      "revision": 7,
+      "kind": "updated"
+    },
     "ophthasearch-v2": {
-      "fingerprint": "bf205601e2e937c8beab6fcd0e01fd0ce2143d05f0b2e1e09679f5a79c8df3fd",
+      "fingerprint": "29687f6076bae28c78a62ca141ccdf93aba36b7070200c1c3e96368db6a7a6da",
       "published": "2026-08-25",
-      "updated": "2026-08-30",
-      "revision": 3,
+      "updated": "2026-11-18",
+      "revision": 4,
       "kind": "updated"
     },
     "penetrating-keratoplasty": {
-      "fingerprint": "3caf29583a1a9a37052062d72a047cfbe61a41f9bd5bbfdf341e4e4dac39851f",
+      "fingerprint": "631e21c6b53a6aa5a7cae319216107d54d4bcf459368845b87f89c06039c6033",
       "published": "2026-08-16",
-      "updated": "2026-10-17",
-      "revision": 3,
+      "updated": "2026-11-18",
+      "revision": 4,
       "kind": "updated"
     }
   }
