@@ -66,6 +66,26 @@ def main():
       page.locator('[data-site-header] .site-mega-nav').wait_for(state='attached')
       reference=page.evaluate(METRICS)
       page.screenshot(path=str(out/(name+'-home.png')))
+      fab=page.locator('.patient-fab')
+      fab.locator('.patient-fab__main').click()
+      actions=fab.locator('.patient-fab__action')
+      assert actions.count()==4,'contact menu must contain Telegram, Instagram, YouTube and Share'
+      for service,href in [('Instagram','https://www.instagram.com/dr.shemyakin/'),('YouTube','https://www.youtube.com/@dr.shemyakin')]:
+       link=fab.get_by_role('link',name=service)
+       assert link.get_attribute('href')==href
+       assert link.get_attribute('target')=='_blank'
+       assert 'noopener' in link.get_attribute('rel')
+       assert link.locator('svg').count()==1
+      assert fab.locator('small').all_text_contents()==(['Только организационные вопросы','Мой профиль в Instagram','Мой канал на YouTube','Отправить ссылку'] if lang=='ru' else ['Organisational questions only','My Instagram profile','My YouTube channel','Send the page link'])
+      assert fab.locator('.patient-fab__menu').evaluate('(e)=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>=0}'),'contact menu exceeds viewport'
+      page.screenshot(path=str(out/(name+'-contacts.png')))
+      if width==320:
+       page.set_viewport_size({'width':width,'height':568})
+       assert fab.locator('.patient-fab__menu').evaluate('(e)=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight}'),'contact menu exceeds short viewport'
+       page.screenshot(path=str(out/(name+'-contacts-short.png')))
+       page.set_viewport_size({'width':width,'height':1000})
+      page.keyboard.press('Escape')
+      assert fab.locator('.patient-fab__main').get_attribute('aria-expanded')=='false'
       for support_path in [prefix+'/',prefix+'/patients/']:
        page.goto(base+support_path,wait_until='domcontentloaded',timeout=45000)
        support=page.locator('.hero-actions [data-site-support="widget"]')

@@ -10,7 +10,7 @@
     cookie:'Сайт использует необходимые cookie и локальное хранилище. Необязательная веб-аналитика может быть включена только с вашего согласия. Вы можете разрешить аналитику или продолжить только с необходимыми технологиями.',accept:'Разрешить аналитику',reject:'Только необходимые'
   };
   const privacyUrl=lang==='en'?'/en/privacy.html':'/privacy.html';
-  if(!document.querySelector('link[href^="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=8e6045e2e384';document.head.appendChild(l)}
+  if(!document.querySelector('link[href^="/legal.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/legal.css?v=6b8db282906d';document.head.appendChild(l)}
   if(!isDoctorsSection&&!document.querySelector('link[href^="/prodoctorov-widget.css"]')){const l=document.createElement('link');l.rel='stylesheet';l.href='/prodoctorov-widget.css?v=20260723-2';document.head.appendChild(l)}
 
   function initProDoctorovWidget(){
@@ -110,9 +110,9 @@
   function initSiteFab(){
     if(document.querySelector('.patient-fab'))return;
     const F=lang==='en'?{
-      open:'Open quick actions',close:'Close quick actions',telegram:'Message me directly',telegramNote:'Organisational questions only',share:'Share this page',shareNote:'Send the page link',copied:'Link copied',siteLogo:'MS',shareText:'Page from Matvey Shemyakin’s website'
+      open:'Open quick actions',close:'Close quick actions',telegram:'Message me directly',telegramNote:'Organisational questions only',instagramNote:'My Instagram profile',youtubeNote:'My YouTube channel',share:'Share this page',shareNote:'Send the page link',copied:'Link copied',siteLogo:'MS',shareText:'Page from Matvey Shemyakin’s website'
     }:{
-      open:'Открыть быстрые действия',close:'Закрыть быстрые действия',telegram:'Написать лично',telegramNote:'Только организационные вопросы',share:'Поделиться страницей',shareNote:'Отправить ссылку',copied:'Ссылка скопирована',siteLogo:'МШ',shareText:'Страница сайта Матвея Шемякина'
+      open:'Открыть быстрые действия',close:'Закрыть быстрые действия',telegram:'Написать лично',telegramNote:'Только организационные вопросы',instagramNote:'Мой профиль в Instagram',youtubeNote:'Мой канал на YouTube',share:'Поделиться страницей',shareNote:'Отправить ссылку',copied:'Ссылка скопирована',siteLogo:'МШ',shareText:'Страница сайта Матвея Шемякина'
     };
     const root=document.createElement('div');
     root.className='patient-fab';
@@ -123,6 +123,18 @@
             <svg viewBox="0 0 40 40" focusable="false"><circle cx="20" cy="20" r="20" fill="#27A7E7"/><path d="M10.4 19.2 29.8 11.7c.9-.3 1.7.2 1.4 1.4l-3.3 15.6c-.2 1.1-1 1.4-2 .9l-5-3.7-2.4 2.4c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2l-11.4 7.2-4.9-1.5c-1-.3-1.1-1 .2-1.5Z" fill="#fff"/></svg>
           </span>
           <span><strong>${F.telegram}</strong><small>${F.telegramNote}</small></span>
+        </a>
+        <a class="patient-fab__action" href="https://www.instagram.com/dr.shemyakin/" target="_blank" rel="noopener noreferrer">
+          <span class="patient-fab__logo" aria-hidden="true">
+            <svg viewBox="0 0 40 40" focusable="false"><defs><linearGradient id="site-fab-instagram" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FEDA75"/><stop offset=".3" stop-color="#FA7E1E"/><stop offset=".6" stop-color="#D62976"/><stop offset="1" stop-color="#4F5BD5"/></linearGradient></defs><rect width="40" height="40" rx="12" fill="url(#site-fab-instagram)"/><rect x="9" y="9" width="22" height="22" rx="7" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="20" cy="20" r="5.5" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="27" cy="13" r="1.6" fill="#fff"/></svg>
+          </span>
+          <span><strong>Instagram</strong><small>${F.instagramNote}</small></span>
+        </a>
+        <a class="patient-fab__action" href="https://www.youtube.com/@dr.shemyakin" target="_blank" rel="noopener noreferrer">
+          <span class="patient-fab__logo" aria-hidden="true">
+            <svg viewBox="0 0 40 40" focusable="false"><rect x="1" y="6" width="38" height="28" rx="9" fill="#FF0000"/><path d="m17 13 11 7-11 7Z" fill="#fff"/></svg>
+          </span>
+          <span><strong>YouTube</strong><small>${F.youtubeNote}</small></span>
         </a>
         <button class="patient-fab__action" type="button" data-patient-share>
           <span class="patient-fab__logo patient-fab__logo--site" aria-hidden="true">${F.siteLogo}</span>
