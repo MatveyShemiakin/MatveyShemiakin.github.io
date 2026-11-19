@@ -4,6 +4,7 @@ import argparse
 import functools
 import http.server
 import json
+import os
 import hashlib
 import time
 import urllib.request
@@ -49,7 +50,7 @@ def main():
   else:raise AssertionError('Production has not served the approved header styles yet')
  rows=[]
  with sync_playwright() as p:
-  browser=p.chromium.launch()
+  browser=p.chromium.launch(channel=os.environ.get('HEADER_BROWSER_CHANNEL') or None)
   for lang in ['ru','en']:
    prefix='/en' if lang=='en' else ''
    for width in [320,390,768,1440]:
