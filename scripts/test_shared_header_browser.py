@@ -38,7 +38,7 @@ def main():
   threading.Thread(target=server.serve_forever,daemon=True).start()
   base=f'http://127.0.0.1:{server.server_port}'
  if args.base_url:
-  assets=['site-header.css','for-doctors/simple-questions/series.css']
+  assets=['site-header.css','for-doctors/simple-questions/series.css','legal.css','legal.js']
   versions={asset:hashlib.sha256((ROOT/asset).read_bytes()).hexdigest()[:12] for asset in assets}
   for attempt in range(40):
    try:
@@ -65,6 +65,18 @@ def main():
       page.locator('[data-site-header] .site-mega-nav').wait_for(state='attached')
       reference=page.evaluate(METRICS)
       page.screenshot(path=str(out/(name+'-home.png')))
+      for support_path in [prefix+'/',prefix+'/patients/']:
+       page.goto(base+support_path,wait_until='domcontentloaded',timeout=45000)
+       support=page.locator('.hero-actions [data-site-support="widget"]')
+       support.wait_for(state='visible')
+       for card in page.locator('[data-site-support]').all():
+        assert card.locator('.button').inner_text()==('Поддержать проект' if lang=='ru' else 'Support the project')
+        assert card.locator('.button').get_attribute('href')=='https://tips.tips/000492830'
+        assert card.locator('h2').evaluate('(e)=>parseFloat(getComputedStyle(e).fontSize)<=18'),'support heading must remain compact'
+        assert card.evaluate('(e)=>e.scrollWidth<=e.clientWidth+1'),'support content overflow'
+       support.evaluate('(e)=>window.scrollTo(0,window.scrollY+e.getBoundingClientRect().top-260)')
+       label='patients' if 'patients' in support_path else 'home'
+       page.screenshot(path=str(out/(name+'-support-'+label+'.png')))
       for slug in ['simple-questions','complicated-cataract']:
        path=prefix+'/for-doctors/'+slug+'/'
        page.goto(base+path,wait_until='domcontentloaded',timeout=45000)

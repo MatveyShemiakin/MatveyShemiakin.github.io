@@ -47,11 +47,11 @@
 
 /* Shared educational support: existing container, card and button classes. */
 [data-site-support-wrap]{width:min(100% - 48px,1240px);margin:0 auto;padding:24px 0 48px}
-.privacy-card[data-site-support]{box-sizing:border-box;min-width:0;max-width:100%;padding:24px;border:1px solid var(--site-theme-border,#d8d3ca);border-radius:20px;background:var(--site-theme-surface,#fff);color:var(--site-theme-text,#111a27);box-shadow:none;text-align:left;font-family:var(--legal-sans)}
-.privacy-card[data-site-support] h2{margin:0 0 10px;font-family:var(--serif,Georgia,serif);font-size:clamp(22px,2.2vw,28px);font-weight:400;line-height:1.2;letter-spacing:0;color:var(--site-theme-text,#111a27);overflow-wrap:anywhere}
-.privacy-card[data-site-support] p{max-width:65ch;margin:0 0 18px;font-size:16px;line-height:1.55;letter-spacing:0;color:var(--site-theme-muted,#596679)}
-.privacy-card[data-site-support] .button{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:auto;min-width:0;max-width:100%;min-height:48px;height:auto;margin:0;padding:12px 20px;border:1px solid var(--site-theme-accent,#3567ad);border-radius:14px;background:var(--site-theme-surface-2,#ece9e2);box-shadow:none;color:var(--site-theme-accent,#3567ad);font:700 16px/1.4 var(--legal-sans);letter-spacing:0;text-decoration:none;white-space:normal;text-align:center;overflow-wrap:anywhere;transform:none}
-.privacy-card[data-site-support] .button:hover{background:var(--site-theme-surface,#fff);text-decoration:underline;text-underline-offset:4px}
+.privacy-card[data-site-support]{box-sizing:border-box;min-width:0;max-width:100%;padding:18px;border:1px solid rgba(143,179,226,.7);border-radius:16px;background:linear-gradient(135deg,rgba(77,142,255,.14),rgba(5,23,46,.85)),#06182f;color:#fff;box-shadow:0 0 22px rgba(77,142,255,.12);text-align:left;font-family:var(--legal-sans)}
+.privacy-card[data-site-support] h2{margin:0 0 8px;font-family:var(--legal-sans);font-size:16px;font-weight:700;line-height:1.4;letter-spacing:0;color:#fff;overflow-wrap:anywhere}
+.privacy-card[data-site-support] p{max-width:65ch;margin:0 0 14px;font-size:14px;line-height:1.5;letter-spacing:0;color:#c7d3e3}
+.privacy-card[data-site-support] .button{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:100%;min-width:0;max-width:100%;min-height:52px;height:auto;margin:0;padding:12px 20px;border:1px solid rgba(143,179,226,.85);border-radius:14px;background:rgba(77,142,255,.18);box-shadow:0 0 18px rgba(77,142,255,.14);color:#fff;font:700 15px/1.4 var(--legal-sans);letter-spacing:0;text-decoration:none;white-space:normal;text-align:center;overflow-wrap:anywhere;transform:none}
+.privacy-card[data-site-support] .button:hover{background:rgba(77,142,255,.26);border-color:#a7caff;box-shadow:0 0 24px rgba(77,142,255,.2);text-decoration:none}
 [data-site-support] a:focus-visible{outline:3px solid var(--site-theme-accent,#3567ad);outline-offset:4px}
 .hero-actions>.privacy-card[data-site-support="widget"]{flex:1 0 100%;grid-column:1 / -1;width:100%;margin:4px 0 0}
-@media(max-width:680px){[data-site-support-wrap]{width:calc(100% - 32px);padding:16px 0 32px}.privacy-card[data-site-support]{padding:20px}.privacy-card[data-site-support] .button{width:100%}}
+@media(max-width:680px){[data-site-support-wrap]{width:calc(100% - 32px);padding:16px 0 32px}.privacy-card[data-site-support]{padding:16px}.privacy-card[data-site-support] .button{width:100%}}
