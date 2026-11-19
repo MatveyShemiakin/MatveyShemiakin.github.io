@@ -69,6 +69,7 @@ def main():
        page.goto(base+support_path,wait_until='domcontentloaded',timeout=45000)
        support=page.locator('.hero-actions [data-site-support="widget"]')
        support.wait_for(state='visible')
+       page.wait_for_function("parseFloat(getComputedStyle(document.querySelector('[data-site-support] h2')).fontSize)<=18")
        for card in page.locator('[data-site-support]').all():
         assert card.locator('.button').inner_text()==('Поддержать проект' if lang=='ru' else 'Support the project')
         assert card.locator('.button').get_attribute('href')=='https://tips.tips/000492830'

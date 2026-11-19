@@ -48,7 +48,7 @@
 /* Shared educational support: existing container, card and button classes. */
 [data-site-support-wrap]{width:min(100% - 48px,1240px);margin:0 auto;padding:24px 0 48px}
 .privacy-card[data-site-support]{box-sizing:border-box;min-width:0;max-width:100%;padding:18px;border:1px solid rgba(143,179,226,.7);border-radius:16px;background:linear-gradient(135deg,rgba(77,142,255,.14),rgba(5,23,46,.85)),#06182f;color:#fff;box-shadow:0 0 22px rgba(77,142,255,.12);text-align:left;font-family:var(--legal-sans)}
-.privacy-card[data-site-support] h2{margin:0 0 8px;font-family:var(--legal-sans);font-size:16px;font-weight:700;line-height:1.4;letter-spacing:0;color:#fff;overflow-wrap:anywhere}
+.privacy-card[data-site-support] h2{margin:0 0 8px;font-family:var(--legal-sans);font-size:16px!important;font-weight:700;line-height:1.4!important;letter-spacing:0;color:#fff;overflow-wrap:anywhere}
 .privacy-card[data-site-support] p{max-width:65ch;margin:0 0 14px;font-size:14px;line-height:1.5;letter-spacing:0;color:#c7d3e3}
 .privacy-card[data-site-support] .button{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:100%;min-width:0;max-width:100%;min-height:52px;height:auto;margin:0;padding:12px 20px;border:1px solid rgba(143,179,226,.85);border-radius:14px;background:rgba(77,142,255,.18);box-shadow:0 0 18px rgba(77,142,255,.14);color:#fff;font:700 15px/1.4 var(--legal-sans);letter-spacing:0;text-decoration:none;white-space:normal;text-align:center;overflow-wrap:anywhere;transform:none}
 .privacy-card[data-site-support] .button:hover{background:rgba(77,142,255,.26);border-color:#a7caff;box-shadow:0 0 24px rgba(77,142,255,.2);text-decoration:none}
