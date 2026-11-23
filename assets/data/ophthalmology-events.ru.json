@@ -1953,6 +1953,39 @@
       "level": "specialty"
     },
     {
+      "id": "artificial-vision-2026",
+      "featured": false,
+      "title": "Artificial Vision 2026 — конференция по искусственному зрению",
+      "fullTitle": "Artificial Vision 2026 — конференция по искусственному зрению",
+      "org": "Artificial Vision Conference",
+      "start": "2026-12-11",
+      "end": "2026-12-12",
+      "city": "Аахен",
+      "country": "Германия",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "University Hospital Aachen, RWTH Aachen University, Pauwelsstr. 30",
+      "categories": [
+        "Исследования",
+        "Нейроофтальмология",
+        "Сетчатка"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=571771ee-eb3c-4921-8268-019d4f8b19d4&Home=%2Fhome",
+      "program": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=571771ee-eb3c-4921-8268-019d4f8b19d4&Home=%2Fhome",
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-23",
+      "description": "Международная конференция по зрительным нейропротезам: ретинальные и кортикальные импланты, ИИ и инженерные технологии. 11 декабря 10:30 – 12 декабря 16:00 (местное время).",
+      "deadlines": [],
+      "dateSource": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=571771ee-eb3c-4921-8268-019d4f8b19d4&Home=%2Fhome",
+      "coordinates": [
+        50.776,
+        6.043
+      ]
+    },
+    {
       "id": "asmhk-2026",
       "featured": false,
       "level": "national",
@@ -2014,6 +2047,40 @@
         114.17
       ],
       "dateSource": "https://asmhk2026.com/"
+    },
+    {
+      "id": "columbia-bcsc-2027",
+      "featured": false,
+      "title": "Базовый и клинический курс офтальмологии Columbia 2027",
+      "fullTitle": "Базовый и клинический курс офтальмологии Columbia 2027",
+      "org": "Columbia University Irving Medical Center",
+      "start": "2027-01-04",
+      "end": "2027-01-29",
+      "city": "Нью-Йорк",
+      "country": "США",
+      "region": "Северная Америка",
+      "mode": "Очно",
+      "venue": "Columbia University Irving Medical Center, 104 Haven Ave.",
+      "categories": [
+        "Исследования",
+        "Катаракта / ИОЛ",
+        "Глаукома",
+        "Окулопластика"
+      ],
+      "credits": "AMA PRA Category 1 Credit",
+      "submissionOpen": false,
+      "official": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=95b83575-9b04-4447-8f27-019fadc2e1fc&Home=%2Fevents%2Fcalendar",
+      "program": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=95b83575-9b04-4447-8f27-019fadc2e1fc&Home=%2Fevents%2Fcalendar",
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-23",
+      "description": "Четырёхнедельный курс: более 125 часов лекций, более 20 часов практикумов; доступны AMA PRA Category 1 Credit. Early bird завершился 30 октября 2026 года.",
+      "deadlines": [],
+      "dateSource": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=95b83575-9b04-4447-8f27-019fadc2e1fc&Home=%2Fevents%2Fcalendar",
+      "coordinates": [
+        40.844,
+        -73.941
+      ]
     },
     {
       "id": "moorf-uae-2027",
@@ -2192,6 +2259,33 @@
         139.69
       ],
       "dateSource": "https://50.jsos.jp/"
+    },
+    {
+      "id": "arvo-advance-2027",
+      "featured": false,
+      "title": "ARVO Advance: конференция по развитию научной карьеры",
+      "fullTitle": "ARVO Advance: конференция по развитию научной карьеры",
+      "org": "ARVO",
+      "start": "2027-02-03",
+      "end": "2027-02-04",
+      "city": "Онлайн",
+      "country": "Международное",
+      "region": "Международные онлайн",
+      "mode": "Онлайн",
+      "venue": "Online / virtual",
+      "categories": [
+        "Исследования"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=03a38ec4-ee9a-499d-a129-01a11bf19aa5&Home=%2Fevents%2Fcalendar",
+      "program": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=03a38ec4-ee9a-499d-a129-01a11bf19aa5&Home=%2Fevents%2Fcalendar",
+      "registration": "https://www.arvo.org/meetings-events/advance-conference",
+      "submit": null,
+      "verified": "2026-11-23",
+      "description": "Виртуальная конференция для исследователей: наставничество, международные коллаборации, карьера и публикации. Бесплатно для членов ARVO; $129 для остальных. 08:00–17:00 ET оба дня.",
+      "deadlines": [],
+      "dateSource": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=03a38ec4-ee9a-499d-a129-01a11bf19aa5&Home=%2Fevents%2Fcalendar"
     },
     {
       "id": "cornex-2027",
@@ -3088,6 +3182,38 @@
         -117.16
       ],
       "dateSource": "https://community.nanosweb.org/events/event-description?CalendarEventKey=de230df2-9ae2-4615-9dde-01a15f8150b4&Home=%2Fevents%2Fcalendar&hlmlt=ED"
+    },
+    {
+      "id": "tear-research-network-2027",
+      "featured": false,
+      "title": "Ежегодная встреча Tear Research Network 2027",
+      "fullTitle": "Ежегодная встреча Tear Research Network 2027",
+      "org": "Tear Research Network",
+      "start": "2027-03-22",
+      "end": "2027-03-24",
+      "city": "Болонья",
+      "country": "Италия",
+      "region": "Европа",
+      "mode": "Очно",
+      "venue": "Venue to be announced",
+      "categories": [
+        "Исследования",
+        "Роговица"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://arvoconnect.arvo.org/events/calendar",
+      "program": "https://arvoconnect.arvo.org/events/calendar",
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-23",
+      "description": "Встреча по исследованию слёзной плёнки и глазной поверхности, 22–24 марта 2027. Площадка уточняется организатором.",
+      "deadlines": [],
+      "dateSource": "https://arvoconnect.arvo.org/events/calendar",
+      "coordinates": [
+        44.4949,
+        11.3426
+      ]
     },
     {
       "id": "fuji-retina-2027",
@@ -5569,6 +5695,35 @@
         37.98,
         23.73
       ]
+    },
+    {
+      "id": "escrs-2028",
+      "featured": false,
+      "title": "46-й конгресс ESCRS 2028",
+      "fullTitle": "46-й конгресс ESCRS 2028",
+      "org": "European Society of Cataract and Refractive Surgeons",
+      "start": "2028-10-06",
+      "end": "2028-10-10",
+      "city": "Уточняется",
+      "country": "Уточняется",
+      "region": "Европа",
+      "mode": "Уточняется",
+      "venue": "Venue and host city not announced",
+      "categories": [
+        "Катаракта / ИОЛ",
+        "Рефракция",
+        "Роговица"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.escrs.org/escrs-annual-events/46th-congress-of-the-escrs",
+      "program": "https://www.escrs.org/escrs-annual-events/46th-congress-of-the-escrs",
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-23",
+      "description": "Организатор подтвердил 6–10 октября 2028 года; город, площадка, цены, сроки регистрации и подачи научных работ пока не опубликованы.",
+      "deadlines": [],
+      "dateSource": "https://www.escrs.org/escrs-annual-events/46th-congress-of-the-escrs"
     },
     {
       "id": "aao-2028",
