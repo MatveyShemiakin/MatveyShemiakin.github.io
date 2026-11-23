@@ -1950,6 +1950,39 @@
       ]
     },
     {
+      "id": "artificial-vision-2026",
+      "featured": false,
+      "title": "2026 Artificial Vision Conference",
+      "fullTitle": "2026 Artificial Vision Conference",
+      "org": "Artificial Vision Conference",
+      "start": "2026-12-11",
+      "end": "2026-12-12",
+      "city": "Aachen",
+      "country": "Germany",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "University Hospital Aachen, RWTH Aachen University, Pauwelsstr. 30",
+      "categories": [
+        "Research",
+        "Neuro-ophthalmology",
+        "Retina"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=571771ee-eb3c-4921-8268-019d4f8b19d4&Home=%2Fhome",
+      "program": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=571771ee-eb3c-4921-8268-019d4f8b19d4&Home=%2Fhome",
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-23",
+      "description": "International visual-neuroprosthesis symposium: retinal/cortical implants, AI and engineering. Dec 11, 10:30 – Dec 12, 16:00 (local time).",
+      "deadlines": [],
+      "dateSource": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=571771ee-eb3c-4921-8268-019d4f8b19d4&Home=%2Fhome",
+      "coordinates": [
+        50.776,
+        6.043
+      ]
+    },
+    {
       "id": "asmhk-2026",
       "featured": false,
       "level": "national",
@@ -2011,6 +2044,40 @@
         114.17
       ],
       "dateSource": "https://asmhk2026.com/"
+    },
+    {
+      "id": "columbia-bcsc-2027",
+      "featured": false,
+      "title": "Basic & Clinical Science Course in Ophthalmology 2027",
+      "fullTitle": "Basic & Clinical Science Course in Ophthalmology 2027",
+      "org": "Columbia University Irving Medical Center",
+      "start": "2027-01-04",
+      "end": "2027-01-29",
+      "city": "New York",
+      "country": "USA",
+      "region": "North America",
+      "mode": "In person",
+      "venue": "Columbia University Irving Medical Center, 104 Haven Ave.",
+      "categories": [
+        "Research",
+        "Cataract / IOL",
+        "Glaucoma",
+        "Oculoplastics"
+      ],
+      "credits": "AMA PRA Category 1 Credit",
+      "submissionOpen": false,
+      "official": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=95b83575-9b04-4447-8f27-019fadc2e1fc&Home=%2Fevents%2Fcalendar",
+      "program": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=95b83575-9b04-4447-8f27-019fadc2e1fc&Home=%2Fevents%2Fcalendar",
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-23",
+      "description": "Four-week course with 125+ lecture hours and 20+ hands-on hours; AMA PRA Category 1 Credit available. Early bird ended Oct 30, 2026.",
+      "deadlines": [],
+      "dateSource": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=95b83575-9b04-4447-8f27-019fadc2e1fc&Home=%2Fevents%2Fcalendar",
+      "coordinates": [
+        40.844,
+        -73.941
+      ]
     },
     {
       "id": "moorf-uae-2027",
@@ -2189,6 +2256,33 @@
         139.69
       ],
       "dateSource": "https://50.jsos.jp/"
+    },
+    {
+      "id": "arvo-advance-2027",
+      "featured": false,
+      "title": "ARVO Advance: Research Career Development Conference",
+      "fullTitle": "ARVO Advance: Research Career Development Conference",
+      "org": "ARVO",
+      "start": "2027-02-03",
+      "end": "2027-02-04",
+      "city": "Online",
+      "country": "Worldwide",
+      "region": "Online / worldwide",
+      "mode": "Online",
+      "venue": "Online / virtual",
+      "categories": [
+        "Research"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=03a38ec4-ee9a-499d-a129-01a11bf19aa5&Home=%2Fevents%2Fcalendar",
+      "program": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=03a38ec4-ee9a-499d-a129-01a11bf19aa5&Home=%2Fevents%2Fcalendar",
+      "registration": "https://www.arvo.org/meetings-events/advance-conference",
+      "submit": null,
+      "verified": "2026-11-23",
+      "description": "Virtual meeting about mentorship, international research networks, careers and publishing. Free for ARVO members; US$129 for nonmembers. 8 am–5 pm ET both days.",
+      "deadlines": [],
+      "dateSource": "https://arvoconnect.arvo.org/events/event-description?CalendarEventKey=03a38ec4-ee9a-499d-a129-01a11bf19aa5&Home=%2Fevents%2Fcalendar"
     },
     {
       "id": "cornex-2027",
@@ -3084,6 +3178,38 @@
         -117.16
       ],
       "dateSource": "https://community.nanosweb.org/events/event-description?CalendarEventKey=de230df2-9ae2-4615-9dde-01a15f8150b4&Home=%2Fevents%2Fcalendar&hlmlt=ED"
+    },
+    {
+      "id": "tear-research-network-2027",
+      "featured": false,
+      "title": "Annual Meeting of the Tear Research Network 2027",
+      "fullTitle": "Annual Meeting of the Tear Research Network 2027",
+      "org": "Tear Research Network",
+      "start": "2027-03-22",
+      "end": "2027-03-24",
+      "city": "Bologna",
+      "country": "Italy",
+      "region": "Europe",
+      "mode": "In person",
+      "venue": "Venue to be announced",
+      "categories": [
+        "Research",
+        "Cornea"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://arvoconnect.arvo.org/events/calendar",
+      "program": "https://arvoconnect.arvo.org/events/calendar",
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-23",
+      "description": "Tear-film and ocular-surface research meeting, March 22–24, 2027. Venue not yet announced.",
+      "deadlines": [],
+      "dateSource": "https://arvoconnect.arvo.org/events/calendar",
+      "coordinates": [
+        44.4949,
+        11.3426
+      ]
     },
     {
       "id": "fuji-retina-2027",
@@ -5564,6 +5690,35 @@
         37.98,
         23.73
       ]
+    },
+    {
+      "id": "escrs-2028",
+      "featured": false,
+      "title": "46th Congress of the ESCRS 2028",
+      "fullTitle": "46th Congress of the ESCRS 2028",
+      "org": "European Society of Cataract and Refractive Surgeons",
+      "start": "2028-10-06",
+      "end": "2028-10-10",
+      "city": "To be announced",
+      "country": "To be announced",
+      "region": "Europe",
+      "mode": "To be announced",
+      "venue": "Venue and host city not announced",
+      "categories": [
+        "Cataract / IOL",
+        "Refractive",
+        "Cornea"
+      ],
+      "credits": "",
+      "submissionOpen": false,
+      "official": "https://www.escrs.org/escrs-annual-events/46th-congress-of-the-escrs",
+      "program": "https://www.escrs.org/escrs-annual-events/46th-congress-of-the-escrs",
+      "registration": null,
+      "submit": null,
+      "verified": "2026-11-23",
+      "description": "Organiser confirms Oct 6–10, 2028; city, venue, fees and abstract/registration deadlines not yet published.",
+      "deadlines": [],
+      "dateSource": "https://www.escrs.org/escrs-annual-events/46th-congress-of-the-escrs"
     },
     {
       "id": "aao-2028",
