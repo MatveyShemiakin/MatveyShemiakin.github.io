@@ -23,7 +23,7 @@
     require(doc.documentElement.dataset.siteTheme===theme,'Wrong theme');
     require(doc.documentElement.scrollWidth<=win.innerWidth+1,'Horizontal page overflow');
     if(path.endsWith('/social/')){
-      const library=doc.querySelector('.pro-library');
+      const outbound=[...doc.querySelectorAll('main a[href^="https://t.me/DrShemMYu/"]')];require(outbound.length>=5,'Telegram post links missing');require(outbound.every(a=>!a.target||a.target==='_self'),'Telegram post links must navigate in current tab');const library=doc.querySelector('.pro-library');
       require(Boolean(library),'Research library missing');
       const select=library?.querySelector('[data-pro-filter="topic"]');
       const cards=[...library?.querySelectorAll('.pro-entry')||[]];
