@@ -44,10 +44,12 @@ def build_pages(posts):
   head=re.sub(r'<meta name="description"[^>]*>',f'<meta name="description" content="{title} — {name}. Telegram.">',head)
   from scripts.site_header import asset_version
   head=head.replace('</head>',f'<link rel="stylesheet" href="/social-feed.css?v={asset_version("social-feed.css")}"></head>')
-  main=f'<main><section class="section hero"><div class="eyebrow">{name} · Telegram</div><h1>{title}</h1><p class="hero-copy">'+('Новые заметки, профессиональные события и материалы из моего Telegram-канала.' if lang=='ru' else 'New notes, professional events and posts from my Telegram channel.')+f'</p><div class="hero-actions"><a class="button primary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer">Telegram ↗</a><a class="button" href="https://www.instagram.com/dr.shemyakin/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div></section>{render_guide(lang)}<section class="section social-grid">{render_cards(posts,lang)}</section></main>'
+  library=(ROOT / f'social/library-{lang}.html').read_text()
+  main=f'<main><section class="section hero"><div class="eyebrow">{name} · Telegram</div><h1>{title}</h1><p class="hero-copy">'+('Новые заметки, профессиональные события и материалы из моего Telegram-канала.' if lang=='ru' else 'New notes, professional events and posts from my Telegram channel.')+f'</p><div class="hero-actions"><a class="button primary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer">Telegram ↗</a><a class="button" href="https://www.instagram.com/dr.shemyakin/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div></section>{render_guide(lang)}{library}<section class="section social-grid">{render_cards(posts,lang)}</section></main>'
   tail=source[source.index('</main>')+len('</main>'):]
   tail=tail.replace('/en/collaboration/"','/en/social/"').replace('/collaboration/"','/social/"')
   tail=re.sub(r'<div class="mobile-cta".*?</div>', '<div class="mobile-cta"><a class="button primary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer">'+('Открыть Telegram ↗' if lang=='ru' else 'View Telegram ↗')+'</a></div>',tail)
+  tail=tail.replace('</body>', '<script defer src="/social-library.js?v=20261126"></script></body>')
   head=head.replace(' aria-current="page"','').replace('site-mega-nav.js?v=20260816-2','site-mega-nav.js?v=20261024-2')
   tail=tail.replace('site-mega-nav.js?v=20260816-2','site-mega-nav.js?v=20261024-2')
   folder=ROOT/(prefix.strip('/')+'/social' if prefix else 'social');folder.mkdir(parents=True,exist_ok=True);(folder/'index.html').write_text(__import__('scripts.site_header',fromlist=['update_page']).update_page(head+main+tail,(folder/'index.html').relative_to(ROOT).as_posix()))

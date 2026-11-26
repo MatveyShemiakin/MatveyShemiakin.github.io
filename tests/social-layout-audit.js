@@ -23,6 +23,12 @@
     require(doc.documentElement.dataset.siteTheme===theme,'Wrong theme');
     require(doc.documentElement.scrollWidth<=win.innerWidth+1,'Horizontal page overflow');
     if(path.endsWith('/social/')){
+      const library=doc.querySelector('.pro-library');
+      require(Boolean(library),'Research library missing');
+      const select=library?.querySelector('[data-pro-filter="topic"]');
+      const cards=[...library?.querySelectorAll('.pro-entry')||[]];
+      require(cards.length===5,'Five research cards expected');
+      if(select){select.value='glaucoma';select.dispatchEvent(new win.Event('change'));require(cards.filter(c=>!c.hidden).length===1,'Glaucoma filter failed');select.value='';select.dispatchEvent(new win.Event('change'));require(cards.every(c=>!c.hidden),'Filter reset failed');}
       const card=doc.querySelector('.social-article-card');
       const image=card?.querySelector('img'),copy=card?.querySelector('h2')?.parentElement;
       require(Boolean(card&&image&&copy),'Article card missing');
