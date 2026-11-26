@@ -13,7 +13,7 @@ def render_cards(posts,lang):
   text='\n\n'.join(dict.fromkeys(x.get('text','') for x in group if x.get('text')))
   date=datetime.datetime.fromtimestamp(p.get('date',0),datetime.timezone.utc).strftime('%Y-%m-%d')
   covers=''.join('<img loading="lazy" src="'+html.escape(x['cover'],quote=True)+'" alt="" width="800" height="600">' for x in group if x.get('cover','').startswith('/social/media/'))
-  out.append(f'<article class="social-card"><div class="social-meta">Telegram · <time datetime="{date}">{date}</time></div>{covers}<p class="social-caption">{html.escape(text)}</p><a class="button ghost" href="{html.escape(url,quote=True)}" target="_blank" rel="noopener noreferrer">'+('Открыть в Telegram ↗' if lang=='ru' else 'View on Telegram ↗')+'</a></article>')
+  out.append(f'<article class="social-card"><div class="social-meta">Telegram · <time datetime="{date}">{date}</time></div>{covers}<p class="social-caption">{html.escape(text)}</p><a class="button ghost" href="{html.escape(url,quote=True)}" rel="noopener noreferrer">'+('Открыть в Telegram ↗' if lang=='ru' else 'View on Telegram ↗')+'</a></article>')
  return '\n'.join(out)
 def render_instagram_article(lang):
  title='Почему блокируют Instagram: мой опыт и реальные истории' if lang=='ru' else 'Why Instagram accounts get suspended: real user stories'
@@ -45,10 +45,10 @@ def build_pages(posts):
   from scripts.site_header import asset_version
   head=head.replace('</head>',f'<link rel="stylesheet" href="/social-feed.css?v={asset_version("social-feed.css")}"></head>')
   library=(ROOT / f'social/library-{lang}.html').read_text()
-  main=f'<main><section class="section hero"><div class="eyebrow">{name} · Telegram</div><h1>{title}</h1><p class="hero-copy">'+('Новые заметки, профессиональные события и материалы из моего Telegram-канала.' if lang=='ru' else 'New notes, professional events and posts from my Telegram channel.')+f'</p><div class="hero-actions"><a class="button primary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer">Telegram ↗</a><a class="button" href="https://www.instagram.com/dr.shemyakin/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div></section>{render_guide(lang)}{library}<section class="section social-grid">{render_cards(posts,lang)}</section></main>'
+  main=f'<main><section class="section hero"><div class="eyebrow">{name} · Telegram</div><h1>{title}</h1><p class="hero-copy">'+('Новые заметки, профессиональные события и материалы из моего Telegram-канала.' if lang=='ru' else 'New notes, professional events and posts from my Telegram channel.')+f'</p><div class="hero-actions"><a class="button primary" href="https://t.me/DrShemMYu" rel="noopener noreferrer">Telegram ↗</a><a class="button" href="https://www.instagram.com/dr.shemyakin/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div></section>{render_guide(lang)}{library}<section class="section social-grid">{render_cards(posts,lang)}</section></main>'
   tail=source[source.index('</main>')+len('</main>'):]
   tail=tail.replace('/en/collaboration/"','/en/social/"').replace('/collaboration/"','/social/"')
-  tail=re.sub(r'<div class="mobile-cta".*?</div>', '<div class="mobile-cta"><a class="button primary" href="https://t.me/DrShemMYu" target="_blank" rel="noopener noreferrer">'+('Открыть Telegram ↗' if lang=='ru' else 'View Telegram ↗')+'</a></div>',tail)
+  tail=re.sub(r'<div class="mobile-cta".*?</div>', '<div class="mobile-cta"><a class="button primary" href="https://t.me/DrShemMYu" rel="noopener noreferrer">'+('Открыть Telegram ↗' if lang=='ru' else 'View Telegram ↗')+'</a></div>',tail)
   tail=tail.replace('</body>', '<script defer src="/social-library.js?v=20261126"></script></body>')
   head=head.replace(' aria-current="page"','').replace('site-mega-nav.js?v=20260816-2','site-mega-nav.js?v=20261024-2')
   tail=tail.replace('site-mega-nav.js?v=20260816-2','site-mega-nav.js?v=20261024-2')
